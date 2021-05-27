@@ -9,7 +9,7 @@ npm cache clean --force<br/>
 npm install --global gulp-cli<br/>
 gulp --version<br/>
 yarn<br/>
-gulp --demo1<br/>
+//gulp --demo1<br/>
 gulp localhost --demo1<br/>
 
 
