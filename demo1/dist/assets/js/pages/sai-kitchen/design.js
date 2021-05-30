@@ -187,7 +187,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         //     <i class="la la-file-upload"></i>
                         // </a>`;
                         if (full.questionaireType == 1) {
-                            ret += ` <a href="viewkitchenmeasurment.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
+                            ret += ` <a href="viewkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
                     <i class="la la-ruler-combined"></i>
                 </a>`;
                         } else {
