@@ -31,8 +31,8 @@ if (fs.existsSync(__dirname + '/' + confPath)) {
 }
 
 gulp.task('upload-app-to-azure', function () {
-    return gulp.src(['*.js','*.json'], {
-        base: 'node_modules/deploy-azure-cdn' // optional, the base directory in which the file is located. The relative path of file to this directory is used as the destination path
+    return gulp.src(['*.js','*.json','*.html','*.css'], {
+        base: '../../demo1/dist/' // optional, the base directory in which the file is located. The relative path of file to this directory is used as the destination path
     }).pipe(deployCdn({
         containerName: 'saikitchenfrontend', // container name in blob
         serviceOptions: ['saikitchenstorage', '3T0N76fi775rEzIVVWkx1mb89luBAjrbpr4znDtF0Ca/j6by/5ecteMWzodOeqH9C8MunRyC8iuVqhGJ40R9Gw=='], // custom arguments to azure.createBlobService
