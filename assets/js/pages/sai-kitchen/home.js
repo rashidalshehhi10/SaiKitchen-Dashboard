@@ -10,11 +10,11 @@ import { baseURL } from './constant.js'
 // Class Initialization
 jQuery(document).ready(function() {
 	// let obj = JSON.parse(sessionStorage.user);
-	// alert(sessionStorage.getItem("user"));
-	// if(sessionStorage.getItem("user")==null){
+	// alert(localStorage.getItem("user"));
+	// if(localStorage.getItem("user")==null){
 	// 	window.location.replace("index.html");
 	// }
-	// if(sessionStorage.getItem("user")===null){
+	// if(localStorage.getItem("user")===null){
 	// 	window.location.replace("index.html");
 	// }
 });

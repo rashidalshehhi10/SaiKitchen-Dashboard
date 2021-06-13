@@ -37,12 +37,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/Inquiry/GetInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/Inquiry/GetApprovalMeasurementOfBranch?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName',
+                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName','noOfRevision',
                         'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
                         'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy', 'actions'
                     ],
@@ -59,6 +59,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'workScopeName'
+                },
+                {
+                    data: 'noOfRevision'
                 },
                 {
                     data: 'measurementScheduleDate'
@@ -186,31 +189,28 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     title: 'Actions',
                     orderable: false,
                     render: function(data, type, full, meta) {
+                       
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
+                            var action=``; 
+                            if (full.questionaireType == 1) {
+                                action += ` <a href="viewkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Measurement">
+                        <i class="la la-ruler-combined"></i>
+                    </a>`;
+                            } else {
+                                action += ` <a href="viewwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="View Measurement">
+                    <i class="la la-ruler-combined"></i>
+                </a>`;
+                            }
                             // onclick="`+full.inquiryId+`" 
-                            var action = `
-                            <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
-								<i class="la la-calendar"></i>
+                             action += `
+                            <a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+								<i class="la la-thumbs-up"></i>
 							</a>
-							<a href="javascript:;" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Edit details">
-								<i class="la la-edit"></i>
+                            <a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
+								<i class="la la-thumbs-down"></i>
 							</a>
 						`;
-                            if (inquiryPermission == 4) {
-                                action += '\
-                            <a href="javascript:;" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Escalate">\
-                            <i class="la la-bitbucket-square"></i>\
-                        </a>\
-                        ';
-                            }
-                            if (inquiryPermission >= 5) {
-                                action += '\
-                            <a href="javascript:;" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Delete">\
-                                <i class="la la-trash"></i>\
-                            </a>\
-                        ';
-                            }
                             return action;
                         } else {
                             return `<span></span>`;
@@ -508,23 +508,23 @@ jQuery(document).ready(function() {
         }
     }
 
-    if (inquiryPermission >= 2) {
-        document.getElementById('btnNewInquiry').innerHTML += `
-        <a href="addinquiry.html" class="btn btn-primary font-weight-bolder">
-            <span class="svg-icon svg-icon-md">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                    height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <circle fill="#000000" cx="9" cy="15" r="6" />
-                        <path
-                            d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                            fill="#000000" opacity="0.3" />
-                    </g>
-                </svg>
-                </span>New Inquiry</a>`;
-    }
+    // if (inquiryPermission >= 2) {
+    //     document.getElementById('btnNewInquiry').innerHTML += `
+    //     <a href="addinquiry.html" class="btn btn-primary font-weight-bolder">
+    //         <span class="svg-icon svg-icon-md">
+    //             <svg xmlns="http://www.w3.org/2000/svg"
+    //                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+    //                 height="24px" viewBox="0 0 24 24" version="1.1">
+    //                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    //                     <rect x="0" y="0" width="24" height="24" />
+    //                     <circle fill="#000000" cx="9" cy="15" r="6" />
+    //                     <path
+    //                         d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+    //                         fill="#000000" opacity="0.3" />
+    //                 </g>
+    //             </svg>
+    //             </span>New Inquiry</a>`;
+    // }
 
 
 

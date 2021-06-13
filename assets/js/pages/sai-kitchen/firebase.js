@@ -64,7 +64,7 @@ messaging.requestPermission()
     return messaging.getToken()
       .then(function (currentToken) {
         console.log(currentToken);
-        var login = sessionStorage.getItem("user");
+        var login = localStorage.getItem("user");
         if (login === null) {
           // window.location.replace("index.html");
         } else {

@@ -464,10 +464,7 @@ let inquiryPermission;
 
 jQuery(document).ready(function() {
     KTWizard1.init();
-
-
-
-    var login = sessionStorage.getItem("user");
+    var login = localStorage.getItem("user");
     if (login !== null) {
         user = JSON.parse(login);
         console.log(user);

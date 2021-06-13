@@ -899,8 +899,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <!--begin::Wizard Body-->
                                     <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
                                         <div class="col-xl-12 col-xxl-7">
-
-
                                             <!--begin::Wizard Form-->
                                             <form class="form" id="kt_form">
                                                 <!--begin::Wizard Step 1-->
@@ -2832,8 +2830,8 @@ License: You must have a valid license purchased only from themeforest(the above
             var data = JSON.stringify({
                 userId: users.data.userId
             });
-            sessionStorage.removeItem('user');
-            sessionStorage.removeItem('permission');
+            localStorage.removeItem('user');
+            localStorage.removeItem('permission');
             $.ajax({
                 type: "Post",
                 url: baseURL + '/User/LogoutUser',

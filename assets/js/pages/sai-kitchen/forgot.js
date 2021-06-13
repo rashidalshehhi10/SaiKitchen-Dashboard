@@ -152,7 +152,7 @@ var userId;
 // Class Initialization
 jQuery(document).ready(function () {
 	KTLogin.init();
-	if (sessionStorage.getItem("user") !== null) {
+	if (localStorage.getItem("user") !== null) {
 		window.location.replace("home.html");
 	}
 

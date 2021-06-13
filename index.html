@@ -220,10 +220,10 @@
 
 
     <script src="assets/js/pages/sai-kitchen/signin.js" type="module"></script>
-    <script type="Module">
+	<script type="Module">
 
 
-        // Test this by running the code snippet below and then
+		// Test this by running the code snippet below and then
 // use the "Offline" checkbox in DevTools Network panel
 
 import { baseURL } from '/assets/js/pages/sai-kitchen/constant.js'
@@ -237,35 +237,35 @@ function handleConnection() {
         console.log('online');
       } else {
         console.log('no connectivity');
-        Swal.fire({
-                            text: 'Internet Connection Problem',
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        }).then(function() {
-                            KTUtil.scrollTop();
-                        });
+		Swal.fire({
+			                text: 'Internet Connection Problem',
+			                icon: "error",
+			                buttonsStyling: false,
+							confirmButtonText: "Ok, got it!",
+							customClass: {
+								confirmButton: "btn font-weight-bold btn-light-primary"
+							}
+			            }).then(function() {
+							KTUtil.scrollTop();
+						});
   
       }
     });
   } else {
     // handle offline status
     console.log('offline');
-    
-    Swal.fire({
-                            text: 'Internet Connection Problem',
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        }).then(function() {
-                            KTUtil.scrollTop();
-                        });
+	
+	Swal.fire({
+			                text: 'Internet Connection Problem',
+			                icon: "error",
+			                buttonsStyling: false,
+							confirmButtonText: "Ok, got it!",
+							customClass: {
+								confirmButton: "btn font-weight-bold btn-light-primary"
+							}
+			            }).then(function() {
+							KTUtil.scrollTop();
+						});
   }
 }
 
@@ -321,8 +321,8 @@ isPWAInstalled=localStorage.getItem("isPWAInstalled");
 
 isPWAInstallationAsked=sessionStorage.getItem("isPWAInstallationAsked");
 if((isPWAInstalled===false|| isPWAInstalled==null)&&(isPWAInstallationAsked===false|| isPWAInstallationAsked==null)){
-    
-    sessionStorage.setItem("isPWAInstallationAsked", true);
+	
+	sessionStorage.setItem("isPWAInstallationAsked", true);
 Swal.fire({
   title: 'Do you wanna Install app?',
   text: "You won't be able to revert this!",
@@ -349,7 +349,8 @@ Swal.fire({
 }
 
 
-</script></body>
+</script>
+</body>
 <!--end::Body-->
 
 </html>

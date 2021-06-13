@@ -4,6 +4,11 @@ import {
     baseURL
 } from './constant.js'
 
+import {
+    measurementFile
+} from './constant.js'
+
+
 let user;
 
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
@@ -150,11 +155,23 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 5: {
                                     'title': 'Quotation Pending',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-primary'
                                 },
                                 6: {
                                     'title': 'Quotation Delayed',
                                     'class': ' label-light-danger'
+                                },
+                                7: {
+                                    'title': 'Measurement Approved',
+                                    'class': 'label-light-success'
+                                },
+                                8: {
+                                    'title': 'Measurement Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                9: {
+                                    'title': 'Measurement Approval Pending',
+                                    'class': ' label-light-primary'
                                 },
                             };
                             column.data().unique().sort().each(function(d, j) {
@@ -182,19 +199,19 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     title: 'Actions',
                     orderable: false,
                     render: function(data, type, full, meta) {
-                        var ret = `<a href="javascript:;"  data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-clean btn-icon" title="Add Measurement File">
+                        var ret = `<button  style="background-color:#734f43;margin:2px"  onclick="setInquiryWorkscopeId(` + full.inquiryWorkscopeId + `);" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-clean btn-icon" title="Add Measurement File">
                         <i class="la la-file-upload"></i>
-                    </a>`;
+                    </button>`;
                         if (full.questionaireType == 1) {
-                            ret += ` <a href="addkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="Add Measurement">
+                            ret += `<a href="addkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Add Measurement">
                     <i class="la la-ruler-combined"></i>
                 </a>`;
                         } else {
-                            ret += ` <a href="addwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="Add Measurement">
+                            ret += `<a href="addwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Add Measurement">
                 <i class="la la-ruler-combined"></i>
             </a>`;
                         }
-                        ret += `	<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                        ret += `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Delete">
                 <i class="la la-trash"></i>
             </a>`
                         return ret;
@@ -222,11 +239,23 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             5: {
                                 'title': 'Quotation Pending',
-                                'class': ' label-light-info'
+                                'class': ' label-light-primary'
                             },
                             6: {
                                 'title': 'Quotation Delayed',
                                 'class': ' label-light-danger'
+                            },
+                            7: {
+                                'title': 'Measurement Approved',
+                                'class': 'label-light-success'
+                            },
+                            8: {
+                                'title': 'Measurement Rejected',
+                                'class': ' label-light-info'
+                            },
+                            9: {
+                                'title': 'Measurement Approval Pending',
+                                'class': ' label-light-primary'
                             },
                         };
 
@@ -234,7 +263,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         if (typeof status[data] === 'undefined') {
                             return data;
                         }
-                        return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
+                        return '<span style="font-size:1.0rem !important; height:80px;" class="label label-lg font-weight-bold ' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
 
                     },
                 },
@@ -302,18 +331,164 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         });
 
     };
+    
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+
+    var _handleuploadmeasurementfile = function() {
+        var form = KTUtil.getById('kt_add_measurement_file');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_upload_measurement_file');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                      
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+               
+                console.log(measurementFile);
+                 var measurementFiles = {
+                    "ininquiryworkscopeid": document.getElementById("inquiryWorkscopeId").innerHTML,
+                    "measurementComment": document.getElementById('measurementComment').value,
+                    "base64img": measurementFile
+                  };
+                const data = JSON.stringify(measurementFiles);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Measurement/AddUpdateMeasurmentfiles',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("measurement.html");
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+            .on('core.form.invalid', function() {
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            });
+    }
 
     return {
 
         //main function to initiate the module
         init: function() {
             initTable1();
+            _handleuploadmeasurementfile();
         },
 
     };
 
 }();
 
+function uploadMeasurementFiles()   
+ {   
+document.write("welcome to Javatpoint");  
+ }  
+
+ 
+ function insertParam(key, value) {
+    key = encodeURIComponent(key);
+    value = encodeURIComponent(value);
+
+    // kvp looks like ['key1=value1', 'key2=value2', ...]
+    var kvp = document.location.search.substr(1).split('&');
+    let i=0;
+
+    for(; i<kvp.length; i++){
+        if (kvp[i].startsWith(key + '=')) {
+            let pair = kvp[i].split('=');
+            pair[1] = value;
+            kvp[i] = pair.join('=');
+            break;
+        }
+    }
+
+    if(i >= kvp.length){
+        kvp[kvp.length] = [key,value].join('=');
+    }
+
+    // can return this or...
+    let params = kvp.join('&');
+
+    // reload page with new params
+    document.location.search = params;
+}
 let permissions;
 let inquiryPermission;
 
@@ -321,7 +496,7 @@ jQuery(document).ready(function() {
 
 
 
-    var login = sessionStorage.getItem("user");
+    var login = localStorage.getItem("user");
     if (login !== null) {
         user = JSON.parse(login);
         console.log(user);

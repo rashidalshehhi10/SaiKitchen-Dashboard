@@ -96,7 +96,7 @@ var KTLogin = function () {
 						  // window.location.replace("home.html");
 						  // var objResponse = jQuery.parseJSON( response );
 				  if(response.isError==false){
-					  sessionStorage.setItem('user', JSON.stringify(response));
+					  localStorage.setItem('user', JSON.stringify(response));
 						  window.location.replace("home.html");
 				  
 				  }else{
@@ -160,7 +160,7 @@ var userId;
 // Class Initialization
 jQuery(document).ready(function () {
 	KTLogin.init();
-	if (sessionStorage.getItem("user") !== null) {
+	if (localStorage.getItem("user") !== null) {
 		window.location.replace("home.html");
 	}
 	const queryString = window.location.search;

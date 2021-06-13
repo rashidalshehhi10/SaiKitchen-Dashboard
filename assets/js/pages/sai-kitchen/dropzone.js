@@ -5,8 +5,10 @@ import {
     baseURL
 } from './constant.js'
 
+import {
+    measurementFile
+} from './constant.js'
 
-export var measurementFile = new Array();
 
 var KTDropzoneDemo = function() {
     // Private functions
@@ -50,30 +52,45 @@ var KTDropzoneDemo = function() {
             maxFiles: 50,
             maxFilesize: 5, // MB
             addRemoveLinks: true,
-            acceptedFiles: "image/*,application/pdf,.psd,.png",
-            accept: function(file, done) {
-                if (file.name == "justinbieber.jpg") {
-                    done("Naha, you don't.");
-                } else {
-                    var reader = new FileReader();
-                    var fileByteArray = [];
-                    reader.readAsArrayBuffer(file);
-                    reader.onloadend = function(evt) {
-                        if (evt.target.readyState == FileReader.DONE) {
-                            var arrayBuffer = evt.target.result,
-                                array = new Uint8Array(arrayBuffer);
-                            for (var i = 0; i < array.length; i++) {
-                                fileByteArray.push(array[i]);
-                            }
-                            measurementFile.push(fileByteArray);
-                            console.log(measurementFile);
-                        }
-                    }
+            acceptedFiles: "image/*,application/pdf,.png",
+            
+        init: function() {
+            this.on("addedfile", function (file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    // event.target.result contains base64 encoded image
+                    var base64String = event.target.result;
+                    var fileName = file.name;
+                    var finalbase64 = base64String.split(",")[1]
+                    measurementFile.push(finalbase64);
+                    // handlePictureDropUpload(base64String ,fileName );
+                };
+                reader.readAsDataURL(file);
 
-                    // file.accepted();
-                    done("");
-                }
-            }
+            });
+        }
+            // accept: function(file, done) {
+            //     if (file.name == "justinbieber.jpg") {
+            //         done("Naha, you don't.");
+            //     } else {
+            //         var reader = new FileReader();
+            //         var fileByteArray = [];
+            //         reader.readAsArrayBuffer(file);
+            //         reader.onloadend = function(evt) {
+            //             if (evt.target.readyState == FileReader.DONE) {
+            //                 var arrayBuffer = evt.target.result,
+            //                     array = new Uint8Array(arrayBuffer);
+            //                 for (var i = 0; i < array.length; i++) {
+            //                     fileByteArray.push(array[i]);
+            //                 }
+            //                 measurementFile.push(fileByteArray);
+            //                 console.log(measurementFile);
+            //             }
+            //         }
+            //         // file.accepted();
+            //         done("");
+            //     }
+            // }
         });
     }
 

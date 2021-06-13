@@ -467,7 +467,7 @@ jQuery(document).ready(function() {
 
 
 
-    var login = sessionStorage.getItem("user");
+    var login = localStorage.getItem("user");
     if (login !== null) {
         user = JSON.parse(login);
         console.log(user);

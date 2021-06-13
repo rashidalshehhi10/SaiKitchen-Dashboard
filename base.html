@@ -2109,8 +2109,8 @@ License: You must have a valid license purchased only from themeforest(the above
             var data = JSON.stringify({
                 userId: users.data.userId
             });
-            sessionStorage.removeItem('user');
-            sessionStorage.removeItem('permission');
+            localStorage.removeItem('user');
+            localStorage.removeItem('permission');
             $.ajax({
                 type: "Post",
                 url: baseURL + '/User/LogoutUser',

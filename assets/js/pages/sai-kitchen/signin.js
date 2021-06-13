@@ -89,8 +89,8 @@ var KTLogin = function() {
                         // window.location.replace("home.html");
                         // var objResponse = jQuery.parseJSON( response );
                         if (response.isError == false) {
-                            sessionStorage.setItem('user', JSON.stringify(response));
-                            sessionStorage.setItem('permission', response.data.userRoles[0].branchRole.permissionRoles);
+                            localStorage.setItem('user', JSON.stringify(response));
+                            localStorage.setItem('permission', response.data.userRoles[0].branchRole.permissionRoles);
                             window.location.replace("home.html");
 
                         } else {
@@ -530,7 +530,7 @@ var KTLogin = function() {
 // Class Initialization
 jQuery(document).ready(function() {
     KTLogin.init();
-    if (sessionStorage.getItem("user") !== null) {
+    if (localStorage.getItem("user") !== null) {
         window.location.replace("home.html");
     }
 
