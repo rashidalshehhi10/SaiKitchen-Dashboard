@@ -211,9 +211,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 <i class="la la-ruler-combined"></i>
             </a>`;
                         }
-                        ret += `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Delete">
-                <i class="la la-trash"></i>
-            </a>`
+            //             ret += `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Delete">
+            //     <i class="la la-trash"></i>
+            // </a>`
                         return ret;
                     },
                 },

@@ -7,7 +7,7 @@ import {
 
 import {
     measurementFile
-} from './dropzone.js'
+} from './constant.js'
 
 
 // List of all countries in a simple list / array.
