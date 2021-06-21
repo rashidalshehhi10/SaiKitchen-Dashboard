@@ -44,7 +44,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     columnsDef: [
                         'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName',
                         'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
-                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy', 'actions'
+                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
                     ],
                 },
             },
@@ -94,7 +95,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'buildingReconstruction'
                 },
                 {
+                    data: 'isOccupied'
+                },
+                {
                     data: 'inquiryDescription'
+                },
+                {
+                    data: 'inquiryComment'
                 },
                 {
                     data: 'inquiryStartDate'
@@ -160,6 +167,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Measurement Approval Pending',
                                     'class': ' label-light-primary'
                                 },
+                                10: {
+                                    'title': 'Design Approved',
+                                    'class': 'label-light-success'
+                                },
+                                11: {
+                                    'title': 'Design Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                12: {
+                                    'title': 'Design Approval Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                13: {
+                                    'title': 'Quotation Approved',
+                                    'class': 'label-light-success'
+                                },
+                                14: {
+                                    'title': 'Quotation Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                15: {
+                                    'title': 'Quotation Approval Pending',
+                                    'class': ' label-light-primary'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -186,17 +217,23 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     title: 'Actions',
                     orderable: false,
                     render: function(data, type, full, meta) {
+                        var action = ``;
+                        if(full.inquiryAddedById==user.data.userId){
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
                             // onclick="`+full.inquiryId+`" 
-                            var action = `
+                             action += `
                             <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
 								<i class="la la-calendar"></i>
 							</a>
-							<a href="javascript:;" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Edit details">
-								<i class="la la-edit"></i>
+						`;     if (inquiryPermission >= 3 && full.status==1 && full.noOfRevision==0) {
+                            console.log(full.inquiryId);
+                            // onclick="`+full.inquiryId+`" 
+                             action += `
+                           <a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryWorkscopeId + `)"  data-toggle="modal" data-target="#AddWorkscope"  class="btn btn-sm btn-clean btn-icon" title="Add workscope">
+								<i class="la la-plus-square"></i>
 							</a>
-						`;
+						`;}
                             if (inquiryPermission == 4) {
                                 action += '\
                             <a href="javascript:;" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Escalate">\
@@ -205,12 +242,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         ';
                             }
                             if (inquiryPermission >= 5) {
-                                action += '\
-                            <a href="javascript:;" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Delete">\
+                                action += `\
+                            <a onclick="deleteInquiryWorkscope(` + full.inquiryWorkscopeId + `)"  style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Delete">\
                                 <i class="la la-trash"></i>\
                             </a>\
-                        ';
+                        `;
                             }
+                        }
                             return action;
                         } else {
                             return `<span></span>`;
@@ -255,6 +293,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             9: {
                                 'title': 'Measurement Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            10: {
+                                'title': 'Design Approved',
+                                'class': 'label-light-success'
+                            },
+                            11: {
+                                'title': 'Design Rejected',
+                                'class': ' label-light-info'
+                            },
+                            12: {
+                                'title': 'Design Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            13: {
+                                'title': 'Quotation Approved',
+                                'class': 'label-light-success'
+                            },
+                            14: {
+                                'title': 'Quotation Rejected',
+                                'class': ' label-light-info'
+                            },
+                            15: {
+                                'title': 'Quotation Approval Pending',
                                 'class': ' label-light-primary'
                             },
                         };
@@ -475,12 +537,127 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 });
             });
     }
+    var _handleFormAddWorkscope = function() {
+        var form = KTUtil.getById('kt_modify_add_workscope');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_add_workscope_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+             
+              var inquiryWorkscope=  {inquiryWorkscopeId:document.getElementById("inquiryWorkscopeId").innerHTML,
+              workScopeId: new Array()
+            };
+            
+					var workscope = document.getElementsByClassName("tagify__tag tagify__tag tagify__tag--primary");
+					workscope.forEach(element => {
+						try {
+							inquiryWorkscope.workScopeId.push(element.attributes.workScopeId.value,);
+						} catch (error) {
+
+						}
+					});
+                const data = JSON.stringify(inquiryWorkscope);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Inquiry/AddWorkscopetoInquiry',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("inquiry.html");
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+            .on('core.form.invalid', function() {
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            });
+    }
     return {
 
         //main function to initiate the module
         init: function() {
             initTable1();
             _handleFormModifySchedule();
+            _handleFormAddWorkscope();
         },
 
     };

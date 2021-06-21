@@ -2921,6 +2921,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 type: "Post",
                 url: baseURL + '/User/LogoutUser',
                 headers: {
+                        'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json'
                 },
                 data: data,

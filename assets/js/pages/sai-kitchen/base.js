@@ -262,6 +262,28 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 </a>
 </li>
 `;
+
+if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branchRole.roleTypeId==3){
+	sideMenuHTML += `
+	<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+	<a href="designrequest.html" class="menu-link menu-toggle">
+		<span class="svg-icon menu-icon">
+			<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+					<rect x="0" y="0" width="24" height="24" />
+					<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
+					<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3" />
+				</g>
+			</svg>
+			<!--end::Svg Icon-->
+		</span>
+		<span class="menu-text">Approval Request</span>
+		
+	</a>
+	</li>
+	`;
+}
         }
         if (permission.includes(9)) {
             sideMenuHTML += `
@@ -421,11 +443,13 @@ function getNotifications() {
                 var notification = document.getElementById('notification');
                 var notificationInquiry = document.getElementById('notificationinquiry');
                 var notificationMeasurement = document.getElementById('notificationmeasurement');
+                var notificationDesign = document.getElementById('notificatiodesign');
                 notification.innerHTML = ``;
                 notificationMeasurement.innerHTML = ``;
                 notificationinquiry.innerHTML = ``;
+                notificationDesign.innerHTML = ``;
                 for (var i = 0; i < response.data.length; i++) {
-                    notification.innerHTML += `<div class="d-flex align-items-center mb-6">
+                    notification.innerHTML += `<div class="d-flex align-items-center mb-6"  onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
 				<!--begin::Symbol-->
 				<div class="symbol symbol-40 symbol-light-primary mr-5">
 					<span class="symbol-label">
@@ -463,7 +487,7 @@ function getNotifications() {
 
                     if (response.data[i].notificationCategoryName == "Inquiry") {
                         notificationInquiry.innerHTML += `
-						<div class="d-flex align-items-center mb-6">
+						<div class="d-flex align-items-center mb-6"   onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
 						<!--begin::Symbol-->
 						<div class="symbol symbol-40 symbol-light-primary mr-5">
 							<span class="symbol-label">
@@ -501,7 +525,7 @@ function getNotifications() {
                     }
                     if (response.data[i].notificationCategoryName == "Measurement") {
                         notificationMeasurement.innerHTML += `
-						<div class="d-flex align-items-center mb-6">
+						<div class="d-flex align-items-center mb-6"  onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
 						<!--begin::Symbol-->
 						<div class="symbol symbol-40 symbol-light-primary mr-5">
 							<span class="symbol-label">
@@ -532,7 +556,45 @@ function getNotifications() {
 						<div class="d-flex flex-column font-weight-bold">
 						<div class="font-weight-bold">` + response.data[i].notificationContent + `</div>
 							
-								<div class="text-muted">3 days ago</div>
+								<div class="text-muted">` + response.data[i].createdDate + `</div>
+						</div>
+						<!--end::Text-->
+					</div>`;
+                    }
+                    if (response.data[i].notificationCategoryName == "Design") {
+                        notificationDesign.innerHTML += `
+						<div class="d-flex align-items-center mb-6"   onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
+						<!--begin::Symbol-->
+						<div class="symbol symbol-40 symbol-light-primary mr-5">
+							<span class="symbol-label">
+								<span class="svg-icon svg-icon-lg svg-icon-primary">
+									<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
+									<svg xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										width="24px" height="24px" viewBox="0 0 24 24"
+										version="1.1">
+										<g stroke="none" stroke-width="1" fill="none"
+											fill-rule="evenodd">
+											<rect x="0" y="0" width="24" height="24" />
+											<path
+												d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z"
+												fill="#000000" />
+											<rect fill="#000000" opacity="0.3"
+												transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)"
+												x="16.3255682" y="2.94551858" width="3"
+												height="18" rx="1" />
+										</g>
+									</svg>
+									<!--end::Svg Icon-->
+								</span>
+							</span>
+						</div>
+						<!--end::Symbol-->
+						<!--begin::Text-->
+						<div class="d-flex flex-column font-weight-bold">
+						<div class="font-weight-bold">` + response.data[i].notificationContent + `</div>
+							
+								<div class="text-muted">` + response.data[i].createdDate + `</div>
 						</div>
 						<!--end::Text-->
 					</div>`;

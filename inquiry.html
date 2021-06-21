@@ -1000,7 +1000,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <th>Building Condition</th>
                                                 <th>Building Floor</th>
                                                 <th>Building Re-construction</th>
+                                                <th>Building Occupied</th>
                                                 <th>Description</th>
+                                                <th>Comment</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Added By</th>
@@ -2268,6 +2270,42 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
 
+
+    <div class="modal fade" id="AddWorkscope" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Workscope</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_modify_add_workscope" action="" name="addworkscope">
+                    <span id="inquiryWorkscopeId" style="display:none">0</span>
+                    <span id="customerCity" style="display:none">0</span>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="">WorkScope*</label>
+                            <div class="">
+                                <input id="kt_tagify_1" class="form-control tagify form-control h-auto py-7 px-6 rounded-lg border-0 form-control-solid" name='scopeTag' placeholder="Add users" value="" />
+                                <!-- <div class="mt-3 text-muted">Dropdown item and tag templates.</div> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="
+						document.getElementById('inquiryWorkscopeId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="submit" id="kt_add_workscope_button" class="btn btn-primary font-weight-bold">Update</button>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">
         <span class="svg-icon">
@@ -2388,6 +2426,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--begin::Page Scripts(used by this page)-->
     <script src="assets/js/pages/sai-kitchen/dropdown.js"></script>
+    
+
+    <script src="assets/js/pages/sai-kitchen/inquirytagify.js" type="Module"></script>
     <!--end::Page Scripts-->
 
     <!--begin::Page Scripts(used by this page)-->
@@ -2446,6 +2487,93 @@ License: You must have a valid license purchased only from themeforest(the above
 
         function setInquiryId(inquiryId) {
             document.getElementById("inquiryId").innerHTML = inquiryId;
+        }
+
+        function setInquiryWorkscopeId(inquiryWorskcopeId) {
+            document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorskcopeId;
+        }
+
+        function deleteInquiryWorkscope(inquiryWorskcopeId) {
+            document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorskcopeId;
+            Swal.fire({
+				text: "Are You Sure to delete?",
+				icon: "error",
+				showCancelButton: true,
+				buttonsStyling: false,
+				confirmButtonText: "Yes, submit!",
+				cancelButtonText: "No, cancel",
+				customClass: {
+					confirmButton: "btn font-weight-bold btn-primary",
+					cancelButton: "btn font-weight-bold btn-default"
+				}
+			}).then(function (result) {
+				if (result.value) {
+                    var inquiryWorkscope=  {inquiryWorkscopeId:document.getElementById("inquiryWorkscopeId").innerHTML,
+              workScopeId: new Array()
+            };
+                const data = JSON.stringify(inquiryWorkscope);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Inquiry/DeleteWorkscopefromInquiry',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // 'userId': user.data.userId,
+                        // 'userToken': user.data.userToken,
+                        // 'userRoleId': user.data.userRoles[0].userRoleId,
+                        // 'branchId': user.data.userRoles[0].branchId,
+                        // 'branchRoleId': user.data.userRoles[0].branchRoleId,
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                        console.log(response);
+                        if (response.isError == false) {
+                            window.location.replace("inquiry.html");
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+
+				} else if (result.dismiss === 'cancel') {
+					// Swal.fire({
+					// 	text: "Your form has not been submitted!.",
+					// 	icon: "error",
+					// 	buttonsStyling: false,
+					// 	confirmButtonText: "Ok, got it!",
+					// 	customClass: {
+					// 		confirmButton: "btn font-weight-bold btn-primary",
+					// 	}
+					// });
+				}
+			});
         }
 
         function logoutUser(user) {

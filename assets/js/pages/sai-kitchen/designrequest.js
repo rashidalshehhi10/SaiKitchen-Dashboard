@@ -4,10 +4,6 @@ import {
     baseURL
 } from './constant.js'
 
-import {
-    measurementFile
-} from './constant.js'
-
 let user;
 
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
@@ -41,23 +37,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/Inquiry/GetDesignOfBranch?branchId=' + user.data.userRoles[0].branchId,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'userId': user.data.userId,
-                    'userToken': user.data.userToken,
-                    'userRoleId': user.data.userRoles[0].userRoleId,
-                    'branchId': user.data.userRoles[0].branchId,
-                    'branchRoleId': user.data.userRoles[0].branchRoleId,
-                },
+                url: baseURL + '/Inquiry/GetApprovalDesignOfBranch?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'noOfRevision', 'workScopeName',
+                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName','noOfRevision',
                         'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
                         'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription',
-                        'inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'actions'
+                        'inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy', 'actions'
                     ],
                 },
             },
@@ -71,10 +59,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'status'
                 },
                 {
-                    data: 'noOfRevision'
+                    data: 'workScopeName'
                 },
                 {
-                    data: 'workScopeName'
+                    data: 'noOfRevision'
                 },
                 {
                     data: 'measurementScheduleDate'
@@ -122,6 +110,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'inquiryEndDate'
                 },
                 {
+                    data: 'inquiryAddedBy'
+                },
+                {
                     data: 'actions',
                     responsivePriority: -1
                 },
@@ -158,7 +149,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 5: {
                                     'title': 'Quotation Pending',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-primary'
                                 },
                                 6: {
                                     'title': 'Quotation Delayed',
@@ -226,35 +217,35 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     title: 'Actions',
                     orderable: false,
                     render: function(data, type, full, meta) {
-                        var ret = ``;
-                        //      var ret = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Add Measurement">
-                        //     <i class="la la-file-upload"></i>
-                        // </a>`;
-                        ret += ` <a style="background-color:#734f43;margin:2px"  href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
-                        <i class="la la-ruler-combined"></i>
+                       
+                        if (inquiryPermission >= 3) {
+                            console.log(full.inquiryId);
+                            var action=``; 
+                                                 action += ` <a href="viewdesign.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Design">
+                        <i class="la fab la-codepen"></i>
                     </a>`;
-                    ret += ` <button style="background-color:#734f43;margin:2px"  onclick="setInquiryWorkscopeId(` + full.inquiryWorkscopeId + `);"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >
-                    <i class="la fab la-codepen"></i>
-                </button>`;
-            //             if (full.questionaireType == 1) {
-            //                 ret += ` <button  style="background-color:#734f43;margin:2px"  onclick="viewkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
-            //         <i class="la la-ruler-combined"></i>
-            //     </button>`;
-            //             } else {
-            //                 ret += ` <button  style="background-color:#734f43;margin:2px"  onclick="viewwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
-            //     <i class="la la-ruler-combined"></i>
-            // </button>`;
-            //             }
-            //             if (full.questionaireType == 1) {
-            //                 ret += ` <button  style="background-color:#734f43;margin:2px"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >
-            //         <i class="la fab la-codepen"></i>
-            //     </button>`;
-            //             } else {
-            //                 ret += ` <button  style="background-color:#734f43;margin:2px"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >
-            //     <i class="la fab la-codepen"></i>
-            // </button>`;
-            //             }
-                        return ret;
+                //             if (full.questionaireType == 1) {
+                //                 action += ` <a href="viewkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Measurement">
+                //         <i class="la la-ruler-combined"></i>
+                //     </a>`;
+                //             } else {
+                //                 action += ` <a href="viewwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="View Measurement">
+                //     <i class="la la-ruler-combined"></i>
+                // </a>`;
+                //             }
+                            // onclick="`+full.inquiryId+`" 
+                             action += `
+                            <a type="button" onclick="setInquiryId(` + full.inquiryWorkscopeId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+								<i class="la la-thumbs-up"></i>
+							</a>
+                            <a type="button" onclick="setInquiryId(` + full.inquiryWorkscopeId + `)" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
+								<i class="la la-thumbs-down"></i>
+							</a>
+						`;
+                            return action;
+                        } else {
+                            return `<span></span>`;
+                        }
                     },
                 },
                 {
@@ -279,7 +270,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             5: {
                                 'title': 'Quotation Pending',
-                                'class': ' label-light-info'
+                                'class': ' label-light-primary'
                             },
                             6: {
                                 'title': 'Quotation Delayed',
@@ -327,7 +318,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         if (typeof status[data] === 'undefined') {
                             return data;
                         }
-                        return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
+                        return '<span style="font-size:1.0rem !important; height:80px;" class="label label-lg font-weight-bold ' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
 
                     },
                 },
@@ -395,13 +386,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         });
 
     };
-    
+
+
+
+
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
-    var _handleuploaddesignfile = function() {
-        var form = KTUtil.getById('kt_add_design_file');
+    var _handleFormAcceptMeasurement = function() {
+        var form = KTUtil.getById('kt_approve_design');
         var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_upload_design_file');
+        var formSubmitButton = KTUtil.getById('kt_approve_design_button');
 
         if (!form) {
             return;
@@ -411,7 +405,21 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                      
+                        design_schedule_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Design Schedule Date is required'
+                                }
+                            }
+                        },
+                        DesignAssignto: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Design Assign is required'
+                                },
+
+                            }
+                        },
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
@@ -428,18 +436,17 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-               
-                console.log(measurementFile);
-                 var designFiles = {
-                    "inquiryWorkScopeId": document.getElementById("inquiryWorkscopeId").innerHTML,
-                    "comment": document.getElementById('designComment').value,
-                    "base64f3d": measurementFile
-                  };
-                const data = JSON.stringify(designFiles);
+                var inquiryApproved = {
+                    inquiryWorkscopeId: document.getElementById("inquiryWorkscopeId").innerHTML,
+                    
+                    designComment: document.getElementById('designApprovalComment').value,
+                };
+                const data = JSON.stringify(inquiryApproved);
                 console.log(data);
                 $.ajax({
                     type: "Post",
-                    url: baseURL + '/Design/AddUpdateDesignfiles',
+                    url: baseURL + '/Design/AcceptDesign',
+
                     headers: {
                         'Content-Type': 'application/json',
                         'userId': user.data.userId,
@@ -456,7 +463,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("design.html");
+                            window.location.replace("designrequest.html");
 
                         } else {
                             Swal.fire({
@@ -506,13 +513,134 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 });
             });
     }
+    var _handleFormRejectMeasurement = function() {
+        var form = KTUtil.getById('kt_modify_reject_measurement');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_reject_measurement_button');
 
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        design_schedule_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Design Schedule Date is required'
+                                }
+                            }
+                        },
+                        DesignAssignto: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Design Assign is required'
+                                },
+
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                var inquiryRejected = {
+                    inquiryWorkscopeId: document.getElementById("inquiryWorkscopeId").innerHTML,
+                    designAssignedTo: $('#kt_designassignto').val(),
+                    designScheduleDate: document.getElementById('design_schedule_date').value,
+                    designComment: document.getElementById('designRejectComment').value,
+                };
+                const data = JSON.stringify(inquiryRejected);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Design/DeclineDesign',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("designrequest.html");
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+            .on('core.form.invalid', function() {
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            });
+    }
     return {
 
         //main function to initiate the module
         init: function() {
             initTable1();
-            _handleuploaddesignfile();
+            _handleFormAcceptMeasurement();
+            _handleFormRejectMeasurement();
         },
 
     };
@@ -539,6 +667,77 @@ jQuery(document).ready(function() {
             }
         }
     }
+
+    // if (inquiryPermission >= 2) {
+    //     document.getElementById('btnNewInquiry').innerHTML += `
+    //     <a href="addinquiry.html" class="btn btn-primary font-weight-bolder">
+    //         <span class="svg-icon svg-icon-md">
+    //             <svg xmlns="http://www.w3.org/2000/svg"
+    //                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+    //                 height="24px" viewBox="0 0 24 24" version="1.1">
+    //                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    //                     <rect x="0" y="0" width="24" height="24" />
+    //                     <circle fill="#000000" cx="9" cy="15" r="6" />
+    //                     <path
+    //                         d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+    //                         fill="#000000" opacity="0.3" />
+    //                 </g>
+    //             </svg>
+    //             </span>New Inquiry</a>`;
+    // }
+
+
+
+
+    $.ajax({
+        type: "post",
+        url: baseURL + '/User/GetDesignUsers?branchId=' + user.data.userRoles[0].branch.branchId,
+
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+        },
+
+        success: function(response) {
+            console.log(response);
+            if (response.isError == false) {
+
+                console.log(response.data[0].userName);
+                const assigntoList = document.getElementById('kt_designassignto');
+                var assignToListHTML = new Array();
+
+                for (var i = 0; i < response.data.length; i++) {
+                    assignToListHTML.push(`
+					<option value="` + response.data[i].userId + `">` + response.data[i].userName + `</option>`);
+                }
+
+                assigntoList.innerHTML = assignToListHTML.join('');
+
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+            // alert(errorThrown);
+
+            Swal.fire({
+                text: 'Internet Connection Problem',
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function() {
+                KTUtil.scrollTop();
+            });
+        }
+    });
+
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 });

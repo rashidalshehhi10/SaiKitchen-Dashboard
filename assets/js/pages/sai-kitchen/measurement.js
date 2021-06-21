@@ -57,7 +57,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     columnsDef: [
                         'inquiryWorkscopeId', 'inquiryCode', 'status', 'noOfRevision', 'workScopeName',
                         'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
-                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'actions'
+                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription',
+                        'isOccupied','InquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'actions'
                     ],
                 },
             },
@@ -110,7 +111,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'buildingReconstruction'
                 },
                 {
+                    data: 'isOccupied'
+                },
+                {
                     data: 'inquiryDescription'
+                },
+                {
+                    data: 'inquiryComment'
                 },
                 {
                     data: 'inquiryStartDate'
@@ -173,6 +180,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Measurement Approval Pending',
                                     'class': ' label-light-primary'
                                 },
+                                10: {
+                                    'title': 'Design Approved',
+                                    'class': 'label-light-success'
+                                },
+                                11: {
+                                    'title': 'Design Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                12: {
+                                    'title': 'Design Approval Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                13: {
+                                    'title': 'Quotation Approved',
+                                    'class': 'label-light-success'
+                                },
+                                14: {
+                                    'title': 'Quotation Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                15: {
+                                    'title': 'Quotation Approval Pending',
+                                    'class': ' label-light-primary'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -203,13 +234,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         <i class="la la-file-upload"></i>
                     </button>`;
                         if (full.questionaireType == 1) {
-                            ret += `<a href="addkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Add Measurement">
+                            ret += `<button href="addkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Add Measurement" disabled>
                     <i class="la la-ruler-combined"></i>
-                </a>`;
+                </button>`;
                         } else {
-                            ret += `<a href="addwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Add Measurement">
+                            ret += `<button href="addwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Add Measurement" disabled>
                 <i class="la la-ruler-combined"></i>
-            </a>`;
+            </button>`;
                         }
             //             ret += `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Delete">
             //     <i class="la la-trash"></i>
@@ -255,6 +286,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             9: {
                                 'title': 'Measurement Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            10: {
+                                'title': 'Design Approved',
+                                'class': 'label-light-success'
+                            },
+                            11: {
+                                'title': 'Design Rejected',
+                                'class': ' label-light-info'
+                            },
+                            12: {
+                                'title': 'Design Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            13: {
+                                'title': 'Quotation Approved',
+                                'class': 'label-light-success'
+                            },
+                            14: {
+                                'title': 'Quotation Rejected',
+                                'class': ' label-light-info'
+                            },
+                            15: {
+                                'title': 'Quotation Approval Pending',
                                 'class': ' label-light-primary'
                             },
                         };
@@ -376,7 +431,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 $.ajax({
                     type: "Post",
                     url: baseURL + '/Measurement/AddUpdateMeasurmentfiles',
-
                     headers: {
                         'Content-Type': 'application/json',
                         'userId': user.data.userId,
@@ -384,6 +438,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'userRoleId': user.data.userRoles[0].userRoleId,
                         'branchId': user.data.userRoles[0].branchId,
                         'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
                     },
                     data: data,
                     success: function(response) {

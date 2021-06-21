@@ -317,6 +317,7 @@ var KTWizard1 = function () {
 							buildingCondition: $('input[name="condition"]:checked').val(),
 							buildingFloor: document.getElementById('floor').value,
 							buildingReconstruction: $('input[name="construction"]:checked').val(),
+							isOccupied: $('input[name="occupied"]:checked').val(),
 							isActive: true,
 							isDeleted: false,
 						},

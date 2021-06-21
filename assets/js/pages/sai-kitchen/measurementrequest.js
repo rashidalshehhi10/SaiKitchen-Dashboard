@@ -44,7 +44,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     columnsDef: [
                         'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName','noOfRevision',
                         'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
-                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy', 'actions'
+                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription',
+                        'inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy', 'actions'
                     ],
                 },
             },
@@ -98,6 +99,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'inquiryDescription'
+                },
+                {
+                    data: 'inquiryComment'
                 },
                 {
                     data: 'inquiryStartDate'
@@ -163,6 +167,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Measurement Approval Pending',
                                     'class': ' label-light-primary'
                                 },
+                                10: {
+                                    'title': 'Design Approved',
+                                    'class': 'label-light-success'
+                                },
+                                11: {
+                                    'title': 'Design Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                12: {
+                                    'title': 'Design Approval Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                13: {
+                                    'title': 'Quotation Approved',
+                                    'class': 'label-light-success'
+                                },
+                                14: {
+                                    'title': 'Quotation Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                15: {
+                                    'title': 'Quotation Approval Pending',
+                                    'class': ' label-light-primary'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -193,21 +221,24 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
                             var action=``; 
-                            if (full.questionaireType == 1) {
-                                action += ` <a href="viewkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Measurement">
+                                                 action += ` <a href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Measurement">
                         <i class="la la-ruler-combined"></i>
                     </a>`;
-                            } else {
-                                action += ` <a href="viewwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="View Measurement">
-                    <i class="la la-ruler-combined"></i>
-                </a>`;
-                            }
+                //             if (full.questionaireType == 1) {
+                //                 action += ` <a href="viewkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Measurement">
+                //         <i class="la la-ruler-combined"></i>
+                //     </a>`;
+                //             } else {
+                //                 action += ` <a href="viewwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="View Measurement">
+                //     <i class="la la-ruler-combined"></i>
+                // </a>`;
+                //             }
                             // onclick="`+full.inquiryId+`" 
                              action += `
-                            <a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+                            <a type="button" onclick="setInquiryId(` + full.inquiryWorkscopeId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
 								<i class="la la-thumbs-up"></i>
 							</a>
-                            <a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
+                            <a type="button" onclick="setInquiryId(` + full.inquiryWorkscopeId + `)" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
 								<i class="la la-thumbs-down"></i>
 							</a>
 						`;
@@ -255,6 +286,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             9: {
                                 'title': 'Measurement Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            10: {
+                                'title': 'Design Approved',
+                                'class': 'label-light-success'
+                            },
+                            11: {
+                                'title': 'Design Rejected',
+                                'class': ' label-light-info'
+                            },
+                            12: {
+                                'title': 'Design Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            13: {
+                                'title': 'Quotation Approved',
+                                'class': 'label-light-success'
+                            },
+                            14: {
+                                'title': 'Quotation Rejected',
+                                'class': ' label-light-info'
+                            },
+                            15: {
+                                'title': 'Quotation Approval Pending',
                                 'class': ' label-light-primary'
                             },
                         };
@@ -337,10 +392,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
-    var _handleFormModifySchedule = function() {
-        var form = KTUtil.getById('kt_modify_inquiry_schedule');
+    var _handleFormAcceptMeasurement = function() {
+        var form = KTUtil.getById('kt_approve_inquiry');
         var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_add_customer_button');
+        var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
 
         if (!form) {
             return;
@@ -350,21 +405,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                        measurement_schedule_date: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Measurement Schedule Date is required'
-                                }
-                            }
-                        },
-                        MeasurementAssignto: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Measurement Assign is required'
-                                },
-
-                            }
-                        },
                         design_schedule_date: {
                             validators: {
                                 notEmpty: {
@@ -396,18 +436,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-                var inquirySchedule = {
-                    inquiryId: document.getElementById("inquiryId").innerHTML,
-                    measurementAssignedTo: $('#kt_assignto').val(),
-                    measurementScheduleDate: document.getElementById('measurement_schedule_date').value,
+                var inquiryApproved = {
+                    inquiryWorkscopeId: document.getElementById("inquiryWorkscopeId").innerHTML,
                     designAssignedTo: $('#kt_designassignto').val(),
                     designScheduleDate: document.getElementById('design_schedule_date').value,
                 };
-                const data = JSON.stringify(inquirySchedule);
+                const data = JSON.stringify(inquiryApproved);
                 console.log(data);
                 $.ajax({
                     type: "Post",
-                    url: baseURL + '/Inquiry/UpdateInquiryScheduleDate',
+                    url: baseURL + '/Measurement/AcceptMeasurement',
 
                     headers: {
                         'Content-Type': 'application/json',
@@ -425,8 +463,129 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("inquiry.html");
+                            window.location.replace("measurementrequest.html");
 
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+            .on('core.form.invalid', function() {
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            });
+    }
+    var _handleFormRejectMeasurement = function() {
+        var form = KTUtil.getById('kt_modify_reject_measurement');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_reject_measurement_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        measurement_schedule_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Measurement Schedule Date is required'
+                                }
+                            }
+                        },
+                        MeasurementAssignto: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Measurement Assign is required'
+                                },
+
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                var inquiryRejected = {
+                    inquiryWorkscopeId: document.getElementById("inquiryWorkscopeId").innerHTML,
+                    measurementAssignedTo: $('#kt_assignto').val(),
+                    measurementScheduleDate: document.getElementById('measurement_schedule_date').value,
+                    measurementComment: document.getElementById('measurementComment').value,
+                };
+                const data = JSON.stringify(inquiryRejected);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Measurement/DeclineMeasurement',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("measurementrequest.html");
                         } else {
                             Swal.fire({
                                 text: response.errorMessage,
@@ -480,7 +639,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         //main function to initiate the module
         init: function() {
             initTable1();
-            _handleFormModifySchedule();
+            _handleFormAcceptMeasurement();
+            _handleFormRejectMeasurement();
         },
 
     };

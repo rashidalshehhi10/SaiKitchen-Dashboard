@@ -26,6 +26,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Fonts-->
     <!--begin::Page Vendors Styles(used by this page)-->
     <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="assets/css/pages/sai-kitchen/pannellum.css"/>
     <!--end::Page Vendors Styles-->
     <!--begin::Global Theme Styles(used by all pages)-->
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
@@ -762,205 +764,40 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="container">
                             <!--begin::CustomBody-->
                             <!--begin::Dashboard-->
-                            <!--begin::Row-->
+                            <div style="height: 20px;">
 
-                            <!--begin::Card-->
-                            <!--begin::Card-->
-                            <div class="card card-custom">
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <span class="card-icon">
-											<i class="flaticon2-delivery-package text-primary"></i>
-										</span>
-                                        <h3 class="card-label">Design</h3>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <!--begin: Search Form-->
-                                    <form class="mb-15">
-                                        <div class="row mb-6">
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>ID:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: 4590" data-col-index="0" />
-                                            </div>
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Code:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: 135" data-col-index="1" />
-                                            </div>
-
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Status:</label>
-                                                <select class="form-control datatable-input" data-col-index="2">
-													<option value="">Select</option>
-												</select>
-                                            </div>
-
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Workscope:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: Kitchen" data-col-index="3" />
-                                            </div>
-                                            <!-- <div class="col-lg-3 mb-lg-0 mb-6">
-													<label>Status:</label>
-													<input type="text" class="form-control datatable-input" placeholder="E.g: test" data-col-index="1" />
-												</div> -->
-
-                                        </div>
-                                        <div class="row mb-8">
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Start Date:</label>
-                                                <div class="input-daterange input-group" id="kt_datepicker">
-                                                    <input type="text" class="form-control datatable-input" name="start" placeholder="From" data-col-index="16" />
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">
-															<i class="la la-ellipsis-h"></i>
-														</span>
-                                                    </div>
-                                                    <input type="text" class="form-control datatable-input" name="end" placeholder="To" data-col-index="16" />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Measurement Schedule Date:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: 04/14/2021 1:31 PM" data-col-index="4" />
-                                            </div>
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Measurement Assign To:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="5" />
-                                            </div>
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Design Schedule Date:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: 04/14/2021 1:31 PM" data-col-index="6" />
-                                            </div>
-                                        </div>
-                                        <div class="row mb-8">
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Design Assign To:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="7" />
-                                            </div>
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Customer Name:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="8" />
-                                            </div>
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Customer Contact:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="9" />
-                                            </div>
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Building Address:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="10" />
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-lg-3 mb-lg-0 mb-6">
-													<label>Country:</label>
-													<select class="form-control datatable-input" data-col-index="5">
-														<option value="">Select</option>
-													</select>
-												</div> -->
-                                        <!-- <div class="col-lg-3 mb-lg-0 mb-6">
-													<label>Agent:</label>
-													<input type="text" class="form-control datatable-input" placeholder="Agent ID or name" data-col-index="6" />
-												</div> -->
-
-                                        <!-- <div class="row mb-8">
-												<div class="col-lg-3 mb-lg-0 mb-6">
-													<label>Inquiry Start Date:</label>
-													<div class="input-daterange input-group" id="kt_datepicker">
-														<input type="text" class="form-control datatable-input" name="start" placeholder="From" data-col-index="7" />
-														<div class="input-group-append">
-															<span class="input-group-text">
-																<i class="la la-ellipsis-h"></i>
-															</span>
-														</div>
-														<input type="text" class="form-control datatable-input" name="end" placeholder="To" data-col-index="7" />
-													</div>
-												</div>
-												<div class="col-lg-3 mb-lg-0 mb-6">
-													<label>Type:</label>
-													<select class="form-control datatable-input" data-col-index="8">
-														<option value="">Select</option>
-													</select>
-												</div>
-											</div> -->
-                                        <div class="row mt-8">
-                                            <div class="col-lg-12">
-                                                <button class="btn btn-primary btn-primary--icon" id="kt_search">
-													<span>
-														<i class="la la-search"></i>
-														<span>Search</span>
-													</span>
-												</button>&#160;&#160;
-                                                <button class="btn btn-secondary btn-secondary--icon" id="kt_reset">
-													<span>
-														<i class="la la-close"></i>
-														<span>Reset</span>
-													</span>
-												</button></div>
-                                        </div>
-                                    </form>
-                                    <!--begin: Datatable-->
-                                    <!--begin: Datatable-->
-                                    <table class="table table-bordered table-hover table-checkable" id="kt_datatable">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Code</th>
-                                                <th>Status</th>
-                                                <th>Revision</th>
-                                                <th>Workscope</th>
-                                                <th>Measurement Schedule Date</th>
-                                                <th>Measurement Assign To</th>
-                                                <th>Design Schedule Date</th>
-                                                <th>Design Assign To</th>
-                                                <th>Customer Name</th>
-                                                <th>Customer Contact</th>
-                                                <th>Building Address</th>
-                                                <th>Building Type Of Unit</th>
-                                                <th>Building Condition</th>
-                                                <th>Building Floor</th>
-                                                <th>Building Re-construction</th>
-                                                <th>Description</th>
-                                                <th>Comment</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-
-                                    </table>
-                                    <!--end: Datatable-->
-                                </div>
                             </div>
-                            <!--end::Card-->
-                            <!--end::Card-->
-                            <!--end::Row-->
-                            <!--end::Dashboard-->
+                            <div style="height: 100%;" id="pdfview">
+                            <!-- <iframe src="https://saikitchenstorage.blob.core.windows.net/files/2fb6616b-650b-4896-a2f3-fa52ea11206e.jpg" frameborder="0" allowfullscreen  webkitallowfullscreen mozallowfullscreen  style="width: 100%; height: 100%;">
+                            </iframe> --> 
+                             <!-- <iframe src="https://api2.enscape3d.com/v3/view/ab9d0c6d-16ab-4f0d-aa48-39e1bf43fc39" frameborder="0" allowfullscreen  webkitallowfullscreen mozallowfullscreen  style="width: 100%; height: 100%;">
+                            </iframe> -->
+                           
+                            <!-- <iframe frameborder="0" allowfullscreen  webkitallowfullscreen mozallowfullscreen  style="width: 100%; height: 100%;"  src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://saikitchenstorage.blob.core.windows.net/files/2fb6616b-650b-4896-a2f3-fa52ea11206e.jpg&autoLoad=true"></iframe> -->
+                            <!-- <embed src="https://saikitchenstorage.blob.core.windows.net/saikitchenfrontend/4117c85c-74a6-42e2-a8f1-c6c97653d05f.pdf" type="application/pdf" width="100%" height="100%"> -->
+                                <!-- <object data="https://api2.enscape3d.com/v3/view/ab9d0c6d-16ab-4f0d-aa48-39e1bf43fc39"  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="100%">
+                                    <iframe src="https://api2.enscape3d.com/v3/view/ab9d0c6d-16ab-4f0d-aa48-39e1bf43fc39"  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="100%" style="border: none;">
+                                    This browser does not support PDFs. Please download the PDF to view it: 
+                                    <a href="https://api2.enscape3d.com/v3/view/ab9d0c6d-16ab-4f0d-aa48-39e1bf43fc39">Download PDF</a>
+                                    </iframe>
+                                    </object> -->
+
+                                </div>
+                                <div style="height: 50px;">
+    
+                                </div>
+                                <!--end::Dashboard-->
                             <!--end::CustomBody-->
+<div style="height: 50px;">
+
+</div>
+
                         </div>
                         <!--end::Container-->
                     </div>
                     <!--end::Entry-->
                 </div>
                 <!--end::Content-->
-                <!--begin::Footer-->
-                <div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
-                    <!--begin::Container-->
-                    <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-                        <!--begin::Copyright-->
-                        <div class="text-dark order-2 order-md-1">
-                            <span class="text-muted font-weight-bold mr-2">2021©</span>
-                            <a href="http://www.sai-group.ae/" target="_blank" class="text-dark-75 text-hover-primary">Sai Kitchen</a>
-                        </div>
-                        <!--end::Copyright-->
-                        <!--begin::Nav-->
-                        <div class="nav nav-dark">
-                            <a href="http://www.sai-group.ae/about/" target="_blank" class="nav-link pl-0 pr-5">About</a>
-                            <a href="http://www.sai-group.ae/" target="_blank" class="nav-link pl-0 pr-5">Team</a>
-                            <a href="http://www.sai-group.ae/contact-us/" target="_blank" class="nav-link pl-0 pr-0">Contact</a>
-                        </div>
-                        <!--end::Nav-->
-                    </div>
-                    <!--end::Container-->
-                </div>
-                <!--end::Footer-->
             </div>
             <!--end::Wrapper-->
         </div>
@@ -1012,8 +849,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span class="navi-text text-muted text-hover-primary" id="userEmail">ceo@sai-group.ae</span>
                             </span>
                         </a>
-                        <button id="logout" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign
-							Out</button>
+                        <button id="logout" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</button>
                     </div>
                 </div>
             </div>
@@ -2106,86 +1942,6 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
     <!--end::Chat Panel-->
-
-
-
-    <div class="modal fade" id="ScheduleDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Measurement</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i aria-hidden="true" class="ki ki-close"></i>
-					</button>
-                </div>
-                <!--begin::Form-->
-                <form class="form" id="kt_modify_inquiry_schedule" action="" name="modifyScheduleDateform">
-                    <span id="inquiryId" style="display:none">0</span>
-                    <span id="customerCity" style="display:none">0</span>
-                    <div class="modal-body">
-
-
-                        <div class="form-group row">
-                            <label class="">Measurement/Drawings Schedule Date*</label>
-                            <div class="col-lg-4 col-md-9 col-sm-12">
-                                <div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
-                                    <input type="text" id="measurement_schedule_date" name="measurement_schedule_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_1">
-                                    <div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
-                                        <span class="input-group-text">
-											<i class="ki ki-calendar"></i>
-										</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-group row">
-                            <label class="">Measurement Assign to*</label>
-                            <div class="input-group input-group-lg input-group-solid">
-                                <select class="form-control" id="kt_assignto" name="MeasurementAssignto" class="form-control form-control-lg form-control-solid" style="width:100%">
-
-								</select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="">Design Schedule Date*</label>
-                            <div class="col-lg-4 col-md-9 col-sm-12">
-                                <div class="input-group date" id="kt_design_datetimepicker" data-target-input="nearest">
-                                    <input type="text" id="design_schedule_date" name="design_schedule_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_design_datetimepicker">
-                                    <div class="input-group-append" data-target="#kt_design_datetimepicker" data-toggle="datetimepicker">
-                                        <span class="input-group-text">
-											<i class="ki ki-calendar"></i>
-										</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-group row">
-                            <label class="">Design Assign to*</label>
-                            <div class="input-group input-group-lg input-group-solid">
-                                <select class="form-control" id="kt_designassignto" name="DesignAssignto" class="form-control form-control-lg form-control-solid" style="width:100%">
-
-								</select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" onclick="
-						document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                        <button type="submit" id="kt_add_customer_button" class="btn btn-primary font-weight-bold">Update</button>
-                    </div>
-                </form>
-                <!--end::Form-->
-            </div>
-        </div>
-    </div>
-
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">
         <span class="svg-icon">
@@ -2205,55 +1961,112 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
     <!--end::Scrolltop-->
 
+    
 
-    <!-- Modal-->
-    <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="ScheduleDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
-                <form class="form" id="kt_add_design_file" action="" name="kt_add_design_file">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Upload Design</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Measurement Approve</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i aria-hidden="true" class="ki ki-close"></i>
-                        </button>
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
                 </div>
-                <div class="modal-body">
+                <!--begin::Form-->
+                <form class="form" id="kt_approve_inquiry" action="" name="approveinquiryform">
                     <span id="inquiryWorkscopeId" style="display:none">0</span>
-                    <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_3" name="measurementDrawing">
-                                <div class="dropzone-msg dz-message needsclick">
-                                    <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
-                                    <span class="dropzone-msg-desc">Only image & pdf files are allowed for upload</span>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="">Design Schedule Date*</label>
+                            <div class="col-lg-4 col-md-9 col-sm-12">
+                                <div class="input-group date" id="kt_design_datetimepicker" data-target-input="nearest">
+                                    <input type="text" id="design_schedule_date" name="design_schedule_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_design_datetimepicker">
+                                    <div class="input-group-append" data-target="#kt_design_datetimepicker" data-toggle="datetimepicker">
+                                        <span class="input-group-text">
+											<i class="ki ki-calendar"></i>
+										</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="">Design Assign to*</label>
+                            <div class="input-group input-group-lg input-group-solid">
+                                <select class="form-control" id="kt_designassignto" name="DesignAssignto" class="form-control form-control-lg form-control-solid" style="width:100%">
+
+								</select>
+                            </div>
+                        </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="
+						document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="submit" id="kt_approve_inquiry_button" class="btn btn-primary font-weight-bold">Approved</button>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" id="measurementScheduleDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Measurement Reject</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_modify_reject_measurement" action="" name="modifyScheduleDateform">
+                    <span id="inquiryId" style="display:none">0</span>
+                    <span id="customerCity" style="display:none">0</span>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="">Measurement/Drawings Schedule Date*</label>
+                            <div class="col-lg-4 col-md-9 col-sm-12">
+                                <div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
+                                    <input type="text" id="measurement_schedule_date" name="measurement_schedule_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_1">
+                                    <div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
+                                        <span class="input-group-text">
+											<i class="ki ki-calendar"></i>
+										</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="">Measurement Assign to*</label>
+                            <div class="input-group input-group-lg input-group-solid">
+                                <select class="form-control" id="kt_assignto" name="MeasurementAssignto" class="form-control form-control-lg form-control-solid" style="width:100%">
+
+								</select>
+                            </div>
+                        </div>
+                        
                     	<!--begin::Form group-->
 									<div class="form-group row">
-										<label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
+										<label class="">Reason</label>
 										<div class="input-group">
-
-											<input type="text" name="designComment" id="designComment"
+											<input type="text" name="measurementComment" id="measurementComment"
 												class="form-control" value=""
 												placeholder="" >
 										</div>
 									</div>
 									<!--end::Form group-->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" onclick="document.getElementById('inquiryWorkscopeId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                    <button type="submit" id="kt_upload_design_file" class="btn btn-primary font-weight-bold">Upload</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="
+						document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="submit" id="kt_reject_measurement_button" class="btn btn-primary font-weight-bold">Rejected</button>
+                    </div>
                 </form>
+                <!--end::Form-->
             </div>
         </div>
     </div>
-    <!--end::Modal-->
-
-    <!--begin::Page Scripts(used by this page)-->
-    <script src="assets/js/pages/sai-kitchen/dropzone.js" type="Module"></script>
-    <!--end::Page Scripts-->
     <script>
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
     </script>
@@ -2340,17 +2153,31 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="assets/js/pages/sai-kitchen/firebase.js" type="module"></script>
 
 
+    <script src="assets/js/pages/sai-kitchen/home.js" type="module"></script>
+
 
     <script src="assets/js/pages/sai-kitchen/base.js" type="module"></script>
+    <script src="assets/js/pages/sai-kitchen/viewdesign.js" type="module"></script>
+    
+<script src='assets/js/pages/sai-kitchen/pdfobject.js'></script>
 
-    <!--begin::Page Vendors(used by this page)-->
-    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <!--end::Page Vendors-->
     <!--begin::Page Scripts(used by this page)-->
-    <script src="assets/js/pages/sai-kitchen/design.js" type="module"></script>
+    <script src="assets/js/pages/sai-kitchen/dropdown.js"></script>
     <!--end::Page Scripts-->
 
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
+    <!--end::Page Scripts-->
+    <script type="text/javascript" src="assets/js/pages/sai-kitchen/pannellum.js"></script>
+    <!-- <script src="assets/js/pages/sai-kitchen/three.min.js"></script>
+    <script src="assets/js/pages/sai-kitchen/panolens.min.js" ></script> -->
+
+
     <script>
+        var options = {
+   pdfOpenParams: { view: 'FitBH,5', pagemode: 'none', scrollbar: '1', toolbar: '1', statusbar: '1', messages: '1', navpanes: '1' }
+};
+     PDFObject.embed("assets/js/pages/sai-kitchen/myfile.pdf", "#example1",options);
         var baseURL = "https://backendsaikitchen.azurewebsites.net/Api"
 
         // import { baseURL } from '/assets/js/pages/sai-kitchen/constant.js'
@@ -2371,11 +2198,6 @@ License: You must have a valid license purchased only from themeforest(the above
             });
         }
 
-        function setInquiryWorkscopeId(inquiryWorkscope) {
-            document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorkscope;
-            inquiryWorkscopeId = inquiryWorkscope;
-            // alert(inquiryWorkscopeId);
-        }
 
         function notifyMe() {
             // Let's check if the browser supports notifications
@@ -2404,6 +2226,7 @@ License: You must have a valid license purchased only from themeforest(the above
             // want to be respectful there is no need to bother them any more.
         }
 
+
         function logoutUser(user) {
 
             // alert('hi ' + branchRoleId);
@@ -2413,8 +2236,8 @@ License: You must have a valid license purchased only from themeforest(the above
             var data = JSON.stringify({
                 userId: users.data.userId
             });
-            sessionStorage.removeItem('user');
-            sessionStorage.removeItem('permission');
+            localStorage.removeItem('user');
+            localStorage.removeItem('permission');
             $.ajax({
                 type: "Post",
                 url: baseURL + '/User/LogoutUser',
@@ -2452,7 +2275,13 @@ License: You must have a valid license purchased only from themeforest(the above
             });
         }
     </script>
+<!-- <script>
 
+    const panorama = new PANOLENS.ImagePanorama('assets/media/sai-kitchen/panorama.jpg');
+    const viewer = new PANOLENS.Viewer();
+    viewer.add( panorama );
+    
+    </script> -->
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->
