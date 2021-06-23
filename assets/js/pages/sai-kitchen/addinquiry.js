@@ -368,6 +368,7 @@ var KTWizard1 = function () {
 							'userRoleId': user.data.userRoles[0].userRoleId,
 							'branchId': user.data.userRoles[0].branchId,
 							'branchRoleId': user.data.userRoles[0].branchRoleId,
+							'Access-Control-Allow-Origin': '*',
 						},
 						data: data,
 						success: function (response) {
@@ -501,6 +502,7 @@ jQuery(document).ready(function () {
 					'userRoleId': user.data.userRoles[0].userRoleId,
 					'branchId': user.data.userRoles[0].branchId,
 					'branchRoleId': user.data.userRoles[0].branchRoleId,
+					'Access-Control-Allow-Origin': '*',
 				},
 				// data: data,
 				success: function (response) {
@@ -604,6 +606,7 @@ jQuery(document).ready(function () {
 			'userRoleId': user.data.userRoles[0].userRoleId,
 			'branchId': user.data.userRoles[0].branchId,
 			'branchRoleId': user.data.userRoles[0].branchRoleId,
+			'Access-Control-Allow-Origin': '*',
 		},
 
 		success: function (response) {
@@ -661,6 +664,7 @@ jQuery(document).ready(function () {
 			'userRoleId': user.data.userRoles[0].userRoleId,
 			'branchId': user.data.userRoles[0].branchId,
 			'branchRoleId': user.data.userRoles[0].branchRoleId,
+			'Access-Control-Allow-Origin': '*',
 		},
 
 		success: function (response) {
@@ -710,6 +714,7 @@ jQuery(document).ready(function () {
 			'userRoleId': user.data.userRoles[0].userRoleId,
 			'branchId': user.data.userRoles[0].branchId,
 			'branchRoleId': user.data.userRoles[0].branchRoleId,
+			'Access-Control-Allow-Origin': '*',
 		},
 
 		success: function (response) {
@@ -761,19 +766,30 @@ jQuery(document).ready(function () {
 	});
 
 
-	var addressPicker = new AddressPicker();
+	// var addressPicker = new AddressPicker();
 
-	$('#customerAddress').typeahead(null, {
-		displayKey: 'description',
-		source: addressPicker.ttAdapter()
-	  });
+	// $('#customerAddress').typeahead(null, {
+	// 	displayKey: 'description',
+	// 	source: addressPicker.ttAdapter()
+	//   });
 	
 	
-	var addressPickers = new AddressPicker();
-	$('#buildingAddress').typeahead(null, {
-		displayKey: 'description',
-		source: addressPickers.ttAdapter()
-	  });
+	// var addressPickers = new AddressPicker();
+	// $('#buildingAddress').typeahead(null, {
+	// 	displayKey: 'description',
+	// 	source: addressPickers.ttAdapter()
+	//   });
+
+	const input = document.getElementById("customerAddress");
+	const input2 = document.getElementById("buildingAddress");
+const options = {
+  componentRestrictions: { country: "ae" },
+  fields: ["address_components", "geometry", "icon", "name"],
+  strictBounds: false,
+  types: ["establishment"],
+};
+const autocomplete = new google.maps.places.Autocomplete(input, options);
+const autocomplete2 = new google.maps.places.Autocomplete(input2, options);
 
 });
 

@@ -81,6 +81,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'userRoleId': user.data.userRoles[0].userRoleId,
                         'branchId': user.data.userRoles[0].branchId,
                         'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
                     },
                     data: data,
                     success: function(response) {
@@ -203,6 +204,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'userRoleId': user.data.userRoles[0].userRoleId,
                         'branchId': user.data.userRoles[0].branchId,
                         'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
                     },
                     data: data,
                     success: function(response) {
@@ -312,6 +314,7 @@ jQuery(document).ready(function() {
             'userRoleId': user.data.userRoles[0].userRoleId,
             'branchId': user.data.userRoles[0].branchId,
             'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
         },
 
         success: function(response) {
@@ -381,6 +384,7 @@ pdfView.innerHTML=pdfViewHTML;
             'userRoleId': user.data.userRoles[0].userRoleId,
             'branchId': user.data.userRoles[0].branchId,
             'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
         },
 
         success: function(response) {
@@ -431,6 +435,7 @@ pdfView.innerHTML=pdfViewHTML;
             'userRoleId': user.data.userRoles[0].userRoleId,
             'branchId': user.data.userRoles[0].branchId,
             'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
         },
 
         success: function(response) {

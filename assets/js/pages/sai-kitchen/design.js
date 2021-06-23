@@ -49,6 +49,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     'userRoleId': user.data.userRoles[0].userRoleId,
                     'branchId': user.data.userRoles[0].branchId,
                     'branchRoleId': user.data.userRoles[0].branchRoleId,
+                    'Access-Control-Allow-Origin': '*',
                 },
                 type: 'POST',
                 data: {
@@ -447,6 +448,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'userRoleId': user.data.userRoles[0].userRoleId,
                         'branchId': user.data.userRoles[0].branchId,
                         'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
                     },
                     data: data,
                     success: function(response) {

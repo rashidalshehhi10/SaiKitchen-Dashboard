@@ -81,6 +81,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'userRoleId': user.data.userRoles[0].userRoleId,
                         'branchId': user.data.userRoles[0].branchId,
                         'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
                     },
                     data: data,
                     success: function(response) {
@@ -203,6 +204,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'userRoleId': user.data.userRoles[0].userRoleId,
                         'branchId': user.data.userRoles[0].branchId,
                         'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
                     },
                     data: data,
                     success: function(response) {
@@ -311,6 +313,7 @@ jQuery(document).ready(function() {
             'userRoleId': user.data.userRoles[0].userRoleId,
             'branchId': user.data.userRoles[0].branchId,
             'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
         },
 
         success: function(response) {
@@ -333,7 +336,18 @@ files.forEach(element => {
 // 	</iframe>
 // 	</object>
 // `;
+if(element.fileUrl.includes(".pdf")){
+    	pdfViewHTML += `	 <object data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="100%">
+	<iframe src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="100%" style="border: none;">
+	This browser does not support PDFs. Please download the PDF to view it: 
+	<a href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
+	</iframe>
+	</object>
+`;
+}else{
+    
 pdfViewHTML += `<div id="`+element.fileUrl+`"></div>`;
+}
 // 	pdfViewHTML += `<iframe frameborder="0" allowfullscreen  webkitallowfullscreen mozallowfullscreen 
 //  style="width: 100%; height: 100%;"  
 //  src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=`+baseFileURL+element.fileUrl+`&autoLoad=true"></iframe>        
@@ -348,12 +362,14 @@ pdfView.innerHTML=pdfViewHTML;
 files.forEach(element => {
 	console.log(baseFileURL+element.fileUrl);
     var url=element.fileUrl;
-  
+    if(!element.fileUrl.includes(".pdf")){
+ 
 pannellum.viewer(url, {
     "type": "equirectangular",
     "autoLoad": true,
     "panorama": baseFileURL+element.fileUrl
 });
+    }
 });
 
             }else {
@@ -400,6 +416,7 @@ pannellum.viewer(url, {
             'userRoleId': user.data.userRoles[0].userRoleId,
             'branchId': user.data.userRoles[0].branchId,
             'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
         },
 
         success: function(response) {
@@ -450,6 +467,7 @@ pannellum.viewer(url, {
             'userRoleId': user.data.userRoles[0].userRoleId,
             'branchId': user.data.userRoles[0].branchId,
             'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
         },
 
         success: function(response) {

@@ -101,6 +101,7 @@ messaging.requestPermission()
             type: "Post",
             url: baseURL + '/User/SetFCMToken',
             headers: {
+              'Access-Control-Allow-Origin': '*',
               'Content-Type': 'application/json'
             },
             data: data,

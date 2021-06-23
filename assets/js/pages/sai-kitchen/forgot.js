@@ -61,6 +61,7 @@ var KTLogin = function () {
 					  type: "post",
 					  url: baseURL+'/User/ForgotPasswordUser',
 					  headers: {
+                        'Access-Control-Allow-Origin': '*',
 						  'Content-Type':'application/json'
 					  },
 					  data: data,

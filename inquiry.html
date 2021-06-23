@@ -2519,6 +2519,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     headers: {
                         'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
                         // 'userId': user.data.userId,
                         // 'userToken': user.data.userToken,
                         // 'userRoleId': user.data.userRoles[0].userRoleId,
@@ -2596,6 +2597,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     'userToken': user.data.userToken,
                     'userRoleId': user.data.userRoles[0].userRoleId,
                     'branchId': user.data.userRoles[0].branchId,
+                        'Access-Control-Allow-Origin': '*',
                     'branchRoleId': user.data.userRoles[0].branchRoleId,
                 },
                 data: data,

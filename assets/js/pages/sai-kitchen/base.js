@@ -20,7 +20,7 @@ export let user;
 // document.getElementsByTagName('head')[0].appendChild(script);
 
 
-
+var isFocused=true;
 
 // Class Initialization
 jQuery(document).ready(function() {
@@ -28,8 +28,12 @@ jQuery(document).ready(function() {
     if (login === null) {
         window.location.replace("index.html");
     } else {
-
-
+		window.addEventListener('blur', () => {
+			isFocused=false;
+		});
+		window.addEventListener('focus', () => {
+			isFocused=true;
+		});
 
 
         user = JSON.parse(login);
@@ -53,6 +57,7 @@ jQuery(document).ready(function() {
                             'userRoleId': user.data.userRoles[0].userRoleId,
                             'branchId': user.data.userRoles[0].branchId,
                             'branchRoleId': user.data.userRoles[0].branchRoleId,
+							'Access-Control-Allow-Origin': '*',
                         },
                         data: data,
                         success: function(response) {
@@ -418,13 +423,13 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
     }
     getNotifications();
 
-    setInterval(getNotifications, 5000); //10000 milliseconds = 10 seconds
+    setInterval(getNotifications, 10000); //10000 milliseconds = 10 seconds
 });
 
 
 
 function getNotifications() {
-
+if(isFocused){
     $.ajax({
         type: "Post",
         url: baseURL + '/Notification/GeAllNotificationofUser?userId=' + user.data.userId,
@@ -436,6 +441,7 @@ function getNotifications() {
             'userRoleId': user.data.userRoles[0].userRoleId,
             'branchId': user.data.userRoles[0].branchId,
             'branchRoleId': user.data.userRoles[0].branchRoleId,
+			'Access-Control-Allow-Origin': '*',
         },
         success: function(response) {
             console.log(response);
@@ -618,4 +624,5 @@ function getNotifications() {
             // alert(textStatus);
         },
     });
+}
 }

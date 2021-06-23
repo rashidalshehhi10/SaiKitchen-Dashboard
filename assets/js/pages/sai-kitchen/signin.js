@@ -77,6 +77,7 @@ var KTLogin = function() {
                     url: baseURL + '/User/LoginUser',
 
                     headers: {
+                        'Access-Control-Allow-Origin': '*',
                         'Content-Type': 'application/json',
                     },
                     data: data,
