@@ -312,7 +312,24 @@ var KTDatatablesExtensionsResponsive = function () {
 	};
 }();
 
-jQuery(document).ready(function () {
+let permissions;
+let branchPermission;
+jQuery(document).ready(function() {
+
+        console.log(user);
+        permissions = user.data.userRoles[0].branchRole.permissionRoles;
+        console.log(permissions);
+        for (var i = 0; i < permissions.length; i++) {
+            if (permissions[i].permissionId == 2) {
+                branchPermission = permissions[i].permissionLevelId;
+                console.log(branchPermission);
+              
+            }
+        }
+        if(branchPermission==null){
+        window.location.replace("index.html");
+        }
+	
 	KTDatatablesExtensionsResponsive.init();
 
 
@@ -358,6 +375,18 @@ jQuery(document).ready(function () {
 
 				branchTypeList.innerHTML = branchTypeListHTML.join('');
 
+			} else {
+				Swal.fire({
+					text: response.errorMessage,
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
 			}
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {

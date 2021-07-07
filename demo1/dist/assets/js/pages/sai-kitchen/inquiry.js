@@ -43,8 +43,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     // parameters for custom backend script demo
                     columnsDef: [
                         'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName',
-                        'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
-                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+                        'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
+                        'customerContact','customerEmail', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
                          'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
                     ],
                 },
@@ -74,10 +74,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'designAssignTo'
                 },
                 {
+                    data: 'customerCode'
+                },
+                {
                     data: 'customerName'
                 },
                 {
                     data: 'customerContact'
+                },
+                {
+                    data: 'customerEmail'
                 },
                 {
                     data: 'buildingAddress'
@@ -188,8 +194,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-info'
                                 },
                                 15: {
-                                    'title': 'Quotation Approval Pending',
+                                    'title': 'Quotation Waiting For Customer Approval',
                                     'class': ' label-light-primary'
+                                },
+                                16: {
+                                    'title': 'Design Waiting For Customer Approval',
+                                    'class': ' label-light-primary'
+                                },
+                                17: {
+                                    'title': 'Design Rejected By Client',
+                                    'class': ' label-light-info'
                                 },
                             };
                             column.data().unique().sort().each(function(d, j) {
@@ -316,8 +330,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'class': ' label-light-info'
                             },
                             15: {
-                                'title': 'Quotation Approval Pending',
+                                'title': 'Quotation Waiting For Customer Approval',
                                 'class': ' label-light-primary'
+                            },
+                            16: {
+                                'title': 'Design Waiting For Customer Approval',
+                                'class': ' label-light-primary'
+                            },
+                            17: {
+                                'title': 'Design Rejected By Client',
+                                'class': ' label-light-info'
                             },
                         };
 
@@ -736,6 +758,18 @@ jQuery(document).ready(function() {
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -787,6 +821,18 @@ jQuery(document).ready(function() {
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

@@ -128,6 +128,18 @@ jQuery(document).ready(function () {
                     branchRoles.push(tagVal);
                 });
                 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
             
     KTTagifyDemos.init();

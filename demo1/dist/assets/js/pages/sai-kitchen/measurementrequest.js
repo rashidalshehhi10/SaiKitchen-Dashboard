@@ -221,10 +221,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
                             var action=``; 
-                                                 action += ` <a href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Measurement">
+                    action += ` <a href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Measurement">
                         <i class="la la-ruler-combined"></i>
                     </a>`;
-                //             if (full.questionaireType == 1) {
+                    // action += `
+                    // <a type="button" onclick="setInquiryId(` + full.inquiryWorkscopeId + `)" data-toggle="modal" data-target="#viewMeasurementModalCenter" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+                    //     <i class="la la-ruler-combined"></i>
+                    // </a>`;
+                    //             if (full.questionaireType == 1) {
                 //                 action += ` <a href="viewkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="View Measurement">
                 //         <i class="la la-ruler-combined"></i>
                 //     </a>`;
@@ -719,6 +723,18 @@ jQuery(document).ready(function() {
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -770,6 +786,18 @@ jQuery(document).ready(function() {
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

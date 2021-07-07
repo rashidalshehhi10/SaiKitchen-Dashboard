@@ -325,6 +325,10 @@ jQuery(document).ready(function () {
 		}
 	}
 
+    
+    if(userPermission==null){
+        window.location.replace("index.html");
+        }
 	KTDatatablesExtensionsResponsive.init();
 
 	$.ajax({
@@ -355,6 +359,18 @@ jQuery(document).ready(function () {
 
 				branchList.innerHTML = branchTypeListHTML.join('');
 
+			} else {
+				Swal.fire({
+					text: response.errorMessage,
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
 			}
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -400,6 +416,18 @@ jQuery(document).ready(function () {
 					<option value="` + response.data[i].branchRoleId + `">` + response.data[i].branchRoleName + `</option>`);
 				}
 				branchList.innerHTML = branchTypeListHTML.join('');
+			} else {
+				Swal.fire({
+					text: response.errorMessage,
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
 			}
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {

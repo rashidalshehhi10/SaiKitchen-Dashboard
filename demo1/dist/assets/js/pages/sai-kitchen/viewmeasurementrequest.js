@@ -244,6 +244,18 @@ jQuery(document).ready(function() {
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -295,6 +307,18 @@ jQuery(document).ready(function() {
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

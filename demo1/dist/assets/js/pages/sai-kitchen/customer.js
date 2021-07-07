@@ -569,6 +569,9 @@ jQuery(document).ready(function() {
                 console.log(customerPermission);
             }
         }
+        if(customerPermission==null){
+            window.location.replace("index.html");
+            }
 
         if (customerPermission >= 2) {
             document.getElementById('btnNewCustomer').innerHTML += `	<!--begin::Button-->
@@ -650,6 +653,18 @@ jQuery(document).ready(function() {
 
 
                 // $('#kt_datatable_search_status').selectpicker();
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -699,6 +714,18 @@ jQuery(document).ready(function() {
 
                 contactWayList.innerHTML = contactWayListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -747,6 +774,7 @@ function GetCity(country) {
 
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
         },
         // data: data,
         success: function(response) {

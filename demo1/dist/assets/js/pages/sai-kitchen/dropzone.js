@@ -52,7 +52,7 @@ var KTDropzoneDemo = function() {
             maxFiles: 50,
             maxFilesize: 5, // MB
             addRemoveLinks: true,
-            acceptedFiles: "image/*,application/pdf,.png",
+            acceptedFiles: "image/*,application/pdf,.png,.mp4",
             
         init: function() {
             this.on("addedfile", function (file) {

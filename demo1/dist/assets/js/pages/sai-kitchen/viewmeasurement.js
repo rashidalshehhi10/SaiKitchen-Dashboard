@@ -328,13 +328,20 @@ const pdfView = document.getElementById('pdfview');
 var pdfViewHTML =``;
 files.forEach(element => {
 	console.log(baseFileURL+element.fileUrl);
-	pdfViewHTML += `	 <object data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="100%">
-	<iframe src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="100%" style="border: none;">
+    if(element.fileContentType=='mp4'){
+        
+        var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
+        pdfViewHTML += `    <iframe src=`+videoUrl+` width="100%" height="600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+`;
+}else{
+	pdfViewHTML += `	 <object data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px">
+	<iframe src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px" style="border: none;">
 	This browser does not support PDFs. Please download the PDF to view it: 
 	<a href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
 	</iframe>
 	</object>
 `;
+}
 });
 
 	 
@@ -402,6 +409,18 @@ pdfView.innerHTML=pdfViewHTML;
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -453,6 +472,18 @@ pdfView.innerHTML=pdfViewHTML;
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

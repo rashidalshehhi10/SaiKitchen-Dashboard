@@ -12,6 +12,10 @@ const countryList = ["United Arab Emirates", "Afghanistan", "Åland Islands", "A
 
 let user;
 let datatable;
+let measurementFeesAmount;
+let afterdiscountmeasurementFeesAmount;
+let promoId;
+let promoDiscount;
 // Class definition
 var KTWizard1 = function () {
 	// Base elements
@@ -272,12 +276,12 @@ var KTWizard1 = function () {
 		// Submit event
 		_wizardObj.on('submit', function (wizard) {
 			Swal.fire({
-				text: "All is good! Please confirm the form submission.",
+				text: "Make sure you receive the measurement Fees AED "+afterdiscountmeasurementFeesAmount+" by cash before proceeding to next step",
 				icon: "success",
 				showCancelButton: true,
 				buttonsStyling: false,
-				confirmButtonText: "Yes, submit!",
-				cancelButtonText: "No, cancel",
+				confirmButtonText: "Yes, Recieved!",
+				cancelButtonText: "No, Not Yet",
 				customClass: {
 					confirmButton: "btn font-weight-bold btn-primary",
 					cancelButton: "btn font-weight-bold btn-default"
@@ -289,6 +293,8 @@ var KTWizard1 = function () {
 						inquiryName: "",
 						inquiryDescription: document.getElementById('inquirydescription').value,
 						inquiryStatusId: 1,
+						isMeasurementProvidedByCustomer: $('input[name="clientMeasurement"]:checked').val(),
+						measurementFees:'',
 						customer: {
 							customerName: "",
 							customerEmail: "",
@@ -307,6 +313,8 @@ var KTWizard1 = function () {
 							isDeleted: false,
 						},
 						branchId: user.data.userRoles[0].branchId,
+						promoId: promoId,
+						promoDiscount: promoDiscount,
 						isEscalationRequested: false,
 						addedBy:user.data.userId,
 						isActive: true,
@@ -321,7 +329,8 @@ var KTWizard1 = function () {
 							isActive: true,
 							isDeleted: false,
 						},
-						inquiryWorkscopes: new Array()
+						inquiryWorkscopes: new Array(),
+						payments:new Array(),
 					};
 
 					inquiry.customer.customerId = document.getElementById("customerId").innerHTML;
@@ -353,6 +362,17 @@ var KTWizard1 = function () {
 
 						}
 					});
+					if( $('input[name="clientMeasurement"]:checked').val()=="false"){
+					inquiry.payments.push({
+						paymentName: "Measurement",
+						paymentDetail: "",
+						paymentAmount: afterdiscountmeasurementFeesAmount,
+						paymentTypeId: 1,
+						paymentStatusId: 3,
+						isActive: true,
+						isDeleted: false,
+					})
+				}
 
 					console.log(inquiry);
 
@@ -414,7 +434,7 @@ var KTWizard1 = function () {
 
 				} else if (result.dismiss === 'cancel') {
 					Swal.fire({
-						text: "Your form has not been submitted!.",
+						text: "Inquiry has not been submitted!.",
 						icon: "error",
 						buttonsStyling: false,
 						confirmButtonText: "Ok, got it!",
@@ -461,6 +481,9 @@ jQuery(document).ready(function () {
 			}
 		}
 
+        if(inquiryPermission==null){
+            window.location.replace("index.html");
+            }
 		// if (inquiryPermission >= 2) {
 		// 	document.getElementById('btnNewCustomer').innerHTML += `	<!--begin::Button-->
 		// 	<button type="button" onclick="customFormReset();" data-target="#addCustomer" data-toggle="modal"
@@ -578,6 +601,98 @@ jQuery(document).ready(function () {
 
 		}
 	});
+
+	$('#promoCode').keyup(function () {
+
+			$.ajax({
+				type: "Post",
+				url: baseURL + '/Promo/GetPromoByCode?promoCode=' + $(this).val(),
+			
+				headers: {
+					'Content-Type': 'application/json',
+					'userId': user.data.userId,
+					'userToken': user.data.userToken,
+					'userRoleId': user.data.userRoles[0].userRoleId,
+					'branchId': user.data.userRoles[0].branchId,
+					'branchRoleId': user.data.userRoles[0].branchRoleId,
+					'Access-Control-Allow-Origin': '*',
+				},
+				// data: data,
+				success: function (response) {
+					console.log(response);
+					// window.location.replace("home.html");
+					if (response.isError == false) {
+						// sessionStorage.setItem('user', JSON.stringify(response));
+						try {
+							promoId=response.data.promoId;
+							afterdiscountmeasurementFeesAmount=measurementFeesAmount-(measurementFeesAmount/100)*response.data.promoDiscount;
+							promoDiscount=afterdiscountmeasurementFeesAmount;
+							document.getElementById('paymentFee').innerHTML='AED&#160;'+afterdiscountmeasurementFeesAmount;
+							
+					if( $('input[name="clientMeasurement"]:checked').val()=="false"){
+document.getElementById('measurementFee').innerHTML='AED&#160;'+afterdiscountmeasurementFeesAmount;
+					}
+						} catch (error) {
+							promoId=null;
+							promoDiscount=0;
+							if( $('input[name="clientMeasurement"]:checked').val()=="false"){
+								document.getElementById('measurementFee').innerHTML='AED&#160;'+measurementFeesAmount;
+							}
+							document.getElementById('paymentFee').innerHTML='AED&#160;'+measurementFeesAmount;
+						}
+
+						//  document.getElementById('customerEmail').value;
+						// 	customer.customerEmail = document.getElementById('customerEmail').value;
+						// 	customer.customerContact = document.getElementById('customerContact').value;
+						// 	customer.customerAddress = document.getElementById('customerAddress').value;
+						// 	customer.customerNationalId = document.getElementById('customerNationalId').value;
+						// 	customer.contactStatusId = $('#kt_contact_status').val();
+						// 	customer.wayofContactId = $('#kt_wayofcontact').val();
+						// 	customer.customerCountry = $('#kt_country_of_Resdience').val();
+						// 	customer.customerCity = $('#kt_city_of_Resdience').val();
+						// 	customer.customerNationality = $('#kt_nationality').val();
+
+						// window.location.replace("branchrole.html");
+
+					} else {
+						promoId=null;
+						promoDiscount=0;
+						if( $('input[name="clientMeasurement"]:checked').val()=="false"){
+							document.getElementById('measurementFee').innerHTML='AED&#160;'+measurementFeesAmount;
+						}
+						document.getElementById('paymentFee').innerHTML='AED&#160;'+measurementFeesAmount;
+						// Swal.fire({
+						// 	text: response.errorMessage,
+						// 	icon: "error",
+						// 	buttonsStyling: false,
+						// 	confirmButtonText: "Ok, got it!",
+						// 	customClass: {
+						// 		confirmButton: "btn font-weight-bold btn-light-primary"
+						// 	}
+						// }).then(function () {
+						// 	KTUtil.scrollTop();
+						// });
+					}
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					// Release button
+					KTUtil.btnRelease(formSubmitButton);
+					// alert(errorThrown);
+
+					Swal.fire({
+						text: 'Internet Connection Problem',
+						icon: "error",
+						buttonsStyling: false,
+						confirmButtonText: "Ok, got it!",
+						customClass: {
+							confirmButton: "btn font-weight-bold btn-light-primary"
+						}
+					}).then(function () {
+						KTUtil.scrollTop();
+					});
+				}
+			});
+	});
 	const countryOfResidenceList = document.getElementById('kt_country_of_Resdience');
 	const nationalityList = document.getElementById('kt_nationality');
 	var countryListHTML = new Array();
@@ -632,6 +747,18 @@ jQuery(document).ready(function () {
 
 
 				// $('#kt_datatable_search_status').selectpicker();
+			} else {
+				Swal.fire({
+					text: response.errorMessage,
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
 			}
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -682,6 +809,18 @@ jQuery(document).ready(function () {
 
 				contactWayList.innerHTML = contactWayListHTML.join('');
 
+			} else {
+				Swal.fire({
+					text: response.errorMessage,
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
 			}
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -732,6 +871,18 @@ jQuery(document).ready(function () {
 
 				assigntoList.innerHTML = assignToListHTML.join('');
 
+			} else {
+				Swal.fire({
+					text: response.errorMessage,
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
 			}
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -824,4 +975,61 @@ function GetCity(country) {
 		error: function (XMLHttpRequest, textStatus, errorThrown) {}
 	});
 
+	$.ajax({
+		type: "get",
+		url: baseURL + '/Fees/GetFeesById?feesId=1',
+		
+		headers: {
+			'Content-Type': 'application/json',
+			'userId': user.data.userId,
+			'userToken': user.data.userToken,
+			'userRoleId': user.data.userRoles[0].userRoleId,
+			'branchId': user.data.userRoles[0].branchId,
+			'branchRoleId': user.data.userRoles[0].branchRoleId,
+			'Access-Control-Allow-Origin': '*',
+		},
+
+		success: function (response) {
+			console.log(response);
+			if (response.isError == false) {
+
+				console.log(response.data.feesAmount);
+				measurementFeesAmount=response.data.feesAmount;
+				afterdiscountmeasurementFeesAmount=response.data.feesAmount;
+				document.getElementById('paymentFee').innerHTML='AED&#160;'+response.data.feesAmount;
+			
+				document.getElementById('measurementFee').innerHTML='AED&#160;'+response.data.feesAmount;
+			
+			} else {
+				Swal.fire({
+					text: response.errorMessage,
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
+			}
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+
+			// alert(errorThrown);
+
+			Swal.fire({
+				text: 'Internet Connection Problem',
+				icon: "error",
+				buttonsStyling: false,
+				confirmButtonText: "Ok, got it!",
+				customClass: {
+					confirmButton: "btn font-weight-bold btn-light-primary"
+				}
+			}).then(function () {
+				KTUtil.scrollTop();
+			});
+		}
+	});
 }

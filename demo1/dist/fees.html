@@ -762,7 +762,7 @@
                                         <!--begin::Details-->
                                         <div class="d-flex align-items-center flex-wrap mr-2">
                                             <!--begin::Title-->
-                                            <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">WorkScopes</h5>
+                                            <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Fees</h5>
                                             <!--end::Title-->
                                             <!--begin::Separator-->
                                             <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200">
@@ -890,10 +890,9 @@
                                             <!--begin::Header-->
                                             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                                                 <div class="card-title">
-                                                    <h3 class="card-label">Manage Workscope 
+                                                    <h3 class="card-label">Manage Fees
                                                         <!-- <span class="d-block text-muted pt-2 font-size-sm">User
-															management made easy</span> -->
-                                                        </h3>
+															management made easy</span></h3> -->
                                                 </div>
                                                 <div class="card-toolbar" id="btnNewCustomer">
                                                     <!--begin::Dropdown-->
@@ -2186,14 +2185,14 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New WorkScope</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">New Fees</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<i aria-hidden="true" class="ki ki-close"></i>
 					</button>
                 </div>
                 <!--begin::Form-->
                 <form class="form" id="kt_add_customer" action="" name="addCustomerform">
-                    <span id="workScopeId" style="display:none">0</span>
+                    <span id="feesId" style="display:none">0</span>
                     <span id="customerCity" style="display:none">0</span>
                     <div class="modal-body">
 
@@ -2207,7 +2206,7 @@
                                         <label class="font-size-h6 font-weight-bolder text-dark">Name*</label>
                                         <div class="input-group input-group-lg input-group-solid">
 
-                                            <input type="text" name="workScopeName" id="workScopeName" class="form-control form-control-lg form-control-solid" value="" placeholder="Kitchen" required>
+                                            <input type="text" name="feesName" id="feesName" disabled class="form-control form-control-lg form-control-solid" value="" placeholder="Kitchen" required>
                                         </div>
                                     </div>
                                     <!--end::Form group-->
@@ -2217,7 +2216,7 @@
                                         <label class="font-size-h6 font-weight-bolder text-dark">Description</label>
                                         <div class="input-group input-group-lg input-group-solid">
 
-                                            <input type="text" name="workScopeDescription" id="workScopeDescription" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
+                                            <input type="text" name="feesDescription" id="feesDescription" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
                                         </div>
                                     </div>
                                     <!--end::Form group-->
@@ -2229,12 +2228,9 @@
                                 </div>
                                 <div class="col-xl-5">
                                     <div class="form-group row">
-                                        <label class="font-size-h6 font-weight-bolder text-dark">Questionaire Type*</label>
+                                        <label class="font-size-h6 font-weight-bolder text-dark">Amount*</label>
                                         <div class="input-group input-group-lg input-group-solid">
-                                            <select class="form-control" id="kt_questionaire_type" name="questionairetype" class="form-control form-control-lg form-control-solid" style="width:100%">
-												<option value="1">Kitchen</option>
-												<option value="2">Wardrobe</option>
-											</select>
+                                            <input type="number" name="feesAmount" id="feesAmount" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -2248,7 +2244,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" onclick="
-						document.getElementById('workScopeId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+						document.getElementById('feesId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                         <button type="submit" id="kt_add_customer_button" class="btn btn-primary font-weight-bold">Add</button>
                     </div>
 
@@ -2368,7 +2364,7 @@
     <script src="assets/js/pages/sai-kitchen/base.js" type="module"></script>
 
     <!--begin::Page Scripts(used by this page)-->
-    <script src="assets/js/pages/sai-kitchen/workscope.js" type="module"></script>
+    <script src="assets/js/pages/sai-kitchen/fees.js" type="module"></script>
     <!--end::Page Scripts-->
 
     <!--begin::Page Scripts(used by this page)-->
@@ -2386,9 +2382,9 @@
         function customFormReset() {
             try {
 
-                document.getElementById("exampleModalLabel").innerHTML = "New WorkScope";
+                document.getElementById("exampleModalLabel").innerHTML = "New Fees";
                 document.getElementById("kt_add_customer_button").innerHTML = "Add";
-                document.getElementById("workScopeId").innerHTML = '0';
+                document.getElementById("feesId").innerHTML = '0';
                 document.getElementById('workScopeName').value = "";
                 document.getElementById('workScopeDescription').value = "";
                 // $('#kt_contact_status').val(response.data.contactStatusId).change();
@@ -2403,17 +2399,17 @@
         }
 
         // document.querySelector('#editbutton').addEventListener('click', hello);
-        function getWorkScopeById(baseURL, workScopeId) {
+        function getFeesById(baseURL, feesId) {
 
-            document.getElementById("exampleModalLabel").innerHTML = "Modify WorkScope";
+            document.getElementById("exampleModalLabel").innerHTML = "Modify Fees";
             document.getElementById("kt_add_customer_button").innerHTML = "Modify";
-            document.getElementById("workScopeId").innerHTML = workScopeId + '';
+            document.getElementById("feesId").innerHTML = feesId + '';
 
 
             // alert('hi ' + baseURL);
             $.ajax({
                 type: "Get",
-                url: baseURL + '/Inquiry/GetWorkscopeById?workScopeId=' + workScopeId,
+                url: baseURL + '/Fees/GetFeesById?feesId=' + feesId,
                 headers: {
                     'Content-Type': 'application/json',
                     'userId': user.data.userId,
@@ -2431,9 +2427,9 @@
                         // sessionStorage.setItem('user', JSON.stringify(response));
                         try {
                             $('#addCustomer').modal('show');
-                            document.getElementById('workScopeName').value = response.data.workScopeName;
-                            document.getElementById('workScopeDescription').value = response.data.workScopeDescription;
-                            $('#kt_questionaire_type').val(response.data.questionaireType).change();
+                            document.getElementById('feesName').value = response.data.feesName;
+                            document.getElementById('feesDescription').value = response.data.feesDescription;
+                            document.getElementById('feesAmount').value = response.data.feesAmount;
 
                         } catch (error) {
 
@@ -2481,63 +2477,6 @@
                         }
                     }).then(function() {
                         KTUtil.scrollTop();
-                    });
-                }
-            });
-        }
-
-        function deleteCustomerById(baseURL, workScopeId) {
-            // alert('hi ' + branchRoleId);
-            var data = JSON.stringify({
-                customerId: workScopeId
-            });
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-
-                    $.ajax({
-                        type: "Post",
-                        url: baseURL + '/Customer/DeleteCustomer?customerId=' + customerId,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'userId': user.data.userId,
-                            'userToken': user.data.userToken,
-                            'userRoleId': user.data.userRoles[0].userRoleId,
-                            'branchId': user.data.userRoles[0].branchId,
-                            'branchRoleId': user.data.userRoles[0].branchRoleId,
-                        'Access-Control-Allow-Origin': '*',
-                        },
-                        data: data,
-                        success: function(response) {
-                            console.log(response);
-                            if (response.isError == false) {
-                                // sessionStorage.setItem('user', JSON.stringify(response));
-                                window.location.replace("customer.html");
-
-                            } else {
-                                Swal.fire({
-                                    text: response.errorMessage,
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn font-weight-bold btn-light-primary"
-                                    }
-                                }).then(function() {
-                                    KTUtil.scrollTop();
-                                });
-                            }
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            alert(textStatus);
-                        },
                     });
                 }
             });
@@ -2608,7 +2547,7 @@
                 Notification.requestPermission().then(function(permission) {
                     // If the user accepts, let's create a notification
                     if (permission === "granted") {
-                        var notification = new Notification("Hi there!");
+                        // var notification = new Notification("Hi there!");
                     }
                 });
             }

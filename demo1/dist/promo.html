@@ -762,7 +762,7 @@
                                         <!--begin::Details-->
                                         <div class="d-flex align-items-center flex-wrap mr-2">
                                             <!--begin::Title-->
-                                            <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">WorkScopes</h5>
+                                            <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Promo</h5>
                                             <!--end::Title-->
                                             <!--begin::Separator-->
                                             <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200">
@@ -890,7 +890,7 @@
                                             <!--begin::Header-->
                                             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                                                 <div class="card-title">
-                                                    <h3 class="card-label">Manage Workscope 
+                                                    <h3 class="card-label">Manage Promo 
                                                         <!-- <span class="d-block text-muted pt-2 font-size-sm">User
 															management made easy</span> -->
                                                         </h3>
@@ -2182,19 +2182,19 @@
 
 
 
-    <div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+    <div class="modal fade" id="addPromo" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New WorkScope</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">New Promo</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<i aria-hidden="true" class="ki ki-close"></i>
 					</button>
                 </div>
                 <!--begin::Form-->
-                <form class="form" id="kt_add_customer" action="" name="addCustomerform">
-                    <span id="workScopeId" style="display:none">0</span>
-                    <span id="customerCity" style="display:none">0</span>
+                <form class="form" id="kt_add_promo" action="" name="addPromoform">
+                    <span id="promoId" style="display:none">0</span>
+                    <!-- <span id="customerCity" style="display:none">0</span> -->
                     <div class="modal-body">
 
                         <!--begin::Signin-->
@@ -2202,12 +2202,10 @@
                             <div class="row">
                                 <div class="col-xl-5">
                                     <!--begin::Form group-->
-
                                     <div class="form-group">
                                         <label class="font-size-h6 font-weight-bolder text-dark">Name*</label>
                                         <div class="input-group input-group-lg input-group-solid">
-
-                                            <input type="text" name="workScopeName" id="workScopeName" class="form-control form-control-lg form-control-solid" value="" placeholder="Kitchen" required>
+                                            <input type="text" name="promoName" id="promoName" class="form-control form-control-lg form-control-solid" value="" placeholder="Weekend Offer" required>
                                         </div>
                                     </div>
                                     <!--end::Form group-->
@@ -2217,25 +2215,64 @@
                                         <label class="font-size-h6 font-weight-bolder text-dark">Description</label>
                                         <div class="input-group input-group-lg input-group-solid">
 
-                                            <input type="text" name="workScopeDescription" id="workScopeDescription" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
+                                            <input type="text" name="promoDescription" id="promoDescription" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
                                         </div>
                                     </div>
                                     <!--end::Form group-->
 
-
+                                    <div class="form-group">
+                                        <label class="font-size-h6 font-weight-bolder text-dark">Start Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control" id="kt_datepicker_3" readonly="readonly" placeholder="Select date" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">
+                                                        <i class="la la-calendar-check-o"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    
+                                <div class="form-group">
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Measurement Promo?</label>
+                                    <!-- <div class="col-lg-9 col-md-9 col-sm-12"> -->
+                                        <input data-switch="true" id="measurementPromo" name="measurementPromo" type="checkbox" checked="checked" data-on-text="Yes" data-handle-width="80" data-off-text="No" data-on-color="primary" />
+                                    <!-- </div> -->
                                 </div>
-
+                                </div>
                                 <div class="col-xl-1">
                                 </div>
                                 <div class="col-xl-5">
-                                    <div class="form-group row">
-                                        <label class="font-size-h6 font-weight-bolder text-dark">Questionaire Type*</label>
+                                    <div class="form-group">
+                                        <label class="font-size-h6 font-weight-bolder text-dark">Code*</label>
                                         <div class="input-group input-group-lg input-group-solid">
-                                            <select class="form-control" id="kt_questionaire_type" name="questionairetype" class="form-control form-control-lg form-control-solid" style="width:100%">
-												<option value="1">Kitchen</option>
-												<option value="2">Wardrobe</option>
-											</select>
+
+                                            <input type="text" name="promoCode" id="promoCode" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
                                         </div>
+                                    </div>
+                                    <!--end::Form group-->
+                                    <div class="form-group ">
+                                        <label class="font-size-h6 font-weight-bolder text-dark">Discount in %</label>
+                                        <div class="">
+                                            <div class="row align-items-center">
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="kt_nouislider_1_input" placeholder="Discount" required/>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div id="kt_nouislider_1" class="nouislider-drag-danger"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-size-h6 font-weight-bolder text-dark">End Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control" id="kt_datepicker_2" readonly="readonly" placeholder="Select date" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">
+                                                        <i class="la la-calendar-check-o"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
 
@@ -2249,7 +2286,7 @@
                     <div class="modal-footer">
                         <button type="button" onclick="
 						document.getElementById('workScopeId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                        <button type="submit" id="kt_add_customer_button" class="btn btn-primary font-weight-bold">Add</button>
+                        <button type="submit" id="kt_add_promo_button" class="btn btn-primary font-weight-bold">Add</button>
                     </div>
 
                 </form>
@@ -2368,13 +2405,24 @@
     <script src="assets/js/pages/sai-kitchen/base.js" type="module"></script>
 
     <!--begin::Page Scripts(used by this page)-->
-    <script src="assets/js/pages/sai-kitchen/workscope.js" type="module"></script>
+    <script src="assets/js/pages/sai-kitchen/promo.js" type="module"></script>
     <!--end::Page Scripts-->
 
     <!--begin::Page Scripts(used by this page)-->
     <script src="assets/js/pages/sai-kitchen/dropdown.js"></script>
     <!--end::Page Scripts-->
+    
+      <!--begin::Page Scripts(used by this page)-->
+      <script src="assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js"></script>
+      <!--end::Page Scripts-->
 
+		<!--begin::Page Scripts(used by this page)-->
+		<script src="assets/js/pages/sai-kitchen/nouislider.js"></script>
+		<!--end::Page Scripts-->
+
+		<!--begin::Page Scripts(used by this page)-->
+		<script src="assets/js/pages/crud/forms/widgets/bootstrap-switch.js"></script>
+		<!--end::Page Scripts-->
     <script>
         // import {
         // 	baseURL
@@ -2386,11 +2434,16 @@
         function customFormReset() {
             try {
 
-                document.getElementById("exampleModalLabel").innerHTML = "New WorkScope";
-                document.getElementById("kt_add_customer_button").innerHTML = "Add";
-                document.getElementById("workScopeId").innerHTML = '0';
-                document.getElementById('workScopeName').value = "";
-                document.getElementById('workScopeDescription').value = "";
+                document.getElementById("exampleModalLabel").innerHTML = "New Promo";
+                document.getElementById("kt_add_promo_button").innerHTML = "Add";
+                document.getElementById("promoId").innerHTML = '0';
+                document.getElementById('promoName').value = "";
+                document.getElementById('promoDescription').value = "";
+                document.getElementById('input[name="measurementPromo"]:checked').value=false;
+                            document.getElementById('promoCode').value = "";
+                            document.getElementById('kt_nouislider_1_input').value = "20";
+                            // document.getElementById('kt_datepicker_3').value = response.data.promoStartDate;
+                            // document.getElementById('kt_datepicker_2').value = response.data.promoExpiryDate;
                 // $('#kt_contact_status').val(response.data.contactStatusId).change();
                 // $('#kt_wayofcontact').val(response.data.wayofContactId).change();
                 // $('#kt_country_of_Resdience').val(response.data.customerCountry).change();
@@ -2403,17 +2456,17 @@
         }
 
         // document.querySelector('#editbutton').addEventListener('click', hello);
-        function getWorkScopeById(baseURL, workScopeId) {
+        function getPromoById(baseURL, promoId) {
 
-            document.getElementById("exampleModalLabel").innerHTML = "Modify WorkScope";
-            document.getElementById("kt_add_customer_button").innerHTML = "Modify";
-            document.getElementById("workScopeId").innerHTML = workScopeId + '';
+            document.getElementById("exampleModalLabel").innerHTML = "Modify Promo";
+            document.getElementById("kt_add_promo_button").innerHTML = "Modify";
+            document.getElementById("promoId").innerHTML = promoId + '';
 
 
             // alert('hi ' + baseURL);
             $.ajax({
                 type: "Get",
-                url: baseURL + '/Inquiry/GetWorkscopeById?workScopeId=' + workScopeId,
+                url: baseURL + '/Promo/GetPromoById?promoId=' + promoId,
                 headers: {
                     'Content-Type': 'application/json',
                     'userId': user.data.userId,
@@ -2430,11 +2483,23 @@
                     if (response.isError == false) {
                         // sessionStorage.setItem('user', JSON.stringify(response));
                         try {
-                            $('#addCustomer').modal('show');
-                            document.getElementById('workScopeName').value = response.data.workScopeName;
-                            document.getElementById('workScopeDescription').value = response.data.workScopeDescription;
-                            $('#kt_questionaire_type').val(response.data.questionaireType).change();
-
+                            $('#addPromo').modal('show');
+                            document.getElementById('promoName').value = response.data.promoName;
+                            document.getElementById('promoDescription').value = response.data.promoDescription;
+                            document.getElementById('promoCode').value = response.data.promoCode;
+                            document.getElementById('kt_nouislider_1_input').value = response.data.promoDiscount;
+                            document.getElementById('kt_datepicker_3').value = response.data.promoStartDate;
+                            document.getElementById('kt_datepicker_2').value = response.data.promoExpiryDate;
+                            if(response.data.isMeasurementPromo==true){
+                                if($('input[name="measurementPromo"]:checked').val()==undefined){
+                            $('input[name="measurementPromo"]').click();
+                                }
+                            }else if(response.data.isMeasurementPromo==false){
+                                console.log($('input[name="measurementPromo"]').val());
+                                if($('input[name="measurementPromo"]:checked').val()=="on"){
+                            $('input[name="measurementPromo"]').click();
+                                }
+                            }
                         } catch (error) {
 
                         }

@@ -191,6 +191,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Quotation Approval Pending',
                                     'class': ' label-light-primary'
                                 },
+                                16: {
+                                    'title': 'Design Waiting For Customer Approval',
+                                    'class': ' label-light-primary'
+                                },
+                                17: {
+                                    'title': 'Design Rejected By Client',
+                                    'class': ' label-light-info'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -311,6 +319,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             15: {
                                 'title': 'Quotation Approval Pending',
                                 'class': ' label-light-primary'
+                            },
+                            16: {
+                                'title': 'Design Waiting For Customer Approval',
+                                'class': ' label-light-primary'
+                            },
+                            17: {
+                                'title': 'Design Rejected By Client',
+                                'class': ' label-light-info'
                             },
                         };
 
@@ -720,6 +736,18 @@ jQuery(document).ready(function() {
 
                 assigntoList.innerHTML = assignToListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

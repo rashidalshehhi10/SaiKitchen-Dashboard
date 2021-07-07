@@ -272,9 +272,6 @@ let branchRolePermission;
 
 jQuery(document).ready(function() {
 
-
-
-
     var login = localStorage.getItem("user");
     if (login !== null) {
         user = JSON.parse(login);
@@ -288,6 +285,11 @@ jQuery(document).ready(function() {
             }
         }
     }
+    
+    if(branchRolePermission==null){
+        window.location.replace("index.html");
+        }
+	
     KTDatatablesExtensionsResponsive.init();
     console.log(baseURL + '/Permission/GetPermissions');
 
@@ -339,6 +341,18 @@ jQuery(document).ready(function() {
                 permissionList.innerHTML = permissionListHTML.join('');
                 editPermissionList.innerHTML = permissionListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -390,6 +404,18 @@ jQuery(document).ready(function() {
 
                 roleTypeList.innerHTML = roleTypeListHTML.join('');
 
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
