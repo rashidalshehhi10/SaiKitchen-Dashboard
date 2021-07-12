@@ -16,6 +16,7 @@ let measurementFeesAmount;
 let afterdiscountmeasurementFeesAmount;
 let promoId;
 let promoDiscount;
+let isMeasurementPromo;
 // Class definition
 var KTWizard1 = function () {
 	// Base elements
@@ -315,6 +316,7 @@ var KTWizard1 = function () {
 						branchId: user.data.userRoles[0].branchId,
 						promoId: promoId,
 						promoDiscount: promoDiscount,
+						isMeasurementPromo: isMeasurementPromo,
 						isEscalationRequested: false,
 						addedBy:user.data.userId,
 						isActive: true,
@@ -626,7 +628,8 @@ jQuery(document).ready(function () {
 						try {
 							promoId=response.data.promoId;
 							afterdiscountmeasurementFeesAmount=measurementFeesAmount-(measurementFeesAmount/100)*response.data.promoDiscount;
-							promoDiscount=afterdiscountmeasurementFeesAmount;
+							promoDiscount=response.data.promoDiscount;
+							isMeasurementPromo=response.data.isMeasurementPromo;
 							document.getElementById('paymentFee').innerHTML='AED&#160;'+afterdiscountmeasurementFeesAmount;
 							
 					if( $('input[name="clientMeasurement"]:checked').val()=="false"){
@@ -635,6 +638,7 @@ document.getElementById('measurementFee').innerHTML='AED&#160;'+afterdiscountmea
 						} catch (error) {
 							promoId=null;
 							promoDiscount=0;
+							isMeasurementPromo=false;
 							if( $('input[name="clientMeasurement"]:checked').val()=="false"){
 								document.getElementById('measurementFee').innerHTML='AED&#160;'+measurementFeesAmount;
 							}
@@ -657,6 +661,7 @@ document.getElementById('measurementFee').innerHTML='AED&#160;'+afterdiscountmea
 					} else {
 						promoId=null;
 						promoDiscount=0;
+						isMeasurementPromo=false;
 						if( $('input[name="clientMeasurement"]:checked').val()=="false"){
 							document.getElementById('measurementFee').innerHTML='AED&#160;'+measurementFeesAmount;
 						}
@@ -951,6 +956,7 @@ function GetCity(country) {
 		
 		headers: {
 			'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Origin': '*',
 		},
 		// data: data,
 		success: function (response) {

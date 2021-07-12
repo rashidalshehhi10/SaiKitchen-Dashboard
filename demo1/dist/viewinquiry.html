@@ -2046,9 +2046,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Quotation</h5>
+                 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i aria-hidden="true" class="ki ki-close"></i>
-					</button>
+                     <i aria-hidden="true" class="ki ki-close"></i>
+                  </button>
                 </div>
                 <!--begin::Form-->
                 <form class="form" id="kt_add_quotation" action="" name="addQutotationform">
@@ -2057,7 +2058,7 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-lg-6">
-                                <label>Advance Payment:</label>
+                                <label id="lblAdvancePayment">Advance Payment:</label>
                                 <div class="input-group">
                                     <input type="number" id="txtAdvancePayment" class="form-control" placeholder="50" min="0" max="100" value="50" readonly/>
                                     <div class="input-group-append">
@@ -2066,12 +2067,12 @@
                                         </span>
                                     </div>
                                 </div>
-                                <span class="form-text text-muted">Please enter advance payment in %</span>
+                                <span class="form-text text-muted">Advance Payment in % of Total Amount</span>
                             </div>
                             <div class="col-lg-6">
-                                <label>Total Amount:</label>
+                                <label>Amount:</label>
                                 <div class="input-group">
-                                    <input  type="number" id="txtTotalAmount" class="form-control" placeholder="0"  min="0" />
+                                    <input  type="number" id="txtAmount" name="txtAmount" class="form-control" placeholder="0"  min="0" />
                                     <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="la 
@@ -2079,7 +2080,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <span class="form-text text-muted">Please enter total amount in AED</span>
+                                <span class="form-text text-muted">Please enter amount in AED</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -2107,6 +2108,29 @@
                                 </div>
                                  <span class="form-text text-muted">Please enter validity date</span>
                             </div>
+                        </div>
+                        <div class="form-group row">
+                           <div class="col-lg-6">
+                             <label>Promo Code:</label>
+                             <div class="input-group">
+                                 <input type="text" id="txtPromoCode" class="form-control" placeholder="ABC123" readonly/>
+                             </div>
+                             <span class="form-text text-muted"></span>
+                         </div>
+                         
+                         <div class="col-lg-6">
+                           <label id="lblTotalAmount">Total Amount:</label>
+                           <div class="input-group">
+                               <input  type="number" id="txtTotalAmount" class="form-control" placeholder="0"  min="0" readonly/>
+                               <div class="input-group-append">
+                                   <span class="input-group-text">
+                                       <i class="la 
+                                       la-money-check"></i>
+                                   </span>
+                               </div>
+                           </div>
+                           <span class="form-text text-muted">Total amount in AED</span>
+                       </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-lg-12 col-md-12 col-sm-12">

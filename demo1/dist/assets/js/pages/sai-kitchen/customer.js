@@ -774,7 +774,7 @@ function GetCity(country) {
 
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Origin': '*',
         },
         // data: data,
         success: function(response) {

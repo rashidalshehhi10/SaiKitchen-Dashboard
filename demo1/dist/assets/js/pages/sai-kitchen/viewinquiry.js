@@ -15,8 +15,16 @@ export let user;
 // document.getElementsByTagName('head')[0].appendChild(script);
 
 let inquiryId;
+let inquiry;
 let permissions;
 let measurementPermission;
+let promoId;
+let promoDiscount;
+let isMeasurementPromo;
+let vatvalue;
+let advancePayment;
+let advancePaymentAmount;
+let totalAmount;
 
 
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
@@ -36,7 +44,34 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                      
+                        txtTotalAmount: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Total Amount is required'
+                                }
+                            }
+                        },
+                        txtAmount: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Amount is required'
+                                }
+                            }
+                        },
+                        txtAdvancePayment: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Advance Payment is required'
+                                }
+                            }
+                        },
+                        kt_datepicker_2: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Valid Till is required'
+                                }
+                            }
+                        },
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
@@ -55,14 +90,23 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                
                 console.log(measurementFile);
+                
+    if(user.data.userRoles[0].branchRole.roleTypeId==1){
+     advancePayment= document.getElementById('txtAdvancePayment').value;
+    }
                 var quotationModel={
                     inquiryId: inquiryId,
                     description: document.getElementById('txtdescription').value,
                     totalAmount: document.getElementById('txtTotalAmount').value,
-                    advancePayment: document.getElementById('txtAdvancePayment').value,
-                    discount: '',
+                    amount: document.getElementById('txtAmount').value,
+                    advancePayment:advancePayment,
+                    vat:vatvalue,
+                    discount: promoDiscount,
                     quotationValidityDate: document.getElementById('kt_datepicker_2').value,
-                    quotationFiles: measurementFile
+                    quotationFiles: measurementFile,
+                    paymentName: 'Advance Payment',
+                    paymentDetail: '',
+                    paymentAmount:advancePaymentAmount,
                 };
                 const data = JSON.stringify(quotationModel);
                 console.log(data);
@@ -172,7 +216,9 @@ jQuery(document).ready(function() {
     if (inquiryId == null || inquiryId == "") {
         window.location.replace("quotation.html");
     }
-
+    if(user.data.userRoles[0].branchRole.roleTypeId==1){
+    $('#txtAdvancePayment').prop('readonly', false);
+}
 
 
     $.ajax({
@@ -192,12 +238,13 @@ jQuery(document).ready(function() {
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
-
-                
 var inquiryWorkscopelength=response.data.inquiryWorkscopes[response.data.inquiryWorkscopes.length-1];
 console.log(inquiryWorkscopelength);
-
-	
+inquiry=response.data;
+document.getElementById('txtPromoCode').value=inquiry.promo.promoName;
+promoDiscount=inquiry.promoDiscount;
+promoId=inquiry.promoId;
+isMeasurementPromo=inquiry.isMeasurementPromo;
 const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');
@@ -557,8 +604,143 @@ workscope.innerHTML=workscopeHtml;
     });
 
 
+	$('#txtAmount').keyup(function () {
+        if(isMeasurementPromo==false){
+            var amountAfterDiscount=($(this).val()/1- (($(this).val()/100)*promoDiscount));
+             totalAmount=(amountAfterDiscount+ (amountAfterDiscount/100)*vatvalue);
+      document.getElementById('txtTotalAmount').value=totalAmount;
+      document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount '+promoDiscount+'% + VAT '+vatvalue+'%';
+      advancePaymentAmount= (totalAmount/100)*advancePayment;
+      document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED '+advancePaymentAmount;
+    }else{
+         totalAmount= ($(this).val()/1+ (($(this).val()/100)*vatvalue));
+        document.getElementById('txtTotalAmount').value= totalAmount;   
+           document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount 0% + VAT '+vatvalue+'%';
+           advancePaymentAmount= (totalAmount/100)*advancePayment;
+           document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+         
+    }
+});
+
+$('#txtAdvancePayment').keyup(function () {
+    advancePayment=  document.getElementById('txtAdvancePayment').value;
+    advancePaymentAmount= (totalAmount/100)*advancePayment;
+    document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+
+});
+
+
     KTDatatablesSearchOptionsAdvancedSearch.init();
 
+    $.ajax({
+        type: "get",
+        url: baseURL + '/Fees/GetFeesById?feesId=2',
+        
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+        },
+    
+        success: function (response) {
+            console.log(response);
+            if (response.isError == false) {
+                console.log(response.data.feesAmount);
+                advancePayment=response.data.feesAmount;
+                document.getElementById('txtAdvancePayment').value=advancePayment;
+              
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+    
+    
+            // alert(errorThrown);
+    
+            Swal.fire({
+                text: 'Internet Connection Problem',
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    });
+    $.ajax({
+        type: "get",
+        url: baseURL + '/Fees/GetFeesById?feesId=5',
+        
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+        },
+    
+        success: function (response) {
+            console.log(response);
+            if (response.isError == false) {
+                console.log(response.data.feesAmount);
+                vatvalue=response.data.feesAmount;
+                if(isMeasurementPromo==false){
+                document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount '+promoDiscount+'% + VAT '+vatvalue+'%';
+                }else{
+                    document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount 0% + VAT '+vatvalue+'%';
+                }
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+    
+    
+            // alert(errorThrown);
+    
+            Swal.fire({
+                text: 'Internet Connection Problem',
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    });
 
     });
 

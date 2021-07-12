@@ -325,13 +325,15 @@ jQuery(document).ready(function() {
 var files=response.data.measurements[response.data.measurements.length-1].files;
 console.log(files);
 const pdfView = document.getElementById('pdfview');
+const videoView = document.getElementById('videoview');
+var videoViewHTML =``;
 var pdfViewHTML =``;
 files.forEach(element => {
 	console.log(baseFileURL+element.fileUrl);
     if(element.fileContentType=='mp4'){
         
         var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
-        pdfViewHTML += `    <iframe src=`+videoUrl+` width="100%" height="600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        videoViewHTML += `    <iframe src=`+videoUrl+` width="100%" height="600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 `;
 }else{
 	pdfViewHTML += `	 <object data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px">
@@ -346,6 +348,7 @@ files.forEach(element => {
 
 	 
 pdfView.innerHTML=pdfViewHTML;
+videoView.innerHTML=videoViewHTML;
 
             }else {
 				Swal.fire({
