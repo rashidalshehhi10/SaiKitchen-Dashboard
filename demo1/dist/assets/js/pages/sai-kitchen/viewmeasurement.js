@@ -324,31 +324,61 @@ jQuery(document).ready(function() {
                 
 var files=response.data.measurements[response.data.measurements.length-1].files;
 console.log(files);
+const imgView = document.getElementById('imgview');
+const imgViewdocs = document.getElementById('imgViewdocs');
 const pdfView = document.getElementById('pdfview');
+const pdfViewdocs = document.getElementById('pdfViewdocs');
 const videoView = document.getElementById('videoview');
 var videoViewHTML =``;
+var imgViewdocsHTML = ``;
+var imgViewHTML =``;
 var pdfViewHTML =``;
+var pdfViewdocsHTML = ``;
+var isImgLoaded=false;
+var isPdfLoaded=false;
 files.forEach(element => {
 	console.log(baseFileURL+element.fileUrl);
     if(element.fileContentType=='mp4'){
-        
         var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
-        videoViewHTML += `    <iframe src=`+videoUrl+` width="100%" height="600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-`;
+        videoViewHTML += `    <iframe src=`+videoUrl+` width="100%" height="600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+}else if(element.fileContentType=='pdf'){
+   
+    if(isPdfLoaded==false){
+        pdfViewHTML += `<object id="objpdfdoc" data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px">
+        <iframe id="framepdfdoc" src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px" style="border: none;">
+        This browser does not support PDFs. Please download the PDF to view it: 
+        <a  id="linkpdfdoc" href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
+        </iframe>
+        </object>`;
+        isPdfLoaded=true;
+        }
+        pdfViewdocsHTML += `<div style="cursor: pointer;" onclick="changeMeasurementPDFFile('`+baseFileURL+element.fileUrl+`');" >   
+           <img alt="" class="max-h-65px" style="height:65px" src="assets/media/svg/files/pdf.svg" />
+        </a>`;
+	
 }else{
-	pdfViewHTML += `	 <object data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px">
-	<iframe src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px" style="border: none;">
-	This browser does not support PDFs. Please download the PDF to view it: 
-	<a href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
-	</iframe>
-	</object>
-`;
+    if(isImgLoaded==false){
+        imgViewHTML += `<object id="objimgdoc" data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px">
+        <iframe id="frameimgdoc" src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px" style="border: none;">
+        This browser does not support PDFs. Please download the PDF to view it: 
+        <a  id="linkimgdoc" href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
+        </iframe>
+        </object>`;
+        isImgLoaded=true;
+        }
+        imgViewdocsHTML += `<a type="button" onclick="changeMeasurementImgFile('`+baseFileURL+element.fileUrl+`');" >   
+           <img alt="" class="max-h-65px" src="`+baseFileURL+element.fileUrl+`" />
+        </a>`;
 }
 });
 
 	 
-pdfView.innerHTML=pdfViewHTML;
+imgView.innerHTML=imgViewHTML;
 videoView.innerHTML=videoViewHTML;
+imgViewdocs.innerHTML=imgViewdocsHTML;
+
+pdfView.innerHTML=pdfViewHTML;
+pdfViewdocs.innerHTML=pdfViewdocsHTML;
 
             }else {
 				Swal.fire({
@@ -509,7 +539,25 @@ videoView.innerHTML=videoViewHTML;
     });
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
-
+    $('#kt_tab_document div').hide();
+    $('#kt_tab_video div').hide();
+    $('.nav li a').click(function(){
+		var data = $(this).attr("href");
+		console.log(data);
+        if(data=='#kt_tab_diagram'){
+            $('#kt_tab_diagram div').show();
+            $('#kt_tab_document div').hide();
+            $('#kt_tab_video div').hide();
+        }else if(data=='#kt_tab_document'){
+            $('#kt_tab_document div').show();
+            $('#kt_tab_diagram div').hide();
+            $('#kt_tab_video div').hide();
+        }else if(data=='#kt_tab_video'){
+            $('#kt_tab_video div').show();
+            $('#kt_tab_diagram div').hide();
+            $('#kt_tab_document div').hide();
+        }
+	});
 
     });
 

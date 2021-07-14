@@ -115,7 +115,7 @@ jQuery(document).ready(function() {
         const sideMenu = document.getElementById('kt_aside_menu');
 
         var sideMenuHTML = `	<ul class="menu-nav">
-<li class="menu-item menu-item-active" aria-haspopup="true">
+ <li class="menu-item menu-item-active" aria-haspopup="true">
 	<a href="home.html" class="menu-link">
 		<span class="svg-icon menu-icon">
 			<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -130,8 +130,8 @@ jQuery(document).ready(function() {
 		</span>
 		<span class="menu-text">Dashboard</span>
 	</a>
-</li>
-`;
+ </li>
+ `;
 
         var permission = new Array();
 
@@ -488,6 +488,7 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
     getNotifications();
 
     setInterval(getNotifications, 10000); //10000 milliseconds = 10 seconds
+	document.addEventListener('contextmenu', event => event.preventDefault());
 });
 
 
