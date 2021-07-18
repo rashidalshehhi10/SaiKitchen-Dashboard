@@ -124,11 +124,11 @@ var KTDatatablesExtensionsResponsive = function() {
                     roleTypeId: 0,
                     permissionRoles: new Array(),
                     roleHeads: new Array(),
+                    branchRoleId: "string",
                 };
-
+                branchRole.branchRoleId = document.getElementById("branchRoleId").innerHTML,
                 branchRole.branchRoleName = document.getElementById('roleName').value;
                 branchRole.branchRoleDescription = document.getElementById('roleDescription').value;
-
                 branchRole.roleTypeId = $('#kt_role_department').val();
                 var roleHead = document.getElementsByClassName("tagify__tag tagify__tag tagify__tag--primary");
 
@@ -159,6 +159,7 @@ var KTDatatablesExtensionsResponsive = function() {
                         });
                     }
                 });
+                
                 // branchRole.permissionRoles.push({
                 // 	permissionId: 1,
                 // 	isActive: true,
@@ -184,6 +185,7 @@ var KTDatatablesExtensionsResponsive = function() {
                 // console.log( baseURL + '/Branch/AddBranchRole');
                 // console.log(branchRole);
                 const data = JSON.stringify(branchRole);
+                console.log("send data");
                 console.log(data);
                 $.ajax({
                     type: "Post",
@@ -339,8 +341,8 @@ jQuery(document).ready(function() {
                 }
 
                 permissionList.innerHTML = permissionListHTML.join('');
-                editPermissionList.innerHTML = permissionListHTML.join('');
-
+               // editPermissionList.innerHTML = permissionListHTML.join('');
+                
             } else {
                 Swal.fire({
                     text: response.errorMessage,

@@ -866,7 +866,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 										<!--end::Dropdown-->
 										<!--begin::Button-->
-										<button type="button" data-target="#addBranchRole" data-toggle="modal"
+										<button type="button" onclick="customFormReset()" data-target="#addBranchRole" data-toggle="modal"
 											class="btn btn-primary font-weight-bolder">
 											<i class="la la-plus"></i>New Role</button>
 										<!--end::Button-->
@@ -2154,6 +2154,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				</div>
 				<!--begin::Form-->
 				<form class="form" id="kt_login_add_branch_role" action="" name="signinform">
+					<span id="branchRoleId" style="display:none">0</span>
 					<div class="modal-body">
 
 						<!--begin::Signin-->
@@ -2179,7 +2180,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 									<div class="form-group">
 										<label class="font-size-h6 font-weight-bolder text-dark">Report to</label>
-										<div class="">
+										<div class="" id="kt_tagify_el">
 											<input id="kt_tagify_1"
 												class="form-control tagify form-control h-auto py-7 px-6 rounded-lg border-0 form-control-solid"
 												name='tags3' placeholder="Add users" value="" />
@@ -2236,87 +2237,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		</div>
 	</div>
 
-	<div class="modal fade" id="editBranchRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i aria-hidden="true" class="ki ki-close"></i>
-					</button>
-				</div>
-				<!--begin::Form-->
-				<form class="form" id="kt_login_singin_form" action="" name="signinform">
-					<div class="modal-body">
-
-						<!--begin::Signin-->
-						<div class="login-form">
-							<div class="row">
-								<div class="col-xl-5">
-									<!--begin::Form group-->
-									<div class="form-group">
-										<label class="font-size-h6 font-weight-bolder text-dark">Name*</label>
-										<input
-											class="form-control h-auto py-7 px-6 rounded-lg border-0 form-control-solid"
-											type="text" id="roleNamess" name="Name" autocomplete="on" required />
-									</div>
-									<!--end::Form group-->
-									<!--begin::Form group-->
-
-									<div class="form-group">
-										<label class="font-size-h6 font-weight-bolder text-dark">Description</label>
-										<input
-											class="form-control h-auto py-7 px-6 rounded-lg border-0 form-control-solid"
-											type="text" id="roleNames" name="Name" autocomplete="on" />
-									</div>
-									<div class="form-group">
-										<label class="font-size-h6 font-weight-bolder text-dark">Report to</label>
-										<div class="">
-											<input id="kt_tagify_2"
-												class="form-control tagify form-control h-auto py-7 px-6 rounded-lg border-0 form-control-solid"
-												name='tags3' placeholder="Add users" value="" />
-											<!-- <div class="mt-3 text-muted">Dropdown item and tag templates.</div> -->
-										</div>
-									</div>
-									<!--end::Form group-->
-									<!--end::Form group-->
-								</div>
-								<div class="col-xl-2">
-								</div>
-								<div class="col-xl-5">
-									<div class="form-group">
-										<label class="font-size-h6 font-weight-bolder text-dark">Permission*</label>
-										<div class="checkbox-list" id="editPermissionList">
-											<label class="checkbox">
-												<input type="checkbox" name="Checkboxes1">
-												<span></span>All</label>
-											<label class="checkbox">
-												<input type="checkbox" checked="checked" name="Checkboxes1">
-												<span></span>Manage Branch</label>
-											<label class="checkbox">
-												<input type="checkbox" checked="checked" name="Checkboxes1">
-												<span></span>Manage Branch Role</label>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<!--end::Signin-->
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-light-primary font-weight-bold"
-							data-dismiss="modal">Close</button>
-						<button type="submit" id="kt_login_singin_form_submit_button"
-							class="btn btn-primary font-weight-bold">Save changes</button>
-					</div>
-
-				</form>
-				<!--end::Form-->
-			</div>
-		</div>
-	</div>
+	
 
 
 	<!--end::Scrolltop-->
@@ -2414,8 +2335,29 @@ License: You must have a valid license purchased only from themeforest(the above
 		// alert('hi ' + baseURL);
 
 		// document.querySelector('#editbutton').addEventListener('click', hello);
+		function customFormReset() {
+            try {
+
+                document.getElementById("exampleModalLabel").innerHTML = "New Role";
+                document.getElementById("kt_login_add_branch_role_submit_button").innerHTML = "Add";
+			    document.getElementById("branchRoleId").innerHTML = '0';
+				$('[type=checkbox]').prop("checked", false);
+				$("option:selected").removeAttr("selected");
+				document.getElementById('roleName').value = "";
+                document.getElementById('roleDescription').value = "";
+                document.getElementById('kt_tagify_1').value = "";
+				$('#kt_role_department'+' option[value="1"').attr('selected',true).change();
+            } catch (error) {
+
+            }
+        }
+		let branchRoles=new Array();
 		function getBranchRoleById(baseURL, branchRoleId) {
 			// alert('hi ' + baseURL);
+			document.getElementById("exampleModalLabel").innerHTML = "Modify BranchRole";
+            document.getElementById("kt_login_add_branch_role_submit_button").innerHTML = "Modify";
+			document.getElementById("branchRoleId").innerHTML = branchRoleId + '';
+			var user=	JSON.parse(localStorage.getItem("user"));
 			$.ajax({
 				type: "Get",
 				url: baseURL + '/Branch/GetBranchRoleById?branchRoleId=' + branchRoleId,
@@ -2430,12 +2372,44 @@ License: You must have a valid license purchased only from themeforest(the above
 						},
 				// data: data,
 				success: function (response) {
-					console.log(response);
+					//console.log( Object.keys(response.data['permissionRoles']).length);
 					// window.location.replace("home.html");
 					if (response.isError == false) {
 						// sessionStorage.setItem('user', JSON.stringify(response));
 						// window.location.replace("branchrole.html");
-
+						$('[type=checkbox]').prop("checked", false);
+				        $("option:selected").removeAttr("selected");
+						document.getElementById('roleDescription').value = "";
+						
+						var dsource ='';
+						for (var i = 0; i < Object.keys(response.data['roleHeads']).length; i++) {
+							
+							if( i < i < Object.keys(response.data['roleHeads']).length)
+							    dsource +=response.data['roleHeads'][i]['branchRoleName'] +', ';
+							else
+							    dsource +=response.data['roleHeads'][i]['branchRoleName'] ;
+						}
+						document.getElementById('kt_tagify_el').innerHTML = '<input id="kt_tagify_1"	class="form-control tagify form-control h-auto py-7 px-6 rounded-lg border-0 form-control-solid" name="tags3" placeholder="Add users" value="'+dsource+'" />'
+						
+						calltagify();
+						settagify();
+						
+						$('#addBranchRole').modal('show');
+						//console.log(response.data['roleHeads']);
+						document.getElementById('roleName').value = response.data.branchRole.branchRoleName;
+                        document.getElementById('roleDescription').value = response.data.branchRole.branchRoleDescription;
+						$('#kt_role_department'+' option[value="'+response.data.branchRole['roleTypeId']).attr('selected',true).change();
+                        //document.getElementById('kt_tagify_1').value = response.data.branchRoleId;
+						for (var i = 0; i < Object.keys(response.data.branchRole['permissionRoles']).length; i++) {
+                           if(response.data.branchRole['permissionRoles'][i]['isActive']==true){
+						       $('input[value="'+response.data.branchRole['permissionRoles'][i]['permissionId']+'"]').prop("checked", true);
+							  // $('#kt_'+response.data['permissionRoles'][i]['permissionId']+' option').removeAttr('selected');
+							  $('#kt_'+response.data.branchRole['permissionRoles'][i]['permissionId']+' option[value="'+response.data.branchRole['permissionRoles'][i]['permissionLevelId']+'"]').attr('selected',true).change();
+							 //  console.log(document.getElementById("kt_"+response.data['permissionRoles'][i]['permissionId']).selectedIndex);
+							}
+							   //console.log(response.data['permissionRoles'][i]);
+						}
+						
 					} else {
 						Swal.fire({
 							text: response.errorMessage,
@@ -2448,9 +2422,11 @@ License: You must have a valid license purchased only from themeforest(the above
 						}).then(function () {
 							KTUtil.scrollTop();
 						});
+						
 					}
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					
 					// Release button
 					KTUtil.btnRelease(formSubmitButton);
 					// alert(errorThrown);
@@ -2539,7 +2515,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			// }
 		}
 
-
+    
 		// 	document.getElementById('btn').onclick = function() {  
 		//   var markedCheckbox = document.getElementsByName('pl');  
 		//   for (var checkbox of markedCheckbox) {  
@@ -2547,6 +2523,120 @@ License: You must have a valid license purchased only from themeforest(the above
 		//       document.body.append(checkbox.value + ' ');  
 		//   }  
 		// }  
+		// Class definition
+		
+		function settagify(){
+        // Init autocompletes
+        var toEl = document.getElementById('kt_tagify_1');
+        var tagifyTo = new Tagify(toEl, {
+            delimiters: ", ", // add new tags when a comma or a space character is entered
+            maxTags: 500,
+            // blacklist: ["fuck"],
+            keepInvalidTags: false, // do not remove invalid tags (but keep them marked as invalid)
+            whitelist: branchRoles,
+            templates: {
+                dropdownItem: function (tagData) {
+                    try {
+                        var html = '';
+                        html += '<div class="tagify__dropdown__item">';
+                        html += '   <div class="d-flex align-items-center">';
+                        html += '       <span class="symbol sumbol-' + (tagData.initialsState ? tagData.initialsState : '') + ' mr-2">';
+                        html += '           <span class="symbol-label" style="background-image: url(\'' + (tagData.pic ? tagData.pic : '') + '\')">' + (tagData.initials ? tagData.initials : '') + '</span>';
+                        html += '       </span>';
+                        html += '       <div class="d-flex flex-column">';
+                        html += '           <a href="#" class="text-dark-75 text-hover-primary font-weight-bold">' + (tagData.value ? tagData.value : '') + '</a>';
+                        html += '           <span class="text-muted font-weight-bold">' + (tagData.subTtext ? tagData.subTtext : '') + '</span>';
+                        html += '       </div>';
+                        html += '   </div>';
+                        html += '</div>';
+
+                        return html;
+                    } catch (err) {}
+                }
+            },
+            transformTag: function (tagData) {
+                tagData.class = 'tagify__tag tagify__tag--primary';
+            },
+            dropdown: {
+                classname: "color-blue",
+                enabled: 1,
+                maxItems: 5
+            }
+        });
+    
+
+		}
+
+function calltagify() {
+
+   var baseURL ='https://backendsaikitchen.azurewebsites.net/Api';
+    console.log(baseURL + '/Branch/GetBranchRoles');
+
+    $.ajax({
+        type: "get",
+        url: baseURL + '/Branch/GetBranchRoles',
+        async: false,
+        success: function (response) {
+            console.log(response);
+            if (response.isError == false) {
+                console.log(response.data[0].branchRoleName);
+                // branchRoles = response.data;
+                
+                response.data.forEach(element => {
+                    
+                console.log(element.branchRoleName);
+                var tagVal = {
+                    value: '',
+                    subTtext: '',
+                    initials: '',
+                    branchRoleId: '',
+                    initialsState: 'warning',
+                    pic: ''
+                };
+                tagVal.value=element.branchRoleName;
+                tagVal.subTtext=element.branchRoleDescription;
+                tagVal.branchRoleId=element.branchRoleId;
+                tagVal.initials=element.branchRoleName.charAt(0);
+                    branchRoles.push(tagVal);
+                });
+                
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+            
+    //KTTagifyDemos.init();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            // alert(errorThrown);
+            
+	 Swal.fire({
+		text: 'Internet Connection Problem',
+		icon: "error",
+		buttonsStyling: false,
+		confirmButtonText: "Ok, got it!",
+		customClass: {
+			confirmButton: "btn font-weight-bold btn-light-primary"
+		}
+	}).then(function() {
+		KTUtil.scrollTop();
+	});
+            
+   // KTTagifyDemos.init();
+        }
+    });
+
+
+}
 	</script>
 
 	<script src="assets/js/pages/sai-kitchen/tagify.js" type="Module"></script>
