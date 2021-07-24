@@ -17,6 +17,7 @@ let afterdiscountmeasurementFeesAmount;
 let promoId;
 let promoDiscount;
 let isMeasurementPromo;
+let vatvalue;
 // Class definition
 var KTWizard1 = function () {
 	// Base elements
@@ -276,8 +277,9 @@ var KTWizard1 = function () {
 
 		// Submit event
 		_wizardObj.on('submit', function (wizard) {
+			var totalAmount=(afterdiscountmeasurementFeesAmount/1)+((afterdiscountmeasurementFeesAmount/100)*vatvalue);
 			Swal.fire({
-				text: "Make sure you receive the measurement Fees AED "+afterdiscountmeasurementFeesAmount+" by cash before proceeding to next step",
+				text: "Make sure you receive the measurement Fees AED "+totalAmount+"(inclusive VAT) by cash before proceeding to next step",
 				icon: "success",
 				showCancelButton: true,
 				buttonsStyling: false,
@@ -1038,4 +1040,56 @@ function GetCity(country) {
 			});
 		}
 	});
+	
+    $.ajax({
+        type: "get",
+        url: baseURL + '/Fees/GetFeesById?feesId=5',
+        
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+        },
+    
+        success: function (response) {
+            console.log(response);
+            if (response.isError == false) {
+                console.log(response.data.feesAmount);
+                vatvalue=response.data.feesAmount;
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+    
+    
+            // alert(errorThrown);
+    
+            Swal.fire({
+                text: 'Internet Connection Problem',
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    });
 }

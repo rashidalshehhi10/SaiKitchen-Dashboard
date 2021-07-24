@@ -91,7 +91,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("measurementrequest.html");
+                            window.location.replace("designrequest.html");
 
                         } else {
                             Swal.fire({
