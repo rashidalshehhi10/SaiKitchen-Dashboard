@@ -1,18 +1,18 @@
 const staticDevCoffee = "dev-coffee-site-v1"
 const assets = [
-    "/",
     "/index.html",
-    "/css/style.css",
-    "/js/app.js",
-    "/images/coffee1.jpg",
-    "/images/coffee2.jpg",
-    "/images/coffee3.jpg",
-    "/images/coffee4.jpg",
-    "/images/coffee5.jpg",
-    "/images/coffee6.jpg",
-    "/images/coffee7.jpg",
-    "/images/coffee8.jpg",
-    "/images/coffee9.jpg",
+    "/assets/css/pages/login/login-3.css",
+    "/assets/plugins/global/plugins.bundle.css",
+    "/assets/plugins/custom/prismjs/prismjs.bundle.css",
+    "/assets/css/style.bundle.css",
+    "/assets/css/themes/layout/header/base/light.css",
+    "/assets/css/themes/layout/header/menu/light.css",
+    "/assets/css/themes/layout/brand/dark.css",
+    "/assets/css/themes/layout/aside/dark.css",
+    "/assets/media/logos/favicon.ico",
+    "./assets/media/svg/illustrations/login-visual-5.svg",
+    "/assets/media/logos/logo-1.png",
+    "/assets/js/pages/sai-kitchen/signin.js",
 ]
 
 self.addEventListener("install", installEvent => {

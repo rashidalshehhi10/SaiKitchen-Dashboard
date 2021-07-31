@@ -5,6 +5,7 @@ import {
 } from './constant.js';
 
 let branchRoles=new Array();
+export let tagifyTo;
 
 
 // Class definition
@@ -12,7 +13,7 @@ var KTTagifyDemos = function () {
     var demo1 = function () {
         // Init autocompletes
         var toEl = document.getElementById('kt_tagify_1');
-        var tagifyTo = new Tagify(toEl, {
+         tagifyTo = new Tagify(toEl, {
             delimiters: ", ", // add new tags when a comma or a space character is entered
             maxTags: 500,
             // blacklist: ["fuck"],

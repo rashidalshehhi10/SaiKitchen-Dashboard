@@ -19,10 +19,13 @@ let measurementPermission;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
+ 
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+
     var _handleFormAcceptMeasurement = function() {
-        var form = KTUtil.getById('kt_approve_inquiry');
+        var form = KTUtil.getById('kt_approve_design');
         var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
+        var formSubmitButton = KTUtil.getById('kt_approve_design_button');
 
         if (!form) {
             return;
@@ -64,15 +67,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var inquiryApproved = {
-                    inquiryWorkscopeId: inquiryWorkscopeId,
-                    designAssignedTo: $('#kt_designassignto').val(),
-                    designScheduleDate: document.getElementById('design_schedule_date').value,
+                    id: inquiryWorkscopeId,
+                    
+                    designComment: document.getElementById('designApprovalComment').value,
                 };
                 const data = JSON.stringify(inquiryApproved);
                 console.log(data);
                 $.ajax({
                     type: "Post",
-                    url: baseURL + '/Measurement/AcceptMeasurement',
+                    url: baseURL + '/Design/AcceptDesign',
 
                     headers: {
                         'Content-Type': 'application/json',
@@ -154,17 +157,17 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                        measurement_schedule_date: {
+                        design_schedule_date: {
                             validators: {
                                 notEmpty: {
-                                    message: 'Measurement Schedule Date is required'
+                                    message: 'Design Schedule Date is required'
                                 }
                             }
                         },
-                        MeasurementAssignto: {
+                        DesignAssignto: {
                             validators: {
                                 notEmpty: {
-                                    message: 'Measurement Assign is required'
+                                    message: 'Design Assign is required'
                                 },
 
                             }
@@ -186,16 +189,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var inquiryRejected = {
-                    inquiryWorkscopeId: inquiryWorkscopeId,
-                    measurementAssignedTo: $('#kt_assignto').val(),
-                    measurementScheduleDate: document.getElementById('measurement_schedule_date').value,
-                    measurementComment: document.getElementById('measurementComment').value,
+                    id: inquiryWorkscopeId,
+                    designAssignedTo: $('#kt_designassignto').val(),
+                    designScheduleDate: document.getElementById('design_schedule_date').value,
+                    designComment: document.getElementById('designRejectComment').value,
                 };
                 const data = JSON.stringify(inquiryRejected);
                 console.log(data);
                 $.ajax({
                     type: "Post",
-                    url: baseURL + '/Measurement/DeclineMeasurement',
+                    url: baseURL + '/Design/DeclineDesign',
 
                     headers: {
                         'Content-Type': 'application/json',
@@ -214,7 +217,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("measurementrequest.html");
+                            window.location.replace("designrequest.html");
                         } else {
                             Swal.fire({
                                 text: response.errorMessage,
@@ -297,7 +300,7 @@ jQuery(document).ready(function() {
     inquiryWorkscopeId = urlParams.get('inquiryWorkscopeId')
     console.log(inquiryWorkscopeId);
     if (inquiryWorkscopeId == null || inquiryWorkscopeId == "") {
-        window.location.replace("measurementrequest.html");
+        window.location.replace("designrequest.html");
     }
 
 
@@ -324,53 +327,78 @@ jQuery(document).ready(function() {
 var files=response.data.designs[response.data.designs.length-1].files;
 console.log(files);
 
-	
+const imgView = document.getElementById('imgview');
+const imgViewdocs = document.getElementById('imgViewdocs');
 const pdfView = document.getElementById('pdfview');
+const pdfViewdocs = document.getElementById('pdfViewdocs');
+const videoViewdocs= document.getElementById('videoViewdocs');
+const videoView = document.getElementById('videoview');
+var videoViewHTML =``;
+var imgViewdocsHTML = ``;
+var imgViewHTML =``;
 var pdfViewHTML =``;
+var pdfViewdocsHTML = ``;
+var videoViewdocsHTML = ``;
+var isImgLoaded=false;
+var isPdfLoaded=false;
+var isVideoLoaded=false;
 files.forEach(element => {
 	console.log(baseFileURL+element.fileUrl);
-// 	pdfViewHTML += `	 <object data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="100%">
-// 	<iframe src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="100%" style="border: none;">
-// 	This browser does not support PDFs. Please download the PDF to view it: 
-// 	<a href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
-// 	</iframe>
-// 	</object>
-// `;
-if(element.fileUrl.includes(".pdf")){
-    	pdfViewHTML += `	 <object data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px">
-	<iframe src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px" style="border: none;">
-	This browser does not support PDFs. Please download the PDF to view it: 
-	<a href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
-	</iframe>
-	</object>
-`;
+    if(element.fileContentType=='mp4'){
+        if(isVideoLoaded==false){
+        var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
+        videoViewHTML += `    <iframe id="framevideodoc"  src=`+videoUrl+` width="100%" height="600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+        isVideoLoaded=true;
+    }
+    videoViewdocsHTML += `<div style="cursor: pointer;" onclick="changeMeasurementVideoFile('https://player.vimeo.com/video/`+element.fileUrl+`');" >   
+    <img alt="" class="max-h-65px" style="height:65px" src="assets/media/svg/files/mp4.svg" />
+ </a>`;
+    }else if(element.fileContentType=='pdf'){
+   
+    if(isPdfLoaded==false){
+        pdfViewHTML += `<object id="objpdfdoc" data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px">
+        <iframe id="framepdfdoc" src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px" style="border: none;">
+        This browser does not support PDFs. Please download the PDF to view it: 
+        <a  id="linkpdfdoc" href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
+        </iframe>
+        </object>`;
+        isPdfLoaded=true;
+        }
+        pdfViewdocsHTML += `<div style="cursor: pointer;" onclick="changeMeasurementPDFFile('`+baseFileURL+element.fileUrl+`');" >   
+           <img alt="" class="max-h-65px" style="height:65px" src="assets/media/svg/files/pdf.svg" />
+        </a>`;
+	
 }else{
-    
-pdfViewHTML += `<div id="`+element.fileUrl+`"></div>`;
+    if(isImgLoaded==false){
+        imgViewHTML +=`<div id="`+element.fileUrl+`" value= `+element.fileUrl+`></div>`;
+        isImgLoaded=true;
+        }
+        imgViewdocsHTML += `<a type="button" onclick="changeMeasurementImgFile('`+baseFileURL+element.fileUrl+`');" >   
+           <img alt="" class="max-h-65px" src="`+baseFileURL+element.fileUrl+`" />
+        </a>`;
 }
-// 	pdfViewHTML += `<iframe frameborder="0" allowfullscreen  webkitallowfullscreen mozallowfullscreen 
-//  style="width: 100%; height: 100%;"  
-//  src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=`+baseFileURL+element.fileUrl+`&autoLoad=true"></iframe>        
-// `;
-// pdfViewHTML+=`     <iframe src="https://api2.enscape3d.com/v3/view/ab9d0c6d-16ab-4f0d-aa48-39e1bf43fc39" frameborder="0" allowfullscreen  webkitallowfullscreen mozallowfullscreen  style="width: 100%; height: 100%;">
-// </iframe>`;
 });
 
 	 
+imgView.innerHTML=imgViewHTML;
+videoView.innerHTML=videoViewHTML;
+videoViewdocs.innerHTML=videoViewdocsHTML;
+imgViewdocs.innerHTML=imgViewdocsHTML;
+
 pdfView.innerHTML=pdfViewHTML;
+pdfViewdocs.innerHTML=pdfViewdocsHTML;
 
 files.forEach(element => {
 	console.log(baseFileURL+element.fileUrl);
     var url=element.fileUrl;
-    if(!element.fileUrl.includes(".pdf")){
+    if(element.fileContentType!='pdf' &&!element.fileContentType!='mp4' ){
  
 pannellum.viewer(url, {
     "type": "equirectangular",
     "autoLoad": true,
     "panorama": baseFileURL+element.fileUrl
 });
-    }
-});
+    }});
 
             }else {
 				Swal.fire({
@@ -405,67 +433,67 @@ pannellum.viewer(url, {
         }
     });
 
-    $.ajax({
-        type: "post",
-        url: baseURL + '/User/GetMeasurementUsers?branchId=' + user.data.userRoles[0].branch.branchId,
+    // $.ajax({
+    //     type: "post",
+    //     url: baseURL + '/User/GetMeasurementUsers?branchId=' + user.data.userRoles[0].branch.branchId,
 
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'userToken': user.data.userToken,
-            'userRoleId': user.data.userRoles[0].userRoleId,
-            'branchId': user.data.userRoles[0].branchId,
-            'branchRoleId': user.data.userRoles[0].branchRoleId,
-            'Access-Control-Allow-Origin': '*',
-        },
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'userId': user.data.userId,
+    //         'userToken': user.data.userToken,
+    //         'userRoleId': user.data.userRoles[0].userRoleId,
+    //         'branchId': user.data.userRoles[0].branchId,
+    //         'branchRoleId': user.data.userRoles[0].branchRoleId,
+    //         'Access-Control-Allow-Origin': '*',
+    //     },
 
-        success: function(response) {
-            console.log(response);
-            if (response.isError == false) {
+    //     success: function(response) {
+    //         console.log(response);
+    //         if (response.isError == false) {
 
-                console.log(response.data[0].userName);
-                const assigntoList = document.getElementById('kt_assignto');
-                var assignToListHTML = new Array();
+    //             console.log(response.data[0].userName);
+    //             const assigntoList = document.getElementById('kt_assignto');
+    //             var assignToListHTML = new Array();
 
-                for (var i = 0; i < response.data.length; i++) {
-                    assignToListHTML.push(`
-					<option value="` + response.data[i].userId + `">` + response.data[i].userName + `</option>`);
-                }
+    //             for (var i = 0; i < response.data.length; i++) {
+    //                 assignToListHTML.push(`
+	// 				<option value="` + response.data[i].userId + `">` + response.data[i].userName + `</option>`);
+    //             }
 
-                assigntoList.innerHTML = assignToListHTML.join('');
+    //             assigntoList.innerHTML = assignToListHTML.join('');
 
-            } else {
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-            }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
+    //         } else {
+    //             Swal.fire({
+    //                 text: response.errorMessage,
+    //                 icon: "error",
+    //                 buttonsStyling: false,
+    //                 confirmButtonText: "Ok, got it!",
+    //                 customClass: {
+    //                     confirmButton: "btn font-weight-bold btn-light-primary"
+    //                 }
+    //             }).then(function () {
+    //                 KTUtil.scrollTop();
+    //             });
+    //         }
+    //     },
+    //     error: function(XMLHttpRequest, textStatus, errorThrown) {
 
 
-            // alert(errorThrown);
+    //         // alert(errorThrown);
 
-            Swal.fire({
-                text: 'Internet Connection Problem',
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                    confirmButton: "btn font-weight-bold btn-light-primary"
-                }
-            }).then(function() {
-                KTUtil.scrollTop();
-            });
-        }
-    });
+    //         Swal.fire({
+    //             text: 'Internet Connection Problem',
+    //             icon: "error",
+    //             buttonsStyling: false,
+    //             confirmButtonText: "Ok, got it!",
+    //             customClass: {
+    //                 confirmButton: "btn font-weight-bold btn-light-primary"
+    //             }
+    //         }).then(function() {
+    //             KTUtil.scrollTop();
+    //         });
+    //     }
+    // });
 
 
     $.ajax({
@@ -532,6 +560,25 @@ pannellum.viewer(url, {
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 
+    $('#kt_tab_document div').hide();
+    $('#kt_tab_video div').hide();
+    $('.nav li a').click(function(){
+		var data = $(this).attr("href");
+		console.log(data);
+        if(data=='#kt_tab_diagram'){
+            $('#kt_tab_diagram div').show();
+            $('#kt_tab_document div').hide();
+            $('#kt_tab_video div').hide();
+        }else if(data=='#kt_tab_document'){
+            $('#kt_tab_document div').show();
+            $('#kt_tab_diagram div').hide();
+            $('#kt_tab_video div').hide();
+        }else if(data=='#kt_tab_video'){
+            $('#kt_tab_video div').show();
+            $('#kt_tab_diagram div').hide();
+            $('#kt_tab_document div').hide();
+        }
+	});
 
     });
 

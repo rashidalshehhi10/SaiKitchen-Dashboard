@@ -2054,35 +2054,81 @@
                 <!--begin::Form-->
                 <form class="form" id="kt_add_quotation" action="" name="addQutotationform">
                     <span id="inquiryId" style="display:none">0</span>
-                 
+                  
                     <div class="modal-body">
-                        <div class="form-group row">
-                            <div class="col-lg-6">
-                                <label id="lblAdvancePayment">Advance Payment:</label>
-                                <div class="input-group">
-                                    <input type="number" id="txtAdvancePayment" class="form-control" placeholder="50" min="0" max="100" value="50" readonly/>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="la la-percent"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <span class="form-text text-muted">Advance Payment in % of Total Amount</span>
-                            </div>
-                            <div class="col-lg-6">
-                                <label>Amount:</label>
-                                <div class="input-group">
-                                    <input  type="number" id="txtAmount" name="txtAmount" class="form-control" placeholder="0"  min="0" />
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="la 
-                                            la-money-check"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <span class="form-text text-muted">Please enter amount in AED</span>
-                            </div>
+                     <div class="form-group row">
+                        <div class="col-lg-6">
+                           <label id="lblAdvancePayment">Payment method:</label>
+                           <div class="input-group input-group-lg input-group-solid">
+                              <select class="form-control" id="method" name="method"
+                                 class="form-control form-control-lg form-control-solid"
+                                 style="width:100%">
+                                 <option value="1" data-select2-id="1">Pay Now</option>
+                                 <option value="2" >Pay Later</option>
+                              </select>
+                           </div>
                         </div>
+                           
+                           <div class="col-lg-3" id="diviCnt" style="display: none;">
+                              <label id="iCnt">Installment Count:</label>
+                              <div class="input-group">
+                                    <input type="number" id="instCnt" max="5" onblur="addInstallment()"  class="form-control" />
+                                    <div class="input-group-append">
+                                       <span class="input-group-text">
+                                          <i class="la la-money-check"></i>
+                                       </span>
+                                    </div>
+                              </div>
+                       
+                           </div>
+                     </div>
+
+                       <div id="dynamicdiv" style="">
+                           <div class="form-group row">
+                              <div class="col-lg-6">
+                                 <label id="lblAdvancePayment">Advance Payment:</label>
+                                 <div class="input-group">
+                                       <input type="number" id="txtAdvancePayment" class="form-control" placeholder="50" min="0" max="100" value="50" readonly/>
+                                       <div class="input-group-append">
+                                          <span class="input-group-text">
+                                             <i class="la la-percent"></i>
+                                          </span>
+                                       </div>
+                                 </div>
+                                 <span class="form-text text-muted">Advance Payment in % of Total Amount</span>
+                              </div>
+                              
+                           </div>
+                        </div>
+                           <div class="form-group row">
+                              <div class="col-lg-6">
+                                 <label>Amount:</label>
+                                 <div class="input-group">
+                                       <input  type="number" id="txtAmount" name="txtAmount" class="form-control" placeholder="0"  min="0" />
+                                       <div class="input-group-append">
+                                          <span class="input-group-text">
+                                             <i class="la 
+                                             la-money-check"></i>
+                                          </span>
+                                       </div>
+                                 </div>
+                                 <span class="form-text text-muted">Please enter amount in AED</span>
+                              </div>
+                              <div class="col-lg-6">
+                                 <label>Valid Till:</label>
+                                 <div class="input-group date">
+                                     <input type="text" class="form-control" id="kt_datepicker_2" readonly="readonly" placeholder="Select date" />
+                                     <div class="input-group-append">
+                                         <span class="input-group-text">
+                                             <i class="la la-calendar-check-o"></i>
+                                         </span>
+                                     </div>
+                                 </div>
+                                  <span class="form-text text-muted">Please enter validity date</span>
+                             </div>
+                           </div>
+                           
+                        
                         <div class="form-group row">
                             <div class="col-lg-6">
                                 <label>Description:</label>
@@ -2096,19 +2142,9 @@
                                 </div>
                                 <span class="form-text text-muted">Please enter description of quotation</span>
                             </div>
-                            <div class="col-lg-6">
-                                <label>Valid Till:</label>
-                                <div class="input-group date">
-                                    <input type="text" class="form-control" id="kt_datepicker_2" readonly="readonly" placeholder="Select date" />
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="la la-calendar-check-o"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                 <span class="form-text text-muted">Please enter validity date</span>
-                            </div>
+                            
                         </div>
+                        
                         <div class="form-group row">
                            <div class="col-lg-6">
                              <label>Promo Code:</label>
@@ -2257,6 +2293,9 @@
       <script src="assets/js/pages/sai-kitchen/viewinquiry.js" type="module"></script>
       <script src="assets/js/pages/sai-kitchen/base.js" type="module"></script>
       <!--begin::Page Scripts(used by this page)-->
+      <script src="assets/js/pages/sai-kitchen/dropdown.js"></script>
+      
+      <!--begin::Page Scripts(used by this page)-->
       <script src="assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js"></script>
       <!--end::Page Scripts-->
   
@@ -2359,6 +2398,50 @@
                      alert(textStatus);
                  },
              });
+         }
+         function addInstallment(){
+            var second_date = new Date(Date.now());
+            
+            document.getElementById("dynamicdiv").innerHTML='';
+            var cnt  =$('input#instCnt').val();
+            var vprcnt = 100/parseInt(cnt);
+            for (let i = 1; i <= parseInt(cnt); i++) {
+               //second_date.setMonth(second_date.getMonth()+i);
+               document.getElementById("dynamicdiv").innerHTML= document.getElementById("dynamicdiv").innerHTML+
+               ' <div class="form-group row">'+
+                '<div class="col-lg-6">'+
+                   '<label>Installment Percent:</label>'+
+                   '<div class="input-group">'+
+                         '<input  type="number" id="ipercent'+i+'" name="ipercent'+i+'" class="form-control" placeholder="0" value="'+vprcnt+'"  min="0" />'+
+                         '<div class="input-group-append">'+
+                            '<span class="input-group-text">'+
+                               '<i class="la la-percent"></i>'+
+                            '</span>'+
+                         '</div>'+
+                   '</div>'+
+                '</div>'+
+                '<div class="col-lg-6">'+
+                   '<label>Expectation Date:</label>'+
+                   '<div class="input-group date" data-provide="datepicker">'+
+                       '<input type="text" class="form-control" id="kt_datepicker'+i+'"  placeholder="Select date" />'+
+                       '<div class="input-group-append">'+
+                           '<span class="input-group-text">'+
+                               '<i class="la la-calendar-check-o"></i>'+
+                           '</span>'+
+                       '</div>'+
+                   '</div>'+
+                    '<span class="form-text text-muted">Please enter validity date</span>'+
+               '</div>'+
+             '</div>';
+            
+            }
+          
+            var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+            var myDate = new Date(y, m, 1);           
+            for (let i = 1; i <= parseInt(cnt); i++) {
+               myDate.setMonth(myDate.getMonth() + 1);
+               $('#kt_datepicker'+i).val(myDate.toLocaleDateString("en-US")).datepicker("update");
+            }
          }
       </script>
       <!--end::Page Scripts-->

@@ -231,7 +231,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         //      var ret = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Add Measurement">
                         //     <i class="la la-file-upload"></i>
                         // </a>`;
-                        ret += ` <a style="background-color:#734f43;margin:2px"  href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
+                        ret += ` <a style="background-color:#734f43;margin:2px"  href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `&designView=1"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
                         <i class="la la-ruler-combined"></i>
                     </a>`;
                     ret += ` <button style="background-color:#734f43;margin:2px"  onclick="setInquiryWorkscopeId(` + full.inquiryWorkscopeId + `);"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >

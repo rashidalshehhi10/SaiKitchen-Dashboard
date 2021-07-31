@@ -26,7 +26,8 @@ let advancePayment=0;
 let advancePaymentAmount=0;
 let totalAmount=0;
 let measurementFee=0;
-
+let noOfInstallment=0;
+let isInstallment;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
    
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
@@ -90,11 +91,44 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                
                 console.log(measurementFile);
-                
-    if(user.data.userRoles[0].branchRole.roleTypeId==1){
-     advancePayment= document.getElementById('txtAdvancePayment').value;
-    }
-                var quotationModel={
+                var pymnt = new Array();
+                    if(user.data.userRoles[0].branchRole.roleTypeId==1 ){
+                        if(document.getElementById('method').value=='1'){
+                            advancePayment= document.getElementById('txtAdvancePayment').value;
+                            noOfInstallment =0;
+                            isInstallment=false;
+                            pymnt.push({
+                                paymentName: "",
+                                paymentDetail: "",
+                                paymentAmount: advancePaymentAmount,
+                                paymentModeId: 0,
+                                paymentAmountinPercentage: 0,
+                                paymentExpectedDate: "",
+                                inquiryId: inquiryId,
+                                isActive: true,
+                                isDeleted: false
+                            })
+                        }
+                        else{
+                            advancePayment ='';
+                            noOfInstallment=document.getElementById('instCnt').value;
+                            isInstallment=true
+                            for (let i = 1; i <= parseInt(noOfInstallment); i++) {
+                                pymnt.push({
+                                    paymentName: "",
+                                    paymentDetail: "",
+                                    paymentAmount: 0,
+                                    paymentModeId: 0,
+                                    paymentAmountinPercentage: document.getElementById('ipercent'+i).value,
+                                    paymentExpectedDate: document.getElementById('kt_datepicker'+i).value,
+                                    inquiryId: inquiryId,
+                                    isActive: true,
+                                    isDeleted: false
+                                })
+                            }
+                        }
+                    }
+                    var quotationModel={
                     inquiryId: inquiryId,
                     description: document.getElementById('txtdescription').value,
                     totalAmount: document.getElementById('txtTotalAmount').value,
@@ -107,7 +141,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     paymentName: 'Advance Payment',
                     paymentDetail: '',
                     paymentAmount:advancePaymentAmount,
+                    noOfInstallment:noOfInstallment,
+                    isInstallment:isInstallment,
+                    payments: new Array(),
                 };
+                quotationModel.payments = pymnt;
                 const data = JSON.stringify(quotationModel);
                 console.log(data);
                 $.ajax({
@@ -753,3 +791,41 @@ $('#txtAdvancePayment').keyup(function () {
 
     });
 
+    $(function() {
+        $('#method').change(function(){
+           // $('input#txtcount').val(cnt)
+            if($('#method').val()=='1'){
+                document.getElementById("dynamicdiv").innerHTML=
+                '<div class="form-group row">'+
+                '<div class="col-lg-6">'+
+                   '<label id="lblAdvancePayment">Advance Payment:</label>'+
+                   '<div class="input-group">'+
+                         '<input type="number" id="txtAdvancePayment" name="txtAdvancePayment" class="form-control" placeholder="50" min="0" max="100" value="50" />'+
+                         '<div class="input-group-append">'+
+                            '<span class="input-group-text">'+
+                               '<i class="la la-percent"></i>'+
+                            '</span>'+
+                         '</div>'+
+                   '</div>'+
+                   '<span class="form-text text-muted">Advance Payment in % of Total Amount</span>'+
+                '</div>'+
+                
+             '</div>';
+             $('#txtAdvancePayment').keyup(function () {
+                advancePayment=  document.getElementById('txtAdvancePayment').value;
+                advancePaymentAmount= (totalAmount/100)*advancePayment;
+                document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+            
+            });
+                //$('#divtAmount').hide(); 
+                $('#diviCnt').hide();
+            }else{
+                document.getElementById("dynamicdiv").innerHTML='';
+                //$('#divtAmount').show();
+                $('#diviCnt').show(); 
+            }
+            
+        });
+        
+    });
+    

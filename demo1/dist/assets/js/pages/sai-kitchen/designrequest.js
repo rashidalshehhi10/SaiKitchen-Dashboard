@@ -453,7 +453,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var inquiryApproved = {
-                    inquiryWorkscopeId: document.getElementById("inquiryWorkscopeId").innerHTML,
+                    id: document.getElementById("inquiryWorkscopeId").innerHTML,
                     
                     designComment: document.getElementById('designApprovalComment').value,
                 };
@@ -575,7 +575,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var inquiryRejected = {
-                    inquiryWorkscopeId: document.getElementById("inquiryWorkscopeId").innerHTML,
+                    id: document.getElementById("inquiryWorkscopeId").innerHTML,
                     designAssignedTo: $('#kt_designassignto').val(),
                     designScheduleDate: document.getElementById('design_schedule_date').value,
                     designComment: document.getElementById('designRejectComment').value,

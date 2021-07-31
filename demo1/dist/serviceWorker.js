@@ -2,6 +2,7 @@ const staticDevCoffee = "sai-kitchen-site-v1"
 const assets = [
 //   "/",
   "/index.html",
+  "/offline.html",
   "/assets/css/pages/login/login-3.css",
   "/assets/plugins/global/plugins.bundle.css",
   "/assets/plugins/custom/prismjs/prismjs.bundle.css",
@@ -16,6 +17,9 @@ const assets = [
 //   "/css/style.css",
 //   "/js/app.js",
   "/assets/js/pages/sai-kitchen/signin.js",
+  "/assets/media/gif/404.gif",
+  "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css",
+  "https://fonts.googleapis.com/css?family=Arvo",
 //   "/images/coffee1.jpg",
 //   "/images/coffee2.jpg",
 //   "/images/coffee3.jpg",
@@ -35,10 +39,42 @@ self.addEventListener("install", installEvent => {
   )
 })
 
-self.addEventListener("fetch", fetchEvent => {
-    fetchEvent.respondWith(
-      caches.match(fetchEvent.request).then(res => {
-        return res || fetch(fetchEvent.request)
-      })
-    )
-  })
+self.addEventListener("fetch", function (event) {
+  event.respondWith(
+  caches.match(event.request).then(function (response) {
+    if (response) {
+      return response;
+      // if valid response is found in cache return it
+    } else {
+      return (
+        fetch(event.request)
+        //fetch from internet
+        .then(function (res) {
+          return caches.
+          open(staticDevCoffee).
+          then( function (cache) {
+            // console.log(event.request.url+' Cached');
+            cache.put(event.request.url, res.clone());
+            //save the response for future
+            return res;
+            // return the fetched data
+          });
+        }).
+        catch(function (err) {
+          // fallback mechanism  
+          if(!event.request.url.includes('backendsaikitchen.azurewebsites.net')){
+    
+          return caches.
+          open(staticDevCoffee).
+          then(function (cache) {
+            return cache.match("/offline.html");
+          });
+        }else{
+          return response;
+        }
+        }));
+     
+    }
+  }));
+
+});
