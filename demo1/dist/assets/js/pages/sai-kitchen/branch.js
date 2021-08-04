@@ -94,7 +94,7 @@ var KTDatatablesExtensionsResponsive = function () {
 
 						return '\
 						\
-						<button type="button" onclick="myFunction(\'' + baseURL + '\',\'' + data.branchId + '\');" data-target="#editBranchRole" data-toggle="modal" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
+						<button type="button" onclick="getBranchById(\'' + baseURL + '\',\'' + data.branchId + '\');" data-target="#addBranch" data-toggle="modal" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
 						<i class="la la-edit"></i>\
 					</button>\
 					<button type="button"  onclick="deleteBranchById(\'' + baseURL + '\',\'' + data.branchId + '\');"  class="btn btn-sm btn-clean btn-icon" title="Delete">\
@@ -188,6 +188,7 @@ var KTDatatablesExtensionsResponsive = function () {
 				KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
 				// Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
 				var branch = {
+					branchId : "string",
 					branchName: "string",
 					branchAddress: "string",
 					branchContact: "string",
@@ -205,6 +206,7 @@ var KTDatatablesExtensionsResponsive = function () {
 				// 	isActive: true,
 				// 	isDeleted: false
 				// };
+				branch.branchId = document.getElementById('branchId').innerHTML;
 				branch.branchName = document.getElementById('branchName').value;
 				branch.branchContact = document.getElementById('branchContact').value;
 				branch.branchAddress = document.getElementById('branchAddress').value;

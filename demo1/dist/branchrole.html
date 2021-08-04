@@ -2148,7 +2148,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">New Role</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button  type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<i aria-hidden="true" class="ki ki-close"></i>
 					</button>
 				</div>
@@ -2531,8 +2531,9 @@ License: You must have a valid license purchased only from themeforest(the above
         var tagifyTo = new Tagify(toEl, {
             delimiters: ", ", // add new tags when a comma or a space character is entered
             maxTags: 500,
+			duplicates: false,
             // blacklist: ["fuck"],
-            keepInvalidTags: false, // do not remove invalid tags (but keep them marked as invalid)
+            // do not remove invalid tags (but keep them marked as invalid)
             whitelist: branchRoles,
             templates: {
                 dropdownItem: function (tagData) {
@@ -2571,7 +2572,7 @@ function calltagify() {
 
    var baseURL ='https://backendsaikitchen.azurewebsites.net/Api';
     console.log(baseURL + '/Branch/GetBranchRoles');
-
+    branchRoles =[];
     $.ajax({
         type: "get",
         url: baseURL + '/Branch/GetBranchRoles',

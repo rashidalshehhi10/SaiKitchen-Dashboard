@@ -265,7 +265,7 @@ var KTAppsUsersListDatatable = function() {
                                 'class': ' label-light-info'
                             },
                             6: {
-                                'title': 'Friend',
+                                'title': 'Friends recommended',
                                 'class': ' label-light-primary'
                             },
                             7: {
@@ -277,6 +277,14 @@ var KTAppsUsersListDatatable = function() {
                                 'class': ' label-light-primary'
                             },
                             9: {
+                                'title': 'Owner Reference',
+                                'class': ' label-light-info'
+                            },
+                            10: {
+                                'title': 'Instagram',
+                                'class': ' label-light-primary'
+                            },
+                            11: {
                                 'title': 'Other',
                                 'class': ' label-light-info'
                             }

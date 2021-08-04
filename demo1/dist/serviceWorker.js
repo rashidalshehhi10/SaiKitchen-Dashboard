@@ -50,6 +50,8 @@ self.addEventListener("fetch", function (event) {
         fetch(event.request)
         //fetch from internet
         .then(function (res) {
+
+          if(!event.request.url.includes('backendsaikitchen.azurewebsites.net')){
           return caches.
           open(staticDevCoffee).
           then( function (cache) {
@@ -59,6 +61,10 @@ self.addEventListener("fetch", function (event) {
             return res;
             // return the fetched data
           });
+        }
+          else{
+            return res || fetch(fetchEvent.request)
+          }
         }).
         catch(function (err) {
           // fallback mechanism  

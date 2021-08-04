@@ -52,6 +52,162 @@
       <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
       <meta name="theme-color" content="#db4938" />
       <style>
+         .cardform {
+            width: 30vw;
+            min-width: 500px;
+            align-self: center;
+            box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+               0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+            border-radius: 7px;
+            padding: 40px;
+            }
+
+         input {
+         border-radius: 6px;
+         margin-bottom: 6px;
+         padding: 12px;
+         border: 1px solid rgba(50, 50, 93, 0.1);
+         height: 44px;
+         font-size: 16px;
+         width: 100%;
+         background: white;
+         }
+         .result-message {
+         line-height: 22px;
+         font-size: 16px;
+         }
+         .result-message a {
+         color: rgb(89, 111, 214);
+         font-weight: 600;
+         text-decoration: none;
+         }
+         .hidden {
+         display: none;
+         }
+         #card-error {
+         color: rgb(105, 115, 134);
+         text-align: left;
+         font-size: 13px;
+         line-height: 17px;
+         margin-top: 12px;
+         }
+         #card-element {
+         border-radius: 4px 4px 4px 4px ;
+         padding: 12px;
+         border: 1px solid rgba(50, 50, 93, 0.1);
+         height: 44px;
+         width: 100%;
+         background: white;
+         }
+         #payment-request-button {
+         margin-bottom: 32px;
+         }
+         /* Buttons and links */
+         button {
+         background: #5469d4;
+         color: #ffffff;
+         font-family: Arial, sans-serif;
+         border-radius: 0 0 4px 4px;
+         border: 0;
+         padding: 12px 16px;
+         font-size: 16px;
+         font-weight: 600;
+         cursor: pointer;
+         display: block;
+         transition: all 0.2s ease;
+         box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+         width: 100%;
+         }
+         button:hover {
+         filter: contrast(115%);
+         }
+         button:disabled {
+         opacity: 0.5;
+         cursor: default;
+         }
+         /* spinner/processing state, errors */
+         .spinner,
+         .spinner:before,
+         .spinner:after {
+         border-radius: 50%;
+         }
+         .spinner {
+         color: #ffffff;
+         font-size: 22px;
+         text-indent: -99999px;
+         margin: 0px auto;
+         position: relative;
+         width: 20px;
+         height: 20px;
+         box-shadow: inset 0 0 0 2px;
+         -webkit-transform: translateZ(0);
+         -ms-transform: translateZ(0);
+         transform: translateZ(0);
+         }
+         .spinner:before,
+         .spinner:after {
+         position: absolute;
+         content: "";
+         }
+         .spinner:before {
+         width: 10.4px;
+         height: 20.4px;
+         background: #5469d4;
+         border-radius: 20.4px 0 0 20.4px;
+         top: -0.2px;
+         left: -0.2px;
+         -webkit-transform-origin: 10.4px 10.2px;
+         transform-origin: 10.4px 10.2px;
+         -webkit-animation: loading 2s infinite ease 1.5s;
+         animation: loading 2s infinite ease 1.5s;
+         }
+         .spinner:after {
+         width: 10.4px;
+         height: 10.2px;
+         background: #5469d4;
+         border-radius: 0 10.2px 10.2px 0;
+         top: -0.1px;
+         left: 10.2px;
+         -webkit-transform-origin: 0px 10.2px;
+         transform-origin: 0px 10.2px;
+         -webkit-animation: loading 2s infinite ease;
+         animation: loading 2s infinite ease;
+         }
+         @-webkit-keyframes loading {
+         0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+         }
+         100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+         }
+         }
+         @keyframes loading {
+         0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+         }
+         100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+         }
+         }
+         @media only screen and (max-width: 600px) {
+         form {
+            width: 80vw;
+         }
+         }
+      </style>
+      <style>
+         .divoddrow{display: flex;background-color: #ffffff;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;}
+         .divevenrow{display: flex;background-color: #f0e8ff;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;}
+         .divoddendrow{display: flex;background-color: #ffffff;border-radius: 0px 0px 5px 5px;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;}
+         .divendrow{display: flex;background-color: #f0e8ff;border-radius: 0px 0px 5px 5px;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;}
+         .divico{width: 100px;border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left}
+         .start{
+            height: 5px;
+         }
          .left {
            float: left;
            box-sizing: border-box;
@@ -82,9 +238,20 @@
          .totalpadd{
             padding-left: 75%;
          }
-         
+         .logo{
+            padding-right: 25px;
+         }
          /* Use a media query to add a break point at 800px: */
          @media screen and (max-width: 800px) {
+            .logo{
+            padding-right: 0px;
+         }
+         .logo{
+            width: 40%;
+         }
+         .img{
+            width: 100%;
+         }
            .left, .right {
              width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
              display: inline-table;;
@@ -126,8 +293,104 @@
           .paddcont{
              padding-left: 10px !important;
           }
+          .logo{
+            width: 34%;
+         }
+         .img{
+            width: 100%;
+         }
          }
          </style>
+          <style>
+            @media (min-width: 1200px){
+              .modal-dialog.modal-xl {
+                 max-width: 550px;
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            }
+              @media (min-width: 1200px){
+              .modal-xl {
+                 max-width: 550px;
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            }
+              @media (min-width: 992px){
+              .modal-lg, .modal-xl {
+                 max-width: 550px;
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            }
+              @media (min-width: 576px){
+              .modal-dialog-centered {
+                 min-height: calc(100% - 3.5rem);
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+             
+            }
+              @media (min-width: 576px){
+              .modal-dialog {
+                 max-width: 500px;
+                 margin: 1.75rem auto;
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            }
+            @media (min-width: 400px){
+              
+              .emoj{
+                 font-size: 50px;
+              }
+              
+            } 
+            @media (max-width: 700px){
+              
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            } 
+            @media (max-width: 400px){
+              
+              .emoj{
+                 font-size: 30px;
+              }
+              .start{
+                 height: 15px;
+              }
+              .divico{
+                 width: 70px;
+              }
+            } 
+            @media (max-width: 300px){
+              
+              .emoj{
+                 font-size: 20px;
+              }
+              .start{
+                 height: 25px;
+              }
+              .divico{
+                 width: 50px;
+              }
+            } 
+            
+      </style>
+      <style>
+         
+      </style>
       <!--End:PWA-->
    </head>
    <!--end::Head-->
@@ -143,7 +406,7 @@
                         <!--begin::Details-->
                         <div class="d-flex align-items-center flex-wrap mr-2">
                            <!--begin::Title-->
-                           <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5"></h5>
+                           <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Quotation</h5>
                            <!--end::Title-->
                            <!--begin::Separator-->
                            <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200">
@@ -153,14 +416,14 @@
                            <div class="d-flex align-items-center" id="kt_subheader_search">
                               <!-- <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">450
                                  Total</span> -->
-                              
+                              <input type="hidden" id="inquiryId" />
                            </div>
                         </div>
                         <!--end::Details-->
                         <!--begin::Toolbar-->
                         <!--end::Toolbar-->
                         <div class="card-toolbar">
-                           <a href="#"    data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm font-weight-bold headapp" style="background-color: #aa9d9d; color:#ffffff">
+                           <a href="#"    data-toggle="modal" data-target="#reject" class="btn btn-sm font-weight-bold headapp" style="background-color: #aa9d9d; color:#ffffff">
                               <i >
                                  <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
@@ -174,9 +437,9 @@
                                     <!--end::Svg Icon-->
                                  </span>
                               </i>
-                              Reject Measurement
+                              Reject Quotation
                            </a>
-                           <a href="#"  data-toggle="modal" data-target="#ScheduleDate"  class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff">
+                           <a href="#"  data-toggle="modal" data-target="#approve"  class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff">
                               <i >
                                  <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
@@ -190,7 +453,7 @@
                                     <!--end::Svg Icon-->
                                  </span>
                               </i>
-                              Approve Measurement
+                              Approve Quotation
                            </a>
                         </div>
                      </div>
@@ -200,79 +463,85 @@
                   <!--begin::Entry-->
                   <div class="d-flex flex-column-fluid  tab-pane fade show active"  id="kt_tab_diagram" role="tabpanel" aria-labelledby="kt_tab_diagram">
                      <!--begin::Container-->
-                     <div class="padd15" style="width: 100%;align-items: center;margin-top: 65px;" >
+                     <div id="inercontainer" class="padd15" style="width: 100%;align-items: center;margin-top: 65px;" >
                         <!--begin::CustomBody-->
                         <!--begin::Dashboard-->
-                        <div style="height: 5px;">
+                        <div class="start" >
                         </div>
                         
-                        <div class="paddall with" style="background-color: #ffffff;border-radius: 5px;" >
-                           <div id="address" class="paddall" style="padding-top: 40px;">
+                        <div id="innerdata" class="paddall with" style="background-color: #ffffff;border-radius: 5px;" >
+                           <div id="address" class="paddall" style="padding-top: 40px;display: inline-block;">
                               <div style="display: flex;">
                                  <span style="float: left;">
                                     <p style="font-size: 25px;color: #9363ed;">
-                                       Invoice
-                                    </p>
-                                 </span>
-                              </div>
-                              
-                              <div style="display: flex;">
-                                 <span style="float: left;font-weight: bold;opacity: 50%;width: 100px">
-                                    <p>
-                                       Invoice No#
-                                    </p>
-                                 </span>
-                                 <span style="float: left;font-weight: bold;">
-                                    <p>
-                                       0002
-                                    </p>
-                                 </span>
-                              </div>
-                              <div style="display: flex;">
-                                 <span style="float: left;font-weight: bold;opacity: 50%;width: 100px;">
-                                    <p>
-                                       Invoice Date
-                                    </p>
-                                 </span>
-                                 <span style="float: left;font-weight: bold;">
-                                    <p>
-                                       July 25 2021
-                                    </p>
-                                 </span>
-                              </div>
-                              <div style="display: flex;">
-                                 <span style="float: left;font-weight: bold;opacity: 50%;width: 100px">
-                                    <p>
-                                       Due Date
-                                    </p>
-                                 </span>
-                                 <span style="float: left;font-weight: bold;">
-                                    <p>
-                                       August 09, 2021
+                                       Quotation
                                     </p>
                                  </span>
                               </div>
                            </div>
-                        
+                           <div id="logo" style="float: right;padding-top: 50px;" class="logo">
+                              <a href="home.html" class="brand-logo">
+                                 <img src="assets/media/logos/logo-1.png" class="max-h-70px img" alt="">
+                                 </a>
+                             </div>
+                           <div id="" class="paddall" style="display: inline-block;width: 100%;">  
+                              <div style="display: flex;">
+                                 <span style="float: left;font-weight: bold;opacity: 50%;width: 110px">
+                                    <p>
+                                       Quotation No#
+                                    </p>
+                                 </span>
+                                 <span style="float: left;font-weight: bold;">
+                                    <p id="invoID">
+                                       
+                                    </p>
+                                 </span>
+                              </div>
+                              <div style="display: flex;">
+                                 <span style="float: left;font-weight: bold;opacity: 50%;width: 110px;">
+                                    <p >
+                                       Quotation Date
+                                    </p>
+                                 </span>
+                                 <span style="float: left;font-weight: bold;">
+                                    <p id="invoDate">
+                                       
+                                    </p>
+                                 </span>
+                              </div>
+                              <div style="display: flex;">
+                                 <span style="float: left;font-weight: bold;opacity: 50%;width: 110px">
+                                    <p >
+                                       Due Date
+                                    </p>
+                                 </span>
+                                 <span style="float: left;font-weight: bold;">
+                                    <p id="invoDuDate">
+                                      
+                                    </p>
+                                 </span>
+                              </div>
+                           </div>
+                          
                            <div id="cards" class="paddall" style="padding-top: 20px;display: inline-block;width: 100%;">
                               <div class="left"  style="border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;">
                                  <div style="display: flex;height: 30px;">
                                     <span style="float: left;width: 100%;color: #9363ed;font-size: 20px;">
                                        <p>
-                                          Billed By
+                                         Quotation From
                                        </p>
                                     </span> 
                                  </div>
                                  <div style="display: flex;height: 18px;">
                                     <span style="float: left;width: 100%;font-weight: bold;">
-                                       <p>
-                                          Mohammad
+                                       <p >
+                                          SAI Kitchen & Wardrobe
                                        </p>
                                     </span> 
                                  </div>
                                  <div style="display: flex;height: 18px;">
                                     <span style="float: left;width: 100%;opacity: 80%;">
-                                       <p>
+                                       <p id="branchAddress">
                                           United arab Emirates
                                        </p>
                                     </span> 
@@ -285,7 +554,7 @@
                                     </span> 
                                     <span style="float: left;opacity: 80%;padding-left: 4px;">
                                        <p>
-                                          eng.daibus@gmail.com
+                                          info@sai-group.ai
                                        </p>
                                     </span> 
                                  </div>
@@ -296,8 +565,8 @@
                                        </p>
                                     </span> 
                                     <span style="float: left;opacity: 80%;padding-left: 4px;">
-                                       <p>
-                                          +9639565453225
+                                       <p id="branchContact">
+                                          
                                        </p>
                                     </span> 
                                  </div>
@@ -307,33 +576,33 @@
                                  <div style="display: flex;height: 30px;">
                                     <span style="float: left;width: 100%;color: #9363ed;font-size: 20px;">
                                        <p>
-                                          Billed To
+                                          Quotation For
                                        </p>
                                     </span> 
                                  </div>
                                  <div style="display: flex;height: 18px;">
                                     <span style="float: left;width: 100%;font-weight: bold;">
-                                       <p>
-                                          Client
+                                       <p id="customerName">
+                                          
                                        </p>
                                     </span> 
                                  </div>
                                  <div style="display: flex;height: 18px;">
                                     <span style="float: left;width: 100%;opacity: 80%;">
-                                       <p>
-                                          United arab Emirates
+                                       <p id="buildingAddress">
+                                          
                                        </p>
                                     </span> 
                                  </div>
                                  <div style="display: flex;height: 18px;">
                                     <span style="float: left;font-weight: bold;">
-                                       <p>
+                                       <p >
                                           Email:
                                        </p>
                                     </span> 
                                     <span style="float: left;opacity: 80%;padding-left: 4px;">
-                                       <p>
-                                          eng.daibus@gmail.com
+                                       <p id="customerEmail">
+                                         
                                        </p>
                                     </span> 
                                  </div>
@@ -344,8 +613,8 @@
                                        </p>
                                     </span> 
                                     <span style="float: left;opacity: 80%;padding-left: 4px;">
-                                       <p>
-                                          +9639565453225
+                                       <p id="customerContact">
+                                          
                                        </p>
                                     </span> 
                                  </div>
@@ -354,45 +623,28 @@
                            <div style="display: flex;"></div>
                            <div  id="table" class="paddall size1" style="border-radius: 5px 5px 0px 0px;padding-top: 20px;text-align: center;">
                             <div style="display: flex;background-color: #733dd9;border-radius: 5px 5px 0px 0px;height: 30px;padding-top: 2px;padding-bottom:2px ; font-weight: bold;color: #ffffff;display: flex;">
-                              
                               <div class="padd" style="display: inline-block;width: 10%;">S.NO</div>
-                              <div class="padd"  style="display: inline-block;width: 25%;">Description</div>
+                              <div class="padd"  style="display: inline-block;width: 20%;">Description</div>
                               <div class="padd"  style="display: inline-block;width: 15%;">Quantity</div>
                               <div class="padd"  style="display: inline-block;width: 15%;">Discount</div>
-                              <div class="padd"  style="display: inline-block;width: 20%;">Amount</div>
+                              <div class="padd"  style="display: inline-block;width: 15%;">Amount</div>
                               <div class="padd"  style="display: inline-block;width: 15%;">VAT</div>
                              </div>
-                             <div style="display: flex;background-color: #ffffff;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;">
-                           
-                              <div style="display: inline-block;width: 10%;">111</div>
-                              <div style="display: inline-block;width: 20%;">no desc</div>
-                              <div style="display: inline-block;width: 15%;">251</div>
-                              <div style="display: inline-block;width: 15%;">5%</div>
-                              <div style="display: inline-block;width: 15%;">1000</div>
-                              <div style="display: inline-block;width: 15%;">200</div>
-                             </div>
-                             <div style="display: flex;background-color: #f0e8ff;border-radius: 0px 0px 5px 5px;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;">
-                               <div style="display: inline-block;width: 10%;">111</div>
-                              <div style="display: inline-block;width: 20%;">no desc</div>
-                              <div style="display: inline-block;width: 15%;">251</div>
-                              <div style="display: inline-block;width: 15%;">5%</div>
-                              <div style="display: inline-block;width: 15%;">1000</div>
-                              <div style="display: inline-block;width: 15%;">200</div>
-                             </div>
+                            
                            </div>
                            <div id="total" style="padding-right: 25px;">
                               <div style="width: 100%;padding-top: 15px;"> 
                                  <span style="width: 150px;font-weight: bold;" class="totalpadd">Sub Total</span>
-                                 <span style="float: right;">$13</span>
+                                 <span style="float: right;" id="amount"></span>
                               </div>
                               <div style="width: 100%;">
-                                 <span style="width: 150px;font-weight: bold;" class="totalpadd">Discount(17%)</span>
-                                 <span style="float: right;">($14.2)</span>
+                                 <span style="width: 150px;font-weight: bold;" class="totalpadd">Discount</span>
+                                 <span style="float: right;" id="discount"></span>
                                  
                               </div>
                               <div style="width: 100%;">
-                                 <span style="width: 150px;font-weight: bold;" class="totalpadd">Reductions</span>
-                                 <span style="float: right;">($12)</span>
+                                 <span style="width: 150px;font-weight: bold;" class="totalpadd">Vat</span>
+                                 <span style="float: right;" id="vat"></span>
                                  
                               </div>
                               <div >
@@ -400,7 +652,7 @@
                               </div>
                               <div style="width: 100%;">
                                  <span style="width: 150px;font-weight: bold;" class="totalpadd">Total USD</span>
-                                 <span style="float: right;">($100)</span>
+                                 <span style="float: right;" id="totalAmount"></span>
                                  
                               </div>
                            </div>
@@ -411,35 +663,96 @@
                               
                            </div>
                            <div id="icons" class="paddall" style="display: inline-block;width: 100%;">
-                              <div   style="width: 10%; border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left;">
-                                 <a href="www.google.com"> <img  src="icon (1).png" style="width:100%;"></a>
+                             
+                              
+                           </div>
+                           <div id="additional" class="paddall">
+                              <div  style="font-size: 15px;padding-top: 10px;font-weight: bold;text-decoration: underline;">
+                                 Additional Works/Variations
                               </div>
-                              <div   style="width: 10%;border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left">
-                                 <a href="www.google.com"> <img src="icon (2).png" style="width:100%;"></a>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 Any additional works/variations shall be executed on written instructions. The same shall be carried out on mutually agreed rates. Payments for such works shall be made in interim bills. For Fillers more than 10cm be additional on variation cost. 
                               </div>
-                              <div   style="width: 10%;border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left">
-                                 <a href="www.google.com"><img src="icon (3).png" style="width:100%;"></a>
+                           </div>
+                           <div id="warranty" class="paddall">
+                              <div  style="font-size: 15px;padding-top: 10px;font-weight: bold;text-decoration: underline;">
+                                 Warranty
                               </div>
-                              <div   style="width: 10%;border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left">
-                                 <a href="www.google.com"><img src="icon (4).png" style="width:100%;"></a>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 1 Year Warranty from the date of Final Hand-over of Sai Kitchen and Wooden Safes Factory. 
                               </div>
-                              <div   style="width: 10%;border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left">
-                                 <a href="www.google.com"><img src="icon (5).png" style="width:100%;"></a>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 Warranty Terms Conditions: This Warranty is not applied in the case of any damage, scratches, and dents, etc. if the products exposed to stocks using improper home detergents and other chimicals.
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 Any Damage cause by another contractor is not covered under warranty
                               </div>
                            </div>
                            <div id="terms" class="paddall">
-                              <div  style="color: #9363ed;font-size: 15px;padding-top: 25px;">
-                              Terms And Conditions
-                              </div>
-                              <div style="padding-left: 20px;opacity: 80%;">
-                                 1. Please pay in 15 day from the date of invoice.
-                              </div>
-                              <div style="padding-left: 20px;opacity: 80%;">
-                                 2. Please qoute invoice number
+                              <div  style="font-size: 15px;padding-top: 10px;font-weight: bold;text-decoration: underline;">
+                              Payment Terms 
                               </div>
                            </div>
-                           <div id="footer" class="paddall" style="text-align: center;padding-top: 20px;">
-                            for any enquiry reach out via <p style="font-weight: bold;display: inline-block;">samer@gmail.com</p> or call on <p style="font-weight: bold;display: inline-block;">+98525125151515</p>
+                           <div id="warranty" class="paddall">
+                              <div  style="font-size: 15px;padding-top: 10px;font-weight: bold;text-decoration: underline;">
+                                 Delivery Terms
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 In the absence of the agreement to the contrary, the period of delivery begins at the latest of the following Comments:
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 a.) date of the order confirmation 
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 b.) Date of fulfilment of all technical, commercial, and financial requirements on the part of the buyer
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 c.) The date on which we received the down payment 
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 d.) The date on which we received Project Time Ligne 
+                              </div>
+                           </div>
+                           <div id="additional" class="paddall">
+                              <div  style="font-size: 15px;padding-top: 10px;font-weight: bold;text-decoration: underline;">
+                                Exclusin
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 Sai Kitchen And Wardrobe work program at site does not include any plumbing, electric work associated with Kitchen Cabinets & Wardrobes installation.
+                              </div>
+                           </div>
+                           <div id="additional" class="paddall">
+                              <div  style="font-size: 15px;padding-top: 10px;font-weight: bold;text-decoration: underline;">
+                                Validity
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 This quotation prices are valid for 1 week only from the date of issuing.
+                              </div>
+                           </div>
+                           <div id="additional" class="paddall">
+                              <div  style="font-size: 15px;padding-top: 10px;font-weight: bold;text-decoration: underline;">
+                                Note
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 Electricity, water, and air-conditioned storage facility for execution purposes to be provided free of cost.
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;">
+                                 SAI Will note take responsibility of damage cabinet caused by water source leakage.
+                              </div>
+                           </div>
+                           <div id="additional" class="paddall">
+                              <div  style="font-size: 15px;padding-top: 10px;font-weight: bold;text-decoration: underline;">
+                              </div>
+                              <div style="padding-left: 20px;opacity: 80%;font-style: italic;font-weight: bold;">
+                                 sai factory it's able to keep the materials after production finish maximum for ten days, after that storage charge will be applicable 200 AED DAILY
+                              </div>
+                           </div>
+                           <div class="d-flex justify-content-between" style="float: right;padding-right: 25px;">
+                                    
+                              <button type="button" class="btn btn-primary font-weight-bold" style="background-color: #733dd9 !important;border-color: #733dd9;" onclick="changewidth()">Print Invoice</button>
+                           </div>
+                           <div id="footer" class="paddall" style="text-align: center;padding-top: 25px;">
+                            for any enquiry reach out via <p style="font-weight: bold;display: inline-block;">info@sai-group.ai</p> or call on <p id="sbranchContact" style="font-weight: bold;display: inline-block;"></p>
                            </div>
                         </div>
                         <!--end::Dashboard-->
@@ -451,6 +764,214 @@
                   <!--begin::Entry-->
                  
                </div>
+               <div class="modal fade" id="reject"data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                              <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Reject Quotation</h5>
+                              
+                              <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <i aria-hidden="true" class="ki ki-close"></i>
+                                  </button>
+                               </div>
+                          </div>
+                          <div id="rinvoiceno" style="padding: 0px 1.5rem 0px;border-bottom: 0px;opacity: 50%;font-size: 11px;">
+                             
+                          </div>
+                          <!--begin::Form-->
+                          <form class="form" id="kt_add_quotation" action="" name="addQutotationform">
+                              <span id="inquiryId" style="display:none">0</span>
+                            
+                              <div class="modal-body">     
+                               <div class="form-group row">
+                                  <div class="col-lg-12 ">
+                                      <label>please share with us your feedback and your painpoint about the suggested 
+                                         design, this'll guide us to improve the concept and design details. 
+                                      </label>
+                                     
+                                  </div>
+                                  
+                              </div>              
+                                  <div class="form-group row">
+                                      <div class="col-lg-12 " >
+                                          <div class="input-group">
+                                              
+                                              <textarea style="border:1px solid #E8E4E4 !important;font-style: italic;font-size: 11px;"  type="text" id="txtdescription" class="form-control" placeholder="your feedback goes here" rows="10"></textarea>
+                                           </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <div style="display: flex;"> 
+                                     <span style="font-weight: bold;font-size: 13px;">Your Felling</span>
+                                  </div>
+                                  <div style="display: flex;font-size: 1rem;"> 
+                                     <span>How much do you like this desgin?</span>
+                                  </div>
+                                  <div id="imoji" style="vertical-align: bottom;">
+                                    <input type="hidden" id="hemoji" value="0" /> 
+                                    <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(1)">
+                                      <span id="emoj1" class="emo1">   😶  </span >
+                                     </div>
+                                     <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(2)">
+                                       <span id="emoj2" class="emo2">   😑  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(3)">
+                                       <span id="emoj3" class="emo3">   😒  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(4)">
+                                       <span id="emoj4" class="emo4">   😕  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(5)">
+                                       <span id="emoj5" class="emo5">   🙂  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 15%;" onclick="like(6)">
+                                       <span id="emoj6" class="emo6">   😃  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 15%;" onclick="like(7)">
+                                       <span id="emoj7" class="emo7">   😍  </span >
+                                      </div>
+                                    <!--  <div style="float: right;padding-bottom: 5px;" id="prcnt" class="prcnt">%</div> -->
+                                     <div  style="border: 0px;padding-bottom: 20px;padding-top: 25px;text-align:center;width: 100%;display: flex;">
+                                       <button id="rejectbtn" type="button" style="width: 80%; background-color: #F1583E;width: 100%;" class="btn btn-light-primary font-weight-bold" data-dismiss="modal"><span style="color:beige ;z-index: 1;"> Reject Quotation</span></button>
+                                     </div>
+                                    </div>
+                                 
+                                 
+                              </div>
+                             
+                              </form>
+                          <!--end::Form-->
+                      </div>
+                  </div>
+              </div>
+              <div class="modal fade" id="approve"data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+               <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                           <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Approve Quotation</h5>
+                           
+                           <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <i aria-hidden="true" class="ki ki-close"></i>
+                               </button>
+                            </div>
+                       </div>
+                       <div id="rinvoiceno" style="padding: 0px 1.5rem 0px;border-bottom: 0px;opacity: 50%;font-size: 11px;">
+                          
+                       </div>
+                       <!--begin::Form-->
+                       <form class="form" id="kt_add_quotation" action="" name="addQutotationform">
+                           <span id="inquiryId" style="display:none">0</span>
+                         
+                           <div class="modal-body">     
+                            <div class="form-group row">
+                              
+                               
+                           </div>              
+                              <div class="form-group row">
+                                 <div class="col-lg-12 mb-lg-0 mb-12">
+                                    <label>Payment method:</label>
+                                    <select id="slctapprve" class="form-control datatable-input" data-col-index="2">
+                                     <option value="">Select</option>
+                                     <option value="1">Cash</option>
+                                     <option value="2">Cheque</option>
+                                     <option value="3">Online</option>
+                                    </select>
+                                 </div>
+                                 <div id="divPymntType" style="display: none; height: 100px;padding-top: 20px;" class="col-lg-12 mb-lg-0 mb-12">
+                                   
+                                 </div>  
+                                 <div id="cardpay"  style="display: none; height: 100px;padding-top: 20px;" class="col-lg-12 mb-lg-0 mb-12">
+                                    <form id="payment-form">
+                                       <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+                                      <!--  <button id="submit">
+                                         <div class="spinner hidden" id="spinner"></div>
+                                         <span id="button-text">Pay now</span>
+                                       </button> -->
+                                      <!--  <p id="card-error" role="alert"></p>
+                                       <p class="result-message hidden">
+                                         Payment succeeded, see the result in your
+                                         <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+                                       </p> -->
+                                     </form>
+                                     <span id="spamount" style="float: right;">Amount:</span>
+                                 </div> 
+                               </div>
+                               <div style="display: flex;"> 
+                                  <span style="font-weight: bold;font-size: 13px;">Your Felling</span>
+                               </div>
+                               <div style="display: flex;font-size: 1rem;"> 
+                                  <span>How much do you like this desgin?</span>
+                               </div>
+                               <div id="imoji" style="vertical-align: bottom;">
+                                 <input type="hidden" id="aemoji" value="0" /> 
+                                    <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="appr(1)">
+                                      <span id="aemoj1" class="emo1">   😶  </span >
+                                     </div>
+                                     <div  class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(2)">
+                                       <span  id="aemoj2" class="emo2">   😑  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(3)">
+                                       <span id="aemoj3" class="emo3">   😒  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(4)">
+                                       <span id="aemoj4" class="emo4">   😕  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(5)">
+                                       <span id="aemoj5" class="emo5">   🙂  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 15%" onclick="appr(6)">
+                                       <span id="aemoj6" class="emo6">   😃  </span >
+                                      </div>
+                                      <div   class="emoj" style="cursor: pointer; float: left;width: 15%" onclick="appr(7)">
+                                       <span id="aemoj7" class="emo7">   😍  </span >
+                                      </div>
+                                 <!--  <div style="float: right;padding-bottom: 5px;" id="prcnt" class="prcnt">%</div> -->
+                                  <div  style="border: 0px;padding-bottom: 20px;padding-top: 25px;text-align:center;width: 100%;display: flex;">
+                                    <button id="approvebtn"  type="button" style="width: 80%; background-color: #F1583E;width: 100%;" class="btn btn-light-primary font-weight-bold" data-dismiss="modal"><span style="color:beige ;z-index: 1;"> Approve Quotation</span></button>
+                                  </div>
+                                 </div>
+                              
+                              
+                           </div>
+                          
+                           </form>
+                       <!--end::Form-->
+                   </div>
+               </div>
+           </div>
+           
+           <div class="modal fade" id="msg" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                        <h5 class="modal-title" id="qsms" style="font-weight: bold;">Quotation Message</h5>
+                        
+                        <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <i aria-hidden="true" class="ki ki-close"></i>
+                            </button>
+                         </div>
+                    </div>
+                        <div class="modal-body">     
+                         <div class="form-group row" >
+                           <span style="text-align: center;width: 100%;">Thanks for approve</span>
+                        </div>              
+                           <div class="form-group row">
+                              <div  style=" height: 30px;padding-top: 10px;" class="col-lg-12 mb-lg-0 mb-12">
+                                    <p style="color: red;" id="card-error" role="alert"></p>
+                                    <p class="result-message hidden">
+                                      Payment succeeded, see the result in your
+                                      <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+                                    </p>
+                              </div> 
+                            </div>
+                            
+                        </div>
+                </div>
+            </div>
+        </div>
                <!--end::Content-->
       <!--end::Main-->
       <!-- begin::User Panel-->
@@ -468,79 +989,44 @@
      
       <script>
          var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+         function like(id){         
+           //var heart = document.getElementById("hemoji").value;
+           for (let i = 1; i <= 7; i++) {
+              if(i == id){
+               document.getElementById("emoj"+id).style.backgroundColor  = '#F1583E';
+               document.getElementById("emoj"+id).style.borderRadius = '100%';
+               document.getElementById("hemoji").value = id;
+              }else{
+               document.getElementById("emoj"+i).style.removeProperty('background-color');
+              }
+           }
+         }
+         function appr(id){         
+           //var heart = document.getElementById("hemoji").value;
+           for (let i = 1; i <= 7; i++) {
+              if(i == id){
+               document.getElementById("aemoj"+id).style.backgroundColor  = '#F1583E';
+               document.getElementById("aemoj"+id).style.borderRadius = '100%';
+               document.getElementById("aemoji").value = id;
+              }else{
+               document.getElementById("aemoj"+i).style.removeProperty('background-color');
+              }
+           }
+         }
+        function  changewidth(){
+            document.getElementById("inercontainer").classList.remove("padd15");
+            document.getElementById("innerdata").classList.remove("with");
+            window.print();
+            document.getElementById("inercontainer").classList.add("padd15");
+            document.getElementById("innerdata").classList.add("with");
+            //alert(document.getElementById("inercontainer").style.padding);
+         }
       </script>
-      <!--begin::Global Config(global config for global JS scripts)-->
-      <script>
-         var KTAppSettings = {
-             "breakpoints": {
-                 "sm": 576,
-                 "md": 768,
-                 "lg": 992,
-                 "xl": 1200,
-                 "xxl": 1400
-             },
-             "colors": {
-                 "theme": {
-                     "base": {
-                         "white": "#ffffff",
-                         "primary": "#3699FF",
-                         "secondary": "#E5EAEE",
-                         "success": "#1BC5BD",
-                         "info": "#8950FC",
-                         "warning": "#FFA800",
-                         "danger": "#F64E60",
-                         "light": "#E4E6EF",
-                         "dark": "#181C32"
-                     },
-                     "light": {
-                         "white": "#ffffff",
-                         "primary": "#E1F0FF",
-                         "secondary": "#EBEDF3",
-                         "success": "#C9F7F5",
-                         "info": "#EEE5FF",
-                         "warning": "#FFF4DE",
-                         "danger": "#FFE2E5",
-                         "light": "#F3F6F9",
-                         "dark": "#D6D6E0"
-                     },
-                     "inverse": {
-                         "white": "#ffffff",
-                         "primary": "#ffffff",
-                         "secondary": "#3F4254",
-                         "success": "#ffffff",
-                         "info": "#ffffff",
-                         "warning": "#ffffff",
-                         "danger": "#ffffff",
-                         "light": "#464E5F",
-                         "dark": "#ffffff"
-                     }
-                 },
-                 "gray": {
-                     "gray-100": "#F3F6F9",
-                     "gray-200": "#EBEDF3",
-                     "gray-300": "#E4E6EF",
-                     "gray-400": "#D1D3E0",
-                     "gray-500": "#B5B5C3",
-                     "gray-600": "#7E8299",
-                     "gray-700": "#5E6278",
-                     "gray-800": "#3F4254",
-                     "gray-900": "#181C32"
-                 }
-             },
-             "font-family": "Poppins"
-         };
-      </script>
-      <!--end::Global Config-->
-      <!--begin::Global Theme Bundle(used by all pages)-->
+      
       <script src="assets/plugins/global/plugins.bundle.js"></script>
       <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-      <script src="assets/js/scripts.bundle.js"></script>
-      <!--end::Global Theme Bundle-->
-      <!--begin::Page Vendors(used by this page)-->
-      <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-      <!--end::Page Vendors-->
-      <!--begin::Page Scripts(used by this page)-->
-      <script src="assets/js/pages/widgets.js"></script>
+      
+ 
       <!--end::Page Scripts-->
       <!-- The core Firebase JS SDK is always required and must be listed first -->
       <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
@@ -548,137 +1034,16 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
       <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
-      <script src="assets/js/pages/sai-kitchen/firebase.js" type="module"></script>
-      <script src='assets/js/pages/sai-kitchen/pdfobject.js'></script>
+  
       <!--begin::Page Scripts(used by this page)-->
-      <script src="assets/js/pages/sai-kitchen/dropdown.js"></script>
       <!--end::Page Scripts-->
-      <!--begin::Page Scripts(used by this page)-->
-      <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
+      <!--begin::Global Config(global config for global JS scripts)-->
+      <script src="assets/js/pages/sai-kitchen/invoice.js" type="module"></script>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+      <!-- <script src="assets/js/pages/sai-kitchen/client.js"  defer></script> -->
       <!--end::Page Scripts-->
-      <script>
-         var options = {
-         pdfOpenParams: { view: 'FitBH,5', pagemode: 'none', scrollbar: '1', toolbar: '1', statusbar: '1', messages: '1', navpanes: '1' }
-         };
-         PDFObject.embed("assets/js/pages/sai-kitchen/myfile.pdf", "#example1",options);
-         var baseURL = "https://backendsaikitchen.azurewebsites.net/Api"
-         
-         // import { baseURL } from '/assets/js/pages/sai-kitchen/constant.js'
-         
-         if (Notification.permission === "denied") {
-             Swal.fire({
-                 title: 'Allow Notification?',
-                 text: "You won't be able to revert this!",
-                 icon: 'warning',
-                 showCancelButton: true,
-                 confirmButtonColor: '#3085d6',
-                 cancelButtonColor: '#d33',
-                 confirmButtonText: 'Ok!'
-             }).then((result) => {
-                 if (result.isConfirmed) {
-                     notifyMe();
-                 }
-             });
-         }
-         
-         
-         function notifyMe() {
-             // Let's check if the browser supports notifications
-             if (!("Notification" in window)) {
-                 alert("This browser does not support desktop notification");
-             }
-         
-             // Let's check whether notification permissions have already been granted
-             else if (Notification.permission === "granted") {
-                 // If it's okay let's create a notification
-                 var notification = new Notification("Hi there!");
-                 registerServiceWorker();
-             }
-         
-             // Otherwise, we need to ask the user for permission
-             else if (Notification.permission !== "denied") {
-                 Notification.requestPermission().then(function(permission) {
-                     // If the user accepts, let's create a notification
-                     if (permission === "granted") {
-                         var notification = new Notification("Hi there!");
-                     }
-                 });
-             }
-         
-             // At last, if the user has denied notifications, and you
-             // want to be respectful there is no need to bother them any more.
-         }
-         
-         function logoutUser(user) {
-         
-             // alert('hi ' + branchRoleId);
-             var users = JSON.parse(user);
-         
-         
-             var data = JSON.stringify({
-                 userId: users.data.userId
-             });
-             localStorage.removeItem('user');
-             localStorage.removeItem('permission');
-             $.ajax({
-                 type: "Post",
-                 url: baseURL + '/User/LogoutUser',
-                 headers: {
-                     'Content-Type': 'application/json',
-                     'userId': user.data.userId,
-                     'userToken': user.data.userToken,
-                     'userRoleId': user.data.userRoles[0].userRoleId,
-                     'branchId': user.data.userRoles[0].branchId,
-                         'Access-Control-Allow-Origin': '*',
-                     'branchRoleId': user.data.userRoles[0].branchRoleId,
-                 },
-                 data: data,
-                 success: function(response) {
-                     console.log(response);
-                     if (response.isError == false) {
-                         // sessionStorage.setItem('user', JSON.stringify(response));
-                         window.location.replace("index.html");
-                     } else {
-                         Swal.fire({
-                             text: response.errorMessage,
-                             icon: "error",
-                             buttonsStyling: false,
-                             confirmButtonText: "Ok, got it!",
-                             customClass: {
-                                 confirmButton: "btn font-weight-bold btn-light-primary"
-                             }
-                         }).then(function() {
-                             KTUtil.scrollTop();
-                         });
-                     }
-                 },
-                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                     alert(textStatus);
-                 },
-             });
-         }
-         function changeMeasurementImgFile(fileUrl) {
-             // alert(fileUrl);
-             $('#objimgdoc').attr('data', fileUrl);
-             $('#frameimgdoc').attr('src', fileUrl);
-             $('#linkimgdoc').attr('href', fileUrl);
-         }
-         function changeMeasurementPDFFile(fileUrl) {
-             // alert(fileUrl);
-             $('#objpdfdoc').attr('data', fileUrl);
-             $('#framepdfdoc').attr('src', fileUrl);
-             $('#linkpdfdoc').attr('href', fileUrl);
-         }
-         function changeMeasurementVideoFile(fileUrl) {
-             $('#framevideodoc').attr('src', fileUrl);
-         }
-      </script>
-      <!--end::Page Scripts-->
-      <script>
-         $(document).ready(function() {
-            $('#kt_subheader').scrollToFixed();
-         });
-      </script>
+     
    </body>
    <!--end::Body-->
 </html>

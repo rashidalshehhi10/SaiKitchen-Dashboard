@@ -87,7 +87,7 @@ var KTDatatablesExtensionsResponsive = function () {
 					render: function (data, type, full, meta) {
 						return '\
 						\
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
+							<a href="javascript:;" onclick="getUserById(\'' + baseURL + '\',\'' + data.userId + '\');" data-toggle="modal" data-target="#addUser"  class="btn btn-sm btn-clean btn-icon" title="Edit details">\
 								<i class="la la-edit"></i>\
 							</a>\
 							<button type="button"  onclick="deleteUserById(\'' + baseURL + '\',\'' + data.userId + '\');" class="btn btn-sm btn-clean btn-icon" title="Delete">\
@@ -184,6 +184,7 @@ var KTDatatablesExtensionsResponsive = function () {
 				KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
 				// Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
 				var newuser = {
+					userId:"string",
 					userName: "string",
 					userEmail: "string",
 					userMobile: "string",
@@ -205,6 +206,7 @@ var KTDatatablesExtensionsResponsive = function () {
 				// 	isActive: true,
 				// 	isDeleted: false
 				// };
+				newuser.userId = document.getElementById('userId').innerHTML;
 				newuser.userName = document.getElementById('userName').value;
 				newuser.userEmail = document.getElementById('userEmail').value;
 				newuser.userMobile = document.getElementById('userMobile').value;

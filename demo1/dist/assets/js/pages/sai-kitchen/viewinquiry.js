@@ -27,7 +27,8 @@ let advancePaymentAmount=0;
 let totalAmount=0;
 let measurementFee=0;
 let noOfInstallment=0;
-let isInstallment;
+let beforeInstallation=0;
+let afterDelivery=0;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
    
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
@@ -92,27 +93,28 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                
                 console.log(measurementFile);
                 var pymnt = new Array();
+                advancePayment= document.getElementById('txtAdvancePayment').value;
+                beforeInstallation= document.getElementById('txtBeforeInstallation').value;
+                afterDelivery= document.getElementById('txtAfterInstallation').value;
                     if(user.data.userRoles[0].branchRole.roleTypeId==1 ){
                         if(document.getElementById('method').value=='1'){
                             advancePayment= document.getElementById('txtAdvancePayment').value;
                             noOfInstallment =0;
-                            isInstallment=false;
-                            pymnt.push({
-                                paymentName: "",
-                                paymentDetail: "",
-                                paymentAmount: advancePaymentAmount,
-                                paymentModeId: 0,
-                                paymentAmountinPercentage: 0,
-                                paymentExpectedDate: "",
-                                inquiryId: inquiryId,
-                                isActive: true,
-                                isDeleted: false
-                            })
+                            // pymnt.push({
+                            //     paymentName: "",
+                            //     paymentDetail: "",
+                            //     paymentAmount: advancePaymentAmount,
+                            //     paymentModeId: 0,
+                            //     paymentAmountinPercentage: advancePayment,
+                            //     paymentExpectedDate: "",
+                            //     inquiryId: inquiryId,
+                            //     isActive: true,
+                            //     isDeleted: false
+                            // })
                         }
                         else{
-                            advancePayment ='';
+                            advancePayment =document.getElementById('txtAdvancePayment').value;
                             noOfInstallment=document.getElementById('instCnt').value;
-                            isInstallment=true
                             for (let i = 1; i <= parseInt(noOfInstallment); i++) {
                                 pymnt.push({
                                     paymentName: "",
@@ -134,6 +136,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     totalAmount: document.getElementById('txtTotalAmount').value,
                     amount: document.getElementById('txtAmount').value,
                     advancePayment:advancePayment,
+                    beforeInstallation:beforeInstallation,
+                    afterDelivery:afterDelivery,
                     vat:vatvalue,
                     discount: promoDiscount,
                     quotationValidityDate: document.getElementById('kt_datepicker_2').value,
@@ -142,7 +146,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     paymentDetail: '',
                     paymentAmount:advancePaymentAmount,
                     noOfInstallment:noOfInstallment,
-                    isInstallment:isInstallment,
                     payments: new Array(),
                 };
                 quotationModel.payments = pymnt;
@@ -276,19 +279,22 @@ jQuery(document).ready(function() {
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
-var inquiryWorkscopelength=response.data.inquiryWorkscopes[response.data.inquiryWorkscopes.length-1];
+var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
 console.log(inquiryWorkscopelength);
-inquiry=response.data;
+inquiry=response.data.inquiry;
 if(inquiry.promo!=null){
 document.getElementById('txtPromoCode').value=inquiry.promo?.promoName;
 }
 promoDiscount=inquiry.promoDiscount;
 promoId=inquiry.promoId;
 isMeasurementPromo=inquiry.isMeasurementPromo;
-measurementFee=inquiry.payments[0]?.paymentAmount;
+measurementFee=inquiry.payments[0].paymentAmount;
 const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');
+
+document.getElementById('txtBeforeInstallation').value=response.data.fees[1].feesAmount;
+document.getElementById('txtAfterInstallation').value=response.data.fees[2].feesAmount;
 var dicMeasurement = new Object();
 var dicDesign = new Object();
 var workscopeHtml=``;
@@ -312,8 +318,8 @@ customerDetail.innerHTML=` <!--begin::User-->
       <i class="symbol-badge bg-success"></i>
    </div>
    <div>
-      <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">`+response.data.customer.customerName+`</a>
-      <div class="text-muted">`+response.data.customer.customerContact+`</div>
+      <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">`+response.data.inquiry.customer.customerName+`</a>
+      <div class="text-muted">`+response.data.inquiry.customer.customerContact+`</div>
    </div>
 </div>
 <!--end::User-->
@@ -321,46 +327,46 @@ customerDetail.innerHTML=` <!--begin::User-->
 <div class="py-9">
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Code:</span>
-      <span class="text-muted" style=" text-align: right;">CS`+response.data.branchId+``+response.data.customerId+`</span>
+      <span class="text-muted" style=" text-align: right;">CS`+response.data.inquiry.branchId+``+response.data.inquiry.customerId+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Email:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.customer.customerEmail+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.customer.customerEmail+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Contact:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.customer.customerContact+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.customer.customerContact+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Address:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.building.buildingAddress+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingAddress+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Building Condition:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.building.buildingCondition+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingCondition+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Floor:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.building.buildingFloor+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingFloor+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Building Under-Construction:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.building.buildingReconstruction+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingReconstruction+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Building IsOccupied:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.building.isOccupied+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.isOccupied+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Type Of Unit:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.building.buildingTypeOfUnit+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingTypeOfUnit+`</span>
    </div>
 </div>
 <!--end::Contact-->
 `;
-inquiryCode.innerHTML=response.data.inquiryCode;
+inquiryCode.innerHTML=response.data.inquiry.inquiryCode;
 var isfirst=true;
-response.data.inquiryWorkscopes.forEach(element => {
+response.data.inquiry.inquiryWorkscopes.forEach(element => {
     if(isfirst){
         workscopeHtml+=` <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#workscope`+element.workscopeId+`">
@@ -795,22 +801,10 @@ $('#txtAdvancePayment').keyup(function () {
         $('#method').change(function(){
            // $('input#txtcount').val(cnt)
             if($('#method').val()=='1'){
-                document.getElementById("dynamicdiv").innerHTML=
-                '<div class="form-group row">'+
-                '<div class="col-lg-6">'+
-                   '<label id="lblAdvancePayment">Advance Payment:</label>'+
-                   '<div class="input-group">'+
-                         '<input type="number" id="txtAdvancePayment" name="txtAdvancePayment" class="form-control" placeholder="50" min="0" max="100" value="50" />'+
-                         '<div class="input-group-append">'+
-                            '<span class="input-group-text">'+
-                               '<i class="la la-percent"></i>'+
-                            '</span>'+
-                         '</div>'+
-                   '</div>'+
-                   '<span class="form-text text-muted">Advance Payment in % of Total Amount</span>'+
-                '</div>'+
-                
-             '</div>';
+               document.getElementById('instCnt').value='0';
+            document.getElementById("dynamicdiv").innerHTML='';
+                $('#RowAdv').show(); 
+                $('#RowAfter').show(); 
              $('#txtAdvancePayment').keyup(function () {
                 advancePayment=  document.getElementById('txtAdvancePayment').value;
                 advancePaymentAmount= (totalAmount/100)*advancePayment;
@@ -820,9 +814,13 @@ $('#txtAdvancePayment').keyup(function () {
                 //$('#divtAmount').hide(); 
                 $('#diviCnt').hide();
             }else{
-                document.getElementById("dynamicdiv").innerHTML='';
+                //document.getElementById("dynamicdiv").innerHTML='';
                 //$('#divtAmount').show();
+               
+                
                 $('#diviCnt').show(); 
+                $('#RowAfter').hide(); 
+
             }
             
         });

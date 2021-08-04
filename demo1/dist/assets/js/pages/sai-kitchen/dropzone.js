@@ -52,6 +52,22 @@ var KTDropzoneDemo = function() {
             maxFiles: 50,
             maxFilesize: 5, // MB
             addRemoveLinks: true,
+            removedfile:function(file) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        // event.target.result contains base64 encoded image
+                        var base64String = event.target.result;
+                        var fileName = file.name;
+                        var finalbase64 = base64String.split(",")[1];
+                        // handlePictureDropUpload(base64String ,fileName );
+                        removeA(measurementFile, finalbase64);
+                    };
+                    reader.readAsDataURL(file);
+                    
+                file.previewElement.remove();
+    
+            },
+      
             acceptedFiles: "image/*,application/pdf,.png,.mp4",
             
         init: function() {
@@ -106,3 +122,15 @@ var KTDropzoneDemo = function() {
 KTUtil.ready(function() {
     KTDropzoneDemo.init();
 });
+
+
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
