@@ -179,6 +179,7 @@ var KTAppsUsersListDatatable = function() {
                 }, {
                     field: 'ContactStatus',
                     title: 'Contact Status',
+                    autoHide: true,
                     // overflow: 'visible',
                     // callback function support for column rendering
                     template: function(data) {
@@ -192,7 +193,7 @@ var KTAppsUsersListDatatable = function() {
                                 'class': ' label-light-danger'
                             }
                         };
-                        return '<span class="label label-lg font-weight-bold ' + status[data.contactStatusId].class + ' label-inline">' + status[data.contactStatusId].title + '</span>';
+                        return '<span class="label label-lg font-weight-bold ' + status[data.contactStatusId].class + ' label-inline">' +data.contactStatus + '</span>';
 
                     },
                 }, {
@@ -375,17 +376,30 @@ var KTAppsUsersListDatatable = function() {
             ],
         });
 
-        $('#kt_datatable_search_status').on('change', function() {
-            datatable.search($(this).val().toLowerCase(), 'Status');
-        });
+         $('#kt_subheader_search_form').on('blur', function() {
+            datatable.search($(this).val().toLowerCase());
+        }); 
 
         $('#kt_datatable_contact_statuss').on('change', function() {
             datatable.search($(this).val().toLowerCase(), 'Type');
         });
 
+        $('#divclk').on('click', function() {
+           document.getElementById("kt_subheader_search_form").value = 'Need to Contact';
+           datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+        });
 
+        $('#divclk2').on('click', function() {
+            document.getElementById("kt_subheader_search_form").value = 'Contacted';
+            datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+         });
+         $('#divclk1').on('click', function() {
+            document.getElementById("kt_subheader_search_form").value = '';
+            datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+         });
         $('#kt_datatable_search_status, #kt_datatable_contact_statuss').selectpicker();
         // $('#kt_datatable_search_status').selectpicker();
+        
     };
 
 

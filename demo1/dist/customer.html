@@ -48,6 +48,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/dist/typeahead.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead-addresspicker/0.1.4/typeahead-addresspicker.min.js"></script>
+<style>
+	#divclk:active {
+    background-color: #3699ff;
+    }
+	#divclk1:active {
+    background-color: #3699ff;
+    }
+	#divclk2:active {
+    background-color: #3699ff;
+    }
+</style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -944,7 +955,7 @@
 													<!--begin::Tiles Widget 4-->
 												<div class="card card-custom gutter-b" style="height: 130px">
 													<!--begin::Body-->
-													<div class="card-body d-flex flex-column">
+													<div id="divclk1"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
 														<!--begin::Stats-->
 														<div class="flex-grow-1">
 															<div class="text-dark-50 font-weight-bold">Total Customers</div>
@@ -962,7 +973,7 @@
 												<!--begin::Tiles Widget 5-->
 												<div class="card card-custom bg-info gutter-b" style="height: 130px">
 													<!--begin::Body-->
-													<div class="card-body d-flex flex-column p-0">
+													<div  id="divclk2" style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column p-0">
 														<!--begin::Stats-->
 														<div class="flex-grow-1 card-spacer-x pt-6">
 															<div class="text-inverse-info font-weight-bold">Contacted Customers</div>
@@ -976,9 +987,9 @@
 											</div>
 											<div class="col-xl-4">
 												<!--begin::Tiles Widget 3-->
-												<div class="card card-custom bg-danger gutter-b" style="height: 130px">
+												<div   class="card card-custom bg-danger gutter-b" style="height: 130px;">
 													<!--begin::Body-->
-													<div class="card-body d-flex flex-column p-0">
+													<div id="divclk" style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column p-0">
 														<!--begin::Stats-->
 														<div class="flex-grow-1 card-spacer-x pt-6">
 															<div class="text-inverse-danger font-weight-bold">Need to Contact</div>
@@ -2529,6 +2540,20 @@
 	<!--end::Scrolltop-->
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+		function divclick(id){
+			//document.getElementById("12345").style.removeProperty('background-color');
+			document.getElementById("12345").classList.remove("bg-danger");
+			document.getElementById("12345").style.removeProperty('background-color');
+			document.getElementById("12345").style.backgroundColor  = '#8950FC !important';
+			setTimeout(alert('Hello'), 5000);
+			document.getElementById("12345").classList.add("bg-danger");
+		   
+		}
+		function sleep(ms) {
+			return new Promise(
+				resolve => setTimeout(resolve, ms)
+			);
+		}
 	</script>
 	<!--begin::Global Config(global config for global JS scripts)-->
 	<script>
