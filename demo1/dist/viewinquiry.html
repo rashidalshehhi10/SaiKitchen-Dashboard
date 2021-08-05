@@ -2434,7 +2434,7 @@
          function addInstallment(){
             var second_date = new Date(Date.now());
             
-            //document.getElementById("dynamicdiv").innerHTML='';
+            document.getElementById("dynamicdiv").innerHTML='';
             var cnt  =$('input#instCnt').val();
             var vprcnt = (100-document.getElementById('txtAdvancePayment').value)/parseInt(cnt);
             for (let i = 1; i <= parseInt(cnt); i++) {

@@ -40,13 +40,29 @@ jQuery(document).ready(function() {
                 document.getElementById("buildingAddress").innerText = response.data.buildingAddress;
                 document.getElementById("customerEmail").innerText = response.data.customerEmail;
                 document.getElementById("customerContact").innerText = response.data.customerContact;
-                document.getElementById("amount").innerHTML = parseInt(response.data.amount).toLocaleString() + ' aed';
+                // document.getElementById("amount").innerHTML = parseInt(response.data.amount) + ' AED';
                 
-                var disval =  Math.round((parseInt(response.data.discount)/100)*parseInt(response.data.amount));
-                var vatval = Math.round((parseInt(response.data.vat)/100)*parseInt(response.data.amount));
-                document.getElementById("discount").innerHTML = disval.toLocaleString() +' aed';
-                document.getElementById("vat").innerHTML = vatval.toLocaleString() +' aed';
-                document.getElementById("totalAmount").innerHTML = parseInt(response.data.totalAmount).toLocaleString()+' aed';
+                // var disval =  Math.round((parseFloat(response.data.discount)/100)*parseFloat(response.data.amount));
+              var subtotal=  parseFloat(response.data.amount);
+                var disval =  parseFloat(response.data.discount);
+                // var vatval = Math.round((parseInt(response.data.vat)/100)*parseInt(response.data.amount));
+                var vatval = parseInt(response.data.vat);
+
+                var measurementFee=parseFloat(response.data.measurementFee);
+                subtotal = subtotal ? subtotal : 0;
+                disval = disval ? disval : 0;
+                measurementFee = measurementFee ? measurementFee : 0;
+                document.getElementById("amount").innerHTML =  subtotal+' AED';
+                document.getElementById("discount").innerHTML = disval+'%';
+                document.getElementById("measurementFee").innerHTML = measurementFee+' AED';
+                if(measurementFee>0){
+                document.getElementById("measurementFee").innerHTML = '-'+measurementFee+' AED';
+              }
+                document.getElementById("vat").innerHTML = vatval +'%';
+                
+// Total Amount = Amount - Discount 0% - Measurement Fee AED 250 + VAT 5%
+// var totalA
+                document.getElementById("totalAmount").innerHTML = parseFloat(response.data.totalAmount)+' AED';
                 var classrow = '';
                 for (let i = 1; i <= response.data.invoiceDetails.length; i++) {
                     if(i < response.data.invoiceDetails.length){
@@ -65,12 +81,12 @@ jQuery(document).ready(function() {
                     document.getElementById("table").innerHTML += 
                                 classrow+
                                  '<div style="display: inline-block;width: 10%;">'+i+'</div>'+
-                                 '<div style="display: inline-block;width: 20%;">'+response.data.invoiceDetails[i-1].inquiryWorkScopeNames+'</div>'+
-                                 '<div style="display: inline-block;width: 15%;">'+response.data.invoiceDetails[i-1].quantity+'</div>'+
-                                 '<div style="display: inline-block;width: 15%;">'+response.data.discount+'%</div>'+
+                                 '<div style="display: inline-block;width: 40%;">'+response.data.invoiceDetails[i-1].inquiryWorkScopeNames+'</div>'+
+                                 '<div style="display: inline-block;width: 25%;">'+response.data.invoiceDetails[i-1].quantity+'</div>'+
+                                //  '<div style="display: inline-block;width: 15%;">'+response.data.discount+'%</div>'+
                                 //  '<div style="display: inline-block;width: 15%;">'+parseInt(response.data.amount).toLocaleString()+'</div>'+
-                                 '<div style="display: inline-block;width: 15%;">-</div>'+
-                                 '<div style="display: inline-block;width: 15%;">'+response.data.vat +'%</div>'+
+                                 '<div style="display: inline-block;width: 25%;">-</div>'+
+                                //  '<div style="display: inline-block;width: 15%;">'+response.data.vat +'%</div>'+
                                 '</div>';
                       
                 }
@@ -204,29 +220,15 @@ $( "#rejectbtn" ).click(function() {
   });
 
 
-  ///begin strip script
-  jQuery(document).ready(function() {
+
+  // Disable the button until we have Stripe set up on the page
+  //document.querySelector("button").disabled = true;
+  jQuery(document).ready( function () {
     const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
     inquiryId = urlParams.get('inquiryId')
     document.getElementById("inquiryId").value = inquiryId;
-    $.ajax({
-        type: "post",
-        url:  baseURL +'/Quotation/stripe?inquiryId=' + inquiryId,
-        success: function(response) {
-          secret = response.data;
-            console.log(response.data);
-      },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-           
-        }
-    });
-  
-  
-  });
-  // Disable the button until we have Stripe set up on the page
-  //document.querySelector("button").disabled = true;
-  jQuery(document).ready( function () {
+
       var elements = stripe.elements();
   
       var style = {
@@ -265,7 +267,20 @@ $( "#rejectbtn" ).click(function() {
     });
   
     $("#approvebtn" ).click(function() {
+      
+    $.ajax({
+      type: "post",
+      url:  baseURL +'/Quotation/stripe?inquiryId=' + inquiryId,
+      success: function(response) {
+        secret = response.data;
+          console.log(response.data);
+          
       payWithCard(stripe, card, secret);
+    },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+         
+      }
+  });
     });
   // Calls stripe.confirmCardPayment
   // If the card requires authentication Stripe shows a pop-up modal to
@@ -290,6 +305,10 @@ $( "#rejectbtn" ).click(function() {
               var apprvObj={
                 inquiryId:document.getElementById("inquiryId").value,
                 FeedBackReactionId:document.getElementById("aemoji").value,
+                paymentIntentToken:result.paymentIntent.id,
+                clientSecret:result.paymentIntent.client_secret,
+                PaymentMethod:result.paymentIntent.payment_method
+
               }
               const data = JSON.stringify(apprvObj);
               // console.log(data);
