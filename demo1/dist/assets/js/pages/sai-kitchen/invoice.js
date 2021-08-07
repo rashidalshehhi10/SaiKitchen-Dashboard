@@ -16,7 +16,8 @@ let inquiryId;
 var stripe = Stripe("pk_test_51JA8pgAtqGclDTLoOJUyuy8M288MhMFKFDMXvm2ygLXiMGHDmUyIDfE4umnBN7d0u1Z3K3bOcsfzwTWiE5zSQmHu00G9ydc4IQ");
 var card ='';
 var secret = '';
-
+let quotationData;
+let advanceAmount;
 // Class Initialization
 jQuery(document).ready(function() {
     const queryString = window.location.search;
@@ -27,8 +28,9 @@ jQuery(document).ready(function() {
         type: "post",
         url: baseURL + '/Quotation/ViewQuotationForCustomer?inquiryId=' + inquiryId,
         success: function(response) {
-            console.log(response.data);
+            console.log(response);
             if (response.isError == false) {
+              quotationData=response.data;
                 document.getElementById("invoID").innerText = response.data.invoiceNo;
                 document.getElementById("rinvoiceno").innerText = response.data.invoiceNo;
                 document.getElementById("invoDate").innerText = response.data.createdDate;
@@ -47,7 +49,6 @@ jQuery(document).ready(function() {
                 var disval =  parseFloat(response.data.discount);
                 // var vatval = Math.round((parseInt(response.data.vat)/100)*parseInt(response.data.amount));
                 var vatval = parseInt(response.data.vat);
-
                 var measurementFee=parseFloat(response.data.measurementFee);
                 subtotal = subtotal ? subtotal : 0;
                 disval = disval ? disval : 0;
@@ -62,6 +63,8 @@ jQuery(document).ready(function() {
                 
 // Total Amount = Amount - Discount 0% - Measurement Fee AED 250 + VAT 5%
 // var totalA
+
+ advanceAmount=parseFloat(response.data.advancePayment)*(parseFloat(response.data.totalAmount)/100);
                 document.getElementById("totalAmount").innerHTML = parseFloat(response.data.totalAmount)+' AED';
                 var classrow = '';
                 for (let i = 1; i <= response.data.invoiceDetails.length; i++) {
@@ -158,13 +161,23 @@ jQuery(document).ready(function() {
                 for (let i = 0; i < response.data.termsAndConditionsDetail.length; i++) {
                     document.getElementById("terms").innerHTML +=
                     '<div style="padding-left: 20px;opacity: 80%;">'+
-                    response.data.termsAndConditionsDetail[i].termsAndConditionsId +'. '+response.data.termsAndConditionsDetail[i].termsAndConditionsDetail
+                    (i+1) +'. '+response.data.termsAndConditionsDetail[i].termsAndConditionsDetail
                     '</div>';
                 }
 
-            }else {
-				
-			}
+            } else {
+              Swal.fire({
+                  text: response.errorMessage,
+                  icon: "error",
+                  buttonsStyling: false,
+                  confirmButtonText: "Ok, got it!",
+                  customClass: {
+                      confirmButton: "btn font-weight-bold btn-light-primary"
+                  }
+              }).then(function() {
+                  KTUtil.scrollTop();
+              });
+          }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
            
@@ -201,19 +214,20 @@ $( "#rejectbtn" ).click(function() {
   });
 
   $('#slctapprve').on('change', function() {
+    
     if(this.value == '1'){
         document.getElementById("cardpay").style.display ="none";
         document.getElementById("divPymntType").style.removeProperty('display');
-        document.getElementById("divPymntType").innerHTML= '<p style="font-weight:bold;">'+document.getElementById("branchAddress").innerText+ '<p/><p style="display:inline-block;padding-right:5px;">Amount: </p><p style="font-weight:bold;display:inline-block;"> '+document.getElementById("totalAmount").innerText+' </p>';
+        document.getElementById("divPymntType").innerHTML= '<p style="display:inline-block;padding-right:5px;">Branch Address:</p><p style="font-weight:bold;;display:inline-block;">'+document.getElementById("branchAddress").innerText+ '<p/><p style="display:inline-block;padding-right:5px;">Amount: </p><p style="font-weight:bold;display:inline-block;"> '+advanceAmount+' </p>';
        
     }
     if(this.value == '2'){
         document.getElementById("cardpay").style.display ="none";
         document.getElementById("divPymntType").style.removeProperty('display');
-        document.getElementById("divPymntType").innerHTML='<p style="display:inline-block;padding-right:5px;">Pay To the Order of:</p><p style="font-weight:bold;display:inline-block;">  Sai Kitchen & Wardrobe </p>'+ '<p style="height:0px;"></p><p style="display:inline-block;padding-right:5px;">Amount: </p><p style="font-weight:bold;display:inline-block;"> '+document.getElementById("totalAmount").innerText+' </p>';
+        document.getElementById("divPymntType").innerHTML='<p style="display:inline-block;padding-right:5px;">Pay To the Order of:</p><p style="font-weight:bold;display:inline-block;">  SAI KITCHEN & WOODEN SAFES FACTORY </p>'+ '<p style="height:0px;"></p><p style="display:inline-block;padding-right:5px;">Amount: </p><p style="font-weight:bold;display:inline-block;"> '+advanceAmount+' </p>';
     }
     if(this.value == '4'){
-        document.getElementById("spamount").innerHTML= '<p style="padding-top:5px;display:inline-block;padding-right:5px;">Amount: </p><p style="font-weight:bold;display:inline-block;"> '+document.getElementById("totalAmount").innerText+' </p>'
+        document.getElementById("spamount").innerHTML= '<p style="padding-top:5px;display:inline-block;padding-right:5px;">Amount: </p><p style="font-weight:bold;display:inline-block;"> '+advanceAmount+' </p>'
         document.getElementById("divPymntType").style.display ="none";
         document.getElementById("cardpay").style.removeProperty('display');
     }
@@ -288,7 +302,7 @@ $( "#rejectbtn" ).click(function() {
                 $('#msg').modal('show');
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-              $('#msg').modal('show');
+              // $('#msg').modal('show');
             }
         });
      }
@@ -300,14 +314,47 @@ $( "#rejectbtn" ).click(function() {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
       },
-      success: function(response) {
+      success: function(response) { 
+        if (response.isError == false) {
+                       try{
         secret = response.data;
-          console.log(response.data);
-          
-      payWithCard(stripe, card, secret);
+        console.log(response.data);
+        
+    payWithCard(stripe, card, secret);
+  }catch(Exception ){
+    $('#approve').modal('show');
+  }
+      }
+       else {
+         
+        $('#approve').modal('show');
+        Swal.fire({
+            text: response.errorMessage,
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    }
     },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
-         
+     
+        Swal.fire({
+            text: errorThrown,
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    
       }
   });
 }
@@ -328,7 +375,8 @@ $( "#rejectbtn" ).click(function() {
           // Show error to your customer
 
           showError(result.error.message);
-          $('#msg').modal('show');
+          $('#approve').modal('show');
+          // $('#msg').modal('show');
         } else {
           // The payment succeeded!
               orderComplete(result.paymentIntent.id);
@@ -352,10 +400,37 @@ $( "#rejectbtn" ).click(function() {
                   },
                   success: function(response) {
                       //console.log(response);
+                      if (response.isError == false) {
+                         
                       $('#msg').modal('show');
+                    } else {
+                      Swal.fire({
+                          text: response.errorMessage,
+                          icon: "error",
+                          buttonsStyling: false,
+                          confirmButtonText: "Ok, got it!",
+                          customClass: {
+                              confirmButton: "btn font-weight-bold btn-light-primary"
+                          }
+                      }).then(function() {
+                          KTUtil.scrollTop();
+                      });
+                  }
                   },
                   error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    $('#msg').modal('show');
+                  
+        Swal.fire({
+          text: errorThrown,
+          icon: "error",
+          buttonsStyling: false,
+          confirmButtonText: "Ok, got it!",
+          customClass: {
+              confirmButton: "btn font-weight-bold btn-light-primary"
+          }
+      }).then(function() {
+          KTUtil.scrollTop();
+      });
+  
                   }
               });
         }
@@ -373,16 +448,17 @@ $( "#rejectbtn" ).click(function() {
         "href",
         "https://dashboard.stripe.com/test/payments/" + paymentIntentId
       );
-    document.querySelector(".result-message").classList.remove("hidden");
+    // document.querySelector(".result-message").classList.remove("hidden");
     //document.querySelector("button").disabled = true;
   };
   
   // Show the customer the error from Stripe if their card fails to charge
   var showError = function(errorMsgText) {
    // loading(false);
+   document.getElementById("errorMessage").innerHTML=errorMsgText;
    document.querySelector(".result-message").classList.add("hidden");
-    var errorMsg = document.querySelector("#card-error");
-    errorMsg.textContent = errorMsgText;
+  //   var errorMsg = document.querySelector("#card-error");
+  //   errorMsg.textContent = errorMsgText;
   //  setTimeout(function() {
    //   errorMsg.textContent = "";
   //  }, 4000);

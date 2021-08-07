@@ -278,6 +278,7 @@ jQuery(document).ready(function() {
 
         success: function(response) {
             console.log(response);
+            response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
             if (response.isError == false) {
 var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
 console.log(inquiryWorkscopelength);
@@ -297,6 +298,7 @@ document.getElementById('txtBeforeInstallation').value=response.data.fees[1].fee
 document.getElementById('txtAfterInstallation').value=response.data.fees[2].feesAmount;
 var dicMeasurement = new Object();
 var dicDesign = new Object();
+var dicQuot = new Object();
 var workscopeHtml=``;
 var tabsHTML =``;
 // response.data.inquiryWorkscopes.forEach(element => {
@@ -491,6 +493,49 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
         }
     });
+    element.quotations[0].files.forEach(element => {
+        if(   dicQuot["QuotRow"+element.quotationId]==null){
+            dicQuot["QuotRow"+element.quotationId]=``;
+        }
+        if(element.fileContentType=='pdf'){
+            dicQuot["QuotRow"+element.quotationId] +=`
+                <!--begin::Col-->
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                   <!--begin::Card-->
+                   <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                      <div class="d-flex flex-column align-items-center">
+                         <!--begin: Icon-->
+                         <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                         <!--end: Icon-->
+                         <!--begin: Tite-->
+                         <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                         <!--end: Tite-->
+                      </div>
+                   </div>
+                   <!--end:: Card-->
+                </div>
+                <!--end::Col-->`;
+
+        }else{
+            dicQuot["QuotRow"+element.quotationId] +=`
+            <!--begin::Col-->
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+               <!--begin::Card-->
+               <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                  <div class="d-flex flex-column align-items-center">
+                     <!--begin: Icon-->
+                     <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                     <!--end: Icon-->
+                     <!--begin: Tite-->
+                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                     <!--end: Tite-->
+                  </div>
+               </div>
+               <!--end:: Card-->
+            </div>
+            <!--end::Col-->`;
+    }
+});
             if(isfirst){
                 tabsHTML+=`
                 <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
@@ -524,6 +569,20 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                         </div>
                       </div>
                    </div>
+                   <div class="card">
+                    <div class="card-header" >
+                        <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
+                            <i class="la fab la-codepen"></i>Quotation
+                        </div>
+                    </div>
+                    <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                    <div class="card-body" >
+                    <div class="row" id="quotRow`+element.quotations[0].quotationId+`">
+                    `+dicQuot["QuotRow"+element.quotations[0].quotationId]+`
+                        </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
                 <!--end::Accordion-->
              </div>`;
@@ -561,6 +620,20 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             </div>
           </div>
        </div>
+       <div class="card">
+          <div class="card-header" >
+             <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
+                <i class="la fab la-codepen"></i>Quotation
+             </div>
+          </div>
+          <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+           <div class="card-body" >
+           <div class="row" id="quotRow`+element.quotations[0].quotationId+`">
+           `+dicQuot["QuotRow"+element.quotations[0].quotationId]+`
+               </div>
+            </div>
+          </div>
+       </div>
     </div>
     <!--end::Accordion-->
  </div>`;
@@ -568,41 +641,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
 
  isfirst=false;
 });
-tabsHTML+=`
-<div class="tab-pane fade" id="workscope`+response.data.inquiry.inquiryWorkscopes.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+response.data.inquiry.inquiryWorkscopes.workscopeId+`">
-<!--begin::Accordion-->
-<div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId+`">
-   <div class="card">
-      <div class="card-header" >
-         <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId+`">
-            <i class="la la-ruler-combined"></i>Measurement
-         </div>
-      </div>
-      <div id="measurementRow`+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId+`">
-         <div class="card-body" >
-               <div class="row" id="quotationRow`+response.data.inquiry.quotations[0].quotationId+`">
-               `+dicMeasurement["quotation"+response.data.inquiry.quotations[0].quotationId]+`
-               </div>
-            </div>
-      </div>
-   </div>
-   <div class="card">
-      <div class="card-header" >
-         <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId+`">
-            <i class="la fab la-codepen"></i>Design
-         </div>
-      </div>
-      <div id="designRow`+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId+`">
-       <div class="card-body" >
-       <div class="row" id="designRow`+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId+`">
-       `+dicDesign["DesignRow"+response.data.inquiry.inquiryWorkscopes.inquiryWorkscopeId]+`
-           </div>
-        </div>
-      </div>
-   </div>
-</div>
-<!--end::Accordion-->
-</div>`;
+
 tabs.innerHTML=`<div class="tab-content ">`+tabsHTML+`</div>`;
 workscope.innerHTML=workscopeHtml;
 // response.data.inquiryWorkscopes.forEach(element => {

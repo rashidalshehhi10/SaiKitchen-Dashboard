@@ -42,8 +42,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryId', 'inquiryCode', 'status', 'workScopeCount','customerCode', 'customerName',
-                        'customerContact','customerEmail', 'buildingAddress','quotationNo', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+                        'inquiryId', 'inquiryCode','quotationNo', 'status', 'workScopeCount','customerCode', 'customerName',
+                        'customerContact','customerEmail', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
                          'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
                     ],
                 },
@@ -53,6 +53,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'inquiryCode'
+                },
+                {
+                    data: 'quotationNo'
                 },
                 {
                     data: 'status'
@@ -74,9 +77,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'buildingAddress'
-                },
-                {
-                    data: 'quotationNo'
                 },
                 {
                     data: 'buildingTypeOfUnit'
@@ -237,7 +237,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             console.log(full.inquiryId);
                          
                         action += `
-                        <a href="viewchklist.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
+                        <a href="viewchecklist.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
                         <i class="la la-file-contract"></i>
                     </a>
                     `;

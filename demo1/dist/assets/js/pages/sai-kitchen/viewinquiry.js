@@ -29,6 +29,7 @@ let measurementFee=0;
 let noOfInstallment=0;
 let beforeInstallation=0;
 let afterDelivery=0;
+let isInstallment=false;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
    
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
@@ -98,6 +99,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 afterDelivery= document.getElementById('txtAfterInstallation').value;
                     if(user.data.userRoles[0].branchRole.roleTypeId==1 ){
                         if(document.getElementById('method').value=='1'){
+                            isInstallment=false;
                             advancePayment= document.getElementById('txtAdvancePayment').value;
                             noOfInstallment =0;
                             // pymnt.push({
@@ -113,6 +115,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             // })
                         }
                         else{
+                            isInstallment=true;
                             advancePayment =document.getElementById('txtAdvancePayment').value;
                             noOfInstallment=document.getElementById('instCnt').value;
                             for (let i = 1; i <= parseInt(noOfInstallment); i++) {
@@ -138,6 +141,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     advancePayment:advancePayment,
                     beforeInstallation:beforeInstallation,
                     afterDelivery:afterDelivery,
+                    isInstallment:isInstallment,
                     vat:vatvalue,
                     discount: promoDiscount,
                     quotationValidityDate: document.getElementById('kt_datepicker_2').value,
@@ -794,7 +798,10 @@ $('#txtAdvancePayment').keyup(function () {
             });
         }
     });
-
+    var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+    var myDate = new Date(y, m, 1);  
+    myDate.setDate(date.getDate() + 7);
+    $('#kt_datepicker_2').val(myDate.toLocaleDateString("en-US")).datepicker("update");         
     });
 
     $(function() {
