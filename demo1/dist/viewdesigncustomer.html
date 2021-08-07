@@ -73,6 +73,195 @@
          /* background-color: #777; */
          /* } */
       </style>
+        <style>
+         .divoddrow{display: flex;background-color: #ffffff;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;}
+         .divevenrow{display: flex;background-color: #f0e8ff;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;}
+         .divoddendrow{display: flex;background-color: #ffffff;border-radius: 0px 0px 5px 5px;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;}
+         .divendrow{display: flex;background-color: #f0e8ff;border-radius: 0px 0px 5px 5px;height: 30px;padding-top: 5px;border:solid 1px;border-color: #f0e8ff;}
+         .divico{width: 100px;border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left}
+         .start{
+            height: 5px;
+         }
+         .left {
+           float: left;
+           box-sizing: border-box;
+           width: 49%;
+         }
+         .right {
+           float: left;
+           box-sizing: border-box;
+           width: 50%;
+ /* The width is 20%, by default */
+         }
+         .padd15{
+            padding-left: 15%;;
+         }
+         .padd{
+            padding-top: 2px;
+         }
+         .line{
+            width: 250px;
+         }
+         .paddall{
+              padding-left: 25px;
+              padding-right: 25px;
+           }
+         .with{
+            width: 80%;
+         }
+         .totalpadd{
+            padding-left: 75%;
+         }
+         .logo{
+            padding-right: 25px;
+         }
+         /* Use a media query to add a break point at 800px: */
+         @media screen and (max-width: 800px) {
+            .logo{
+            padding-right: 0px;
+         }
+         .logo{
+            width: 40%;
+         }
+         .img{
+            width: 100%;
+         }
+           .left, .right {
+             width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+             display: inline-table;;
+           }
+           .padd{
+            padding-top: 5px;
+           }
+           .line{
+              width: 0px;
+           }
+           .paddall{
+              padding-left: 5px;
+              padding-right: 5px;
+           }
+           .with{
+            width: 100%;
+           }
+           .padd15{
+            padding-left: 0px;
+           }
+           .size1{
+              font-size: 9px;
+              font-weight: normal;
+           }
+           .size2{
+              font-size: 8px;
+              font-weight: normal;
+           }
+           .totalpadd{
+            padding-left: 55%;
+          }
+          
+         }
+         @media screen and (max-width: 400px) {
+            .headapp{
+             width: 60%;
+             margin-top: 2px;
+          }
+          .paddcont{
+             padding-left: 10px !important;
+          }
+          .logo{
+            width: 34%;
+         }
+         .img{
+            width: 100%;
+         }
+         }
+         </style>
+          <style>
+            @media (min-width: 1200px){
+              .modal-dialog.modal-xl {
+                 max-width: 550px;
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            }
+              @media (min-width: 1200px){
+              .modal-xl {
+                 max-width: 550px;
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            }
+              @media (min-width: 992px){
+              .modal-lg, .modal-xl {
+                 max-width: 550px;
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            }
+              @media (min-width: 576px){
+              .modal-dialog-centered {
+                 min-height: calc(100% - 3.5rem);
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+             
+            }
+              @media (min-width: 576px){
+              .modal-dialog {
+                 max-width: 500px;
+                 margin: 1.75rem auto;
+              }
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            }
+            @media (min-width: 400px){
+              
+              .emoj{
+                 font-size: 50px;
+              }
+              
+            } 
+            @media (max-width: 700px){
+              
+              .emoj{
+                 font-size: 30px;
+              }
+              
+            } 
+            @media (max-width: 400px){
+              
+              .emoj{
+                 font-size: 30px;
+              }
+              .start{
+                 height: 15px;
+              }
+              .divico{
+                 width: 70px;
+              }
+            } 
+            @media (max-width: 300px){
+              
+              .emoj{
+                 font-size: 20px;
+              }
+              .start{
+                 height: 25px;
+              }
+              .divico{
+                 width: 50px;
+              }
+            } 
+            
+      </style>
       <!--End:PWA-->
    </head>
    <!--end::Head-->
@@ -1454,96 +1643,162 @@
       <!--end::Scrolltop-->
    
 
-      <div class="modal fade" id="ScheduleDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+      <div class="modal fade" id="ScheduleDate" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
              <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Design Approve</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <i aria-hidden="true" class="ki ki-close"></i>
-                </button>
+                 <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                     <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Approve Design</h5>
+                     
+                     <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i aria-hidden="true" class="ki ki-close"></i>
+                         </button>
+                      </div>
+                 </div>
+                 <div id="rinvoiceno" style="padding: 0px 1.5rem 0px;border-bottom: 0px;opacity: 50%;font-size: 11px;">
+                    
                  </div>
                  <!--begin::Form-->
                  <form class="form" id="kt_approve_design" action="" name="approvedesignform">
                      <span id="inquiryWorkscopeId" style="display:none">0</span>
-                     <div class="modal-body">
-                            <div class="form-group row">
-                               <label class="">Notes</label>
-                               <div class="input-group">
-                                  <textarea type="text" name="designApprovalComment" id="designApprovalComment"
-                                     class="form-control" rows="3" value=""
-                                     placeholder="" ></textarea>
+                   
+                     <div class="modal-body">     
+                      <div class="form-group row">
+                        <div class="col-lg-12 " >
+                        <div class="input-group">
+                            
+                            <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="designApprovalComment" name="designApprovalComment" class="form-control" placeholder="your feedback goes here" rows="7"></textarea>
+                         </div>
+                    </div>
+                         
+                     </div>              
+
+                         <div style="display: flex;"> 
+                            <span style="font-weight: bold;font-size: 13px;">Your Felling</span>
+                         </div>
+                         <div style="display: flex;font-size: 1rem;"> 
+                            <span>How much do you like this desgin?</span>
+                         </div>
+                         <div id="imoji" style="vertical-align: bottom;">
+                           <input type="hidden" id="aemoji" value="0" /> 
+                              <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="appr(1)">
+                                <span id="aemoj1" class="emo1">   😶  </span >
                                </div>
+                               <div  class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(2)">
+                                 <span  id="aemoj2" class="emo2">   😑  </span >
+                                </div>
+                                <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(3)">
+                                 <span id="aemoj3" class="emo3">   😒  </span >
+                                </div>
+                                <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(4)">
+                                 <span id="aemoj4" class="emo4">   😕  </span >
+                                </div>
+                                <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(5)">
+                                 <span id="aemoj5" class="emo5">   🙂  </span >
+                                </div>
+                                <div   class="emoj" style="cursor: pointer; float: left;width: 15%" onclick="appr(6)">
+                                 <span id="aemoj6" class="emo6">   😃  </span >
+                                </div>
+                                <div   class="emoj" style="cursor: pointer; float: left;width: 15%" onclick="appr(7)">
+                                 <span id="aemoj7" class="emo7">   😍  </span >
+                                </div>
+                           <!--  <div style="float: right;padding-bottom: 5px;" id="prcnt" class="prcnt">%</div> -->
+                            <div  style="border: 0px;padding-bottom: 20px;padding-top: 25px;text-align:center;width: 100%;display: flex;">
+                              <button id="kt_approve_design_button"   type="submit" style="width: 80%; background-color: #F1583E;width: 100%;" class="btn btn-light-primary font-weight-bold" data-dismiss="modal"><span style="color:beige ;z-index: 1;"> Approve Design</span></button>
                             </div>
+                           </div>
+                        
+                        
                      </div>
-                     <div class="modal-footer">
-                         <button type="button" onclick="
-                   document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                         <button type="submit" id="kt_approve_design_button" class="btn btn-primary font-weight-bold">Approved</button>
-                     </div>
-                 </form>
+                    
+                     </form>
                  <!--end::Form-->
              </div>
          </div>
-     </div>
+        </div>
    
      
-     <div class="modal fade" id="measurementScheduleDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Design Reject</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <i aria-hidden="true" class="ki ki-close"></i>
-                </button>
-                 </div>
-                 <!--begin::Form-->
-                 <form class="form" id="kt_modify_reject_measurement" action="" name="modifyScheduleDateform">
-                     <span id="inquiryId" style="display:none">0</span>
-                     <span id="customerCity" style="display:none">0</span>
-                     <div class="modal-body">
-                         <!-- <div class="form-group row">
-                             <label class="">Design Schedule Date*</label>
-                             <div class="col-lg-4 col-md-9 col-sm-12">
-                                 <div class="input-group date" id="kt_design_datetimepicker" data-target-input="nearest">
-                                     <input type="text" id="design_schedule_date" name="design_schedule_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_design_datetimepicker">
-                                     <div class="input-group-append" data-target="#kt_design_datetimepicker" data-toggle="datetimepicker">
-                                         <span class="input-group-text">
-                                  <i class="ki ki-calendar"></i>
-                               </span>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div> -->
-                         <!-- <div class="form-group row">
-                             <label class="">Design Assign to*</label>
-                             <div class="input-group input-group-lg input-group-solid">
-                                 <select class="form-control" id="kt_designassignto" name="DesignAssignto" class="form-control form-control-lg form-control-solid" style="width:100%">
-   
-                         </select>
-                             </div>
-                         </div> -->
-                        <!--begin::Form group-->
-                            <div class="form-group row">
-                               <label class="">Reason</label>
-                               <div class="input-group">
-                                  <input type="text" name="designRejectComment" id="designRejectComment"
-                                     class="form-control" value=""
-                                     placeholder="" >
+     <div class="modal fade" id="measurementScheduleDate" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+          <div class="modal-content">
+              <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                  <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Reject Design</h5>
+                  
+                  <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <i aria-hidden="true" class="ki ki-close"></i>
+                      </button>
+                   </div>
+              </div>
+              <div id="rinvoiceno" style="padding: 0px 1.5rem 0px;border-bottom: 0px;opacity: 50%;font-size: 11px;">
+                 
+              </div>
+              <!--begin::Form-->
+              <form class="form" id="kt_modify_reject_measurement" action="" name="modifyScheduleDateform">
+                  <span id="inquiryId" style="display:none">0</span>
+                  <span id="customerCity" style="display:none">0</span>
+                  <div class="modal-body">     
+                   <div class="form-group row">
+                      <div class="col-lg-12 ">
+                          <label>please share with us your feedback and your painpoint about the suggested 
+                             design, this'll guide us to improve the concept and design details. 
+                          </label>
+                         
+                      </div>
+                      
+                  </div>              
+                      <div class="form-group row">
+                          <div class="col-lg-12 " >
+                              <div class="input-group">
+                                  
+                                  <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="designRejectComment" name="designRejectComment" class="form-control" placeholder="your feedback goes here" rows="7"></textarea>
                                </div>
-                            </div>
-                            <!--end::Form group-->
-                     </div>
-                     <div class="modal-footer">
-                         <button type="button" onclick="
-                   document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                         <button type="submit" id="kt_reject_measurement_button" class="btn btn-primary font-weight-bold">Rejected</button>
-                     </div>
-                 </form>
-                 <!--end::Form-->
-             </div>
-         </div>
-     </div>
+                          </div>
+                          
+                      </div>
+                      <div style="display: flex;"> 
+                         <span style="font-weight: bold;font-size: 13px;">Your Felling</span>
+                      </div>
+                      <div style="display: flex;font-size: 1rem;"> 
+                         <span>How much do you like this desgin?</span>
+                      </div>
+                      <div id="imoji" style="vertical-align: bottom;">
+                        <input type="hidden" id="hemoji" value="0" /> 
+                        <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(1)">
+                          <span id="emoj1" class="emo1">   😶  </span >
+                         </div>
+                         <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(2)">
+                           <span id="emoj2" class="emo2">   😑  </span >
+                          </div>
+                          <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(3)">
+                           <span id="emoj3" class="emo3">   😒  </span >
+                          </div>
+                          <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(4)">
+                           <span id="emoj4" class="emo4">   😕  </span >
+                          </div>
+                          <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(5)">
+                           <span id="emoj5" class="emo5">   🙂  </span >
+                          </div>
+                          <div   class="emoj" style="cursor: pointer; float: left;width: 15%;" onclick="like(6)">
+                           <span id="emoj6" class="emo6">   😃  </span >
+                          </div>
+                          <div   class="emoj" style="cursor: pointer; float: left;width: 15%;" onclick="like(7)">
+                           <span id="emoj7" class="emo7">   😍  </span >
+                          </div>
+                        <!--  <div style="float: right;padding-bottom: 5px;" id="prcnt" class="prcnt">%</div> -->
+                         <div  style="border: 0px;padding-bottom: 20px;padding-top: 25px;text-align:center;width: 100%;display: flex;">
+                           <button id="kt_reject_measurement_button" type="submit" style="width: 80%; background-color: #F1583E;width: 100%;" class="btn btn-light-primary font-weight-bold" data-dismiss="modal"><span style="color:beige ;z-index: 1;"> Reject Design</span></button>
+                         </div>
+                        </div>
+                     
+                     
+                  </div>
+                 
+                  </form>
+              <!--end::Form-->
+          </div>
+      </div>
+  </div>
       <script>
          var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
       </script>
@@ -1637,6 +1892,30 @@
       <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
       <!--end::Page Scripts-->
       <script>
+         function like(id){         
+           //var heart = document.getElementById("hemoji").value;
+           for (let i = 1; i <= 7; i++) {
+              if(i == id){
+               document.getElementById("emoj"+id).style.backgroundColor  = '#F1583E';
+               document.getElementById("emoj"+id).style.borderRadius = '100%';
+               document.getElementById("hemoji").value = id;
+              }else{
+               document.getElementById("emoj"+i).style.removeProperty('background-color');
+              }
+           }
+         }
+         function appr(id){         
+           //var heart = document.getElementById("hemoji").value;
+           for (let i = 1; i <= 7; i++) {
+              if(i == id){
+               document.getElementById("aemoj"+id).style.backgroundColor  = '#F1583E';
+               document.getElementById("aemoj"+id).style.borderRadius = '100%';
+               document.getElementById("aemoji").value = id;
+              }else{
+               document.getElementById("aemoj"+i).style.removeProperty('background-color');
+              }
+           }
+         }
          var options = {
          pdfOpenParams: { view: 'FitBH,5', pagemode: 'none', scrollbar: '1', toolbar: '1', statusbar: '1', messages: '1', navpanes: '1' }
          };

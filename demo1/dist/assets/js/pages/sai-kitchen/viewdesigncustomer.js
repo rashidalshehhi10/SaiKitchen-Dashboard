@@ -68,8 +68,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var inquiryApproved = {
                     id: inquiryWorkscopeId,
-                    
                     designComment: document.getElementById('designApprovalComment').value,
+                    FeedBackReactionId:document.getElementById("aemoji").value,
                 };
                 const data = JSON.stringify(inquiryApproved);
                 console.log(data);
@@ -94,6 +94,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
+                            $('#ScheduleDate').modal('hide');
                             window.close();
 
                         } else {
@@ -193,6 +194,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     // designAssignedTo: $('#kt_designassignto').val(),
                     // designScheduleDate: document.getElementById('design_schedule_date').value,
                     designComment: document.getElementById('designRejectComment').value,
+                    FeedBackReactionId:document.getElementById("hemoji").value,
                 };
                 const data = JSON.stringify(inquiryRejected);
                 console.log(data);
@@ -217,6 +219,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
+                            $('#measurementScheduleDate').modal('hide');
                             window.close();
                         } else {
                             Swal.fire({
