@@ -212,7 +212,7 @@ $( "#rejectbtn" ).click(function() {
         document.getElementById("divPymntType").style.removeProperty('display');
         document.getElementById("divPymntType").innerHTML='<p style="display:inline-block;padding-right:5px;">Pay To the Order of:</p><p style="font-weight:bold;display:inline-block;">  Sai Kitchen & Wardrobe </p>'+ '<p style="height:0px;"></p><p style="display:inline-block;padding-right:5px;">Amount: </p><p style="font-weight:bold;display:inline-block;"> '+document.getElementById("totalAmount").innerText+' </p>';
     }
-    if(this.value == '3'){
+    if(this.value == '4'){
         document.getElementById("spamount").innerHTML= '<p style="padding-top:5px;display:inline-block;padding-right:5px;">Amount: </p><p style="font-weight:bold;display:inline-block;"> '+document.getElementById("totalAmount").innerText+' </p>'
         document.getElementById("divPymntType").style.display ="none";
         document.getElementById("cardpay").style.removeProperty('display');
@@ -267,7 +267,32 @@ $( "#rejectbtn" ).click(function() {
     });
   
     $("#approvebtn" ).click(function() {
-      
+      if($('#slctapprve').val()!='4'){
+        var apprvObj={
+          inquiryId:document.getElementById("inquiryId").value,
+          FeedBackReactionId:document.getElementById("aemoji").value,
+          SelectedPaymentMode:$('#slctapprve').val()
+        }
+        const data = JSON.stringify(apprvObj);
+        // console.log(data);
+        $.ajax({
+            type: "post",
+            url:  baseURL +'/Quotation/ClientApproveQuotation' ,
+            data: data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            success: function(response) {
+                //console.log(response);
+                $('#msg').modal('show');
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              $('#msg').modal('show');
+            }
+        });
+     }
+   else  if($('#slctapprve').val()=='4'){
     $.ajax({
       type: "post",
       url:  baseURL +'/Quotation/stripe?inquiryId=' + inquiryId,
@@ -285,6 +310,7 @@ $( "#rejectbtn" ).click(function() {
          
       }
   });
+}
     });
   // Calls stripe.confirmCardPayment
   // If the card requires authentication Stripe shows a pop-up modal to
@@ -311,7 +337,8 @@ $( "#rejectbtn" ).click(function() {
                 FeedBackReactionId:document.getElementById("aemoji").value,
                 paymentIntentToken:result.paymentIntent.id,
                 clientSecret:result.paymentIntent.client_secret,
-                PaymentMethod:result.paymentIntent.payment_method
+                PaymentMethod:result.paymentIntent.payment_method,
+                SelectedPaymentMode:$('#slctapprve').val()
               }
               const data = JSON.stringify(apprvObj);
               // console.log(data);
