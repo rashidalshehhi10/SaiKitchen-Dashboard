@@ -271,6 +271,10 @@ $( "#rejectbtn" ).click(function() {
     $.ajax({
       type: "post",
       url:  baseURL +'/Quotation/stripe?inquiryId=' + inquiryId,
+      headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+      },
       success: function(response) {
         secret = response.data;
           console.log(response.data);
@@ -308,7 +312,6 @@ $( "#rejectbtn" ).click(function() {
                 paymentIntentToken:result.paymentIntent.id,
                 clientSecret:result.paymentIntent.client_secret,
                 PaymentMethod:result.paymentIntent.payment_method
-
               }
               const data = JSON.stringify(apprvObj);
               // console.log(data);

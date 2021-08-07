@@ -205,6 +205,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Design Rejected By Client',
                                     'class': ' label-light-info'
                                 },
+                                18: {
+                                    'title': 'Checklist Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                19: {
+                                    'title': 'Checklist Approved',
+                                    'class': ' label-light-success'
+                                },
+                                20: {
+                                    'title': 'Checklist Rejected',
+                                    'class': ' label-light-info'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -341,6 +353,19 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'title': 'Design Rejected By Client',
                                 'class': ' label-light-info'
                             },
+                            18: {
+                                'title': 'Checklist Pending',
+                                'class': ' label-light-primary'
+                            },
+                            19: {
+                                'title': 'Checklist Approved',
+                                'class': ' label-light-success'
+                            },
+                            20: {
+                                'title': 'Checklist Rejected',
+                                'class': ' label-light-info'
+                            },
+                            
                         };
 
                         console.log(data);
