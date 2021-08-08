@@ -757,8 +757,7 @@
                            </div>
                            <div class="d-flex justify-content-between" style="float: right;padding-right: 25px;">
                                     
-                              <button type="button" class="btn btn-primary font-weight-bold" style="background-color: #733dd9 !important;border-color: #733dd9;" onclick="changewidth()">Print Invoice</button>
-                           </div>
+                              <button id="savePdfbtn" onclick="changewidth()" type="button" class="btn btn-primary font-weight-bold" style="background-color: #733dd9 !important;border-color: #733dd9;" >Print Invoice</button>    </div>
                            <div id="footer" class="paddall" style="text-align: center;padding-top: 25px;">
                             for any enquiry reach out via <p style="font-weight: bold;display: inline-block;">info@sai-group.ae</p> or call on <p id="sbranchContact" style="font-weight: bold;display: inline-block;"></p>
                            </div>
@@ -771,8 +770,8 @@
                   <!--end::Entry-->
                   <!--begin::Entry-->
                  
-               </div>
-               <div class="modal fade" id="reject"data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+               </div><div id="editor"></div>
+                <div class="modal fade" id="reject"data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                       <div class="modal-content">
                           <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
@@ -1201,7 +1200,15 @@
       <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
       <!-- <script src="assets/js/pages/sai-kitchen/client.js"  defer></script> -->
       <!--end::Page Scripts-->
-     
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+     	
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+      	
+                integrity="sha256-c9vxcXyAG4paArQG3xk6DjyW/9aHxai2ef9RpMWO44A=" crossorigin="anonymous"></script>
+      	
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+      
+      
    </body>
    <!--end::Body-->
 </html>

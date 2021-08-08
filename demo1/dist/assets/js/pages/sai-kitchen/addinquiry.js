@@ -277,7 +277,12 @@ var KTWizard1 = function () {
 
 		// Submit event
 		_wizardObj.on('submit', function (wizard) {
-			var totalAmount=(afterdiscountmeasurementFeesAmount/1)+((afterdiscountmeasurementFeesAmount/100)*vatvalue);
+
+			var totalAmount=0;
+			if( $('input[name="clientMeasurement"]:checked').val()=="false"){
+			 totalAmount=(afterdiscountmeasurementFeesAmount/1)+((afterdiscountmeasurementFeesAmount/100)*vatvalue);
+			}
+
 			Swal.fire({
 				text: "Make sure you receive the measurement Fees AED "+totalAmount+"(inclusive VAT) by cash before proceeding to next step",
 				icon: "success",
@@ -373,6 +378,18 @@ var KTWizard1 = function () {
 						paymentAmount: afterdiscountmeasurementFeesAmount,
 						paymentTypeId: 1,
 						paymentStatusId: 3,
+						paymentModeId: 1,
+						isActive: true,
+						isDeleted: false,
+					})
+				}else{
+					inquiry.payments.push({
+						paymentName: "Measurement",
+						paymentDetail: "Measurement Provided by client",
+						paymentAmount: 0,
+						paymentTypeId: 1,
+						paymentStatusId: 3,
+						paymentModeId: 1,
 						isActive: true,
 						isDeleted: false,
 					})

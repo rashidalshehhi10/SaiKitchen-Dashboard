@@ -464,3 +464,70 @@ $( "#rejectbtn" ).click(function() {
   //  }, 4000);
   };
   
+
+  
+  $('#approvebtn').click(function () {
+    document.getElementById("amount").style.width ="150px";
+    document.getElementById("amount").style.textAlign = "right";
+    document.getElementById("discount").style.width ="150px";
+    document.getElementById("discount").style.textAlign = "right";
+    document.getElementById("measurementFee").style.width ="150px";
+    document.getElementById("measurementFee").style.textAlign = "right";
+    document.getElementById("vat").style.width ="150px";
+    document.getElementById("vat").style.textAlign = "right";
+    document.getElementById("totalAmount").style.width ="150px";
+    document.getElementById("totalAmount").style.textAlign = "right";
+    domtoimage.toPng(document.getElementById('kt_tab_diagram'))
+        .then(function (blob) {     
+            var pdf = new jsPDF('l', 'pt', [$('#kt_tab_diagram').width(), $('#kt_tab_diagram').height()]);
+            pdf.addImage(blob, 'PNG', 0, 0, $('#kt_tab_diagram').width(), $('#kt_tab_diagram').height());
+            var file = pdf.output();
+            var out =btoa(file);
+           /*  document.getElementById("amount").style.removeProperty("width");
+            document.getElementById("amount").style.removeProperty("textAlign");  
+            document.getElementById("discount").style.removeProperty("width");
+            document.getElementById("discount").style.removeProperty("textAlign");  
+            document.getElementById("measurementFee").style.removeProperty("width");
+            document.getElementById("measurementFee").style.removeProperty("textAlign"); 
+            document.getElementById("vat").style.removeProperty("width");
+            document.getElementById("vat").style.removeProperty("textAlign"); 
+            document.getElementById("totalAmount").style.removeProperty("width");
+            document.getElementById("totalAmount").style.removeProperty("textAlign");
+            that.options.api.optionsChanged(); */
+            /*var file = pdf.output('blob');
+            var fd = new FormData();     // To carry on your data  
+            fd.append('mypdf',file);
+            alert(fd);
+            /*
+            other method
+            var file = pdf.output();
+            var out =btoa(file);
+            */
+            var quotFile = {
+              "inquiryId": document.getElementById("inquiryId").value,
+              "pdf": out,
+            };
+            const data = JSON.stringify(quotFile);
+              // console.log(data);
+              $.ajax({
+                  type: "post",
+                  url:  baseURL +'/Quotation/UploadPDFForQuotation' ,
+                  data: data,
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Allow-Origin': '*',
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(response);
+                  }
+              });
+
+             
+           
+        });
+            
+});

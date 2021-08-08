@@ -287,7 +287,7 @@ var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data
 console.log(inquiryWorkscopelength);
 inquiry=response.data.inquiry;
 if(inquiry.promo!=null){
-document.getElementById('txtPromoCode').value=inquiry.promo?.promoName;
+document.getElementById('txtPromoCode').value=inquiry.promo?.promoCode;
 }
 promoDiscount=inquiry.promoDiscount;
 promoId=inquiry.promoId;
