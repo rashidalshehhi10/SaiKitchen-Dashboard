@@ -480,7 +480,8 @@ $( "#rejectbtn" ).click(function() {
     domtoimage.toPng(document.getElementById('kt_tab_diagram'))
         .then(function (blob) {     
             var pdf = new jsPDF('l', 'pt', [$('#kt_tab_diagram').width(), $('#kt_tab_diagram').height()]);
-            pdf.addImage(blob, 'PNG', 0, 0, $('#kt_tab_diagram').width(), $('#kt_tab_diagram').height());
+            pdf.addImage(blob, 'JPG', 0, 0, $('#kt_tab_diagram').width(), $('#kt_tab_diagram').height(),undefined,'FAST');
+            //pdf.save("test.pdf");
             var file = pdf.output();
             var out =btoa(file);
            /*  document.getElementById("amount").style.removeProperty("width");
