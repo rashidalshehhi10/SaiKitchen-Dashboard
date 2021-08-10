@@ -3,7 +3,9 @@
 import {
     baseURL
 } from './constant.js'
-
+import {
+    measurementFile
+} from './constant.js'
 let user;
 
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
@@ -207,7 +209,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
-                                    $('.datatable-input[data-col-index="2"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
+                                    $('.datatable-input[data-col-index="3"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
                             });
                             break;
 
@@ -241,6 +243,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         <i class="la la-file-contract"></i>
                     </a>
                     `;
+                    action += `
+                            <a type="button" onclick="" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+								<i class="la la-thumbs-up"></i>
+							</a>
+                            <a type="button" onclick="" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
+								<i class="la la-thumbs-down"></i>
+							</a>
+						`;
                         }
                             return action;
                         } else {
@@ -249,7 +259,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     },
                 },
                 {
-                    targets: 2,
+                    targets: 3,
                     render: function(data, type, full, meta) {
                         var status = {
                             1: {
@@ -436,4 +446,132 @@ jQuery(document).ready(function() {
     }
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
+
+    $.ajax({
+		type: "get",
+		url: baseURL + '/Branch/GetBranches',
+
+		headers: {
+			'Content-Type': 'application/json',
+			'userId': user.data.userId,
+			'userToken': user.data.userToken,
+			'userRoleId': user.data.userRoles[0].userRoleId,
+			'branchId': user.data.userRoles[0].branchId,
+			'branchRoleId': user.data.userRoles[0].branchRoleId,
+			'Access-Control-Allow-Origin': '*',
+		},
+		success: function (response) {
+			console.log(response);
+			if (response.isError == false) {
+
+				console.log(response.data[0].permissionName);
+				const branchList = document.getElementById('kt_select_branch');
+				var branchTypeListHTML = new Array();
+
+				for (var i = 0; i < response.data.length; i++) {
+					branchTypeListHTML.push(`
+					<option value="` + response.data[i].branchId + `">` + response.data[i].branchName + `</option>`);
+				}
+
+				branchList.innerHTML = branchTypeListHTML.join('');
+
+			} else {
+				Swal.fire({
+					text: response.errorMessage,
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
+			}
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+
+			// alert(errorThrown);
+			
+	 Swal.fire({
+		text: 'Internet Connection Problem',
+		icon: "error",
+		buttonsStyling: false,
+		confirmButtonText: "Ok, got it!",
+		customClass: {
+			confirmButton: "btn font-weight-bold btn-light-primary"
+		}
+	}).then(function() {
+		KTUtil.scrollTop();
+	});
+		}
+	});
+});
+$('#kt_approve_inquiry_button').click(function () {
+    var measurementFiles = {
+        "installDate": document.getElementById('check_schedule_date').value,
+        "factory": document.getElementById('kt_select_branch').value,
+        "Comment": document.getElementById('CheckComment').value,
+        "mdq": document.getElementById('kt_check').value,
+        "base64img": measurementFile,
+      };
+    const data = JSON.stringify(measurementFiles);
+    console.log(data);
+    $.ajax({
+        type: "Post",
+        url: baseURL + '/CheckList/ApproveinquiryChecklist',
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        data: data,
+        success: function(response) {
+            console.log(response);
+            
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log(response);
+        }
+    });
+});
+$('#kt_reject_inquiry_button').click(function () {
+    var measurementFiles = {
+        "Comment": document.getElementById('RejectComment').value,
+        "mdq": document.getElementById('kt_check_reject').value,
+        roleHeads: new Array(),
+      };
+      var roleHead = document.getElementsByClassName("tagify__tag tagify__tag tagify__tag--primary");
+
+                roleHead.forEach(element => {
+                    try {
+                        measurementFiles.roleHeads.push({
+                            headRoleId: element.attributes.value.nodeValue,
+                        });
+                    } catch (error) {
+
+                    }
+
+                });
+
+    const data = JSON.stringify(measurementFiles);
+    console.log(data);
+    $.ajax({
+        type: "Post",
+        url: baseURL + '/CheckList/RejectinquiryChecklist',
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        data: data,
+        success: function(response) {
+            console.log(response);
+            
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log(response);
+        }
+    });
 });
