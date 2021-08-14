@@ -9,6 +9,7 @@ import {
     measurementFile
 } from './constant.js'
 export let user;
+var filearry = new Array();
 // var script = document.createElement('script');
 // script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 // script.type = 'text/javascript';
@@ -87,125 +88,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 }
             )
             .on('core.form.valid', function() {
-                // Show loading state on button
-                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
-                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                
-                console.log(measurementFile);
-                var pymnt = new Array();
-                advancePayment= document.getElementById('txtAdvancePayment').value;
-                beforeInstallation= document.getElementById('txtBeforeInstallation').value;
-                afterDelivery= document.getElementById('txtAfterInstallation').value;
-                    if(user.data.userRoles[0].branchRole.roleTypeId==1 ){
-                        if(document.getElementById('method').value=='1'){
-                            advancePayment= document.getElementById('txtAdvancePayment').value;
-                            noOfInstallment =0;
-                            // pymnt.push({
-                            //     paymentName: "",
-                            //     paymentDetail: "",
-                            //     paymentAmount: advancePaymentAmount,
-                            //     paymentModeId: 0,
-                            //     paymentAmountinPercentage: advancePayment,
-                            //     paymentExpectedDate: "",
-                            //     inquiryId: inquiryId,
-                            //     isActive: true,
-                            //     isDeleted: false
-                            // })
-                        }
-                        else{
-                            advancePayment =document.getElementById('txtAdvancePayment').value;
-                            noOfInstallment=document.getElementById('instCnt').value;
-                            for (let i = 1; i <= parseInt(noOfInstallment); i++) {
-                                pymnt.push({
-                                    paymentName: "",
-                                    paymentDetail: "",
-                                    paymentAmount: 0,
-                                    paymentModeId: 0,
-                                    paymentAmountinPercentage: document.getElementById('ipercent'+i).value,
-                                    paymentExpectedDate: document.getElementById('kt_datepicker'+i).value,
-                                    inquiryId: inquiryId,
-                                    isActive: true,
-                                    isDeleted: false
-                                })
-                            }
-                        }
-                    }
-                    var quotationModel={
-                    inquiryId: inquiryId,
-                    description: document.getElementById('txtdescription').value,
-                    totalAmount: document.getElementById('txtTotalAmount').value,
-                    amount: document.getElementById('txtAmount').value,
-                    advancePayment:advancePayment,
-                    beforeInstallation:beforeInstallation,
-                    afterDelivery:afterDelivery,
-                    vat:vatvalue,
-                    discount: promoDiscount,
-                    quotationValidityDate: document.getElementById('kt_datepicker_2').value,
-                    quotationFiles: measurementFile,
-                    paymentName: 'Advance Payment',
-                    paymentDetail: '',
-                    paymentAmount:advancePaymentAmount,
-                    noOfInstallment:noOfInstallment,
-                    payments: new Array(),
-                };
-                quotationModel.payments = pymnt;
-                const data = JSON.stringify(quotationModel);
-                console.log(data);
-                $.ajax({
-                    type: "Post",
-                    url: baseURL + '/Quotation/AddQuotation',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'userId': user.data.userId,
-                        'userToken': user.data.userToken,
-                        'userRoleId': user.data.userRoles[0].userRoleId,
-                        'branchId': user.data.userRoles[0].branchId,
-                        'branchRoleId': user.data.userRoles[0].branchRoleId,
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                    data: data,
-                    success: function(response) {
-                        // Release button
-                        KTUtil.btnRelease(formSubmitButton);
-                        console.log(response);
-                        // window.location.replace("home.html");
-                        if (response.isError == false) {
-                            // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("quotation.html");
-
-                        } else {
-                            Swal.fire({
-                                text: response.errorMessage,
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
-                                }
-                            }).then(function() {
-                                KTUtil.scrollTop();
-                            });
-                        }
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        // Release button
-                        KTUtil.btnRelease(formSubmitButton);
-
-                        // alert(errorThrown);
-
-                        Swal.fire({
-                            text: 'Internet Connection Problem',
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        }).then(function() {
-                            KTUtil.scrollTop();
-                        });
-                    }
-                });
             })
             .on('core.form.invalid', function() {
                 Swal.fire({
@@ -252,14 +135,13 @@ jQuery(document).ready(function() {
     const queryString = window.location.search;
     console.log(queryString);
     const urlParams = new URLSearchParams(queryString);
-    inquiryId = urlParams.get('inquiryId')
+    inquiryId = urlParams.get('inquiryId');
+    document.getElementById("inquiryId").value = inquiryId;
     console.log(inquiryId);
     if (inquiryId == null || inquiryId == "") {
         window.location.replace("quotation.html");
     }
-    if(user.data.userRoles[0].branchRole.roleTypeId==1){
-    $('#txtAdvancePayment').prop('readonly', false);
-}
+    
 
 
     $.ajax({
@@ -294,8 +176,6 @@ const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');
 
-document.getElementById('txtBeforeInstallation').value=response.data.fees[1].feesAmount;
-document.getElementById('txtAfterInstallation').value=response.data.fees[2].feesAmount;
 var dicMeasurement = new Object();
 var dicDesign = new Object();
 var dicQuot = new Object();
@@ -750,155 +630,304 @@ workscope.innerHTML=workscopeHtml;
     }
 });
 
-$('#txtAdvancePayment').keyup(function () {
-    advancePayment=  document.getElementById('txtAdvancePayment').value;
-    advancePaymentAmount= (totalAmount/100)*advancePayment;
-    document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
 
-});
 
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 
-    $.ajax({
-        type: "get",
-        url: baseURL + '/Fees/GetFeesById?feesId=2',
-        
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'userToken': user.data.userToken,
-            'userRoleId': user.data.userRoles[0].userRoleId,
-            'branchId': user.data.userRoles[0].branchId,
-            'branchRoleId': user.data.userRoles[0].branchRoleId,
-            'Access-Control-Allow-Origin': '*',
-        },
+
+   
+
+    });
+
+  
     
-        success: function (response) {
-            console.log(response);
-            if (response.isError == false) {
-                console.log(response.data.feesAmount);
-                advancePayment=response.data.feesAmount;
-                document.getElementById('txtAdvancePayment').value=advancePayment;
-              
-            } else {
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
+    jQuery(document).ready(function() {
+    
+        $.ajax({
+            type: "get",
+            url: baseURL + '/Branch/GetBranchByType?typeId=3',
+    
+            headers: {
+                'Content-Type': 'application/json',
+                'userId': user.data.userId,
+                'userToken': user.data.userToken,
+                'userRoleId': user.data.userRoles[0].userRoleId,
+                'branchId': user.data.userRoles[0].branchId,
+                'branchRoleId': user.data.userRoles[0].branchRoleId,
+                'Access-Control-Allow-Origin': '*',
+            },
+            success: function (response) {
+                console.log(response);
+                    console.log(response.data[0].permissionName);
+                    const branchList = document.getElementById('kt_select_branch');
+                    var branchTypeListHTML = new Array();
+    
+                    for (var i = 0; i < response.data.length; i++) {
+                        branchTypeListHTML.push(`
+                        <option value="` + response.data[i].branchId + `">` + response.data[i].branchName + `</option>`);
                     }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
     
-    
-            // alert(errorThrown);
-    
-            Swal.fire({
-                text: 'Internet Connection Problem',
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                    confirmButton: "btn font-weight-bold btn-light-primary"
-                }
-            }).then(function () {
-                KTUtil.scrollTop();
-            });
-        }
-    });
-    $.ajax({
-        type: "get",
-        url: baseURL + '/Fees/GetFeesById?feesId=5',
-        
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'userToken': user.data.userToken,
-            'userRoleId': user.data.userRoles[0].userRoleId,
-            'branchId': user.data.userRoles[0].branchId,
-            'branchRoleId': user.data.userRoles[0].branchRoleId,
-            'Access-Control-Allow-Origin': '*',
-        },
-    
-        success: function (response) {
-            console.log(response);
-            if (response.isError == false) {
-                console.log(response.data.feesAmount);
-                vatvalue=response.data.feesAmount;
-                if(isMeasurementPromo==false){
-                document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount '+promoDiscount+'% - Measurement Fee AED '+measurementFee+' + VAT '+vatvalue+'%';
-            }else{
-                    document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount 0% - Measurement Fee AED '+measurementFee+' + VAT '+vatvalue+'%';
-                }
-            } else {
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-    
-    
-            // alert(errorThrown);
-    
-            Swal.fire({
-                text: 'Internet Connection Problem',
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                    confirmButton: "btn font-weight-bold btn-light-primary"
-                }
-            }).then(function () {
-                KTUtil.scrollTop();
-            });
-        }
-    });
+                    branchList.innerHTML = branchTypeListHTML.join('');
 
-    });
-
-    $(function() {
-        $('#method').change(function(){
-           // $('input#txtcount').val(cnt)
-            if($('#method').val()=='1'){
-               document.getElementById('instCnt').value='0';
-            document.getElementById("dynamicdiv").innerHTML='';
-                $('#RowAdv').show(); 
-                $('#RowAfter').show(); 
-             $('#txtAdvancePayment').keyup(function () {
-                advancePayment=  document.getElementById('txtAdvancePayment').value;
-                advancePaymentAmount= (totalAmount/100)*advancePayment;
-                document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
-            
-            });
-                //$('#divtAmount').hide(); 
-                $('#diviCnt').hide();
-            }else{
-                //document.getElementById("dynamicdiv").innerHTML='';
-                //$('#divtAmount').show();
-               
-                
-                $('#diviCnt').show(); 
-                $('#RowAfter').hide(); 
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
 
             }
-            
         });
+    });
+    $('#kt_approve_inquiry_button').click(function () {
+        var checklistdata = {
+            "inquiryId":document.getElementById('inquiryId').value,
+            "factoryId": document.getElementById('kt_select_branch').value,
+            "prefferdDateByClient": document.getElementById('design_schedule_date').value, 
+            "comment": document.getElementById('CheckComment').value,
+            "addFileonChecklists":new Array(),
+          };
+          let from = document.getElementById('compCount').value;
+          let to = document.getElementById('maxCount').value;
+          for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
+            checklistdata.addFileonChecklists.push({
+                "inquiryworkscopeId":document.getElementById('kt_workscpe_'+i)==null?"": document.getElementById('kt_workscpe_'+i).value,
+                "documentType":document.getElementById('documentType'+i).value,
+                "files":filearry[i]==undefined?[]:filearry[i],
+            })
+          }
+          filearry= [];
+        const data = JSON.stringify(checklistdata);
+        console.log(data);
         
+        $.ajax({
+            type: "Post",
+            url: baseURL + '/CheckList/ApproveinquiryChecklist',
+            headers: {
+                'Content-Type': 'application/json',
+                'userId': user.data.userId,
+                'Access-Control-Allow-Origin': '*',
+            },
+            data: data,
+            success: function(response) {
+                console.log(response);
+                filearry= [];
+                document.getElementById("checkbody").innerHTML ="";
+                document.getElementById('design_schedule_date').value ="";
+                document.getElementById('CheckComment').value="";
+                $('#approve').modal('hide');
+                window.location.replace("checklist.html");
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                document.getElementById("alert").innerHTML ="All fields should be selected";
+            }
+        });
+    });
+    $('#kt_reject_inquiry_button').click(function () {
+        var rejectlistdata = {
+            "inquiryId":document.getElementById('inquiryId').value,
+            "addrejections": [{
+                "inquiryWorkscopeId":document.getElementById("kt_workscpe_1")==undefined?0:parseInt(document.getElementById("kt_workscpe_1").value),
+                "rejectionType":document.getElementById("documentType1").value==""?0:parseInt(document.getElementById("documentType1").value),
+                "reason":document.getElementById('RejectComment1').value,
+            }],
+    
+          };
+          let from = document.getElementById('compCount').value;
+          let to = document.getElementById('maxCount').value;
+          for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
+            rejectlistdata.addrejections.push({
+                "inquiryWorkscopeId":document.getElementById("kt_workscpe_"+i)==undefined?0:parseInt(document.getElementById("kt_workscpe_"+i).value),
+                "rejectionType":document.getElementById("documentType"+i).value==""?0:parseInt(document.getElementById("documentType"+i).value),
+                "reason":document.getElementById('RejectComment'+i).value,
+            })
+          }
+        const data = JSON.stringify(rejectlistdata);
+        console.log(data);
+         $.ajax({
+            type: "Post",
+            url: baseURL + '/CheckList/RejectinquiryChecklist',
+            headers: {
+                'Content-Type': 'application/json',
+                'userId': user.data.userId,
+                'Access-Control-Allow-Origin': '*',
+            },
+            data: data,
+            success: function(response) {
+                console.log(response);
+                document.getElementById("rjctbody").innerHTML ="";
+                document.getElementById('RejectComment1').value="";
+                document.getElementById('divscopelist1').innerHTML="";
+                $('#reject').modal('hide');
+                window.location.replace("checklist.html");
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                document.getElementById("ralert").innerHTML ="All fields should be selected";
+            }
+        }); 
     });
     
+    $('#addComponentbtn').click(function () {
+        
+        let count = document.getElementById("compCount").value;
+        if(parseInt(count) > 0 ){
+            document.getElementById("checkbody").innerHTML +=
+            `<div class="form-group row">
+                            <div class="col-lg-5" >
+                            <label class="font-size-h6 font-weight-bolder text-dark">Rejected Phase</label>
+                                <select class="form-control" id="documentType`+count+`" onchange="createList(`+count+`)" name="documentType`+count+`"  style="width:100%">
+                                    <option value=""></option>
+                                    <option value="7">Measurement</option>
+                                    <option value="8">Design</option>
+                                    <option value="9">Quotation</option>
+                                </select>
+                            </div>
+                            <div id="file`+count+`" style="display:none"></div>
+                            <div id="divscopelist`+count+`" class="col-lg-5"></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_`+count+`" name="measurementDrawing`+count+`">
+                                        <div class="dropzone-msg dz-message needsclick">
+                                            <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                            <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+             document.getElementById("compCount").value = parseInt(count) -1;
+             let from = document.getElementById('compCount').value;
+          let to = document.getElementById('maxCount').value;
+          Dropzone.autoDiscover = false;
+          for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
+            let measurementFile =new Array();
+             $('#kt_dropzone_'+i).dropzone({
+                url: baseURL + "/User", // Set the url for your upload script location
+                type: "Head",
+                headers : {
+                    'Access-Control-Allow-Origin': '*',
+                },
+                paramName: "file"+i, // The name that will be used to transfer the file
+                maxFiles: 50,
+                maxFilesize: 10, // MB
+                addRemoveLinks: true,
+                removedfile:function(file) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            // event.target.result contains base64 encoded image
+                            var base64String = event.target.result;
+                            var fileName = file.name;
+                            var finalbase64 = base64String.split(",")[1];
+                            // handlePictureDropUpload(base64String ,fileName );
+                             removeA(measurementFile,finalbase64);
+                             filearry[i] =measurementFile;
+                        };
+                        reader.readAsDataURL(file);
+                        
+                    file.previewElement.remove();
+        
+                },
+          
+                acceptedFiles: "image/*,application/pdf,.png,.mp4",
+                
+            init: function() {
+                this.on("addedfile", function (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        // event.target.result contains base64 encoded image
+                        var base64String = event.target.result;
+                        var fileName = file.name;
+                        var finalbase64 = base64String.split(",")[1]
+                        measurementFile.push(finalbase64);
+                        //document.getElementById("file"+i).innerHTML += finalbase64+';';
+                        // handlePictureDropUpload(base64String ,fileName );
+                        filearry[i] = measurementFile;
+                    };
+                    reader.readAsDataURL(file);
+    
+                });
+            }
+                
+              });
+            }
+            function removeA(arr) {
+                var what, a = arguments, L = a.length, ax;
+                while (L > 1 && arr.length) {
+                    what = a[--L];
+                    while ((ax= arr.indexOf(what)) !== -1) {
+                        arr.splice(ax, 1);
+                    }
+                }
+                return arr;
+            }
+        }else{
+            alert("Can't Add more components");
+        }
+        
+    });
+    $('#resetComponentbtn').click(function () {
+        filearry= [];
+         document.getElementById("compCount").value = document.getElementById("maxCount").value;
+         document.getElementById("checkbody").innerHTML ="";
+         document.getElementById("alert").innerHTML ="";
+        });
+        $('#kt_close_inquiry_button').click(function () {
+             filearry= [];
+             document.getElementById("compCount").value = document.getElementById("maxCount").value;
+             document.getElementById("checkbody").innerHTML ="";
+             document.getElementById("alert").innerHTML ="";
+            });
+            $('#xclose').click(function () {
+                filearry= [];
+                document.getElementById("compCount").value = document.getElementById("maxCount").value;
+                document.getElementById("checkbody").innerHTML ="";
+                document.getElementById("alert").innerHTML ="";
+               });
+               $('#addRjctbtn').click(function () {
+        
+                let count = document.getElementById("compCount").value;
+                if(parseInt(count) > 1 ){
+                    document.getElementById("rjctbody").innerHTML +=
+                    `<div class="form-group row">
+                                    <div class="col-lg-5" >
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Rejected Phase</label>
+                                        <select class="form-control" id="documentType`+count+`" onchange="createList(`+count+`)" name="documentType`+count+`"  style="width:100%">
+                                            <option value=""></option>
+                                            <option value="7">Measurement</option>
+                                            <option value="8">Design</option>
+                                            <option value="9">Quotation</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div id="divscopelist`+count+`" class="col-lg-5"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="RejectComment`+count+`" id="RejectComment`+count+`"
+                                                        class="form-control" value=" "
+                                                        placeholder="" >
+                                                </div>
+                                    </div>
+                                 </div>
+                                   `;
+                     document.getElementById("compCount").value = parseInt(count) -1;
+                }else{
+                    alert("Can't Add more components");
+                }
+                
+            });
+            $('#kt_close_reject_inquiry_button').click(function () {
+                 document.getElementById("compCount").value = document.getElementById("maxCount").value;
+                 document.getElementById("rjctbody").innerHTML ="";
+                 document.getElementById("ralert").innerHTML ="";
+                });
+                $('#resetRjctbtn').click(function () {
+                    document.getElementById("compCount").value = document.getElementById("maxCount").value;
+                    document.getElementById("rjctbody").innerHTML ="";
+                    document.getElementById("ralert").innerHTML ="";
+                   });
+                   $('#rclose').click(function () {
+                    document.getElementById("compCount").value = document.getElementById("maxCount").value;
+                    document.getElementById("rjctbody").innerHTML ="";
+                    document.getElementById("ralert").innerHTML ="";
+                   });

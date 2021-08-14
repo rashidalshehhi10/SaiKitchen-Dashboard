@@ -35,6 +35,7 @@ jQuery(document).ready(function() {
                 document.getElementById("rinvoiceno").innerText = response.data.invoiceNo;
                 document.getElementById("invoDate").innerText = response.data.createdDate;
                 document.getElementById("invoDuDate").innerText = response.data.validDate;
+                document.getElementById("invoProposalRef").innerText = response.data.proposalReferenceNumber;
                 document.getElementById("branchAddress").innerText = response.data.branchAddress;
                 document.getElementById("branchContact").innerText = response.data.branchContact;
                 document.getElementById("sbranchContact").innerText = response.data.branchContact;

@@ -138,6 +138,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     description: document.getElementById('txtdescription').value,
                     totalAmount: document.getElementById('txtTotalAmount').value,
                     amount: document.getElementById('txtAmount').value,
+                    ProposalReferenceNumber: document.getElementById('txtProposalReferenceNumber').value,
                     advancePayment:advancePayment,
                     beforeInstallation:beforeInstallation,
                     afterDelivery:afterDelivery,

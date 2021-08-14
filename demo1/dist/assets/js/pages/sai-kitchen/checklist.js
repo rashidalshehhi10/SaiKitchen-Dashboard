@@ -7,7 +7,8 @@ import {
     measurementFile
 } from './constant.js'
 let user;
-
+export let workscopelist;
+var filearry = new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -234,7 +235,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     render: function(data, type, full, meta) {
                         console.log(full);
                         var action = ``;
-                        if(full.inquiryAddedById==user.data.userId){
+                        
+                        
                         if (quotationPermission >= 2) {
                             console.log(full.inquiryId);
                          
@@ -244,18 +246,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     </a>
                     `;
                     action += `
-                            <a type="button" onclick="" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+                            <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
 								<i class="la la-thumbs-up"></i>
 							</a>
-                            <a type="button" onclick="" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
+                            <a type="button" onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
 								<i class="la la-thumbs-down"></i>
 							</a>
 						`;
                         }
                             return action;
-                        } else {
-                            return `<span></span>`;
-                        }
+                       
                     },
                 },
                 {
@@ -449,7 +449,7 @@ jQuery(document).ready(function() {
 
     $.ajax({
 		type: "get",
-		url: baseURL + '/Branch/GetBranches',
+		url: baseURL + '/Branch/GetBranchByType?typeId=3',
 
 		headers: {
 			'Content-Type': 'application/json',
@@ -509,15 +509,26 @@ jQuery(document).ready(function() {
 	});
 });
 $('#kt_approve_inquiry_button').click(function () {
-    var measurementFiles = {
-        "installDate": document.getElementById('check_schedule_date').value,
-        "factory": document.getElementById('kt_select_branch').value,
-        "Comment": document.getElementById('CheckComment').value,
-        "mdq": document.getElementById('kt_check').value,
-        "base64img": measurementFile,
+    var checklistdata = {
+        "inquiryId":document.getElementById('inquiryId').value,
+        "factoryId": document.getElementById('kt_select_branch').value,
+        "prefferdDateByClient": document.getElementById('design_schedule_date').value, 
+        "comment": document.getElementById('CheckComment').value,
+        "addFileonChecklists":new Array(),
       };
-    const data = JSON.stringify(measurementFiles);
+      let from = document.getElementById('compCount').value;
+      let to = document.getElementById('maxCount').value;
+      for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
+        checklistdata.addFileonChecklists.push({
+            "inquiryworkscopeId":document.getElementById('kt_workscpe_'+i)==null?"": document.getElementById('kt_workscpe_'+i).value,
+            "documentType":document.getElementById('documentType'+i).value,
+            "files":filearry[i]==undefined?[]:filearry[i],
+        })
+      }
+      filearry= [];
+    const data = JSON.stringify(checklistdata);
     console.log(data);
+    
     $.ajax({
         type: "Post",
         url: baseURL + '/CheckList/ApproveinquiryChecklist',
@@ -529,35 +540,40 @@ $('#kt_approve_inquiry_button').click(function () {
         data: data,
         success: function(response) {
             console.log(response);
-            
+            filearry= [];
+            document.getElementById("checkbody").innerHTML ="";
+            document.getElementById('design_schedule_date').value ="";
+            document.getElementById('CheckComment').value="";
+            $('#ScheduleDate').modal('hide');
+            window.location.replace("checklist.html");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log(response);
+            document.getElementById("alert").innerHTML ="All fields should be selected";
         }
     });
 });
 $('#kt_reject_inquiry_button').click(function () {
-    var measurementFiles = {
-        "Comment": document.getElementById('RejectComment').value,
-        "mdq": document.getElementById('kt_check_reject').value,
-        roleHeads: new Array(),
+    var rejectlistdata = {
+        "inquiryId":document.getElementById('inquiryId').value,
+        "addrejections": [{
+            "inquiryWorkscopeId":document.getElementById("kt_workscpe_1")==undefined?0:parseInt(document.getElementById("kt_workscpe_1").value),
+            "rejectionType":document.getElementById("documentType1").value==""?0:parseInt(document.getElementById("documentType1").value),
+            "reason":document.getElementById('RejectComment1').value,
+        }],
+
       };
-      var roleHead = document.getElementsByClassName("tagify__tag tagify__tag tagify__tag--primary");
-
-                roleHead.forEach(element => {
-                    try {
-                        measurementFiles.roleHeads.push({
-                            headRoleId: element.attributes.value.nodeValue,
-                        });
-                    } catch (error) {
-
-                    }
-
-                });
-
-    const data = JSON.stringify(measurementFiles);
+      let from = document.getElementById('compCount').value;
+      let to = document.getElementById('maxCount').value;
+      for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
+        rejectlistdata.addrejections.push({
+            "inquiryWorkscopeId":document.getElementById("kt_workscpe_"+i)==undefined?0:parseInt(document.getElementById("kt_workscpe_"+i).value),
+            "rejectionType":document.getElementById("documentType"+i).value==""?0:parseInt(document.getElementById("documentType"+i).value),
+            "reason":document.getElementById('RejectComment'+i).value,
+        })
+      }
+    const data = JSON.stringify(rejectlistdata);
     console.log(data);
-    $.ajax({
+     $.ajax({
         type: "Post",
         url: baseURL + '/CheckList/RejectinquiryChecklist',
         headers: {
@@ -568,10 +584,182 @@ $('#kt_reject_inquiry_button').click(function () {
         data: data,
         success: function(response) {
             console.log(response);
+            document.getElementById("rjctbody").innerHTML ="";
+            document.getElementById('RejectComment1').value="";
+            document.getElementById('divscopelist1').innerHTML="";
+            $('#measurementScheduleDate').modal('hide');
+            window.location.replace("checklist.html");
             
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log(response);
+            document.getElementById("ralert").innerHTML ="All fields should be selected";
         }
-    });
+    }); 
 });
+
+$('#addComponentbtn').click(function () {
+    
+    let count = document.getElementById("compCount").value;
+    if(parseInt(count) > 0 ){
+        document.getElementById("checkbody").innerHTML +=
+        `<div class="form-group row">
+                        <div class="col-lg-5" >
+                        <label class="font-size-h6 font-weight-bolder text-dark">Rejected Phase</label>
+                            <select class="form-control" id="documentType`+count+`" onchange="createList(`+count+`)" name="documentType`+count+`"  style="width:100%">
+                                <option value=""></option>
+                                <option value="7">Measurement</option>
+                                <option value="8">Design</option>
+                                <option value="9">Quotation</option>
+                            </select>
+                        </div>
+                        <div id="file`+count+`" style="display:none"></div>
+                        <div id="divscopelist`+count+`" class="col-lg-5"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_`+count+`" name="measurementDrawing`+count+`">
+                                    <div class="dropzone-msg dz-message needsclick">
+                                        <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                        <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+         document.getElementById("compCount").value = parseInt(count) -1;
+         let from = document.getElementById('compCount').value;
+      let to = document.getElementById('maxCount').value;
+      Dropzone.autoDiscover = false;
+      for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
+        let measurementFile =new Array();
+         $('#kt_dropzone_'+i).dropzone({
+            url: baseURL + "/User", // Set the url for your upload script location
+            type: "Head",
+            headers : {
+                'Access-Control-Allow-Origin': '*',
+            },
+            paramName: "file"+i, // The name that will be used to transfer the file
+            maxFiles: 50,
+            maxFilesize: 10, // MB
+            addRemoveLinks: true,
+            removedfile:function(file) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        // event.target.result contains base64 encoded image
+                        var base64String = event.target.result;
+                        var fileName = file.name;
+                        var finalbase64 = base64String.split(",")[1];
+                        // handlePictureDropUpload(base64String ,fileName );
+                         removeA(measurementFile,finalbase64);
+                         filearry[i] =measurementFile;
+                    };
+                    reader.readAsDataURL(file);
+                    
+                file.previewElement.remove();
+    
+            },
+      
+            acceptedFiles: "image/*,application/pdf,.png,.mp4",
+            
+        init: function() {
+            this.on("addedfile", function (file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    // event.target.result contains base64 encoded image
+                    var base64String = event.target.result;
+                    var fileName = file.name;
+                    var finalbase64 = base64String.split(",")[1]
+                    measurementFile.push(finalbase64);
+                    //document.getElementById("file"+i).innerHTML += finalbase64+';';
+                    // handlePictureDropUpload(base64String ,fileName );
+                    filearry[i] = measurementFile;
+                };
+                reader.readAsDataURL(file);
+
+            });
+        }
+            
+          });
+        }
+        function removeA(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax= arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+    }else{
+        alert("Can't Add more components");
+    }
+    
+});
+$('#resetComponentbtn').click(function () {
+    filearry= [];
+     document.getElementById("compCount").value = document.getElementById("maxCount").value;
+     document.getElementById("checkbody").innerHTML ="";
+     document.getElementById("alert").innerHTML ="";
+    });
+    $('#kt_close_inquiry_button').click(function () {
+         filearry= [];
+         document.getElementById("compCount").value = document.getElementById("maxCount").value;
+         document.getElementById("checkbody").innerHTML ="";
+         document.getElementById("alert").innerHTML ="";
+        });
+        $('#xclose').click(function () {
+            filearry= [];
+            document.getElementById("compCount").value = document.getElementById("maxCount").value;
+            document.getElementById("checkbody").innerHTML ="";
+            document.getElementById("alert").innerHTML ="";
+           });
+           $('#addRjctbtn').click(function () {
+    
+            let count = document.getElementById("compCount").value;
+            if(parseInt(count) > 1 ){
+                document.getElementById("rjctbody").innerHTML +=
+                `<div class="form-group row">
+                                <div class="col-lg-5" >
+                                <label class="font-size-h6 font-weight-bolder text-dark">Rejected Phase</label>
+                                    <select class="form-control" id="documentType`+count+`" onchange="createList(`+count+`)" name="documentType`+count+`"  style="width:100%">
+                                        <option value=""></option>
+                                        <option value="7">Measurement</option>
+                                        <option value="8">Design</option>
+                                        <option value="9">Quotation</option>
+                                    </select>
+                                </div>
+                                
+                                <div id="divscopelist`+count+`" class="col-lg-5"></div>
+                                </div>
+                                <div class="form-group row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
+                                            <div class="input-group">
+                                                <input type="text" name="RejectComment`+count+`" id="RejectComment`+count+`"
+                                                    class="form-control" value=""
+                                                    placeholder="" >
+                                            </div>
+                                </div>
+                             </div>
+                               `;
+                 document.getElementById("compCount").value = parseInt(count) -1;
+            }else{
+                alert("Can't Add more components");
+            }
+            
+        });
+        $('#kt_close_reject_inquiry_button').click(function () {
+             document.getElementById("compCount").value = document.getElementById("maxCount").value;
+             document.getElementById("rjctbody").innerHTML ="";
+             document.getElementById("ralert").innerHTML ="";
+            });
+            $('#resetRjctbtn').click(function () {
+                document.getElementById("compCount").value = document.getElementById("maxCount").value;
+                document.getElementById("rjctbody").innerHTML ="";
+                document.getElementById("ralert").innerHTML ="";
+               });
+               $('#rclose').click(function () {
+                document.getElementById("compCount").value = document.getElementById("maxCount").value;
+                document.getElementById("rjctbody").innerHTML ="";
+                document.getElementById("ralert").innerHTML ="";
+               });

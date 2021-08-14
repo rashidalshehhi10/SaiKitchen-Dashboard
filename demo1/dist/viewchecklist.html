@@ -57,6 +57,7 @@
    <!--begin::Body-->
    <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
       <!--begin::Main-->
+      
       <!--begin::Header Mobile-->
       <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
          <!--begin::Logo-->
@@ -148,8 +149,10 @@
             <!--end::Aside Menu-->
          </div>
          <!--end::Aside-->
+         
          <!--begin::Wrapper-->
-         <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+         <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper"  >
+            
             <!--begin::Header-->
             <div id="kt_header" class="header header-fixed">
                <!--begin::Container-->
@@ -736,8 +739,45 @@
                <!--end::Container-->
             </div>
             <!--end::Header-->
+            
             <!--begin::Content-->
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+               <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
+                  <div class="card-toolbar" style="padding-right: 25px;text-align: right;width: 100%;">
+                     <a href="#"    data-toggle="modal" data-target="#reject" onclick="addComponent(document.getElementById('inquiryId').value)" class="btn btn-sm font-weight-bold headapp" style="background-color: #aa9d9d; color:#ffffff">
+                        <i >
+                           <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
+                              <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  transform="rotate(-180 0 0)" width="15px" height="15px" viewBox="0 0 24 24" version="1.1">
+                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="15" height="15"/>
+                                    <path d="M2.70963455,10 L2.70963455,19 L3.86223328,19.3841996 C5.08583091,19.7920655 6.36718132,20 7.65696647,20 L11.2502228,20 C12.6802659,20 13.9115103,18.990621 14.1919649,17.5883484 L14.9411635,13.8423552 C15.2660994,12.217676 14.2124491,10.6372006 12.5877699,10.3122648 C12.3285558,10.260422 12.0636265,10.2430672 11.7998644,10.2606513 L8.20963455,10.5 L8.57383093,6.49383981 C8.6423241,5.74041495 8.08707726,5.07411874 7.3336524,5.00562558 C7.29241938,5.00187712 7.25103761,5 7.20963455,5 L7.20963455,5 C6.27903894,5 5.4166784,5.48826024 4.93789092,6.28623939 L2.70963455,10 Z" fill="#000000" transform="translate(8.854817, 12.500000) scale(-1, 1) translate(-8.854817, -12.500000) "/>
+                                    <rect fill="#000000" opacity="0.3" transform="translate(19.500000, 14.500000) scale(-1, 1) translate(-19.500000, -14.500000) " x="17" y="9" width="5" height="11" rx="1"/>
+                                 </g>
+                              </svg>
+                              <!--end::Svg Icon-->
+                           </span>
+                        </i>
+                        Reject Checklist
+                     </a>
+                     <a href="#"  data-toggle="modal" data-target="#approve"  onclick="addComponent(document.getElementById('inquiryId').value)"  class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff">
+                        <i >
+                           <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
+                              <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1">
+                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="15" height="15"/>
+                                    <path d="M9,10 L9,19 L10.1525987,19.3841996 C11.3761964,19.7920655 12.6575468,20 13.9473319,20 L17.5405883,20 C18.9706314,20 20.2018758,18.990621 20.4823303,17.5883484 L21.231529,13.8423552 C21.5564648,12.217676 20.5028146,10.6372006 18.8781353,10.3122648 C18.6189212,10.260422 18.353992,10.2430672 18.0902299,10.2606513 L14.5,10.5 L14.8641964,6.49383981 C14.9326895,5.74041495 14.3774427,5.07411874 13.6240179,5.00562558 C13.5827848,5.00187712 13.5414031,5 13.5,5 L13.5,5 C12.5694044,5 11.7070439,5.48826024 11.2282564,6.28623939 L9,10 Z" fill="#000000"/>
+                                    <rect fill="#000000" opacity="0.3" x="2" y="9" width="5" height="11" rx="1"/>
+                                 </g>
+                              </svg>
+                              <!--end::Svg Icon-->
+                           </span>
+                        </i>
+                        Approve Checklist
+                     </a>
+                  </div>
+               </div>
                <!--begin::Subheader-->
                <!--end::Subheader-->
                <!--begin::Entry-->
@@ -2039,190 +2079,145 @@
          </div>
       </div>
       <!--end::Chat Panel-->
-      
-    
-    <div class="modal fade" id="addquotation"data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Quotation</h5>
-                 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <i aria-hidden="true" class="ki ki-close"></i>
-                  </button>
-                </div>
-                <!--begin::Form-->
-                <form class="form" id="kt_add_quotation" action="" name="addQutotationform">
-                    <span id="inquiryId" style="display:none">0</span>
-                  
-                    <div class="modal-body">
+      <div class="modal fade" id="approve" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+             <div class="modal-content">
+                 <form class="form" id="kt_approve_inquiry" action="" name="approveinquiryform">
+                     
+                     <input id="inquiryId" type="hidden" value="0" />
+             <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">CheckList Approve</h5>
+                     <button id="xclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <i aria-hidden="true" class="ki ki-close"></i>
+                         </button>
+                 </div>
+                 <div class="modal-body">
                      <div class="form-group row">
-                        <div class="col-lg-6">
-                           <label >Payment method:</label>
-                           <div class="input-group input-group-lg input-group-solid">
-                              <select class="form-control" id="method" name="method"
-                                 class="form-control form-control-lg form-control-solid"
-                                 style="width:100%">
-                                 <option value="1" data-select2-id="1">Pay Now</option>
-                                 <option value="2" >Pay Later</option>
-                              </select>
-                           </div>
-                        </div>
-                           
-                           <div class="col-lg-3" id="diviCnt" style="display: none;">
-                              <label id="iCnt">Installment Count:</label>
-                              <div class="input-group">
-                                    <input type="number" id="instCnt" max="5" onblur="addInstallment()"  class="form-control" />
-                                    <div class="input-group-append">
-                                       <span class="input-group-text">
-                                          <i class="la la-money-check"></i>
-                                       </span>
-                                    </div>
-                              </div>
-                       
-                           </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12">
+                             <label class="">Installation Date</label>
+                             
+                             <div class="input-group date" id="kt_design_datetimepicker" data-target-input="nearest">
+                                 <input type="text" id="design_schedule_date" name="design_schedule_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_design_datetimepicker">
+                                 <div class="input-group-append" data-target="#kt_design_datetimepicker" data-toggle="datetimepicker">
+                                     <span class="input-group-text">
+                                         <i class="ki ki-calendar"></i>
+                                     </span>
+                                 </div>
+                             </div>
+                         </div>
                      </div>
-
-                       <div id="" >
-
-                        <div class="form-group row" id="RowAdv" >
-                           <div class="col-lg-6">
-                              <label id="lblAdvancePayment">Advance Payment:</label>
-                              <div class="input-group">
-                                    <input type="number" id="txtAdvancePayment" class="form-control" placeholder="50" min="0" max="100" value="50" readonly/>
-                                    <div class="input-group-append">
-                                       <span class="input-group-text">
-                                          <i class="la la-percent"></i>
-                                       </span>
-                                    </div>
-                              </div>
-                              <span class="form-text text-muted">Advance Payment in % of Total Amount</span>
-                           </div>
-                          
-                           <div class="col-lg-6">
-                              <label>Description:</label>
-                              <div class="input-group">
-                                  <input type="text" id="txtdescription" class="form-control" placeholder="" />
-                                  <div class="input-group-append">
-                                      <span class="input-group-text">
-                                          <i class="la la-info"></i>
-                                      </span>
-                                  </div>
-                              </div>
-                              <span class="form-text text-muted">Please enter description of quotation</span>
-                          </div>
-                        </div>
-                        
-
-                       <div id="dynamicdiv" >
-
-                       </div>
-                        <div class="form-group row" id="RowAfter" >
-                           
-                           <div class="col-lg-6">
-                              <label id="lblBeforeInstallation">Before Installation 7 Days:</label>
-                              <div class="input-group">
-                                    <input type="number" id="txtBeforeInstallation" class="form-control" placeholder="50" min="0" max="100" value="50" />
-                                    <div class="input-group-append">
-                                       <span class="input-group-text">
-                                          <i class="la la-percent"></i>
-                                       </span>
-                                    </div>
-                              </div>
-                              <span class="form-text text-muted">Before Insatallation in % of Total Amount</span>
-                           </div>
-                           
-                           <div class="col-lg-6">
-                              <label id="lblAfterInstallation">After Installation:</label>
-                              <div class="input-group">
-                                    <input type="number" id="txtAfterInstallation" class="form-control" placeholder="0" min="0" max="100" value="0" />
-                                    <div class="input-group-append">
-                                       <span class="input-group-text">
-                                          <i class="la la-percent"></i>
-                                       </span>
-                                    </div>
-                              </div>
-                              <span class="form-text text-muted">After Installation in % of Total Amount</span>
-                           </div>
-                           
-                          
-                           
-                        </div>
-                        </div>
-                           <div class="form-group row">
-                              <div class="col-lg-6">
-                                 <label>Amount:</label>
-                                 <div class="input-group">
-                                       <input  type="number" id="txtAmount" name="txtAmount" class="form-control" placeholder="0"  min="0" />
-                                       <div class="input-group-append">
-                                          <span class="input-group-text">
-                                             <i class="la 
-                                             la-money-check"></i>
-                                          </span>
-                                       </div>
-                                 </div>
-                                 <span class="form-text text-muted">Please enter amount in AED</span>
-                              </div>
-                              <div class="col-lg-6">
-                                 <label>Valid Till:</label>
-                                 <div class="input-group date">
-                                     <input type="text" class="form-control" id="kt_datepicker_2" readonly="readonly" placeholder="Select date" />
-                                     <div class="input-group-append">
-                                         <span class="input-group-text">
-                                             <i class="la la-calendar-check-o"></i>
-                                         </span>
-                                     </div>
-                                 </div>
-                                  <span class="form-text text-muted">Please enter validity date</span>
-                             </div>
-                           </div>
-                           
-                        
-                            
-                        
-                        <div class="form-group row">
-                           <div class="col-lg-6">
-                             <label>Promo Code:</label>
-                             <div class="input-group">
-                                 <input type="text" id="txtPromoCode" class="form-control" placeholder="ABC123" readonly/>
-                             </div>
-                             <span class="form-text text-muted"></span>
+                     <div class="form-group row">
+                         <div class="col-lg-12 col-md-12 col-sm-12">
+                             <label class="">Factory</label>
+                         <div class="input-group input-group-lg input-group-solid">
+                             <select class="form-control" id="kt_select_branch" name="param"	class="form-control form-control-lg form-control-solid"
+                                     style="width:100%">
+ 
+                                  </select>
+                         </div>
                          </div>
                          
-                         <div class="col-lg-6">
-                           <label id="lblTotalAmount">Total Amount:</label>
-                           <div class="input-group">
-                               <input  type="number" id="txtTotalAmount" class="form-control" placeholder="0"  min="0" readonly/>
-                               <div class="input-group-append">
-                                   <span class="input-group-text">
-                                       <i class="la 
-                                       la-money-check"></i>
-                                   </span>
-                               </div>
-                           </div>
-                           <span class="form-text text-muted">Total amount in AED</span>
-                       </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_3" name="quotationFiles">
-                                    <div class="dropzone-msg dz-message needsclick">
-                                        <h3 class="dropzone-msg-title">Upload Quotation & Contract</h3>
-                                        <span class="dropzone-msg-desc">Only pdf files are allowed</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" onclick="document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                        <button type="submit" id="kt_btn_add_quotation" class="btn btn-primary font-weight-bold">Upload</button>
-                    </div>
-                    </form>
-                <!--end::Form-->
-            </div>
-        </div>
-    </div>
+                     </div>
+                     <div class="form-group row">
+                         <div class="col-lg-12 col-md-12 col-sm-12">
+                                     <label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
+                                     <div class="input-group">
+ 
+                                         <input type="text" name="CheckComment" id="CheckComment"
+                                             class="form-control" value=""
+                                             placeholder="" >
+                                     </div>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                             <div class="col-lg-12 col-md-12 col-sm-12">
+                                 <button  type="button" onclick="" id="addComponentbtn" class="btn btn-primary font-weight-bold">Attach Document</button>
+                                 <button  type="button" onclick="" id="resetComponentbtn" class="btn btn-primary font-weight-bold">Reset Document</button>
+                             </div>
+ 
+                             <input type="hidden" id="compCount" value="0" /> 
+                             <input type="hidden" id="maxCount" value="0" />
+                             <div id="divoptions" style="display: none;"></div>      
+                         </div> 
+                 <div  id="checkbody" >
+                     
+                 </div>
+                 <div class="form-group row">
+                     <div class="col-lg-12 col-md-12 col-sm-12">
+                         <span id="alert" style="color: red;"></span>
+                     </div>
+                 </div>
+             </div>
+                 <div class="modal-footer">
+                     <button type="button" id="kt_close_inquiry_button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                     <button type="button" id="kt_approve_inquiry_button" class="btn btn-primary font-weight-bold">Approve</button>
+                 </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+ 
+     
+     <div class="modal fade" id="reject" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+             <div class="modal-content">
+                 <form class="form" id="kt_reject_inquiry" action="" name="rejectinquiryform">
+                   
+             <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">CheckList Reject</h5>
+                     <button id="rclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <i aria-hidden="true" class="ki ki-close"></i>
+                         </button>
+                 </div>
+                 <div class="modal-body">
+                     <div class="form-group row">
+                         <div class="col-lg-5">
+                             <label class="font-size-h6 font-weight-bolder text-dark">Rejected Phase</label>
+                             <select class="form-control" id="documentType1" onchange="createList(1)" name="documentType1" class="form-control form-control-lg form-control-solid" style="width:100%">
+                                 <option value=""></option>
+                                 <option value="7">Measurement</option>
+                                 <option value="8">Design</option>
+                                 <option value="9">Quotation</option>
+                            </select>
+                         </div>
+                         <div id="divscopelist1"></div>
+                     </div>
+                     <div class="form-group row">
+                         <div class="col-lg-12 col-md-12 col-sm-12">
+                                     <label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
+                                     <div class="input-group">
+ 
+                                         <input type="text" name="RejectComment1" id="RejectComment1"
+                                             class="form-control" value=""
+                                             placeholder="" >
+                                     </div>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-lg-12 col-md-12 col-sm-12">
+                             <button  type="button" onclick="" id="addRjctbtn" class="btn btn-primary font-weight-bold">Add More</button>
+                             <button  type="button" onclick="" id="resetRjctbtn" class="btn btn-primary font-weight-bold">Reset</button>
+                         </div>
+                      </div>
+                      <div  id="rjctbody" >
+                     
+                     </div>
+                     <div class="form-group row">
+                         <div class="col-lg-12 col-md-12 col-sm-12">
+                             <span id="ralert" style="color: red;"></span>
+                         </div>
+                     </div>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" id="kt_close_reject_inquiry_button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                 <button type="button" id="kt_reject_inquiry_button" class="btn btn-primary font-weight-bold">Reject</button>
+             </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+    
+   
 
       <!--begin::Scrolltop-->
       <div id="kt_scrolltop" class="scrolltop">
@@ -2431,52 +2426,53 @@
                  },
              });
          }
-         function addInstallment(){
-            var second_date = new Date(Date.now());
-            
-            document.getElementById("dynamicdiv").innerHTML='';
-            var cnt  =$('input#instCnt').val();
-            var vprcnt = (100-document.getElementById('txtAdvancePayment').value)/parseInt(cnt);
-            for (let i = 1; i <= parseInt(cnt); i++) {
-               //second_date.setMonth(second_date.getMonth()+i);
-               document.getElementById("dynamicdiv").innerHTML= document.getElementById("dynamicdiv").innerHTML+
-               ' <div class="form-group row">'+
-                '<div class="col-lg-6">'+
-                   '<label>Installment Percent:</label>'+
-                   '<div class="input-group">'+
-                         '<input  type="number" id="ipercent'+i+'" name="ipercent'+i+'" class="form-control" placeholder="0" value="'+vprcnt+'"  min="0" />'+
-                         '<div class="input-group-append">'+
-                            '<span class="input-group-text">'+
-                               '<i class="la la-percent"></i>'+
-                            '</span>'+
-                         '</div>'+
-                   '</div>'+
-                '</div>'+
-                '<div class="col-lg-6">'+
-                   '<label>Expectation Date:</label>'+
-                   '<div class="input-group date" data-provide="datepicker">'+
-                       '<input type="text" class="form-control" id="kt_datepicker'+i+'"  placeholder="Select date" />'+
-                       '<div class="input-group-append">'+
-                           '<span class="input-group-text">'+
-                               '<i class="la la-calendar-check-o"></i>'+
-                           '</span>'+
-                       '</div>'+
-                   '</div>'+
-                    '<span class="form-text text-muted">Please enter validity date</span>'+
-               '</div>'+
-             '</div>';
-            
-            }
-          
-            var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-            var myDate = new Date(y, m, 1);           
-            for (let i = 1; i <= parseInt(cnt); i++) {
-               myDate.setMonth(myDate.getMonth() + 1);
-               $('#kt_datepicker'+i).val(myDate.toLocaleDateString("en-US")).datepicker("update");
-            }
-         }
+         
       </script>
       <!--end::Page Scripts-->
+      <script>
+        
+         function addComponent(inquiryId) {
+             //let inquiryId = document.getElementById("inquiryId").value;
+             document.getElementById("divoptions").innerHTML ='';
+             $.ajax({
+                 type: "Post",
+                 url: baseURL + '/Inquiry/GetWorkscopesByinquiryId?inquiryId='+inquiryId,
+                 headers: {
+                     'Content-Type': 'application/json',
+                     'Access-Control-Allow-Origin': '*',
+                 },
+                 success: function(response) {
+                     //document.getElementById('checkbody').style.removeProperty('display');
+                     document.getElementById("inquiryId").value = inquiryId;
+                     document.getElementById("compCount").value = parseInt(response.data.length)*2 +1;
+                     document.getElementById("maxCount").value = parseInt(response.data.length)*2 +1;
+                     for (let i = 0; i < response.data.length; i++) {
+                     document.getElementById("divoptions").innerHTML +=
+                     '<option value="'+response.data[i].inquiryWorkscopeId+'">'+response.data[i].workScopeName+'</option>';
+                 }
+                      
+                 },
+                 error: function(XMLHttpRequest, textStatus, errorThrown) {
+         
+                 }
+             });
+         }
+         function createList(id){
+            let list = document.getElementById("documentType"+id).value;
+            if(list=="7" || list=="8"){
+                document.getElementById("divscopelist"+id).innerHTML =
+                `<label class="font-size-h6 font-weight-bolder text-dark">Workscope</label>`+
+                `<select class="form-control" id="kt_workscpe_`+id+`" name="kt_workscpe_`+id+`"	class="form-control form-control-lg form-control-solid"	style="width:100%">
+                 `+document.getElementById("divoptions").innerHTML+`
+                 </select>`
+            }else{
+             document.getElementById("divscopelist"+id).innerHTML ="";
+            }
+            document.getElementById("documentType"+id).options[document.getElementById("documentType"+id).options.selectedIndex].setAttribute("selected", "selected");
+         }
+         
+     </script>
+     <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
    </body>
    <!--end::Body-->
 </html>
