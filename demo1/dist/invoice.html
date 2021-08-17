@@ -213,6 +213,9 @@
          .start{
             height: 5px;
          }
+         .build{
+            height: 18px;
+         }
          .left {
            float: left;
            box-sizing: border-box;
@@ -314,7 +317,9 @@
               .emoj{
                  font-size: 30px;
               }
-              
+              .build{
+                 height: 18px;
+              }
             }
               @media (min-width: 1200px){
               .modal-xl {
@@ -366,6 +371,13 @@
                  font-size: 30px;
               }
               
+              @media (max-width: 1366){
+              
+              .build{
+                 height: 30px !important;
+              }
+              
+            } 
             } 
             @media (max-width: 400px){
               
@@ -390,8 +402,18 @@
               .divico{
                  width: 50px;
               }
+            }
+            @media (min-width: 280px){
+               .build{
+                 height: 30px !important;
+              }
+              
             } 
-            
+            @media (max-width: 653px){
+              .total{
+                 font-size: 9px !important;
+              }
+            }
       </style>
       <style>
          
@@ -428,9 +450,9 @@
                         <!--begin::Toolbar-->
                         <!--end::Toolbar-->
                         <div class="card-toolbar">
-                           <a href="#"    data-toggle="modal" data-target="#reject" class="btn btn-sm font-weight-bold headapp" style="background-color: #aa9d9d; color:#ffffff">
+                           <a href="#"     data-toggle="modal" data-target="#reject" class="btn btn-sm font-weight-bold headapp total" style="background-color: #aa9d9d; color:#ffffff">
                               <i >
-                                 <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
+                                 <span class="svg-icon svg-icon-2x svg-icon-white ml-n2 ">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  transform="rotate(-180 0 0)" width="15px" height="15px" viewBox="0 0 24 24" version="1.1">
                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -444,7 +466,7 @@
                               </i>
                               Reject Quotation
                            </a>
-                           <a href="#"  data-toggle="modal" data-target="#approve"  class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff">
+                           <a href="#"  data-toggle="modal" data-target="#approve"  class="btn btn-sm font-weight-bold headapp total" style="background-color: #F1583E; color:#ffffff">
                               <i >
                                  <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
@@ -556,7 +578,7 @@
                                        </p>
                                     </span> 
                                  </div>
-                                 <div style="display: flex;height: 18px;">
+                                 <div class="build" style="display: flex;">
                                     <span style="float: left;width: 100%;opacity: 80%;">
                                        <p id="branchAddress">
                                           United arab Emirates
@@ -604,7 +626,7 @@
                                        </p>
                                     </span> 
                                  </div>
-                                 <div style="display: flex;height: 18px;">
+                                 <div class="build" style="display: flex;">
                                     <span style="float: left;width: 100%;opacity: 80%;">
                                        <p id="buildingAddress">
                                           
@@ -649,7 +671,7 @@
                              </div>
                             
                            </div>
-                           <div id="total" style="padding-right: 25px;">
+                           <div id="total" class="total" style="padding-right: 25px;">
                               <div style="width: 100%;padding-top: 15px;"> 
                                  <span style="width: 150px;font-weight: bold;" class="totalpadd">Sub Total</span>
                                  <span style="float: right;" id="amount"></span>
@@ -1055,7 +1077,7 @@
             //alert(document.getElementById("inercontainer").style.padding);
          }
       </script>
-      <script>
+      <!-- <script>
          (function() {
   window.requestAnimFrame = (function(callback) {
     return window.requestAnimationFrame ||
@@ -1190,7 +1212,7 @@
 //   }, false);
 
 })();
-      </script>
+      </script> -->
       
       <script src="assets/plugins/global/plugins.bundle.js"></script>
       <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>

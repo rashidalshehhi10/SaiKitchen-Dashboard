@@ -85,7 +85,8 @@ jQuery(document).ready(function() {
 		},
 		success: function (response) {
 			console.log(response);
-				
+            document.getElementById('lblcustomerRegistered').innerHTML=response.data.customerRegistered;
+            document.getElementById('lblTotalInquiry').innerHTML=response.data.inquiryCompleted;
 			eventList =[];
 				for (var i = 0; i < response.data.calendar.length; i++) {
 					eventList.push(
