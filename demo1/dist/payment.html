@@ -65,6 +65,9 @@ License: You must have a valid license purchased only from themeforest(the above
         .start{
            height: 5px;
         }
+        .build{
+         height: 18px;
+        }
         .left {
           float: left;
           box-sizing: border-box;
@@ -163,10 +166,20 @@ License: You must have a valid license purchased only from themeforest(the above
              .modal-dialog.modal-xl {
                 max-width: 550px;
              }
-             .emoj{
-                font-size: 30px;
+            .with{
+                width: 80% !important;
+            }
+            .build{
+                height: 20px !important;
+            }
+            .right{
+                 font-size: 1rem !important;
+
              }
-             
+             .left{
+                font-size: 1rem !important;
+
+             }
            }
              @media (min-width: 1200px){
              .modal-xl {
@@ -210,15 +223,24 @@ License: You must have a valid license purchased only from themeforest(the above
              .emoj{
                 font-size: 50px;
              }
-             
+        
            } 
            @media (max-width: 700px){
              
              .emoj{
                 font-size: 30px;
              }
-             
+
            } 
+           @media (max-width: 731px){
+             
+             .emoj{
+                font-size: 30px;
+             }
+             .build{
+                height: 30px;
+            }
+           }
            @media (max-width: 400px){
              
              .emoj{
@@ -230,17 +252,59 @@ License: You must have a valid license purchased only from themeforest(the above
              .divico{
                 width: 70px;
              }
+             .right{
+                 font-size: 10px;
+                 height: 30px;
+             }
+             .left{
+                font-size: 10px;
+                height: 30px;
+             }
+             .build{
+                height: 30px;
+            }
            } 
            @media (max-width: 300px){
-             
-             .emoj{
-                font-size: 20px;
-             }
              .start{
                 height: 25px;
              }
              .divico{
                 width: 50px;
+             }
+            .build{
+                height: 30px;
+            }
+            .right{
+                 font-size: 8px;
+
+             }
+             .left{
+                font-size: 8px;
+
+             }
+           }
+           @media (min-width: 280px){
+             .total{
+                font-size: 10px !important;
+             }
+           }
+           @media (min-width: 1024px){
+            .with{
+                width: 99%;
+            }
+            .build{
+                height: 20px;
+            }
+            .right{
+                 font-size: 0.7rem;
+
+             }
+             .left{
+                font-size: 0.7rem;
+
+             }
+             .total{
+                font-size: 12px !important;
              }
            } 
            
@@ -1167,21 +1231,21 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </p>
                                      </span> 
                                   </div>
-                                  <div style="display: flex;height: 18px;">
+                                  <div style="display: flex;height: 20px;">
                                      <span style="float: left;width: 100%;font-weight: bold;">
                                         <p >
                                            SAI Kitchen & Wooden Safes Factory
                                         </p>
                                      </span> 
                                   </div>
-                                  <div style="display: flex;height: 18px;">
+                                  <div class="build" style="display: flex;height: 20px;">
                                      <span style="float: left;width: 100%;opacity: 80%;">
                                         <p id="branchAddress">
                                            United arab Emirates
                                         </p>
                                      </span> 
                                   </div>
-                                  <div style="display: flex;height: 18px;">
+                                  <div style="display: flex;height: 20px;">
                                      <span style="float: left;font-weight: bold;">
                                         <p>
                                            Email:
@@ -1193,7 +1257,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </p>
                                      </span> 
                                   </div>
-                                  <div style="display: flex;height: 18px;">
+                                  <div style="display: flex;height: 20px;">
                                      <span style="float: left;font-weight: bold;">
                                         <p>
                                            Phone:
@@ -1215,21 +1279,21 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </p>
                                      </span> 
                                   </div>
-                                  <div style="display: flex;height: 18px;">
+                                  <div style="display: flex;height: 20px;">
                                      <span style="float: left;width: 100%;font-weight: bold;">
                                         <p id="customerName">
                                            
                                         </p>
                                      </span> 
                                   </div>
-                                  <div style="display: flex;height: 18px;">
+                                  <div class="build" style="display: flex;">
                                      <span style="float: left;width: 100%;opacity: 80%;">
                                         <p id="buildingAddress">
                                            
                                         </p>
                                      </span> 
                                   </div>
-                                  <div style="display: flex;height: 18px;">
+                                  <div style="display: flex;height: 20px;">
                                      <span style="float: left;font-weight: bold;">
                                         <p >
                                            Email:
@@ -1241,7 +1305,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </p>
                                      </span> 
                                   </div>
-                                  <div style="display: flex;height: 18px;">
+                                  <div style="display: flex;height: 20px;">
                                      <span style="float: left;font-weight: bold;">
                                         <p>
                                            Phone:
@@ -1267,7 +1331,7 @@ License: You must have a valid license purchased only from themeforest(the above
                               </div>
                              
                             </div>
-                            <div id="total" style="padding-right: 25px;">
+                            <div id="total" class="total" style="padding-right: 25px;">
                                <div style="width: 100%;padding-top: 15px;"> 
                                   <span style="width: 150px;font-weight: bold;" class="totalpadd">Sub Total</span>
                                   <span style="float: right;" id="amount"></span>
@@ -1387,7 +1451,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="d-flex justify-content-between" style="float: right;padding-right: 25px;">
                                      
-                               <button id="savePdfbtn" onclick="changewidth()" type="button" class="btn btn-primary font-weight-bold" style="background-color: #733dd9 !important;border-color: #733dd9;" >Print Quotation</button>    </div>
+                               <button id="savePdfbtn" onclick="changewidth()" type="button" class="btn btn-primary font-weight-bold total" style="background-color: #733dd9 !important;border-color: #733dd9;" >Print Quotation</button>    </div>
                             <div id="footer" class="paddall" style="text-align: center;padding-top: 25px;">
                              for any enquiry reach out via <p style="font-weight: bold;display: inline-block;">info@sai-group.ae</p> or call on <p id="sbranchContact" style="font-weight: bold;display: inline-block;"></p>
                             </div>

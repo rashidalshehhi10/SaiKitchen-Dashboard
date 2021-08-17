@@ -341,7 +341,7 @@ var KTAppsUsersListDatatable = function() {
                     },
                 }, {
                     field: 'EmiratesId',
-                    title: 'Residence ID/ Passport',
+                    title: 'Makani#',
                     autoHide: true,
                     // type: 'date',
                     // format: 'MM/DD/YYYY',
