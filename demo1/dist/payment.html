@@ -164,7 +164,7 @@ License: You must have a valid license purchased only from themeforest(the above
          <style>
            @media (min-width: 1200px){
              .modal-dialog.modal-xl {
-                max-width: 550px;
+                max-width: 800px;
              }
             .with{
                 width: 80% !important;
@@ -210,7 +210,7 @@ License: You must have a valid license purchased only from themeforest(the above
            }
              @media (min-width: 576px){
              .modal-dialog {
-                max-width: 500px;
+                max-width: 800px;
                 margin: 1.75rem auto;
              }
              .emoj{
@@ -1081,8 +1081,8 @@ License: You must have a valid license purchased only from themeforest(the above
                       <!--end::Details-->
                       <!--begin::Toolbar-->
                       <!--end::Toolbar-->
-                      <div class="card-toolbar">
-                         <a href="#" data-toggle="modal" data-target="#ScheduleDate"  class="btn btn-sm font-weight-bold" style="background-color: #F1583E; color:#ffffff">
+                      <div class="card-toolbar" id="paybtn" style="display: none;">
+                         <a href="#"  data-toggle="modal" data-target="#paylist" onclick="GetUnPaid()"  class="btn btn-sm font-weight-bold" style="background-color: #F1583E; color:#ffffff">
                             <i>
                                <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
                                   <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
@@ -1449,12 +1449,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                   sai factory it's able to keep the materials after production finish maximum for ten days, after that storage charge will be applicable 200 AED DAILY
                                </div>
                             </div>
-                            <div class="d-flex justify-content-between" style="float: right;padding-right: 25px;">
-                                     
-                               <button id="savePdfbtn" onclick="changewidth()" type="button" class="btn btn-primary font-weight-bold total" style="background-color: #733dd9 !important;border-color: #733dd9;" >Print Quotation</button>    </div>
                             <div id="footer" class="paddall" style="text-align: center;padding-top: 25px;">
                              for any enquiry reach out via <p style="font-weight: bold;display: inline-block;">info@sai-group.ae</p> or call on <p id="sbranchContact" style="font-weight: bold;display: inline-block;"></p>
                             </div>
+                            <div class="d-flex" style="float: right;padding-right: 10px;display: flex;">
+                                    
+                                <button id="savePdfbtn" onclick="changewidth()" type="button" class="btn btn-primary font-weight-bold" style="background-color: #733dd9 !important;border-color: #733dd9;" >Print Quotation</button>
+                              </div>
+                              <div style="display: flex;height: 50px;"></div>
                          </div> 
                       </div>
                       <!--end::Dashboard-->
@@ -2650,6 +2652,148 @@ License: You must have a valid license purchased only from themeforest(the above
 		</span>
     </div>
     <!--end::Scrolltop-->
+
+    <div class="modal fade" id="paylist"  tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-x1"  role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Pending Payment</h5>
+                    
+                    <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                     </div>
+                </div>
+                <div id="rinvoiceno" style="padding: 0px 1.5rem 0px;border-bottom: 0px;opacity: 50%;font-size: 11px;">
+                   
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_payment" action="" name="kt_payment">
+                    <input type="hidden" id="quotationid" />
+                    <div id="body" class="modal-body">     
+
+                        <div class="row align-items-center">
+                            <div class="row col ">
+                                <div style="font-weight: bold;" class="col">
+                                    payment Name:
+                                </div>
+                                <div style="font-weight: bold;" class="col">
+                                    Amount:
+                                </div>
+                            </div> 
+                            <div class="row col ">
+                                <div class="col ">
+                                    
+                                </div>
+                                <div class="col ">                                 
+                                   
+                                </div>
+                            </div>
+                        </div>            
+                    </div>                  
+                    </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="payupload"  tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-x1"  role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                    <h5 class="modal-title" id="inoiceModal" style="font-weight: bold;">Upload Invoice</h5>
+                    
+                    <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                     </div>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_upload" action="" name="kt_upload">
+                    <div id="bodyupload" class="modal-body">     
+
+                        <div class="form-group row">
+                        <div class="col-lg-6">
+                           <label >Payment mode:</label>
+                           <div class="input-group input-group-lg input-group-solid">
+                              <select class="form-control" id="method" name="method"
+                                 class="form-control form-control-lg form-control-solid"
+                                 style="width:100%">
+                                 <option value="1" data-select2-id="1">Cash</option>
+                                 <option value="2" >Cheque</option>
+								 <option value="3" >Bank Transfer</option>
+                              </select>
+                           </div>
+                        </div>
+                        </div>  
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                               <label >upload files:</label>
+                               <div >
+                                <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_3" name="measurementDrawing3">
+                                    <div class="dropzone-msg dz-message needsclick">
+                                        <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                        <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                                    </div>
+                                </div>
+                                </div>      						
+                            </div> 
+                            </div> 	          
+                    </div>                  
+                    </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="payoption"  tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-x1"  role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                    <h5 class="modal-title" id="payModal" style="font-weight: bold;">Payment Option</h5>
+                    
+                    <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                     </div>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_option" action="" name="kt_option">
+                    <div id="bodyoption" class="modal-body">     
+
+                        <div class="form-group row">
+                        <div class="col-lg-6">
+
+                           <label >Payment mode:</label>
+                           <div class="input-group input-group-lg input-group-solid">
+                              <select class="form-control" id="paymethod" name="paymethod"
+                                 class="form-control form-control-lg form-control-solid"
+                                 style="width:100%">
+								 <option value="" ></option>
+                                 <option value="1" data-select2-id="1">Cash</option>
+                                 <option value="2" >Cheque</option>
+								 <option value="3" >Bank Transfer</option>
+								 <option value="4" >Online Payment</option>
+                              </select>
+                           </div>
+                        </div>
+                        </div>  
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                               <div id="rcptdiv" style="display: none;" >
+                                 <button type="button" id="rcptbtn" onclick="opensales()"  class="btn btn-primary btn-sm" >generate reciept</button>
+                                </div>      						
+                            </div> 
+                            </div> 	          
+                    </div>                  
+                    </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
     <script>
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
     </script>
@@ -2735,7 +2879,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
     <script src="assets/js/pages/sai-kitchen/firebase.js" type="module"></script>
 
-
+    <script src="assets/js/pages/sai-kitchen/dropzone.js" type="Module"></script>
     <!-- <script src="assets/js/pages/sai-kitchen/payment.js" type="module"></script> -->
 
 
@@ -2848,6 +2992,18 @@ License: You must have a valid license purchased only from themeforest(the above
             //alert(document.getElementById("inercontainer").style.padding);
             var printContents = document.getElementById("innerdata").outerHTML;
             var originalContents = document.body.innerHTML;
+            originalContents +=`<script>
+            $('#paymethod').on('change', function() {
+                if(this.value != ''){
+                    document.getElementById("rcptdiv").style.removeProperty('display');
+
+                }else
+                    document.getElementById("rcptdiv").style.display ="none";
+            });
+            function opensales(){
+                window.open(window.location.origin+'/salesorderinvoice.html','_blank');
+            } <script/>
+            `;
             document.body.innerHTML = printContents;
             window.print();
             document.body.innerHTML = originalContents;
@@ -2861,8 +3017,10 @@ License: You must have a valid license purchased only from themeforest(the above
     var code =$('#kt_subheader_search_form').val().toLowerCase();
     if(code==''){
         document.getElementById("innerdata").style.display = 'none';
+        document.getElementById("paybtn").style.display = 'none';
        return false;
     }
+    document.getElementById("quotationid").value=code;
     $.ajax({
 		type: "Post",
 		url: baseURL + '/Payment/GetQuotationDetailsFromCode?code='+code,
@@ -2876,12 +3034,14 @@ License: You must have a valid license purchased only from themeforest(the above
 			if(response.data==null)
             {
                 document.getElementById("innerdata").style.display = 'none';
+                document.getElementById("paybtn").style.display = 'none';
              return false;
             }
             $(".divoddendrow").remove();
             $(".divico").remove();
             $(".iterms").remove();
             document.getElementById("innerdata").style.removeProperty('display');	
+            document.getElementById("paybtn").style.removeProperty('display');
 			if (response.isError == false) {
                   document.getElementById("invoID").innerText = response.data.invoiceNo;
                   document.getElementById("invoDate").innerText = response.data.createdDate;
@@ -3024,6 +3184,63 @@ License: You must have a valid license purchased only from themeforest(the above
 		}
 	});
 }
+function GetUnPaid(){
+    var code =$('#kt_subheader_search_form').val().toLowerCase();
+    $(".tormv").remove();
+    if(code==''){
+       return false;
+    }
+    $.ajax({
+		type: "Post",
+		url: baseURL + '/Payment/GetUnPaidPaymentByCode?code='+document.getElementById("quotationid").value,
+
+		headers: {
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*',
+		},
+		success: function (response) {
+			console.log(response);
+				for (var i = 0; i < response.data.payments.length; i++) {
+                    document.getElementById("body").innerHTML +=
+                    `<div class="row align-items-center tormv" >
+                        <div class="row col ">
+                                <div   class="col">
+                                    `+response.data.payments[i].paymentName+`
+                                </div>
+                                <div   class="col">
+                                    `+(parseInt(response.data.payments[i].paymentAmount)/100).toFixed(2)+`
+                                </div>
+                            </div>    
+                            <div class="row col ">      
+                                <div class="col " style="padding-bottom:2px;">
+                                    <button type="button" data-toggle="modal" data-target="#payupload"  id="upload_button" class="btn btn-light-primary btn-sm" >upload invoice</button>
+                                </div>
+                                <div class="col " style="padding-bottom:2px;">                                 
+                                    <button type="button" data-toggle="modal" data-target="#payoption" id="option_button" class="btn btn-primary btn-sm" >payment option</button>
+                                </div>
+                            </div>
+                        </div>  `;
+				}
+
+
+
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+		}
+	});
+}
+$('#paymethod').on('change', function() {
+    
+    if(this.value != ''){
+        document.getElementById("rcptdiv").style.removeProperty('display');
+
+    }else
+        document.getElementById("rcptdiv").style.display ="none";
+  });
+  function opensales(){
+    window.open(window.location.origin+'/salesorderinvoice.html','_blank');
+  }
 </script>
     <!--end::Page Scripts-->
 </body>

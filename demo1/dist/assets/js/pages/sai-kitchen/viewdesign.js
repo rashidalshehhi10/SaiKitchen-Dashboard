@@ -581,4 +581,3 @@ pannellum.viewer(url, {
 	});
 
     });
-

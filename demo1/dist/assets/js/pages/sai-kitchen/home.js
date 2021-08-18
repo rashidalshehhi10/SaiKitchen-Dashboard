@@ -1,6 +1,7 @@
 "use strict";
 import { baseURL } from './constant.js'
 var eventList = new Array();
+let user;
 // var script = document.createElement('script');
 // script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 // script.type = 'text/javascript';
@@ -74,35 +75,54 @@ jQuery(document).ready(function() {
 });
 // Class Initialization
 jQuery(document).ready(function() {
+    var login = localStorage.getItem("user");
+	if (login !== null) {
+		user = JSON.parse(login);
+		console.log(user);
+    }
     
 	$.ajax({
 		type: "Post",
-		url: baseURL + '/Dashboard/ViewDashborad',
+		url: baseURL + '/Dashboard/ViewDashboard',
 
 		headers: {
-			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'userId': user.data.userId,
+        'userToken': user.data.userToken,
+        'userRoleId': user.data.userRoles[0].userRoleId,
+        'branchId': user.data.userRoles[0].branchId,
+        'branchRoleId': user.data.userRoles[0].branchRoleId,
+        'Access-Control-Allow-Origin': '*',
 		},
 		success: function (response) {
 			console.log(response);
             document.getElementById('lblcustomerRegistered').innerHTML=response.data.customerRegistered;
-            document.getElementById('lblTotalInquiry').innerHTML=response.data.inquiryCompleted;
+            document.getElementById('lblTotalInquiry').innerHTML=response.data.totalInquiries;
+            document.getElementById('lblTotalQuotation').innerHTML=response.data.totalquotations;
+            document.getElementById('lblTotalJobOrder').innerHTML=response.data.totalJoborder;
+            document.getElementById('lblContactedCustomer').innerHTML=response.data.customerContacted;
+            document.getElementById('lblNeedToContactCustomer').innerHTML=response.data.customerNeedtoContact;
+            document.getElementById('lblCompletedInquiry').innerHTML=response.data.inquiryCompleted;
+            document.getElementById('lblPendingInquiry').innerHTML=response.data.inquiryIncomplete;
+            document.getElementById('lblApprovedQuotation').innerHTML=response.data.quotationAccepted;
+            document.getElementById('lblRejectedQuotation').innerHTML=response.data.quotationRejected;
 			eventList =[];
 				for (var i = 0; i < response.data.calendar.length; i++) {
-					eventList.push(
+				try{	eventList.push(
 						{
 							"title":response.data.calendar[i].workscopeName ,
 							"start":(new Date(response.data.calendar[i].measurementScheduleDate)).toISOString(),
 							"className": "fc-event-danger fc-event-solid-warning",
-							"description": response.data.calendar[i].workscopeName +' Measurement' 
+							"description": response.data.calendar[i].workscopeName +' Measurement of '+ response.data.calendar[i].inquiryWorkscopeId 
 						},
 						{
 							"title":response.data.calendar[i].workscopeName ,
 							"start":(new Date(response.data.calendar[i].designScheduledate)).toISOString(),
 							"className": "fc-event-light fc-event-solid-primary",
-							"description": response.data.calendar[i].workscopeName +' Design'
+							"description": response.data.calendar[i].workscopeName +' Design of '+ response.data.calendar[i].inquiryWorkscopeId 
 						}
 					);
+                }catch(error){}
 				}
 
 				KTCalendarBasic.init();
