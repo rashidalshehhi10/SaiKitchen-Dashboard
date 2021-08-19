@@ -2763,7 +2763,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!--begin::Form-->
                 <form class="form" id="kt_option" action="" name="kt_option">
                     <div id="bodyoption" class="modal-body">     
-
+                    <input type="hidden" id="paymentId" />
                         <div class="form-group row">
                         <div class="col-lg-6">
 
@@ -3012,7 +3012,9 @@ License: You must have a valid license purchased only from themeforest(the above
          }
     </script>
 <script>
-   
+    function calloption(value){
+        document.getElementById("paymentId").value = value;
+    }
     function callapi() {
     var code =$('#kt_subheader_search_form').val().toLowerCase();
     if(code==''){
@@ -3184,63 +3186,65 @@ License: You must have a valid license purchased only from themeforest(the above
 		}
 	});
 }
-function GetUnPaid(){
-    var code =$('#kt_subheader_search_form').val().toLowerCase();
-    $(".tormv").remove();
-    if(code==''){
-       return false;
+    function GetUnPaid(){
+        var code =$('#kt_subheader_search_form').val().toLowerCase();
+        $(".tormv").remove();
+        if(code==''){
+        return false;
+        }
+        $.ajax({
+            type: "Post",
+            url: baseURL + '/Payment/GetUnPaidPaymentByCode?code='+document.getElementById("quotationid").value,
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            success: function (response) {
+                console.log(response);
+                    for (var i = 0; i < response.data.payments.length; i++) {
+                        document.getElementById("body").innerHTML +=
+                        `<div class="row align-items-center tormv" >
+                            <div class="row col ">
+                                    <div   class="col">
+                                        `+response.data.payments[i].paymentName+`
+                                    </div>
+                                    <div   class="col">
+                                        `+(parseInt(response.data.payments[i].paymentAmount)/100).toFixed(2)+`
+                                    </div>
+                                </div>    
+                                <div class="row col ">      
+                                    <div class="col " style="padding-bottom:2px;">
+                                        <button type="button" data-toggle="modal" data-target="#payupload"  id="upload_button" class="btn btn-light-primary btn-sm" >upload invoice</button>
+                                    </div>
+                                    <div class="col " style="padding-bottom:2px;">                                 
+                                        <button type="button" data-toggle="modal" onclick="calloption(`+response.data.payments[i].paymentId+`)" data-target="#payoption" id="option_button" class="btn btn-primary btn-sm" >payment option</button>
+                                    </div>
+                                </div>
+                            </div>  `;
+                    }
+
+
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
     }
-    $.ajax({
-		type: "Post",
-		url: baseURL + '/Payment/GetUnPaidPaymentByCode?code='+document.getElementById("quotationid").value,
+    $('#paymethod').on('change', function() {
+        
+        if(this.value != ''){
+            document.getElementById("rcptdiv").style.removeProperty('display');
 
-		headers: {
-			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*',
-		},
-		success: function (response) {
-			console.log(response);
-				for (var i = 0; i < response.data.payments.length; i++) {
-                    document.getElementById("body").innerHTML +=
-                    `<div class="row align-items-center tormv" >
-                        <div class="row col ">
-                                <div   class="col">
-                                    `+response.data.payments[i].paymentName+`
-                                </div>
-                                <div   class="col">
-                                    `+(parseInt(response.data.payments[i].paymentAmount)/100).toFixed(2)+`
-                                </div>
-                            </div>    
-                            <div class="row col ">      
-                                <div class="col " style="padding-bottom:2px;">
-                                    <button type="button" data-toggle="modal" data-target="#payupload"  id="upload_button" class="btn btn-light-primary btn-sm" >upload invoice</button>
-                                </div>
-                                <div class="col " style="padding-bottom:2px;">                                 
-                                    <button type="button" data-toggle="modal" data-target="#payoption" id="option_button" class="btn btn-primary btn-sm" >payment option</button>
-                                </div>
-                            </div>
-                        </div>  `;
-				}
-
-
-
-		},
-		error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-		}
-	});
-}
-$('#paymethod').on('change', function() {
-    
-    if(this.value != ''){
-        document.getElementById("rcptdiv").style.removeProperty('display');
-
-    }else
-        document.getElementById("rcptdiv").style.display ="none";
-  });
-  function opensales(){
-    window.open(window.location.origin+'/salesorderinvoice.html','_blank');
-  }
+        }else
+            document.getElementById("rcptdiv").style.display ="none";
+    });
+    function opensales(){
+        let paymentId = document.getElementById("paymentId").value;
+        let paymentModeId= document.getElementById("paymethod").value;
+        window.open(window.location.origin+'/salesorderinvoice.html?paymentId='+paymentId+'&paymentModeId='+paymentModeId,'_blank');
+    }
 </script>
     <!--end::Page Scripts-->
 </body>

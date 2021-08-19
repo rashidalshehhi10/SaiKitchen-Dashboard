@@ -107,17 +107,26 @@ jQuery(document).ready(function() {
             document.getElementById('lblApprovedQuotation').innerHTML=response.data.quotationAccepted;
             document.getElementById('lblRejectedQuotation').innerHTML=response.data.quotationRejected;
 			eventList =[];
+            var mstart ='',dstart='';
 				for (var i = 0; i < response.data.calendar.length; i++) {
+                    if(response.data.calendar[i].measurementScheduleDate !='')
+                     mstart = (new Date(response.data.calendar[i].measurementScheduleDate)).toISOString();
+                    else
+                      mstart ='';
+                    if(response.data.calendar[i].designScheduledate !='')
+                      dstart = (new Date(response.data.calendar[i].designScheduledate)).toISOString();
+                     else
+                       dstart ='';
 				try{	eventList.push(
 						{
 							"title":response.data.calendar[i].workscopeName ,
-							"start":(new Date(response.data.calendar[i].measurementScheduleDate)).toISOString(),
+							"start":mstart,
 							"className": "fc-event-danger fc-event-solid-warning",
 							"description": response.data.calendar[i].workscopeName +' Measurement of '+ response.data.calendar[i].inquiryWorkscopeId 
 						},
 						{
 							"title":response.data.calendar[i].workscopeName ,
-							"start":(new Date(response.data.calendar[i].designScheduledate)).toISOString(),
+							"start":dstart,
 							"className": "fc-event-light fc-event-solid-primary",
 							"description": response.data.calendar[i].workscopeName +' Design of '+ response.data.calendar[i].inquiryWorkscopeId 
 						}
