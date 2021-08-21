@@ -849,7 +849,7 @@
                                   <div style="display: flex;font-size: 1rem;"> 
                                      <span>How much do you like this desgin?</span>
                                   </div>
-                                  <div id="imoji" style="vertical-align: bottom;">
+                                  <div id="himoji" style="vertical-align: bottom;">
                                     <input type="hidden" id="hemoji" value="0" /> 
                                     <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="like(1)">
                                       <span id="emoj1" class="emo1">   😶  </span >
@@ -913,7 +913,7 @@
                               <div class="form-group row">
                                  <div class="col-lg-12 mb-lg-0 mb-12">
                                     <label>Payment method:</label>
-                                    <select id="slctapprve" class="form-control datatable-input" data-col-index="2">
+                                    <select id="slctapprve" class="form-control datatable-input" data-col-index="2" >
                                      <option value="">Select</option>
                                      <option value="1">Cash</option>
                                      <option value="2">Cheque</option>
@@ -959,7 +959,7 @@
                                <div style="display: flex;font-size: 1rem;"> 
                                   <span>How much do you like this desgin?</span>
                                </div>
-                               <div id="imoji" style="vertical-align: bottom;">
+                               <div id="aimoji" style="vertical-align: bottom;">
                                  <input type="hidden" id="aemoji" value="0" /> 
                                     <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="appr(1)">
                                       <span id="aemoj1" class="emo1">   😶  </span >
@@ -983,11 +983,11 @@
                                        <span id="aemoj7" class="emo7">   😍  </span >
                                       </div>
                                  <!--  <div style="float: right;padding-bottom: 5px;" id="prcnt" class="prcnt">%</div> -->
-                                  <div  style="border: 0px;padding-bottom: 20px;padding-top: 25px;text-align:center;width: 100%;display: flex;">
-                                    <button id="approvebtn"  type="button" style="width: 80%; background-color: #F1583E;width: 100%;" class="btn btn-light-primary font-weight-bold" data-dismiss="modal"><span style="color:beige ;z-index: 1;"> Approve Quotation</span></button>
-                                  </div>
+                                  
                                  </div>
-                              
+                                 <div  style="border: 0px;padding-bottom: 20px;padding-top: 25px;text-align:center;width: 100%;display: flex;">
+                                    <button id="approvebtn"   type="button" style="width: 80%; background-color: #F1583E;width: 100%;" class="btn btn-light-primary font-weight-bold" data-dismiss="modal"><span style="color:beige ;z-index: 1;"> Approve Quotation</span></button>
+                                  </div>
                               
                            </div>
                           
@@ -1046,6 +1046,7 @@
          var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
          function like(id){         
            //var heart = document.getElementById("hemoji").value;
+           document.getElementById("emoj1").style.removeProperty('border');
            for (let i = 1; i <= 7; i++) {
               if(i == id){
                document.getElementById("emoj"+id).style.backgroundColor  = '#F1583E';
@@ -1058,6 +1059,7 @@
          }
          function appr(id){         
            //var heart = document.getElementById("hemoji").value;
+           document.getElementById("aemoj1").style.removeProperty('border');
            for (let i = 1; i <= 7; i++) {
               if(i == id){
                document.getElementById("aemoj"+id).style.backgroundColor  = '#F1583E';

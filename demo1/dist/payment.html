@@ -2731,16 +2731,18 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="form-group row">
                             <div class="col-lg-6">
                                <label >upload files:</label>
-                               <div >
-                                <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_3" name="measurementDrawing3">
-                                    <div class="dropzone-msg dz-message needsclick">
-                                        <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
-                                        <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
-                                    </div>
-                                </div>
+                               <div  id="divdropzone">
+                                
                                 </div>      						
                             </div> 
-                            </div> 	          
+                        </div> 	
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                               <div  >
+                                 <button type="button" id="sendbtn" onclick="sendInvoice()"  class="btn btn-primary btn-sm" >Send Invoice</button>
+                                </div>      						
+                            </div> 
+                        </div> 	            
                     </div>                  
                     </form>
                 <!--end::Form-->
@@ -2769,7 +2771,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                            <label >Payment mode:</label>
                            <div class="input-group input-group-lg input-group-solid">
-                              <select class="form-control" id="paymethod" name="paymethod"
+                              <select class="form-control" id="paymethod" onchange="changemethod()" name="paymethod"
                                  class="form-control form-control-lg form-control-solid"
                                  style="width:100%">
 								 <option value="" ></option>
@@ -2787,7 +2789,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                  <button type="button" id="rcptbtn" onclick="opensales()"  class="btn btn-primary btn-sm" >generate reciept</button>
                                 </div>      						
                             </div> 
-                            </div> 	          
+                        </div> 	          
                     </div>                  
                     </form>
                 <!--end::Form-->
@@ -2879,7 +2881,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
     <script src="assets/js/pages/sai-kitchen/firebase.js" type="module"></script>
 
-    <script src="assets/js/pages/sai-kitchen/dropzone.js" type="Module"></script>
+    <!-- <script src="assets/js/pages/sai-kitchen/dropzone.js" type="Module"></script> -->
     <!-- <script src="assets/js/pages/sai-kitchen/payment.js" type="module"></script> -->
 
 
@@ -2992,7 +2994,7 @@ License: You must have a valid license purchased only from themeforest(the above
             //alert(document.getElementById("inercontainer").style.padding);
             var printContents = document.getElementById("innerdata").outerHTML;
             var originalContents = document.body.innerHTML;
-            originalContents +=`<script>
+           /*  originalContents +=`<script>
             $('#paymethod').on('change', function() {
                 if(this.value != ''){
                     document.getElementById("rcptdiv").style.removeProperty('display');
@@ -3003,7 +3005,7 @@ License: You must have a valid license purchased only from themeforest(the above
             function opensales(){
                 window.open(window.location.origin+'/salesorderinvoice.html','_blank');
             } <script/>
-            `;
+            `; */
             document.body.innerHTML = printContents;
             window.print();
             document.body.innerHTML = originalContents;
@@ -3215,7 +3217,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>    
                                 <div class="row col ">      
                                     <div class="col " style="padding-bottom:2px;">
-                                        <button type="button" data-toggle="modal" data-target="#payupload"  id="upload_button" class="btn btn-light-primary btn-sm" >upload invoice</button>
+                                        <button type="button" data-toggle="modal" onclick="createUpload();calloption(`+response.data.payments[i].paymentId+`);" data-target="#payupload"  id="upload_button" class="btn btn-light-primary btn-sm" >upload invoice</button>
                                     </div>
                                     <div class="col " style="padding-bottom:2px;">                                 
                                         <button type="button" data-toggle="modal" onclick="calloption(`+response.data.payments[i].paymentId+`)" data-target="#payoption" id="option_button" class="btn btn-primary btn-sm" >payment option</button>
@@ -3223,7 +3225,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                             </div>  `;
                     }
-
+            
 
 
             },
@@ -3232,19 +3234,126 @@ License: You must have a valid license purchased only from themeforest(the above
             }
         });
     }
-    $('#paymethod').on('change', function() {
+    /* $('#paymethod').on('change', function() {
         
         if(this.value != ''){
             document.getElementById("rcptdiv").style.removeProperty('display');
 
         }else
             document.getElementById("rcptdiv").style.display ="none";
-    });
+    }); */
     function opensales(){
         let paymentId = document.getElementById("paymentId").value;
         let paymentModeId= document.getElementById("paymethod").value;
         window.open(window.location.origin+'/salesorderinvoice.html?paymentId='+paymentId+'&paymentModeId='+paymentModeId,'_blank');
     }
+    function changemethod(){
+        
+        if(document.getElementById("paymethod").value != ''){
+            document.getElementById("rcptdiv").style.removeProperty('display');
+
+        }else
+            document.getElementById("rcptdiv").style.display ="none";
+    }
+    var measurementFile=new Array();
+    function createUpload(){
+        Dropzone.autoDiscover = false;
+        measurementFile =[];
+        document.getElementById("divdropzone").innerHTML =`
+        <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_3" name="measurementDrawing3">
+                                    <div class="dropzone-msg dz-message needsclick">
+                                        <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                        <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                                    </div>
+                                </div><span id="error"></span>
+        `;
+         $('#kt_dropzone_3').dropzone({
+            url: baseURL + "/User", // Set the url for your upload script location
+            type: "Head",
+            headers : {
+                'Access-Control-Allow-Origin': '*',
+            },
+            paramName: "file", // The name that will be used to transfer the file
+            maxFiles: 50,
+            maxFilesize: 10, // MB
+            addRemoveLinks: true,
+            removedfile:function(file) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        // event.target.result contains base64 encoded image
+                        var base64String = event.target.result;
+                        var fileName = file.name;
+                        var finalbase64 = base64String.split(",")[1];
+                        // handlePictureDropUpload(base64String ,fileName );
+                         removeA(measurementFile,finalbase64);
+                    };
+                    reader.readAsDataURL(file);
+                    
+                file.previewElement.remove();
+    
+            },
+      
+            acceptedFiles: "image/*,application/pdf,.png,.mp4",
+            
+        init: function() {
+            this.on("addedfile", function (file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    // event.target.result contains base64 encoded image
+                    var base64String = event.target.result;
+                    var fileName = file.name;
+                    var finalbase64 = base64String.split(",")[1]
+                    measurementFile.push(finalbase64);
+                    //document.getElementById("file"+i).innerHTML += finalbase64+';';
+                    // handlePictureDropUpload(base64String ,fileName );
+
+                };
+                reader.readAsDataURL(file);
+
+            });
+        }
+            
+          });
+
+        function removeA(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax= arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+    }
+
+    function sendInvoice(){
+        var paymentModeId = document.getElementById("method").value;
+        var paymentId = document.getElementById("paymentId").value;
+		var payment={
+        "paymentId":paymentId,
+        "paymentModeId":paymentModeId,
+		"files":measurementFile,
+        }
+        const data = JSON.stringify(payment);
+        $.ajax({
+            type: "Post",
+            url: baseURL + '/Payment/UploadInvoice',
+            data:data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            success: function (response) {
+                console.log(response);
+                $('#payupload').modal('hide');
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+              document.getElementById("error").value = "there is a problem in sending..";
+            }
+        });
+    }
+
 </script>
     <!--end::Page Scripts-->
 </body>

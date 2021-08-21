@@ -187,7 +187,20 @@ jQuery(document).ready(function() {
 
 
 });
+$( "#txtdescription" ).blur(function() {
+  if($('#txtdescription').val()!=''){
+    $('#txtdescription').css("border-color","#E8E4E4");
+  }
+});
 $( "#rejectbtn" ).click(function() {
+  if($('#txtdescription').val()==''){
+    $('#txtdescription').css("border-color","#C80000");
+   return false;
+  }
+  if($('#hemoji').val()=='0'){
+    document.getElementById("emoj1").style.border = "solid 1px red";
+   return false;
+  }
     var rejectObj={
         inquiryId:document.getElementById("inquiryId").value,
         reason:document.getElementById("txtdescription").value,
@@ -215,7 +228,18 @@ $( "#rejectbtn" ).click(function() {
   });
 
   $('#slctapprve').on('change', function() {
-    
+    if(this.value !=''){
+      
+      $('#slctapprve').css("border-color","#e4e6ef");
+    }
+
+    if(this.value ==''){
+      document.getElementById("divPymntType").style.removeProperty('display');
+      document.getElementById("cardpay").style.removeProperty('display');
+      document.getElementById("cardpay").style.display ="none";
+      document.getElementById("divPymntType").style.display ="none";
+    }
+
     if(this.value == '1'){
         document.getElementById("cardpay").style.display ="none";
         document.getElementById("divPymntType").style.removeProperty('display');
@@ -282,6 +306,14 @@ $( "#rejectbtn" ).click(function() {
     });
   
     $("#approvebtn" ).click(function() {
+      if($('#slctapprve').val()==''){
+        $('#slctapprve').css("border-color","#C80000");
+       return false;
+      }
+      if($('#aemoji').val()=='0'){
+        document.getElementById("aemoj1").style.border = "solid 1px red";
+       return false;
+      }
       if($('#slctapprve').val()!='4'){
         var apprvObj={
           inquiryId:document.getElementById("inquiryId").value,
