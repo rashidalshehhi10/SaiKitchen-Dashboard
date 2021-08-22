@@ -2182,7 +2182,7 @@
                               <div class="col-lg-6">
                                  <label>Valid Till:</label>
                                  <div class="input-group date">
-                                     <input type="text" class="form-control" id="kt_datepicker_2" readonly="readonly" placeholder="Select date" />
+                                     <input type="text" class="form-control datepicker" id="kt_datepicker_2" readonly="readonly" placeholder="Select date" />
                                      <div class="input-group-append">
                                          <span class="input-group-text">
                                              <i class="la la-calendar-check-o"></i>
@@ -2471,7 +2471,7 @@
                 '<div class="col-lg-6">'+
                    '<label>Expectation Date:</label>'+
                    '<div class="input-group date" data-provide="datepicker">'+
-                       '<input type="text" class="form-control" id="kt_datepicker'+i+'"  placeholder="Select date" />'+
+                       '<input type="text" class="form-control datepicker" id="kt_datepicker'+i+'"  placeholder="Select date" />'+
                        '<div class="input-group-append">'+
                            '<span class="input-group-text">'+
                                '<i class="la la-calendar-check-o"></i>'+
@@ -2490,7 +2490,9 @@
                myDate.setMonth(myDate.getMonth() + 1);
                $('#kt_datepicker'+i).val(myDate.toLocaleDateString("en-US")).datepicker("update");
             }
+            
          }
+        
       </script>
       <!--end::Page Scripts-->
    </body>

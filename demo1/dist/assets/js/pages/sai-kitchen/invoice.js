@@ -218,7 +218,24 @@ $( "#rejectbtn" ).click(function() {
         },
         success: function(response) {
             console.log(response);
+
             
+                        if (response.isError == false) {
+                            window.close();
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -315,31 +332,76 @@ $( "#rejectbtn" ).click(function() {
        return false;
       }
       if($('#slctapprve').val()!='4'){
-        var apprvObj={
-          inquiryId:document.getElementById("inquiryId").value,
-          FeedBackReactionId:document.getElementById("aemoji").value,
-          SelectedPaymentMode:$('#slctapprve').val()
-        }
-        const data = JSON.stringify(apprvObj);
-        // console.log(data);
-        $.ajax({
-            type: "post",
-            url:  baseURL +'/Quotation/ClientApproveQuotation' ,
-            data: data,
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-            },
-            success: function(response) {
-                //console.log(response);
-                $('#msg').modal('show');
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              // $('#msg').modal('show');
-            }
+        document.getElementById("load").style.removeProperty('display');
+       
+        document.getElementById("amount").style.width ="150px";
+        document.getElementById("amount").style.textAlign = "right";
+        document.getElementById("discount").style.width ="150px";
+        document.getElementById("discount").style.textAlign = "right";
+        document.getElementById("measurementFee").style.width ="150px";
+        document.getElementById("measurementFee").style.textAlign = "right";
+        document.getElementById("vat").style.width ="150px";
+        document.getElementById("vat").style.textAlign = "right";
+        document.getElementById("totalAmount").style.width ="150px";
+        document.getElementById("totalAmount").style.textAlign = "right";
+        domtoimage.toPng(document.getElementById('kt_tab_diagram'))
+        .then(function (blob) {     
+            var pdf = new jsPDF('l', 'pt', [$('#kt_tab_diagram').width(), $('#kt_tab_diagram').height()]);
+            pdf.addImage(blob, 'JPG', 0, 0, $('#kt_tab_diagram').width(), $('#kt_tab_diagram').height(),undefined,'FAST');
+            //pdf.save("test.pdf");
+            var file = pdf.output();
+            var out =btoa(file);
+              var apprvObj={
+                inquiryId:document.getElementById("inquiryId").value,
+                FeedBackReactionId:document.getElementById("aemoji").value,
+                paymentIntentToken:'',
+                clientSecret:'',
+                PaymentMethod:'',
+                SelectedPaymentMode:$('#slctapprve').val(),
+                pdf: out,
+              }
+              const data = JSON.stringify(apprvObj);
+              // console.log(data);
+              $.ajax({
+                  type: "post",
+                  url:  baseURL +'/Quotation/ClientApproveQuotation' ,
+                  data: data,
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Allow-Origin': '*',
+                  },
+                  success: function(response) {
+                      //console.log(response);
+                      
+            
+                      if (response.isError == false) {
+                        document.getElementById("load").style.display = 'none';
+                      $('#msg').modal('show');
+                    } else {
+                      Swal.fire({
+                        text: response.errorMessage,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    }).then(function() {
+                        KTUtil.scrollTop();
+                    });
+                  }
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  
+                    document.getElementById("load").style.display = 'none';
+  
+                  }
+              });
+              
         });
      }
    else  if($('#slctapprve').val()=='4'){
+    document.getElementById("load").style.removeProperty('display');
     $.ajax({
       type: "post",
       url:  baseURL +'/Quotation/stripe?inquiryId=' + inquiryId,
@@ -453,7 +515,7 @@ $( "#rejectbtn" ).click(function() {
                   success: function(response) {
                       //console.log(response);
                       if (response.isError == false) {
-                         
+                        document.getElementById("load").style.display = 'none';
                       $('#msg').modal('show');
                     } else {
                       Swal.fire({
@@ -470,7 +532,7 @@ $( "#rejectbtn" ).click(function() {
                   }
                   },
                   error: function(XMLHttpRequest, textStatus, errorThrown) {
-                  
+                    document.getElementById("load").style.display = 'none';
         Swal.fire({
           text: errorThrown,
           icon: "error",

@@ -373,6 +373,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
         }
     });
+    if(element.quotations !=undefined){
     element.quotations[0].files.forEach(element => {
         if(   dicQuot["QuotRow"+element.quotationId]==null){
             dicQuot["QuotRow"+element.quotationId]=``;
@@ -416,6 +417,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             <!--end::Col-->`;
     }
 });
+    }
             if(isfirst){
                 tabsHTML+=`
                 <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
@@ -468,6 +470,25 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
              </div>`;
             
             }else{
+                let quot ='';
+                if(element.quotations !=undefined){
+                    quot = `
+                    <div class="card">
+                       <div class="card-header" >
+                          <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
+                             <i class="la fab la-codepen"></i>Quotation
+                          </div>
+                       </div>
+                       <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                        <div class="card-body" >
+                        <div class="row" id="quotRow`+element.quotations[0].quotationId+`">
+                        `+dicQuot["QuotRow"+element.quotations[0].quotationId]+`
+                        </div>
+                        </div>
+                       </div>
+                    </div>
+                    `;
+                    }
     tabsHTML+=`
     <div class="tab-pane fade" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
     <!--begin::Accordion-->
@@ -499,21 +520,9 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                </div>
             </div>
           </div>
-       </div>
-       <div class="card">
-          <div class="card-header" >
-             <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
-                <i class="la fab la-codepen"></i>Quotation
-             </div>
-          </div>
-          <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-           <div class="card-body" >
-           <div class="row" id="quotRow`+element.quotations[0].quotationId+`">
-           `+dicQuot["QuotRow"+element.quotations[0].quotationId]+`
-               </div>
-            </div>
-          </div>
-       </div>
+       </div>`+
+       quot
+       +`
     </div>
     <!--end::Accordion-->
  </div>`;

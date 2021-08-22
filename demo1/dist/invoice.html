@@ -416,13 +416,23 @@
             }
       </style>
       <style>
-         
+
+.se-pre-con {
+	position: fixed;
+	left: 50%;
+	top: 40%;
+	width: 60px;
+	height: 60px;
+	z-index: 9999;
+	background: url(assets/media/gif/load.gif) center no-repeat #fff;
+}
       </style>
       <!--End:PWA-->
    </head>
    <!--end::Head-->
    <!--begin::Body-->
    <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+      <div class="se-pre-con" id="load" style="display: none;" ></div>
       <!--begin::Main-->
                <!--begin::Content-->
                <div class=" d-flex flex-column flex-column-fluid" id="kt_content">
@@ -904,7 +914,7 @@
                        <!--begin::Form-->
                        <form class="form" id="kt_add_quotation" action="" name="addQutotationform">
                            <span id="inquiryId" style="display:none">0</span>
-                         
+                          
                            <div class="modal-body">     
                             <div class="form-group row">
                               
@@ -1044,6 +1054,7 @@
      
       <script>
          var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+
          function like(id){         
            //var heart = document.getElementById("hemoji").value;
            document.getElementById("emoj1").style.removeProperty('border');

@@ -82,7 +82,7 @@ div.cls_018{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,255);font-weig
 <div style="position:absolute;left:78.02px;top:808.88px" class="cls_006"><span class="cls_006">Tel: +971 4-551-4553 , Fax: +971 4-5514531 , Email: </span><span class="cls_018">info@sai-group.ae </span><span class="cls_006">, Website: </span><A HREF="http://www.sai-group.ae/">www.sai-group.ae</A> </span></div>
 </div>
 <div style="padding-top: 842px;padding-left: 50%;"> 
-    <button id="savePdfbtn"  type="button" onclick="changewidth()" class="btn btn-primary font-weight-bold" style="background-color: #733dd9 !important;border-color: #733dd9;" >Print Invoice</button>
+    <button id="savePdfbtn"  type="button" onclick="changewidth()" class="btn btn-primary font-weight-bold" style="background-color: #ffffff !important;border-color: #cdcdcd; height: 30px;" >Print Invoice</button>
 </div>
 </body>
 <script>
@@ -136,7 +136,7 @@ div.cls_018{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,255);font-weig
             document.getElementById("TaxAmount1").innerText =  response.data[0].vat;
             document.getElementById("TotalAmount").innerText =  response.data[0].totalAmount;
             document.getElementById("TotalAmount1").innerText =  response.data[0].totalAmount;
-            document.getElementById("PaymentAmount").innerText =  response.data[0].amounttoBePaid;
+            document.getElementById("PaymentAmount").innerText =  response.data[0].amounttoBePaid/100;
             document.getElementById("MeasurementFee").innerText =  response.data[0].deduction;
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {

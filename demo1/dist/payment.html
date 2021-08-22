@@ -3039,6 +3039,18 @@ License: You must have a valid license purchased only from themeforest(the above
             {
                 document.getElementById("innerdata").style.display = 'none';
                 document.getElementById("paybtn").style.display = 'none';
+                
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
              return false;
             }
             $(".divoddendrow").remove();
@@ -3180,7 +3192,19 @@ License: You must have a valid license purchased only from themeforest(the above
                       '</div>';
                   }
   
-              }
+              }   else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
 
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -3346,7 +3370,25 @@ License: You must have a valid license purchased only from themeforest(the above
             },
             success: function (response) {
                 console.log(response);
+                
+            if (response.isError == false) {
                 $('#payupload').modal('hide');
+                $('#paylist').modal('hide');
+              
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+                
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
               document.getElementById("error").value = "there is a problem in sending..";
