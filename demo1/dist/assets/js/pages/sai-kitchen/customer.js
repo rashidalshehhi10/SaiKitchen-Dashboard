@@ -340,6 +340,51 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     },
                 }, {
+                    field: 'CustomerNextMeetingDate',
+                    title: 'Next Meeting Date',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        if (data.customerNextMeetingDate !== null) {
+                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerNextMeetingDate + '</div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        }
+                        return output;
+                    },
+                }, {
+                    field: 'CustomerNotes',
+                    title: 'Customer Notes',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        if (data.customerNotes !== null) {
+                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerNotes + '</div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        }
+                        return output;
+                    },
+                },
+                {
                     field: 'EmiratesId',
                     title: 'Makani#',
                     autoHide: true,
@@ -460,9 +505,11 @@ var KTAppsUsersListDatatable = function() {
                     customerContact: "string",
                     customerAddress: "string",
                     customerCity: "string",
+                    customerNotes:"string",
                     customerCountry: "string",
                     customerNationality: "string",
                     customerNationalId: "string",
+                    customerNextMeetingDate:"",
                     contactStatusId: 0,
                     wayofContactId: 0,
                     branchId: user.data.userRoles[0].branchId,
@@ -477,7 +524,9 @@ var KTAppsUsersListDatatable = function() {
                 customer.customerContact = document.getElementById('customerContact').value;
                 customer.customerAddress = document.getElementById('customerAddress').value;
                 customer.customerNationalId = document.getElementById('customerNationalId').value;
+                customer.customerNotes = document.getElementById('customerNotes').value;
                 customer.contactStatusId = $('#kt_contact_status').val();
+                customer.customerNextMeetingDate=document.getElementById('next_meeting_date').value,
                 customer.wayofContactId = $('#kt_wayofcontact').val();
                 customer.customerCountry = $('#kt_country_of_Resdience').val();
                 customer.customerCity = $('#kt_city_of_Resdience').val();

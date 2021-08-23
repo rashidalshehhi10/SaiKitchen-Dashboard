@@ -2448,7 +2448,21 @@
 											</select>
 										</div>
 									</div>
-
+									<div id="nextMeetingDate" style="display: none;">
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Next Meeting Date</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
+												<input type="text" id="next_meeting_date" name="next_meeting_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_1">
+												<div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
+													<span class="input-group-text">
+														<i class="ki ki-calendar"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 									<div class="form-group row">
 										<label class="font-size-h6 font-weight-bolder text-dark">Way of Finding us*</label>
 										<div class="input-group input-group-lg input-group-solid">
@@ -2496,11 +2510,26 @@
 										</div>
 									</div>
 
+									
+
 								</div>
 
 								<div class="col-xl-1">
 								</div>
 
+							</div>
+							
+									
+							<div class="form-group row col-11">
+								<label class="font-size-h6 font-weight-bolder text-dark">Notes</label>
+								<div class="input-group input-group-lg input-group-solid">
+
+									<!-- <input type="text" name="customerNotes" id="customerNotes"
+										class="form-control form-control-lg form-control-solid" value=""
+										placeholder="Need to contact tomorrow" > -->
+										<textarea   type="text" name="customerNotes" id="customerNotes" class="form-control form-control-lg form-control-solid" placeholder="Any feedback" rows="3"></textarea>
+                                         
+								</div>
 							</div>
 						</div>
 						<!--end::Signin-->
@@ -2637,6 +2666,11 @@
 	<script src="assets/js/pages/sai-kitchen/firebase.js" type="module"></script>
 
 
+
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
+    <!--end::Page Scripts-->
+
 	<script src="assets/js/pages/sai-kitchen/base.js" type="module"></script>
 
 	<!--begin::Page Scripts(used by this page)-->
@@ -2654,6 +2688,15 @@
 		// alert('hi ' + baseURL);
 		
 		var user=	JSON.parse(localStorage.getItem("user"));
+
+$( "#kt_contact_status" ).change(function () {    
+	if($('#kt_contact_status').val()=="1"){
+$("#nextMeetingDate").hide();
+}else{
+	$("#nextMeetingDate").show();
+}
+});  
+
 		function customFormReset() {
 try {
 	
@@ -2661,6 +2704,8 @@ try {
 			document.getElementById("kt_add_customer_button").innerHTML = "Add";
 			document.getElementById("customerId").innerHTML = '0';
 			document.getElementById('customerName').value = "";
+			document.getElementById('customerNotes').value = "";
+			document.getElementById('next_meeting_date').value = "";
 			document.getElementById('customerEmail').value = "";
 			document.getElementById('customerContact').value = "";
 			document.getElementById('customerAddress').value = "";
@@ -2709,6 +2754,8 @@ try {
 						document.getElementById('customerEmail').value = response.data.customerEmail;
 						document.getElementById('customerContact').value = response.data.customerContact;
 						document.getElementById('customerAddress').value = response.data.customerAddress;
+						document.getElementById('customerNotes').value = response.data.customerNotes;	
+						document.getElementById('next_meeting_date').value = response.data.customerNextMeetingDate;
 						document.getElementById('customerNationalId').value = response.data.customerNationalId;
 						$('#kt_contact_status').val(response.data.contactStatusId).change();
 						$('#kt_wayofcontact').val(response.data.wayofContactId).change();

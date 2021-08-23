@@ -160,8 +160,8 @@ jQuery(document).ready(function() {
 
         success: function(response) {
             console.log(response);
-            response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
             if (response.isError == false) {
+                response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
 var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
 console.log(inquiryWorkscopelength);
 inquiry=response.data.inquiry;

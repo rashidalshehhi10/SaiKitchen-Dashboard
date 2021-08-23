@@ -309,11 +309,24 @@ License: You must have a valid license purchased only from themeforest(the above
            } 
            
      </style>
+      <style>
+
+        .se-pre-con {
+            position: fixed;
+            left: 50%;
+            top: 40%;
+            width: 60px;
+            height: 60px;
+            z-index: 9999;
+            background: url(assets/media/gif/load.gif) center no-repeat #fff;
+        }
+              </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
 
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+    <div class="se-pre-con" id="load" style="display: none;" ></div>
     <!--begin::Main-->
     <!--begin::Header Mobile-->
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
@@ -1076,6 +1089,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                   <a class="nav-link" data-toggle="tab" href="#kt_tab_video">Videos</a>
                                </li> -->
                             </ul>
+                            <span style="padding-left: 10px;" id="result"></span>
                          </div>
                       </div>
                       <!--end::Details-->
@@ -2796,6 +2810,28 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
     </div>
+    <div class="modal fade" id="msg" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                    <h5 class="modal-title" id="qsms" style="font-weight: bold;">Upload Message</h5>
+                    
+                    <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                     </div>
+                </div>
+                    <div class="modal-body">     
+                     <div class="form-group row" >
+                       <span style="text-align: center;width: 100%;">File uploaded successfully</span>
+                    </div>              
+                       
+                        
+                    </div>
+            </div>
+        </div>
+    </div>
     <script>
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
     </script>
@@ -3018,6 +3054,7 @@ License: You must have a valid license purchased only from themeforest(the above
         document.getElementById("paymentId").value = value;
     }
     function callapi() {
+        document.getElementById("result").innerText ="";
     var code =$('#kt_subheader_search_form').val().toLowerCase();
     if(code==''){
         document.getElementById("innerdata").style.display = 'none';
@@ -3039,18 +3076,7 @@ License: You must have a valid license purchased only from themeforest(the above
             {
                 document.getElementById("innerdata").style.display = 'none';
                 document.getElementById("paybtn").style.display = 'none';
-                
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
+                document.getElementById("result").innerText = response.errorMessage;
              return false;
             }
             $(".divoddendrow").remove();
@@ -3192,23 +3218,11 @@ License: You must have a valid license purchased only from themeforest(the above
                       '</div>';
                   }
   
-              }   else {
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-            }
+              }
 
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
-
+               document.getElementById("result").innerText = errorThrown; 
 		}
 	});
 }
@@ -3228,6 +3242,7 @@ License: You must have a valid license purchased only from themeforest(the above
             },
             success: function (response) {
                 console.log(response);
+                if(response.data != null){
                     for (var i = 0; i < response.data.payments.length; i++) {
                         document.getElementById("body").innerHTML +=
                         `<div class="row align-items-center tormv" >
@@ -3250,7 +3265,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>  `;
                     }
             
-
+                }
 
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -3352,6 +3367,7 @@ License: You must have a valid license purchased only from themeforest(the above
     }
 
     function sendInvoice(){
+        document.getElementById("load").style.removeProperty('display');
         var paymentModeId = document.getElementById("method").value;
         var paymentId = document.getElementById("paymentId").value;
 		var payment={
@@ -3370,27 +3386,13 @@ License: You must have a valid license purchased only from themeforest(the above
             },
             success: function (response) {
                 console.log(response);
-                
-            if (response.isError == false) {
+                document.getElementById("load").style.display = 'none';
                 $('#payupload').modal('hide');
                 $('#paylist').modal('hide');
-              
-            } else {
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-            }
-                
+                $('#msg').modal('show');
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
+              document.getElementById("load").style.display = 'none';
               document.getElementById("error").value = "there is a problem in sending..";
             }
         });

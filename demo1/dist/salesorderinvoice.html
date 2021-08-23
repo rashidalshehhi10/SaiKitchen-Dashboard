@@ -82,7 +82,7 @@ div.cls_018{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,255);font-weig
 <div style="position:absolute;left:78.02px;top:808.88px" class="cls_006"><span class="cls_006">Tel: +971 4-551-4553 , Fax: +971 4-5514531 , Email: </span><span class="cls_018">info@sai-group.ae </span><span class="cls_006">, Website: </span><A HREF="http://www.sai-group.ae/">www.sai-group.ae</A> </span></div>
 </div>
 <div style="padding-top: 842px;padding-left: 50%;"> 
-    <button id="savePdfbtn"  type="button" onclick="changewidth()" class="btn btn-primary font-weight-bold" style="background-color: #ffffff !important;border-color: #cdcdcd; height: 30px;" >Print Invoice</button>
+    <button id="savePdfbtn"  type="button" onclick="changewidth()" class="btn btn-primary font-weight-bold" style="background-color: #ffffff !important;border-color: #cdcdcd; height: 30px;" >Print Sales Order</button>
 </div>
 </body>
 <script>
@@ -119,6 +119,8 @@ div.cls_018{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,255);font-weig
 		},
 		success: function (response) {
 			console.log(response);
+            if (response.isError == false) {
+           
             document.getElementById("invoiceCode").innerText = "REF#: "+ response.data[0].invoiceCode;
             document.getElementById("createdDate").innerText = "Date: "+ response.data[0].createdDate;
             document.getElementById("CustomerName").innerText =  response.data[0].customerName;
@@ -138,7 +140,21 @@ div.cls_018{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,255);font-weig
             document.getElementById("TotalAmount1").innerText =  response.data[0].totalAmount;
             document.getElementById("PaymentAmount").innerText =  response.data[0].amounttoBePaid/100;
             document.getElementById("MeasurementFee").innerText =  response.data[0].deduction;
-		},
+		
+        } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+        },
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
 
 		}

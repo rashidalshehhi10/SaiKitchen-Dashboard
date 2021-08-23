@@ -218,24 +218,7 @@ $( "#rejectbtn" ).click(function() {
         },
         success: function(response) {
             console.log(response);
-
             
-                        if (response.isError == false) {
-                            window.close();
-
-                        } else {
-                            Swal.fire({
-                                text: response.errorMessage,
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
-                                }
-                            }).then(function() {
-                                KTUtil.scrollTop();
-                            });
-                        }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -372,23 +355,11 @@ $( "#rejectbtn" ).click(function() {
                   },
                   success: function(response) {
                       //console.log(response);
-                      
-            
                       if (response.isError == false) {
                         document.getElementById("load").style.display = 'none';
                       $('#msg').modal('show');
                     } else {
-                      Swal.fire({
-                        text: response.errorMessage,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn font-weight-bold btn-light-primary"
-                        }
-                    }).then(function() {
-                        KTUtil.scrollTop();
-                    });
+                      
                   }
                   },
                   error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -468,7 +439,7 @@ $( "#rejectbtn" ).click(function() {
       .then(function(result) {
         if (result.error) {
           // Show error to your customer
-
+          document.getElementById("load").style.display = 'none';
           showError(result.error.message);
           $('#approve').modal('show');
           // $('#msg').modal('show');
