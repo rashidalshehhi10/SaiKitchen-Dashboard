@@ -47,7 +47,7 @@ var KTCalendarBasic = function() {
                 eventLimit: true, // allow "more" link when too many events
                 navLinks: true,
                 events: eventList,
-
+                selectable: true,
                 eventRender: function(info) {
                     var element = $(info.el);
 
@@ -62,6 +62,21 @@ var KTCalendarBasic = function() {
                             element.find('.fc-list-item-title').append('<div class="fc-description">' + info.event.extendedProps.description + '</div>');
                         }
                     }
+                },
+                select: function( start, end, jsEvent, view ) {                   
+                    // show modal dialog
+                    // $('#event-modal').find('input[name=evDate]').val(
+                    //     start.start.
+                    // );
+                   // $( "#evDate" ).datepicker({ dateFormat: 'YYYY-MM-DD HH:mm:ss' });
+                   var today  = new Date(start.start);
+                   var hours = new Date();
+                  //  $("#evDate").datepicker("setDate", start.start);
+                  $("#evDate").val(today.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
+                    $('#event-modal').modal('show');
+                   
+                    
+                    
                 }
             });
 
@@ -69,10 +84,67 @@ var KTCalendarBasic = function() {
         }
     };
 }();
+$("#evuName").blur(function() {
+    if($('#evuName').val()!=''){
+        $('#evuName').css("border-color","#e4e6ef");
+      }});
+$("#evDescription").blur(function() {
+        if($('#evDescription').val()!=''){
+            $('#evDescription').css("border-color","#e4e6ef");
+          }});
+$("#evDate").blur(function() {
+            if($('#evDate').val()!=''){
+                $('#evDate').css("border-color","#e4e6ef");
+              }});
+$("#submit").click( function() {
+    if($('#evuName').val()==''){
+        $('#evuName').css("border-color","#C80000");
+       return false;
+      }
+      if($('#evDescription').val()==''){
+        $('#evDescription').css("border-color","#C80000");
+       return false;
+      };
+      if($('#evDate').val()==''){
+        $('#evDate').css("border-color","#C80000");
+       return false;
+      };
+      var eventobj={
+        "calendarEventId":0,
+        "calendarEventName":document.getElementById("evuName").value,
+        "calendarEventDescription":document.getElementById("evDescription").value,
+        "calendarEventDate":document.getElementById("evDate").value,
+        "calendarEventOnClickUrl":document.getElementById("evURL").value,
+        "eventTypeId":document.getElementById("evSelect").value,
+      }
+      const data = JSON.stringify(eventobj);
+      // console.log(data);
+      $.ajax({
+        url:  baseURL +'/Dashboard/AddCalendarEvent' ,
+        data: data,
+        type: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        dataType: 'json',
+        success: function(response) {
+            // if saved, close modal
+            $("#event-modal").modal('hide');
+            window.location.replace("home.html");         
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  
+            console.log(errorThrown);
 
-jQuery(document).ready(function() {
-    
-});
+          }
+    });
+});        
 // Class Initialization
 jQuery(document).ready(function() {
     var login = localStorage.getItem("user");
@@ -107,31 +179,65 @@ jQuery(document).ready(function() {
             document.getElementById('lblApprovedQuotation').innerHTML=response.data.quotationAccepted;
             document.getElementById('lblRejectedQuotation').innerHTML=response.data.quotationRejected;
 			eventList =[];
-            var mstart ='',dstart='';
+            let mstart ='';
+            let eventcolor ='';
 				for (var i = 0; i < response.data.calendar.length; i++) {
-                    if(response.data.calendar[i].measurementScheduleDate !='')
-                     mstart = (new Date(response.data.calendar[i].measurementScheduleDate)).toISOString();
+                    if(response.data.calendar[i].date !='')
+                     mstart = (new Date(response.data.calendar[i].date)).toISOString();
                     else
                       mstart ='';
-                    if(response.data.calendar[i].designScheduledate !='')
-                      dstart = (new Date(response.data.calendar[i].designScheduledate)).toISOString();
-                     else
-                       dstart ='';
-				try{	eventList.push(
-						{
-							"title":response.data.calendar[i].workscopeName ,
-							"start":mstart,
-							"className": "fc-event-danger fc-event-solid-warning",
-							"description": response.data.calendar[i].workscopeName +' Measurement of '+ response.data.calendar[i].inquiryWorkscopeId 
-						},
-						{
-							"title":response.data.calendar[i].workscopeName ,
-							"start":dstart,
-							"className": "fc-event-light fc-event-solid-primary",
-							"description": response.data.calendar[i].workscopeName +' Design of '+ response.data.calendar[i].inquiryWorkscopeId 
-						}
-					);
-                }catch(error){}
+                      switch(response.data.calendar[i].eventTypeId) {
+                        case 1:
+                            eventcolor ='#FFBF00';
+                          break;
+                        case 2:
+                            eventcolor ='#FF7F50';
+                          break;
+                        case 3:
+                            eventcolor ='#FF00FF';
+                          break;
+                        case 4:
+                            eventcolor ='#9FE2BF';
+                          break;
+                        case 5:
+                            eventcolor ='#40E0D0';
+                          break; 
+                        case 6:
+                            eventcolor ='#6495ED';
+                          break;
+                        case 7:
+                            eventcolor ='#CCCCFF';
+                          break;
+                        case 8:
+                            eventcolor ='#FF0000';
+                          break;
+                        case 9:
+                            eventcolor ='#00FF00';
+                          break;
+                        case 10:
+                            eventcolor ='#808000';
+                          break;
+                        case 11:
+                            eventcolor ='#FFFF00';
+                          break;
+                        case 12:
+                            eventcolor ='#C0C0C0';
+                          break;
+                        
+                        default:
+                            eventcolor = '';
+                      }
+                    try{	eventList.push(
+                            {
+                                "title":response.data.calendar[i].name ,
+                                "start":mstart,
+                                
+                                "description": response.data.calendar[i].description,
+                                color:eventcolor,
+                                url:response.data.calendar[i].onClickURL
+                            }
+                        );
+                    }catch(error){}
 				}
 
 				KTCalendarBasic.init();

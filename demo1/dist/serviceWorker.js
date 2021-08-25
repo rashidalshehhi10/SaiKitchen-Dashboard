@@ -40,9 +40,14 @@ self.addEventListener("install", installEvent => {
 })
 
 self.addEventListener("fetch", function (event) {
+  // event.waitUntil(
+  //   update(event.request));
   event.respondWith(
   caches.match(event.request).then(function (response) {
-    if (response) {
+   
+    //Temporary Comment
+
+    if (event.request.url.includes('assets/media/gif/404.gif')) {
       return response;
       // if valid response is found in cache return it
     } else {
@@ -52,15 +57,16 @@ self.addEventListener("fetch", function (event) {
         .then(function (res) {
 
           if(!event.request.url.includes('backendsaikitchen.azurewebsites.net')){
-          return caches.
-          open(staticDevCoffee).
-          then( function (cache) {
-            // console.log(event.request.url+' Cached');
-            cache.put(event.request.url, res.clone());
-            //save the response for future
-            return res;
-            // return the fetched data
-          });
+          // return caches.
+          // open(staticDevCoffee).
+          // then( function (cache) {
+          //   // console.log(event.request.url+' Cached');
+          //   cache.put(event.request.url, res.clone());
+          //   //save the response for future
+          //   return res;
+          //   // return the fetched data
+          // });
+          return res || fetch(fetchEvent.request)
         }
           else{
             return res || fetch(fetchEvent.request)
@@ -102,3 +108,12 @@ self.addEventListener("fetch", function (event) {
 //     })
 //   );
 // });
+function update(request) {
+  return caches.open(staticDevCoffee).then(function (cache) {
+    return fetch(request).then(function (response) {
+      return cache.put(request, response.clone()).then(function () {
+        return response;
+      });
+    });
+  });
+}

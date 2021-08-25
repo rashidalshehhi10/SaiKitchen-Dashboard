@@ -52,6 +52,10 @@
       <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
       <meta name="theme-color" content="#db4938" />
       <!--End:PWA-->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9H-Gmi17sb3cbdR1lpTNnCjcan7vV9jc&v=3.exp&sensor=false&libraries=places"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/dist/typeahead.bundle.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead-addresspicker/0.1.4/typeahead-addresspicker.min.js"></script>
    </head>
    <!--end::Head-->
    <!--begin::Body-->
@@ -2093,6 +2097,72 @@
          </span>
       </div>
       <!--end::Scrolltop-->
+      <div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+           <div class="modal-content">
+            <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+               <h5 class="modal-title" id="payModal" style="font-weight: bold;">Add event</h5>
+               
+               <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <i aria-hidden="true" class="ki ki-close"></i>
+                   </button>
+                </div>
+           </div>
+             <div class="modal-body">
+               <form name="save-event" method="post">
+                 <div class="form-group">
+                   <label>Name</label>
+                   <input type="text" name="evuName"  id="evuName" class="form-control" />
+                 </div>
+                 <div class="form-group">
+                   <label>Description</label>
+                   <input type="text" name="evDescription" id="evDescription" class="form-control col-xs-3" />
+                 </div>
+                 <div class="form-group">
+                   <label>Date</label>
+                     <div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
+                         <input type="text" id="evDate" name="evDate"  class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_1">
+                         <div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
+                             <span class="input-group-text">
+                              <i class="ki ki-calendar"></i>
+                           </span>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                  <label>URL</label>
+                  <input type="text" name="evURL" id="evURL" class="form-control col-xs-3" />
+                </div>
+                <div class="form-group">
+                  <label>Event Type</label>
+                  <select id="evSelect" class="form-control datatable-input" data-col-index="5">
+                     <option value="1">Customer</option>
+                     <option value="2">Inquiry</option>
+                     <option value="3">Measurement</option>
+                     <option value="4">Design</option>
+                     <option value="5">Quotation</option>
+                     <option value="6">CheckList</option>
+                     <option value="7">JobOrder</option>
+                     <option value="8">Payment</option>
+                     <option value="9">Installation</option>
+                     <option value="10">Delivery</option>
+                     <option value="11">Promo</option>
+                     <option value="12">Other</option>
+                  </select>
+                </div>
+               </form>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <button type="button" id="submit" class="btn btn-primary">Save changes</button>
+             </div>
+           </div>
+           <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+       </div>
+       <!-- /.modal -->
       <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
       <!--begin::Global Config(global config for global JS scripts)-->
       <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
@@ -2115,6 +2185,7 @@
       <!-- <script src="assets/js/pages/features/calendar/background-events.js"></script> -->
       <!-- The core Firebase JS SDK is always required and must be listed first -->
       <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+      <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
       <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
       <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>

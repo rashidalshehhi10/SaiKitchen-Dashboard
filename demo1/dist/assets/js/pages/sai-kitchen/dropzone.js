@@ -47,14 +47,17 @@ var KTDropzoneDemo = function() {
 
         // file type validation
         $('#kt_dropzone_3').dropzone({
+            
+            // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
             url: baseURL + "/User", // Set the url for your upload script location
             type: "Head",
             headers : {
                 'Access-Control-Allow-Origin': '*',
             },
             paramName: "file", // The name that will be used to transfer the file
-            maxFiles: 50,
-            maxFilesize: 10, // MB
+            maxFiles: 150,
+            maxFilesize: 3000, // MB
+            timeout: 240000,
             addRemoveLinks: true,
             removedfile:function(file) {
                     var reader = new FileReader();
