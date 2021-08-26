@@ -331,6 +331,7 @@ var KTWizard1 = function () {
 						isDeleted: false,
 						building: {
 							buildingAddress: document.getElementById('buildingAddress').value,
+							buildingMakaniMap:document.getElementById('BuildingMakaniMap').value,
 							buildingTypeOfUnit: $('input[name="typeofunit"]:checked').val(),
 							buildingCondition: $('input[name="condition"]:checked').val(),
 							buildingFloor: document.getElementById('floor').value,
