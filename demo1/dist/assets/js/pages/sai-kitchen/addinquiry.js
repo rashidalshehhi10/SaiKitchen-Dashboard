@@ -302,6 +302,7 @@ var KTWizard1 = function () {
 						inquiryDescription: document.getElementById('inquirydescription').value,
 						inquiryStatusId: 1,
 						isMeasurementProvidedByCustomer: $('input[name="clientMeasurement"]:checked').val(),
+						isDesignProvidedByCustomer: $('input[name="clientDesign"]:checked').val(),
 						measurementFees:'',
 						customer: {
 							customerName: "",

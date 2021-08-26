@@ -341,7 +341,7 @@ var KTAppsUsersListDatatable = function() {
                     },
                 }, {
                     field: 'CustomerNextMeetingDate',
-                    title: 'Next Meeting Date',
+                    title: 'Next Follow-up Date',
                     autoHide: true,
                     // type: 'date',
                     // format: 'MM/DD/YYYY',
@@ -386,7 +386,7 @@ var KTAppsUsersListDatatable = function() {
                 },
                 {
                     field: 'EmiratesId',
-                    title: 'Makani#',
+                    title: 'Makani#/Map URL',
                     autoHide: true,
                     // type: 'date',
                     // format: 'MM/DD/YYYY',
@@ -401,7 +401,7 @@ var KTAppsUsersListDatatable = function() {
                         // };
                         // var index = KTUtil.getRandomInt(1, 4);
                         if (data.customerNationalId !== null) {
-                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerNationalId + '</div>';
+                            output += '<div class="font-weight-bolder text-primary mb-0"><a href='+data.customerNationalId+' target="_blank">' + data.customerNationalId + '</a></div>';
                             // output += '<div class="text-muted">' + status[index].title + '</div>';
                         }
                         return output;
