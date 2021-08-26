@@ -44,7 +44,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     columnsDef: [
                         'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName',
                         'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
-                        'customerContact','customerEmail', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+                        'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
                          'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
                     ],
                 },
@@ -87,6 +87,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'buildingAddress'
+                },
+                {
+                    data: 'buildingMakaniMap'
                 },
                 {
                     data: 'buildingTypeOfUnit'
@@ -134,6 +137,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // 		$('.datatable-input[data-col-index="2"]').append('<option value="' + d + '">' + d + '</option>');
                         // 	});
                         // 	break;
+                        // case 'Building Makani Map':
+                        //     column.data().unique().sort().each(function(d, j) {
+                        //         if (d != null)
+                        //             $('.datatable-input[data-col-index="13"]').append('<a href='+d+' target="_blank">Click here</a>');
+                        //     });
+                        //     break;
 
                         case 'Status':
                             var status = {
@@ -376,6 +385,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
                     },
                 },
+                {
+                	targets: 13,
+                	render: function(data, type, full, meta) {
+                	
+                		if (typeof data === 'undefined') {
+                			return data;
+                		}
+                		return '<div class="font-weight-bolder text-primary mb-0"><a href='+data+' target="_blank">Click Here</a></div>';
+                	},
+                },
+
+                
                 // {
                 // 	targets: 7,
                 // 	render: function(data, type, full, meta) {
@@ -391,6 +412,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // 			'<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
                 // 	},
                 // },
+                
             ],
         });
 
