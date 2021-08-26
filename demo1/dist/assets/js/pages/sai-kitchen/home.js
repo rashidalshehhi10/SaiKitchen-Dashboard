@@ -188,37 +188,37 @@ jQuery(document).ready(function() {
                       mstart ='';
                       switch(response.data.calendar[i].eventTypeId) {
                         case 1:
-                            eventcolor ='#FFBF00';
+                            eventcolor ='#FFFBFD';
                           break;
                         case 2:
                             eventcolor ='#FF7F50';
                           break;
                         case 3:
-                            eventcolor ='#FF00FF';
+                            eventcolor ='#FFF0FF';
                           break;
                         case 4:
-                            eventcolor ='#9FE2BF';
+                            eventcolor ='#FFE2BF';
                           break;
                         case 5:
-                            eventcolor ='#40E0D0';
+                            eventcolor ='#FFE0D0';
                           break; 
                         case 6:
-                            eventcolor ='#6495ED';
+                            eventcolor ='#FF95ED';
                           break;
                         case 7:
-                            eventcolor ='#CCCCFF';
+                            eventcolor ='#FFCCFF';
                           break;
                         case 8:
-                            eventcolor ='#FF0000';
+                            eventcolor ='#FF00F0';
                           break;
                         case 9:
-                            eventcolor ='#00FF00';
+                            eventcolor ='#F0FF00';
                           break;
                         case 10:
-                            eventcolor ='#808000';
+                            eventcolor ='#FF8000';
                           break;
                         case 11:
-                            eventcolor ='#FFFF00';
+                            eventcolor ='#FCFF00';
                           break;
                         case 12:
                             eventcolor ='#C0C0C0';
