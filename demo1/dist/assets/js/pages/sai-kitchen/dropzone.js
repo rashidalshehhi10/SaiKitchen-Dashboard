@@ -49,15 +49,16 @@ var KTDropzoneDemo = function() {
         $('#kt_dropzone_3').dropzone({
             
             // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
-            url: baseURL + "/User", // Set the url for your upload script location
-            type: "Head",
+            url: baseURL +"/File/UploadFile", // Set the url for your upload script location
+            type: "Post",
             headers : {
                 'Access-Control-Allow-Origin': '*',
+                // 'Content-Type': 'application/json'
             },
             paramName: "file", // The name that will be used to transfer the file
             maxFiles: 150,
-            maxFilesize: 3000, // MB
-            timeout: 240000,
+            maxFilesize: 30000, // MB
+            timeout: 600000,
             addRemoveLinks: true,
             removedfile:function(file) {
                     var reader = new FileReader();
@@ -91,6 +92,11 @@ var KTDropzoneDemo = function() {
                 reader.readAsDataURL(file);
 
             });
+        },
+        success: function(file, response){
+            // alert(response);
+            measurementFile.push(response.data.item1);
+        
         }
             // accept: function(file, done) {
             //     if (file.name == "justinbieber.jpg") {
