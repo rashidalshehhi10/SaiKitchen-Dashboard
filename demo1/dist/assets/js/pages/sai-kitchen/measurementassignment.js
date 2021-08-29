@@ -37,15 +37,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/Inquiry/GetInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/Inquiry/GetMeasurementAssigneeApproval?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName',
-                        'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
-                        'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
+                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName','noOfRevision',
+                        'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
+                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription',
+                        'inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy', 'actions'
                     ],
                 },
             },
@@ -62,6 +62,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'workScopeName'
                 },
                 {
+                    data: 'noOfRevision'
+                },
+                {
                     data: 'measurementScheduleDate'
                 },
                 {
@@ -74,22 +77,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'designAssignTo'
                 },
                 {
-                    data: 'customerCode'
-                },
-                {
                     data: 'customerName'
                 },
                 {
                     data: 'customerContact'
                 },
                 {
-                    data: 'customerEmail'
-                },
-                {
                     data: 'buildingAddress'
-                },
-                {
-                    data: 'buildingMakaniMap'
                 },
                 {
                     data: 'buildingTypeOfUnit'
@@ -102,9 +96,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'buildingReconstruction'
-                },
-                {
-                    data: 'isOccupied'
                 },
                 {
                     data: 'inquiryDescription'
@@ -137,12 +128,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // 		$('.datatable-input[data-col-index="2"]').append('<option value="' + d + '">' + d + '</option>');
                         // 	});
                         // 	break;
-                        // case 'Building Makani Map':
-                        //     column.data().unique().sort().each(function(d, j) {
-                        //         if (d != null)
-                        //             $('.datatable-input[data-col-index="13"]').append('<a href='+d+' target="_blank">Click here</a>');
-                        //     });
-                        //     break;
 
                         case 'Status':
                             var status = {
@@ -203,28 +188,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-info'
                                 },
                                 15: {
-                                    'title': 'Quotation Waiting For Customer Approval',
+                                    'title': 'Quotation Approval Pending',
                                     'class': ' label-light-primary'
-                                },
-                                16: {
-                                    'title': 'Design Waiting For Customer Approval',
-                                    'class': ' label-light-primary'
-                                },
-                                17: {
-                                    'title': 'Design Rejected By Client',
-                                    'class': ' label-light-info'
-                                },
-                                18: {
-                                    'title': 'Checklist Pending',
-                                    'class': ' label-light-primary'
-                                },
-                                19: {
-                                    'title': 'Checklist Approved',
-                                    'class': ' label-light-success'
-                                },
-                                20: {
-                                    'title': 'Checklist Rejected',
-                                    'class': ' label-light-info'
                                 },
                                 36: {
                                     'title': 'Measurement Assignee Pending',
@@ -276,38 +241,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     title: 'Actions',
                     orderable: false,
                     render: function(data, type, full, meta) {
-                        var action = ``;
-                        if(full.inquiryAddedById==user.data.userId){
+                       
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
-                            // onclick="`+full.inquiryId+`" 
-                             action += `
-                            <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
-								<i class="la la-calendar"></i>
+                            var action=``; 
+                            action += `
+                            <a type="button" onclick="setInquiryId(` + full.inquiryWorkscopeId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+								<i class="la la-thumbs-up"></i>
 							</a>
-						`;     if (inquiryPermission >= 3 && full.status==1 && full.noOfRevision==0) {
-                            console.log(full.inquiryId);
-                            // onclick="`+full.inquiryId+`" 
-                             action += `
-                           <a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryWorkscopeId + `)"  data-toggle="modal" data-target="#AddWorkscope"  class="btn btn-sm btn-clean btn-icon" title="Add workscope">
-								<i class="la la-plus-square"></i>
+                            <a type="button" onclick="setInquiryId(` + full.inquiryWorkscopeId + `)" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
+								<i class="la la-thumbs-down"></i>
 							</a>
-						`;}
-                            if (inquiryPermission == 4) {
-                                action += '\
-                            <a href="javascript:;" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Escalate">\
-                            <i class="la la-bitbucket-square"></i>\
-                        </a>\
-                        ';
-                            }
-                            if (inquiryPermission >= 5) {
-                                action += `\
-                            <a onclick="deleteInquiryWorkscope(` + full.inquiryWorkscopeId + `)"  style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Delete">\
-                                <i class="la la-trash"></i>\
-                            </a>\
-                        `;
-                            }
-                        }
+						`;
                             return action;
                         } else {
                             return `<span></span>`;
@@ -375,28 +320,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'class': ' label-light-info'
                             },
                             15: {
-                                'title': 'Quotation Waiting For Customer Approval',
+                                'title': 'Quotation Approval Pending',
                                 'class': ' label-light-primary'
-                            },
-                            16: {
-                                'title': 'Design Waiting For Customer Approval',
-                                'class': ' label-light-primary'
-                            },
-                            17: {
-                                'title': 'Design Rejected By Client',
-                                'class': ' label-light-info'
-                            },
-                            18: {
-                                'title': 'Checklist Pending',
-                                'class': ' label-light-primary'
-                            },
-                            19: {
-                                'title': 'Checklist Approved',
-                                'class': ' label-light-success'
-                            },
-                            20: {
-                                'title': 'Checklist Rejected',
-                                'class': ' label-light-info'
                             },
                             36: {
                                 'title': 'Measurement Assignee Pending',
@@ -422,7 +347,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'title': 'Design Assignee  Rejected',
                                 'class': ' label-light-info'
                             },
-                            
                         };
 
                         console.log(data);
@@ -433,18 +357,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
                     },
                 },
-                {
-                	targets: 13,
-                	render: function(data, type, full, meta) {
-                	
-                		if (typeof data === 'undefined') {
-                			return data;
-                		}
-                		return '<div class="font-weight-bolder text-primary mb-0"><a href='+data+' target="_blank">Click Here</a></div>';
-                	},
-                },
-
-                
                 // {
                 // 	targets: 7,
                 // 	render: function(data, type, full, meta) {
@@ -460,7 +372,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // 			'<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
                 // 	},
                 // },
-                
             ],
         });
 
@@ -516,10 +427,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
-    var _handleFormModifySchedule = function() {
-        var form = KTUtil.getById('kt_modify_inquiry_schedule');
+    var _handleFormAcceptMeasurement = function() {
+        var form = KTUtil.getById('kt_approve_inquiry');
         var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_add_customer_button');
+        var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
 
         if (!form) {
             return;
@@ -528,38 +439,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         FormValidation
             .formValidation(
                 form, {
-                    fields: {
-                        measurement_schedule_date: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Measurement Schedule Date is required'
-                                }
-                            }
-                        },
-                        MeasurementAssignto: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Measurement Assign is required'
-                                },
-
-                            }
-                        },
-                        design_schedule_date: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Design Schedule Date is required'
-                                }
-                            }
-                        },
-                        DesignAssignto: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Design Assign is required'
-                                },
-
-                            }
-                        },
-                    },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
                         submitButton: new FormValidation.plugins.SubmitButton(),
@@ -575,18 +454,21 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-                var inquirySchedule = {
-                    inquiryId: document.getElementById("inquiryId").innerHTML,
-                    measurementAssignedTo: $('#kt_assignto').val(),
-                    measurementScheduleDate: document.getElementById('measurement_schedule_date').value,
-                    designAssignedTo: $('#kt_designassignto').val(),
-                    designScheduleDate: document.getElementById('design_schedule_date').value,
+                var inquiryApproved = {
+                    "id": parseInt( document.getElementById("inquiryWorkscopeId").innerHTML),
+                    "measurementAssignedTo": 0,
+                    "measurementScheduleDate": "",
+                    "measurementComment": "",
+                    "designAssignedTo": 0,
+                    "designScheduleDate": "",
+                    "designComment": "",
+                    "feedBackReaction": 0
                 };
-                const data = JSON.stringify(inquirySchedule);
+                const data = JSON.stringify(inquiryApproved);
                 console.log(data);
                 $.ajax({
                     type: "Post",
-                    url: baseURL + '/Inquiry/UpdateInquiryScheduleDate',
+                    url: baseURL + '/Measurement/ApproveMeasurementAssignee',
 
                     headers: {
                         'Content-Type': 'application/json',
@@ -605,7 +487,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("inquiry.html");
+                            window.location.replace("measurementassignment.html");
 
                         } else {
                             Swal.fire({
@@ -655,10 +537,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 });
             });
     }
-    var _handleFormAddWorkscope = function() {
-        var form = KTUtil.getById('kt_modify_add_workscope');
+    var _handleFormRejectMeasurement = function() {
+        var form = KTUtil.getById('kt_modify_reject_measurement');
         var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_add_workscope_button');
+        var formSubmitButton = KTUtil.getById('kt_reject_measurement_button');
 
         if (!form) {
             return;
@@ -668,6 +550,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
+                        measurementComment: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Assignement reject reason  is required'
+                                }
+                            }
+                        },
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
@@ -684,24 +573,22 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-             
-              var inquiryWorkscope=  {inquiryWorkscopeId:document.getElementById("inquiryWorkscopeId").innerHTML,
-              workScopeId: new Array()
-            };
-            
-					var workscope = document.getElementsByClassName("tagify__tag tagify__tag tagify__tag--primary");
-					workscope.forEach(element => {
-						try {
-							inquiryWorkscope.workScopeId.push(element.attributes.workScopeId.value,);
-						} catch (error) {
-
-						}
-					});
-                const data = JSON.stringify(inquiryWorkscope);
+                var inquiryRejected = {
+                    "id":parseInt(document.getElementById("inquiryWorkscopeId").innerHTML),
+                    "measurementAssignedTo": 0,
+                    "measurementScheduleDate": "",
+                    "measurementComment": document.getElementById("measurementComment").value,
+                    "designAssignedTo": 0,
+                    "designScheduleDate": "",
+                    "designComment": "",
+                    "feedBackReaction": 0
+ 
+                };
+                const data = JSON.stringify(inquiryRejected);
                 console.log(data);
                 $.ajax({
                     type: "Post",
-                    url: baseURL + '/Inquiry/AddWorkscopetoInquiry',
+                    url: baseURL + '/Measurement/RejectMeasurementAssignee',
 
                     headers: {
                         'Content-Type': 'application/json',
@@ -720,8 +607,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("inquiry.html");
-
+                            window.location.replace("measurementassignment.html");
                         } else {
                             Swal.fire({
                                 text: response.errorMessage,
@@ -775,8 +661,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         //main function to initiate the module
         init: function() {
             initTable1();
-            _handleFormModifySchedule();
-            _handleFormAddWorkscope();
+            _handleFormAcceptMeasurement();
+            _handleFormRejectMeasurement();
         },
 
     };
@@ -802,152 +688,7 @@ jQuery(document).ready(function() {
                 console.log(inquiryPermission);
             }
         }
-    }
-
-    if (inquiryPermission >= 2) {
-        document.getElementById('btnNewInquiry').innerHTML += `
-        <a href="addinquiry.html" class="btn btn-primary font-weight-bolder">
-            <span class="svg-icon svg-icon-md">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                    height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <circle fill="#000000" cx="9" cy="15" r="6" />
-                        <path
-                            d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                            fill="#000000" opacity="0.3" />
-                    </g>
-                </svg>
-                </span>New Inquiry</a>`;
-    }
-
-
-
-    $.ajax({
-        type: "post",
-        url: baseURL + '/User/GetMeasurementUsers?branchId=' + user.data.userRoles[0].branch.branchId,
-
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'userToken': user.data.userToken,
-            'userRoleId': user.data.userRoles[0].userRoleId,
-            'branchId': user.data.userRoles[0].branchId,
-            'branchRoleId': user.data.userRoles[0].branchRoleId,
-            'Access-Control-Allow-Origin': '*',
-        },
-
-        success: function(response) {
-            console.log(response);
-            if (response.isError == false) {
-
-                console.log(response.data[0].userName);
-                const assigntoList = document.getElementById('kt_assignto');
-                var assignToListHTML = new Array();
-
-                for (var i = 0; i < response.data.length; i++) {
-                    assignToListHTML.push(`
-					<option value="` + response.data[i].userId + `">` + response.data[i].userName + `</option>`);
-                }
-
-                assigntoList.innerHTML = assignToListHTML.join('');
-
-            } else {
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-            }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-
-            // alert(errorThrown);
-
-            Swal.fire({
-                text: 'Internet Connection Problem',
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                    confirmButton: "btn font-weight-bold btn-light-primary"
-                }
-            }).then(function() {
-                KTUtil.scrollTop();
-            });
-        }
-    });
-
-
-    $.ajax({
-        type: "post",
-        url: baseURL + '/User/GetDesignUsers?branchId=' + user.data.userRoles[0].branch.branchId,
-
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'userToken': user.data.userToken,
-            'userRoleId': user.data.userRoles[0].userRoleId,
-            'branchId': user.data.userRoles[0].branchId,
-            'branchRoleId': user.data.userRoles[0].branchRoleId,
-            'Access-Control-Allow-Origin': '*',
-        },
-
-        success: function(response) {
-            console.log(response);
-            if (response.isError == false) {
-
-                console.log(response.data[0].userName);
-                const assigntoList = document.getElementById('kt_designassignto');
-                var assignToListHTML = new Array();
-
-                for (var i = 0; i < response.data.length; i++) {
-                    assignToListHTML.push(`
-					<option value="` + response.data[i].userId + `">` + response.data[i].userName + `</option>`);
-                }
-
-                assigntoList.innerHTML = assignToListHTML.join('');
-
-            } else {
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-            }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-
-            // alert(errorThrown);
-
-            Swal.fire({
-                text: 'Internet Connection Problem',
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                    confirmButton: "btn font-weight-bold btn-light-primary"
-                }
-            }).then(function() {
-                KTUtil.scrollTop();
-            });
-        }
-    });
+    } 
 
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
