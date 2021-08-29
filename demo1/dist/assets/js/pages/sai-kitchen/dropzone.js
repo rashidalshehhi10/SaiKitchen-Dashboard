@@ -95,7 +95,7 @@ var KTDropzoneDemo = function() {
         },
         success: function(file, response){
             // alert(response);
-            measurementFile.push(response.data.item1);
+            // measurementFile.push(response.data.item1);
         
         }
             // accept: function(file, done) {
