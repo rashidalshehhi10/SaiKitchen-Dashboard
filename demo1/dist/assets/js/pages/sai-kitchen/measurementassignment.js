@@ -242,7 +242,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                        
-                        if (inquiryPermission >= 3) {
+                        // if (inquiryPermission >= 1) {
                             console.log(full.inquiryId);
                             var action=``; 
                             action += `
@@ -254,9 +254,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 							</a>
 						`;
                             return action;
-                        } else {
-                            return `<span></span>`;
-                        }
+                        // } else {
+                        //     return `<span></span>`;
+                        // }
                     },
                 },
                 {
@@ -468,7 +468,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 console.log(data);
                 $.ajax({
                     type: "Post",
-                    url: baseURL + '/Measurement/ApproveMeasurementAssignee',
+                    url: baseURL+'/Measurement/ApproveMeasurementAssignee',
 
                     headers: {
                         'Content-Type': 'application/json',
