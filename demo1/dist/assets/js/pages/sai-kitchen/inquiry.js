@@ -280,12 +280,20 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         if(full.inquiryAddedById==user.data.userId){
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
-                            // onclick="`+full.inquiryId+`" 
+                            // onclick="`+full.inquiryId+`"
+                            if(full.status==1 || full.status==2) {
                              action += `
-                            <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
+                            <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryId + `,1)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
 								<i class="la la-calendar"></i>
 							</a>
-						`;     if (inquiryPermission >= 3 && full.status==1 && full.noOfRevision==0) {
+						`;    }
+                        if(full.status==3 || full.status==4) {
+                            action += `
+                           <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryWorkscopeId + `,2)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
+                               <i class="la la-calendar"></i>
+                           </a>
+                       `;    }
+                         if (inquiryPermission >= 3 && full.status==1 && full.noOfRevision==0) {
                             console.log(full.inquiryId);
                             // onclick="`+full.inquiryId+`" 
                              action += `
@@ -516,7 +524,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
-    var _handleFormModifySchedule = function() {
+    var _handleFormMeasurSchedule = function() {
         var form = KTUtil.getById('kt_modify_inquiry_schedule');
         var formSubmitUrl = KTUtil.attr(form, 'action');
         var formSubmitButton = KTUtil.getById('kt_add_customer_button');
@@ -544,6 +552,117 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
                             }
                         },
+                        
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                var inquirySchedule = {
+                    inquiryId: document.getElementById("inquiryId").innerHTML,
+                    measurementAssignedTo: $('#kt_assignto').val(),
+                    measurementScheduleDate: document.getElementById('measurement_schedule_date').value,
+                    inquiryStatusId: 0,
+                    designAssignedTo: 0,
+                    designScheduleDate:"",
+                };
+                const data = JSON.stringify(inquirySchedule);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Inquiry/UpdateAssignMeasurement',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("inquiry.html");
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+            .on('core.form.invalid', function() {
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            });
+    }
+    var _handleFormDesignSchedule = function() {
+        var form = KTUtil.getById('kt_modify_inquiry_schedule');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_add_customer_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
                         design_schedule_date: {
                             validators: {
                                 notEmpty: {
@@ -576,9 +695,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var inquirySchedule = {
-                    inquiryId: document.getElementById("inquiryId").innerHTML,
-                    measurementAssignedTo: $('#kt_assignto').val(),
-                    measurementScheduleDate: document.getElementById('measurement_schedule_date').value,
+                    inquiryId: 0,
+                    inquiryWorkscopeId:document.getElementById("inquiryId").innerHTML,
+                    measurementAssignedTo: 0,
+                    measurementScheduleDate: "",
+                    inquiryStatusId:0,
                     designAssignedTo: $('#kt_designassignto').val(),
                     designScheduleDate: document.getElementById('design_schedule_date').value,
                 };
@@ -586,7 +707,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 console.log(data);
                 $.ajax({
                     type: "Post",
-                    url: baseURL + '/Inquiry/UpdateInquiryScheduleDate',
+                    url: baseURL + '/Inquiry/UpdateAssignDesign',
 
                     headers: {
                         'Content-Type': 'application/json',
@@ -775,7 +896,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         //main function to initiate the module
         init: function() {
             initTable1();
-            _handleFormModifySchedule();
+            _handleFormMeasurSchedule();
+            _handleFormDesignSchedule();
             _handleFormAddWorkscope();
         },
 
