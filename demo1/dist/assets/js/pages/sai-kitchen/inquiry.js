@@ -595,7 +595,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: data,
                     success: function(response) {
                         // Release button
-                        KTUtil.btnRelease(formSubmitButton);
+                       // KTUtil.btnRelease(formSubmitButton);
                         console.log(response);
                         // window.location.replace("home.html");
                         if (response.isError == false) {
@@ -636,19 +636,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     }
                 });
             })
-            .on('core.form.invalid', function() {
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function() {
-                    KTUtil.scrollTop();
-                });
-            });
     }
     var _handleFormDesignSchedule = function() {
         var form = KTUtil.getById('kt_modify_inquiry_schedule');
@@ -721,7 +708,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: data,
                     success: function(response) {
                         // Release button
-                        KTUtil.btnRelease(formSubmitButton);
+                     //   KTUtil.btnRelease(formSubmitButton);
                         console.log(response);
                         // window.location.replace("home.html");
                         if (response.isError == false) {
@@ -762,19 +749,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     }
                 });
             })
-            .on('core.form.invalid', function() {
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function() {
-                    KTUtil.scrollTop();
-                });
-            });
+
     }
     var _handleFormAddWorkscope = function() {
         var form = KTUtil.getById('kt_modify_add_workscope');

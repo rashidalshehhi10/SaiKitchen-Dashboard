@@ -635,7 +635,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     }
                 });
             })
-            .on('core.form.invalid', function() {
+/*             .on('core.form.invalid', function() {
                 Swal.fire({
                     text: "Sorry, looks like there are some errors detected, please try again.",
                     icon: "error",
@@ -647,7 +647,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 }).then(function() {
                     KTUtil.scrollTop();
                 });
-            });
+            }); */
     }
     return {
 
