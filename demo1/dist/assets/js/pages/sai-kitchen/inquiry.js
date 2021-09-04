@@ -42,8 +42,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName',
-                        'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
+                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName','isMeasurementProvidedByCustomer',
+                        'measurementScheduleDate', 'measurementAssignTo','isDesignProvidedByCustomer', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
                          'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
                     ],
@@ -62,10 +62,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'workScopeName'
                 },
                 {
+                    data: 'isMeasurementProvidedByCustomer'
+                },
+                {
                     data: 'measurementScheduleDate'
                 },
                 {
                     data: 'measurementAssignTo'
+                },
+                {
+                    data: 'isDesignProvidedByCustomer'
                 },
                 {
                     data: 'designScheduleDate'
@@ -442,10 +448,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     },
                 },
                 {
-                	targets: 13,
+                	targets: 15,
                 	render: function(data, type, full, meta) {
                 	
-                		if (typeof data === 'undefined') {
+                		if (typeof data === 'undefined' || data===null || data=="") {
                 			return data;
                 		}
                 		return '<div class="font-weight-bolder text-primary mb-0"><a href='+data+' target="_blank">Click Here</a></div>';

@@ -49,7 +49,7 @@ var KTDropzoneDemo = function() {
         $('#kt_dropzone_3').dropzone({
             
             // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
-            url: baseURL +"/File/UploadFile", // Set the url for your upload script location
+            url: baseURL+"/File/UploadFile", // Set the url for your upload script location
             type: "Post",
             headers : {
                 'Access-Control-Allow-Origin': '*',
@@ -61,41 +61,41 @@ var KTDropzoneDemo = function() {
             timeout: 600000,
             addRemoveLinks: true,
             removedfile:function(file) {
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        // event.target.result contains base64 encoded image
-                        var base64String = event.target.result;
-                        var fileName = file.name;
-                        var finalbase64 = base64String.split(",")[1];
-                        // handlePictureDropUpload(base64String ,fileName );
-                        removeA(measurementFile, finalbase64);
-                    };
-                    reader.readAsDataURL(file);
+                //     var reader = new FileReader();
+                //     reader.onload = function(event) {
+                //         // event.target.result contains base64 encoded image
+                //         var base64String = event.target.result;
+                //         var fileName = file.name;
+                //         var finalbase64 = base64String.split(",")[1];
+                //         // handlePictureDropUpload(base64String ,fileName );
+                //         removeA(measurementFile, finalbase64);
+                //     };
+                //     reader.readAsDataURL(file);
                     
-                file.previewElement.remove();
+                // file.previewElement.remove();
     
             },
       
             acceptedFiles: "image/*,application/pdf,.png,.mp4",
             
         init: function() {
-            this.on("addedfile", function (file) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    // event.target.result contains base64 encoded image
-                    var base64String = event.target.result;
-                    var fileName = file.name;
-                    var finalbase64 = base64String.split(",")[1]
-                    measurementFile.push(finalbase64);
-                    // handlePictureDropUpload(base64String ,fileName );
-                };
-                reader.readAsDataURL(file);
+            // this.on("addedfile", function (file) {
+            //     var reader = new FileReader();
+            //     reader.onload = function(event) {
+            //         // event.target.result contains base64 encoded image
+            //         var base64String = event.target.result;
+            //         var fileName = file.name;
+            //         var finalbase64 = base64String.split(",")[1]
+            //         measurementFile.push(finalbase64);
+            //         // handlePictureDropUpload(base64String ,fileName );
+            //     };
+            //     reader.readAsDataURL(file);
 
-            });
+            // });
         },
         success: function(file, response){
-            // alert(response);
-            // measurementFile.push(response.data.item1);
+            // alert(response.data.item1);
+            measurementFile.push(response.data.item1);
         
         }
             // accept: function(file, done) {
