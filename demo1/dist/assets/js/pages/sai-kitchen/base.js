@@ -1738,7 +1738,18 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 <h4 class="menu-text">Quotation</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+<a href="quotationschedule.html" class="menu-link menu-toggle">
+	<span class="svg-icon menu-icon">
 
+   <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+   <img src="/assets//media/svg/saikitchen/quotation.svg"/>
+   <!--end::Svg Icon-->
+	</span>
+	<span class="menu-text">Assign Schedule</span>
+	
+</a>
+</li>
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="quotation.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">

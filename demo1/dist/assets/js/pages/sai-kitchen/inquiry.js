@@ -256,6 +256,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Design Assignee  Rejected',
                                     'class': ' label-light-info'
                                 },
+                                42: {
+                                    'title': 'Quotation Schedule  Pending',
+                                    'class': ' label-light-primary'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -435,6 +439,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             41: {
                                 'title': 'Design Assignee  Rejected',
                                 'class': ' label-light-info'
+                            },
+                            42: {
+                                'title': 'Quotation Schedule  Pending',
+                                'class': ' label-light-primary'
                             },
                             
                         };
