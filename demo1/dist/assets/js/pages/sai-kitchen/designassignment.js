@@ -238,7 +238,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                        
-                        if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
                             var action=``; 
                         
@@ -251,9 +250,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 							</a>
 						`;
                             return action;
-                        } else {
-                            return `<span></span>`;
-                        }
+                     
                     },
                 },
                 {
