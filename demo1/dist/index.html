@@ -10,6 +10,7 @@
     <meta name="description" content="Sai Kitchen & Wardrobe CRM" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
+    
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -44,6 +45,10 @@
     <link rel="apple-touch-icon" href="assets/media/logos/icon-512x512.png" />
     <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
     <meta name="theme-color" content="#db4938" />
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
     <!--End:PWA-->
 
 </head>
@@ -91,7 +96,7 @@
                     <!--begin::Signin-->
                     <div class="login-form">
                         <!--begin::Form-->
-                        <form class="form" id="kt_login_singin_form" action="" name="signinform">
+                        <form class="form" id="kt_login_singin_form" action="" method="POST" name="signinform">
                             <!--begin::Title-->
                             <div class="pb-5 pb-lg-15">
                                 <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
@@ -113,7 +118,7 @@
                                     <a href="forgot.html" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Forgot
 										Password ?</a>
                                 </div>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" id="password" name="password" autocomplete="on" required />
+                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" id="password" name="password" required />
                             </div>
                             <!--end::Form group-->
                             <!--begin::Action-->
