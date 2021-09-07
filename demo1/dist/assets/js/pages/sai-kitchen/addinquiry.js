@@ -51,16 +51,7 @@ var KTWizard1 = function () {
 							}
 						}
 					},
-					customerEmail: {
-						validators: {
-							notEmpty: {
-								message: 'Email is required'
-							},
-							emailAddress: {
-								message: 'Please write valid email address'
-							}
-						}
-					},
+
 					customerAddress: {
 						validators: {
 							notEmpty: {
@@ -320,6 +311,7 @@ var KTWizard1 = function () {
 							isActive: true,
 							isEscalationRequested: false,
 							isDeleted: false,
+							customerWhatsapp:"",
 						},
 						branchId: user.data.userRoles[0].branchId,
 						promoId: promoId,
@@ -355,7 +347,7 @@ var KTWizard1 = function () {
 					inquiry.customer.customerCountry = $('#kt_country_of_Resdience').val();
 					inquiry.customer.customerCity = $('#kt_city_of_Resdience').val();
 					inquiry.customer.customerNationality = $('#kt_nationality').val();
-
+					inquiry.customer.customerWhatsapp = document.getElementById('whatsapp').value;
 					var workscope = document.getElementsByClassName("tagify__tag tagify__tag tagify__tag--primary");
 					workscope.forEach(element => {
 						try {
@@ -569,6 +561,7 @@ jQuery(document).ready(function () {
 							$('#kt_city_of_Resdience').val(response.data.customerCity).change();
 							document.getElementById("customerCity").innerHTML = response.data.customerCity;
 							$('#kt_nationality').val(response.data.customerNationality).change();
+							document.getElementById('whatsapp').value = response.data.customerWhatsapp;
 						} catch (error) {
 							document.getElementById('customerName').value = "";
 							document.getElementById('customerEmail').value = "";

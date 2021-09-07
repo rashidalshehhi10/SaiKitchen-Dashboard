@@ -531,6 +531,7 @@ var KTAppsUsersListDatatable = function() {
                 customer.customerCountry = $('#kt_country_of_Resdience').val();
                 customer.customerCity = $('#kt_city_of_Resdience').val();
                 customer.customerNationality = $('#kt_nationality').val();
+                customer.customerWhatsapp = document.getElementById('whatsapp').value;
                 // branchRole.permissionRoles.push({
                 // 	permissionId: 1,
                 // 	isActive: true,
@@ -870,3 +871,8 @@ function GetCity(country) {
         error: function(XMLHttpRequest, textStatus, errorThrown) {}
     });
 }
+$('#customerContact').blur('change', function() {
+
+ $('#whatsapp').val($('#customerContact').val());
+
+});

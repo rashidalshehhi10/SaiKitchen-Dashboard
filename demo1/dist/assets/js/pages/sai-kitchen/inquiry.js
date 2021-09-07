@@ -590,6 +590,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     inquiryStatusId: 0,
                     designAssignedTo: 0,
                     designScheduleDate:"",
+                    isProvidedByCustomer:$('input[name="clientMeasurement"]:checked').val(),
                 };
                 const data = JSON.stringify(inquirySchedule);
                 console.log(data);
@@ -703,6 +704,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     inquiryStatusId:0,
                     designAssignedTo: $('#kt_designassignto').val(),
                     designScheduleDate: document.getElementById('design_schedule_date').value,
+                    isProvidedByCustomer:$('input[name="clientDesign"]:checked').val(),
                 };
                 const data = JSON.stringify(inquirySchedule);
                 console.log(data);
