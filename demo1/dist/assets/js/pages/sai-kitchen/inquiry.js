@@ -287,7 +287,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var action = ``;
-                        if(full.inquiryAddedById==user.data.userId){
+                        if(full.inquiryAddedById==user.data.userId ||userRoleId==1){
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
                             // onclick="`+full.inquiryId+`"
@@ -897,6 +897,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 }();
 
 let permissions;
+let userRoleId;
 let inquiryPermission;
 
 jQuery(document).ready(function() {
@@ -907,6 +908,7 @@ jQuery(document).ready(function() {
     if (login !== null) {
         user = JSON.parse(login);
         console.log(user);
+        userRoleId = user.data.userRoles[0].branchRole.roleTypeId;
         permissions = user.data.userRoles[0].branchRole.permissionRoles;
         console.log(permissions);
         for (var i = 0; i < permissions.length; i++) {

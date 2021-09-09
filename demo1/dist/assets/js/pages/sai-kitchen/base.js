@@ -1,24 +1,24 @@
 "use strict";
 
 if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function() {
-        navigator.serviceWorker
-            .register("/serviceWorker.js")
-            .then(res => console.log("service worker registered"))
-            .catch(err => console.log("service worker not registered", err))
-    })
+   window.addEventListener("load", function () {
+      navigator.serviceWorker
+         .register("/serviceWorker.js")
+         .then(res => console.log("service worker registered"))
+         .catch(err => console.log("service worker not registered", err))
+   })
 }
 
 
 import {
-    baseURL
+   baseURL
 } from './constant.js'
 export let user;
 // var script = document.createElement('script');
 // script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 // script.type = 'text/javascript';
 // document.getElementsByTagName('head')[0].appendChild(script);
-document.getElementById("kt_header_mobile").innerHTML =` <!--begin::Logo-->
+document.getElementById("kt_header_mobile").innerHTML = ` <!--begin::Logo-->
                   <a href="home.html">
                   <img alt="Logo" src="assets/media/logos/logo-light.png" />
                   </a>
@@ -107,7 +107,7 @@ document.getElementById("kt_aside").innerHTML = `
                   <!--end::Aside Menu-->
                   `;
 document.getElementById("kt_header").innerHTML =
-`                  <!--begin::Container-->
+   `                  <!--begin::Container-->
                   <div class="container-fluid d-flex align-items-stretch justify-content-between">
                      <!--begin::Header Menu Wrapper-->
                      <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
@@ -681,9 +681,9 @@ document.getElementById("kt_header").innerHTML =
                   </div>
                   <!--end::Container-->
                `;
-			   try {
-				   
-document.getElementById("kt_footer").innerHTML = `<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+try {
+
+   document.getElementById("kt_footer").innerHTML = `<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 <!--begin::Copyright-->
 <div class="text-dark order-2 order-md-1">
   <span class="text-muted font-weight-bold mr-2">2021©</span>
@@ -698,11 +698,11 @@ document.getElementById("kt_footer").innerHTML = `<div class="container-fluid d-
 </div>
 <!--end::Nav-->
 </div>`;
-			   } catch (error) {
-				   
-			   }
+} catch (error) {
+
+}
 document.getElementById("kt_quick_user").innerHTML =
-                  ` <!--begin::Header-->
+   ` <!--begin::Header-->
                   <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
                     <h3 class="font-weight-bold m-0">
                     User Profile
@@ -934,7 +934,7 @@ document.getElementById("kt_quick_user").innerHTML =
                   </div>
                   <!--end::Content-->`;
 document.getElementById("kt_quick_panel").innerHTML =
-                `<!--begin::Header-->
+   `<!--begin::Header-->
                 <div class="offcanvas-header offcanvas-header-navs d-flex align-items-center justify-content-between mb-5">
                   <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-primary flex-grow-1 px-10" role="tablist">
                       <li class="nav-item">
@@ -1460,7 +1460,7 @@ document.getElementById("kt_quick_panel").innerHTML =
                 </div>
                 <!--end::Content-->`;
 document.getElementById("kt_scrolltop").innerHTML =
-            `<span class="svg-icon">
+   `<span class="svg-icon">
             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Up-2.svg-->
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -1472,101 +1472,101 @@ document.getElementById("kt_scrolltop").innerHTML =
             <!--end::Svg Icon-->
             </span>`;
 
-var isFocused=true;
+var isFocused = true;
 
 // Class Initialization
-jQuery(document).ready(function() {
-    var login = localStorage.getItem("user");
-    if (login === null) {
-        window.location.replace("index.html");
-    } else {
-		window.addEventListener('blur', () => {
-			isFocused=false;
-		});
-		window.addEventListener('focus', () => {
-			isFocused=true;
-		});
+jQuery(document).ready(function () {
+   var login = localStorage.getItem("user");
+   if (login === null) {
+      window.location.replace("index.html");
+   } else {
+      window.addEventListener('blur', () => {
+         isFocused = false;
+      });
+      window.addEventListener('focus', () => {
+         isFocused = true;
+      });
 
 
-        user = JSON.parse(login);
-        console.log(user);
-        try {
+      user = JSON.parse(login);
+      console.log(user);
+      try {
 
-            document.getElementById("logout").onclick =
-                function() {
-                    localStorage.removeItem('user');
-                    localStorage.removeItem('permission');
-                    var data = JSON.stringify({
-                        userId: user.data.userId
-                    });
-                    $.ajax({
-                        type: "Post",
-                        url: baseURL + '/User/LogoutUser',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'userId': user.data.userId,
-                            'userToken': user.data.userToken,
-                            'userRoleId': user.data.userRoles[0].userRoleId,
-                            'branchId': user.data.userRoles[0].branchId,
-                            'branchRoleId': user.data.userRoles[0].branchRoleId,
-							'Access-Control-Allow-Origin': '*',
-                        },
-                        data: data,
-                        success: function(response) {
-                            console.log(response);
-                            if (response.isError == false) {
-                                // sessionStorage.setItem('user', JSON.stringify(response));
-                                window.location.replace("index.html");
-                            } else {
-                                Swal.fire({
-                                    text: response.errorMessage,
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn font-weight-bold btn-light-primary"
-                                    }
-                                }).then(function() {
-                                    KTUtil.scrollTop();
-                                });
-                            }
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            alert(textStatus);
-                        },
-                    });
+         document.getElementById("logout").onclick =
+            function () {
+               localStorage.removeItem('user');
+               localStorage.removeItem('permission');
+               var data = JSON.stringify({
+                  userId: user.data.userId
+               });
+               $.ajax({
+                  type: "Post",
+                  url: baseURL + '/User/LogoutUser',
+                  headers: {
+                     'Content-Type': 'application/json',
+                     'userId': user.data.userId,
+                     'userToken': user.data.userToken,
+                     'userRoleId': user.data.userRoles[0].userRoleId,
+                     'branchId': user.data.userRoles[0].branchId,
+                     'branchRoleId': user.data.userRoles[0].branchRoleId,
+                     'Access-Control-Allow-Origin': '*',
+                  },
+                  data: data,
+                  success: function (response) {
+                     console.log(response);
+                     if (response.isError == false) {
+                        // sessionStorage.setItem('user', JSON.stringify(response));
+                        window.location.replace("index.html");
+                     } else {
+                        Swal.fire({
+                           text: response.errorMessage,
+                           icon: "error",
+                           buttonsStyling: false,
+                           confirmButtonText: "Ok, got it!",
+                           customClass: {
+                              confirmButton: "btn font-weight-bold btn-light-primary"
+                           }
+                        }).then(function () {
+                           KTUtil.scrollTop();
+                        });
+                     }
+                  },
+                  error: function (XMLHttpRequest, textStatus, errorThrown) {
+                     alert(textStatus);
+                  },
+               });
 
-                };
+            };
 
-        } catch (error) {
+      } catch (error) {
 
-        }
-        // $.ajaxSetup({
-        // 	beforeSend: function (xhr) {
-        // 		xhr.setRequestHeader('userId', user.data.userId);
-        // 		xhr.setRequestHeader('Accept', 'application/json');
-        // 		xhr.setRequestHeader('userToken', user.data.userToken);
-        // 		xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-        // 		xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
-        // 		xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-        // 		xhr.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-        // 	},
-        // });
-        console.log(user.data.userEmail);
+      }
+      // $.ajaxSetup({
+      // 	beforeSend: function (xhr) {
+      // 		xhr.setRequestHeader('userId', user.data.userId);
+      // 		xhr.setRequestHeader('Accept', 'application/json');
+      // 		xhr.setRequestHeader('userToken', user.data.userToken);
+      // 		xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+      // 		xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+      // 		xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+      // 		xhr.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+      // 	},
+      // });
+      console.log(user.data.userEmail);
 
-        // document.getElementById("userProfileName").value = user.data.userName;
-        $("#userProfileName").text(user.data.userName);
-        $("#dashboardUserName").text(user.data.userName);
-        console.log(user.data.userRoles[0].branchRole);
-        $("#branchRoleName").text(user.data.userRoles[0].branchRole.branchRoleName + ' (' + user.data.userRoles[0].branch.branchName + ')');
-
-
-        $("#userEmail").text(user.data.userEmail);
+      // document.getElementById("userProfileName").value = user.data.userName;
+      $("#userProfileName").text(user.data.userName);
+      $("#dashboardUserName").text(user.data.userName);
+      console.log(user.data.userRoles[0].branchRole);
+      $("#branchRoleName").text(user.data.userRoles[0].branchRole.branchRoleName + ' (' + user.data.userRoles[0].branch.branchName + ')');
 
 
-        const sideMenu = document.getElementById('kt_aside_menu');
+      $("#userEmail").text(user.data.userEmail);
 
-        var sideMenuHTML = `	<ul class="menu-nav">
+
+      const sideMenu = document.getElementById('kt_aside_menu');
+
+      var sideMenuHTML = `	<ul class="menu-nav">
  <li class="menu-item menu-item-active" aria-haspopup="true">
 	<a href="home.html" class="menu-link">
 		<span class="svg-icon menu-icon svg-icon-light">
@@ -1580,20 +1580,22 @@ jQuery(document).ready(function() {
  </li>
  `;
 
-        var permission = new Array();
+      var permission = new Array();
 
+      var userRoleId;
 
-        for (var i = 0; i < user.data.userRoles[0].branchRole.permissionRoles.length; i++) {
+      userRoleId = user.data.userRoles[0].branchRole.roleTypeId;
+      for (var i = 0; i < user.data.userRoles[0].branchRole.permissionRoles.length; i++) {
 
-            var permissions = user.data.userRoles[0].branchRole.permissionRoles[i].permissionId;
-            permission.push(permissions);
-        }
-        // if (permission.includes(5)) {
-        // 	alert('Yes');
-        // }
+         var permissions = user.data.userRoles[0].branchRole.permissionRoles[i].permissionId;
+         permission.push(permissions);
+      }
+      // if (permission.includes(5)) {
+      // 	alert('Yes');
+      // }
 
-        if (permission.includes(5)) {
-            sideMenuHTML += `
+      if (permission.includes(5)) {
+         sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Customer</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -1611,9 +1613,9 @@ jQuery(document).ready(function() {
 </a>
 </li>
 `;
-        }
-        if (permission.includes(6)) {
-            sideMenuHTML += `
+      }
+      if (permission.includes(6)) {
+         sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Inquiry</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -1631,14 +1633,16 @@ jQuery(document).ready(function() {
 </a>
 </li>
 `;
-        }
-        if (permission.includes(7)) {
-            sideMenuHTML += `
+      }
+      if (permission.includes(7) || userRoleId == 1 || userRoleId == 3) {
+         sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Measurement</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-</li>
+</li>`;
 
+if (permission.includes(7)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 	<a href="measurementassignment.html" class="menu-link menu-toggle">
 		<span class="svg-icon menu-icon">
@@ -1651,7 +1655,6 @@ jQuery(document).ready(function() {
 		
 	</a>
 	</li>
-
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="measurement.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1665,8 +1668,8 @@ jQuery(document).ready(function() {
 </a>
 </li>
 `;
-if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branchRole.roleTypeId==3){
-	sideMenuHTML += `
+         }
+         sideMenuHTML += `
 	<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 	<a href="measurementrequest.html" class="menu-link menu-toggle">
 		<span class="svg-icon menu-icon">
@@ -1680,15 +1683,17 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 	</a>
 	</li>
 	`;
-}
-        }
-        if (permission.includes(8)) {
-            sideMenuHTML += `
+
+      }
+      if (permission.includes(8) || userRoleId == 1 || userRoleId == 3) {
+         sideMenuHTML += `
             
 <li class="menu-section">
 <h4 class="menu-text">Design</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-</li>
+</li>`;
+if (permission.includes(8)){
+   sideMenuHTML += `   
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="designassignment.html" class="menu-link menu-toggle">
    <span class="svg-icon menu-icon">
@@ -1714,9 +1719,9 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 </a>
 </li>
 `;
+}
 
-if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branchRole.roleTypeId==3){
-	sideMenuHTML += `
+            sideMenuHTML += `
 	<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 	<a href="designrequest.html" class="menu-link menu-toggle">
 		<span class="svg-icon menu-icon">
@@ -1730,28 +1735,10 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 	</a>
 	</li>
 	`;
-}
-        }
-        sideMenuHTML += `   
-        <li class="menu-section">
-        <h4 class="menu-text">Reports</h4>
-        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-        </li>
-        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="salesreport.html" class="menu-link menu-toggle">
-           <span class="svg-icon menu-icon">
-             
-           <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-           <img src="/assets/media/svg/saikitchen/report.svg"/>
-           <!--end::Svg Icon-->
-           </span>
-           <span class="menu-text">Sales Report</span>
-           
-        </a>
-        </li>
-        `;
-        if (permission.includes(9)) {
-            sideMenuHTML += `
+         
+      }
+      if (permission.includes(9)) {
+         sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Quotation</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -1781,9 +1768,9 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 </a>
 </li>
 `;
-        }
-        if (permission.includes(13)) {
-            sideMenuHTML += `
+      }
+      if (permission.includes(13)) {
+         sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Checklist</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -1802,10 +1789,10 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 </a>
 </li>
 `;
-        }
-		
-        if (permission.includes(14)) {
-            sideMenuHTML += `
+      }
+
+      if (permission.includes(14)) {
+         sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Job Order</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -1829,9 +1816,9 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 </a>
 </li>
 `;
-        }
-        if (permission.includes(15)) {
-            sideMenuHTML += `
+      }
+      if (permission.includes(15)) {
+         sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Payment</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -1855,19 +1842,40 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 </a>
 </li>
 `;
-        }
+      }
 
-        if (permission.includes(2) || permission.includes(3) || permission.includes(4)) {
-            sideMenuHTML += `
+      if (permission.includes(16)) {
+
+         sideMenuHTML += `   
+        <li class="menu-section">
+        <h4 class="menu-text">Reports</h4>
+        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+        </li>
+        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+        <a href="salesreport.html" class="menu-link menu-toggle">
+           <span class="svg-icon menu-icon">
+             
+           <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+           <img src="/assets/media/svg/saikitchen/report.svg"/>
+           <!--end::Svg Icon-->
+           </span>
+           <span class="menu-text">Sales Report</span>
+           
+        </a>
+        </li>
+        `;
+      }
+      if (permission.includes(2) || permission.includes(3) || permission.includes(4)) {
+         sideMenuHTML += `
 		<li class="menu-section">
 		<h4 class="menu-text">CRM Management</h4>
 		<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 		</li>`;
 
-        }
+      }
 
-        if (permission.includes(4)) {
-            sideMenuHTML += `
+      if (permission.includes(4)) {
+         sideMenuHTML += `
 	<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 		<a href="user.html" class="menu-link menu-toggle">
 			<span class="svg-icon menu-icon">
@@ -1880,9 +1888,9 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 		</a>
 	</li>
 	`;
-        }
-        if (permission.includes(2)) {
-            sideMenuHTML += `<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+      }
+      if (permission.includes(2)) {
+         sideMenuHTML += `<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 		<a href="branch.html" class="menu-link menu-toggle">
 			<span class="svg-icon menu-icon">
 				
@@ -1893,9 +1901,9 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 			<span class="menu-text">Branch</span>
 		</a>
 	</li>`;
-        }
-        if (permission.includes(3)) {
-            sideMenuHTML += `
+      }
+      if (permission.includes(3)) {
+         sideMenuHTML += `
 		<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 			<a href="branchrole.html" class="menu-link menu-toggle">
 				<span class="svg-icon menu-icon">
@@ -1907,19 +1915,19 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 				<span class="menu-text">Branch Role</span>
 			</a>
 		</li>`;
-        }
+      }
 
 
-        if (permission.includes(10)||permission.includes(11)||permission.includes(12)) {
-            sideMenuHTML += `
+      if (permission.includes(10) || permission.includes(11) || permission.includes(12)) {
+         sideMenuHTML += `
 		<li class="menu-section">
 		<h4 class="menu-text">Settings</h4>
 		<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 		</li>`;
 
-        }
-        if (permission.includes(10)) {
-            sideMenuHTML += `
+      }
+      if (permission.includes(10)) {
+         sideMenuHTML += `
 		<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 			<a href="workscope.html" class="menu-link menu-toggle">
 				<span class="svg-icon menu-icon">
@@ -1931,9 +1939,9 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 				<span class="menu-text">WorkScope</span>
 			</a>
 		</li>`;
-        }
-        if (permission.includes(11)) {
-            sideMenuHTML += `
+      }
+      if (permission.includes(11)) {
+         sideMenuHTML += `
 		<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 			<a href="fees.html" class="menu-link menu-toggle">
 				<span class="svg-icon menu-icon">
@@ -1950,9 +1958,9 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 				<span class="menu-text">Fees</span>
 			</a>
 		</li>`;
-        }
-        if (permission.includes(12)) {
-            sideMenuHTML += `
+      }
+      if (permission.includes(12)) {
+         sideMenuHTML += `
 		<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 			<a href="promo.html" class="menu-link menu-toggle">
 				<span class="svg-icon menu-icon">
@@ -1971,50 +1979,50 @@ if(user.data.userRoles[0].branchRole.roleTypeId==1||user.data.userRoles[0].branc
 		</li>
 		
 		</ul>`;
-        }
+      }
 
 
-        sideMenu.innerHTML = sideMenuHTML;
+      sideMenu.innerHTML = sideMenuHTML;
 
 
 
-    }
-    getNotifications();
+   }
+   getNotifications();
 
-    setInterval(getNotifications, 10000); //10000 milliseconds = 10 seconds
-	document.addEventListener('contextmenu', event => event.preventDefault());
+   setInterval(getNotifications, 10000); //10000 milliseconds = 10 seconds
+   document.addEventListener('contextmenu', event => event.preventDefault());
 });
 
 
 
 function getNotifications() {
-if(isFocused){
-    $.ajax({
-        type: "Post",
-        url: baseURL + '/Notification/GeAllNotificationofUser?userId=' + user.data.userId,
+   if (isFocused) {
+      $.ajax({
+         type: "Post",
+         url: baseURL + '/Notification/GeAllNotificationofUser?userId=' + user.data.userId,
 
-        headers: {
+         headers: {
             'Content-Type': 'application/json',
             'userId': user.data.userId,
             'userToken': user.data.userToken,
             'userRoleId': user.data.userRoles[0].userRoleId,
             'branchId': user.data.userRoles[0].branchId,
             'branchRoleId': user.data.userRoles[0].branchRoleId,
-			'Access-Control-Allow-Origin': '*',
-        },
-        success: function(response) {
+            'Access-Control-Allow-Origin': '*',
+         },
+         success: function (response) {
             console.log(response);
             if (response.isError == false) {
-                var notification = document.getElementById('notification');
-                var notificationInquiry = document.getElementById('notificationinquiry');
-                var notificationMeasurement = document.getElementById('notificationmeasurement');
-                var notificationDesign = document.getElementById('notificatiodesign');
-                notification.innerHTML = ``;
-                notificationMeasurement.innerHTML = ``;
-                notificationinquiry.innerHTML = ``;
-                notificationDesign.innerHTML = ``;
-                for (var i = 0; i < response.data.length; i++) {
-                    notification.innerHTML += `<div class="d-flex align-items-center mb-6"  onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
+               var notification = document.getElementById('notification');
+               var notificationInquiry = document.getElementById('notificationinquiry');
+               var notificationMeasurement = document.getElementById('notificationmeasurement');
+               var notificationDesign = document.getElementById('notificatiodesign');
+               notification.innerHTML = ``;
+               notificationMeasurement.innerHTML = ``;
+               notificationinquiry.innerHTML = ``;
+               notificationDesign.innerHTML = ``;
+               for (var i = 0; i < response.data.length; i++) {
+                  notification.innerHTML += `<div class="d-flex align-items-center mb-6"  onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
 				<!--begin::Symbol-->
 				<div class="symbol symbol-40 symbol-light-primary mr-5">
 					<span class="symbol-label">
@@ -2050,8 +2058,8 @@ if(isFocused){
 			</div>`;
 
 
-                    if (response.data[i].notificationCategoryName == "Inquiry") {
-                        notificationInquiry.innerHTML += `
+                  if (response.data[i].notificationCategoryName == "Inquiry") {
+                     notificationInquiry.innerHTML += `
 						<div class="d-flex align-items-center mb-6"   onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
 						<!--begin::Symbol-->
 						<div class="symbol symbol-40 symbol-light-primary mr-5">
@@ -2087,9 +2095,9 @@ if(isFocused){
 						</div>
 						<!--end::Text-->
 					</div>`;
-                    }
-                    if (response.data[i].notificationCategoryName == "Measurement") {
-                        notificationMeasurement.innerHTML += `
+                  }
+                  if (response.data[i].notificationCategoryName == "Measurement") {
+                     notificationMeasurement.innerHTML += `
 						<div class="d-flex align-items-center mb-6"  onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
 						<!--begin::Symbol-->
 						<div class="symbol symbol-40 symbol-light-primary mr-5">
@@ -2125,9 +2133,9 @@ if(isFocused){
 						</div>
 						<!--end::Text-->
 					</div>`;
-                    }
-                    if (response.data[i].notificationCategoryName == "Design") {
-                        notificationDesign.innerHTML += `
+                  }
+                  if (response.data[i].notificationCategoryName == "Design") {
+                     notificationDesign.innerHTML += `
 						<div class="d-flex align-items-center mb-6"   onclick="location.href='` + response.data[i].notificationCategoryName + `.html';" style="cursor: pointer;">
 						<!--begin::Symbol-->
 						<div class="symbol symbol-40 symbol-light-primary mr-5">
@@ -2163,26 +2171,26 @@ if(isFocused){
 						</div>
 						<!--end::Text-->
 					</div>`;
-                    }
-                }
+                  }
+               }
             } else {
-                Swal.fire({
-                    text: response.errorMessage,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function() {
-                    KTUtil.scrollTop();
-                });
+               Swal.fire({
+                  text: response.errorMessage,
+                  icon: "error",
+                  buttonsStyling: false,
+                  confirmButtonText: "Ok, got it!",
+                  customClass: {
+                     confirmButton: "btn font-weight-bold btn-light-primary"
+                  }
+               }).then(function () {
+                  KTUtil.scrollTop();
+               });
             }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
+         },
+         error: function (XMLHttpRequest, textStatus, errorThrown) {
             // alert(textStatus);
-        },
-    });
-}
+         },
+      });
+   }
 
 }
