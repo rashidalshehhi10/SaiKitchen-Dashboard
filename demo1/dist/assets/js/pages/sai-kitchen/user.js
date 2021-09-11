@@ -208,7 +208,7 @@ var KTDatatablesExtensionsResponsive = function () {
 				// };
 				newuser.userId = document.getElementById('userId').innerHTML;
 				newuser.userName = document.getElementById('userName').value;
-				newuser.userEmail = document.getElementById('userEmail').value;
+				newuser.userEmail = document.getElementById('Email').value;
 				newuser.userMobile = document.getElementById('userMobile').value;
 				userRole.branchId = $('#kt_select_branch').val();
 				userRole.branchRoleId = $('#kt_select_branch_role').val();

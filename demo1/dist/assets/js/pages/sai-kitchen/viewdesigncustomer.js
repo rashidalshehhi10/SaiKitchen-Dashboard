@@ -35,21 +35,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                        design_schedule_date: {
+                        designApprovalComment: {
                             validators: {
                                 notEmpty: {
-                                    message: 'Design Schedule Date is required'
+                                    message: 'Design Approval Comment  required'
                                 }
                             }
                         },
-                        DesignAssignto: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Design Assign is required'
-                                },
 
-                            }
-                        },
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
@@ -63,6 +56,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 }
             )
             .on('core.form.valid', function() {
+                if($('#designApprovalComment').val()==''){
+                    $('#designApprovalComment').css("border-color","#C80000");
+                   return false;
+                  }
+                  if($('#aemoji').val()=='0'){
+                    document.getElementById("aemoj1").style.border = "solid 1px red";
+                   return false;
+                  }
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
@@ -130,19 +131,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         });
                     }
                 });
-            })
-            .on('core.form.invalid', function() {
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function() {
-                    KTUtil.scrollTop();
-                });
             });
     }
     var _handleFormRejectMeasurement = function() {
@@ -158,19 +146,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                        design_schedule_date: {
+                        designRejectComment: {
                             validators: {
                                 notEmpty: {
-                                    message: 'Design Schedule Date is required'
+                                    message: 'Design Reject Comment is required'
                                 }
-                            }
-                        },
-                        DesignAssignto: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Design Assign is required'
-                                },
-
                             }
                         },
                     },
@@ -186,6 +166,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 }
             )
             .on('core.form.valid', function() {
+                if($('#designRejectComment').val()==''){
+                    $('#designRejectComment').css("border-color","#C80000");
+                   return false;
+                  }
+                  if($('#hemoji').val()=='0'){
+                    document.getElementById("emoj1").style.border = "solid 1px red";
+                   return false;
+                  }
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
@@ -255,19 +243,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     }
                 });
             })
-            .on('core.form.invalid', function() {
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function() {
-                    KTUtil.scrollTop();
-                });
-            });
+            ;
     }
     return {
 
@@ -524,3 +500,14 @@ pannellum.viewer(url, {
 
     });
 
+    $( "#designApprovalComment" ).blur(function() {
+        if($('#designApprovalComment').val()!=''){
+          $('#designApprovalComment').css("border-color","#E8E4E4");
+        }
+      });
+      $( "#designRejectComment" ).blur(function() {
+        if($('#designRejectComment').val()!=''){
+          $('#designRejectComment').css("border-color","#E8E4E4");
+        }
+      });
+      

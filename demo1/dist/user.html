@@ -564,7 +564,7 @@ License: You must have a valid license purchased only from themeforest(the above
 													<i class="la la-at"></i>
 												</span>
 											</div>
-											<input type="text" name="email" id="userEmail"
+											<input type="text" name="email" id="Email"
 												class="form-control form-control-lg form-control-solid" value=""
 												placeholder="abc@abc.com">
 										</div>
@@ -633,7 +633,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				//$("option:selected").removeAttr("selected");
 				document.getElementById('userName').value ='';
 				document.getElementById('userMobile').value ='';
-				document.getElementById('userEmail').value ='';
+				document.getElementById('Email').value ='';
 				$('#kt_select_branch'+' option[value="1"').attr('selected',true).change();
 				$('#kt_select_branch_role'+' option[value="1"').attr('selected',true).change();
             } catch (error) {
@@ -660,7 +660,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					if (response.isError == false) {
 						document.getElementById('userName').value =response.data.userName;
 						document.getElementById('userMobile').value =response.data.userMobile;
-						document.getElementById('userEmail').value =response.data.userEmail;
+						document.getElementById('Email').value =response.data.userEmail;
 						$('#kt_select_branch option[value="'+response.data.userRoles['0']['branchId']+'"]').attr('selected',true).change();
 						$('#kt_select_branch_role option[value="'+response.data.userRoles['0']['branchRoleId']+'"]').attr('selected',true).change();					
 					} else {
