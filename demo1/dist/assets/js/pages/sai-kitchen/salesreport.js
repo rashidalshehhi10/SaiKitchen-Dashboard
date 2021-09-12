@@ -40,6 +40,7 @@ var columnName = [
 
   ];
   var example = $("#kt_datatable_example_4").DataTable({
+    responsive: true,
     data: datasource1,
     columns: columnName,
     "searching": false, 
@@ -527,6 +528,7 @@ $('#btnSearch').click(function (){
                 $('#kt_datatable_example_4').empty(); 
               }
               example = $('#kt_datatable_example_4').DataTable({
+                responsive:true,
                 data: datasource1,
                 columns: columnName,
                 "searching": false, 
@@ -547,6 +549,7 @@ $('#btnSearch').click(function (){
         $('#kt_datatable_example_4').empty(); 
     }
     example = $('#kt_datatable_example_4').DataTable({
+        responsive:true,
         data: datasource2,
             columns: columnName,
             "searching": false, 
@@ -590,6 +593,7 @@ $('#btnSearch').click(function (){
             $('#kt_datatable_example_4').empty(); 
         }
         example = $('#kt_datatable_example_4').DataTable({
+            responsive:true,
             data: datasource1,
                 columns: columnName,
                 "searching": false, 
@@ -1095,6 +1099,7 @@ $('#btnSearch').click(function (){
                         $('#kt_datatable_example_4').empty(); 
                       }
                       example = $('#kt_datatable_example_4').DataTable({
+                         responsive:true, 
                         data: datasource1,
                         columns: columnName,
                         "searching": false, 
