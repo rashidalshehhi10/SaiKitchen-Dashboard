@@ -244,7 +244,7 @@ $('#btnSearch').click(function (){
                     },
                     y: {
                         formatter: function (val) {
-                           // return '$' + val + ' thousands'
+                            return '' + val + ' '
                         }
                     }
                 },
@@ -278,7 +278,7 @@ $('#btnSearch').click(function (){
                }
             var options2 = {
                 series: [{
-                    name: 'Customer satisfaction',
+                    name: 'Received Amount',
                     data: ydatachart
                 }],
                 chart: {
@@ -372,7 +372,7 @@ $('#btnSearch').click(function (){
                     },
                     y: {
                         formatter: function (val) {
-                           // return '$' + val + ' thousands'
+                            return '' + val + ' '
                         }
                     }
                 },
@@ -812,7 +812,7 @@ $('#btnSearch').click(function (){
                             },
                             y: {
                                 formatter: function (val) {
-                                   // return '$' + val + ' thousands'
+                                    return '' + val + ''
                                 }
                             }
                         },
@@ -846,7 +846,7 @@ $('#btnSearch').click(function (){
                        }
                     var options2 = {
                         series: [{
-                            name: 'Customer satisfaction',
+                            name: 'Received Amount',
                             data: ydatachart
                         }],
                         chart: {
@@ -940,7 +940,7 @@ $('#btnSearch').click(function (){
                             },
                             y: {
                                 formatter: function (val) {
-                                   // return '$' + val + ' thousands'
+                                    return '' + val + ''
                                 }
                             }
                         },
