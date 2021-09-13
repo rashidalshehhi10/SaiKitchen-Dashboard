@@ -76,7 +76,7 @@ var KTDropzoneDemo = function() {
     
             },
       
-            acceptedFiles: "image/*,application/pdf,.png,.mp4",
+            acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
             
         init: function() {
             // this.on("addedfile", function (file) {
