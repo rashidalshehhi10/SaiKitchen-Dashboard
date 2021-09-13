@@ -242,6 +242,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             var action=``; 
                         
                              action += `
+                              <a style="background-color:#734f43;margin:2px"  href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `&designView=1"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
+                             <i class="la la-ruler-combined"></i>
+                         </a>
                             <a type="button" onclick="setInquiryId(` + full.inquiryWorkscopeId + `)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
 								<i class="la la-thumbs-up"></i>
 							</a>
