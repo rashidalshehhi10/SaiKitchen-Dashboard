@@ -802,7 +802,38 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
     </div>
+    <div class="modal fade" id="DelWorkscope" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Del Workscope</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_del_workscope" action="" name="addworkscope">
+                    <div class="modal-body">
 
+                        <div class="form-group">
+                            <label class="">WorkScope*</label>
+                            <div class="">
+                                <select class="form-control" id="kt_select_WorkScope" name="kt_select_WorkScope" class="form-control form-control-lg form-control-solid" >
+											
+							    </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="submit"  id="kt_del_workscope_button" onclick="deleteInquiryWorkscope(document.getElementById('kt_select_WorkScope').value)" class="btn btn-primary font-weight-bold">Delete</button>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">   
     </div>
@@ -1116,7 +1147,65 @@ License: You must have a valid license purchased only from themeforest(the above
                 },
             });
         }
-        
+        function GetWorkscopesByinquiryId(inquiryId) {
+        $.ajax({
+            type: "Post",
+            url: baseURL + '/Inquiry/GetWorkscopesByinquiryId?inquiryId='+inquiryId,
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                // 'userId': user.data.userId,
+                // 'userToken': user.data.userToken,
+                // 'userRoleId': user.data.userRoles[0].userRoleId,
+                // 'branchId': user.data.userRoles[0].branchId,
+                // 'branchRoleId': user.data.userRoles[0].branchRoleId,
+            },
+            success: function(response) {
+                // Release button
+                console.log(response);
+                if (response.isError == false) {
+                    const WorkScope = document.getElementById('kt_select_WorkScope');
+				var TypeListHTML = new Array();
+
+				for (var i = 0; i < response.data.length; i++) {
+					TypeListHTML.push(`
+					<option value="` + response.data[i].inquiryWorkscopeId + `">` + response.data[i].workScopeName + `</option>`);
+				}
+
+				WorkScope.innerHTML = TypeListHTML.join('');
+
+
+                } else {
+                    Swal.fire({
+                        text: response.errorMessage,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    }).then(function() {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                Swal.fire({
+                    text: 'Internet Connection Problem',
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            }
+        });
+}
     </script>
 
     <!--end::Page Scripts-->

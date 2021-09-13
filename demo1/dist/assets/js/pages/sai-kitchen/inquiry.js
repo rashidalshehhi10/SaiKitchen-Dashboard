@@ -42,7 +42,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'workScopeName','isMeasurementProvidedByCustomer',
+                        'inquiryId', 'inquiryCode', 'status', 'workscopeNames','isMeasurementProvidedByCustomer',
                         'measurementScheduleDate', 'measurementAssignTo','isDesignProvidedByCustomer', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
                          'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
@@ -50,7 +50,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
             },
             columns: [{
-                    data: 'inquiryWorkscopeId'
+                    data: 'inquiryId'
                 },
                 {
                     data: 'inquiryCode'
@@ -62,7 +62,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'customerName'
                 },
                 {
-                    data: 'workScopeName'
+                    data: 'workscopeNames'
                 },
                 {
                     data: 'isMeasurementProvidedByCustomer'
@@ -299,7 +299,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 						`;    }
                         if(full.status==3 || full.status==4 || full.status==11 || full.status==39 ||full.status==40 || full.status==41) {
                             action += `
-                           <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryWorkscopeId + `,2)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
+                           <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryId + `,2)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
                                <i class="la la-calendar"></i>
                            </a>
                        `;    }
@@ -307,7 +307,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             console.log(full.inquiryId);
                             // onclick="`+full.inquiryId+`" 
                              action += `
-                           <a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryWorkscopeId + `)"  data-toggle="modal" data-target="#AddWorkscope"  class="btn btn-sm btn-clean btn-icon" title="Add workscope">
+                           <a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"  data-toggle="modal" data-target="#AddWorkscope"  class="btn btn-sm btn-clean btn-icon" title="Add workscope">
 								<i class="la la-plus-square"></i>
 							</a>
 						`;}
@@ -319,15 +319,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         ';
                             }
                             if (inquiryPermission >= 5) {
-                                action += `\
-                            <a onclick="deleteInquiryWorkscope(` + full.inquiryWorkscopeId + `)"  style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Delete">\
-                                <i class="la la-trash"></i>\
-                            </a>\
+                                action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="GetWorkscopesByinquiryId(` + full.inquiryId + `)"  data-toggle="modal" data-target="#DelWorkscope"  class="btn btn-sm btn-clean btn-icon" title="Delete workscope">
+                            <i class="la la-trash"></i>\
+							</a>\
                         `;
                             }
                             if (full.status==12 ) {
                                  action += `
-                               <a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewdesigncustomer.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"    class="btn btn-sm btn-clean btn-icon" title="View Customer Approval Pending">
+                               <a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewdesigncustomer.html?inquiryWorkscopeId=` + full.inquiryId + `"    class="btn btn-sm btn-clean btn-icon" title="View Customer Approval Pending">
                                <i class="la fab la-codepen"></i>
                                 </a>
                             `;
@@ -1081,3 +1080,5 @@ jQuery(document).ready(function() {
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 });
+
+
