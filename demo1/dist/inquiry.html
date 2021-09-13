@@ -827,7 +827,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                     <div class="modal-footer">
                         <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                        <button type="submit"  id="kt_del_workscope_button" onclick="deleteInquiryWorkscope(document.getElementById('kt_select_WorkScope').value)" class="btn btn-primary font-weight-bold">Delete</button>
+                        <button type="button"  id="kt_del_workscope_button" onclick="deleteInquiryWorkscope(document.getElementById('kt_select_WorkScope').value)" class="btn btn-primary font-weight-bold">Delete</button>
                     </div>
                 </form>
                 <!--end::Form-->
@@ -1016,23 +1016,11 @@ License: You must have a valid license purchased only from themeforest(the above
         }
 
         function deleteInquiryWorkscope(inquiryWorskcopeId) {
-            document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorskcopeId;
-            Swal.fire({
-				text: "Are You Sure to delete?",
-				icon: "error",
-				showCancelButton: true,
-				buttonsStyling: false,
-				confirmButtonText: "Yes, submit!",
-				cancelButtonText: "No, cancel",
-				customClass: {
-					confirmButton: "btn font-weight-bold btn-primary",
-					cancelButton: "btn font-weight-bold btn-default"
-				}
-			}).then(function (result) {
-				if (result.value) {
-                    var inquiryWorkscope=  {inquiryWorkscopeId:document.getElementById("inquiryWorkscopeId").innerHTML,
-              workScopeId: new Array()
-            };
+            if (confirm('Are you sure you want delete workscope?')) {
+                var inquiryWorkscope=  
+                {inquiryWorkscopeId:inquiryWorskcopeId,
+                  workScopeId: new Array()
+                }   
                 const data = JSON.stringify(inquiryWorkscope);
                 console.log(data);
                 $.ajax({
@@ -1085,18 +1073,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     }
                 });
 
-				} else if (result.dismiss === 'cancel') {
-					// Swal.fire({
-					// 	text: "Your form has not been submitted!.",
-					// 	icon: "error",
-					// 	buttonsStyling: false,
-					// 	confirmButtonText: "Ok, got it!",
-					// 	customClass: {
-					// 		confirmButton: "btn font-weight-bold btn-primary",
-					// 	}
-					// });
-				}
-			});
+				
+            } else {
+                    return false;
+                }
+			
         }
 
         function logoutUser(user) {

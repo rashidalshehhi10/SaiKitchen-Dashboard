@@ -556,37 +556,7 @@ $('#btnSearch').click(function (){
             "lengthChange": false
     } );
     });
-    $.ajax({
-		type: "get",
-		url: baseURL + '/Branch/GetBranches',
-
-		headers: {
-			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*',
-		},
-		success: function (response) {
-			console.log(response);
-			if (response.isError == false) {
-
-				console.log(response.data[0].permissionName);
-				const branchList = document.getElementById('kt_select_branch');
-				var branchTypeListHTML = new Array();
-
-				for (var i = 0; i < response.data.length; i++) {
-					branchTypeListHTML.push(`
-					<option value="` + response.data[i].branchId + `">` + response.data[i].branchName + `</option>`);
-				}
-
-				branchList.innerHTML = branchTypeListHTML.join('');
-
-			} else {
-				
-			}
-		},
-		error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-		}
-	});
+   
     $('#btnRecieved').click(function (){
         if ( $.fn.dataTable.isDataTable( '#kt_datatable_example_4' ) ) {
             example.destroy();
@@ -601,9 +571,39 @@ $('#btnSearch').click(function (){
         } );
         });
 
-
-
+   
         jQuery(document).ready(function () {
+            $.ajax({
+                type: "get",
+                url: baseURL + '/Branch/GetBranches',
+                async:false,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (response.isError == false) {
+            
+                        console.log(response.data[0].permissionName);
+                        const branchList = document.getElementById('kt_select_branch');
+                        var branchTypeListHTML = new Array();
+            
+                        for (var i = 0; i < response.data.length; i++) {
+                            branchTypeListHTML.push(`
+                            <option value="` + response.data[i].branchId + `">` + response.data[i].branchName + `</option>`);
+                        }
+            
+                        branchList.innerHTML = branchTypeListHTML.join('');
+            
+                    } else {
+                        
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+            
+                }
+            });
             document.getElementById("kt_apexcharts_3").innerHTML='';
             document.getElementById("kt_apexcharts_4").innerHTML='';
             document.getElementById("topFivePaidCustomers").innerHTML='';
