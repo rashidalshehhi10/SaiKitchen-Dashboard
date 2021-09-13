@@ -59,6 +59,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'status'
                 },
                 {
+                    data: 'customerName'
+                },
+                {
                     data: 'workScopeName'
                 },
                 {
@@ -81,9 +84,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'customerCode'
-                },
-                {
-                    data: 'customerName'
                 },
                 {
                     data: 'customerContact'
