@@ -325,6 +325,20 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             </a>\
                         `;
                             }
+                            if (full.status==12 ) {
+                                 action += `
+                               <a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewdesigncustomer.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"    class="btn btn-sm btn-clean btn-icon" title="View Customer Approval Pending">
+                               <i class="la fab la-codepen"></i>
+                                </a>
+                            `;
+                           }
+                             if (full.status==15 ) {
+                                action += `
+                                <a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/invoice.html?inquiryId=` + full.inquiryId + `"    class="btn btn-sm btn-clean btn-icon" title="View Quotation Customer Approval Pending">
+                                <i class="la la-file-contract"></i>
+                                </a>
+                            `;
+                            }
                         }
                             return action;
                         } else {
