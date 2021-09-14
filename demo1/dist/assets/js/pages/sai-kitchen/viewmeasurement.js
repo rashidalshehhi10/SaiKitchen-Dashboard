@@ -339,7 +339,7 @@ if(isDesignView!=1){
 
     $.ajax({
         type: "post",
-        url: baseURL + '/Measurement/ViewMeasurementById?inquiryWorkscopeId=' + inquiryWorkscopeId,
+        url: baseURL + '/Measurement/ViewMeasurementById?inquiryId=' + inquiryWorkscopeId,
 
         headers: {
             'Content-Type': 'application/json',

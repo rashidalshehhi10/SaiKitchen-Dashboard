@@ -426,7 +426,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                
                 console.log(measurementFile);
                  var measurementFiles = {
-                    "ininquiryworkscopeid": document.getElementById("inquiryWorkscopeId").innerHTML,
+                    "inquiryId": document.getElementById("inquiryWorkscopeId").innerHTML,
                     "measurementComment": document.getElementById('measurementComment').value,
                     "base64img": measurementFile,
                     "videobase64": videoFile,
