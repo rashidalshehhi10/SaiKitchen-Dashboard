@@ -59,7 +59,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'noOfRevision', 'workScopeName',
+                        'inquiryId', 'inquiryCode', 'status', 'noOfRevision', 'workScopeName',
                         'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
                         'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription',
                         'isOccupied','InquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'actions'
@@ -67,7 +67,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
             },
             columns: [{
-                    data: 'inquiryWorkscopeId'
+                    data: 'inquiryId'
                 },
                 {
                     data: 'inquiryCode'
@@ -234,15 +234,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     title: 'Actions',
                     orderable: false,
                     render: function(data, type, full, meta) {
-                        var ret = `<button  style="background-color:#734f43;margin:2px"  onclick="setInquiryWorkscopeId(` + full.inquiryWorkscopeId + `);" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-clean btn-icon" title="Add Measurement File">
+                        var ret = `<button  style="background-color:#734f43;margin:2px"  onclick="setInquiryWorkscopeId(` + full.inquiryId + `);" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-clean btn-icon" title="Add Measurement File">
                         <i class="la la-file-upload"></i>
                     </button>`;
                         if (full.questionaireType == 1) {
-                            ret += `<button href="addkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Add Measurement" disabled>
+                            ret += `<button href="addkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryId + `"class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Add Measurement" disabled>
                     <i class="la la-ruler-combined"></i>
                 </button>`;
                         } else {
-                            ret += `<button href="addwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Add Measurement" disabled>
+                            ret += `<button href="addwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryId + `"class="btn btn-sm btn-clean btn-icon" style="background-color:#734f43;margin:2px"  title="Add Measurement" disabled>
                 <i class="la la-ruler-combined"></i>
             </button>`;
                         }

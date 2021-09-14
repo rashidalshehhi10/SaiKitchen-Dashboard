@@ -55,7 +55,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryWorkscopeId', 'inquiryCode', 'status', 'noOfRevision', 'workScopeName',
+                        'inquiryId', 'inquiryCode', 'status', 'noOfRevision', 'workscopeNames',
                         'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
                         'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription',
                         'inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'actions'
@@ -63,7 +63,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
             },
             columns: [{
-                    data: 'inquiryWorkscopeId'
+                    data: 'inquiryId'
                 },
                 {
                     data: 'inquiryCode'
@@ -75,7 +75,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'noOfRevision'
                 },
                 {
-                    data: 'workScopeName'
+                    data: 'workscopeNames'
                 },
                 {
                     data: 'measurementScheduleDate'
@@ -231,10 +231,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         //      var ret = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Add Measurement">
                         //     <i class="la la-file-upload"></i>
                         // </a>`;
-                        ret += ` <a style="background-color:#734f43;margin:2px"  href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `&designView=1"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
+                        ret += ` <a style="background-color:#734f43;margin:2px"  href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryId + `&designView=1"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
                         <i class="la la-ruler-combined"></i>
                     </a>`;
-                    ret += ` <button style="background-color:#734f43;margin:2px"  onclick="setInquiryWorkscopeId(` + full.inquiryWorkscopeId + `);"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >
+                    ret += ` <button style="background-color:#734f43;margin:2px"  onclick="setInquiryWorkscopeId(` + full.inquiryId + `);"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >
                     <i class="la fab la-codepen"></i>
                 </button>`;
             //             if (full.questionaireType == 1) {
