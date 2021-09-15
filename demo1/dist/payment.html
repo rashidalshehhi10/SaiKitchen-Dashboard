@@ -1639,6 +1639,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                  '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
                                 '</div>';
                           break;
+                          case "jpeg":
+                                document.getElementById('icons').innerHTML +=
+                                '<div   class="divico">'+
+                                 '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                                '</div>';
+                          break;
                           case "mp4":
                                 document.getElementById('icons').innerHTML +=
                                 '<div   class="divico">'+
@@ -1761,54 +1767,37 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                 </div><span id="error"></span>
         `;
-         $('#kt_dropzone_3').dropzone({
-            url: baseURL + "/User", // Set the url for your upload script location
-            type: "Head",
+        $('#kt_dropzone_3').dropzone({
+            
+            // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+            url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+            type: "Post",
             headers : {
                 'Access-Control-Allow-Origin': '*',
+                // 'Content-Type': 'application/json'
             },
             paramName: "file", // The name that will be used to transfer the file
-            maxFiles: 50,
-            maxFilesize: 10, // MB
+            maxFiles: 150,
+            maxFilesize: 30000, // MB
+            timeout: 600000,
             addRemoveLinks: true,
             removedfile:function(file) {
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        // event.target.result contains base64 encoded image
-                        var base64String = event.target.result;
-                        var fileName = file.name;
-                        var finalbase64 = base64String.split(",")[1];
-                        // handlePictureDropUpload(base64String ,fileName );
-                         removeA(measurementFile,finalbase64);
-                    };
-                    reader.readAsDataURL(file);
-                    
-                file.previewElement.remove();
+             
     
             },
       
-            acceptedFiles: "image/*,application/pdf,.png,.mp4",
+            acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
             
         init: function() {
-            this.on("addedfile", function (file) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    // event.target.result contains base64 encoded image
-                    var base64String = event.target.result;
-                    var fileName = file.name;
-                    var finalbase64 = base64String.split(",")[1]
-                    measurementFile.push(finalbase64);
-                    //document.getElementById("file"+i).innerHTML += finalbase64+';';
-                    // handlePictureDropUpload(base64String ,fileName );
-
-                };
-                reader.readAsDataURL(file);
-
-            });
-        }
             
-          });
-
+        },
+        success: function(file, response){
+            // alert(response.data.item1);
+            measurementFile.push(response.data.item1);
+        
+        }
+           
+        });
         function removeA(arr) {
             var what, a = arguments, L = a.length, ax;
             while (L > 1 && arr.length) {
@@ -1831,6 +1820,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		"files":measurementFile,
         }
         const data = JSON.stringify(payment);
+        console.log(data);
         $.ajax({
             type: "Post",
             url: baseURL + '/Payment/UploadInvoice',

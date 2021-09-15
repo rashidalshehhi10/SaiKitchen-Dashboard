@@ -45,7 +45,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryId', 'inquiryCode','quotationNo', 'status', 'workScopeCount','customerCode', 'customerName',
+                        'inquiryId', 'inquiryCode','quotationNo', 'status', 'workScopeName','customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
                          'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
                     ],
@@ -64,7 +64,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'status'
                 },
                 {
-                    data: 'workScopeCount'
+                    data: 'workScopeName'
                 },
                 {
                     data: 'customerCode'
