@@ -132,6 +132,12 @@ jQuery(document).ready(function() {
                                '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
+                        case "jpeg":
+                              document.getElementById('icons').innerHTML +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                              '</div>';
+                        break;
                         case "mp4":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+

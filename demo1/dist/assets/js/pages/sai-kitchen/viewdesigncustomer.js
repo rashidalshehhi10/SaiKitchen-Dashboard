@@ -286,7 +286,7 @@ jQuery(document).ready(function() {
 
     $.ajax({
         type: "post",
-        url: baseURL + '/Design/ViewDesignById?inquiryWorkscopeId=' + inquiryWorkscopeId,
+        url: baseURL + '/Design/ViewDesignById?inquiryId=' + inquiryWorkscopeId,
 
         headers: {
             'Content-Type': 'application/json',
