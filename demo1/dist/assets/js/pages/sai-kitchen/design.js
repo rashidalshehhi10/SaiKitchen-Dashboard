@@ -432,7 +432,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                
                 console.log(measurementFile);
                  var designFiles = {
-                    "inquiryWorkScopeId": document.getElementById("inquiryWorkscopeId").innerHTML,
+                    "inquiryId": document.getElementById("inquiryWorkscopeId").innerHTML,
                     "comment": document.getElementById('designComment').value,
                     "base64f3d": measurementFile
                   };
