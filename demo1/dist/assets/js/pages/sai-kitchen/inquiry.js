@@ -318,25 +318,26 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         </a>\
                         ';
                             }
+                            
+                            if (full.status==16 ) {
+                                action += `
+                              <a  style="background-color:#734f43;margin:2px" target="blank" href="`+window.location.origin+`/viewdesigncustomer.html?inquiryWorkscopeId=` + full.inquiryId + `"    class="btn btn-sm btn-clean btn-icon" title="View Customer Approval Pending">
+                              <i class="la fab la-codepen"></i>
+                               </a>
+                           `;
+                          }
+                            if (full.status==15 ) {
+                               action += `
+                               <a  style="background-color:#734f43;margin:2px" target="blank" href="`+window.location.origin+`/invoice.html?inquiryId=` + full.inquiryId + `"    class="btn btn-sm btn-clean btn-icon" title="View Quotation Customer Approval Pending">
+                               <i class="la la-file-contract"></i>
+                               </a>
+                           `;
+                           }
                             if (inquiryPermission >= 5) {
                                 action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="GetWorkscopesByinquiryId(` + full.inquiryId + `)"  data-toggle="modal" data-target="#DelWorkscope"  class="btn btn-sm btn-clean btn-icon" title="Delete workscope">
                             <i class="la la-trash"></i>\
 							</a>\
                         `;
-                            }
-                            if (full.status==12 ) {
-                                 action += `
-                               <a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewdesigncustomer.html?inquiryWorkscopeId=` + full.inquiryId + `"    class="btn btn-sm btn-clean btn-icon" title="View Customer Approval Pending">
-                               <i class="la fab la-codepen"></i>
-                                </a>
-                            `;
-                           }
-                             if (full.status==15 ) {
-                                action += `
-                                <a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/invoice.html?inquiryId=` + full.inquiryId + `"    class="btn btn-sm btn-clean btn-icon" title="View Quotation Customer Approval Pending">
-                                <i class="la la-file-contract"></i>
-                                </a>
-                            `;
                             }
                         }
                             return action;
