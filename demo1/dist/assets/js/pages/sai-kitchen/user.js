@@ -88,7 +88,7 @@ var KTDatatablesExtensionsResponsive = function () {
 					targets: 0
 				},
 				{
-					targets: 6,
+					targets: 7,
 					title: 'Actions',
 					orderable: false,
 					render: function (data, type, full, meta) {
