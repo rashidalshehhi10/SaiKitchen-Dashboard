@@ -221,15 +221,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-info'
                                 },
                                 18: {
-                                    'title': 'Checklist Pending',
+                                    'title': 'Technical Checklist Pending',
                                     'class': ' label-light-primary'
                                 },
                                 19: {
-                                    'title': 'Checklist Approved',
+                                    'title': 'Technical  Checklist Approved',
                                     'class': ' label-light-success'
                                 },
                                 20: {
-                                    'title': 'Checklist Rejected',
+                                    'title': 'Technical Checklist Rejected',
                                     'class': ' label-light-info'
                                 },
                                 36: {
@@ -419,15 +419,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'class': ' label-light-info'
                             },
                             18: {
-                                'title': 'Checklist Pending',
+                                'title': 'Technical Checklist Pending',
                                 'class': ' label-light-primary'
                             },
                             19: {
-                                'title': 'Checklist Approved',
+                                'title': 'Technical Checklist Approved',
                                 'class': ' label-light-success'
                             },
                             20: {
-                                'title': 'Checklist Rejected',
+                                'title': 'Technical Checklist Rejected',
                                 'class': ' label-light-info'
                             },
                             36: {
