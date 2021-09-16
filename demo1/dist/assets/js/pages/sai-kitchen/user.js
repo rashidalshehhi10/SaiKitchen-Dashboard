@@ -58,6 +58,13 @@ var KTDatatablesExtensionsResponsive = function () {
 					data: null,
 					render: function (data, type, row) {
 						console.log(data);
+						return data.lastSeen;
+					}
+				},
+				{
+					data: null,
+					render: function (data, type, row) {
+						console.log(data);
 						return data.userRoles[0].branchRole.branchRoleName;
 					}
 				},
