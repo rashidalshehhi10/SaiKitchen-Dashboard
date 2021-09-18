@@ -401,8 +401,8 @@ files.forEach(element => {
 	
 }else{
     if(isImgLoaded==false){
-        imgViewHTML += `<object id="objimgdoc" data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px">
-        <iframe id="frameimgdoc" src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" height="600px" style="border: none;">
+        imgViewHTML += `<object id="objimgdoc" data=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%">
+        <iframe id="frameimgdoc" src=`+baseFileURL+element.fileUrl+`  frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen  width="100%" style="border: none;">
         This browser does not support PDFs. Please download the PDF to view it: 
         <a  id="linkimgdoc" href=`+baseFileURL+element.fileUrl+`>Download PDF</a>
         </iframe>
