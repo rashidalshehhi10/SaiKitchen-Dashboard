@@ -1784,7 +1784,7 @@ if (permission.includes(8)){
    <img src="/assets//media/svg/saikitchen/checklist.svg"/>
    <!--end::Svg Icon-->
 	</span>
-	<span class="menu-text">Checklist</span>
+	<span class="menu-text">Technical Checklist</span>
 	
 </a>
 </li>
