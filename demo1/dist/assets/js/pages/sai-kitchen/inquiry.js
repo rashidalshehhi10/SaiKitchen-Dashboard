@@ -260,6 +260,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Quotation Schedule  Pending',
                                     'class': ' label-light-primary'
                                 },
+                                43: {
+                                    'title': 'Commerical Checklist Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                44: {
+                                    'title': 'Commerical Checklist Approved',
+                                    'class': ' label-light-success'
+                                },
+                                45: {
+                                    'title': 'Commerical Checklist Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                46: {
+                                    'title': 'Job Order Factory Approval Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                47: {
+                                    'title': 'Job Order Factory Accepted',
+                                    'class': ' label-light-success'
+                                },
+                                48: {
+                                    'title': 'Job Order Factory Rejected',
+                                    'class': ' label-light-info'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -458,7 +482,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'title': 'Quotation Schedule  Pending',
                                 'class': ' label-light-primary'
                             },
-                            
+                            43: {
+                                'title': 'Commerical Checklist Pending',
+                                'class': ' label-light-primary'
+                            },
+                            44: {
+                                'title': 'Commerical Checklist Approved',
+                                'class': ' label-light-success'
+                            },
+                            45: {
+                                'title': 'Commerical Checklist Rejected',
+                                'class': ' label-light-info'
+                            },
+                            46: {
+                                'title': 'Job Order Factory Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            47: {
+                                'title': 'Job Order Factory Accepted',
+                                'class': ' label-light-success'
+                            },
+                            48: {
+                                'title': 'Job Order Factory Rejected',
+                                'class': ' label-light-info'
+                            },
                         };
 
                         console.log(data);

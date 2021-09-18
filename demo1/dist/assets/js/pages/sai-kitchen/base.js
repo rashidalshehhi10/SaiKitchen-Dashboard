@@ -1788,6 +1788,18 @@ if (permission.includes(8)){
 	
 </a>
 </li>
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+<a href="commercialchecklist.html" class="menu-link menu-toggle">
+	<span class="svg-icon menu-icon">
+		
+   <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+   <img src="/assets//media/svg/saikitchen/checklist.svg"/>
+   <!--end::Svg Icon-->
+	</span>
+	<span class="menu-text">Commercial Checklist</span>
+	
+</a>
+</li>
 `;
       }
 
