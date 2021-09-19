@@ -265,7 +265,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             console.log(full.inquiryId);
                          
                         action += `
-                        <a href="viewcommercialchecklist.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
+                        <a href="viewjoborderapproval.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
                         <i class="la la-file-contract"></i>
                     </a>
                     `;
@@ -460,12 +460,77 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         });
 
     };
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+    var _handleFormJobApprove = function() {
+        var form = KTUtil.getById('kt_approve_inquiry');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
 
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        measurement_schedule_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Cabinetry installation Date Date is required'
+                                }
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                var checklistdata = {
+                    "inquiryId":parseInt( document.getElementById('inquiryId').value),
+                    "reason": document.getElementById('CheckComment').value,
+                  };
+            
+                const data = JSON.stringify(checklistdata);
+
+                console.log(data);
+               /* $.ajax({
+                    type: "Post",
+                    url: baseURL + '/CheckList/ApproveinquiryCommericalChecklist',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        console.log(response);
+             
+                        window.location.replace("commercialchecklist.html");
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        document.getElementById("alert").innerHTML ="An error occured";
+                    }
+                });*/
+            });
+    }
     return {
 
         //main function to initiate the module
         init: function() {
             initTable1();
+            _handleFormJobApprove();
         },
 
     };
@@ -497,34 +562,7 @@ jQuery(document).ready(function() {
 
 
 });
-$('#kt_approve_inquiry_button').click(function () {
-    var checklistdata = {
-        "inquiryId":parseInt( document.getElementById('inquiryId').value),
-        "reason": document.getElementById('CheckComment').value,
-      };
 
-    const data = JSON.stringify(checklistdata);
-    console.log(data);
-    
-    $.ajax({
-        type: "Post",
-        url: baseURL + '/CheckList/ApproveinquiryCommericalChecklist',
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'Access-Control-Allow-Origin': '*',
-        },
-        data: data,
-        success: function(response) {
-            console.log(response);
- 
-            window.location.replace("commercialchecklist.html");
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            document.getElementById("alert").innerHTML ="An error occured";
-        }
-    });
-});
 $('#kt_reject_inquiry_button').click(function () {
     var rejectlistdata = {
         "inquiryId":parseInt(document.getElementById('inquiryId').value),

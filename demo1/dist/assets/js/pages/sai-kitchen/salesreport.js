@@ -499,7 +499,6 @@ $('#btnSearch').click(function (){
                 let amountRecieved = response.data.inquiryReceivedDetails[i].amountRecieved;
                 let temparr =[inquiryCode,workscope,customerName,contactinfo,paymentMethod,paymentMode,amountRecieved];
                 datasource1.push(temparr);
-                datasource1.push(temparr);
             }
             for (let i = 0; i < response.data.inquiryPendingDetails.length; i++) {
                 let inquiryCode = response.data.inquiryPendingDetails[i].inquiryCode;
@@ -520,7 +519,6 @@ $('#btnSearch').click(function (){
                  
                 let amountPending = response.data.inquiryPendingDetails[i].amountPending;
                 let temparr =[inquiryCode,workscope,customerName,contactinfo,paymentMethod,paymentMode,amountPending];
-                datasource2.push(temparr);
                 datasource2.push(temparr);
             }
             if ( $.fn.dataTable.isDataTable( '#kt_datatable_example_4' ) ) {
@@ -1070,7 +1068,6 @@ $('#btnSearch').click(function (){
                         let amountRecieved = response.data.inquiryReceivedDetails[i].amountRecieved;
                         let temparr =[inquiryCode,workscope,customerName,contactinfo,paymentMethod,paymentMode,amountRecieved];
                         datasource1.push(temparr);
-                        datasource1.push(temparr);
                     }
                     for (let i = 0; i < response.data.inquiryPendingDetails.length; i++) {
                         let inquiryCode = response.data.inquiryPendingDetails[i].inquiryCode;
@@ -1091,7 +1088,6 @@ $('#btnSearch').click(function (){
                          
                         let amountPending = response.data.inquiryPendingDetails[i].amountPending;
                         let temparr =[inquiryCode,workscope,customerName,contactinfo,paymentMethod,paymentMode,amountPending];
-                        datasource2.push(temparr);
                         datasource2.push(temparr);
                     }
                     if ( $.fn.dataTable.isDataTable( '#kt_datatable_example_4' ) ) {
