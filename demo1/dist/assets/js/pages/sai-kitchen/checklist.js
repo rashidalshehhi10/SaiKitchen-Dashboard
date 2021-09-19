@@ -9,6 +9,7 @@ import {
 let user;
 export let workscopelist;
 var filearry = new Array();
+var fourfile =  new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -515,21 +516,27 @@ $('#kt_approve_inquiry_button').click(function () {
         "prefferdDateByClient": document.getElementById('design_schedule_date').value, 
         "comment": document.getElementById('CheckComment').value,
         "addFileonChecklists":new Array(),
+        "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
+        "materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
+        "mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
+        "jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
+        "dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
       };
-      let from = document.getElementById('compCount').value;
-      let to = document.getElementById('maxCount').value;
+      let from = document.getElementById('addcompCount').value;
+      let to = document.getElementById('addmaxCount').value;
       for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
         checklistdata.addFileonChecklists.push({
-            "inquiryworkscopeId":document.getElementById('kt_workscpe_'+i)==null?"": document.getElementById('kt_workscpe_'+i).value,
+           // "inquiryworkscopeId":0,//document.getElementById('kt_workscpe_'+i)==null?"": document.getElementById('kt_workscpe_'+i).value,
             "documentType":document.getElementById('documentType'+i).value,
             "files":filearry[i]==undefined?[]:filearry[i],
         })
       }
+      
       filearry= [];
     const data = JSON.stringify(checklistdata);
     console.log(data);
-    
-    $.ajax({
+    console.log(fourfile);
+     $.ajax({
         type: "Post",
         url: baseURL + '/CheckList/ApproveinquiryChecklist',
         headers: {
@@ -544,13 +551,13 @@ $('#kt_approve_inquiry_button').click(function () {
             document.getElementById("checkbody").innerHTML ="";
             document.getElementById('design_schedule_date').value ="";
             document.getElementById('CheckComment').value="";
-            $('#ScheduleDate').modal('hide');
+            $('#approve').modal('hide');
             window.location.replace("checklist.html");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             document.getElementById("alert").innerHTML ="All fields should be selected";
         }
-    });
+    }); 
 });
 $('#kt_reject_inquiry_button').click(function () {
     var rejectlistdata = {
@@ -596,16 +603,22 @@ $('#kt_reject_inquiry_button').click(function () {
         }
     }); 
 });
-
 $('#addComponentbtn').click(function () {
-    
-    let count = document.getElementById("compCount").value;
+        
+    let count = document.getElementById("addcompCount").value;
+    if (count == 2)  { 
+        document.getElementById("documentType3").options[document.getElementById("documentType3").options.selectedIndex].setAttribute("selected", "selected");
+     }
+     if (count == 1)  { 
+         document.getElementById("documentType2").options[document.getElementById("documentType2").options.selectedIndex].setAttribute("selected", "selected");
+         document.getElementById("documentType3").options[document.getElementById("documentType3").options.selectedIndex].setAttribute("selected", "selected");
+      }
     if(parseInt(count) > 0 ){
         document.getElementById("checkbody").innerHTML +=
         `<div class="form-group row">
                         <div class="col-lg-5" >
                         <label class="font-size-h6 font-weight-bolder text-dark">Rejected Phase</label>
-                            <select class="form-control" id="documentType`+count+`" onchange="createList(`+count+`)" name="documentType`+count+`"  style="width:100%">
+                            <select class="form-control" id="documentType`+count+`"  name="documentType`+count+`"  style="width:100%">
                                 <option value=""></option>
                                 <option value="7">Measurement</option>
                                 <option value="8">Design</option>
@@ -625,61 +638,43 @@ $('#addComponentbtn').click(function () {
                                 </div>
                             </div>
                         </div>`;
-         document.getElementById("compCount").value = parseInt(count) -1;
-         let from = document.getElementById('compCount').value;
-      let to = document.getElementById('maxCount').value;
+
+        
+         document.getElementById("addcompCount").value = parseInt(count) -1;
+         let from = document.getElementById('addcompCount').value;
+      let to = document.getElementById('addmaxCount').value;
       Dropzone.autoDiscover = false;
       for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
         let measurementFile =new Array();
-         $('#kt_dropzone_'+i).dropzone({
-            url: baseURL + "/User", // Set the url for your upload script location
-            type: "Head",
-            headers : {
-                'Access-Control-Allow-Origin': '*',
-            },
-            paramName: "file"+i, // The name that will be used to transfer the file
-            maxFiles: 50,
-            maxFilesize: 10, // MB
-            addRemoveLinks: true,
-            removedfile:function(file) {
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        // event.target.result contains base64 encoded image
-                        var base64String = event.target.result;
-                        var fileName = file.name;
-                        var finalbase64 = base64String.split(",")[1];
-                        // handlePictureDropUpload(base64String ,fileName );
-                         removeA(measurementFile,finalbase64);
-                         filearry[i] =measurementFile;
-                    };
-                    reader.readAsDataURL(file);
-                    
-                file.previewElement.remove();
-    
-            },
-      
-            acceptedFiles: "image/*,application/pdf,.png,.mp4",
-            
-        init: function() {
-            this.on("addedfile", function (file) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    // event.target.result contains base64 encoded image
-                    var base64String = event.target.result;
-                    var fileName = file.name;
-                    var finalbase64 = base64String.split(",")[1]
-                    measurementFile.push(finalbase64);
-                    //document.getElementById("file"+i).innerHTML += finalbase64+';';
-                    // handlePictureDropUpload(base64String ,fileName );
-                    filearry[i] = measurementFile;
-                };
-                reader.readAsDataURL(file);
-
-            });
-        }
-            
-          });
-        }
+        $('#kt_dropzone_'+i).dropzone({
+            url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+           type: "Head",
+           headers : {
+               'Access-Control-Allow-Origin': '*',
+           },
+           paramName: "file"+i, // The name that will be used to transfer the file
+           maxFiles: 150,
+           maxFilesize: 30000, // MB
+           timeout: 600000,
+           addRemoveLinks: true,
+           removedfile:function(file) {
+  
+           },
+     
+           acceptedFiles: "image/*,application/pdf,.png,.mp4",
+           
+          init: function() {
+       
+           },
+           success: function(file, response){
+               // alert(response.data.item1);
+               measurementFile.push(response.data.item1);
+               filearry[i] = measurementFile;
+           
+           }
+           
+         });
+       }
         function removeA(arr) {
             var what, a = arguments, L = a.length, ax;
             while (L > 1 && arr.length) {
@@ -697,16 +692,22 @@ $('#addComponentbtn').click(function () {
 });
 $('#resetComponentbtn').click(function () {
     filearry= [];
-     document.getElementById("compCount").value = document.getElementById("maxCount").value;
+     document.getElementById("addcompCount").value = document.getElementById("addmaxCount").value;
      document.getElementById("checkbody").innerHTML ="";
      document.getElementById("alert").innerHTML ="";
     });
     $('#kt_close_inquiry_button').click(function () {
          filearry= [];
-         document.getElementById("compCount").value = document.getElementById("maxCount").value;
+         document.getElementById("addcompCount").value = document.getElementById("addmaxCount").value;
          document.getElementById("checkbody").innerHTML ="";
          document.getElementById("alert").innerHTML ="";
         });
+        $('#xclose').click(function () {
+            filearry= [];
+            document.getElementById("addcompCount").value = document.getElementById("addmaxCount").value;
+            document.getElementById("checkbody").innerHTML ="";
+            document.getElementById("alert").innerHTML ="";
+           });
         $('#xclose').click(function () {
             filearry= [];
             document.getElementById("compCount").value = document.getElementById("maxCount").value;
@@ -763,3 +764,32 @@ $('#resetComponentbtn').click(function () {
                 document.getElementById("rjctbody").innerHTML ="";
                 document.getElementById("ralert").innerHTML ="";
                });
+
+               for (let j = 4; j <= 7; j++) {
+                $('#kt_dropzone_'+j).dropzone({
+                             url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+                            type: "Head",
+                            headers : {
+                                'Access-Control-Allow-Origin': '*',
+                            },
+                            paramName: "file"+j, // The name that will be used to transfer the file
+                            maxFiles: 150,
+                            maxFilesize: 30000, // MB
+                            timeout: 600000,
+                            addRemoveLinks: true,
+                            removedfile:function(file) {
+                   
+                            },
+                      
+                            acceptedFiles: "image/*,application/pdf,.png,.mp4",
+                            
+                           init: function() {
+                        
+                            },
+                            success: function(file, response){
+                                fourfile[j] = response.data.item1;
+                            
+                            }
+                            
+                          });
+                        }

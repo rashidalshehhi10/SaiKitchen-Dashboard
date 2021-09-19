@@ -407,6 +407,57 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_4" name="measurementDrawing`+count+`">
+                                <div class="dropzone-msg dz-message needsclick">
+                                    <h3 class="dropzone-msg-title"> MaterialSheetFile: Drop files here or click to upload.</h3>
+                                    <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                     <div class="col-lg-12 col-md-12 col-sm-12">
+                         <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_5" name="measurementDrawing`+count+`">
+                             <div class="dropzone-msg dz-message needsclick">
+                                 <h3 class="dropzone-msg-title">MepDrawingFile: Drop files here or click to upload.</h3>
+                                 <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="form-group row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_6" name="measurementDrawing`+count+`">
+                          <div class="dropzone-msg dz-message needsclick">
+                              <h3 class="dropzone-msg-title">JobOrderChecklistFile: Drop files here or click to upload.</h3>
+                              <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group row">
+               <div class="col-lg-12 col-md-12 col-sm-12">
+                   <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_7" name="measurementDrawing`+count+`">
+                       <div class="dropzone-msg dz-message needsclick">
+                           <h3 class="dropzone-msg-title">DataSheetApplianceFileUrl: Drop files here or click to upload.</h3>
+                           <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                       </div>
+                   </div>
+                   <label style="padding-top: 5px;">Appliances to be provided ethier by the client or by SAI</label>
+                                                        <div class="radio-inline">
+                                                            <label class="radio radio-rounded">
+																<input type="radio" checked="checked"
+																	name="isAppliances" value="true" />
+																<span></span>Yes</label>
+                                                            <label class="radio radio-rounded">
+																<input type="radio" name="isAppliances" value="false"  />
+																<span></span>No</label>
+                                                        </div>
+               </div>
+               
+           </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
                                     <div class="input-group">
 
@@ -424,6 +475,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
                             <input type="hidden" id="compCount" value="0" /> 
                             <input type="hidden" id="maxCount" value="0" />
+                            <input type="hidden" id="addcompCount" value="0" /> 
+                             <input type="hidden" id="addmaxCount" value="0" />
                             <div id="divoptions" style="display: none;"></div>      
                         </div> 
                 <div  id="checkbody" >
@@ -736,6 +789,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     document.getElementById("inquiryId").value = inquiryId;
                     document.getElementById("compCount").value = parseInt(response.data.length)*2 +1;
                     document.getElementById("maxCount").value = parseInt(response.data.length)*2 +1;
+                    document.getElementById("addcompCount").value = 3;
+                     document.getElementById("addmaxCount").value = 3;
                     for (let i = 0; i < response.data.length; i++) {
                     document.getElementById("divoptions").innerHTML +=
                     '<option value="'+response.data[i].inquiryWorkscopeId+'">'+response.data[i].workScopeName+'</option>';
