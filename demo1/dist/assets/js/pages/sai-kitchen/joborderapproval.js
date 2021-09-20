@@ -505,6 +505,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
                     "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
                     "counterTopFixingDate": document.getElementById('schedule_date6').value,
+                    "InstallationStartDate":document.getElementById('schedule_date7').value,
+                    "InstallationCompletionDate":document.getElementById('schedule_date8').value,
                     "notes": document.getElementById('CheckComment').value,
                   };
             
@@ -579,7 +581,7 @@ $('#kt_reject_inquiry_button').click(function () {
     console.log(data);
      $.ajax({
         type: "Post",
-        url: baseURL + '/JobOrder​/JobOrderFactoryReject',
+        url: baseURL + '/JobOrder/JobOrderFactoryReject',
         headers: {
             'Content-Type': 'application/json',
             'userId': user.data.userId,

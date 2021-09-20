@@ -40,7 +40,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/CheckList/GetInquirycommercialChecklistByBranchId?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/JobOrder/GetInquiryJobOrderFactoryByBranchId?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
@@ -265,18 +265,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             console.log(full.inquiryId);
                          
                         action += `
-                        <a href="viewcommercialchecklist.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
+                        <a href="viewjoborderinquiry.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
                         <i class="la la-file-contract"></i>
                     </a>
                     `;
-                    action += `
-                            <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
-								<i class="la la-thumbs-up"></i>
-							</a>
-                            <a type="button" onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
-								<i class="la la-thumbs-down"></i>
-							</a>
-						`;
                         }
                             return action;
                        
@@ -466,6 +458,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         //main function to initiate the module
         init: function() {
             initTable1();
+
         },
 
     };
@@ -497,59 +490,6 @@ jQuery(document).ready(function() {
 
 
 });
-$('#kt_approve_inquiry_button').click(function () {
-    var checklistdata = {
-        "inquiryId":parseInt( document.getElementById('inquiryId').value),
-        "reason": document.getElementById('CheckComment').value,
-      };
 
-    const data = JSON.stringify(checklistdata);
-    console.log(data);
-    
-    $.ajax({
-        type: "Post",
-        url: baseURL + '/CheckList/ApproveinquiryCommericalChecklist',
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'Access-Control-Allow-Origin': '*',
-        },
-        data: data,
-        success: function(response) {
-            console.log(response);
- 
-            window.location.replace("commercialchecklist.html");
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            document.getElementById("alert").innerHTML ="An error occured";
-        }
-    });
-});
-$('#kt_reject_inquiry_button').click(function () {
-    var rejectlistdata = {
-        "inquiryId":parseInt(document.getElementById('inquiryId').value),
-        "reason":document.getElementById('RejectComment1').value,
-      };
 
-    const data = JSON.stringify(rejectlistdata);
-    console.log(data);
-     $.ajax({
-        type: "Post",
-        url: baseURL + '/CheckList/RejectinquiryCommericalChecklist',
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'Access-Control-Allow-Origin': '*',
-        },
-        data: data,
-        success: function(response) {
-            console.log(response);
-            window.location.replace("commercialchecklist.html");
-            
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            document.getElementById("ralert").innerHTML ="An error occured";
-        }
-    }); 
-});
 

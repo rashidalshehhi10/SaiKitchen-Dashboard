@@ -843,8 +843,38 @@ workscope.innerHTML=workscopeHtml;
 
     });
 
-  
-
+    $('#aror').click(function (
+    ) {
+       document.getElementById("selectedDiv").value ="1";
+      document.getElementById("divreschedule").style.removeProperty('display');
+      document.getElementById("divrjctreschedule").style.display = 'none';
+      document.getElementById("divrtinstall").style.display = 'none';
+      document.getElementById("divjobcomp").style.display = 'none';
+    });
+    $('#adelay').click(function (
+      ) {
+         document.getElementById("selectedDiv").value ="2";
+        document.getElementById("divrjctreschedule").style.removeProperty('display');
+        document.getElementById("divreschedule").style.display = 'none';
+        document.getElementById("divrtinstall").style.display = 'none';
+        document.getElementById("divjobcomp").style.display = 'none';
+      });
+      $('#rtinstall').click(function (
+         ) {
+            document.getElementById("selectedDiv").value ="3";
+           document.getElementById("divrtinstall").style.removeProperty('display');
+           document.getElementById("divreschedule").style.display = 'none';
+           document.getElementById("divrjctreschedule").style.display = 'none';
+           document.getElementById("divjobcomp").style.display = 'none';
+         });
+         $('#jocomp').click(function (
+            ) {
+               document.getElementById("selectedDiv").value ="4";
+              document.getElementById("divjobcomp").style.removeProperty('display');
+              document.getElementById("divrtinstall").style.display = 'none';
+              document.getElementById("divreschedule").style.display = 'none';
+              document.getElementById("divrjctreschedule").style.display = 'none';
+            });   
     $('#kt_approve_inquiry_button').click(function () {
       var checklistdata = {
          "inquiryId":parseInt( document.getElementById('inquiryId').value),
@@ -854,8 +884,6 @@ workscope.innerHTML=workscopeHtml;
          "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
          "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
          "counterTopFixingDate": document.getElementById('schedule_date6').value,
-         "InstallationStartDate":document.getElementById('schedule_date7').value,
-         "InstallationCompletionDate":document.getElementById('schedule_date8').value,
          "notes": document.getElementById('CheckComment').value,
        };
         const data = JSON.stringify(checklistdata);
