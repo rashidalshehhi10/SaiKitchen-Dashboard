@@ -96,7 +96,7 @@
                               <!--end::Svg Icon-->
                            </span>
                         </i>
-                        Reject Commercial Checklist
+                        Reject JobOrder
                      </a>
                      <a href="#"  data-toggle="modal" data-target="#approve"    class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff">
                         <i >
@@ -112,7 +112,7 @@
                               <!--end::Svg Icon-->
                            </span>
                         </i>
-                        Approve Commercial Checklist
+                        Approve JobOrder
                      </a>
                   </div>
                </div>
@@ -575,12 +575,97 @@
                      
                      <input id="inquiryId" type="hidden" value="0" />
              <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Commercial CheckList Approve</h5>
+                     <h5 class="modal-title" id="exampleModalLabel">Job order Approve</h5>
                      <button id="xclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
                              <i aria-hidden="true" class="ki ki-close"></i>
                          </button>
                  </div>
                  <div class="modal-body">
+                  <div class="form-group row">
+                     <div class="col-lg-12 col-md-12 col-sm-12">
+                     <label class="font-size-h6 font-weight-bolder text-dark">Material Availablity Date:</label>
+                     <div >
+                         <div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
+                             <input type="text" id="schedule_date1" name="schedule_date1" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_1">
+                             <div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
+                                 <span class="input-group-text">
+                                     <i class="ki ki-calendar"></i>
+                                 </span>
+                             </div>
+                         </div>
+                     </div>
+                     </div>
+                 </div>
+                 <div class="form-group row">
+                     <div class="col-lg-12 col-md-12 col-sm-12">
+                         <label class="font-size-h6 font-weight-bolder text-dark">Shop Drawing Completion Date:</label>
+                        
+                        <div class="input-group date" id="kt_design_datetimepicker" data-target-input="nearest">
+                            <input type="text" id="schedule_date2" name="schedule_date2" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_design_datetimepicker">
+                            <div class="input-group-append" data-target="#kt_design_datetimepicker" data-toggle="datetimepicker">
+                                <span class="input-group-text">
+                                    <i class="ki ki-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                 <div class="col-lg-12 col-md-12 col-sm-12">
+                     <label class="font-size-h6 font-weight-bolder text-dark">Production Completion Date:</label>
+                    
+                     <div class="input-group date" id="kt_datetimepicker_2" data-target-input="nearest">
+                         <input type="text" id="schedule_date3" name="schedule_date3" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_2">
+                         <div class="input-group-append" data-target="#kt_datetimepicker_2" data-toggle="datetimepicker">
+                             <span class="input-group-text">
+                                 <i class="ki ki-calendar"></i>
+                             </span>
+                         </div>
+                     </div>
+                </div>
+                </div>
+                <div class="form-group row">
+                 <div class="col-lg-12 col-md-12 col-sm-12">
+                     <label class="font-size-h6 font-weight-bolder text-dark">Wooden Work Completion Date</label>
+                    
+                     <div class="input-group date" id="kt_datetimepicker_3" data-target-input="nearest">
+                         <input type="text" id="schedule_date4" name="schedule_date4" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_3">
+                         <div class="input-group-append" data-target="#kt_datetimepicker_3" data-toggle="datetimepicker">
+                             <span class="input-group-text">
+                                 <i class="ki ki-calendar"></i>
+                             </span>
+                         </div>
+                     </div>
+                </div>
+                </div>
+                <div class="form-group row">
+                 <div class="col-lg-12 col-md-12 col-sm-12">
+                     <label class="font-size-h6 font-weight-bolder text-dark">Material Delivery Final Date</label>
+                    
+                     <div class="input-group date" id="kt_datetimepicker_4" data-target-input="nearest">
+                         <input type="text" id="schedule_date5" name="schedule_date5" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_4">
+                         <div class="input-group-append" data-target="#kt_datetimepicker_4" data-toggle="datetimepicker">
+                             <span class="input-group-text">
+                                 <i class="ki ki-calendar"></i>
+                             </span>
+                         </div>
+                     </div>
+                </div>
+                </div>
+                <div class="form-group row">
+                 <div class="col-lg-12 col-md-12 col-sm-12">
+                     <label class="font-size-h6 font-weight-bolder text-dark">Counter Top Fixing Date</label>
+                    
+                     <div class="input-group date" id="kt_datetimepicker_5" data-target-input="nearest">
+                         <input type="text" id="schedule_date6" name="schedule_date6" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_5">
+                         <div class="input-group-append" data-target="#kt_datetimepicker_5" data-toggle="datetimepicker">
+                             <span class="input-group-text">
+                                 <i class="ki ki-calendar"></i>
+                             </span>
+                         </div>
+                     </div>
+                </div>
+                </div>
                      <div class="form-group row">
                          <div class="col-lg-12 col-md-12 col-sm-12">
                                      <label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
@@ -843,7 +928,9 @@
                  },
              });
          }
-         
+         $('#kt_datetimepicker_2,#kt_datetimepicker_3,#kt_datetimepicker_4,#kt_datetimepicker_5').datetimepicker({
+           minDate: new Date().getDate()
+        });
       </script>
       <!--end::Page Scripts-->
 

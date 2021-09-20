@@ -48,6 +48,7 @@ var columnName = [
 });
 
 $('#btnSearch').click(function (){
+    document.getElementById("btnSearch").disabled = true;
     document.getElementById("kt_apexcharts_3").innerHTML='';
     document.getElementById("kt_apexcharts_4").innerHTML='';
     document.getElementById("topFivePaidCustomers").innerHTML='';
@@ -533,10 +534,12 @@ $('#btnSearch').click(function (){
                 "lengthChange": false
               } );
               document.getElementById("load").style.display = 'none';
+              document.getElementById("btnSearch").disabled = false;
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log(errorThrown);
             document.getElementById("load").style.display = 'none';
+            document.getElementById("btnSearch").disabled = false;
         }
     });
 

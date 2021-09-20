@@ -40,7 +40,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/CheckList/GetInquirycommercialChecklistByBranchId?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/JobOrder/GetInquiryJobOrderFactoryByBranchId?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
@@ -474,13 +474,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                        measurement_schedule_date: {
+                        /* measurement_schedule_date: {
                             validators: {
                                 notEmpty: {
                                     message: 'Cabinetry installation Date Date is required'
                                 }
                             }
-                        },
+                        }, */
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
@@ -499,15 +499,21 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var checklistdata = {
                     "inquiryId":parseInt( document.getElementById('inquiryId').value),
-                    "reason": document.getElementById('CheckComment').value,
+                    "materialAvailablityDate": document.getElementById('schedule_date1').value,
+                    "shopDrawingCompletionDate": document.getElementById('schedule_date2').value,
+                    "productionCompletionDate": document.getElementById('schedule_date3').value,
+                    "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
+                    "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
+                    "counterTopFixingDate": document.getElementById('schedule_date6').value,
+                    "notes": document.getElementById('CheckComment').value,
                   };
             
                 const data = JSON.stringify(checklistdata);
 
                 console.log(data);
-               /* $.ajax({
+                $.ajax({
                     type: "Post",
-                    url: baseURL + '/CheckList/ApproveinquiryCommericalChecklist',
+                    url: baseURL + '/JobOrder/JobOrderFactoryApprove',
                     headers: {
                         'Content-Type': 'application/json',
                         'userId': user.data.userId,
@@ -517,12 +523,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     success: function(response) {
                         console.log(response);
              
-                        window.location.replace("commercialchecklist.html");
+                        window.location.replace("joborderapproval.html");
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         document.getElementById("alert").innerHTML ="An error occured";
                     }
-                });*/
+                });
             });
     }
     return {
@@ -573,7 +579,7 @@ $('#kt_reject_inquiry_button').click(function () {
     console.log(data);
      $.ajax({
         type: "Post",
-        url: baseURL + '/CheckList/RejectinquiryCommericalChecklist',
+        url: baseURL + '/JobOrder​/JobOrderFactoryReject',
         headers: {
             'Content-Type': 'application/json',
             'userId': user.data.userId,
@@ -582,7 +588,7 @@ $('#kt_reject_inquiry_button').click(function () {
         data: data,
         success: function(response) {
             console.log(response);
-            window.location.replace("commercialchecklist.html");
+            window.location.replace("joborderapproval.html");
             
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

@@ -147,7 +147,7 @@ jQuery(document).ready(function() {
 
     $.ajax({
         type: "post",
-        url: baseURL + '/CheckList/GetinquiryCommercialChecklistDetailsById?inquiryId=' + inquiryId,
+        url: baseURL + '/JobOrder/GetinquiryJobOrderFactoryDetailsById?inquiryId=' + inquiryId,
 
         headers: {
             'Content-Type': 'application/json',
@@ -846,17 +846,22 @@ workscope.innerHTML=workscopeHtml;
   
 
     $('#kt_approve_inquiry_button').click(function () {
-        var checklistdata = {
-            "inquiryId":parseInt( document.getElementById('inquiryId').value),
-            "reason": document.getElementById('CheckComment').value,
-          };
-    
+      var checklistdata = {
+         "inquiryId":parseInt( document.getElementById('inquiryId').value),
+         "materialAvailablityDate": document.getElementById('schedule_date1').value,
+         "shopDrawingCompletionDate": document.getElementById('schedule_date2').value,
+         "productionCompletionDate": document.getElementById('schedule_date3').value,
+         "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
+         "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
+         "counterTopFixingDate": document.getElementById('schedule_date6').value,
+         "notes": document.getElementById('CheckComment').value,
+       };
         const data = JSON.stringify(checklistdata);
         console.log(data);
         
         $.ajax({
             type: "Post",
-            url: baseURL + '/CheckList/ApproveinquiryCommericalChecklist',
+            url: baseURL + '/JobOrder/JobOrderFactoryApprove',
             headers: {
                 'Content-Type': 'application/json',
                 'userId': user.data.userId,
@@ -866,7 +871,7 @@ workscope.innerHTML=workscopeHtml;
             success: function(response) {
                 console.log(response);
      
-                window.location.replace("commercialchecklist.html");
+                window.location.replace("joborderapproval.html");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 document.getElementById("alert").innerHTML ="An error occured";
@@ -883,7 +888,7 @@ workscope.innerHTML=workscopeHtml;
         console.log(data);
          $.ajax({
             type: "Post",
-            url: baseURL + '/CheckList/RejectinquiryCommericalChecklist',
+            url: baseURL + '/JobOrder​/JobOrderFactoryReject',
             headers: {
                 'Content-Type': 'application/json',
                 'userId': user.data.userId,
@@ -892,7 +897,7 @@ workscope.innerHTML=workscopeHtml;
             data: data,
             success: function(response) {
                 console.log(response);
-                window.location.replace("commercialchecklist.html");
+                window.location.replace("joborderapproval.html");
                 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
