@@ -147,7 +147,7 @@ jQuery(document).ready(function() {
 
     $.ajax({
         type: "post",
-        url: baseURL + '/JobOrder/GetinquiryJobOrderFactoryDetailsById?inquiryId=' + inquiryId,
+        url: baseURL + '/JobOrderDetail/GetinquiryJobOrderDetailsById?inquiryId=' + inquiryId,
 
         headers: {
             'Content-Type': 'application/json',
@@ -247,6 +247,46 @@ customerDetail.innerHTML=` <!--begin::User-->
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Type Of Unit:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingTypeOfUnit+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Material Availablity Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialAvailabilityDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Shop Drawing Completion Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].shopDrawingCompletionDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Production Completion Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].productionCompletionDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Wooden Work Completion Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].woodenWorkCompletionDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Material Delivery Final Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialDeliveryFinalDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Counter Top Fixing Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].countertopFixingDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Installation Start Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Installation End Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationEndDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Notes:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].jobOrderDetailDescription+`</span>
    </div>
 </div>
 <!--end::Contact-->
@@ -876,22 +916,31 @@ workscope.innerHTML=workscopeHtml;
               document.getElementById("divrjctreschedule").style.display = 'none';
             });   
     $('#kt_approve_inquiry_button').click(function () {
-      var checklistdata = {
-         "inquiryId":parseInt( document.getElementById('inquiryId').value),
-         "materialAvailablityDate": document.getElementById('schedule_date1').value,
-         "shopDrawingCompletionDate": document.getElementById('schedule_date2').value,
-         "productionCompletionDate": document.getElementById('schedule_date3').value,
-         "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
-         "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
-         "counterTopFixingDate": document.getElementById('schedule_date6').value,
-         "notes": document.getElementById('CheckComment').value,
-       };
+       let choose = document.getElementById("selectedDiv").value;
+       let addURL ='';
+       var checklistdata;
+       if(choose == "1"){
+          addURL ='/JobOrderDetail/JobOrderDetailRescheduleApprove';
+         checklistdata ={
+            "inquiryId":parseInt( document.getElementById('inquiryId').value),
+            "installationStartDate": document.getElementById('schedule_date1').value,
+            "notes": document.getElementById('appComment').value,
+          };
+       }
+       if(choose == "2"){
+         addURL ='/JobOrderDetail/JobOrderDelayRequested';
+        checklistdata ={
+           "inquiryId":parseInt( document.getElementById('inquiryId').value),
+           "installationStartDate": document.getElementById('schedule_date2').value,
+           "notes": document.getElementById('CheckComment').value,
+         };
+      }
         const data = JSON.stringify(checklistdata);
         console.log(data);
         
         $.ajax({
             type: "Post",
-            url: baseURL + '/JobOrder/JobOrderFactoryApprove',
+            url: baseURL + addURL,
             headers: {
                 'Content-Type': 'application/json',
                 'userId': user.data.userId,
@@ -901,10 +950,10 @@ workscope.innerHTML=workscopeHtml;
             success: function(response) {
                 console.log(response);
      
-                window.location.replace("joborderapproval.html");
+                window.location.replace("joborder.html");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                document.getElementById("alert").innerHTML ="An error occured";
+                //document.getElementById("alert").innerHTML ="An error occured";
             }
         });
     });
@@ -918,7 +967,7 @@ workscope.innerHTML=workscopeHtml;
         console.log(data);
          $.ajax({
             type: "Post",
-            url: baseURL + '/JobOrder/JobOrderFactoryReject',
+            url: baseURL + '/JobOrderDetail/JobOrderFactoryReject',
             headers: {
                 'Content-Type': 'application/json',
                 'userId': user.data.userId,
@@ -927,15 +976,47 @@ workscope.innerHTML=workscopeHtml;
             data: data,
             success: function(response) {
                 console.log(response);
-                window.location.replace("joborderapproval.html");
+                window.location.replace("joborder.html");
                 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                document.getElementById("ralert").innerHTML ="An error occured";
+                //document.getElementById("ralert").innerHTML ="An error occured";
             }
         }); 
     });
     
-
     
+    $('#RequestforReschedulingBtn').click(function () {
+      var checklistdata = {
+         "inquiryId":parseInt( document.getElementById('inquiryId').value),
+       };
+        const data = JSON.stringify(checklistdata);
+        console.log(data);
+        
+        $.ajax({
+            type: "Post",
+            url: baseURL + '/JobOrderDetail/RequestForRescheduling?inquiryId='+document.getElementById('inquiryId').value,
+            headers: {
+                'Content-Type': 'application/json',
+                'userId': user.data.userId,
+                'Access-Control-Allow-Origin': '*',
+            },
+            //data: data,
+            success: function(response) {
+                console.log(response);
+                document.getElementById('RequestforReschedulingBtn').display = 'none';
+     
+               // window.location.replace("joborderapproval.html");
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                //document.getElementById("alert").innerHTML ="An error occured";
+            }
+        });
+    });
+    $('#RequestforReschedulingBtn').click(function () {
+       document.getElementById("selectedDiv").value ="1";
+    });
+    $('#adelay').click(function () {
+      document.getElementById("selectedDiv").value ="2";
+   });
                             

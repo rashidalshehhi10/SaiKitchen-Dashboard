@@ -40,7 +40,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/JobOrder/GetInquiryJobOrderFactoryByBranchId?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/JobOrderDetail/GetInquiryJobOrderDetailsByBranchId?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
