@@ -284,6 +284,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Job Order Factory Rejected',
                                     'class': ' label-light-info'
                                 },
+                                49: {
+                                    'title': 'jobOrder Reschedule Requested',
+                                    'class': ' label-light-primary'
+                                },
+                                50: {
+                                    'title': 'jobOrder Reschedule Approved',
+                                    'class': ' label-light-success'
+                                },
+                                51: {
+                                    'title': 'jobOrder Reschedule Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                52: {
+                                    'title': 'jobOrder Delay Requested',
+                                    'class': ' label-light-primary'
+                                },
+                                53: {
+                                    'title': 'jobOrder Ready For Installation',
+                                    'class': ' label-light-primary'
+                                },
+                                27: {
+                                    'title': 'jobOrder Completed',
+                                    'class': ' label-light-success'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -505,6 +529,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             48: {
                                 'title': 'Job Order Factory Rejected',
                                 'class': ' label-light-info'
+                            },
+                            49: {
+                                'title': 'jobOrder Reschedule Requested',
+                                'class': ' label-light-primary'
+                            },
+                            50: {
+                                'title': 'jobOrder Reschedule Approved',
+                                'class': ' label-light-success'
+                            },
+                            51: {
+                                'title': 'jobOrder Reschedule Rejected',
+                                'class': ' label-light-info'
+                            },
+                            52: {
+                                'title': 'jobOrder Delay Requested',
+                                'class': ' label-light-primary'
+                            },
+                            53: {
+                                'title': 'jobOrder Ready For Installation',
+                                'class': ' label-light-primary'
+                            },
+                            27: {
+                                'title': 'jobOrder Completed',
+                                'class': ' label-light-success'
                             },
                         };
 
@@ -758,8 +806,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var inquirySchedule = {
-                    inquiryId: 0,
-                    inquiryWorkscopeId:document.getElementById("inquiryId").innerHTML,
+                    inquiryId: document.getElementById("inquiryId").innerHTML,
+                    inquiryWorkscopeId:0,
                     measurementAssignedTo: 0,
                     measurementScheduleDate: "",
                     inquiryStatusId:0,

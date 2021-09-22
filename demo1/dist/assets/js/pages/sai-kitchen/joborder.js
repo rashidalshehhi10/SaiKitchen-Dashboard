@@ -231,6 +231,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Job Order Factory Rejected',
                                     'class': ' label-light-info'
                                 },
+                                49: {
+                                    'title': 'jobOrder Reschedule Requested',
+                                    'class': ' label-light-primary'
+                                },
+                                50: {
+                                    'title': 'jobOrder Reschedule Approved',
+                                    'class': ' label-light-success'
+                                },
+                                51: {
+                                    'title': 'jobOrder Reschedule Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                52: {
+                                    'title': 'jobOrder Delay Requested',
+                                    'class': ' label-light-primary'
+                                },
+                                53: {
+                                    'title': 'jobOrder Ready For Installation',
+                                    'class': ' label-light-primary'
+                                },
+                                27: {
+                                    'title': 'jobOrder Completed',
+                                    'class': ' label-light-success'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -377,6 +401,30 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             48: {
                                 'title': 'Job Order Factory Rejected',
                                 'class': ' label-light-info'
+                            },
+                            49: {
+                                'title': 'jobOrder Reschedule Requested',
+                                'class': ' label-light-primary'
+                            },
+                            50: {
+                                'title': 'jobOrder Reschedule Approved',
+                                'class': ' label-light-success'
+                            },
+                            51: {
+                                'title': 'jobOrder Reschedule Rejected',
+                                'class': ' label-light-info'
+                            },
+                            52: {
+                                'title': 'jobOrder Delay Requested',
+                                'class': ' label-light-primary'
+                            },
+                            53: {
+                                'title': 'jobOrder Ready For Installation',
+                                'class': ' label-light-primary'
+                            },
+                            27: {
+                                'title': 'jobOrder Completed',
+                                'class': ' label-light-success'
                             },
                         };
 

@@ -162,6 +162,9 @@ jQuery(document).ready(function() {
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
+               document.getElementById("schedule_date1").value = response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate;
+               document.getElementById("schedule_date2").value = response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate;
+               document.getElementById("schedule_date3").value = response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate;
                 response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
 var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
 console.log(inquiryWorkscopelength);
@@ -280,11 +283,7 @@ customerDetail.innerHTML=` <!--begin::User-->
       <span class="font-weight-bold mr-2">Installation Start Date:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate+`</span>
    </div>
-   <div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">Installation End Date:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationEndDate+`</span>
-   </div>
-   <div class="d-flex align-items-center justify-content-between mb-2">
+    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Notes:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].jobOrderDetailDescription+`</span>
    </div>
@@ -935,6 +934,22 @@ workscope.innerHTML=workscopeHtml;
            "notes": document.getElementById('CheckComment').value,
          };
       }
+      if(choose == "3"){
+         addURL ='/JobOrderDetail/ReadyToInstall';
+        checklistdata ={
+           "inquiryId":parseInt( document.getElementById('inquiryId').value),
+           "installationStartDate": document.getElementById('schedule_date3').value,
+          // "notes": document.getElementById('CheckComment').value,
+         };
+      }
+      if(choose == "4"){
+         addURL ='/JobOrderDetail/JobOrderCompleted';
+        checklistdata ={
+           "inquiryId":parseInt( document.getElementById('inquiryId').value),
+           "remark": document.getElementById('aemoji').value,
+           "jobOrderDetailsDescription": document.getElementById('jobComment').value,
+         };
+      }
         const data = JSON.stringify(checklistdata);
         console.log(data);
         
@@ -967,7 +982,7 @@ workscope.innerHTML=workscopeHtml;
         console.log(data);
          $.ajax({
             type: "Post",
-            url: baseURL + '/JobOrderDetail/JobOrderFactoryReject',
+            url: baseURL + '/JobOrderDetail/JobOrderDetailRescheduleReject',
             headers: {
                 'Content-Type': 'application/json',
                 'userId': user.data.userId,
@@ -976,7 +991,21 @@ workscope.innerHTML=workscopeHtml;
             data: data,
             success: function(response) {
                 console.log(response);
-                window.location.replace("joborder.html");
+                if(response.errorMessage=="inquiry Not Found"){
+                Swal.fire({
+                  text: 'Can Not Reject Approved Inquiry',
+                  icon: "error",
+                  buttonsStyling: false,
+                  confirmButtonText: "Ok, got it!",
+                  customClass: {
+                      confirmButton: "btn font-weight-bold btn-light-primary"
+                  }
+              }).then(function() {
+                  KTUtil.scrollTop();
+              });
+            }else{
+               window.location.replace("joborder.html");
+            }
                 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -1004,7 +1033,7 @@ workscope.innerHTML=workscopeHtml;
             //data: data,
             success: function(response) {
                 console.log(response);
-                document.getElementById('RequestforReschedulingBtn').display = 'none';
+                document.getElementById('RequestforReschedulingBtn').style.display = 'none';
      
                // window.location.replace("joborderapproval.html");
             },
@@ -1013,10 +1042,5 @@ workscope.innerHTML=workscopeHtml;
             }
         });
     });
-    $('#RequestforReschedulingBtn').click(function () {
-       document.getElementById("selectedDiv").value ="1";
-    });
-    $('#adelay').click(function () {
-      document.getElementById("selectedDiv").value ="2";
-   });
+    
                             

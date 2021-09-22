@@ -506,7 +506,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
                     "counterTopFixingDate": document.getElementById('schedule_date6').value,
                     "InstallationStartDate":document.getElementById('schedule_date7').value,
-                    "InstallationCompletionDate":document.getElementById('schedule_date8').value,
+                    //"InstallationCompletionDate":document.getElementById('schedule_date8').value,
                     "notes": document.getElementById('CheckComment').value,
                   };
             

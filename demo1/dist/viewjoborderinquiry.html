@@ -52,6 +52,65 @@
       <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
       <meta name="theme-color" content="#db4938" />
       <!--End:PWA-->
+      <style>
+         @media (min-width: 1200px){
+           .emoj{
+              font-size: 30px;
+           }
+           
+         }
+           @media (min-width: 1200px){
+           .emoj{
+              font-size: 30px;
+           }
+           
+         }
+           @media (min-width: 992px){
+           .emoj{
+              font-size: 30px;
+           }
+           
+         }
+           @media (min-width: 576px){
+           .emoj{
+              font-size: 30px;
+           }
+          
+         }
+           @media (min-width: 576px){
+             .emoj{
+              font-size: 30px;
+           }
+           
+         }
+         @media (min-width: 400px){
+           
+           .emoj{
+              font-size: 50px;
+           }
+           
+         } 
+         @media (max-width: 700px){
+           
+           .emoj{
+              font-size: 30px;
+           }
+           
+         } 
+         @media (max-width: 400px){
+           
+           .emoj{
+              font-size: 30px;
+           }
+         } 
+         @media (max-width: 300px){
+           
+           .emoj{
+              font-size: 20px;
+           }
+         } 
+         
+   </style>
    </head>
    <!--end::Head-->
    <!--begin::Body-->
@@ -647,8 +706,37 @@
                  <div class="modal-body">
                   <div id="divjobcomp">
                      <div class="form-group row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Review:</label>
+                                    <div id="imoji" style="vertical-align: bottom;">
+                                       <input type="hidden" id="aemoji" value="0" /> 
+                                          <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="appr(1)">
+                                            <span id="aemoj1" class="emo1">   😶  </span >
+                                           </div>
+                                           <div  class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(2)">
+                                             <span  id="aemoj2" class="emo2">   😑  </span >
+                                            </div>
+                                            <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(3)">
+                                             <span id="aemoj3" class="emo3">   😒  </span >
+                                            </div>
+                                            <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(4)">
+                                             <span id="aemoj4" class="emo4">   😕  </span >
+                                            </div>
+                                            <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(5)">
+                                             <span id="aemoj5" class="emo5">   🙂  </span >
+                                            </div>
+                                            <div   class="emoj" style="cursor: pointer; float: left;width: 15%" onclick="appr(6)">
+                                             <span id="aemoj6" class="emo6">   😃  </span >
+                                            </div>
+                                            <div   class="emoj" style="cursor: pointer; float: left;width: 15%" onclick="appr(7)">
+                                             <span id="aemoj7" class="emo7">   😍  </span >
+                                            </div>
+                                       </div>
+                        </div>
+                     </div>
+                     <div class="form-group row">
                          <div class="col-lg-12 col-md-12 col-sm-12">
-                                     <label class="font-size-h6 font-weight-bolder text-dark">Review and Comments</label>
+                                     <label class="font-size-h6 font-weight-bolder text-dark">Comments:</label>
                                      <div class="input-group">
  
                                          <input type="text" name="jobComment" id="jobComment"
@@ -672,7 +760,7 @@
                                 </div>
                             </div>
                        </div>
-                       </div>
+                     </div>
                   </div>
                   <div id="divreschedule">
                      <div class="form-group row">
@@ -998,15 +1086,26 @@
         });
         $('#kt_datetimepicker_2').datetimepicker({
         });
-        var date = new Date();
+        //var date = new Date();
 
-// add a day
-date.setDate(date.getDate() - 2);
+      /*    // add a day
+           date.setDate(date.getDate() - 2);
                    var hours = new Date();
                   //  $("#evDate").datepicker("setDate", start.start);
                   $("#schedule_date3").val(date.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
-                  
-
+                   */
+         function appr(id){         
+           //var heart = document.getElementById("hemoji").value;
+           for (let i = 1; i <= 7; i++) {
+              if(i == id){
+               document.getElementById("aemoj"+id).style.backgroundColor  = '#F1583E';
+               document.getElementById("aemoj"+id).style.borderRadius = '100%';
+               document.getElementById("aemoji").value = id;
+              }else{
+               document.getElementById("aemoj"+i).style.removeProperty('background-color');
+              }
+           }
+         }
       </script>
       <!--end::Page Scripts-->
 
