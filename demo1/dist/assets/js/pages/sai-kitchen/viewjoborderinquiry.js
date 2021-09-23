@@ -881,14 +881,25 @@ workscope.innerHTML=workscopeHtml;
    
 
     });
-
-    $('#aror').click(function (
-    ) {
-       document.getElementById("selectedDiv").value ="1";
+    $('#RequestforReschedulingBtn').click(function () {
+      document.getElementById("selectedDiv").value ="5";
       document.getElementById("divreschedule").style.removeProperty('display');
       document.getElementById("divrjctreschedule").style.display = 'none';
       document.getElementById("divrtinstall").style.display = 'none';
       document.getElementById("divjobcomp").style.display = 'none';
+      document.getElementById("kt_reject_inquiry_button").style.display = 'none';
+      document.getElementById("schedule_date1").disabled =false ;
+      
+    })
+    $('#aror').click(function (
+    ) {
+       document.getElementById("selectedDiv").value ="1";
+      document.getElementById("divreschedule").style.removeProperty('display');
+      document.getElementById("kt_reject_inquiry_button").style.removeProperty('display');
+      document.getElementById("divrjctreschedule").style.display = 'none';
+      document.getElementById("divrtinstall").style.display = 'none';
+      document.getElementById("divjobcomp").style.display = 'none';
+      document.getElementById("schedule_date1").disabled = true;
     });
     $('#adelay').click(function (
       ) {
@@ -897,6 +908,7 @@ workscope.innerHTML=workscopeHtml;
         document.getElementById("divreschedule").style.display = 'none';
         document.getElementById("divrtinstall").style.display = 'none';
         document.getElementById("divjobcomp").style.display = 'none';
+        document.getElementById("kt_reject_inquiry_button").style.display = 'none';
       });
       $('#rtinstall').click(function (
          ) {
@@ -905,6 +917,7 @@ workscope.innerHTML=workscopeHtml;
            document.getElementById("divreschedule").style.display = 'none';
            document.getElementById("divrjctreschedule").style.display = 'none';
            document.getElementById("divjobcomp").style.display = 'none';
+           document.getElementById("kt_reject_inquiry_button").style.display = 'none';
          });
          $('#jocomp').click(function (
             ) {
@@ -913,6 +926,7 @@ workscope.innerHTML=workscopeHtml;
               document.getElementById("divrtinstall").style.display = 'none';
               document.getElementById("divreschedule").style.display = 'none';
               document.getElementById("divrjctreschedule").style.display = 'none';
+              document.getElementById("kt_reject_inquiry_button").style.display = 'none';
             });   
     $('#kt_approve_inquiry_button').click(function () {
        let choose = document.getElementById("selectedDiv").value;
@@ -950,6 +964,14 @@ workscope.innerHTML=workscopeHtml;
            "jobOrderDetailsDescription": document.getElementById('jobComment').value,
          };
       }
+      if(choose == "5"){
+         addURL ='/JobOrderDetail/RequestForRescheduling';
+        checklistdata ={
+           "inquiryId":parseInt( document.getElementById('inquiryId').value),
+           "installationStartDate": document.getElementById('schedule_date1').value,
+           "notes": document.getElementById('appComment').value,
+         };
+      }
         const data = JSON.stringify(checklistdata);
         console.log(data);
         
@@ -975,7 +997,7 @@ workscope.innerHTML=workscopeHtml;
     $('#kt_reject_inquiry_button').click(function () {
         var rejectlistdata = {
             "inquiryId":parseInt(document.getElementById('inquiryId').value),
-            "reason":document.getElementById('RejectComment1').value,
+            "reason":document.getElementById('appComment').value,
           };
     
         const data = JSON.stringify(rejectlistdata);
@@ -1015,32 +1037,5 @@ workscope.innerHTML=workscopeHtml;
     });
     
     
-    $('#RequestforReschedulingBtn').click(function () {
-      var checklistdata = {
-         "inquiryId":parseInt( document.getElementById('inquiryId').value),
-       };
-        const data = JSON.stringify(checklistdata);
-        console.log(data);
-        
-        $.ajax({
-            type: "Post",
-            url: baseURL + '/JobOrderDetail/RequestForRescheduling?inquiryId='+document.getElementById('inquiryId').value,
-            headers: {
-                'Content-Type': 'application/json',
-                'userId': user.data.userId,
-                'Access-Control-Allow-Origin': '*',
-            },
-            //data: data,
-            success: function(response) {
-                console.log(response);
-                document.getElementById('RequestforReschedulingBtn').style.display = 'none';
-     
-               // window.location.replace("joborderapproval.html");
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                //document.getElementById("alert").innerHTML ="An error occured";
-            }
-        });
-    });
     
                             
