@@ -336,6 +336,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     render: function(data, type, full, meta) {
                         var action = ``;
                         if(full.inquiryAddedById==user.data.userId ||userRoleId==1){
+                            
+                            action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
+                            <i class="la la-file-text-o"></i>\
+							</a>\
+                        `;
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
                             // onclick="`+full.inquiryId+`"
@@ -387,10 +392,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 							</a>\
                         `;
                             }
-                            action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Delete workscope">
-                            <i class="la la-file-text-o"></i>\
-							</a>\
-                        `;
                         }
                             return action;
                         } else {
