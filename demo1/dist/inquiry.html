@@ -834,6 +834,37 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="InquiryComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_inq_comment" action="" name="addcomment">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="">Comment*</label>
+                            <div class="">
+                                <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="inqtxtComment" name="inqtxtComment" class="form-control" placeholder="" rows="7"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="submit"  id="kt_comment_button"  class="btn btn-primary font-weight-bold">Add</button>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">   
     </div>
