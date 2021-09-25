@@ -253,6 +253,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 `;
 inquiryCode.innerHTML=response.data.inquiry.inquiryCode;
 var isfirst=true;
+var counter = 0;
 response.data.inquiry.inquiryWorkscopes.forEach(element => {
     if(isfirst){
         workscopeHtml+=` <li class="nav-item">
@@ -273,6 +274,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
         </a>
      </li>`;
     }
+    
     element.measurements[0].files.forEach(element => {
         if( dicMeasurement["measurementRow"+element.measurementId]==null){
             dicMeasurement["measurementRow"+element.measurementId]=``;
@@ -378,8 +380,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
         }
     });
-    if(element.quotations !=undefined){
-    element.quotations[0].files.forEach(element => {
+    if(counter == 0 & response.data.inquiry.quotations.length > 0){
+      response.data.inquiry.quotations[0].files.forEach(element => {
         if(   dicQuot["QuotRow"+element.quotationId]==null){
             dicQuot["QuotRow"+element.quotationId]=``;
         }
@@ -421,22 +423,25 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             </div>
             <!--end::Col-->`;
     }
-});
-    }
+   });
+    }//quotations !=undefined
     var  jobOrder  = response.data.inquiry.jobOrders;
-    if(response.data.inquiry.jobOrders.length > 0){
+    if(response.data.inquiry.jobOrders.length > 0 & counter ==0){
          if(   dicMEP["dicMEP"+jobOrder[0].jobOrderId]==null){
             dicMEP["dicMEP"+jobOrder[0].jobOrderId]=``;
          }
         if(jobOrder[0].mepdrawingFileUrl !=""){
+         var fileExtension = jobOrder[0].mepdrawingFileUrl.substr((jobOrder[0].mepdrawingFileUrl.lastIndexOf('.') + 1));
+         if(fileExtension == 'mp4') {
+            var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].mepdrawingFileUrl;
          dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
              <!--begin::Col-->
              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                 <!--begin::Card-->
-                <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].mepdrawingFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
                    <div class="d-flex flex-column align-items-center">
                       <!--begin: Icon-->
-                      <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                      <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
                       <!--end: Icon-->
                       <!--begin: Tite-->
                       <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].mepdrawingFileUrl+`</a>
@@ -446,55 +451,212 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end:: Card-->
              </div>
              <!--end::Col-->`;
+         }else if(fileExtension == 'pdf') {
+            dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
+            <!--begin::Col-->
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+               <!--begin::Card-->
+               <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].mepdrawingFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                  <div class="d-flex flex-column align-items-center">
+                     <!--begin: Icon-->
+                     <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                     <!--end: Icon-->
+                     <!--begin: Tite-->
+                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].mepdrawingFileUrl+`</a>
+                     <!--end: Tite-->
+                  </div>
+               </div>
+               <!--end:: Card-->
+            </div>
+            <!--end::Col-->`;
+         }else{
+            dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
+            <!--begin::Col-->
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+               <!--begin::Card-->
+               <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].mepdrawingFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                  <div class="d-flex flex-column align-items-center">
+                     <!--begin: Icon-->
+                     <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                     <!--end: Icon-->
+                     <!--begin: Tite-->
+                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].mepdrawingFileUrl+`</a>
+                     <!--end: Tite-->
+                  </div>
+               </div>
+               <!--end:: Card-->
+            </div>
+            <!--end::Col-->`;
+         }
+           
         }
             if(   dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]==null){
                 dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]=``;
             }
             if(jobOrder[0].materialSheetFileUrl !=""){
-                dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
-                <!--begin::Col-->
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                   <!--begin::Card-->
-                   <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].materialSheetFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                      <div class="d-flex flex-column align-items-center">
-                         <!--begin: Icon-->
-                         <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
-                         <!--end: Icon-->
-                         <!--begin: Tite-->
-                         <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].materialSheetFileUrl+`</a>
-                         <!--end: Tite-->
+               var fileExtension = jobOrder[0].materialSheetFileUrl.substr((jobOrder[0].materialSheetFileUrl.lastIndexOf('.') + 1));
+               if(fileExtension == 'mp4') {
+                  var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].materialSheetFileUrl;
+               dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+                   <!--begin::Col-->
+                   <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                      <!--begin::Card-->
+                      <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                         <div class="d-flex flex-column align-items-center">
+                            <!--begin: Icon-->
+                            <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                            <!--end: Icon-->
+                            <!--begin: Tite-->
+                            <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].materialSheetFileUrl+`</a>
+                            <!--end: Tite-->
+                         </div>
                       </div>
+                      <!--end:: Card-->
                    </div>
-                   <!--end:: Card-->
-                </div>
-                <!--end::Col-->`;
+                   <!--end::Col-->`;
+               }else if(fileExtension == 'pdf') {
+                  dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+                  <!--begin::Col-->
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                     <!--begin::Card-->
+                     <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].materialSheetFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                        <div class="d-flex flex-column align-items-center">
+                           <!--begin: Icon-->
+                           <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                           <!--end: Icon-->
+                           <!--begin: Tite-->
+                           <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].materialSheetFileUrl+`</a>
+                           <!--end: Tite-->
+                        </div>
+                     </div>
+                     <!--end:: Card-->
+                  </div>
+                  <!--end::Col-->`;
+               }else{
+                  dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+                  <!--begin::Col-->
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                     <!--begin::Card-->
+                     <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].materialSheetFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                        <div class="d-flex flex-column align-items-center">
+                           <!--begin: Icon-->
+                           <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                           <!--end: Icon-->
+                           <!--begin: Tite-->
+                           <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].materialSheetFileUrl+`</a>
+                           <!--end: Tite-->
+                        </div>
+                     </div>
+                     <!--end:: Card-->
+                  </div>
+                  <!--end::Col-->`;
+               }
             }
                 if(   dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]==null){
                     dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]=``;
                 }
                 if(jobOrder[0].dataSheetApplianceFileUrl !=""){
-                    dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
-                    <!--begin::Col-->
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                       <!--begin::Card-->
-                       <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].dataSheetApplianceFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                          <div class="d-flex flex-column align-items-center">
-                             <!--begin: Icon-->
-                             <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
-                             <!--end: Icon-->
-                             <!--begin: Tite-->
-                             <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].dataSheetApplianceFileUrl+`</a>
-                             <!--end: Tite-->
-                          </div>
-                       </div>
-                       <!--end:: Card-->
-                    </div>
-                    <!--end::Col-->`;
+                  var fileExtension = jobOrder[0].dataSheetApplianceFileUrl.substr((jobOrder[0].dataSheetApplianceFileUrl.lastIndexOf('.') + 1));
+                  if(fileExtension == 'mp4') {
+                     var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].dataSheetApplianceFileUrl;
+                  dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                      <!--begin::Col-->
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                         <!--begin::Card-->
+                         <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                            <div class="d-flex flex-column align-items-center">
+                               <!--begin: Icon-->
+                               <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                               <!--end: Icon-->
+                               <!--begin: Tite-->
+                               <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].dataSheetApplianceFileUrl+`</a>
+                               <!--end: Tite-->
+                            </div>
+                         </div>
+                         <!--end:: Card-->
+                      </div>
+                      <!--end::Col-->`;
+                  }else if(fileExtension == 'pdf') {
+                     dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].dataSheetApplianceFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].dataSheetApplianceFileUrl+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+                  }else{
+                     dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].dataSheetApplianceFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].dataSheetApplianceFileUrl+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+                  }
                 } 
                     if(   dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]==null){
                         dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]=``;
                     }
                     if(jobOrder[0].jobOrderChecklistFileUrl !=""){
+                     var fileExtension = jobOrder[0].jobOrderChecklistFileUrl.substr((jobOrder[0].jobOrderChecklistFileUrl.lastIndexOf('.') + 1));
+                     if(fileExtension == 'mp4') {
+                        var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].jobOrderChecklistFileUrl;
+                     dicJoborder["dicJoborder"+jobOrder[0].jobOrderId] +=`
+                         <!--begin::Col-->
+                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                            <!--begin::Card-->
+                            <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                               <div class="d-flex flex-column align-items-center">
+                                  <!--begin: Icon-->
+                                  <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                                  <!--end: Icon-->
+                                  <!--begin: Tite-->
+                                  <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].jobOrderChecklistFileUrl+`</a>
+                                  <!--end: Tite-->
+                               </div>
+                            </div>
+                            <!--end:: Card-->
+                         </div>
+                         <!--end::Col-->`;
+                     }else if(fileExtension == 'pdf') {
+                        dicJoborder["dicJoborder"+jobOrder[0].jobOrderId] +=`
+                        <!--begin::Col-->
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                           <!--begin::Card-->
+                           <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].jobOrderChecklistFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                              <div class="d-flex flex-column align-items-center">
+                                 <!--begin: Icon-->
+                                 <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                                 <!--end: Icon-->
+                                 <!--begin: Tite-->
+                                 <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].jobOrderChecklistFileUrl+`</a>
+                                 <!--end: Tite-->
+                              </div>
+                           </div>
+                           <!--end:: Card-->
+                        </div>
+                        <!--end::Col-->`;
+                     }else{
                         dicJoborder["dicJoborder"+jobOrder[0].jobOrderId] +=`
                         <!--begin::Col-->
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -512,8 +674,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            <!--end:: Card-->
                         </div>
                         <!--end::Col-->`;
+                     }
                     }
      }
+     counter = 1;
             if(isfirst){
                 let collect ='';
                 if(response.data.inquiry.jobOrders.length > 0){
@@ -613,8 +777,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                     <div class="card-body" >
-                        <div class="row" id="quotRow`+element.quotations[0].quotationId+`">
-                        `+dicQuot["QuotRow"+element.quotations[0].quotationId]+`
+                        <div class="row" id="quotRow`+response.data.inquiry.quotations[0].quotationId+`">
+                        `+dicQuot["QuotRow"+response.data.inquiry.quotations[0].quotationId]+`
                         </div>
                     </div>
                     </div>
@@ -628,7 +792,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             
             }else{
                 let quot ='';
-                if(element.quotations !=undefined){
+                if(response.data.inquiry.quotations.length >0){
                     quot = `
                     <div class="card">
                        <div class="card-header" >
@@ -638,8 +802,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        </div>
                        <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                         <div class="card-body" >
-                        <div class="row" id="quotRow`+element.quotations[0].quotationId+`">
-                        `+dicQuot["QuotRow"+element.quotations[0].quotationId]+`
+                        <div class="row" id="quotRow`+response.data.inquiry.quotations[0].quotationId+`">
+                        `+dicQuot["QuotRow"+response.data.inquiry.quotations[0].quotationId]+`
                         </div>
                         </div>
                        </div>

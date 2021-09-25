@@ -249,6 +249,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 `;
 inquiryCode.innerHTML=response.data.inquiry.inquiryCode;
 var isfirst=true;
+var counter = 0;
 response.data.inquiry.inquiryWorkscopes.forEach(element => {
     if(isfirst){
         workscopeHtml+=` <li class="nav-item">
@@ -269,6 +270,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
         </a>
      </li>`;
     }
+    
     element.measurements[0].files.forEach(element => {
         if( dicMeasurement["measurementRow"+element.measurementId]==null){
             dicMeasurement["measurementRow"+element.measurementId]=``;
@@ -374,8 +376,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
         }
     });
-    if(element.quotations !=undefined){
-    element.quotations[0].files.forEach(element => {
+    if(counter == 0 & response.data.inquiry.quotations.length > 0){
+      response.data.inquiry.quotations[0].files.forEach(element => {
         if(   dicQuot["QuotRow"+element.quotationId]==null){
             dicQuot["QuotRow"+element.quotationId]=``;
         }
@@ -417,9 +419,11 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             </div>
             <!--end::Col-->`;
     }
-});
-    }
+   });
+    }//quotations !=undefined
+     counter = 1;
             if(isfirst){
+                
                 tabsHTML+=`
                 <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
                 <!--begin::Accordion-->
@@ -460,19 +464,22 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                     <div class="card-body" >
-                    <div class="row" id="quotRow`+element.quotations[0].quotationId+`">
-                    `+dicQuot["QuotRow"+element.quotations[0].quotationId]+`
-                        </div>
+                        <div class="row" id="quotRow`+response.data.inquiry.quotations[0].quotationId+`">
+                        `+dicQuot["QuotRow"+response.data.inquiry.quotations[0].quotationId]+`
                         </div>
                     </div>
-                </div>
+                    </div>
+                   </div>
+                   `+''+`
+              
+
                 </div>
                 <!--end::Accordion-->
              </div>`;
             
             }else{
                 let quot ='';
-                if(element.quotations !=undefined){
+                if(response.data.inquiry.quotations.length >0){
                     quot = `
                     <div class="card">
                        <div class="card-header" >
@@ -482,14 +489,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        </div>
                        <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                         <div class="card-body" >
-                        <div class="row" id="quotRow`+element.quotations[0].quotationId+`">
-                        `+dicQuot["QuotRow"+element.quotations[0].quotationId]+`
+                        <div class="row" id="quotRow`+response.data.inquiry.quotations[0].quotationId+`">
+                        `+dicQuot["QuotRow"+response.data.inquiry.quotations[0].quotationId]+`
                         </div>
                         </div>
                        </div>
                     </div>
                     `;
                     }
+                 
+                 
     tabsHTML+=`
     <div class="tab-pane fade" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
     <!--begin::Accordion-->
@@ -523,7 +532,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
           </div>
        </div>`+
        quot
-       +`
+       +
+       `
     </div>
     <!--end::Accordion-->
  </div>`;

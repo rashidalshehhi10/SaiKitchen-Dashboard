@@ -54,7 +54,8 @@ $('#btnSearch').click(function (){
     document.getElementById("topFivePaidCustomers").innerHTML='';
     document.getElementById("topFiveNewCustomers").innerHTML='';
     document.getElementById("MyEmployees").innerHTML='';
-
+    document.getElementById("chart").innerHTML='';
+    document.getElementById("chart1").innerHTML='';
     document.getElementById("load").style.removeProperty('display');
     var obj={
         "id":parseInt(document.getElementById('kt_select_branch').value),
@@ -73,21 +74,21 @@ $('#btnSearch').click(function (){
         },
         success: function(response) {
             console.log(response);
-            var series =[];
-            var labels =[];
+            var series1 =[];
+            var labels1 =[];
             
             for (let i = 0; i < response.data.customerContactSources.length; i++) {
-                series.push(response.data.customerContactSources[i].percentage);
-                labels.push(response.data.customerContactSources[i].contactMode);
+                series1.push(response.data.customerContactSources[i].percentage);
+                labels1.push(response.data.customerContactSources[i].contactMode);
             }
             var options = {
-                series: series,
+                series: series1,
                 chart: {
                 type: 'donut',
                 height:'263px',
                 
             },
-            labels: labels,
+            labels: labels1,
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -106,8 +107,8 @@ $('#btnSearch').click(function (){
             };
             var chart = new ApexCharts(document.querySelector("#chart"), options);
             chart.render();
-            series= [];
-            labels=[];
+            var series= [];
+            var labels=[];
             for (let i = 0; i < response.data.receivedPaymentModes.length; i++) {
                 series.push(response.data.receivedPaymentModes[i].percentage);
                 labels.push(response.data.receivedPaymentModes[i].paymentMode);
@@ -644,21 +645,21 @@ $('#btnSearch').click(function (){
                 },
                 success: function(response) {
                     console.log(response);
-                    var series =[];
-                    var labels =[];
+                    var series1 =[];
+                    var labels1 =[];
                     
                     for (let i = 0; i < response.data.customerContactSources.length; i++) {
-                        series.push(response.data.customerContactSources[i].percentage);
-                        labels.push(response.data.customerContactSources[i].contactMode);
+                        series1.push(response.data.customerContactSources[i].percentage);
+                        labels1.push(response.data.customerContactSources[i].contactMode);
                     }
                     var options = {
-                        series: series,
+                        series: series1,
                         chart: {
                         type: 'donut',
                         height:'263px',
                         
                     },
-                    labels: labels,
+                    labels: labels1,
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -677,8 +678,8 @@ $('#btnSearch').click(function (){
                     };
                     var chart = new ApexCharts(document.querySelector("#chart"), options);
                     chart.render();
-                    series= [];
-                    labels=[];
+                    var series= [];
+                    var labels=[];
                     for (let i = 0; i < response.data.receivedPaymentModes.length; i++) {
                         series.push(response.data.receivedPaymentModes[i].percentage);
                         labels.push(response.data.receivedPaymentModes[i].paymentMode);
