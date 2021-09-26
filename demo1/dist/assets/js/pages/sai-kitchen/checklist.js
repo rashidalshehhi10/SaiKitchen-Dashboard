@@ -706,7 +706,28 @@ $('#addComponentbtn').click(function () {
            timeout: 600000,
            addRemoveLinks: true,
            removedfile:function(file) {
-  
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            var fileurl ='';
+            var filearr = fileuploded.innerHTML.split(".");
+            if(filearr.length > 1){
+                fileurl = "/File/DeleteFileFromBlob?fileName=";
+            }else{
+                fileurl = "/File/DeleteVideo?VideoId=";
+            }
+            $.ajax({
+                type:"post",
+                url:baseURL+fileurl+fileuploded.innerHTML,
+                cache:false,
+                success: function(){
+                    removeA(measurementFile, fileuploded.innerHTML);
+                    filearry[i] = measurementFile;
+                    file.previewElement.remove();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    console.log("Error");
+            
+                }
+            });
            },
      
            acceptedFiles: "image/*,application/pdf,.png,.mp4",
@@ -715,6 +736,8 @@ $('#addComponentbtn').click(function () {
        
            },
            success: function(file, response){
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            fileuploded.innerHTML = response.data.item1;
                // alert(response.data.item1);
                measurementFile.push(response.data.item1);
                filearry[i] = measurementFile;
@@ -821,12 +844,37 @@ $('#resetComponentbtn').click(function () {
                                 'Access-Control-Allow-Origin': '*',
                             },
                             paramName: "file"+j, // The name that will be used to transfer the file
-                            maxFiles: 150,
+                            maxFiles: 1,
                             maxFilesize: 30000, // MB
                             timeout: 600000,
                             addRemoveLinks: true,
                             removedfile:function(file) {
-                   
+                                if(file.status =="error"){
+                                    file.previewElement.remove();
+                                    return false;
+                                }
+                                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                                var fileurl ='';
+                                var filearr = fileuploded.innerHTML.split(".");
+                                if(filearr.length > 1){
+                                    fileurl = "/File/DeleteFileFromBlob?fileName=";
+                                }else{
+                                    fileurl = "/File/DeleteVideo?VideoId=";
+                                }
+                                $.ajax({
+                                    type:"post",
+                                    url:baseURL+fileurl+fileuploded.innerHTML,
+                                    cache:false,
+                                    success: function(){
+                                       // removeA(measurementFile, fileuploded.innerHTML);
+                                        removeA(fourfile, fileuploded.innerHTML);
+                                        file.previewElement.remove();
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                                        console.log("Error");
+                                
+                                    }
+                                });
                             },
                       
                             acceptedFiles: "image/*,application/pdf,.png,.mp4",
@@ -835,9 +883,21 @@ $('#resetComponentbtn').click(function () {
                         
                             },
                             success: function(file, response){
+                                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                                fileuploded.innerHTML = response.data.item1;
                                 fourfile[j] = response.data.item1;
                             
                             }
                             
                           });
+                        }
+                        function removeA(arr) {
+                            var what, a = arguments, L = a.length, ax;
+                            while (L > 1 && arr.length) {
+                                what = a[--L];
+                                while ((ax= arr.indexOf(what)) !== -1) {
+                                    arr.splice(ax, 1);
+                                }
+                            }
+                            return arr;
                         }

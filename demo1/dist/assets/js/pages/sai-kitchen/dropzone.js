@@ -61,18 +61,27 @@ var KTDropzoneDemo = function() {
             timeout: 600000,
             addRemoveLinks: true,
             removedfile:function(file) {
-                //     var reader = new FileReader();
-                //     reader.onload = function(event) {
-                //         // event.target.result contains base64 encoded image
-                //         var base64String = event.target.result;
-                //         var fileName = file.name;
-                //         var finalbase64 = base64String.split(",")[1];
-                //         // handlePictureDropUpload(base64String ,fileName );
-                //         removeA(measurementFile, finalbase64);
-                //     };
-                //     reader.readAsDataURL(file);
-                    
-                // file.previewElement.remove();
+                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                var fileurl ='';
+                var filearr = fileuploded.innerHTML.split(".");
+                if(filearr.length > 1){
+                    fileurl = "/File/DeleteFileFromBlob?fileName=";
+                }else{
+                    fileurl = "/File/DeleteVideo?VideoId=";
+                }
+                $.ajax({
+                    type:"post",
+                    url:baseURL+fileurl+fileuploded.innerHTML,
+                    cache:false,
+                    success: function(){
+                        removeA(measurementFile, fileuploded.innerHTML);
+                        file.previewElement.remove();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log("Error");
+                
+                    }
+                });
     
             },
       
@@ -94,6 +103,10 @@ var KTDropzoneDemo = function() {
             // });
         },
         success: function(file, response){
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            fileuploded.innerHTML = response.data.item1;
+            //var btndelete = file.previewElement.querySelector(".delete");
+           // btndelete.setAttribute("id", 'delete-midia-id-'+response.midia_id);
             // alert(response.data.item1);
             measurementFile.push(response.data.item1);
         
@@ -121,6 +134,7 @@ var KTDropzoneDemo = function() {
             //     }
             // }
         });
+        
     }
 
 

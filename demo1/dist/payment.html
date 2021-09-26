@@ -1784,7 +1784,27 @@ License: You must have a valid license purchased only from themeforest(the above
             timeout: 600000,
             addRemoveLinks: true,
             removedfile:function(file) {
-             
+                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                var fileurl ='';
+                var filearr = fileuploded.innerHTML.split(".");
+                if(filearr.length > 1){
+                    fileurl = "/File/DeleteFileFromBlob?fileName=";
+                }else{
+                    fileurl = "/File/DeleteVideo?VideoId=";
+                }
+                $.ajax({
+                    type:"post",
+                    url:baseURL+fileurl+fileuploded.innerHTML,
+                    cache:false,
+                    success: function(){
+                        removeA(measurementFile, fileuploded.innerHTML);
+                        file.previewElement.remove();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log("Error");
+                
+                    }
+                });
     
             },
       
@@ -1794,6 +1814,8 @@ License: You must have a valid license purchased only from themeforest(the above
             
         },
         success: function(file, response){
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            fileuploded.innerHTML = response.data.item1;
             // alert(response.data.item1);
             measurementFile.push(response.data.item1);
         
