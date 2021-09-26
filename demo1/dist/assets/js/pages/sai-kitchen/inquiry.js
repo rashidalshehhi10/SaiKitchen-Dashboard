@@ -45,7 +45,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'inquiryId', 'inquiryCode', 'status', 'workscopeNames','isMeasurementProvidedByCustomer',
                         'measurementScheduleDate', 'measurementAssignTo','isDesignProvidedByCustomer', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
+                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','noOfRevision', 'actions'
                     ],
                 },
             },
@@ -126,6 +126,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'inquiryAddedBy'
+                },
+                {
+                    data: 'measurementAddedOn'
+                },
+                {
+                    data: 'designAddedOn'
+                },
+                {
+                    data: 'quotationAddedOn'
+                },
+                {
+                    data: 'commentAddedOn'
                 },
                 {
                     data: 'actions',
