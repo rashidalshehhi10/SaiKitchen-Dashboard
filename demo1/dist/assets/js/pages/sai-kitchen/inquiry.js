@@ -42,10 +42,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryId', 'inquiryCode', 'status', 'workscopeNames','isMeasurementProvidedByCustomer',
-                        'measurementScheduleDate', 'measurementAssignTo','isDesignProvidedByCustomer', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
+                        'inquiryId', 'inquiryCode', 'status', 'workscopeNames','inquiryComment',
+                        'measurementScheduleDate', 'measurementAssignTo','designScheduleDate', 'designAssignTo','isMeasurementProvidedByCustomer','isDesignProvidedByCustomer', 'customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','noOfRevision', 'actions'
+                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','noOfRevision', 'actions'
                     ],
                 },
             },
@@ -65,7 +65,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'workscopeNames'
                 },
                 {
-                    data: 'isMeasurementProvidedByCustomer'
+                    data: 'inquiryComment'
                 },
                 {
                     data: 'measurementScheduleDate'
@@ -74,13 +74,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'measurementAssignTo'
                 },
                 {
-                    data: 'isDesignProvidedByCustomer'
-                },
-                {
                     data: 'designScheduleDate'
                 },
                 {
                     data: 'designAssignTo'
+                },
+                {
+                    data: 'isMeasurementProvidedByCustomer'
+                },
+                {
+                    data: 'isDesignProvidedByCustomer'
                 },
                 {
                     data: 'customerCode'
@@ -114,9 +117,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'inquiryDescription'
-                },
-                {
-                    data: 'inquiryComment'
                 },
                 {
                     data: 'inquiryStartDate'
@@ -161,7 +161,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         //             $('.datatable-input[data-col-index="13"]').append('<a href='+d+' target="_blank">Click here</a>');
                         //     });
                         //     break;
-
+                        default:
+                            //Statements executed when none of
+                            //the values match the value of the expression
+                            var v=column.title();
+                        break;
+                        
                         case 'Status':
                             var status = {
                                 1: {
@@ -324,6 +329,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
                                     $('.datatable-input[data-col-index="2"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
+                            });
+                            break;
+                        case 'Added By':
+                            column.data().unique().sort().each(function(d, j) {
+                                if (d != null)
+                                    $('.datatable-input[data-col-index="25"]').append('<option value="' + d+ '">' + d + '</option>');
                             });
                             break;
 
