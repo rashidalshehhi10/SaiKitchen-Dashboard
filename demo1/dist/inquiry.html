@@ -189,7 +189,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="card-body">
                                     <!--begin: Search Form-->
-                                    <form class="mb-15">
+                                    <form class="mb-15" id="searchform" style="display: none;">
                                         <div class="row mb-6">
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>ID:</label>
@@ -1114,7 +1114,14 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
 			
         }
-
+        function toggleSearch() {
+  var x = document.getElementById("searchform");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
         function logoutUser(user) {
 
             // alert('hi ' + branchRoleId);
