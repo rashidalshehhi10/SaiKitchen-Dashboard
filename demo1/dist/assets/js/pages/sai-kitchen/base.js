@@ -1945,7 +1945,20 @@ if (permission.includes(8)){
 			</a>
 		</li>`;
       }
-
+      if (permission.includes(3)) {
+         sideMenuHTML += `
+		<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+			<a href="setting.html" class="menu-link menu-toggle">
+				<span class="svg-icon menu-icon">
+					
+            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+            <img src="/assets/media/svg/saikitchen/setting.svg"/>
+            <!--end::Svg Icon-->
+				</span>
+				<span class="menu-text">Setting</span>
+			</a>
+		</li>`;
+      }
 
       if (permission.includes(10) || permission.includes(11) || permission.includes(12)) {
          sideMenuHTML += `
