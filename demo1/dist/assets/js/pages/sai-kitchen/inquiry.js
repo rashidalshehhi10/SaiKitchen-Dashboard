@@ -183,7 +183,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 4: {
                                     'title': 'Design Delayed',
-                                    'class': ' label-light-success'
+                                    'class': ' label-light-danger'
                                 },
                                 5: {
                                     'title': 'Quotation Pending',
@@ -199,7 +199,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 8: {
                                     'title': 'Measurement Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 9: {
                                     'title': 'Measurement Approval Pending',
@@ -211,7 +211,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 11: {
                                     'title': 'Design Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 12: {
                                     'title': 'Design Approval Pending',
@@ -223,7 +223,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 14: {
                                     'title': 'Quotation Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 15: {
                                     'title': 'Quotation Waiting For Customer Approval',
@@ -235,7 +235,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 17: {
                                     'title': 'Design Rejected By Client',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 18: {
                                     'title': 'Technical Checklist Pending',
@@ -247,7 +247,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 20: {
                                     'title': 'Technical Checklist Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 36: {
                                     'title': 'Measurement Assignee Pending',
@@ -259,7 +259,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 38: {
                                     'title': 'Measurement Assignee  Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 39: {
                                     'title': 'Design Assignee  Pending',
@@ -271,7 +271,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 41: {
                                     'title': 'Design Assignee  Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 42: {
                                     'title': 'Quotation Schedule  Pending',
@@ -287,7 +287,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 45: {
                                     'title': 'Commerical Checklist Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 46: {
                                     'title': 'Job Order Factory Approval Pending',
@@ -299,7 +299,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 48: {
                                     'title': 'Job Order Factory Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 49: {
                                     'title': 'jobOrder Reschedule Requested',
@@ -311,7 +311,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 51: {
                                     'title': 'jobOrder Reschedule Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 52: {
                                     'title': 'jobOrder Delay Requested',
@@ -452,7 +452,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             4: {
                                 'title': 'Design Delayed',
-                                'class': ' label-light-success'
+                                'class': ' label-light-danger'
                             },
                             5: {
                                 'title': 'Quotation Pending',
@@ -468,11 +468,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             8: {
                                 'title': 'Measurement Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             9: {
                                 'title': 'Measurement Approval Pending',
-                                'class': ' label-light-primary'
+                                'class': ' label-light-info'
                             },
                             10: {
                                 'title': 'Design Approved',
@@ -480,11 +480,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             11: {
                                 'title': 'Design Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             12: {
                                 'title': 'Design Approval Pending',
-                                'class': ' label-light-primary'
+                                'class': ' label-light-info'
                             },
                             13: {
                                 'title': 'Quotation Approved',
@@ -492,11 +492,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             14: {
                                 'title': 'Quotation Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             15: {
                                 'title': 'Quotation Waiting For Customer Approval',
-                                'class': ' label-light-primary'
+                                'class': ' label-light-info'
                             },
                             16: {
                                 'title': 'Design Waiting For Customer Approval',
@@ -504,7 +504,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             17: {
                                 'title': 'Design Rejected By Client',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             18: {
                                 'title': 'Technical Checklist Pending',
@@ -516,7 +516,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             20: {
                                 'title': 'Technical Checklist Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             36: {
                                 'title': 'Measurement Assignee Pending',
@@ -528,7 +528,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             38: {
                                 'title': 'Measurement Assignee  Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             39: {
                                 'title': 'Design Assignee  Pending',
@@ -540,7 +540,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             41: {
                                 'title': 'Design Assignee  Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             42: {
                                 'title': 'Quotation Schedule  Pending',
@@ -556,7 +556,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             45: {
                                 'title': 'Commerical Checklist Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             46: {
                                 'title': 'Job Order Factory Approval Pending',
@@ -568,7 +568,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             48: {
                                 'title': 'Job Order Factory Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             49: {
                                 'title': 'jobOrder Reschedule Requested',
@@ -580,7 +580,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             51: {
                                 'title': 'jobOrder Reschedule Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             52: {
                                 'title': 'jobOrder Delay Requested',
@@ -1174,20 +1174,22 @@ jQuery(document).ready(function() {
             }
         }
     }
+    document.getElementById('btnNewInquiry').innerHTML += `
+    <a href="javascript:toggleSearch()" class="btn btn-primary font-weight-bolder">
+        <span class="svg-icon svg-icon-md">
+        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo2/dist/../src/media/svg/icons/General/Search.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect x="0" y="0" width="24" height="24"/>
+            <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+            <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/>
+        </g>
+    </svg><!--end::Svg Icon-->
 
+            </span>Search</a>
+`;
     if (inquiryPermission >= 2) {
         document.getElementById('btnNewInquiry').innerHTML += `
-        <a href="javascript:toggleSearch()" class="btn btn-primary font-weight-bolder">
-            <span class="svg-icon svg-icon-md">
-            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo2/dist/../src/media/svg/icons/General/Search.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <rect x="0" y="0" width="24" height="24"/>
-                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/>
-            </g>
-        </svg><!--end::Svg Icon-->
-
-                </span>Search</a>
+      
                 <div style="width:15px"></div>
                 <a href="addinquiry.html" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
