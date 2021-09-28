@@ -366,7 +366,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                          <div class="d-flex align-items-center" id="kt_subheader_search">
 
-                            <form class="ml-5">
+                            <!-- <form class="ml-5"> -->
                                 <div class="input-group input-group-sm input-group-solid"
                                     style="max-width: 300px">
                                     <input type="text" class="form-control"
@@ -398,7 +398,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                 </div>
                                 
-                            </form>
+                            <!-- </form> -->
 
                          <!--begin::Separator-->
                          <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200">
@@ -1508,6 +1508,13 @@ License: You must have a valid license purchased only from themeforest(the above
     function calloption(value){
         document.getElementById("paymentId").value = value;
     }
+    
+    var searchtextbox = document.getElementById("kt_subheader_search_form");
+    searchtextbox.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+    callapi();
+    }
+});
     function callapi() {
         document.getElementById("result").innerText ="";
     var code =$('#kt_subheader_search_form').val().toLowerCase();
