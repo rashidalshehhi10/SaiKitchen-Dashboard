@@ -249,9 +249,14 @@ customerDetail.innerHTML=` <!--begin::User-->
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingTypeOfUnit+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Prefered date by client :</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderExpectedDeadline+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
    </div>
+  
 </div>
 <!--end::Contact-->
 `;

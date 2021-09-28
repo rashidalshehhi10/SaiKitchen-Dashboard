@@ -564,11 +564,11 @@ $('#kt_approve_inquiry_button').click(function () {
         "prefferdDateByClient": document.getElementById('design_schedule_date').value, 
         "comment": document.getElementById('CheckComment').value,
         "addFileonChecklists":new Array(),
-        "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
+/*         "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
         "materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
         "mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
         "jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
-        "dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
+        "dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7], */
       };
       let from = document.getElementById('addcompCount').value;
       let to = document.getElementById('addmaxCount').value;
@@ -836,68 +836,3 @@ $('#resetComponentbtn').click(function () {
                 document.getElementById("ralert").innerHTML ="";
                });
 
-               for (let j = 4; j <= 7; j++) {
-                $('#kt_dropzone_'+j).dropzone({
-                             url: baseURL+"/File/UploadFile", // Set the url for your upload script location
-                            type: "Head",
-                            headers : {
-                                'Access-Control-Allow-Origin': '*',
-                            },
-                            paramName: "file"+j, // The name that will be used to transfer the file
-                            maxFiles: 1,
-                            maxFilesize: 30000, // MB
-                            timeout: 600000,
-                            addRemoveLinks: true,
-                            removedfile:function(file) {
-                                if(file.status =="error"){
-                                    file.previewElement.remove();
-                                    return false;
-                                }
-                                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
-                                var fileurl ='';
-                                var filearr = fileuploded.innerHTML.split(".");
-                                if(filearr.length > 1){
-                                    fileurl = "/File/DeleteFileFromBlob?fileName=";
-                                }else{
-                                    fileurl = "/File/DeleteVideo?VideoId=";
-                                }
-                                $.ajax({
-                                    type:"post",
-                                    url:baseURL+fileurl+fileuploded.innerHTML,
-                                    cache:false,
-                                    success: function(){
-                                       // removeA(measurementFile, fileuploded.innerHTML);
-                                        removeA(fourfile, fileuploded.innerHTML);
-                                        file.previewElement.remove();
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown){
-                                        console.log("Error");
-                                
-                                    }
-                                });
-                            },
-                      
-                            acceptedFiles: "image/*,application/pdf,.png,.mp4",
-                            
-                           init: function() {
-                        
-                            },
-                            success: function(file, response){
-                                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
-                                fileuploded.innerHTML = response.data.item1;
-                                fourfile[j] = response.data.item1;
-                            
-                            }
-                            
-                          });
-                        }
-                        function removeA(arr) {
-                            var what, a = arguments, L = a.length, ax;
-                            while (L > 1 && arr.length) {
-                                what = a[--L];
-                                while ((ax= arr.indexOf(what)) !== -1) {
-                                    arr.splice(ax, 1);
-                                }
-                            }
-                            return arr;
-                        }

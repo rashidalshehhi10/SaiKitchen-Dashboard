@@ -3,13 +3,12 @@
 import {
     baseURL
 } from './constant.js'
-
 import {
     measurementFile
 } from './constant.js'
-
 let user;
-
+export let workscopelist;
+var fourfile =  new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -41,24 +40,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/Inquiry/GetDesignOfBranch?branchId=' + user.data.userRoles[0].branchId,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'userId': user.data.userId,
-                    'userToken': user.data.userToken,
-                    'userRoleId': user.data.userRoles[0].userRoleId,
-                    'branchId': user.data.userRoles[0].branchId,
-                    'branchRoleId': user.data.userRoles[0].branchRoleId,
-                    'Access-Control-Allow-Origin': '*',
-                },
+                url: baseURL + '/JobOrder/GetInquiryJobOrderByBranchId?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryId', 'inquiryCode', 'status', 'noOfRevision', 'workscopeNames',
-                        'measurementScheduleDate', 'measurementAssignTo', 'designScheduleDate', 'designAssignTo', 'customerName',
-                        'customerContact', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction', 'inquiryDescription',
-                        'inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'actions'
+                        'inquiryId', 'inquiryCode','quotationNo', 'status', 'workScopeName','customerCode', 'customerName',
+                        'customerContact','customerEmail', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
                     ],
                 },
             },
@@ -69,31 +58,25 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'inquiryCode'
                 },
                 {
+                    data: 'quotationNo'
+                },
+                {
                     data: 'status'
                 },
                 {
-                    data: 'noOfRevision'
+                    data: 'workScopeName'
                 },
                 {
-                    data: 'workscopeNames'
-                },
-                {
-                    data: 'measurementScheduleDate'
-                },
-                {
-                    data: 'measurementAssignTo'
-                },
-                {
-                    data: 'designScheduleDate'
-                },
-                {
-                    data: 'designAssignTo'
+                    data: 'customerCode'
                 },
                 {
                     data: 'customerName'
                 },
                 {
                     data: 'customerContact'
+                },
+                {
+                    data: 'customerEmail'
                 },
                 {
                     data: 'buildingAddress'
@@ -111,6 +94,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'buildingReconstruction'
                 },
                 {
+                    data: 'isOccupied'
+                },
+                {
                     data: 'inquiryDescription'
                 },
                 {
@@ -123,9 +109,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'inquiryEndDate'
                 },
                 {
+                    data: 'inquiryAddedBy'
+                },
+                {
                     data: 'actions',
                     responsivePriority: -1
                 },
+                
             ],
 
             initComplete: function() {
@@ -159,7 +149,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 5: {
                                     'title': 'Quotation Pending',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-primary'
                                 },
                                 6: {
                                     'title': 'Quotation Delayed',
@@ -201,14 +191,58 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Quotation Approval Pending',
                                     'class': ' label-light-primary'
                                 },
-                                56: {
-                                    'title': 'Design Revision Requested',
+                                16: {
+                                    'title': 'Design Waiting For Customer Approval',
+                                    'class': ' label-light-primary'
+                                },
+                                17: {
+                                    'title': 'Design Rejected By Client',
+                                    'class': ' label-light-info'
+                                },
+                                18: {
+                                    'title': 'Check List Pending',
+                                    'class': ' label-light-info'
+                                },
+                                32: {
+                                    'title': 'Waiting For Advance',
+                                    'class': ' label-light-info'
+                                },
+                                43: {
+                                    'title': 'Commerical Checklist Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                44: {
+                                    'title': 'Commerical Checklist Approved',
+                                    'class': ' label-light-success'
+                                },
+                                45: {
+                                    'title': 'Commerical Checklist Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                46: {
+                                    'title': 'Job Order Factory Approval Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                47: {
+                                    'title': 'Job Order Factory Accepted',
+                                    'class': ' label-light-success'
+                                },
+                                48: {
+                                    'title': 'Job Order Factory Rejected',
+                                    'class': ' label-light-info'
+                                },
+                                54: {
+                                    'title': 'Job Order Files Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                55: {
+                                    'title': 'Job Order Files Delayed',
                                     'class': ' label-light-primary'
                                 },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
-                                    $('.datatable-input[data-col-index="2"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
+                                    $('.datatable-input[data-col-index="3"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
                             });
                             break;
 
@@ -231,39 +265,21 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     title: 'Actions',
                     orderable: false,
                     render: function(data, type, full, meta) {
-                        var ret = ``;
-                        //      var ret = `<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Add Measurement">
-                        //     <i class="la la-file-upload"></i>
-                        // </a>`;
-                        ret += ` <a style="background-color:#734f43;margin:2px"  href="viewmeasurement.html?inquiryWorkscopeId=` + full.inquiryId + `&designView=1"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
-                        <i class="la la-ruler-combined"></i>
-                    </a>`;
-                    ret += ` <button style="background-color:#734f43;margin:2px"  onclick="setInquiryWorkscopeId(` + full.inquiryId + `);"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >
-                    <i class="la fab la-codepen"></i>
-                </button>`;
-            //             if (full.questionaireType == 1) {
-            //                 ret += ` <button  style="background-color:#734f43;margin:2px"  onclick="viewkitchenmeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
-            //         <i class="la la-ruler-combined"></i>
-            //     </button>`;
-            //             } else {
-            //                 ret += ` <button  style="background-color:#734f43;margin:2px"  onclick="viewwardrobemeasurement.html?inquiryWorkscopeId=` + full.inquiryWorkscopeId + `"class="btn btn-sm btn-clean btn-icon" title="View Measurement">
-            //     <i class="la la-ruler-combined"></i>
-            // </button>`;
-            //             }
-            //             if (full.questionaireType == 1) {
-            //                 ret += ` <button  style="background-color:#734f43;margin:2px"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >
-            //         <i class="la fab la-codepen"></i>
-            //     </button>`;
-            //             } else {
-            //                 ret += ` <button  style="background-color:#734f43;margin:2px"  class="btn btn-sm btn-clean btn-icon" title="Add Design"   data-toggle="modal" data-target="#exampleModalCenter" >
-            //     <i class="la fab la-codepen"></i>
-            // </button>`;
-            //             }
-                        return ret;
+                        console.log(full);
+                        var action = ``;
+                        
+
+                        action += `
+                        <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Upload">
+                            <i class="la la-file-pdf-o"></i>
+                        </a>
+                           `;
+                            return action;
+                       
                     },
                 },
                 {
-                    targets: 2,
+                    targets: 3,
                     render: function(data, type, full, meta) {
                         var status = {
                             1: {
@@ -284,7 +300,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             5: {
                                 'title': 'Quotation Pending',
-                                'class': ' label-light-info'
+                                'class': ' label-light-primary'
                             },
                             6: {
                                 'title': 'Quotation Delayed',
@@ -326,8 +342,52 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'title': 'Quotation Approval Pending',
                                 'class': ' label-light-primary'
                             },
-                            56: {
-                                'title': 'Design Revision Requested',
+                            16: {
+                                'title': 'Design Waiting For Customer Approval',
+                                'class': ' label-light-primary'
+                            },
+                            17: {
+                                'title': 'Design Rejected By Client',
+                                'class': ' label-light-info'
+                            },
+                            18: {
+                                'title': 'Check List Pending',
+                                'class': ' label-light-info'
+                            },
+                            32: {
+                                'title': 'Waiting For Advance',
+                                'class': ' label-light-info'
+                            },
+                            43: {
+                                'title': 'Commerical Checklist Pending',
+                                'class': ' label-light-primary'
+                            },
+                            44: {
+                                'title': 'Commerical Checklist Approved',
+                                'class': ' label-light-success'
+                            },
+                            45: {
+                                'title': 'Commerical Checklist Rejected',
+                                'class': ' label-light-info'
+                            },
+                            46: {
+                                'title': 'Job Order Factory Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            47: {
+                                'title': 'Job Order Factory Accepted',
+                                'class': ' label-light-success'
+                            },
+                            48: {
+                                'title': 'Job Order Factory Rejected',
+                                'class': ' label-light-info'
+                            },
+                            54: {
+                                'title': 'Job Order Files Pending',
+                                'class': ' label-light-primary'
+                            },
+                            55: {
+                                'title': 'Job Order Files Delayed',
                                 'class': ' label-light-primary'
                             },
                         };
@@ -336,7 +396,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         if (typeof status[data] === 'undefined') {
                             return data;
                         }
-                        return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
+                        return '<span style="font-size:1.0rem !important; height:80px;" class="label label-lg font-weight-bold ' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
 
                     },
                 },
@@ -404,125 +464,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         });
 
     };
-    
-    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
-
-    var _handleuploaddesignfile = function() {
-        var form = KTUtil.getById('kt_add_design_file');
-        var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_upload_design_file');
-
-        if (!form) {
-            return;
-        }
-
-        FormValidation
-            .formValidation(
-                form, {
-                    fields: {
-                      
-                    },
-                    plugins: {
-                        trigger: new FormValidation.plugins.Trigger(),
-                        submitButton: new FormValidation.plugins.SubmitButton(),
-                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
-                        bootstrap: new FormValidation.plugins.Bootstrap({
-                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
-                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
-                        })
-                    }
-                }
-            )
-            .on('core.form.valid', function() {
-                // Show loading state on button
-                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
-                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-               
-                console.log(measurementFile);
-                 var designFiles = {
-                    "inquiryId": document.getElementById("inquiryWorkscopeId").innerHTML,
-                    "comment": document.getElementById('designComment').value,
-                    "base64f3d": measurementFile
-                  };
-                const data = JSON.stringify(designFiles);
-                console.log(data);
-                $.ajax({
-                    type: "Post",
-                    url: baseURL + '/Design/AddUpdateDesignfiles',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'userId': user.data.userId,
-                        'userToken': user.data.userToken,
-                        'userRoleId': user.data.userRoles[0].userRoleId,
-                        'branchId': user.data.userRoles[0].branchId,
-                        'branchRoleId': user.data.userRoles[0].branchRoleId,
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                    data: data,
-                    success: function(response) {
-                        // Release button
-                        KTUtil.btnRelease(formSubmitButton);
-                        console.log(response);
-                        // window.location.replace("home.html");
-                        if (response.isError == false) {
-                            // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("design.html");
-
-                        } else {
-                            Swal.fire({
-                                text: response.errorMessage,
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
-                                }
-                            }).then(function() {
-                                KTUtil.scrollTop();
-                            });
-                        }
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        // Release button
-                        KTUtil.btnRelease(formSubmitButton);
-
-                        // alert(errorThrown);
-
-                        Swal.fire({
-                            text: 'Internet Connection Problem',
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        }).then(function() {
-                            KTUtil.scrollTop();
-                        });
-                    }
-                });
-            })
-            .on('core.form.invalid', function() {
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-light-primary"
-                    }
-                }).then(function() {
-                    KTUtil.scrollTop();
-                });
-            });
-    }
 
     return {
 
         //main function to initiate the module
         init: function() {
             initTable1();
-            _handleuploaddesignfile();
         },
 
     };
@@ -530,7 +477,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 }();
 
 let permissions;
-let inquiryPermission;
+let quotationPermission;
 
 jQuery(document).ready(function() {
 
@@ -543,12 +490,113 @@ jQuery(document).ready(function() {
         permissions = user.data.userRoles[0].branchRole.permissionRoles;
         console.log(permissions);
         for (var i = 0; i < permissions.length; i++) {
-            if (permissions[i].permissionId == 6) {
-                inquiryPermission = permissions[i].permissionLevelId;
-                console.log(inquiryPermission);
+            if (permissions[i].permissionId == 9) {
+                quotationPermission = permissions[i].permissionLevelId;
+                console.log(quotationPermission);
             }
         }
     }
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
+
+   
 });
+$('#kt_approve_inquiry_button').click(function () {
+    var checklistdata = {
+        "inquiryId":document.getElementById('inquiryId').value,
+        "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
+        "materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
+        "mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
+        "jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
+        "dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
+      };
+    const data = JSON.stringify(checklistdata);
+    console.log(data);
+    console.log(fourfile);
+     $.ajax({
+        type: "Post",
+        url: baseURL + '/JobOrder/AddJobOrder',
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        data: data,
+        success: function(response) {
+            console.log(response);
+            window.location.replace("joborderfiles.html");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            //document.getElementById("alert").innerHTML ="All fields should be selected";
+        }
+    }); 
+});
+
+
+
+
+               for (let j = 4; j <= 7; j++) {
+                $('#kt_dropzone_'+j).dropzone({
+                             url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+                            type: "Head",
+                            headers : {
+                                'Access-Control-Allow-Origin': '*',
+                            },
+                            paramName: "file"+j, // The name that will be used to transfer the file
+                            maxFiles: 1,
+                            maxFilesize: 30000, // MB
+                            timeout: 600000,
+                            addRemoveLinks: true,
+                            removedfile:function(file) {
+                                if(file.status =="error"){
+                                    file.previewElement.remove();
+                                    return false;
+                                }
+                                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                                var fileurl ='';
+                                var filearr = fileuploded.innerHTML.split(".");
+                                if(filearr.length > 1){
+                                    fileurl = "/File/DeleteFileFromBlob?fileName=";
+                                }else{
+                                    fileurl = "/File/DeleteVideo?VideoId=";
+                                }
+                                $.ajax({
+                                    type:"post",
+                                    url:baseURL+fileurl+fileuploded.innerHTML,
+                                    cache:false,
+                                    success: function(){
+                                       // removeA(measurementFile, fileuploded.innerHTML);
+                                        removeA(fourfile, fileuploded.innerHTML);
+                                        file.previewElement.remove();
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                                        console.log("Error");
+                                
+                                    }
+                                });
+                            },
+                      
+                            acceptedFiles: "image/*,application/pdf,.png,.mp4",
+                            
+                           init: function() {
+                        
+                            },
+                            success: function(file, response){
+                                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                                fileuploded.innerHTML = response.data.item1;
+                                fourfile[j] = response.data.item1;
+                            
+                            }
+                            
+                          });
+                        }
+                        function removeA(arr) {
+                            var what, a = arguments, L = a.length, ax;
+                            while (L > 1 && arr.length) {
+                                what = a[--L];
+                                while ((ax= arr.indexOf(what)) !== -1) {
+                                    arr.splice(ax, 1);
+                                }
+                            }
+                            return arr;
+                        }

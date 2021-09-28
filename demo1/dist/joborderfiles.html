@@ -99,7 +99,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <span class="card-icon">
 											<i class="flaticon2-delivery-package text-primary"></i>
 										</span>
-                                        <h3 class="card-label">CheckList</h3>
+                                        <h3 class="card-label">jobo order upload files</h3>
                                     </div>
                                     <div class="card-toolbar" id="btnNewInquiry">
                                         <!-- <div class="dropdown dropdown-inline mr-2">
@@ -373,139 +373,75 @@ License: You must have a valid license purchased only from themeforest(the above
                     
                     <input id="inquiryId" type="hidden" value="0" />
 			   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">CheckList Approve</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Joborder files</h5>
                     <button id="xclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <i aria-hidden="true" class="ki ki-close"></i>
                         </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <label class="">Preferred Date by Client</label>
-                            
-                            <div class="input-group date" id="kt_design_datetimepicker" data-target-input="nearest">
-                                <input type="text" id="design_schedule_date" name="design_schedule_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_design_datetimepicker">
-                                <div class="input-group-append" data-target="#kt_design_datetimepicker" data-toggle="datetimepicker">
-                                    <span class="input-group-text">
-                                        <i class="ki ki-calendar"></i>
-                                    </span>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_4" name="measurementDrawing`+count+`">
+                                <div class="dropzone-msg dz-message needsclick">
+                                    <h3 class="dropzone-msg-title"> MaterialSheetFile: Drop files here or click to upload.</h3>
+                                    <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <label class="">Factory</label>
-                        <div class="input-group input-group-lg input-group-solid">
-                            <select class="form-control" id="kt_select_branch" name="param"	class="form-control form-control-lg form-control-solid"
-												style="width:100%">
-
-											</select>
-                        </div>
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
-                                    <div class="input-group">
-
-                                        <input type="text" name="CheckComment" id="CheckComment"
-                                            class="form-control" value=""
-                                            placeholder="" >
-                                    </div>
-                        </div>
+                     <div class="col-lg-12 col-md-12 col-sm-12">
+                         <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_5" name="measurementDrawing`+count+`">
+                             <div class="dropzone-msg dz-message needsclick">
+                                 <h3 class="dropzone-msg-title">MepDrawingFile: Drop files here or click to upload.</h3>
+                                 <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                             </div>
+                         </div>
                      </div>
-                     <div class="form-group row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <button  type="button" onclick="" id="addComponentbtn" class="btn btn-primary font-weight-bold">Attach Document</button>
-                                <button  type="button" onclick="" id="resetComponentbtn" class="btn btn-primary font-weight-bold">Reset Document</button>
-                            </div>
+                 </div>
+                 <div class="form-group row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_6" name="measurementDrawing`+count+`">
+                          <div class="dropzone-msg dz-message needsclick">
+                              <h3 class="dropzone-msg-title">JobOrderChecklistFile: Drop files here or click to upload.</h3>
+                              <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group row">
+               <div class="col-lg-12 col-md-12 col-sm-12">
+                   <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_7" name="measurementDrawing`+count+`">
+                       <div class="dropzone-msg dz-message needsclick">
+                           <h3 class="dropzone-msg-title">DataSheetApplianceFileUrl: Drop files here or click to upload.</h3>
+                           <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                       </div>
+                   </div>
+                   <label style="padding-top: 5px;">Appliances to be provided ethier by the client or by SAI</label>
+                                                        <div class="radio-inline">
+                                                            <label class="radio radio-rounded">
+																<input type="radio" checked="checked"
+																	name="isAppliances" value="true" />
+																<span></span>Yes</label>
+                                                            <label class="radio radio-rounded">
+																<input type="radio" name="isAppliances" value="false"  />
+																<span></span>No</label>
+                                                        </div>
+               </div>
+               
+           </div>
 
-                            <input type="hidden" id="compCount" value="0" /> 
-                            <input type="hidden" id="maxCount" value="0" />
-                            <input type="hidden" id="addcompCount" value="0" /> 
-                             <input type="hidden" id="addmaxCount" value="0" />
-                            <div id="divoptions" style="display: none;"></div>      
-                        </div> 
-                <div  id="checkbody" >
-                    
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <span id="alert" style="color: red;"></span>
-                    </div>
-                </div>
+ 
             </div>
-                <div class="modal-footer">
-                    <button type="button" id="kt_close_inquiry_button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                    <button type="button" id="kt_approve_inquiry_button" class="btn btn-primary font-weight-bold">Approve</button>
+                <div class="modal-footer">                   
+                    <button type="button" id="kt_approve_inquiry_button" class="btn btn-primary font-weight-bold">Upload</button>
                 </div>
                 </form>
             </div>
         </div>
     </div>
 
-    
-    <div class="modal fade" id="measurementScheduleDate" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <form class="form" id="kt_reject_inquiry" action="" name="rejectinquiryform">
-                  
-			   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">CheckList Reject</h5>
-                    <button id="rclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i aria-hidden="true" class="ki ki-close"></i>
-                        </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <div class="col-lg-5">
-                            <label class="font-size-h6 font-weight-bolder text-dark">Rejected Phase</label>
-                            <select class="form-control" id="documentType1" onchange="createList(1)" name="documentType1" class="form-control form-control-lg form-control-solid" style="width:100%">
-                                <option value=""></option>
-                                <option value="7">Measurement</option>
-                                <option value="8">Design</option>
-                                <option value="9">Quotation</option>
-                           </select>
-                        </div>
-                        <div id="divscopelist1"></div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
-                                    <div class="input-group">
 
-                                        <input type="text" name="RejectComment1" id="RejectComment1"
-                                            class="form-control" value=""
-                                            placeholder="" >
-                                    </div>
-                        </div>
-                     </div>
-                     <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <button  type="button" onclick="" id="addRjctbtn" class="btn btn-primary font-weight-bold">Add More</button>
-                            <button  type="button" onclick="" id="resetRjctbtn" class="btn btn-primary font-weight-bold">Reset</button>
-                        </div>
-                     </div>
-                     <div  id="rjctbody" >
-                    
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <span id="ralert" style="color: red;"></span>
-                        </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="kt_close_reject_inquiry_button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                <button type="button" id="kt_reject_inquiry_button" class="btn btn-primary font-weight-bold">Reject</button>
-            </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <!--end::Chat Panel-->
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop"> 
@@ -606,7 +542,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <!--end::Page Vendors-->
     <!--begin::Page Scripts(used by this page)-->
-    <script src="assets/js/pages/sai-kitchen/checklist.js" type="module"></script>
+    <script src="assets/js/pages/sai-kitchen/joborderfiles.js" type="module"></script>
     <!--end::Page Scripts-->
 
     <!--begin::Page Scripts(used by this page)-->
@@ -725,45 +661,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script>
         
         function addComponent(inquiryId) {
-            //let inquiryId = document.getElementById("inquiryId").value;
-            document.getElementById("divoptions").innerHTML ='';
-            $.ajax({
-                type: "Post",
-                url: baseURL + '/Inquiry/GetWorkscopesByinquiryId?inquiryId='+inquiryId,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                },
-                success: function(response) {
-                    //document.getElementById('checkbody').style.removeProperty('display');
-                    document.getElementById("inquiryId").value = inquiryId;
-                    document.getElementById("compCount").value = parseInt(response.data.length)*2 +1;
-                    document.getElementById("maxCount").value = parseInt(response.data.length)*2 +1;
-                    document.getElementById("addcompCount").value = 3;
-                     document.getElementById("addmaxCount").value = 3;
-                    for (let i = 0; i < response.data.length; i++) {
-                    document.getElementById("divoptions").innerHTML +=
-                    '<option value="'+response.data[i].inquiryWorkscopeId+'">'+response.data[i].workScopeName+'</option>';
-                }
-                     
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-        
-                }
-            });
-        }
-        function createList(id){
-           let list = document.getElementById("documentType"+id).value;
-           if(list=="7" || list=="8"){
-               document.getElementById("divscopelist"+id).innerHTML =
-               `<label class="font-size-h6 font-weight-bolder text-dark">Workscope</label>`+
-               `<select class="form-control" id="kt_workscpe_`+id+`" name="kt_workscpe_`+id+`"	class="form-control form-control-lg form-control-solid"	style="width:100%">
-                `+document.getElementById("divoptions").innerHTML+`
-                </select>`
-           }else{
-            document.getElementById("divscopelist"+id).innerHTML ="";
-           }
-           document.getElementById("documentType"+id).options[document.getElementById("documentType"+id).options.selectedIndex].setAttribute("selected", "selected");
+             document.getElementById("inquiryId").value = inquiryId;
         }
         
     </script>

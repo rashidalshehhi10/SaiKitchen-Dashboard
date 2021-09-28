@@ -325,6 +325,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'jobOrder Completed',
                                     'class': ' label-light-success'
                                 },
+                                56: {
+                                    'title': 'Design Revision Requested',
+                                    'class': ' label-light-primary'
+                                },
+                                54: {
+                                    'title': 'Job Order Files Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                55: {
+                                    'title': 'Job Order Files Delayed',
+                                    'class': ' label-light-primary'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -581,6 +593,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             27: {
                                 'title': 'jobOrder Completed',
                                 'class': ' label-light-success'
+                            },
+                            56: {
+                                'title': 'Design Revision Requested',
+                                'class': ' label-light-primary'
+                            },
+                            54: {
+                                'title': 'Job Order Files Pending',
+                                'class': ' label-light-primary'
+                            },
+                            55: {
+                                'title': 'Job Order Files Delayed',
+                                'class': ' label-light-primary'
                             },
                         };
 
