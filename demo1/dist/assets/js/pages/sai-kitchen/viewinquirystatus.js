@@ -205,6 +205,7 @@ var tabsHTML =``;
 //  </li>`;
 // });
 var jobHtml =``;
+var jobdetail =``;
 if(response.data.inquiry.jobOrders.length > 0){
    jobHtml =`<div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">Prefered date by client :</span>
@@ -213,8 +214,9 @@ if(response.data.inquiry.jobOrders.length > 0){
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
    <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
+</div>`;
+if(response.data.inquiry.jobOrders[0].jobOrderDetails.length >0){
+ jobdetail = `<div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">Material Availablity Date:</span>
    <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialAvailabilityDate+`</span>
 </div>
@@ -246,6 +248,8 @@ if(response.data.inquiry.jobOrders.length > 0){
    <span class="font-weight-bold mr-2">Notes:</span>
    <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].jobOrderDetailDescription+`</span>
 </div>`;
+}
+jobHtml +=jobdetail;
 }
 customerDetail.innerHTML=` <!--begin::User-->
 <div class="d-flex align-items-center">
