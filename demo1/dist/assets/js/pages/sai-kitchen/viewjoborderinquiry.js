@@ -116,6 +116,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
     };
 
 }();
+
+
+var branchTypeId;
+
 // Class Initialization
 jQuery(document).ready(function() {
 	var login = localStorage.getItem("user");
@@ -143,7 +147,18 @@ jQuery(document).ready(function() {
         window.location.replace("commercialchecklist.html");
     }
     
+branchTypeId = user.data.userRoles[0].branch.branchTypeId;
+if(branchTypeId==2||branchTypeId==1){
+   document.getElementById("RequestforReschedulingBtn").style.display = "block";
+      }
 
+      if(branchTypeId==3){
+         document.getElementById("jocomp").style.display = "block";
+         document.getElementById("rtinstall").style.display = "block";
+         document.getElementById("adelay").style.display = "block";
+         document.getElementById("aror").style.display = "block";
+            }
+    
 
     $.ajax({
         type: "post",
