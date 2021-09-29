@@ -675,7 +675,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     if(   dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]==null){
                         dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]=``;
                     }
-                    if(jobOrder[0].jobOrderChecklistFileUrl !=""){
+                    if(jobOrder[0].jobOrderChecklistFileUrl !="" && jobOrder[0].jobOrderChecklistFileUrl !=null){
                      var fileExtension = jobOrder[0].jobOrderChecklistFileUrl.substr((jobOrder[0].jobOrderChecklistFileUrl.lastIndexOf('.') + 1));
                      if(fileExtension == 'mp4') {
                         var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].jobOrderChecklistFileUrl;

@@ -9,6 +9,7 @@ import {
 let user;
 export let workscopelist;
 var fourfile =  new Array();
+var four=new Array() ,five=new Array(),six=new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -502,22 +503,22 @@ jQuery(document).ready(function() {
    
 });
 $('#kt_approve_inquiry_button').click(function () {
-    if(fourfile[4]==undefined){
+    if(four.length ==0){
     document.getElementById("alert").innerHTML ="MaterialSheet File should be upload";
       return false;
     }
     var checklistdata = {
         "inquiryId":document.getElementById('inquiryId').value,
         "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
-        "materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
-        "mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
+        "materialSheetFileUrl":four,
+        "mepDrawingFileUrl": five,
         //"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
-        "dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
+        "dataSheetApplianceFileUrl":six,
       };
     const data = JSON.stringify(checklistdata);
     console.log(data);
     console.log(fourfile);
-     $.ajax({
+      $.ajax({
         type: "Post",
         url: baseURL + '/JobOrder/AddJobOrder',
         headers: {
@@ -533,13 +534,182 @@ $('#kt_approve_inquiry_button').click(function () {
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             //document.getElementById("alert").innerHTML ="All fields should be selected";
         }
-    }); 
+    });  
 });
 
 
+$('#kt_dropzone_4').dropzone({
+            
+    // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+    url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+    type: "Post",
+    headers : {
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json'
+    },
+    paramName: "file", // The name that will be used to transfer the file
+    maxFiles: 1,
+    maxFilesize: 30000, // MB
+    timeout: 600000,
+    addRemoveLinks: true,
+    removedfile:function(file) {
+        if(file.status =="error"){
+            file.previewElement.remove();
+            return false;
+        }
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        var fileurl ='';
+        var filearr = fileuploded.innerHTML.split(".");
+        if(filearr.length > 1){
+            fileurl = "/File/DeleteFileFromBlob?fileName=";
+        }else{
+            fileurl = "/File/DeleteVideo?VideoId=";
+        }
+        $.ajax({
+            type:"post",
+            url:baseURL+fileurl+fileuploded.innerHTML,
+            cache:false,
+            success: function(){
+                 removeA(four, fileuploded.innerHTML);
+                file.previewElement.remove();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("Error");
+        
+            }
+        });
 
+    },
 
-               for (let j = 4; j <= 7; j++) {
+    acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+    
+init: function() {
+
+},
+success: function(file, response){
+    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+    fileuploded.innerHTML = response.data.item1;
+    four.push(response.data.item1);
+
+}
+    
+});
+$('#kt_dropzone_5').dropzone({
+            
+    // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+    url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+    type: "Post",
+    headers : {
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json'
+    },
+    paramName: "file", // The name that will be used to transfer the file
+    maxFiles: 1,
+    maxFilesize: 30000, // MB
+    timeout: 600000,
+    addRemoveLinks: true,
+    removedfile:function(file) {
+        if(file.status =="error"){
+            file.previewElement.remove();
+            return false;
+        }
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        var fileurl ='';
+        var filearr = fileuploded.innerHTML.split(".");
+        if(filearr.length > 1){
+            fileurl = "/File/DeleteFileFromBlob?fileName=";
+        }else{
+            fileurl = "/File/DeleteVideo?VideoId=";
+        }
+        $.ajax({
+            type:"post",
+            url:baseURL+fileurl+fileuploded.innerHTML,
+            cache:false,
+            success: function(){
+                removeA(five, fileuploded.innerHTML);
+                file.previewElement.remove();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("Error");
+        
+            }
+        });
+
+    },
+
+    acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+    
+init: function() {
+    
+},
+success: function(file, response){
+    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+    fileuploded.innerHTML = response.data.item1;
+
+    five.push(response.data.item1);
+
+}
+
+});
+$('#kt_dropzone_6').dropzone({
+            
+    // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+    url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+    type: "Post",
+    headers : {
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json'
+    },
+    paramName: "file", // The name that will be used to transfer the file
+    maxFiles: 1,
+    maxFilesize: 30000, // MB
+    timeout: 600000,
+    addRemoveLinks: true,
+    removedfile:function(file) {
+        if(file.status =="error"){
+            file.previewElement.remove();
+            return false;
+        }
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        var fileurl ='';
+        var filearr = fileuploded.innerHTML.split(".");
+        if(filearr.length > 1){
+            fileurl = "/File/DeleteFileFromBlob?fileName=";
+        }else{
+            fileurl = "/File/DeleteVideo?VideoId=";
+        }
+        $.ajax({
+            type:"post",
+            url:baseURL+fileurl+fileuploded.innerHTML,
+            cache:false,
+            success: function(){
+                removeA(six, fileuploded.innerHTML);
+                file.previewElement.remove();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("Error");
+        
+            }
+        });
+
+    },
+
+    acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+    
+init: function() {
+
+},
+success: function(file, response){
+    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+    fileuploded.innerHTML = response.data.item1;
+
+    six.push(response.data.item1);
+
+}
+
+});
+
+              /*  for (let j = 4; j <= 6; j++) {
                 $('#kt_dropzone_'+j).dropzone({
                              url: baseURL+"/File/UploadFile", // Set the url for your upload script location
                             type: "Head",
@@ -593,7 +763,7 @@ $('#kt_approve_inquiry_button').click(function () {
                             }
                             
                           });
-                        }
+                        } */
                         function removeA(arr) {
                             var what, a = arguments, L = a.length, ax;
                             while (L > 1 && arr.length) {
