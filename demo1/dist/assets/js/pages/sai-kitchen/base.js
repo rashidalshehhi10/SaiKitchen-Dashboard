@@ -1791,13 +1791,16 @@ if (permission.includes(8)){
 
 `;
       }
-      if (permission.includes(13)) {
+      if (permission.includes(13) || permission.includes(17)) {
          sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Checklist</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
+`;
 
+if (permission.includes(13)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="checklist.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1809,7 +1812,10 @@ if (permission.includes(8)){
 	<span class="menu-text">Technical Checklist</span>
 	
 </a>
-</li>
+</li>`;
+      }
+if (permission.includes(17)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="commercialchecklist.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1824,14 +1830,17 @@ if (permission.includes(8)){
 </li>
 `;
       }
+   }
 
-      if (permission.includes(14)) {
+      if (permission.includes(14)||permission.includes(18)) {
          sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Job Order</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
-
+`;
+if (permission.includes(18)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="joborderapproval.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1848,7 +1857,11 @@ if (permission.includes(8)){
 	<span class="menu-text">Job Order Approval</span>
 	
 </a>
-</li>
+</li>`;
+}
+
+if (permission.includes(14)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="joborder.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1867,7 +1880,8 @@ if (permission.includes(8)){
 </a>
 </li>
 `;
-      }
+        }
+        }
       if (permission.includes(15)) {
          sideMenuHTML += `
 <li class="menu-section">
