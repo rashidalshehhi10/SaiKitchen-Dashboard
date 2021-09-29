@@ -149,14 +149,14 @@ jQuery(document).ready(function() {
     
 branchTypeId = user.data.userRoles[0].branch.branchTypeId;
 if(branchTypeId==2||branchTypeId==1){
-   document.getElementById("RequestforReschedulingBtn").style.display = "block";
+   document.getElementById("RequestforReschedulingBtn").style.display = "inline-block";
       }
 
       if(branchTypeId==3){
-         document.getElementById("jocomp").style.display = "block";
-         document.getElementById("rtinstall").style.display = "block";
-         document.getElementById("adelay").style.display = "block";
-         document.getElementById("aror").style.display = "block";
+         document.getElementById("jocomp").style.display = "inline-block";
+         document.getElementById("rtinstall").style.display = "inline-block";
+         document.getElementById("adelay").style.display = "inline-block";
+         document.getElementById("aror").style.display = "inline-block";
             }
     
 
