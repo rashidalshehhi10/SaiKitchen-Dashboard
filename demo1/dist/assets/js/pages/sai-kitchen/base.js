@@ -1769,7 +1769,7 @@ if (permission.includes(8)){
 </li>
 `;
       }
-      if (permission.includes(13)) {
+      if (permission.includes(8)){
          sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">JobOrder Files</h4>
