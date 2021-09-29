@@ -461,12 +461,105 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         });
 
     };
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+    var _handleFormApprove = function() {
+        var form = KTUtil.getById('kt_approve_inquiry');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
 
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        design_schedule_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Preferred Date is required'
+                                }
+                            }
+                        },
+						/* kt_dropzone_6: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'JobOrderChecklistFile is required'
+                                }
+                            }
+                        }, */
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                 var checklistdata = {
+				"inquiryId":document.getElementById('inquiryId').value,
+				"factoryId": document.getElementById('kt_select_branch').value,
+				"jobOrderExpectedDeadline": document.getElementById('design_schedule_date').value, 
+				"comment": document.getElementById('CheckComment').value,
+				"addFileonChecklists":new Array(),
+				//"isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
+				//"materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
+				//"mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
+				"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
+				//"dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
+			  };
+			  let from = document.getElementById('addcompCount').value;
+			  let to = document.getElementById('addmaxCount').value;
+			  for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
+				checklistdata.addFileonChecklists.push({
+				   // "inquiryworkscopeId":0,//document.getElementById('kt_workscpe_'+i)==null?"": document.getElementById('kt_workscpe_'+i).value,
+					"documentType":document.getElementById('documentType'+i).value,
+					"files":filearry[i]==undefined?[]:filearry[i],
+				})
+			  }
+			  
+			  filearry= [];
+			const data = JSON.stringify(checklistdata);
+			console.log(data);
+			console.log(fourfile);
+			 $.ajax({
+				type: "Post",
+				url: baseURL + '/CheckList/ApproveinquiryChecklist',
+				headers: {
+					'Content-Type': 'application/json',
+					'userId': user.data.userId,
+					'Access-Control-Allow-Origin': '*',
+				},
+				data: data,
+				success: function(response) {
+					console.log(response);
+					filearry= [];
+					document.getElementById("checkbody").innerHTML ="";
+					document.getElementById('design_schedule_date').value ="";
+					document.getElementById('CheckComment').value="";
+					$('#approve').modal('hide');
+					window.location.replace("checklist.html");
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					document.getElementById("alert").innerHTML ="All fields should be selected";
+				}
+			}); 
+                
+            })
+    }
     return {
 
         //main function to initiate the module
         init: function() {
             initTable1();
+            _handleFormApprove();
         },
 
     };
@@ -557,56 +650,7 @@ jQuery(document).ready(function() {
 		}
 	});
 });
-$('#kt_approve_inquiry_button').click(function () {
-    var checklistdata = {
-        "inquiryId":document.getElementById('inquiryId').value,
-        "factoryId": document.getElementById('kt_select_branch').value,
-        "prefferdDateByClient": document.getElementById('design_schedule_date').value, 
-        "comment": document.getElementById('CheckComment').value,
-        "addFileonChecklists":new Array(),
-/*         "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
-        "materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
-        "mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
-        "jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
-        "dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7], */
-      };
-      let from = document.getElementById('addcompCount').value;
-      let to = document.getElementById('addmaxCount').value;
-      for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
-        checklistdata.addFileonChecklists.push({
-           // "inquiryworkscopeId":0,//document.getElementById('kt_workscpe_'+i)==null?"": document.getElementById('kt_workscpe_'+i).value,
-            "documentType":document.getElementById('documentType'+i).value,
-            "files":filearry[i]==undefined?[]:filearry[i],
-        })
-      }
-      
-      filearry= [];
-    const data = JSON.stringify(checklistdata);
-    console.log(data);
-    console.log(fourfile);
-     $.ajax({
-        type: "Post",
-        url: baseURL + '/CheckList/ApproveinquiryChecklist',
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'Access-Control-Allow-Origin': '*',
-        },
-        data: data,
-        success: function(response) {
-            console.log(response);
-            filearry= [];
-            document.getElementById("checkbody").innerHTML ="";
-            document.getElementById('design_schedule_date').value ="";
-            document.getElementById('CheckComment').value="";
-            $('#approve').modal('hide');
-            window.location.replace("checklist.html");
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            document.getElementById("alert").innerHTML ="All fields should be selected";
-        }
-    }); 
-});
+
 $('#kt_reject_inquiry_button').click(function () {
     var rejectlistdata = {
         "inquiryId":document.getElementById('inquiryId').value,
@@ -836,3 +880,68 @@ $('#resetComponentbtn').click(function () {
                 document.getElementById("ralert").innerHTML ="";
                });
 
+               for (let j = 6; j <= 6; j++) {
+                $('#kt_dropzone_'+j).dropzone({
+                             url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+                            type: "Head",
+                            headers : {
+                                'Access-Control-Allow-Origin': '*',
+                            },
+                            paramName: "file"+j, // The name that will be used to transfer the file
+                            maxFiles: 1,
+                            maxFilesize: 30000, // MB
+                            timeout: 600000,
+                            addRemoveLinks: true,
+                            removedfile:function(file) {
+                                if(file.status =="error"){
+                                    file.previewElement.remove();
+                                    return false;
+                                }
+                                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                                var fileurl ='';
+                                var filearr = fileuploded.innerHTML.split(".");
+                                if(filearr.length > 1){
+                                    fileurl = "/File/DeleteFileFromBlob?fileName=";
+                                }else{
+                                    fileurl = "/File/DeleteVideo?VideoId=";
+                                }
+                                $.ajax({
+                                    type:"post",
+                                    url:baseURL+fileurl+fileuploded.innerHTML,
+                                    cache:false,
+                                    success: function(){
+                                       // removeA(measurementFile, fileuploded.innerHTML);
+                                        removeA(fourfile, fileuploded.innerHTML);
+                                        file.previewElement.remove();
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                                        console.log("Error");
+                                
+                                    }
+                                });
+                            },
+                      
+                            acceptedFiles: "image/*,application/pdf,.png,.mp4",
+                            
+                           init: function() {
+                        
+                            },
+                            success: function(file, response){
+                                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                                fileuploded.innerHTML = response.data.item1;
+                                fourfile[j] = response.data.item1;
+                            
+                            }
+                            
+                          });
+                        }
+                        function removeA(arr) {
+                            var what, a = arguments, L = a.length, ax;
+                            while (L > 1 && arr.length) {
+                                what = a[--L];
+                                while ((ax= arr.indexOf(what)) !== -1) {
+                                    arr.splice(ax, 1);
+                                }
+                            }
+                            return arr;
+                        }

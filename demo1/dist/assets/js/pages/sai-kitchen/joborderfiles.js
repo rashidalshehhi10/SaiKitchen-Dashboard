@@ -502,12 +502,16 @@ jQuery(document).ready(function() {
    
 });
 $('#kt_approve_inquiry_button').click(function () {
+    if(fourfile[4]==undefined){
+    document.getElementById("alert").innerHTML ="MaterialSheet File should be upload";
+      return false;
+    }
     var checklistdata = {
         "inquiryId":document.getElementById('inquiryId').value,
         "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
         "materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
         "mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
-        "jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
+        //"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
         "dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
       };
     const data = JSON.stringify(checklistdata);
