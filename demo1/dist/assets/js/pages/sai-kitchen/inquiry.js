@@ -370,6 +370,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var action = ``;
+                        action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewinquirystatus.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
+                        <i class="la la-ellipsis-h""></i>\
+                        </a>\
+                        `;
                         if(full.inquiryAddedById==user.data.userId ||userRoleId==1){
                             
                             action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
