@@ -805,7 +805,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    +` <div class="card">
                    <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDatasheet`+element.inquiryWorkscopeId+`">
-                         <i class="la fab la-codepen"></i> Data sheet appliances & is it from customer
+                         <i class="la fab la-codepen"></i> Data sheet appliances
                       </div>
                    </div>
                    <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -936,7 +936,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     +` <div class="card">
                     <div class="card-header" >
                        <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDatasheet`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i> Data sheet appliances & is it from customer
+                          <i class="la fab la-codepen"></i> Data sheet appliances
                        </div>
                     </div>
                     <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">

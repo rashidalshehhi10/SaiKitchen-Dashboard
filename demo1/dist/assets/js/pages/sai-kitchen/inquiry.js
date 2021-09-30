@@ -227,11 +227,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 15: {
                                     'title': 'Quotation Waiting For Customer Approval',
-                                    'class': ' label-light-primary'
+                                    'class': ' label-light-info'
                                 },
                                 16: {
                                     'title': 'Design Waiting For Customer Approval',
-                                    'class': ' label-light-primary'
+                                    'class': ' label-light-info'
                                 },
                                 17: {
                                     'title': 'Design Rejected By Client',
@@ -504,7 +504,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             16: {
                                 'title': 'Design Waiting For Customer Approval',
-                                'class': ' label-light-primary'
+                                'class': ' label-light-info'
                             },
                             17: {
                                 'title': 'Design Rejected By Client',
@@ -621,7 +621,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     },
                 },
                 {
-                	targets: 15,
+                	targets: 16,
                 	render: function(data, type, full, meta) {
                 	
                 		if (typeof data === 'undefined' || data===null || data=="") {
