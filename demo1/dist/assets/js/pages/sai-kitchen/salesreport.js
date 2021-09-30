@@ -411,7 +411,7 @@ $('#btnSearch').click(function (){
                  <div class="d-flex align-items-sm-center mb-7">
                      <!--begin::Symbol-->
                      <div class="symbol symbol-50px me-5" style="margin-right: 1.25rem!important;">
-                         <span class="symbol-label" >
+                         <span class="symbol-label bg-transparent" >
                              <img src="/assets/media/svg/saikitchen/perso.svg"  alt="">
                          </span>
                      </div>
@@ -423,7 +423,7 @@ $('#btnSearch').click(function (){
                              <span class="text-muted fw-bold d-block fs-7" style="font-size: 10px;">`+response.data.topFivePaidCustomers[i].customerContact+`</span>
                          </div>
                          <div class="flex-grow-1 me-2" style="text-align: right;">
-                         <span class="badge badge-light fw-bolder ">AED `+response.data.topFivePaidCustomers[i].amountRecieved+` </span>
+                         <span class="badge badge-light fw-bolder font-weight-boldest ">AED `+response.data.topFivePaidCustomers[i].amountRecieved+` </span>
                          <span class="text-muted fw-bold d-block fs-7" style="font-size: 10px;">paid</span>
                           </div>
                      </div>
@@ -437,7 +437,7 @@ $('#btnSearch').click(function (){
                  <div class="d-flex align-items-sm-center mb-7">
                      <!--begin::Symbol-->
                      <div class="symbol symbol-50px me-5" style="margin-right: 1.25rem!important;">
-                         <span class="symbol-label" >
+                         <span class="symbol-label bg-transparent" >
                              <img src="/assets/media/svg/saikitchen/perso.svg"  alt="">
                          </span>
                      </div>
@@ -461,7 +461,7 @@ $('#btnSearch').click(function (){
                 <div class="d-flex align-items-sm-center mb-7">
                     <!--begin::Symbol-->
                     <div class="symbol symbol-50px me-5" style="margin-right: 1.25rem!important;">
-                        <span class="symbol-label" >
+                        <span class="symbol-label bg-transparent" >
                             <img src="/assets/media/svg/saikitchen/perso.svg"  alt="">
                         </span>
                     </div>
@@ -473,7 +473,7 @@ $('#btnSearch').click(function (){
                             <span class="text-muted fw-bold d-block fs-7" style="font-size: 10px;">`+response.data.employees[i].contact +`</span>
                         </div>
                         <div class="flex-grow-1 me-2" style="text-align: right;">
-                        <span class="badge badge-light fw-bolder " style="font-size: 10px;">`+response.data.employees[i].position +` </span>
+                        <span class="badge badge-light fw-bolder font-weight-boldest ">`+response.data.employees[i].position +` </span>
                         <span class="text-muted fw-bold d-block fs-7" style="font-size: 10px;"></span>
                          </div>
                     </div>
@@ -982,7 +982,7 @@ $('#btnSearch').click(function (){
                          <div class="d-flex align-items-sm-center mb-7">
                              <!--begin::Symbol-->
                              <div class="symbol symbol-50px me-5" style="margin-right: 1.25rem!important;">
-                                 <span class="symbol-label" >
+                                 <span class="symbol-label bg-transparent" >
                                      <img src="/assets/media/svg/saikitchen/perso.svg"  alt="">
                                  </span>
                              </div>
@@ -994,7 +994,7 @@ $('#btnSearch').click(function (){
                                      <span class="text-muted fw-bold d-block fs-7" style="font-size: 10px;">`+response.data.topFivePaidCustomers[i].customerContact+`</span>
                                  </div>
                                  <div class="flex-grow-1 me-2" style="text-align: right;">
-                                 <span class="badge badge-light fw-bolder ">AED `+response.data.topFivePaidCustomers[i].amountRecieved+` </span>
+                                 <span class="badge badge-light fw-bolder font-weight-boldest ">AED `+response.data.topFivePaidCustomers[i].amountRecieved+` </span>
                                  <span class="text-muted fw-bold d-block fs-7" style="font-size: 10px;">paid</span>
                                   </div>
                              </div>
@@ -1008,7 +1008,7 @@ $('#btnSearch').click(function (){
                          <div class="d-flex align-items-sm-center mb-7">
                              <!--begin::Symbol-->
                              <div class="symbol symbol-50px me-5" style="margin-right: 1.25rem!important;">
-                                 <span class="symbol-label" >
+                                 <span class="symbol-label bg-transparent" >
                                      <img src="/assets/media/svg/saikitchen/perso.svg"  alt="">
                                  </span>
                              </div>
@@ -1032,7 +1032,7 @@ $('#btnSearch').click(function (){
                         <div class="d-flex align-items-sm-center mb-7">
                             <!--begin::Symbol-->
                             <div class="symbol symbol-50px me-5" style="margin-right: 1.25rem!important;">
-                                <span class="symbol-label" >
+                                <span class="symbol-label bg-transparent" >
                                     <img src="/assets/media/svg/saikitchen/perso.svg"  alt="">
                                 </span>
                             </div>
@@ -1044,7 +1044,7 @@ $('#btnSearch').click(function (){
                                     <span class="text-muted fw-bold d-block fs-7" style="font-size: 10px;">`+response.data.employees[i].contact +`</span>
                                 </div>
                                 <div class="flex-grow-1 me-2" style="text-align: right;">
-                                <span class="badge badge-light fw-bolder " style="font-size: 10px;">`+response.data.employees[i].position +` </span>
+                                <span class="badge badge-light fw-bolder font-weight-boldest ">`+response.data.employees[i].position +` </span>
                                 <span class="text-muted fw-bold d-block fs-7" style="font-size: 10px;"></span>
                                  </div>
                             </div>

@@ -88,6 +88,28 @@
             z-index: 9999;
             background: url(assets/media/gif/load.gif) center no-repeat #fff;
         }
+
+	.select2-container--default .select2-selection--single .select2-selection__arrow {
+		background-image: url(/assets/media/sai-kitchen/external-icons/edit-icon.svg);
+		width: 35px;
+		background-repeat: no-repeat;
+		margin: 0px !important;
+	}
+
+	.select2-container--default .select2-selection--multiple .select2-selection__arrow:after, .select2-container--default .select2-selection--single .select2-selection__arrow:after {
+		content: '';
+	}
+
+	#btnSearch:hover,#btnRecieved:hover {color: #F1583E!important;background-color: #fff !important;border-color: #F1583E !important;}
+	#btnPending {
+		background: #f1583e52 !important;
+		border-color: #f1583e52 !important;
+
+
+	}
+	#btnPending:hover {color: #F1583E!important;background-color: #fff !important;border-color: #F1583E !important;}
+
+
 </style>
 </head>
 <!--end::Head-->
@@ -141,7 +163,7 @@
 											</div>
 											<!--end::Symbol-->
 											<!--begin::Title-->
-											<h5  class="text-dark font-weight-bold mt-2 mb-2 mr-5"><span style="font-weight: bold;"> Sales Report</span></h5>
+											<h5  class="text-dark font-weight-bold mt-2 mb-2 mr-5 font-size-h2"><span style="font-weight: bold;"> Sales Report</span></h5>
 											<!--end::Title-->
 											<!--begin::Separator-->
 											<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200">
@@ -149,7 +171,7 @@
 											<!--end::Separator-->
 											<!--begin::Search Form-->
 											<div class="d-flex align-items-center" id="kt_subheader_search">
-											 <span style="opacity: 50%;"> selected branch </span>
+											 <span class="text-muted mx-3"> selected branch </span>
 											</div>
 
 											<div class="" style="padding-left: 5px;">
@@ -157,6 +179,7 @@
 													<option value="1">Head Office</option>
 												</select>
 											</div>
+
 											<!--end::Search Form-->
 											<!--begin::Group Actions-->
 											<div class="d-flex- align-items-center flex-wrap mr-2 d-none"
@@ -228,13 +251,29 @@
 										<!--begin::Toolbar-->
 										<div class="card-toolbar d-flex align-items-center">
 											<span style="opacity: 50%;">Report Period</span>
-											<div style="padding-left: 10px;padding-right: 5px;">
-												<input class="form-control form-control-solid" placeholder="Pick date rage" id="kt_daterangepicker_1"/>
+											<div style="padding-left: 10px;padding-right: 10px;">
+												<div class="input-group date">
+													<div class="input-group-append">
+															<span class="input-group-text" style="background-color: #FFF6F0 !important;color: #1a1a1ab0; !important;border: 0px !important; ">
+																Start:
+															</span>
+													</div>
+													<input class="form-control form-control-solid" placeholder="Pick date rage" id="kt_daterangepicker_1"/>
+
+												</div>
+
 											</div>
 											<div style="padding-right: 5px;">
-												<input class="form-control form-control-solid" placeholder="Pick date rage" id="kt_daterangepicker_2"/>
+												<div class="input-group date">
+													<div class="input-group-append">
+															<span class="input-group-text" style="background-color: #FFF6F0 !important;color: #1a1a1ab0; !important;border: 0px !important; ">
+																End:
+															</span>
+													</div>
+													<input class="form-control form-control-solid" placeholder="Pick date rage" id="kt_daterangepicker_2"/>
+												</div>
 											</div>
-											<button style="opacity: 40%;color: black !important;"  class="btn btn-primary btn-primary--icon" id="btnSearch">
+											<button class="btn btn-primary btn-hover-bg-primary" id="btnSearch" >
 												<span>
 													
 													<span>Search</span>
@@ -253,7 +292,7 @@
 										
 										<div class="row">
 											<div class="col-xl-4" >
-												<div class="card card-custom gutter-b">
+												<div class="card card-custom gutter-b pb-5">
 													<div >
 														<div style="font-size: 18px;font-weight: bold;padding:15px 0px 0px 15px;" class="card-title">
 															<span >Customer Contact Sources</span>
@@ -267,7 +306,7 @@
 											</div>
 												<!--end::Tiles Widget 2-->
 											<div class="col-xl-4" >
-												<div class="card card-custom gutter-b">
+												<div class="card card-custom gutter-b pb-5">
 													<div >
 														<div style="font-size: 18px;font-weight: bold;padding:15px 0px 0px 15px;" class="card-title">
 															<span >Recieved Payment Mode</span>
@@ -288,7 +327,7 @@
 														<div style="border-radius: .42rem;" class="card-body d-flex flex-column p-0">
 															<!--begin::Stats-->
 															<div style="padding: 10px 0px 0px 10px;">
-																<div style="font-size: 10px;" class="text-inverse-danger">amount recieved</div>
+																<div style="font-size: 14px;" class="text-inverse-danger">Amount recieved</div>
 																<div style="padding-top: 10px;font-size: 15px;" class="text-inverse-danger font-weight-bolder"  id="needToContact"></div>
 																<div style="font-size: 11px;padding-bottom: 10px;" class="text-inverse-danger"  id="needToContact">AED</div>
 															</div>
@@ -306,7 +345,7 @@
 															<div style="border-radius: .42rem;" class="card-body d-flex flex-column p-0">
 																<!--begin::Stats-->
 																<div style="padding: 10px 0px 0px 10px;">
-																	<div style="font-size: 10px;color: #1A1A1A;opacity: 36%;" >amount pending</div>
+																	<div style="font-size: 14px;color: #1A1A1A;opacity: 70%;" class="">Amount pending</div>
 																	<div style="padding-top: 10px;color: #1A1A1A;font-size: 15px;" class=" font-weight-bolder"  id="amountpending"></div>
 																	<div style="font-size: 11px;padding-bottom: 10px;color: #1A1A1A;" class=""  id="needToContact">AED</div>
 																</div>
@@ -326,9 +365,8 @@
 														<div style="border-radius: .42rem;" class="card-body d-flex flex-column p-0">
 															<!--begin::Stats-->
 															<div style="padding: 10px 0px 0px 10px;">
-																<div style="font-size: 10px;" class="text-inverse-danger">Quotation accepted</div>
-																<div style="padding-top: 10px;font-size: 20px;" class="text-inverse-danger font-weight-bolder"  id="quotationaccepted"></div>
-																<div style="font-size: 11px;padding-bottom: 10px;" class="text-inverse-danger"  id="needToContact"></div>
+																<div style="font-size: 14px;" class="text-inverse-danger">Quotation accepted</div>
+																<div style="padding-top: 10px;padding-bottom: 10px;font-size: 20px;" class="text-inverse-danger font-weight-bolder"  id="quotationaccepted"></div>
 															</div>
 															<!--end::Stats-->
 															<!--begin::Chart-->
@@ -344,7 +382,7 @@
 															<div style="border-radius: .42rem;" class="card-body d-flex flex-column p-0">
 																<!--begin::Stats-->
 																<div style="padding: 10px 0px 0px 10px;">
-																	<div style="font-size: 10px;color: #1A1A1A;opacity: 36%;" >Quotation rejected</div>
+																	<div style="font-size: 14px;color: #1A1A1A;opacity: 70%;" class="" >Quotation rejected</div>
 																	<div style="padding-top: 10px;color: #1A1A1A;font-size: 20px;" class=" font-weight-bolder"  id="quotationrejected"></div>
 																	<div style="font-size: 11px;padding-bottom: 10px;color: #1A1A1A;" class=""  id="needToContact"></div>
 																</div>
@@ -364,7 +402,7 @@
 														<div style="border-radius: .42rem;" class="card-body d-flex flex-column p-0">
 															<!--begin::Stats-->
 															<div style="padding: 10px 0px 0px 10px;">
-																<div style="font-size: 10px;" class="text-inverse-danger">inquires completed</div>
+																<div style="font-size: 14px;" class="text-inverse-danger ">Inquires completed</div>
 																<div style="padding-top: 10px;font-size: 20px;" class="text-inverse-danger font-weight-bolder"  id="inquirescompleted"></div>
 																<div style="font-size: 11px;padding-bottom: 10px;" class="text-inverse-danger"  id="needToContact"></div>
 															</div>
@@ -382,7 +420,7 @@
 															<div style="border-radius: .42rem;" class="card-body d-flex flex-column p-0">
 																<!--begin::Stats-->
 																<div style="padding: 10px 0px 0px 10px;">
-																	<div style="font-size: 10px;color: #1A1A1A;opacity: 36%;" >Quotation pending</div>
+																	<div style="font-size: 14px;color: #1A1A1A;opacity: 70%;" class="" >Quotation pending</div>
 																	<div style="padding-top: 10px;color: #1A1A1A;font-size: 20px;" class=" font-weight-bolder"  id="quotationpending"></div>
 																	<div style="font-size: 11px;padding-bottom: 10px;color: #1A1A1A;" class=""  id="needToContact"></div>
 																</div>
@@ -404,7 +442,7 @@
 													<!--begin::Header-->
 													<div class="card-header border-0 pt-5">
 														<h3 class=" align-items-start flex-column">
-															<span class="card-label fw-bolder text-dark">Highest Paid Customers</span>
+															<span class="card-label fw-bolder text-dark" style="font-size: 18px;font-weight: bold" >Highest Paid Customers</span>
 															
 														</h3>
 														<span class="text-muted mt-1 fw-bold fs-7">Top 5</span>
@@ -426,7 +464,7 @@
 													<!--begin::Header-->
 													<div class="card-header border-0 pt-5">
 														<h3 class=" align-items-start flex-column">
-															<span class="card-label fw-bolder text-dark">New Customers</span>
+															<span class="card-label fw-bolder text-dark" style="font-size: 18px;font-weight: bold">New Customers</span>
 															
 														</h3>
 														<span class="text-muted mt-1 fw-bold fs-7">Top 5</span>
@@ -475,14 +513,14 @@
 													<!--begin::Header-->
 													<div class="card-header border-0 pt-5">
 														
-														<span class="card-label fw-bolder text-dark" style="font-weight: bold;">inquiry amount</span>
+														<span class="card-label fw-bolder text-dark" style="font-size: 18px;font-weight: bold">inquiry amount</span>
 															
 														
 														<span style="float: right;" class="text-muted mt-1 fw-bold fs-7">
-															<button style="opacity: 40%;color: black !important;"  class="btn btn-primary btn-primary--icon" id="btnPending">
+															<button  class="btn btn-primary btn-primary--icon" id="btnPending">
 																<span>
 																	
-																	<span>Pending</span>
+																	<span class="text-dark">Pending</span>
 																</span>
 															</button>
 															<button class="btn btn-primary btn-primary--icon"  id="btnRecieved">
@@ -518,7 +556,7 @@
 													<!--begin::Header-->
 													<div class="card-header border-0 pt-5">
 														<h3 class=" align-items-start flex-column">
-															<span class="card-label fw-bolder text-dark">My Employees</span>
+															<span class="card-label fw-bolder text-dark" style="font-size: 18px;font-weight: bold">My Employees</span>
 															
 														</h3>
 														<span class="text-muted mt-1 fw-bold fs-7" id="EmployeesNum"> </span>
