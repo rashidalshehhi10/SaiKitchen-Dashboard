@@ -201,6 +201,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'Quotation Approval Pending',
                                     'class': ' label-light-primary'
                                 },
+                                56: {
+                                    'title': 'Design Revision Requested',
+                                    'class': ' label-light-primary'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
@@ -320,6 +324,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             15: {
                                 'title': 'Quotation Approval Pending',
+                                'class': ' label-light-primary'
+                            },
+                            56: {
+                                'title': 'Design Revision Requested',
                                 'class': ' label-light-primary'
                             },
                         };

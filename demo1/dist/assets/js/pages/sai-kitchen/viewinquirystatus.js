@@ -116,6 +116,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
     };
 
 }();
+
+
+var branchTypeId;
+
 // Class Initialization
 jQuery(document).ready(function() {
 	var login = localStorage.getItem("user");
@@ -137,17 +141,19 @@ jQuery(document).ready(function() {
     console.log(queryString);
     const urlParams = new URLSearchParams(queryString);
     inquiryId = urlParams.get('inquiryId');
-    document.getElementById("inquiryId").value = inquiryId;
+    //document.getElementById("inquiryId").value = inquiryId;
     console.log(inquiryId);
     if (inquiryId == null || inquiryId == "") {
         window.location.replace("commercialchecklist.html");
     }
     
+branchTypeId = user.data.userRoles[0].branch.branchTypeId;
 
+   
 
     $.ajax({
         type: "post",
-        url: baseURL + '/JobOrder/GetinquiryJobOrderFactoryDetailsById?inquiryId=' + inquiryId,
+        url: baseURL + '/Inquiry/GetinquiryDetailsById?inquiryId=' + inquiryId,
 
         headers: {
             'Content-Type': 'application/json',
@@ -162,7 +168,7 @@ jQuery(document).ready(function() {
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
-                response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
+                  response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
 var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
 console.log(inquiryWorkscopelength);
 inquiry=response.data.inquiry;
@@ -198,6 +204,53 @@ var tabsHTML =``;
 //     </a>
 //  </li>`;
 // });
+var jobHtml =``;
+var jobdetail =``;
+if(response.data.inquiry.jobOrders.length > 0){
+   jobHtml =`<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Prefered date by client :</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderExpectedDeadline+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
+</div>`;
+if(response.data.inquiry.jobOrders[0].jobOrderDetails.length >0){
+ jobdetail = `<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Material Availablity Date:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialAvailabilityDate+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Shop Drawing Completion Date:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].shopDrawingCompletionDate+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Production Completion Date:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].productionCompletionDate+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Wooden Work Completion Date:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].woodenWorkCompletionDate+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Material Delivery Final Date:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialDeliveryFinalDate+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Counter Top Fixing Date:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].countertopFixingDate+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Installation Start Date:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate+`</span>
+</div>
+ <div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Notes:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].jobOrderDetailDescription+`</span>
+</div>`;
+}
+jobHtml +=jobdetail;
+}
 customerDetail.innerHTML=` <!--begin::User-->
 <div class="d-flex align-items-center">
    <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
@@ -248,15 +301,8 @@ customerDetail.innerHTML=` <!--begin::User-->
       <span class="font-weight-bold mr-2">Type Of Unit:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingTypeOfUnit+`</span>
    </div>
-   <div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">Prefered date by client :</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderExpectedDeadline+`</span>
-   </div>
-   <div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
-   </div>
-  
+   `+jobHtml+`
+   
 </div>
 <!--end::Contact-->
 `;
@@ -283,7 +329,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
         </a>
      </li>`;
     }
-    
+    if(element.measurements.length > 0){
     element.measurements[0].files.forEach(element => {
         if( dicMeasurement["measurementRow"+element.measurementId]==null){
             dicMeasurement["measurementRow"+element.measurementId]=``;
@@ -346,6 +392,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             <!--end::Col-->`;
         }
         });
+      }
+      if(element.designs.length > 0){
         element.designs[0].files.forEach(element => {
             if(   dicDesign["DesignRow"+element.designId]==null){
                 dicDesign["DesignRow"+element.designId]=``;
@@ -389,6 +437,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
         }
     });
+   }
     if(counter == 0 & response.data.inquiry.quotations.length > 0){
       response.data.inquiry.quotations[0].files.forEach(element => {
         if(   dicQuot["QuotRow"+element.quotationId]==null){
@@ -626,7 +675,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     if(   dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]==null){
                         dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]=``;
                     }
-                    if(jobOrder[0].jobOrderChecklistFileUrl !=""){
+                    if(jobOrder[0].jobOrderChecklistFileUrl !="" && jobOrder[0].jobOrderChecklistFileUrl !=null){
                      var fileExtension = jobOrder[0].jobOrderChecklistFileUrl.substr((jobOrder[0].jobOrderChecklistFileUrl.lastIndexOf('.') + 1));
                      if(fileExtension == 'mp4') {
                         var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].jobOrderChecklistFileUrl;
@@ -746,38 +795,9 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 </div>
              </div>`;
                 }
-                tabsHTML+=`
-                <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
-                <!--begin::Accordion-->
-                <div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+element.inquiryWorkscopeId+`">
-                   <div class="card">
-                      <div class="card-header" >
-                         <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
-                            <i class="la la-ruler-combined"></i>Measurement
-                         </div>
-                      </div>
-                      <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-                         <div class="card-body" >
-                               <div class="row" id="measurementRow`+element.measurements[0].measurementId+`">
-                               `+dicMeasurement["measurementRow"+element.measurements[0].measurementId]+`
-                               </div>
-                            </div>
-                      </div>
-                   </div>
-                   <div class="card">
-                      <div class="card-header" >
-                         <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
-                            <i class="la fab la-codepen"></i>Design
-                         </div>
-                      </div>
-                      <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-                       <div class="card-body" >
-                       <div class="row" id="designRow`+element.designs[0].designId+`">
-                       `+dicDesign["DesignRow"+element.designs[0].designId]+`
-                           </div>
-                        </div>
-                      </div>
-                   </div>
+                let quot='';
+                if(response.data.inquiry.quotations.length >0){
+                   quot = `
                    <div class="card">
                     <div class="card-header" >
                         <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
@@ -792,7 +812,49 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     </div>
                    </div>
-                   `+collect+`
+                   `;
+                }
+                let design = '';
+                if(element.designs.length > 0){
+                  design =
+                  `<div class="card">
+                  <div class="card-header" >
+                     <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
+                        <i class="la fab la-codepen"></i>Design
+                     </div>
+                  </div>
+                  <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                   <div class="row" id="designRow`+element.designs[0].designId+`">
+                   `+dicDesign["DesignRow"+element.designs[0].designId]+`
+                       </div>
+                    </div>
+                  </div>
+               </div>`;
+                }
+                let measur ='';
+                if(element.measurements.length > 0){
+                  measur = `<div class="card">
+                  <div class="card-header" >
+                     <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
+                        <i class="la la-ruler-combined"></i>Measurement
+                     </div>
+                  </div>
+                  <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                     <div class="card-body" >
+                           <div class="row" id="measurementRow`+element.measurements[0].measurementId+`">
+                           `+dicMeasurement["measurementRow"+element.measurements[0].measurementId]+`
+                           </div>
+                        </div>
+                  </div>
+               </div>`;
+                }
+                tabsHTML+=`
+                <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
+                <!--begin::Accordion-->
+                <div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+element.inquiryWorkscopeId+`">
+                   
+                   `+measur+design+quot+collect+`
               
 
                 </div>
@@ -877,39 +939,47 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  </div>
               </div>`;
                  }
-                 
+                 let design ='';
+                 if(element.designs.length>0){
+                   design =
+                   `<div class="card">
+                   <div class="card-header" >
+                      <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
+                         <i class="la fab la-codepen"></i>Design
+                      </div>
+                   </div>
+                   <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                    <div class="card-body" >
+                    <div class="row" id="designRow`+element.designs[0].designId+`">
+                    `+dicDesign["DesignRow"+element.designs[0].designId]+`
+                        </div>
+                     </div>
+                   </div>
+                </div>`;
+                 }
+                 let measur ='';
+                if(element.measurements.length > 0){
+                  measur = `<div class="card">
+                  <div class="card-header" >
+                     <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
+                        <i class="la la-ruler-combined"></i>Measurement
+                     </div>
+                  </div>
+                  <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                     <div class="card-body" >
+                           <div class="row" id="measurementRow`+element.measurements[0].measurementId+`">
+                           `+dicMeasurement["measurementRow"+element.measurements[0].measurementId]+`
+                           </div>
+                        </div>
+                  </div>
+               </div>`;
+                }
     tabsHTML+=`
     <div class="tab-pane fade" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
     <!--begin::Accordion-->
     <div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+element.inquiryWorkscopeId+`">
-       <div class="card">
-          <div class="card-header" >
-             <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
-                <i class="la la-ruler-combined"></i>Measurement
-             </div>
-          </div>
-          <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-             <div class="card-body" >
-                   <div class="row" id="measurementRow`+element.measurements[0].measurementId+`">
-                   `+dicMeasurement["measurementRow"+element.measurements[0].measurementId]+`
-                   </div>
-                </div>
-          </div>
-       </div>
-       <div class="card">
-          <div class="card-header" >
-             <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
-                <i class="la fab la-codepen"></i>Design
-             </div>
-          </div>
-          <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-           <div class="card-body" >
-           <div class="row" id="designRow`+element.designs[0].designId+`">
-           `+dicDesign["DesignRow"+element.designs[0].designId]+`
-               </div>
-            </div>
-          </div>
-       </div>`+
+       
+       `+measur+design+
        quot
        +collect+
        `
@@ -1016,71 +1086,7 @@ workscope.innerHTML=workscopeHtml;
 
     });
 
-  
-
-    $('#kt_approve_inquiry_button').click(function () {
-      var checklistdata = {
-         "inquiryId":parseInt( document.getElementById('inquiryId').value),
-         "materialAvailablityDate": document.getElementById('schedule_date1').value,
-         "shopDrawingCompletionDate": document.getElementById('schedule_date2').value,
-         "productionCompletionDate": document.getElementById('schedule_date3').value,
-         "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
-         "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
-         "counterTopFixingDate": document.getElementById('schedule_date6').value,
-         "InstallationStartDate":document.getElementById('schedule_date7').value,
-         "InstallationCompletionDate":document.getElementById('schedule_date8').value,
-         "notes": document.getElementById('CheckComment').value,
-       };
-        const data = JSON.stringify(checklistdata);
-        console.log(data);
-        
-        $.ajax({
-            type: "Post",
-            url: baseURL + '/JobOrder/JobOrderFactoryApprove',
-            headers: {
-                'Content-Type': 'application/json',
-                'userId': user.data.userId,
-                'Access-Control-Allow-Origin': '*',
-            },
-            data: data,
-            success: function(response) {
-                console.log(response);
-     
-                window.location.replace("joborderapproval.html");
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                document.getElementById("alert").innerHTML ="An error occured";
-            }
-        });
-    });
-    $('#kt_reject_inquiry_button').click(function () {
-        var rejectlistdata = {
-            "inquiryId":parseInt(document.getElementById('inquiryId').value),
-            "reason":document.getElementById('RejectComment1').value,
-          };
     
-        const data = JSON.stringify(rejectlistdata);
-        console.log(data);
-         $.ajax({
-            type: "Post",
-            url: baseURL + '/JobOrder/JobOrderFactoryReject',
-            headers: {
-                'Content-Type': 'application/json',
-                'userId': user.data.userId,
-                'Access-Control-Allow-Origin': '*',
-            },
-            data: data,
-            success: function(response) {
-                console.log(response);
-                window.location.replace("joborderapproval.html");
-                
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                document.getElementById("ralert").innerHTML ="An error occured";
-            }
-        }); 
-    });
     
-
     
                             

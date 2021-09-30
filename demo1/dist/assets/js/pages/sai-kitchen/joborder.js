@@ -527,7 +527,7 @@ jQuery(document).ready(function() {
         permissions = user.data.userRoles[0].branchRole.permissionRoles;
         console.log(permissions);
         for (var i = 0; i < permissions.length; i++) {
-            if (permissions[i].permissionId == 9) {
+            if (permissions[i].permissionId == 14) {
                 quotationPermission = permissions[i].permissionLevelId;
                 console.log(quotationPermission);
             }

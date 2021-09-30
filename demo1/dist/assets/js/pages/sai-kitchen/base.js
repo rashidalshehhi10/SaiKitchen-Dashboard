@@ -1585,6 +1585,9 @@ jQuery(document).ready(function () {
       var userRoleId;
 
       userRoleId = user.data.userRoles[0].branchRole.roleTypeId;
+      var branchTypeId;
+
+      branchTypeId = user.data.userRoles[0].branch.branchTypeId;
       for (var i = 0; i < user.data.userRoles[0].branchRole.permissionRoles.length; i++) {
 
          var permissions = user.data.userRoles[0].branchRole.permissionRoles[i].permissionId;
@@ -1635,12 +1638,14 @@ jQuery(document).ready(function () {
 `;
       }
       if (permission.includes(7) || userRoleId == 1 || userRoleId == 3) {
-         sideMenuHTML += `
+         
+   if(branchTypeId!=3){
+      sideMenuHTML += `   
 <li class="menu-section">
 <h4 class="menu-text">Measurement</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>`;
-
+   }
 if (permission.includes(7)) {
    sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -1669,6 +1674,7 @@ if (permission.includes(7)) {
 </li>
 `;
          }
+         if(branchTypeId!=3){
          sideMenuHTML += `
 	<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 	<a href="measurementrequest.html" class="menu-link menu-toggle">
@@ -1683,15 +1689,17 @@ if (permission.includes(7)) {
 	</a>
 	</li>
 	`;
-
+}
       }
       if (permission.includes(8) || userRoleId == 1 || userRoleId == 3) {
+         if(branchTypeId!=3){
          sideMenuHTML += `
             
 <li class="menu-section">
 <h4 class="menu-text">Design</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>`;
+         }
 if (permission.includes(8)){
    sideMenuHTML += `   
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -1705,7 +1713,10 @@ if (permission.includes(8)){
    <span class="menu-text">Assignment Request</span>
    
 </a>
-</li>
+</li>`;
+
+
+sideMenuHTML += `   
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="design.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1721,6 +1732,7 @@ if (permission.includes(8)){
 `;
 }
 
+if(branchTypeId!=3){
             sideMenuHTML += `
 	<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 	<a href="designrequest.html" class="menu-link menu-toggle">
@@ -1735,7 +1747,7 @@ if (permission.includes(8)){
 	</a>
 	</li>
 	`;
-         
+}
       }
       if (permission.includes(9)) {
          sideMenuHTML += `
@@ -1769,13 +1781,38 @@ if (permission.includes(8)){
 </li>
 `;
       }
-      if (permission.includes(13)) {
+      if (permission.includes(8)){
+         sideMenuHTML += `
+<li class="menu-section">
+<h4 class="menu-text">JobOrder Files</h4>
+<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+</li>
+
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+<a href="joborderfiles.html" class="menu-link menu-toggle">
+	<span class="svg-icon menu-icon">
+		
+   <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+   <img src="/assets//media/svg/saikitchen/attach.png"/>
+   <!--end::Svg Icon-->
+	</span>
+	<span class="menu-text">Upload Files</span>
+	
+</a>
+</li>
+
+`;
+      }
+      if (permission.includes(13) || permission.includes(17)) {
          sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Checklist</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
+`;
 
+if (permission.includes(13)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="checklist.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1787,7 +1824,10 @@ if (permission.includes(8)){
 	<span class="menu-text">Technical Checklist</span>
 	
 </a>
-</li>
+</li>`;
+      }
+if (permission.includes(17)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="commercialchecklist.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1802,14 +1842,17 @@ if (permission.includes(8)){
 </li>
 `;
       }
+   }
 
-      if (permission.includes(14)) {
+      if (permission.includes(14)||permission.includes(18)) {
          sideMenuHTML += `
 <li class="menu-section">
 <h4 class="menu-text">Job Order</h4>
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
-
+`;
+if (permission.includes(18)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="joborderapproval.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1826,7 +1869,11 @@ if (permission.includes(8)){
 	<span class="menu-text">Job Order Approval</span>
 	
 </a>
-</li>
+</li>`;
+}
+
+if (permission.includes(14)) {
+   sideMenuHTML += `
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 <a href="joborder.html" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
@@ -1845,7 +1892,8 @@ if (permission.includes(8)){
 </a>
 </li>
 `;
-      }
+        }
+        }
       if (permission.includes(15)) {
          sideMenuHTML += `
 <li class="menu-section">
@@ -1945,7 +1993,20 @@ if (permission.includes(8)){
 			</a>
 		</li>`;
       }
-
+      if (permission.includes(3)) {
+         sideMenuHTML += `
+		<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+			<a href="setting.html" class="menu-link menu-toggle">
+				<span class="svg-icon menu-icon">
+					
+            <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+            <img src="/assets/media/svg/saikitchen/setting.svg"/>
+            <!--end::Svg Icon-->
+				</span>
+				<span class="menu-text">Setting</span>
+			</a>
+		</li>`;
+      }
 
       if (permission.includes(10) || permission.includes(11) || permission.includes(12)) {
          sideMenuHTML += `

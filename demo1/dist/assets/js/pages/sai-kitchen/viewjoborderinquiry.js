@@ -116,6 +116,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
     };
 
 }();
+
+
+var branchTypeId;
+
 // Class Initialization
 jQuery(document).ready(function() {
 	var login = localStorage.getItem("user");
@@ -143,7 +147,18 @@ jQuery(document).ready(function() {
         window.location.replace("commercialchecklist.html");
     }
     
+branchTypeId = user.data.userRoles[0].branch.branchTypeId;
+if(branchTypeId==2||branchTypeId==1){
+   document.getElementById("RequestforReschedulingBtn").style.display = "inline-block";
+      }
 
+      if(branchTypeId==3){
+         document.getElementById("jocomp").style.display = "inline-block";
+         document.getElementById("rtinstall").style.display = "inline-block";
+         document.getElementById("adelay").style.display = "inline-block";
+         document.getElementById("aror").style.display = "inline-block";
+            }
+    
 
     $.ajax({
         type: "post",
@@ -252,6 +267,10 @@ customerDetail.innerHTML=` <!--begin::User-->
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingTypeOfUnit+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Prefered date by client :</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderExpectedDeadline+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
    </div>
@@ -287,6 +306,7 @@ customerDetail.innerHTML=` <!--begin::User-->
       <span class="font-weight-bold mr-2">Notes:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].jobOrderDetailDescription+`</span>
    </div>
+   
 </div>
 <!--end::Contact-->
 `;
@@ -751,7 +771,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    +` <div class="card">
                    <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDatasheet`+element.inquiryWorkscopeId+`">
-                         <i class="la fab la-codepen"></i> Data sheet appliances & is it from customer
+                         <i class="la fab la-codepen"></i> Data sheet appliances
                       </div>
                    </div>
                    <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -882,7 +902,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     +` <div class="card">
                     <div class="card-header" >
                        <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDatasheet`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i> Data sheet appliances & is it from customer
+                          <i class="la fab la-codepen"></i> Data sheet appliances
                        </div>
                     </div>
                     <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">

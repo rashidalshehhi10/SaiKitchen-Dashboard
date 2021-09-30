@@ -105,12 +105,105 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 });
             });
     }
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+    var _handleFormApprove = function() {
+        var form = KTUtil.getById('kt_approve_inquiry');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
 
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        design_schedule_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Preferred Date is required'
+                                }
+                            }
+                        },
+						/* kt_dropzone_6: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'JobOrderChecklistFile is required'
+                                }
+                            }
+                        }, */
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                 var checklistdata = {
+				"inquiryId":document.getElementById('inquiryId').value,
+				"factoryId": document.getElementById('kt_select_branch').value,
+				"jobOrderExpectedDeadline": document.getElementById('design_schedule_date').value, 
+				"comment": document.getElementById('CheckComment').value,
+				"addFileonChecklists":new Array(),
+				//"isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
+				//"materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
+				//"mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
+				"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
+				//"dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
+			  };
+			  let from = document.getElementById('addcompCount').value;
+			  let to = document.getElementById('addmaxCount').value;
+			  for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
+				checklistdata.addFileonChecklists.push({
+				   // "inquiryworkscopeId":0,//document.getElementById('kt_workscpe_'+i)==null?"": document.getElementById('kt_workscpe_'+i).value,
+					"documentType":document.getElementById('documentType'+i).value,
+					"files":filearry[i]==undefined?[]:filearry[i],
+				})
+			  }
+			  
+			  filearry= [];
+			const data = JSON.stringify(checklistdata);
+			console.log(data);
+			console.log(fourfile);
+			 $.ajax({
+				type: "Post",
+				url: baseURL + '/CheckList/ApproveinquiryChecklist',
+				headers: {
+					'Content-Type': 'application/json',
+					'userId': user.data.userId,
+					'Access-Control-Allow-Origin': '*',
+				},
+				data: data,
+				success: function(response) {
+					console.log(response);
+					filearry= [];
+					document.getElementById("checkbody").innerHTML ="";
+					document.getElementById('design_schedule_date').value ="";
+					document.getElementById('CheckComment').value="";
+					$('#approve').modal('hide');
+					window.location.replace("checklist.html");
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					document.getElementById("alert").innerHTML ="All fields should be selected";
+				}
+			}); 
+                
+            })
+    }
     return {
 
         //main function to initiate the module
         init: function() {
             _handleaddquotation();
+            _handleFormApprove();
         },
 
     };
@@ -180,6 +273,10 @@ const workscope=document.getElementById('workscopedetail');
 var dicMeasurement = new Object();
 var dicDesign = new Object();
 var dicQuot = new Object();
+var dicMEP  = new Object();
+var dicMaterial = new Object();
+var dicDatasheet = new Object();
+var dicJoborder = new Object();
 var workscopeHtml=``;
 var tabsHTML =``;
 // response.data.inquiryWorkscopes.forEach(element => {
@@ -421,9 +518,244 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
     }
    });
     }//quotations !=undefined
+    var  jobOrder  = response.data.inquiry.jobOrders;
+    if(response.data.inquiry.jobOrders.length > 0 & counter ==0){
+         if(   dicMEP["dicMEP"+jobOrder[0].jobOrderId]==null){
+            dicMEP["dicMEP"+jobOrder[0].jobOrderId]=``;
+         }
+        if(jobOrder[0].mepdrawingFileUrl !=""){
+         var fileExtension = jobOrder[0].mepdrawingFileUrl.substr((jobOrder[0].mepdrawingFileUrl.lastIndexOf('.') + 1));
+         if(fileExtension == 'mp4') {
+            var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].mepdrawingFileUrl;
+         dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
+             <!--begin::Col-->
+             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <!--begin::Card-->
+                <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                   <div class="d-flex flex-column align-items-center">
+                      <!--begin: Icon-->
+                      <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                      <!--end: Icon-->
+                      <!--begin: Tite-->
+                      <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].mepdrawingFileUrl+`</a>
+                      <!--end: Tite-->
+                   </div>
+                </div>
+                <!--end:: Card-->
+             </div>
+             <!--end::Col-->`;
+         }else if(fileExtension == 'pdf') {
+            dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
+            <!--begin::Col-->
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+               <!--begin::Card-->
+               <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].mepdrawingFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                  <div class="d-flex flex-column align-items-center">
+                     <!--begin: Icon-->
+                     <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                     <!--end: Icon-->
+                     <!--begin: Tite-->
+                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].mepdrawingFileUrl+`</a>
+                     <!--end: Tite-->
+                  </div>
+               </div>
+               <!--end:: Card-->
+            </div>
+            <!--end::Col-->`;
+         }else{
+            dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
+            <!--begin::Col-->
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+               <!--begin::Card-->
+               <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].mepdrawingFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                  <div class="d-flex flex-column align-items-center">
+                     <!--begin: Icon-->
+                     <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                     <!--end: Icon-->
+                     <!--begin: Tite-->
+                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].mepdrawingFileUrl+`</a>
+                     <!--end: Tite-->
+                  </div>
+               </div>
+               <!--end:: Card-->
+            </div>
+            <!--end::Col-->`;
+         }
+           
+        }
+            if(   dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]==null){
+                dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]=``;
+            }
+            if(jobOrder[0].materialSheetFileUrl !=""){
+               var fileExtension = jobOrder[0].materialSheetFileUrl.substr((jobOrder[0].materialSheetFileUrl.lastIndexOf('.') + 1));
+               if(fileExtension == 'mp4') {
+                  var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].materialSheetFileUrl;
+               dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+                   <!--begin::Col-->
+                   <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                      <!--begin::Card-->
+                      <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                         <div class="d-flex flex-column align-items-center">
+                            <!--begin: Icon-->
+                            <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                            <!--end: Icon-->
+                            <!--begin: Tite-->
+                            <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].materialSheetFileUrl+`</a>
+                            <!--end: Tite-->
+                         </div>
+                      </div>
+                      <!--end:: Card-->
+                   </div>
+                   <!--end::Col-->`;
+               }else if(fileExtension == 'pdf') {
+                  dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+                  <!--begin::Col-->
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                     <!--begin::Card-->
+                     <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].materialSheetFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                        <div class="d-flex flex-column align-items-center">
+                           <!--begin: Icon-->
+                           <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                           <!--end: Icon-->
+                           <!--begin: Tite-->
+                           <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].materialSheetFileUrl+`</a>
+                           <!--end: Tite-->
+                        </div>
+                     </div>
+                     <!--end:: Card-->
+                  </div>
+                  <!--end::Col-->`;
+               }else{
+                  dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+                  <!--begin::Col-->
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                     <!--begin::Card-->
+                     <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].materialSheetFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                        <div class="d-flex flex-column align-items-center">
+                           <!--begin: Icon-->
+                           <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                           <!--end: Icon-->
+                           <!--begin: Tite-->
+                           <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].materialSheetFileUrl+`</a>
+                           <!--end: Tite-->
+                        </div>
+                     </div>
+                     <!--end:: Card-->
+                  </div>
+                  <!--end::Col-->`;
+               }
+            }
+                if(   dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]==null){
+                    dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]=``;
+                }
+                if(jobOrder[0].dataSheetApplianceFileUrl !=""){
+                  var fileExtension = jobOrder[0].dataSheetApplianceFileUrl.substr((jobOrder[0].dataSheetApplianceFileUrl.lastIndexOf('.') + 1));
+                  if(fileExtension == 'mp4') {
+                     var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].dataSheetApplianceFileUrl;
+                  dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                      <!--begin::Col-->
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                         <!--begin::Card-->
+                         <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                            <div class="d-flex flex-column align-items-center">
+                               <!--begin: Icon-->
+                               <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                               <!--end: Icon-->
+                               <!--begin: Tite-->
+                               <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].dataSheetApplianceFileUrl+`</a>
+                               <!--end: Tite-->
+                            </div>
+                         </div>
+                         <!--end:: Card-->
+                      </div>
+                      <!--end::Col-->`;
+                  }else if(fileExtension == 'pdf') {
+                     dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].dataSheetApplianceFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].dataSheetApplianceFileUrl+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+                  }else{
+                     dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].dataSheetApplianceFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].dataSheetApplianceFileUrl+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+                  }
+                } 
+ 
+     }
      counter = 1;
             if(isfirst){
-                
+                let collect ='';
+                if(response.data.inquiry.jobOrders.length > 0){
+                   collect =`<div class="card">
+                   <div class="card-header" >
+                      <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMEP`+element.inquiryWorkscopeId+`">
+                         <i class="la fab la-codepen"></i>MEP Drawing
+                      </div>
+                   </div>
+                   <div id="dicMEP`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                    <div class="card-body" >
+                    <div class="row" id="dicMEP`+jobOrder[0].jobOrderId+`">
+                    `+dicMEP["dicMEP"+jobOrder[0].jobOrderId]+`
+                    </div>
+                    </div>
+                   </div>
+                </div>`+
+                    `<div class="card">
+                    <div class="card-header" >
+                    <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMaterial`+element.inquiryWorkscopeId+`">
+                        <i class="la fab la-codepen"></i> Material sheet
+                    </div>
+                    </div>
+                    <div id="dicMaterial`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                    <div class="card-body" >
+                    <div class="row" id="dicMaterial`+jobOrder[0].jobOrderId+`">
+                    `+dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]+`
+                    </div>
+                    </div>
+                    </div>
+                    </div>`
+                   +` <div class="card">
+                   <div class="card-header" >
+                      <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDatasheet`+element.inquiryWorkscopeId+`">
+                         <i class="la fab la-codepen"></i> Data sheet appliances
+                      </div>
+                   </div>
+                   <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                    <div class="card-body" >
+                    <div class="row" id="dicDatasheet`+jobOrder[0].jobOrderId+`">
+                    `+dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]+`
+                    </div>
+                    </div>
+                   </div>
+                </div>`;
+                }
                 tabsHTML+=`
                 <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
                 <!--begin::Accordion-->
@@ -470,7 +802,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     </div>
                    </div>
-                   `+''+`
+                   `+collect+`
               
 
                 </div>
@@ -497,7 +829,51 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     `;
                     }
-                 
+                 let collect ='';
+                 if(response.data.inquiry.jobOrders.length > 0){
+                    collect =`<div class="card">
+                    <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMEP`+element.inquiryWorkscopeId+`">
+                          <i class="la fab la-codepen"></i>MEP Drawing
+                       </div>
+                    </div>
+                    <div id="dicMEP`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                     <div class="card-body" >
+                     <div class="row" id="dicMEP`+jobOrder[0].jobOrderId+`">
+                     `+dicMEP["dicMEP"+jobOrder[0].jobOrderId]+`
+                     </div>
+                     </div>
+                    </div>
+                 </div>`+
+                     `<div class="card">
+                     <div class="card-header" >
+                     <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMaterial`+element.inquiryWorkscopeId+`">
+                         <i class="la fab la-codepen"></i> Material sheet
+                     </div>
+                     </div>
+                     <div id="dicMaterial`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                     <div class="card-body" >
+                     <div class="row" id="dicMaterial`+jobOrder[0].jobOrderId+`">
+                     `+dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]+`
+                     </div>
+                     </div>
+                     </div>
+                     </div>`
+                    +` <div class="card">
+                    <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDatasheet`+element.inquiryWorkscopeId+`">
+                          <i class="la fab la-codepen"></i> Data sheet appliances
+                       </div>
+                    </div>
+                    <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                     <div class="card-body" >
+                     <div class="row" id="dicDatasheet`+jobOrder[0].jobOrderId+`">
+                     `+dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]+`
+                     </div>
+                     </div>
+                    </div>
+                 </div>`;
+                 }
                  
     tabsHTML+=`
     <div class="tab-pane fade" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
@@ -532,7 +908,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
           </div>
        </div>`+
        quot
-       +
+       +collect+
        `
     </div>
     <!--end::Accordion-->
@@ -696,56 +1072,7 @@ workscope.innerHTML=workscopeHtml;
             }
         });
     });
-    $('#kt_approve_inquiry_button').click(function () {
-        var checklistdata = {
-            "inquiryId":document.getElementById('inquiryId').value,
-            "factoryId": document.getElementById('kt_select_branch').value,
-            "prefferdDateByClient": document.getElementById('design_schedule_date').value, 
-            "comment": document.getElementById('CheckComment').value,
-            "addFileonChecklists":new Array(),
-            "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
-            "materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
-            "mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
-            "jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
-            "dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
-          };
-          let from = document.getElementById('addcompCount').value;
-          let to = document.getElementById('addmaxCount').value;
-          for (let i = parseInt(from)+1; i <= parseInt(to); i++) {
-            checklistdata.addFileonChecklists.push({
-               // "inquiryworkscopeId":0,//document.getElementById('kt_workscpe_'+i)==null?"": document.getElementById('kt_workscpe_'+i).value,
-                "documentType":document.getElementById('documentType'+i).value,
-                "files":filearry[i]==undefined?[]:filearry[i],
-            })
-          }
-          
-          filearry= [];
-        const data = JSON.stringify(checklistdata);
-        console.log(data);
-        console.log(fourfile);
-         $.ajax({
-            type: "Post",
-            url: baseURL + '/CheckList/ApproveinquiryChecklist',
-            headers: {
-                'Content-Type': 'application/json',
-                'userId': user.data.userId,
-                'Access-Control-Allow-Origin': '*',
-            },
-            data: data,
-            success: function(response) {
-                console.log(response);
-                filearry= [];
-                document.getElementById("checkbody").innerHTML ="";
-                document.getElementById('design_schedule_date').value ="";
-                document.getElementById('CheckComment').value="";
-                $('#approve').modal('hide');
-                window.location.replace("checklist.html");
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                document.getElementById("alert").innerHTML ="All fields should be selected";
-            }
-        }); 
-    });
+  
     $('#kt_reject_inquiry_button').click(function () {
         var rejectlistdata = {
             "inquiryId":document.getElementById('inquiryId').value,
@@ -846,7 +1173,28 @@ workscope.innerHTML=workscopeHtml;
                timeout: 600000,
                addRemoveLinks: true,
                removedfile:function(file) {
-      
+                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                var fileurl ='';
+                var filearr = fileuploded.innerHTML.split(".");
+                if(filearr.length > 1){
+                    fileurl = "/File/DeleteFileFromBlob?fileName=";
+                }else{
+                    fileurl = "/File/DeleteVideo?VideoId=";
+                }
+                $.ajax({
+                    type:"post",
+                    url:baseURL+fileurl+fileuploded.innerHTML,
+                    cache:false,
+                    success: function(){
+                        removeA(measurementFile, fileuploded.innerHTML);
+                        filearry[i] = measurementFile;
+                        file.previewElement.remove();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log("Error");
+                
+                    }
+                });
                },
          
                acceptedFiles: "image/*,application/pdf,.png,.mp4",
@@ -855,6 +1203,8 @@ workscope.innerHTML=workscopeHtml;
            
                },
                success: function(file, response){
+                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                fileuploded.innerHTML = response.data.item1;
                    // alert(response.data.item1);
                    measurementFile.push(response.data.item1);
                    filearry[i] = measurementFile;
@@ -948,7 +1298,7 @@ workscope.innerHTML=workscopeHtml;
                    });
 
 
-                   for (let j = 4; j <= 7; j++) {
+                   for (let j = 6; j <= 6; j++) {
                     $('#kt_dropzone_'+j).dropzone({
                                  url: baseURL+"/File/UploadFile", // Set the url for your upload script location
                                 type: "Head",
@@ -956,12 +1306,37 @@ workscope.innerHTML=workscopeHtml;
                                     'Access-Control-Allow-Origin': '*',
                                 },
                                 paramName: "file"+j, // The name that will be used to transfer the file
-                                maxFiles: 150,
+                                maxFiles: 1,
                                 maxFilesize: 30000, // MB
                                 timeout: 600000,
                                 addRemoveLinks: true,
                                 removedfile:function(file) {
-                       
+                                    if(file.status =="error"){
+                                        file.previewElement.remove();
+                                        return false;
+                                    }
+                                    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                                    var fileurl ='';
+                                    var filearr = fileuploded.innerHTML.split(".");
+                                    if(filearr.length > 1){
+                                        fileurl = "/File/DeleteFileFromBlob?fileName=";
+                                    }else{
+                                        fileurl = "/File/DeleteVideo?VideoId=";
+                                    }
+                                    $.ajax({
+                                        type:"post",
+                                        url:baseURL+fileurl+fileuploded.innerHTML,
+                                        cache:false,
+                                        success: function(){
+                                           // removeA(measurementFile, fileuploded.innerHTML);
+                                            removeA(fourfile, fileuploded.innerHTML);
+                                            file.previewElement.remove();
+                                        },
+                                        error: function(XMLHttpRequest, textStatus, errorThrown){
+                                            console.log("Error");
+                                    
+                                        }
+                                    });
                                 },
                           
                                 acceptedFiles: "image/*,application/pdf,.png,.mp4",
@@ -970,10 +1345,22 @@ workscope.innerHTML=workscopeHtml;
                             
                                 },
                                 success: function(file, response){
+                                    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                                    fileuploded.innerHTML = response.data.item1;
                                     fourfile[j] = response.data.item1;
                                 
                                 }
                                 
                               });
+                            }
+                            function removeA(arr) {
+                                var what, a = arguments, L = a.length, ax;
+                                while (L > 1 && arr.length) {
+                                    what = a[--L];
+                                    while ((ax= arr.indexOf(what)) !== -1) {
+                                        arr.splice(ax, 1);
+                                    }
+                                }
+                                return arr;
                             }
                             

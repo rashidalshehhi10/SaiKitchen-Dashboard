@@ -42,10 +42,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryId', 'inquiryCode', 'status', 'workscopeNames','isMeasurementProvidedByCustomer',
-                        'measurementScheduleDate', 'measurementAssignTo','isDesignProvidedByCustomer', 'designScheduleDate', 'designAssignTo','customerCode', 'customerName',
+                        'inquiryId', 'inquiryCode', 'status', 'workscopeNames','inquiryComment',
+                        'measurementScheduleDate', 'measurementAssignTo','designScheduleDate', 'designAssignTo','isMeasurementProvidedByCustomer','isDesignProvidedByCustomer', 'customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
+                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','noOfRevision', 'actions'
                     ],
                 },
             },
@@ -65,7 +65,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'workscopeNames'
                 },
                 {
-                    data: 'isMeasurementProvidedByCustomer'
+                    data: 'inquiryComment'
                 },
                 {
                     data: 'measurementScheduleDate'
@@ -74,13 +74,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'measurementAssignTo'
                 },
                 {
-                    data: 'isDesignProvidedByCustomer'
-                },
-                {
                     data: 'designScheduleDate'
                 },
                 {
                     data: 'designAssignTo'
+                },
+                {
+                    data: 'isMeasurementProvidedByCustomer'
+                },
+                {
+                    data: 'isDesignProvidedByCustomer'
                 },
                 {
                     data: 'customerCode'
@@ -116,9 +119,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'inquiryDescription'
                 },
                 {
-                    data: 'inquiryComment'
-                },
-                {
                     data: 'inquiryStartDate'
                 },
                 {
@@ -126,6 +126,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'inquiryAddedBy'
+                },
+                {
+                    data: 'measurementAddedOn'
+                },
+                {
+                    data: 'designAddedOn'
+                },
+                {
+                    data: 'quotationAddedOn'
+                },
+                {
+                    data: 'commentAddedOn'
                 },
                 {
                     data: 'actions',
@@ -149,7 +161,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         //             $('.datatable-input[data-col-index="13"]').append('<a href='+d+' target="_blank">Click here</a>');
                         //     });
                         //     break;
-
+                        default:
+                            //Statements executed when none of
+                            //the values match the value of the expression
+                            var v=column.title();
+                        break;
+                        
                         case 'Status':
                             var status = {
                                 1: {
@@ -166,7 +183,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 4: {
                                     'title': 'Design Delayed',
-                                    'class': ' label-light-success'
+                                    'class': ' label-light-danger'
                                 },
                                 5: {
                                     'title': 'Quotation Pending',
@@ -182,7 +199,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 8: {
                                     'title': 'Measurement Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 9: {
                                     'title': 'Measurement Approval Pending',
@@ -194,7 +211,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 11: {
                                     'title': 'Design Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 12: {
                                     'title': 'Design Approval Pending',
@@ -206,19 +223,19 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 14: {
                                     'title': 'Quotation Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 15: {
                                     'title': 'Quotation Waiting For Customer Approval',
-                                    'class': ' label-light-primary'
+                                    'class': ' label-light-info'
                                 },
                                 16: {
                                     'title': 'Design Waiting For Customer Approval',
-                                    'class': ' label-light-primary'
+                                    'class': ' label-light-info'
                                 },
                                 17: {
                                     'title': 'Design Rejected By Client',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 18: {
                                     'title': 'Technical Checklist Pending',
@@ -230,7 +247,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 20: {
                                     'title': 'Technical Checklist Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 36: {
                                     'title': 'Measurement Assignee Pending',
@@ -242,7 +259,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 38: {
                                     'title': 'Measurement Assignee  Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 39: {
                                     'title': 'Design Assignee  Pending',
@@ -254,7 +271,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 41: {
                                     'title': 'Design Assignee  Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 42: {
                                     'title': 'Quotation Schedule  Pending',
@@ -270,7 +287,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 45: {
                                     'title': 'Commerical Checklist Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 46: {
                                     'title': 'Job Order Factory Approval Pending',
@@ -282,7 +299,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 48: {
                                     'title': 'Job Order Factory Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 49: {
                                     'title': 'jobOrder Reschedule Requested',
@@ -294,7 +311,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 51: {
                                     'title': 'jobOrder Reschedule Rejected',
-                                    'class': ' label-light-info'
+                                    'class': ' label-light-danger'
                                 },
                                 52: {
                                     'title': 'jobOrder Delay Requested',
@@ -308,10 +325,28 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'title': 'jobOrder Completed',
                                     'class': ' label-light-success'
                                 },
+                                56: {
+                                    'title': 'Design Revision Requested',
+                                    'class': ' label-light-primary'
+                                },
+                                54: {
+                                    'title': 'Job Order Files Pending',
+                                    'class': ' label-light-primary'
+                                },
+                                55: {
+                                    'title': 'Job Order Files Delayed',
+                                    'class': ' label-light-primary'
+                                },
                             };
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
                                     $('.datatable-input[data-col-index="2"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
+                            });
+                            break;
+                        case 'Added By':
+                            column.data().unique().sort().each(function(d, j) {
+                                if (d != null)
+                                    $('.datatable-input[data-col-index="25"]').append('<option value="' + d+ '">' + d + '</option>');
                             });
                             break;
 
@@ -335,7 +370,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var action = ``;
+                        action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewinquirystatus.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
+                        <i class="la la-ellipsis-h""></i>\
+                        </a>\
+                        `;
                         if(full.inquiryAddedById==user.data.userId ||userRoleId==1){
+                            
+                            action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
+                            <i class="la la-file-text-o"></i>\
+							</a>\
+                        `;
                         if (inquiryPermission >= 3) {
                             console.log(full.inquiryId);
                             // onclick="`+full.inquiryId+`"
@@ -412,7 +456,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             4: {
                                 'title': 'Design Delayed',
-                                'class': ' label-light-success'
+                                'class': ' label-light-danger'
                             },
                             5: {
                                 'title': 'Quotation Pending',
@@ -428,11 +472,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             8: {
                                 'title': 'Measurement Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             9: {
                                 'title': 'Measurement Approval Pending',
-                                'class': ' label-light-primary'
+                                'class': ' label-light-info'
                             },
                             10: {
                                 'title': 'Design Approved',
@@ -440,11 +484,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             11: {
                                 'title': 'Design Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             12: {
                                 'title': 'Design Approval Pending',
-                                'class': ' label-light-primary'
+                                'class': ' label-light-info'
                             },
                             13: {
                                 'title': 'Quotation Approved',
@@ -452,19 +496,19 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             14: {
                                 'title': 'Quotation Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             15: {
                                 'title': 'Quotation Waiting For Customer Approval',
-                                'class': ' label-light-primary'
+                                'class': ' label-light-info'
                             },
                             16: {
                                 'title': 'Design Waiting For Customer Approval',
-                                'class': ' label-light-primary'
+                                'class': ' label-light-info'
                             },
                             17: {
                                 'title': 'Design Rejected By Client',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             18: {
                                 'title': 'Technical Checklist Pending',
@@ -476,7 +520,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             20: {
                                 'title': 'Technical Checklist Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             36: {
                                 'title': 'Measurement Assignee Pending',
@@ -488,7 +532,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             38: {
                                 'title': 'Measurement Assignee  Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             39: {
                                 'title': 'Design Assignee  Pending',
@@ -500,7 +544,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             41: {
                                 'title': 'Design Assignee  Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             42: {
                                 'title': 'Quotation Schedule  Pending',
@@ -516,7 +560,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             45: {
                                 'title': 'Commerical Checklist Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             46: {
                                 'title': 'Job Order Factory Approval Pending',
@@ -528,7 +572,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             48: {
                                 'title': 'Job Order Factory Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             49: {
                                 'title': 'jobOrder Reschedule Requested',
@@ -540,7 +584,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             },
                             51: {
                                 'title': 'jobOrder Reschedule Rejected',
-                                'class': ' label-light-info'
+                                'class': ' label-light-danger'
                             },
                             52: {
                                 'title': 'jobOrder Delay Requested',
@@ -554,6 +598,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'title': 'jobOrder Completed',
                                 'class': ' label-light-success'
                             },
+                            56: {
+                                'title': 'Design Revision Requested',
+                                'class': ' label-light-primary'
+                            },
+                            54: {
+                                'title': 'Job Order Files Pending',
+                                'class': ' label-light-primary'
+                            },
+                            55: {
+                                'title': 'Job Order Files Delayed',
+                                'class': ' label-light-primary'
+                            },
                         };
 
                         console.log(data);
@@ -565,7 +621,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     },
                 },
                 {
-                	targets: 15,
+                	targets: 16,
                 	render: function(data, type, full, meta) {
                 	
                 		if (typeof data === 'undefined' || data===null || data=="") {
@@ -991,6 +1047,100 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 });
             });
     }
+    var _handleFormComment = function() {
+        var form = KTUtil.getById('kt_inq_comment');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_comment_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        inqtxtComment: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Comment is required'
+                                }
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                var inquiryComment = {
+                    inquiryId: document.getElementById("inquiryWorkscopeId").innerHTML,
+                    comment: $('#inqtxtComment').val(),
+                };
+                const data = JSON.stringify(inquiryComment);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Inquiry/AddComment',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        console.log(response);
+                        if (response.isError == false) {
+                            window.location.replace("inquiry.html");
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+    }
     return {
 
         //main function to initiate the module
@@ -999,6 +1149,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             _handleFormMeasurSchedule();
             _handleFormDesignSchedule();
             _handleFormAddWorkscope();
+            _handleFormComment();
         },
 
     };
@@ -1027,23 +1178,37 @@ jQuery(document).ready(function() {
             }
         }
     }
+    document.getElementById('btnNewInquiry').innerHTML += `
+    <a href="javascript:toggleSearch()" class="btn btn-primary font-weight-bolder">
+        <span class="svg-icon svg-icon-md">
+        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo2/dist/../src/media/svg/icons/General/Search.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect x="0" y="0" width="24" height="24"/>
+            <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+            <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/>
+        </g>
+    </svg><!--end::Svg Icon-->
 
+            </span>Search</a>
+`;
     if (inquiryPermission >= 2) {
         document.getElementById('btnNewInquiry').innerHTML += `
-        <a href="addinquiry.html" class="btn btn-primary font-weight-bolder">
-            <span class="svg-icon svg-icon-md">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                    height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <circle fill="#000000" cx="9" cy="15" r="6" />
-                        <path
-                            d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                            fill="#000000" opacity="0.3" />
-                    </g>
-                </svg>
-                </span>New Inquiry</a>`;
+      
+                <div style="width:15px"></div>
+                <a href="addinquiry.html" class="btn btn-primary font-weight-bolder">
+                    <span class="svg-icon svg-icon-md">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                            height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <circle fill="#000000" cx="9" cy="15" r="6" />
+                                <path
+                                    d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                    fill="#000000" opacity="0.3" />
+                            </g>
+                        </svg>
+                        </span>New Inquiry</a>`;
     }
 
 

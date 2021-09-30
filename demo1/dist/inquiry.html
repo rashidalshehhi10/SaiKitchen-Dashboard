@@ -189,7 +189,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="card-body">
                                     <!--begin: Search Form-->
-                                    <form class="mb-15">
+                                    <form class="mb-15" id="searchform" style="display: none;">
                                         <div class="row mb-6">
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>ID:</label>
@@ -211,10 +211,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <label>Customer Name:</label>
                                                 <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="3" />
                                             </div>
-                                            <div class="col-lg-3 mb-lg-0 mb-6">
-                                                <label>Workscope:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: Kitchen" data-col-index="4" />
-                                            </div>
                                             <!-- <div class="col-lg-3 mb-lg-0 mb-6">
 													<label>Status:</label>
 													<input type="text" class="form-control datatable-input" placeholder="E.g: test" data-col-index="1" />
@@ -223,6 +219,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </div>
                                         <div class="row mb-8">
                                             <div class="col-lg-3 mb-lg-0 mb-6">
+                                                <label>Workscope:</label>
+                                                <input type="text" class="form-control datatable-input" placeholder="E.g: Kitchen" data-col-index="4" />
+                                            </div>
+                                            <!-- <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>Start Date:</label>
                                                 <div class="input-daterange input-group" id="kt_datepicker">
                                                     <input type="text" class="form-control datatable-input" name="start" placeholder="From" data-col-index="16" />
@@ -233,37 +233,47 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     </div>
                                                     <input type="text" class="form-control datatable-input" name="end" placeholder="To" data-col-index="16" />
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>Measurement Schedule Date:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: 04/14/2021 1:31 PM" data-col-index="5" />
+                                                <input type="text" class="form-control datatable-input" placeholder="E.g: 04/14/2021 1:31 PM" data-col-index="6" />
                                             </div>
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>Measurement Assign To:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="6" />
+                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="7" />
                                             </div>
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>Design Schedule Date:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: 04/14/2021 1:31 PM" data-col-index="7" />
+                                                <input type="text" class="form-control datatable-input" placeholder="E.g: 04/14/2021 1:31 PM" data-col-index="8" />
                                             </div>
                                         </div>
                                         <div class="row mb-8">
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>Design Assign To:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="8" />
+                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="9" />
                                             </div>
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>Customer Code:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="10" />
+                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="12" />
                                             </div>
                                            
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>Customer Contact:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="11" />
+                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="13" />
                                             </div>
                                             <div class="col-lg-3 mb-lg-0 mb-6">
                                                 <label>Building Address:</label>
-                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="12" />
+                                                <input type="text" class="form-control datatable-input" placeholder="E.g: John" data-col-index="15" />
+                                            </div>
+                                            
+                                            </div>
+                                            
+                                        <div class="row mb-8">
+                                            <div class="col-lg-3 mb-lg-0 mb-6">
+                                                <label>Handled By:</label>
+                                                <select class="form-control datatable-input" data-col-index="25">
+													<option value="">Select</option>
+												</select>
                                             </div>
                                         </div>
                                         <!-- <div class="col-lg-3 mb-lg-0 mb-6">
@@ -323,12 +333,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <th>Status</th>
                                                 <th>Customer Name</th>
                                                 <th>Workscope</th>
-                                                <th>Measurement Provided By Customer</th>
+                                                <th>Comment</th>
                                                 <th>Measurement Schedule Date</th>
                                                 <th>Measurement Assign To</th>
-                                                <th>Design Provided By Customer</th>
                                                 <th>Design Schedule Date</th>
                                                 <th>Design Assign To</th>
+                                                <th>Measurement Provided By Customer</th>
+                                                <th>Design Provided By Customer</th>
                                                 <th>Customer Code</th>
                                                 <th>Customer Contact</th>
                                                 <th>Customer Email</th>
@@ -340,10 +351,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <th>Building Re-construction</th>
                                                 <th>Building Occupied</th>
                                                 <th>Description</th>
-                                                <th>Comment</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Added By</th>
+                                                <th>Measurement Added Date</th>
+                                                <th>Design Added Date</th>
+                                                <th>Quotation Added Date</th>
+                                                <th>Comment Added Date</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -834,6 +848,37 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="InquiryComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_inq_comment" action="" name="addcomment">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="">Comment*</label>
+                            <div class="">
+                                <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="inqtxtComment" name="inqtxtComment" class="form-control" placeholder="" rows="7"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="submit"  id="kt_comment_button"  class="btn btn-primary font-weight-bold">Add</button>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">   
     </div>
@@ -1079,7 +1124,14 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
 			
         }
-
+        function toggleSearch() {
+  var x = document.getElementById("searchform");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
         function logoutUser(user) {
 
             // alert('hi ' + branchRoleId);
