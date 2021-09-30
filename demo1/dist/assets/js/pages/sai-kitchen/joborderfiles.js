@@ -507,13 +507,23 @@ $('#kt_approve_inquiry_button').click(function () {
     document.getElementById("alert").innerHTML ="MaterialSheet File should be upload";
       return false;
     }
+    var file1='',file2='',file3='';
+    if(four.length >0){
+        file1 = four[0];
+    }
+    if(five.length >0){
+        file2 = five[0];
+    }
+    if(six.length >0){
+        file3 = six[0];
+    }
     var checklistdata = {
         "inquiryId":document.getElementById('inquiryId').value,
         "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
-        "materialSheetFileUrl":four,
-        "mepDrawingFileUrl": five,
+        "materialSheetFileUrl":file1,
+        "mepDrawingFileUrl": file2,
         //"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
-        "dataSheetApplianceFileUrl":six,
+        "dataSheetApplianceFileUrl":file3,
       };
     const data = JSON.stringify(checklistdata);
     console.log(data);
@@ -532,7 +542,7 @@ $('#kt_approve_inquiry_button').click(function () {
             window.location.replace("joborderfiles.html");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            //document.getElementById("alert").innerHTML ="All fields should be selected";
+            document.getElementById("alert").innerHTML ="An error Occured";
         }
     });  
 });
