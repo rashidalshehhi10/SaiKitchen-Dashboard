@@ -550,7 +550,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					document.getElementById("alert").innerHTML ="All fields should be selected";
 				}
-			}); 
+			});  
                 
             })
     }

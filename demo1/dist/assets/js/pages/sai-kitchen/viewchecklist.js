@@ -707,68 +707,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                      <!--end::Col-->`;
                   }
                 } 
-                    if(   dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]==null){
-                        dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]=``;
-                    }
-                    if(jobOrder[0].jobOrderChecklistFileUrl !=""){
-                     var fileExtension = jobOrder[0].jobOrderChecklistFileUrl.substr((jobOrder[0].jobOrderChecklistFileUrl.lastIndexOf('.') + 1));
-                     if(fileExtension == 'mp4') {
-                        var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].jobOrderChecklistFileUrl;
-                     dicJoborder["dicJoborder"+jobOrder[0].jobOrderId] +=`
-                         <!--begin::Col-->
-                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                            <!--begin::Card-->
-                            <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                               <div class="d-flex flex-column align-items-center">
-                                  <!--begin: Icon-->
-                                  <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
-                                  <!--end: Icon-->
-                                  <!--begin: Tite-->
-                                  <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].jobOrderChecklistFileUrl+`</a>
-                                  <!--end: Tite-->
-                               </div>
-                            </div>
-                            <!--end:: Card-->
-                         </div>
-                         <!--end::Col-->`;
-                     }else if(fileExtension == 'pdf') {
-                        dicJoborder["dicJoborder"+jobOrder[0].jobOrderId] +=`
-                        <!--begin::Col-->
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                           <!--begin::Card-->
-                           <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].jobOrderChecklistFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                              <div class="d-flex flex-column align-items-center">
-                                 <!--begin: Icon-->
-                                 <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
-                                 <!--end: Icon-->
-                                 <!--begin: Tite-->
-                                 <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].jobOrderChecklistFileUrl+`</a>
-                                 <!--end: Tite-->
-                              </div>
-                           </div>
-                           <!--end:: Card-->
-                        </div>
-                        <!--end::Col-->`;
-                     }else{
-                        dicJoborder["dicJoborder"+jobOrder[0].jobOrderId] +=`
-                        <!--begin::Col-->
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                           <!--begin::Card-->
-                           <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].jobOrderChecklistFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                              <div class="d-flex flex-column align-items-center">
-                                 <!--begin: Icon-->
-                                 <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
-                                 <!--end: Icon-->
-                                 <!--begin: Tite-->
-                                 <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].jobOrderChecklistFileUrl+`</a>
-                                 <!--end: Tite-->
-                              </div>
-                           </div>
-                           <!--end:: Card-->
-                        </div>
-                        <!--end::Col-->`;
-                     }
-                    }
+ 
      }
      counter = 1;
             if(isfirst){
@@ -815,20 +754,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     </div>
                    </div>
-                </div>`+` <div class="card">
-                <div class="card-header" >
-                   <div class="card-title collapsed" data-toggle="collapse" data-target="#dicJoborder`+element.inquiryWorkscopeId+`">
-                      <i class="la fab la-codepen"></i> Job order checklist file
-                   </div>
-                </div>
-                <div id="dicJoborder`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-                 <div class="card-body" >
-                 <div class="row" id="dicJoborder`+jobOrder[0].jobOrderId+`">
-                 `+dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]+`
-                 </div>
-                 </div>
-                </div>
-             </div>`;
+                </div>`;
                 }
                 tabsHTML+=`
                 <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
@@ -946,20 +872,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                      </div>
                      </div>
                     </div>
-                 </div>`+` <div class="card">
-                 <div class="card-header" >
-                    <div class="card-title collapsed" data-toggle="collapse" data-target="#dicJoborder`+element.inquiryWorkscopeId+`">
-                       <i class="la fab la-codepen"></i> Job order checklist file
-                    </div>
-                 </div>
-                 <div id="dicJoborder`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-                  <div class="card-body" >
-                  <div class="row" id="dicJoborder`+jobOrder[0].jobOrderId+`">
-                  `+dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]+`
-                  </div>
-                  </div>
-                 </div>
-              </div>`;
+                 </div>`;
                  }
                  
     tabsHTML+=`
