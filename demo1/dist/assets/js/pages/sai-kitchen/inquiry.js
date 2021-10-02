@@ -370,6 +370,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var action = ``;
+                        action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"   data-toggle="modal" data-target="#managedby"  class="btn btn-sm btn-clean btn-icon" title="Change Inquiry Managed By">
+                        <i class="la la-user-alt"></i>\
+                        </a>\
+                    `;
                         action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewinquirystatus.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
                         <i class="la la-ellipsis-h""></i>\
                         </a>\
@@ -1337,9 +1341,73 @@ jQuery(document).ready(function() {
             });
         }
     });
+ 
+    $.ajax({
+        type: "Get",
+        url: baseURL + '/User/GetAllUser',
+        data:null,
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        success: function(response) {
+            console.log(response);
+            if (response.isError == false) {
+                const roleTypeList = document.getElementById('kt_selectmanagedby');
+                var roleTypeListHTML = new Array();
+                var selected='';
+                for (var i = 0; i < response.data.length; i++) {
+                    selected='';
+                    roleTypeListHTML.push(`<option value="` + response.data[i].userId+ `" `+selected+`>` + response.data[i].userName + `</option>`);
+                }
+                roleTypeList.innerHTML = roleTypeListHTML.join('');
+ 
 
+
+            } else {
+
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+        }
+    });
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 });
 
+$('#kt_managedby_button').click(function () {
+    var checklistdata = {
+        "inquiryId":parseInt( document.getElementById('inquiryWorkscopeId').innerHTML),
+        "id": parseInt(document.getElementById('kt_selectmanagedby').value),
+      };
+
+    const data = JSON.stringify(checklistdata);
+    console.log(data);
+    
+    $.ajax({
+        type: "Post",
+        url: baseURL + '/Inquiry/ChangeInquiryManagedBy',
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        data: data,
+        success: function(response) {
+            console.log(response);
+ 
+            window.location.replace("inquiry.html");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            
+        }
+    });
+});
 
