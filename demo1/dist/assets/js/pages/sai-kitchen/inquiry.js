@@ -202,7 +202,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-danger'
                                 },
                                 9: {
-                                    'title': 'Measurement Approval Pending',
+                                    'title': 'Measurement Waiting For Approval',
                                     'class': ' label-light-primary'
                                 },
                                 10: {
@@ -479,7 +479,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'class': ' label-light-danger'
                             },
                             9: {
-                                'title': 'Measurement Approval Pending',
+                                'title': 'Measurement Waiting For Approval',
                                 'class': ' label-light-info'
                             },
                             10: {
@@ -654,7 +654,42 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 
             ],
         });
-
+        $('#MeasurementPending').on('click', function() {
+            table.column(2).search('Measurement Pending',true, false, true ).draw();
+         });
+         $('#MeasurementDelayed').on('click', function() {
+            table.column(2).search('Measurement'+' '+'Delayed',true, false, true).draw(); 
+         }); 
+         $('#MeasurementWaitingForApproval').on('click', function() {
+            table.column(2).search('Measurement'+' '+'Waiting'+' '+'For'+' '+'Approval',true, false, true).draw(); 
+         });   
+         $('#MeasurementRejected').on('click', function() {
+            table.column(2).search('Measurement'+' '+'Rejected',true, false, true).draw();
+         });
+         $('#DesignPending').on('click', function() {
+            table.column(2).search('Design'+' '+'Pending',true, false, true).draw();
+         });
+         $('#DesignDelayed').on('click', function() {
+            table.column(2).search('Design'+' '+'Delayed',true, false, true).draw();  
+         });
+         $('#DesignWaitingForApproval').on('click', function() {
+            table.column(2).search('Design'+' '+'Waiting'+' '+'For'+' '+'Approval',true, false, true).draw();
+         });
+         $('#DesignRejected').on('click', function() {
+            table.column(2).search('Design'+' '+'Rejected',true, false, true).draw();  
+         });
+         $('#QuotationPending').on('click', function() {
+            table.column(2).search('Quotation'+' '+'Pending',true, false, true).draw();  
+         });
+             $('#QuotationDelayed').on('click', function() {
+            table.column(2).search('Quotation'+' '+'Delayed',true, false, true).draw();  
+         });
+         $('#QuotationWaitingForCustomerApproval').on('click', function() {
+            table.column(2).search('Quotation'+' '+'Waiting'+' '+'For'+' '+'Customer'+' '+'Approval',true, false, true).draw();   
+         });
+         $('#QuotationRejected').on('click', function() {
+            table.column(2).search('Quotation'+' '+'Rejected',true, false, true).draw(); 
+         });
         var filter = function() {
             var val = $.fn.dataTable.util.escapeRegex($(this).val());
             table.column($(this).data('col-index')).search(val ? val : '', false, false).draw();
@@ -1378,6 +1413,55 @@ jQuery(document).ready(function() {
 
         }
     });
+    $.ajax({
+		type: "Post",
+		url: baseURL + '/Inquiry/GetinquiryStatusByBranch',
+
+		headers: {
+        'Content-Type': 'application/json',
+        'userId': user.data.userId,
+        'userToken': user.data.userToken,
+        'userRoleId': user.data.userRoles[0].userRoleId,
+        'branchId': user.data.userRoles[0].branchId,
+        'branchRoleId': user.data.userRoles[0].branchRoleId,
+        'Access-Control-Allow-Origin': '*',
+		},
+		success: function (response) {
+			console.log(response);
+
+         //   const data1 = JSON.stringify(response.data);
+
+        
+             document.getElementById('a').innerHTML=response.data[0][0].inquiryCount;
+             
+             document.getElementById('b').innerHTML=response.data[1][0].inquiryCount;
+
+             document.getElementById('c').innerHTML=response.data[8][0].inquiryCount;
+
+             document.getElementById('d').innerHTML=response.data[7][0].inquiryCount;
+
+             document.getElementById('e').innerHTML=response.data[2][0].inquiryCount;
+
+             document.getElementById('f').innerHTML=response.data[3][0].inquiryCount;
+
+             document.getElementById('g').innerHTML=response.data[11][0].inquiryCount;
+             
+             document.getElementById('h').innerHTML=response.data[10][0].inquiryCount;
+
+             document.getElementById('i').innerHTML=response.data[4][0].inquiryCount;
+
+             document.getElementById('j').innerHTML=response.data[5][0].inquiryCount;
+
+             document.getElementById('k').innerHTML=response.data[14][0].inquiryCount;
+
+             document.getElementById('l').innerHTML=response.data[13][0].inquiryCount;
+			
+
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+		}
+	});
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 });

@@ -158,6 +158,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 				//"mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
 				"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
 				//"dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
+                "siteMeasurementMatchingWithDesign": $('input[name="isMeasurements"]:checked').val(),
+                "siteMeasurementMatchingWithDesignNotes":document.getElementById("MeasurementsComment").value,
+                "matrialConfirmation": $('input[name="isMaterial"]:checked').val(),
+                "matrialConfirmationNotes":document.getElementById("MaterialComment").value,
+                "mepDrawing": $('input[name="isMEP"]:checked').val(),
+                "mepDrawingNotes":document.getElementById("MEPComment").value,
+                "quotationAndCalculationSheetMatchingProposal": $('input[name="isQuotation"]:checked').val(),
+                "quotationAndCalculationSheetMatchingProposalNotes":document.getElementById("QuotationComment").value,
+                "approvedDrawingsAndAvailabilityOfClientSignture": $('input[name="isDrawings"]:checked').val(),
+                "approvedDrawingsAndAvailabilityOfClientSigntureNotes":document.getElementById("DrawingsComment").value,
+                "appliancesDataSheet": $('input[name="isAppliances"]:checked').val(),
+                "appliancesDataSheetNotes":document.getElementById("AppliancesComment").value,
 			  };
 			  let from = document.getElementById('addcompCount').value;
 			  let to = document.getElementById('addmaxCount').value;

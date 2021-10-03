@@ -318,7 +318,8 @@ var KTWizard1 = function () {
 						promoDiscount: promoDiscount,
 						isMeasurementPromo: isMeasurementPromo,
 						isEscalationRequested: false,
-						addedBy:user.data.userId,
+						createdBy:user.data.userId,
+						managedBy:user.data.userId,
 						isActive: true,
 						isDeleted: false,
 						building: {
