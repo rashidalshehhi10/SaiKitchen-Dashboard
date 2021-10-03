@@ -1344,7 +1344,7 @@ jQuery(document).ready(function() {
  
     $.ajax({
         type: "Get",
-        url: baseURL + '/User/GetAllUser',
+        url: baseURL + '/User/GetInquiryCreateUser',
         data:null,
         headers: {
             'Content-Type': 'application/json',
