@@ -673,7 +673,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             table.column(2).search('Design'+' '+'Delayed',true, false, true).draw();  
          });
          $('#DesignWaitingForApproval').on('click', function() {
-            table.column(2).search('Design'+' '+'Waiting'+' '+'For'+' '+'Approval',true, false, true).draw();
+            table.column(2).search('Design Waiting For Customer Approval',true, false, true).draw();
          });
          $('#DesignRejected').on('click', function() {
             table.column(2).search('Design'+' '+'Rejected',true, false, true).draw();  
