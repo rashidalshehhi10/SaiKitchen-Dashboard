@@ -1444,7 +1444,7 @@ jQuery(document).ready(function() {
 
              document.getElementById('f').innerHTML=response.data[3][0].inquiryCount;
 
-             document.getElementById('g').innerHTML=response.data[11][0].inquiryCount;
+             document.getElementById('g').innerHTML=response.data[15][0].inquiryCount;
              
              document.getElementById('h').innerHTML=response.data[10][0].inquiryCount;
 
