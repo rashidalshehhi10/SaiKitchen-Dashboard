@@ -881,6 +881,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!--begin::Form-->
                 <form class="form" id="kt_modify_inquiry_schedule" action="" name="modifyScheduleDateform">
                     <span id="inquiryId" style="display:none">0</span>
+                    <input type="hidden" id="typeId" value="" />
                     <span id="customerCity" style="display:none">0</span>
                     <div class="modal-body">
 
@@ -957,11 +958,25 @@ License: You must have a valid license purchased only from themeforest(the above
 								</select>
                             </div>
                         </div>
-                    </div>
+                        </div>
+                        <div id="QuotId">
+                            <div class="form-group row">
+                                <label class="">Quotation Schedule Date*</label>
+                                <div class="col-lg-4 col-md-9 col-sm-12">
+                                    <div class="input-group date" id="kt_quotation_datetimepicker" data-target-input="nearest">
+                                        <input type="text" id="quotation_schedule_date" name="quotation_schedule_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_quotation_datetimepicker">
+                                        <div class="input-group-append" data-target="#kt_quotation_datetimepicker" data-toggle="datetimepicker">
+                                            <span class="input-group-text">
+                                                <i class="ki ki-calendar"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick="
-						document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="button" onclick="document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                         <button type="submit" id="kt_add_customer_button" class="btn btn-primary font-weight-bold">Update</button>
                     </div>
                 </form>
@@ -1267,12 +1282,19 @@ License: You must have a valid license purchased only from themeforest(the above
 
         function setInquiryId(inquiryId,type) {
             document.getElementById("inquiryId").innerHTML = inquiryId;
+            document.getElementById("typeId").value=type;
             if(type==1){
                 document.getElementById("DesignId").style.display='none';
+                document.getElementById("QuotId").style.display='none';
                 document.getElementById("MeasurementId").style.removeProperty('display');
+            }else if(type==2){
+                document.getElementById("MeasurementId").style.display='none';
+                document.getElementById("QuotId").style.display='none';
+                document.getElementById("DesignId").style.removeProperty('display');
             }else{
                 document.getElementById("MeasurementId").style.display='none';
-                document.getElementById("DesignId").style.removeProperty('display');
+                document.getElementById("DesignId").style.display='none';
+                document.getElementById("QuotId").style.removeProperty('display');
             }
         }
 
@@ -1459,6 +1481,13 @@ License: You must have a valid license purchased only from themeforest(the above
             }
         });
 }
+$('#kt_quotation_datetimepicker').datetimepicker({
+           minDate: new Date().getDate(),
+           daysOfWeekDisabled: [5],
+            disabledDates: [
+                moment('12/25/2020'),
+            ]
+        });
     </script>
 
     <!--end::Page Scripts-->

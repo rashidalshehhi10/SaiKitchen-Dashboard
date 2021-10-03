@@ -399,6 +399,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                <i class="la la-calendar"></i>
                            </a>
                        `;    }
+                       if(full.status==5 || full.status==6 ) {
+                        action += `
+                        <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryId + `,3)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
+                            <i class="la la-calendar"></i>
+                        </a>
+                    `;    
+                        }
+                           
                          if (inquiryPermission >= 3 && full.status==1 && full.noOfRevision==0) {
                             console.log(full.inquiryId);
                             // onclick="`+full.inquiryId+`" 
@@ -742,235 +750,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
-    var _handleFormMeasurSchedule = function() {
-        var form = KTUtil.getById('kt_modify_inquiry_schedule');
-        var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_add_customer_button');
 
-        if (!form) {
-            return;
-        }
-
-        FormValidation
-            .formValidation(
-                form, {
-                    fields: {
-                        measurement_schedule_date: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Measurement Schedule Date is required'
-                                }
-                            }
-                        },
-                        MeasurementAssignto: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Measurement Assign is required'
-                                },
-
-                            }
-                        },
-                        
-                    },
-                    plugins: {
-                        trigger: new FormValidation.plugins.Trigger(),
-                        submitButton: new FormValidation.plugins.SubmitButton(),
-                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
-                        bootstrap: new FormValidation.plugins.Bootstrap({
-                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
-                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
-                        })
-                    }
-                }
-            )
-            .on('core.form.valid', function() {
-                // Show loading state on button
-                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
-                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-                var inquirySchedule = {
-                    inquiryId: document.getElementById("inquiryId").innerHTML,
-                    measurementAssignedTo: $('#kt_assignto').val(),
-                    measurementScheduleDate: document.getElementById('measurement_schedule_date').value,
-                    inquiryStatusId: 0,
-                    designAssignedTo: 0,
-                    designScheduleDate:"",
-                    isProvidedByCustomer:$('input[name="clientMeasurement"]:checked').val(),
-                };
-                const data = JSON.stringify(inquirySchedule);
-                console.log(data);
-                $.ajax({
-                    type: "Post",
-                    url: baseURL + '/Inquiry/UpdateAssignMeasurement',
-
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'userId': user.data.userId,
-                        'userToken': user.data.userToken,
-                        'userRoleId': user.data.userRoles[0].userRoleId,
-                        'branchId': user.data.userRoles[0].branchId,
-                        'branchRoleId': user.data.userRoles[0].branchRoleId,
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                    data: data,
-                    success: function(response) {
-                        // Release button
-                       // KTUtil.btnRelease(formSubmitButton);
-                        console.log(response);
-                        // window.location.replace("home.html");
-                        if (response.isError == false) {
-                            // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("inquiry.html");
-
-                        } else {
-                            Swal.fire({
-                                text: response.errorMessage,
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
-                                }
-                            }).then(function() {
-                                KTUtil.scrollTop();
-                            });
-                        }
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        // Release button
-                        KTUtil.btnRelease(formSubmitButton);
-
-                        // alert(errorThrown);
-
-                        Swal.fire({
-                            text: 'Internet Connection Problem',
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        }).then(function() {
-                            KTUtil.scrollTop();
-                        });
-                    }
-                });
-            })
-    }
-    var _handleFormDesignSchedule = function() {
-        var form = KTUtil.getById('kt_modify_inquiry_schedule');
-        var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_add_customer_button');
-
-        if (!form) {
-            return;
-        }
-
-        FormValidation
-            .formValidation(
-                form, {
-                    fields: {
-                        design_schedule_date: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Design Schedule Date is required'
-                                }
-                            }
-                        },
-                        DesignAssignto: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Design Assign is required'
-                                },
-
-                            }
-                        },
-                    },
-                    plugins: {
-                        trigger: new FormValidation.plugins.Trigger(),
-                        submitButton: new FormValidation.plugins.SubmitButton(),
-                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
-                        bootstrap: new FormValidation.plugins.Bootstrap({
-                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
-                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
-                        })
-                    }
-                }
-            )
-            .on('core.form.valid', function() {
-                // Show loading state on button
-                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
-                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-                var inquirySchedule = {
-                    inquiryId: document.getElementById("inquiryId").innerHTML,
-                    inquiryWorkscopeId:0,
-                    measurementAssignedTo: 0,
-                    measurementScheduleDate: "",
-                    inquiryStatusId:0,
-                    designAssignedTo: $('#kt_designassignto').val(),
-                    designScheduleDate: document.getElementById('design_schedule_date').value,
-                    isProvidedByCustomer:$('input[name="clientDesign"]:checked').val(),
-                };
-                const data = JSON.stringify(inquirySchedule);
-                console.log(data);
-                $.ajax({
-                    type: "Post",
-                    url: baseURL + '/Inquiry/UpdateAssignDesign',
-
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'userId': user.data.userId,
-                        'userToken': user.data.userToken,
-                        'userRoleId': user.data.userRoles[0].userRoleId,
-                        'branchId': user.data.userRoles[0].branchId,
-                        'branchRoleId': user.data.userRoles[0].branchRoleId,
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                    data: data,
-                    success: function(response) {
-                        // Release button
-                     //   KTUtil.btnRelease(formSubmitButton);
-                        console.log(response);
-                        // window.location.replace("home.html");
-                        if (response.isError == false) {
-                            // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("inquiry.html");
-
-                        } else {
-                            Swal.fire({
-                                text: response.errorMessage,
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
-                                }
-                            }).then(function() {
-                                KTUtil.scrollTop();
-                            });
-                        }
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        // Release button
-                        KTUtil.btnRelease(formSubmitButton);
-
-                        // alert(errorThrown);
-
-                        Swal.fire({
-                            text: 'Internet Connection Problem',
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        }).then(function() {
-                            KTUtil.scrollTop();
-                        });
-                    }
-                });
-            })
-
-    }
     var _handleFormAddWorkscope = function() {
         var form = KTUtil.getById('kt_modify_add_workscope');
         var formSubmitUrl = KTUtil.attr(form, 'action');
@@ -1185,8 +965,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         //main function to initiate the module
         init: function() {
             initTable1();
-            _handleFormMeasurSchedule();
-            _handleFormDesignSchedule();
             _handleFormAddWorkscope();
             _handleFormComment();
         },
@@ -1495,3 +1273,335 @@ $('#kt_managedby_button').click(function () {
     });
 });
 
+$('#kt_add_customer_button').click(function () {
+    var type = document.getElementById("typeId").value;
+    var form = KTUtil.getById('kt_modify_inquiry_schedule');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_add_customer_button');
+
+        if (!form) {
+            return;
+        }
+        var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+      if(type==1){
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        measurement_schedule_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Measurement Schedule Date is required'
+                                }
+                            }
+                        },
+                        MeasurementAssignto: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Measurement Assign is required'
+                                },
+
+                            }
+                        },
+                        
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                var inquirySchedule = {
+                    inquiryId: document.getElementById("inquiryId").innerHTML,
+                    measurementAssignedTo: $('#kt_assignto').val(),
+                    measurementScheduleDate: document.getElementById('measurement_schedule_date').value,
+                    inquiryStatusId: 0,
+                    designAssignedTo: 0,
+                    designScheduleDate:"",
+                    isProvidedByCustomer:$('input[name="clientMeasurement"]:checked').val(),
+                };
+                const data = JSON.stringify(inquirySchedule);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Inquiry/UpdateAssignMeasurement',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                       // KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("inquiry.html");
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+        }
+        if(type==2){
+            var form = KTUtil.getById('kt_modify_inquiry_schedule');
+            var formSubmitUrl = KTUtil.attr(form, 'action');
+            var formSubmitButton = KTUtil.getById('kt_add_customer_button');
+    
+            if (!form) {
+                return;
+            }
+    
+            FormValidation
+                .formValidation(
+                    form, {
+                        fields: {
+                            design_schedule_date: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Design Schedule Date is required'
+                                    }
+                                }
+                            },
+                            DesignAssignto: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Design Assign is required'
+                                    },
+    
+                                }
+                            },
+                        },
+                        plugins: {
+                            trigger: new FormValidation.plugins.Trigger(),
+                            submitButton: new FormValidation.plugins.SubmitButton(),
+                            //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                            bootstrap: new FormValidation.plugins.Bootstrap({
+                                //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                                //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                            })
+                        }
+                    }
+                )
+                .on('core.form.valid', function() {
+                    // Show loading state on button
+                    KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                    // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                    var inquirySchedule = {
+                        inquiryId: document.getElementById("inquiryId").innerHTML,
+                        inquiryWorkscopeId:0,
+                        measurementAssignedTo: 0,
+                        measurementScheduleDate: "",
+                        inquiryStatusId:0,
+                        designAssignedTo: $('#kt_designassignto').val(),
+                        designScheduleDate: document.getElementById('design_schedule_date').value,
+                        isProvidedByCustomer:$('input[name="clientDesign"]:checked').val(),
+                    };
+                    const data = JSON.stringify(inquirySchedule);
+                    console.log(data);
+                    $.ajax({
+                        type: "Post",
+                        url: baseURL + '/Inquiry/UpdateAssignDesign',
+    
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'userId': user.data.userId,
+                            'userToken': user.data.userToken,
+                            'userRoleId': user.data.userRoles[0].userRoleId,
+                            'branchId': user.data.userRoles[0].branchId,
+                            'branchRoleId': user.data.userRoles[0].branchRoleId,
+                            'Access-Control-Allow-Origin': '*',
+                        },
+                        data: data,
+                        success: function(response) {
+                            // Release button
+                         //   KTUtil.btnRelease(formSubmitButton);
+                            console.log(response);
+                            // window.location.replace("home.html");
+                            if (response.isError == false) {
+                                // sessionStorage.setItem('user', JSON.stringify(response));
+                                window.location.replace("inquiry.html");
+    
+                            } else {
+                                Swal.fire({
+                                    text: response.errorMessage,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn font-weight-bold btn-light-primary"
+                                    }
+                                }).then(function() {
+                                    KTUtil.scrollTop();
+                                });
+                            }
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            // Release button
+                            KTUtil.btnRelease(formSubmitButton);
+    
+                            // alert(errorThrown);
+    
+                            Swal.fire({
+                                text: 'Internet Connection Problem',
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    });
+                })
+        }
+        if(type==3){
+            var form = KTUtil.getById('kt_modify_inquiry_schedule');
+            var formSubmitUrl = KTUtil.attr(form, 'action');
+            var formSubmitButton = KTUtil.getById('kt_add_customer_button');
+    
+            if (!form) {
+                return;
+            }
+    
+            FormValidation
+                .formValidation(
+                    form, {
+                        fields: {
+                            quotation_schedule_date: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Quotation Schedule Date is required'
+                                    }
+                                }
+                            },
+                        },
+                        plugins: {
+                            trigger: new FormValidation.plugins.Trigger(),
+                            submitButton: new FormValidation.plugins.SubmitButton(),
+                            //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                            bootstrap: new FormValidation.plugins.Bootstrap({
+                                //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                                //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                            })
+                        }
+                    }
+                )
+                .on('core.form.valid', function() {
+                    // Show loading state on button
+                    KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                    // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                    var inquirySchedule = {
+                        inquiryId:parseInt( document.getElementById("inquiryId").innerHTML),
+                        userId: 0,
+                        date: document.getElementById('quotation_schedule_date').value,
+                    };
+                    const data = JSON.stringify(inquirySchedule);
+                    console.log(data);
+                    $.ajax({
+                        type: "Post",
+                        url: baseURL + '/Quotation/QuotationSchedule',
+    
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'userId': user.data.userId,
+                            'userToken': user.data.userToken,
+                            'userRoleId': user.data.userRoles[0].userRoleId,
+                            'branchId': user.data.userRoles[0].branchId,
+                            'branchRoleId': user.data.userRoles[0].branchRoleId,
+                            'Access-Control-Allow-Origin': '*',
+                        },
+                        data: data,
+                        success: function(response) {
+                            // Release button
+                         //   KTUtil.btnRelease(formSubmitButton);
+                            console.log(response);
+                            // window.location.replace("home.html");
+                            if (response.isError == false) {
+                                // sessionStorage.setItem('user', JSON.stringify(response));
+                                window.location.replace("inquiry.html");
+    
+                            } else {
+                                Swal.fire({
+                                    text: response.errorMessage,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn font-weight-bold btn-light-primary"
+                                    }
+                                }).then(function() {
+                                    KTUtil.scrollTop();
+                                });
+                            }
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            // Release button
+                            KTUtil.btnRelease(formSubmitButton);
+    
+                            // alert(errorThrown);
+    
+                            Swal.fire({
+                                text: 'Internet Connection Problem',
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    });
+                })
+        }
+});
