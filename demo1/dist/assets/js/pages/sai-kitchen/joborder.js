@@ -224,7 +224,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-primary'
                                 },
                                 47: {
-                                    'title': 'Job Order Factory Accepted',
+                                    'title': 'Job Order In-progress',
                                     'class': ' label-light-success'
                                 },
                                 48: {
@@ -244,7 +244,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-info'
                                 },
                                 52: {
-                                    'title': 'jobOrder Delay Requested',
+                                    'title': 'jobOrder Delayed ',
                                     'class': ' label-light-primary'
                                 },
                                 53: {

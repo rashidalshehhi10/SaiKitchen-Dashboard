@@ -256,7 +256,54 @@ customerDetail.innerHTML=` <!--begin::User-->
       <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
    </div>
-  
+   <div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Site Measurement Matching With Design :</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].siteMeasurementMatchingWithDesign+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">Site Measurement Matching With Design Notes :</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].siteMeasurementMatchingWithDesignNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">material Confirmation :</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].materialConfirmation+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">material Confirmation Notes:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].materialConfirmationNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">mep drawing:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].mepdrawing+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">mep drawing Notes:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].mepdrawingNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">quotation And Calculation Sheet Matching Proposal:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].quotationAndCalculationSheetMatchingProposal+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">quotation And Calculation Sheet Matching Proposal Notes:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].quotationAndCalculationSheetMatchingProposalNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">approved Drawings And Availability Of Client Signature:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].approvedDrawingsAndAvailabilityOfClientSignature+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">approved Drawings And Availability Of Client Signature Notes:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].approvedDrawingsAndAvailabilityOfClientSignatureNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">appliances DataSheet:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].appliancesDataSheet+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+   <span class="font-weight-bold mr-2">appliances DataSheet Notes:</span>
+   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].appliancesDataSheetNotes+`</span>
+</div>
 </div>
 <!--end::Contact-->
 `;
@@ -626,7 +673,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     if(   dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]==null){
                         dicJoborder["dicJoborder"+jobOrder[0].jobOrderId]=``;
                     }
-                    if(jobOrder[0].jobOrderChecklistFileUrl !=""){
+                    if(jobOrder[0].jobOrderChecklistFileUrl !="" && jobOrder[0].jobOrderChecklistFileUrl !=null){
                      var fileExtension = jobOrder[0].jobOrderChecklistFileUrl.substr((jobOrder[0].jobOrderChecklistFileUrl.lastIndexOf('.') + 1));
                      if(fileExtension == 'mp4') {
                         var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].jobOrderChecklistFileUrl;
