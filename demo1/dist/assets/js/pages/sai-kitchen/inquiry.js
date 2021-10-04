@@ -698,6 +698,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          $('#QuotationRejected').on('click', function() {
             table.column(2).search('Quotation'+' '+'Rejected',true, false, true).draw(); 
          });
+         $('#DesignRevisionRequested').on('click', function() {
+            table.column(2).search('Design Revision Requested',true, false, true).draw(); 
+         });
+         $('#QuotationApproved').on('click', function() {
+            table.column(2).search('Quotation Accepted',true, false, true).draw(); 
+         });
         var filter = function() {
             var val = $.fn.dataTable.util.escapeRegex($(this).val());
             table.column($(this).data('col-index')).search(val ? val : '', false, false).draw();
@@ -1233,6 +1239,10 @@ jQuery(document).ready(function() {
              document.getElementById('k').innerHTML=response.data[14][0].inquiryCount;
 
              document.getElementById('l').innerHTML=response.data[13][0].inquiryCount;
+
+             document.getElementById('m').innerHTML=response.data[55][0].inquiryCount;
+             
+             document.getElementById('n').innerHTML=response.data[52][0].inquiryCount;
 			
 
 		},
