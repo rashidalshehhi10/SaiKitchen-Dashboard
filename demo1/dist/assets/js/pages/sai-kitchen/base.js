@@ -1866,7 +1866,7 @@ if (permission.includes(18)) {
 		</svg>
 		<!--end::Svg Icon-->
 	</span>
-	<span class="menu-text">Job Order Approval</span>
+	<span class="menu-text">Job Order Confirmation</span>
 	
 </a>
 </li>`;
