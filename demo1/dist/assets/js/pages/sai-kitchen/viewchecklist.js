@@ -156,7 +156,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 				//"isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
 				//"materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
 				//"mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
-				"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
+				//"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
 				//"dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
                 "siteMeasurementMatchingWithDesign": $('input[name="isMeasurements"]:checked').val(),
                 "siteMeasurementMatchingWithDesignNotes":document.getElementById("MeasurementsComment").value,
@@ -1310,7 +1310,7 @@ workscope.innerHTML=workscopeHtml;
                    });
 
 
-                   for (let j = 6; j <= 6; j++) {
+                 /*   for (let j = 6; j <= 6; j++) {
                     $('#kt_dropzone_'+j).dropzone({
                                  url: baseURL+"/File/UploadFile", // Set the url for your upload script location
                                 type: "Head",
@@ -1375,4 +1375,4 @@ workscope.innerHTML=workscopeHtml;
                                 }
                                 return arr;
                             }
-                            
+                             */
