@@ -198,6 +198,31 @@ var tabsHTML =``;
 //     </a>
 //  </li>`;
 // });
+var bool1,bool2,bool2,bool3,bool4,bool5,bool6;
+   if(response.data.inquiry.jobOrders[0].siteMeasurementMatchingWithDesign){
+      bool1  ="Yes";
+   }else
+      bool1 = "No";
+   if(response.data.inquiry.jobOrders[0].materialConfirmation){
+      bool2  ="Yes";
+   }else
+      bool2 = "No";
+   if(response.data.inquiry.jobOrders[0].mepdrawing){
+      bool3  ="Yes";
+   }else
+      bool3 = "No";
+   if(response.data.inquiry.jobOrders[0].quotationAndCalculationSheetMatchingProposal){
+      bool4  ="Yes";
+   }else
+      bool4 = "No"; 
+   if(response.data.inquiry.jobOrders[0].approvedDrawingsAndAvailabilityOfClientSignature){
+      bool5  ="Yes";
+   }else
+      bool5 = "No"; 
+   if(response.data.inquiry.jobOrders[0].appliancesDataSheet){
+      bool6  ="Yes";
+   }else
+      bool6 = "No"; 
 customerDetail.innerHTML=` <!--begin::User-->
 <div class="d-flex align-items-center">
    <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
@@ -258,7 +283,7 @@ customerDetail.innerHTML=` <!--begin::User-->
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">Site Measurement Matching With Design :</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].siteMeasurementMatchingWithDesign+`</span>
+   <span class="text-muted" style=" text-align: right;">`+bool1+`</span>
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">Site Measurement Matching With Design Notes :</span>
@@ -266,7 +291,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">material Confirmation :</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].materialConfirmation+`</span>
+   <span class="text-muted" style=" text-align: right;">`+bool2+`</span>
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">material Confirmation Notes:</span>
@@ -274,7 +299,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">mep drawing:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].mepdrawing+`</span>
+   <span class="text-muted" style=" text-align: right;">`+bool3+`</span>
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">mep drawing Notes:</span>
@@ -282,7 +307,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">quotation And Calculation Sheet Matching Proposal:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].quotationAndCalculationSheetMatchingProposal+`</span>
+   <span class="text-muted" style=" text-align: right;">`+bool4+`</span>
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">quotation And Calculation Sheet Matching Proposal Notes:</span>
@@ -290,7 +315,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">approved Drawings And Availability Of Client Signature:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].approvedDrawingsAndAvailabilityOfClientSignature+`</span>
+   <span class="text-muted" style=" text-align: right;">`+bool5+`</span>
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">approved Drawings And Availability Of Client Signature Notes:</span>
@@ -298,7 +323,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">appliances DataSheet:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].appliancesDataSheet+`</span>
+   <span class="text-muted" style=" text-align: right;">`+bool6+`</span>
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">
    <span class="font-weight-bold mr-2">appliances DataSheet Notes:</span>
