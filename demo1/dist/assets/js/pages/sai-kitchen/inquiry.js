@@ -1242,7 +1242,7 @@ jQuery(document).ready(function() {
 
              document.getElementById('m').innerHTML=response.data[55][0].inquiryCount;
              
-             document.getElementById('n').innerHTML=response.data[52][0].inquiryCount;
+             document.getElementById('n').innerHTML=response.data[12][0].inquiryCount;
 			
 
 		},
