@@ -69,6 +69,7 @@ var KTAppsUsersListDatatable = function() {
                         $("#totalCustomer").html(data.totalCustomers);
                         $("#contactedCustomer").html(data.contactedCustomers);
                         $("#needToContact").html(data.needToContactCustomers);
+                        $("#noInquiryCustomer").html(data.customerWithoutInquiry);
                         return '<span class="font-weight-bolder">' + data.customerId + '</span>';
 
                     }
@@ -407,6 +408,17 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     },
                 }, {
+                    field: 'TotalNoOfInquiries',
+                    title: 'Total Inquiries',
+                    autoHide: true,
+                    // overflow: 'visible',
+                    // callback function support for column rendering
+                    template: function(data) {
+                        
+                        return '<span class="label label-lg font-weight-bold ' + data.totalNoOfInquiries + ' label-inline">' +data.totalNoOfInquiries + '</span>';
+
+                    },
+                },{
                     field: 'AddedBy',
                     title: 'Added By',
                     autoHide: true,
