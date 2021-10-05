@@ -5,7 +5,7 @@ import {
 } from './constant.js'
 
 let user;
-
+var table;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -14,7 +14,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     var initTable1 = function() {
         // begin first table
-        var table = $('#kt_datatable').DataTable({
+         table = $('#kt_datatable').DataTable({
             responsive: true,
             // Pagination settings
             dom: `<'row'<'col-sm-12'tr>>
@@ -670,9 +670,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 
             ],
         });
-        $('#MeasurementPending').on('click', function() {
-            table.column(2).search('Measurement Pending',true, false, true ).draw();
+        $('#TotalInquiry').on('click', function() {
+            table.column(2).search('',true, false, true ).draw();
          });
+         $('#MeasurementPending').on('click', function() {
+             table.column(2).search('Measurement Pending',true, false, true ).draw();
+          });
          $('#MeasurementDelayed').on('click', function() {
             table.column(2).search('Measurement'+' '+'Delayed',true, false, true).draw(); 
          }); 
@@ -1267,6 +1270,7 @@ jQuery(document).ready(function() {
 
              document.getElementById('q').innerHTML=response.data[26][0].inquiryCount;
 			
+             document.getElementById('l').innerHTML=  table.page.info().recordsTotal;
 
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
