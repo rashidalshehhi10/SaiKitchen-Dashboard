@@ -1266,7 +1266,7 @@ jQuery(document).ready(function() {
 
              document.getElementById('o').innerHTML=response.data[46][0].inquiryCount;
              
-             document.getElementById('p').innerHTML=response.data[51][0].inquiryCount;
+             document.getElementById('p').innerHTML=response.data[25][0].inquiryCount;
 
              document.getElementById('q').innerHTML=response.data[26][0].inquiryCount;
 			
