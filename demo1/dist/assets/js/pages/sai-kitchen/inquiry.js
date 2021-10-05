@@ -203,7 +203,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 9: {
                                     'title': 'Measurement Waiting For Approval',
-                                    'class': ' label-light-primary'
+                                    'class': ' label-light-info'
                                 },
                                 10: {
                                     'title': 'Design Approved',
@@ -215,7 +215,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 },
                                 12: {
                                     'title': 'Design Approval Pending',
-                                    'class': ' label-light-primary'
+                                    'class': ' label-light-info'
                                 },
                                 13: {
                                     'title': 'Quotation Approved',
@@ -242,11 +242,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-primary'
                                 },
                                 19: {
-                                    'title': 'Technical  Checklist Approved',
+                                    'title': 'Technical Checklist Approved',
                                     'class': ' label-light-success'
                                 },
                                 20: {
                                     'title': 'Technical Checklist Rejected',
+                                    'class': ' label-light-danger'
+                                },
+                                26: {
+                                    'title': 'Job Order Delayed',
                                     'class': ' label-light-danger'
                                 },
                                 36: {
@@ -254,11 +258,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-primary'
                                 },
                                 37: {
-                                    'title': 'Measurement Assignee  Accepted',
+                                    'title': 'Measurement Assignee Accepted',
                                     'class': 'label-light-success'
                                 },
                                 38: {
-                                    'title': 'Measurement Assignee  Rejected',
+                                    'title': 'Measurement Assignee Rejected',
                                     'class': ' label-light-danger'
                                 },
                                 39: {
@@ -266,11 +270,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-primary'
                                 },
                                 40: {
-                                    'title': 'Design Assignee  Accepted',
+                                    'title': 'Design Assignee Accepted',
                                     'class': 'label-light-success'
                                 },
                                 41: {
-                                    'title': 'Design Assignee  Rejected',
+                                    'title': 'Design Assignee Rejected',
                                     'class': ' label-light-danger'
                                 },
                                 42: {
@@ -294,7 +298,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-primary'
                                 },
                                 47: {
-                                    'title': 'Job Order In-progress',
+                                    'title': 'Job Order In-Progress',
                                     'class': ' label-light-success'
                                 },
                                 48: {
@@ -302,27 +306,27 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'class': ' label-light-danger'
                                 },
                                 49: {
-                                    'title': 'jobOrder Reschedule Requested',
+                                    'title': 'Job Order Reschedule Requested',
                                     'class': ' label-light-primary'
                                 },
                                 50: {
-                                    'title': 'jobOrder Reschedule Approved',
+                                    'title': 'Job Order Reschedule Approved',
                                     'class': ' label-light-success'
                                 },
                                 51: {
-                                    'title': 'jobOrder Reschedule Rejected',
+                                    'title': 'Job Order Reschedule Rejected',
                                     'class': ' label-light-danger'
                                 },
                                 52: {
-                                    'title': 'jobOrder Delayed',
+                                    'title': 'Job Order Delay Requested',
                                     'class': ' label-light-primary'
                                 },
                                 53: {
-                                    'title': 'jobOrder Ready For Installation',
+                                    'title': 'Job Order Ready For Installation',
                                     'class': ' label-light-primary'
                                 },
                                 27: {
-                                    'title': 'jobOrder Completed',
+                                    'title': 'Job Order Completed',
                                     'class': ' label-light-success'
                                 },
                                 56: {
@@ -534,16 +538,20 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'title': 'Technical Checklist Rejected',
                                 'class': ' label-light-danger'
                             },
+                            26: {
+                                'title': 'Job Order Delayed',
+                                'class': ' label-light-danger'
+                            },
                             36: {
                                 'title': 'Measurement Assignee Pending',
                                 'class': ' label-light-primary'
                             },
                             37: {
-                                'title': 'Measurement Assignee  Accepted',
+                                'title': 'Measurement Assignee Accepted',
                                 'class': 'label-light-success'
                             },
                             38: {
-                                'title': 'Measurement Assignee  Rejected',
+                                'title': 'Measurement Assignee Rejected',
                                 'class': ' label-light-danger'
                             },
                             39: {
@@ -551,11 +559,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'class': ' label-light-primary'
                             },
                             40: {
-                                'title': 'Design Assignee  Accepted',
+                                'title': 'Design Assignee Accepted',
                                 'class': 'label-light-success'
                             },
                             41: {
-                                'title': 'Design Assignee  Rejected',
+                                'title': 'Design Assignee Rejected',
                                 'class': ' label-light-danger'
                             },
                             42: {
@@ -579,7 +587,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'class': ' label-light-primary'
                             },
                             47: {
-                                'title': 'Job Order Factory Accepted',
+                                'title': 'Job Order In-Progress',
                                 'class': ' label-light-success'
                             },
                             48: {
@@ -587,27 +595,27 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 'class': ' label-light-danger'
                             },
                             49: {
-                                'title': 'jobOrder Reschedule Requested',
+                                'title': 'Job Order Reschedule Requested',
                                 'class': ' label-light-primary'
                             },
                             50: {
-                                'title': 'jobOrder Reschedule Approved',
+                                'title': 'Job Order Reschedule Approved',
                                 'class': ' label-light-success'
                             },
                             51: {
-                                'title': 'jobOrder Reschedule Rejected',
+                                'title': 'Job Order Reschedule Rejected',
                                 'class': ' label-light-danger'
                             },
                             52: {
-                                'title': 'jobOrder Delay Requested',
+                                'title': 'Job Order Delay Requested',
                                 'class': ' label-light-primary'
                             },
                             53: {
-                                'title': 'jobOrder Ready For Installation',
+                                'title': 'Job Order Ready For Installation',
                                 'class': ' label-light-primary'
                             },
                             27: {
-                                'title': 'jobOrder Completed',
+                                'title': 'Job Order Completed',
                                 'class': ' label-light-success'
                             },
                             56: {
@@ -703,6 +711,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
          $('#QuotationApproved').on('click', function() {
             table.column(2).search('Quotation Accepted',true, false, true).draw(); 
+         });
+         $('#JobOrderInProgress').on('click', function() {
+            table.column(2).search('Job Order In-progress',true, false, true).draw(); 
+         });
+         $('#JobOrderDelayed').on('click', function() {
+            table.column(2).search('Job Order Delayed',true, false, true).draw(); 
+         });
+         $('#JobOrderCompleted').on('click', function() {
+            table.column(2).search('Job Order Completed',true, false, true).draw(); 
          });
         var filter = function() {
             var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -1243,6 +1260,12 @@ jQuery(document).ready(function() {
              document.getElementById('m').innerHTML=response.data[55][0].inquiryCount;
              
              document.getElementById('n').innerHTML=response.data[12][0].inquiryCount;
+
+             document.getElementById('o').innerHTML=response.data[46][0].inquiryCount;
+             
+             document.getElementById('p').innerHTML=response.data[51][0].inquiryCount;
+
+             document.getElementById('q').innerHTML=response.data[26][0].inquiryCount;
 			
 
 		},
