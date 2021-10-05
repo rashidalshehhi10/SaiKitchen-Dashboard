@@ -154,9 +154,9 @@ if(branchTypeId==2||branchTypeId==1){
 
       if(branchTypeId==3){
          document.getElementById("jocomp").style.display = "inline-block";
-         document.getElementById("rtinstall").style.display = "inline-block";
+         //document.getElementById("rtinstall").style.display = "inline-block";
          document.getElementById("adelay").style.display = "inline-block";
-         document.getElementById("aror").style.display = "inline-block";
+        // document.getElementById("aror").style.display = "inline-block";
             }
     
 

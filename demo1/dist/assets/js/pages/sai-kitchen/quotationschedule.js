@@ -3,7 +3,9 @@
 import {
     baseURL
 } from './constant.js'
-
+import {
+    inqStatus
+} from './status.js'
 let user;
 
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
@@ -123,80 +125,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // 	break;
 
                         case 'Status':
-                            var status = {
-                                1: {
-                                    'title': 'Measurement Pending',
-                                    'class': 'label-light-primary'
-                                },
-                                2: {
-                                    'title': 'Measurement Delayed',
-                                    'class': ' label-light-danger'
-                                },
-                                3: {
-                                    'title': 'Design Pending',
-                                    'class': ' label-light-primary'
-                                },
-                                4: {
-                                    'title': 'Design Delayed',
-                                    'class': ' label-light-success'
-                                },
-                                5: {
-                                    'title': 'Quotation Pending',
-                                    'class': ' label-light-primary'
-                                },
-                                6: {
-                                    'title': 'Quotation Delayed',
-                                    'class': ' label-light-danger'
-                                },
-                                7: {
-                                    'title': 'Measurement Approved',
-                                    'class': 'label-light-success'
-                                },
-                                8: {
-                                    'title': 'Measurement Rejected',
-                                    'class': ' label-light-info'
-                                },
-                                9: {
-                                    'title': 'Measurement Approval Pending',
-                                    'class': ' label-light-primary'
-                                },
-                                10: {
-                                    'title': 'Design Approved',
-                                    'class': 'label-light-success'
-                                },
-                                11: {
-                                    'title': 'Design Rejected',
-                                    'class': ' label-light-info'
-                                },
-                                12: {
-                                    'title': 'Design Approval Pending',
-                                    'class': ' label-light-primary'
-                                },
-                                13: {
-                                    'title': 'Quotation Approved',
-                                    'class': 'label-light-success'
-                                },
-                                14: {
-                                    'title': 'Quotation Rejected',
-                                    'class': ' label-light-info'
-                                },
-                                15: {
-                                    'title': 'Quotation Approval Pending',
-                                    'class': ' label-light-primary'
-                                },
-                                16: {
-                                    'title': 'Design Waiting For Customer Approval',
-                                    'class': ' label-light-primary'
-                                },
-                                17: {
-                                    'title': 'Design Rejected By Client',
-                                    'class': ' label-light-info'
-                                },
-                                42: {
-                                    'title': 'Quotation Schedule  Pending',
-                                    'class': ' label-light-primary'
-                                },
-                            };
+                            var status = inqStatus;
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
                                     $('.datatable-input[data-col-index="2"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
@@ -242,80 +171,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 {
                     targets: 2,
                     render: function(data, type, full, meta) {
-                        var status = {
-                            1: {
-                                'title': 'Measurement Pending',
-                                'class': 'label-light-primary'
-                            },
-                            2: {
-                                'title': 'Measurement Delayed',
-                                'class': ' label-light-danger'
-                            },
-                            3: {
-                                'title': 'Design Pending',
-                                'class': ' label-light-primary'
-                            },
-                            4: {
-                                'title': 'Design Delayed',
-                                'class': ' label-light-success'
-                            },
-                            5: {
-                                'title': 'Quotation Pending',
-                                'class': ' label-light-primary'
-                            },
-                            6: {
-                                'title': 'Quotation Delayed',
-                                'class': ' label-light-danger'
-                            },
-                            7: {
-                                'title': 'Measurement Approved',
-                                'class': 'label-light-success'
-                            },
-                            8: {
-                                'title': 'Measurement Rejected',
-                                'class': ' label-light-info'
-                            },
-                            9: {
-                                'title': 'Measurement Approval Pending',
-                                'class': ' label-light-primary'
-                            },
-                            10: {
-                                'title': 'Design Approved',
-                                'class': 'label-light-success'
-                            },
-                            11: {
-                                'title': 'Design Rejected',
-                                'class': ' label-light-info'
-                            },
-                            12: {
-                                'title': 'Design Approval Pending',
-                                'class': ' label-light-primary'
-                            },
-                            13: {
-                                'title': 'Quotation Approved',
-                                'class': 'label-light-success'
-                            },
-                            14: {
-                                'title': 'Quotation Rejected',
-                                'class': ' label-light-info'
-                            },
-                            15: {
-                                'title': 'Quotation Approval Pending',
-                                'class': ' label-light-primary'
-                            },
-                            16: {
-                                'title': 'Design Waiting For Customer Approval',
-                                'class': ' label-light-primary'
-                            },
-                            17: {
-                                'title': 'Design Rejected By Client',
-                                'class': ' label-light-info'
-                            },
-                            42: {
-                                'title': 'Quotation Schedule  Pending',
-                                'class': ' label-light-primary'
-                            },
-                        };
+                        var status = inqStatus;
 
                         console.log(data);
                         if (typeof status[data] === 'undefined') {
