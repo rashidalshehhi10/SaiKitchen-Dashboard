@@ -177,6 +177,21 @@ var KTAppsUsersListDatatable = function() {
 
                         return output;
                     },
+                },{
+                    field: 'TotalNoOfInquiries',
+                    title: 'Total Inquiries',
+                    autoHide: true,
+                    // overflow: 'visible',
+                    // callback function support for column rendering
+                    template: function(data) {
+                        if(data.totalNoOfInquiries==0)
+                           data.totalNoOfInquiries ='No Inquiries';
+                        if(data.totalNoOfInquiries!=0)
+                           return '<span class="label label-lg font-weight-bold  label-inline">' +data.totalNoOfInquiries + '</span>';
+                        else
+                           return '<span class="label label-lg font-weight-bold  label-inline">"'+data.totalNoOfInquiries+'"</span>';
+
+                    },
                 }, {
                     field: 'ContactStatus',
                     title: 'Contact Status',
@@ -408,17 +423,6 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     },
                 }, {
-                    field: 'TotalNoOfInquiries',
-                    title: 'Total Inquiries',
-                    autoHide: true,
-                    // overflow: 'visible',
-                    // callback function support for column rendering
-                    template: function(data) {
-                        
-                        return '<span class="label label-lg font-weight-bold ' + data.totalNoOfInquiries + ' label-inline">' +data.totalNoOfInquiries + '</span>';
-
-                    },
-                },{
                     field: 'AddedBy',
                     title: 'Added By',
                     autoHide: true,
@@ -450,10 +454,15 @@ var KTAppsUsersListDatatable = function() {
             document.getElementById("kt_subheader_search_form").value = 'Contacted';
             datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
+         $('#divclk3').on('click', function() {
+            document.getElementById("kt_subheader_search_form").value = 'No Inquiries';
+            datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+         });
          $('#divclk1').on('click', function() {
             document.getElementById("kt_subheader_search_form").value = '';
             datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
+  
         $('#kt_datatable_search_status, #kt_datatable_contact_statuss').selectpicker();
         // $('#kt_datatable_search_status').selectpicker();
         
