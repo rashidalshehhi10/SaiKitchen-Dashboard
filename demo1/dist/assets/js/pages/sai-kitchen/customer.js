@@ -184,11 +184,11 @@ var KTAppsUsersListDatatable = function() {
                     // overflow: 'visible',
                     // callback function support for column rendering
                     template: function(data) {
-                        if(data.totalNoOfInquiries==0)
-                           data.totalNoOfInquiries ='No Inquiries';
-                        if(data.totalNoOfInquiries!=0)
-                           return '<span class="label label-lg font-weight-bold  label-inline">' +data.totalNoOfInquiries + '</span>';
-                        else
+                       // if(data.totalNoOfInquiries==0)
+                       //    data.totalNoOfInquiries ='No Inquiries';
+                        //if(data.totalNoOfInquiries!=0)
+                        //   return '<span class="label label-lg font-weight-bold  label-inline">' +data.totalNoOfInquiries + '</span>';
+                       // else
                            return '<span class="label label-lg font-weight-bold  label-inline">"'+data.totalNoOfInquiries+'"</span>';
 
                     },
