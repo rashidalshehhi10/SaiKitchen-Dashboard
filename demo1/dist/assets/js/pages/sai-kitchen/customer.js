@@ -189,7 +189,7 @@ var KTAppsUsersListDatatable = function() {
                         //if(data.totalNoOfInquiries!=0)
                         //   return '<span class="label label-lg font-weight-bold  label-inline">' +data.totalNoOfInquiries + '</span>';
                        // else
-                           return '<span class="label label-lg font-weight-bold  label-inline">"'+data.totalNoOfInquiries+'"</span>';
+                           return '<span class="label label-lg font-weight-bold  label-inline">'+data.totalNoOfInquiries+'</span>';
 
                     },
                 }, {
