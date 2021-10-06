@@ -178,7 +178,8 @@ document.getElementById('txtPromoCode').value=inquiry.promo?.promoName;
 promoDiscount=inquiry.promoDiscount;
 promoId=inquiry.promoId;
 isMeasurementPromo=inquiry.isMeasurementPromo;
-measurementFee=inquiry.payments[0].paymentAmount;
+if(inquiry.payments.length > 0)
+  measurementFee=inquiry.payments[0].paymentAmount;
 const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');
@@ -190,20 +191,13 @@ var dicMEP  = new Object();
 var dicMaterial = new Object();
 var dicDatasheet = new Object();
 var dicJoborder = new Object();
+var dicAdvance = new Object();
+var dicBefore = new Object();
+var dicAfter = new Object();
+var dicInstall = new Object();
 var workscopeHtml=``;
 var tabsHTML =``;
-// response.data.inquiryWorkscopes.forEach(element => {
-// 	console.log(baseFileURL+element.fileUrl);
 
-//     workscopeHtml+=` <li class="nav-item">
-//     <a class="nav-link " data-toggle="tab" href="#workscope`+element.workscopeId+`">
-//     <span class="nav-icon">
-//     <i class="la la-box"></i>
-//     </span>
-//     <span class="nav-text">`+element.workscopeId+`</span>
-//     </a>
-//  </li>`;
-// });
 var jobHtml =``;
 var jobdetail =``;
 if(response.data.inquiry.jobOrders.length > 0){
@@ -811,8 +805,282 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                      }
                     }
      }
+     if(response.data.inquiry.quotations.length > 0){
+     if(counter == 0 & response.data.inquiry.quotations[0].payments.length > 0){
+      response.data.inquiry.quotations[0].payments.forEach(payment => {
+         if(payment.paymentTypeId == 2){
+       payment.files.forEach(element => {
+       
+          if(   dicAdvance["dicAdvance"+payment.paymentModeId]==null){
+             dicAdvance["dicAdvance"+payment.paymentModeId]=``;
+          }
+          if(element.fileContentType=='pdf'){
+             dicAdvance["dicAdvance"+payment.paymentModeId] +=`
+                 <!--begin::Col-->
+                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                    <!--begin::Card-->
+                    <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                       <div class="d-flex flex-column align-items-center">
+                          <!--begin: Icon-->
+                          <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                          <!--end: Icon-->
+                          <!--begin: Tite-->
+                          <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                          <!--end: Tite-->
+                       </div>
+                    </div>
+                    <!--end:: Card-->
+                 </div>
+                 <!--end::Col-->`;
+ 
+         }else{
+             dicAdvance["dicAdvance"+payment.paymentModeId] +=`
+             <!--begin::Col-->
+             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <!--begin::Card-->
+                <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                   <div class="d-flex flex-column align-items-center">
+                      <!--begin: Icon-->
+                      <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                      <!--end: Icon-->
+                      <!--begin: Tite-->
+                      <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                      <!--end: Tite-->
+                   </div>
+                </div>
+                <!--end:: Card-->
+             </div>
+             <!--end::Col-->`;
+     }
+       }
+       );
+          }
+          if(payment.paymentTypeId == 3){
+            payment.files.forEach(element => {
+            
+               if(   dicBefore["dicBefore"+payment.paymentModeId]==null){
+                  dicBefore["dicBefore"+payment.paymentModeId]=``;
+               }
+               if(element.fileContentType=='pdf'){
+                  dicBefore["dicBefore"+payment.paymentModeId] +=`
+                      <!--begin::Col-->
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                         <!--begin::Card-->
+                         <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                            <div class="d-flex flex-column align-items-center">
+                               <!--begin: Icon-->
+                               <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                               <!--end: Icon-->
+                               <!--begin: Tite-->
+                               <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                               <!--end: Tite-->
+                            </div>
+                         </div>
+                         <!--end:: Card-->
+                      </div>
+                      <!--end::Col-->`;
+      
+              }else{
+                  dicBefore["dicBefore"+payment.paymentModeId] +=`
+                  <!--begin::Col-->
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                     <!--begin::Card-->
+                     <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                        <div class="d-flex flex-column align-items-center">
+                           <!--begin: Icon-->
+                           <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                           <!--end: Icon-->
+                           <!--begin: Tite-->
+                           <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                           <!--end: Tite-->
+                        </div>
+                     </div>
+                     <!--end:: Card-->
+                  </div>
+                  <!--end::Col-->`;
+          }
+            }
+            );
+            }
+            if(payment.paymentTypeId == 4){
+               payment.files.forEach(element => {
+               
+                  if(   dicAfter["dicAfter"+payment.paymentModeId]==null){
+                     dicAfter["dicAfter"+payment.paymentModeId]=``;
+                  }
+                  if(element.fileContentType=='pdf'){
+                     dicAfter["dicAfter"+payment.paymentModeId] +=`
+                         <!--begin::Col-->
+                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                            <!--begin::Card-->
+                            <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                               <div class="d-flex flex-column align-items-center">
+                                  <!--begin: Icon-->
+                                  <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                                  <!--end: Icon-->
+                                  <!--begin: Tite-->
+                                  <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                                  <!--end: Tite-->
+                               </div>
+                            </div>
+                            <!--end:: Card-->
+                         </div>
+                         <!--end::Col-->`;
+         
+                 }else{
+                     dicAfter["dicAfter"+payment.paymentModeId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+             }
+               }
+               );
+               }
+               if(payment.paymentTypeId == 5){
+                  payment.files.forEach(element => {
+                  
+                     if(   dicInstall["dicInstall"+payment.paymentModeId]==null){
+                        dicInstall["dicInstall"+payment.paymentModeId]=``;
+                     }
+                     if(element.fileContentType=='pdf'){
+                        dicInstall["dicInstall"+payment.paymentModeId] +=`
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                               <!--begin::Card-->
+                               <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                                  <div class="d-flex flex-column align-items-center">
+                                     <!--begin: Icon-->
+                                     <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                                     <!--end: Icon-->
+                                     <!--begin: Tite-->
+                                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                                     <!--end: Tite-->
+                                  </div>
+                               </div>
+                               <!--end:: Card-->
+                            </div>
+                            <!--end::Col-->`;
+            
+                    }else{
+                        dicInstall["dicInstall"+payment.paymentModeId] +=`
+                        <!--begin::Col-->
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                           <!--begin::Card-->
+                           <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                              <div class="d-flex flex-column align-items-center">
+                                 <!--begin: Icon-->
+                                 <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                                 <!--end: Icon-->
+                                 <!--begin: Tite-->
+                                 <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                                 <!--end: Tite-->
+                              </div>
+                           </div>
+                           <!--end:: Card-->
+                        </div>
+                        <!--end::Col-->`;
+                }
+                  }
+                  );
+                  }  
+        });
+     }
+     }
+
      counter = 1;
             if(isfirst){
+               let Advance='';let Before='';let After='';let Install='';
+               if(response.data.inquiry.quotations.length > 0){
+               if(response.data.inquiry.quotations[0].payments.length >0){
+              response.data.inquiry.quotations[0].payments.forEach(payment => {
+                 if(payment.paymentTypeId == 2){
+                  Advance = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAdvance`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Advance Payment
+                       </div>
+                   </div>
+                   <div id="dicAdvance`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicAdvance`+payment.paymentModeId+`">
+                       `+dicAdvance["dicAdvance"+payment.paymentModeId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 }//advance
+                 if(payment.paymentTypeId == 3){
+                  Before = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicBefore`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Before Installation Payment
+                       </div>
+                   </div>
+                   <div id="dicBefore`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicBefore`+payment.paymentModeId+`">
+                       `+dicBefore["dicBefore"+payment.paymentModeId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 }//Before
+                 if(payment.paymentTypeId == 4){
+                  After = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAfter`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>After Delivery Payment
+                       </div>
+                   </div>
+                   <div id="dicAfter`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicAfter`+payment.paymentModeId+`">
+                       `+dicAfter["dicAfter"+payment.paymentModeId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 }//After
+                 if(payment.paymentTypeId == 5){
+                  Install = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicInstall`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Installment Payment
+                       </div>
+                   </div>
+                   <div id="dicInstall`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicInstall`+payment.paymentModeId+`">
+                       `+dicInstall["dicInstall"+payment.paymentModeId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 }//Install
+               });
+                }
+               }
                 let collect ='';
                 if(response.data.inquiry.jobOrders.length > 0){
                    collect =`<div class="card">
@@ -930,7 +1198,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--begin::Accordion-->
                 <div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+element.inquiryWorkscopeId+`">
                    
-                   `+measur+design+quot+collect+`
+                   `+measur+design+quot+collect+Advance+Before+After+Install+`
               
 
                 </div>
@@ -938,6 +1206,84 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
              </div>`;
             
             }else{
+               let Advance='';let Before='';let After='';let Install='';
+               if(response.data.inquiry.quotations.length > 0){
+               if(response.data.inquiry.quotations[0].payments.length >0){
+              response.data.inquiry.quotations[0].payments.forEach(payment => {
+                 if(payment.paymentTypeId == 2){
+                  Advance = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAdvance`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Advance Payment
+                       </div>
+                   </div>
+                   <div id="dicAdvance`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicAdvance`+payment.paymentModeId+`">
+                       `+dicAdvance["dicAdvance"+payment.paymentModeId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 }//advance
+                 if(payment.paymentTypeId == 3){
+                  Before = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicBefore`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Before Installation Payment
+                       </div>
+                   </div>
+                   <div id="dicBefore`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicBefore`+payment.paymentModeId+`">
+                       `+dicBefore["dicBefore"+payment.paymentModeId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 }//Before
+                 if(payment.paymentTypeId == 4){
+                  After = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAfter`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>After Delivery Payment
+                       </div>
+                   </div>
+                   <div id="dicAfter`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicAfter`+payment.paymentModeId+`">
+                       `+dicAfter["dicAfter"+payment.paymentModeId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 }//After
+                 if(payment.paymentTypeId == 5){
+                  Install = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicInstall`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Installment Payment
+                       </div>
+                   </div>
+                   <div id="dicInstall`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicInstall`+payment.paymentModeId+`">
+                       `+dicInstall["dicInstall"+payment.paymentModeId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 }//Install
+               });
+               }}
                 let quot ='';
                 if(response.data.inquiry.quotations.length >0){
                     quot = `
@@ -1057,7 +1403,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
        
        `+measur+design+
        quot
-       +collect+
+       +collect+Advance+Before+After+Install+
        `
     </div>
     <!--end::Accordion-->

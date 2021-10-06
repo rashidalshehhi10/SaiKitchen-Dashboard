@@ -30,6 +30,7 @@ let noOfInstallment=0;
 let beforeInstallation=0;
 let afterDelivery=0;
 let isInstallment=false;
+var calcfile=new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
    
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
@@ -133,6 +134,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             }
                         }
                     }
+                    var calc ='';
+                    if(calcfile.length > 0)
+                       calc = calcfile[0];
                     var quotationModel={
                     inquiryId: inquiryId,
                     description: document.getElementById('txtdescription').value,
@@ -152,6 +156,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     paymentAmount:advancePaymentAmount,
                     noOfInstallment:noOfInstallment,
                     payments: new Array(),
+                    calculationSheetFile:calc,
                 };
                 quotationModel.payments = pymnt;
                 const data = JSON.stringify(quotationModel);
@@ -293,7 +298,8 @@ document.getElementById('txtPromoCode').value=inquiry.promo?.promoCode;
 promoDiscount=inquiry.promoDiscount;
 promoId=inquiry.promoId;
 isMeasurementPromo=inquiry.isMeasurementPromo;
-measurementFee=inquiry.payments[0].paymentAmount;
+if(inquiry.payments.length > 0)
+    measurementFee=inquiry.payments[0].paymentAmount;
 const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');
@@ -834,4 +840,70 @@ $('#txtAdvancePayment').keyup(function () {
         });
         
     });
+    $('#kt_dropzone_4').dropzone({
+            
+        // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+        url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+        type: "Post",
+        headers : {
+            'Access-Control-Allow-Origin': '*',
+            // 'Content-Type': 'application/json'
+        },
+        paramName: "file", // The name that will be used to transfer the file
+        maxFiles: 1,
+        maxFilesize: 30000, // MB
+        timeout: 600000,
+        addRemoveLinks: true,
+        removedfile:function(file) {
+            if(file.status =="error"){
+                file.previewElement.remove();
+                return false;
+            }
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            var fileurl ='';
+            var filearr = fileuploded.innerHTML.split(".");
+            if(filearr.length > 1){
+                fileurl = "/File/DeleteFileFromBlob?fileName=";
+            }else{
+                fileurl = "/File/DeleteVideo?VideoId=";
+            }
+            $.ajax({
+                type:"post",
+                url:baseURL+fileurl+fileuploded.innerHTML,
+                cache:false,
+                success: function(){
+                    removeA(calcfile, fileuploded.innerHTML);
+                    file.previewElement.remove();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    console.log("Error");
+            
+                }
+            });
     
+        },
+    
+        acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+        
+    init: function() {
+    
+    },
+    success: function(file, response){
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        fileuploded.innerHTML = response.data.item1;
+    
+        calcfile.push(response.data.item1);
+    
+    }
+    
+    });
+    function removeA(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax= arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
+    }

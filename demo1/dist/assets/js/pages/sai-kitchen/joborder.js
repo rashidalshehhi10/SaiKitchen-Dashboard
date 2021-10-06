@@ -10,6 +10,7 @@ import {
     inqStatus
 } from './status.js'
 let user;
+var table;
 export let workscopelist;
 var filearry = new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
@@ -18,9 +19,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         return $(this.header()).text().trim();
     });
 
+
+
+
     var initTable1 = function() {
         // begin first table
-        var table = $('#kt_datatable').DataTable({
+         table = $('#kt_datatable').DataTable({
             responsive: true,
             // Pagination settings
             dom: `<'row'<'col-sm-12'tr>>
@@ -207,6 +211,34 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             ],
         });
 
+        $('#TotalJobOrder').on('click', function() {
+            table.column(3).search('',true, false, true ).draw();
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+         $('#JobOrderInProgress').on('click', function() {
+             table.column(3).search('Job'+' '+'Order'+' '+'InProgress',true, false, true ).draw();
+             $('html, body').animate({
+                 scrollTop: $("#kt_datatable").offset().top
+             }, 1000);
+          });
+         $('#JobOrderDelayed').on('click', function() {
+            table.column(3).search('Job'+' '+'Order'+' '+'Delayed',true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         }); 
+         $('#JobOrderCompleted').on('click', function() {
+            table.column(3).search('Job'+' '+'Order'+' '+'Completed',true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });   
+
+
+
+
         var filter = function() {
             var val = $.fn.dataTable.util.escapeRegex($(this).val());
             table.column($(this).data('col-index')).search(val ? val : '', false, false).draw();
@@ -286,6 +318,48 @@ jQuery(document).ready(function() {
             }
         }
     }
+
+
+    $.ajax({
+		type: "Post",
+		url: baseURL + '/Inquiry/GetinquiryStatusByBranch',
+
+		headers: {
+        'Content-Type': 'application/json',
+        'userId': user.data.userId,
+        'userToken': user.data.userToken,
+        'userRoleId': user.data.userRoles[0].userRoleId,
+        'branchId': user.data.userRoles[0].branchId,
+        'branchRoleId': user.data.userRoles[0].branchRoleId,
+        'Access-Control-Allow-Origin': '*',
+		},
+		success: function (response) {
+
+
+			console.log(response);
+
+         //   const data1 = JSON.stringify(response.data);
+
+        
+           
+
+         //   alert(JSON.stringify(table.page.info()));
+
+             
+             document.getElementById('b').innerHTML=response.data[46][0].inquiryCount;
+
+             document.getElementById('c').innerHTML=response.data[25][0].inquiryCount;
+
+             document.getElementById('d').innerHTML=response.data[26][0].inquiryCount;
+
+             document.getElementById('a').innerHTML=  table.page.info().recordsTotal;
+
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+		}
+	});
+
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 

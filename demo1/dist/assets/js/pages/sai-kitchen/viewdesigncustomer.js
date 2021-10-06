@@ -70,7 +70,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 var inquiryApproved = {
                     id: inquiryWorkscopeId,
                     designComment: document.getElementById('designApprovalComment').value,
-                    FeedBackReactionId:document.getElementById("aemoji").value,
+                    FeedBackReactionId:parseInt(document.getElementById("aemoji").value),
                 };
                 const data = JSON.stringify(inquiryApproved);
                 console.log(data);
@@ -182,7 +182,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     // designAssignedTo: $('#kt_designassignto').val(),
                     // designScheduleDate: document.getElementById('design_schedule_date').value,
                     designComment: document.getElementById('designRejectComment').value,
-                    FeedBackReactionId:document.getElementById("hemoji").value,
+                    FeedBackReactionId:parseInt(document.getElementById("hemoji").value),
                 };
                 const data = JSON.stringify(inquiryRejected);
                 console.log(data);
