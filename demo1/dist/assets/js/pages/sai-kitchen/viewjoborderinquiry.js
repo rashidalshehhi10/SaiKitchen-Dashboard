@@ -1197,6 +1197,10 @@ workscope.innerHTML=workscopeHtml;
           };
        }
        if(choose == "2"){
+          if(document.getElementById('CheckComment').value==''){
+            document.getElementById('alert').innerHTML = "Reason is Required";
+             return false;
+          }
          addURL ='/JobOrderDetail/JobOrderDelayRequested';
         checklistdata ={
            "inquiryId":parseInt( document.getElementById('inquiryId').value),
