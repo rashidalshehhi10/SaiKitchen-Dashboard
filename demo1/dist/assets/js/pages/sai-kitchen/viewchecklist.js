@@ -289,6 +289,12 @@ var dicMEP  = new Object();
 var dicMaterial = new Object();
 var dicDatasheet = new Object();
 var dicJoborder = new Object();
+var dicDetailed = new Object();
+var dicAdvance = new Object();
+var dicBefore = new Object();
+var dicAfter = new Object();
+var dicInstall = new Object();
+var dicCALC = new Object();
 var workscopeHtml=``;
 var tabsHTML =``;
 // response.data.inquiryWorkscopes.forEach(element => {
@@ -379,14 +385,14 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
         </a>
      </li>`;
     }
-    
+    if(counter == 0 & element.measurements.length > 0){
     element.measurements[0].files.forEach(element => {
-        if( dicMeasurement["measurementRow"+element.measurementId]==null){
-            dicMeasurement["measurementRow"+element.measurementId]=``;
+        if( dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]==null){
+            dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]=``;
         }
         if(element.fileContentType=='mp4'){
             var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
-            dicMeasurement["measurementRow"+element.measurementId] +=`
+            dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
                 <!--begin::Col-->
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                    <!--begin::Card-->
@@ -405,7 +411,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
         }else if(element.fileContentType=='pdf'){
             var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
-            dicMeasurement["measurementRow"+element.measurementId] +=`
+            dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
             <!--begin::Col-->
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                <!--begin::Card-->
@@ -423,7 +429,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             </div>
             <!--end::Col-->`;
         }else{
-        dicMeasurement["measurementRow"+element.measurementId] +=`
+        dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
             <!--begin::Col-->
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                <!--begin::Card-->
@@ -442,12 +448,14 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             <!--end::Col-->`;
         }
         });
+      }
+      if(counter == 0 & element.designs.length > 0){
         element.designs[0].files.forEach(element => {
-            if(   dicDesign["DesignRow"+element.designId]==null){
-                dicDesign["DesignRow"+element.designId]=``;
+            if(   dicDesign["DesignRow"+response.data.inquiry.inquiryId]==null){
+                dicDesign["DesignRow"+response.data.inquiry.inquiryId]=``;
             }
             if(element.fileContentType=='pdf'){
-                dicDesign["DesignRow"+element.designId] +=`
+                dicDesign["DesignRow"+response.data.inquiry.inquiryId] +=`
                     <!--begin::Col-->
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                        <!--begin::Card-->
@@ -466,7 +474,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     <!--end::Col-->`;
 
             }else{
-            dicDesign["DesignRow"+element.designId] +=`
+            dicDesign["DesignRow"+response.data.inquiry.inquiryId] +=`
                 <!--begin::Col-->
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                    <!--begin::Card-->
@@ -485,13 +493,14 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
         }
     });
+   }
     if(counter == 0 & response.data.inquiry.quotations.length > 0){
       response.data.inquiry.quotations[0].files.forEach(element => {
-        if(   dicQuot["QuotRow"+element.quotationId]==null){
-            dicQuot["QuotRow"+element.quotationId]=``;
+        if(   dicQuot["QuotRow"+response.data.inquiry.inquiryId]==null){
+            dicQuot["QuotRow"+response.data.inquiry.inquiryId]=``;
         }
         if(element.fileContentType=='pdf'){
-            dicQuot["QuotRow"+element.quotationId] +=`
+            dicQuot["QuotRow"+response.data.inquiry.inquiryId] +=`
                 <!--begin::Col-->
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                    <!--begin::Card-->
@@ -510,7 +519,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
 
         }else{
-            dicQuot["QuotRow"+element.quotationId] +=`
+            dicQuot["QuotRow"+response.data.inquiry.inquiryId] +=`
             <!--begin::Col-->
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                <!--begin::Card-->
@@ -530,16 +539,83 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
     }
    });
     }//quotations !=undefined
+
+    var  calculationSheetFile  = response.data.inquiry.quotations;
+    if(response.data.inquiry.quotations.length > 0 & counter ==0){
+         if(   dicCALC["dicCALC"+response.data.inquiry.inquiryId]==null){
+            dicCALC["dicCALC"+response.data.inquiry.inquiryId]=``;
+         }
+        if(calculationSheetFile[0].calculationSheetFile != null){
+         var fileExtension = calculationSheetFile[0].calculationSheetFile.substr((calculationSheetFile[0].calculationSheetFile.lastIndexOf('.') + 1));
+         if(fileExtension == 'mp4') {
+            var videoUrl="https://player.vimeo.com/video/"+calculationSheetFile[0].calculationSheetFile;
+         dicCALC["dicCALC"+response.data.inquiry.inquiryId] +=`
+             <!--begin::Col-->
+             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <!--begin::Card-->
+                <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                   <div class="d-flex flex-column align-items-center">
+                      <!--begin: Icon-->
+                      <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                      <!--end: Icon-->
+                      <!--begin: Tite-->
+                      <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+calculationSheetFile[0].calculationSheetFile+`</a>
+                      <!--end: Tite-->
+                   </div>
+                </div>
+                <!--end:: Card-->
+             </div>
+             <!--end::Col-->`;
+         }else if(fileExtension == 'pdf') {
+            dicCALC["dicCALC"+response.data.inquiry.inquiryId] +=`
+            <!--begin::Col-->
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+               <!--begin::Card-->
+               <div class="card-body" onclick="window.open('`+baseFileURL+calculationSheetFile[0].calculationSheetFile+`', '_blank');" target="_blank" style="cursor: pointer;">
+                  <div class="d-flex flex-column align-items-center">
+                     <!--begin: Icon-->
+                     <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                     <!--end: Icon-->
+                     <!--begin: Tite-->
+                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+calculationSheetFile[0].calculationSheetFile+`</a>
+                     <!--end: Tite-->
+                  </div>
+               </div>
+               <!--end:: Card-->
+            </div>
+            <!--end::Col-->`;
+         }else{
+            dicCALC["dicCALC"+response.data.inquiry.inquiryId] +=`
+            <!--begin::Col-->
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+               <!--begin::Card-->
+               <div class="card-body" onclick="window.open('`+baseFileURL+calculationSheetFile[0].calculationSheetFile+`', '_blank');" target="_blank" style="cursor: pointer;">
+                  <div class="d-flex flex-column align-items-center">
+                     <!--begin: Icon-->
+                     <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                     <!--end: Icon-->
+                     <!--begin: Tite-->
+                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+calculationSheetFile[0].calculationSheetFile+`</a>
+                     <!--end: Tite-->
+                  </div>
+               </div>
+               <!--end:: Card-->
+            </div>
+            <!--end::Col-->`;
+         }
+           
+        }
+ }
     var  jobOrder  = response.data.inquiry.jobOrders;
     if(response.data.inquiry.jobOrders.length > 0 & counter ==0){
-         if(   dicMEP["dicMEP"+jobOrder[0].jobOrderId]==null){
-            dicMEP["dicMEP"+jobOrder[0].jobOrderId]=``;
+         if(   dicMEP["dicMEP"+response.data.inquiry.inquiryId]==null){
+            dicMEP["dicMEP"+response.data.inquiry.inquiryId]=``;
          }
         if(jobOrder[0].mepdrawingFileUrl !=""){
          var fileExtension = jobOrder[0].mepdrawingFileUrl.substr((jobOrder[0].mepdrawingFileUrl.lastIndexOf('.') + 1));
          if(fileExtension == 'mp4') {
             var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].mepdrawingFileUrl;
-         dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
+         dicMEP["dicMEP"+response.data.inquiry.inquiryId] +=`
              <!--begin::Col-->
              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                 <!--begin::Card-->
@@ -557,7 +633,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
              </div>
              <!--end::Col-->`;
          }else if(fileExtension == 'pdf') {
-            dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
+            dicMEP["dicMEP"+response.data.inquiry.inquiryId] +=`
             <!--begin::Col-->
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                <!--begin::Card-->
@@ -575,7 +651,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             </div>
             <!--end::Col-->`;
          }else{
-            dicMEP["dicMEP"+jobOrder[0].jobOrderId] +=`
+            dicMEP["dicMEP"+response.data.inquiry.inquiryId] +=`
             <!--begin::Col-->
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                <!--begin::Card-->
@@ -595,14 +671,14 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
          }
            
         }
-            if(   dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]==null){
-                dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]=``;
+            if(   dicMaterial["dicMaterial"+response.data.inquiry.inquiryId]==null){
+                dicMaterial["dicMaterial"+response.data.inquiry.inquiryId]=``;
             }
             if(jobOrder[0].materialSheetFileUrl !=""){
                var fileExtension = jobOrder[0].materialSheetFileUrl.substr((jobOrder[0].materialSheetFileUrl.lastIndexOf('.') + 1));
                if(fileExtension == 'mp4') {
                   var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].materialSheetFileUrl;
-               dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+               dicMaterial["dicMaterial"+response.data.inquiry.inquiryId] +=`
                    <!--begin::Col-->
                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                       <!--begin::Card-->
@@ -620,7 +696,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    </div>
                    <!--end::Col-->`;
                }else if(fileExtension == 'pdf') {
-                  dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+                  dicMaterial["dicMaterial"+response.data.inquiry.inquiryId] +=`
                   <!--begin::Col-->
                   <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                      <!--begin::Card-->
@@ -638,7 +714,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   </div>
                   <!--end::Col-->`;
                }else{
-                  dicMaterial["dicMaterial"+jobOrder[0].jobOrderId] +=`
+                  dicMaterial["dicMaterial"+response.data.inquiry.inquiryId] +=`
                   <!--begin::Col-->
                   <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                      <!--begin::Card-->
@@ -657,14 +733,14 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   <!--end::Col-->`;
                }
             }
-                if(   dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]==null){
-                    dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]=``;
+                if(   dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId]==null){
+                    dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId]=``;
                 }
                 if(jobOrder[0].dataSheetApplianceFileUrl !=""){
                   var fileExtension = jobOrder[0].dataSheetApplianceFileUrl.substr((jobOrder[0].dataSheetApplianceFileUrl.lastIndexOf('.') + 1));
                   if(fileExtension == 'mp4') {
                      var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].dataSheetApplianceFileUrl;
-                  dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                  dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId] +=`
                       <!--begin::Col-->
                       <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                          <!--begin::Card-->
@@ -682,7 +758,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                       </div>
                       <!--end::Col-->`;
                   }else if(fileExtension == 'pdf') {
-                     dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                     dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId] +=`
                      <!--begin::Col-->
                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                         <!--begin::Card-->
@@ -700,7 +776,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                      </div>
                      <!--end::Col-->`;
                   }else{
-                     dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId] +=`
+                     dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId] +=`
                      <!--begin::Col-->
                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                         <!--begin::Card-->
@@ -719,12 +795,411 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                      <!--end::Col-->`;
                   }
                 } 
- 
+                    if(   dicJoborder["dicJoborder"+response.data.inquiry.inquiryId]==null){
+                        dicJoborder["dicJoborder"+response.data.inquiry.inquiryId]=``;
+                    }
+                    if(jobOrder[0].jobOrderChecklistFileUrl !="" && jobOrder[0].jobOrderChecklistFileUrl !=null){
+                     var fileExtension = jobOrder[0].jobOrderChecklistFileUrl.substr((jobOrder[0].jobOrderChecklistFileUrl.lastIndexOf('.') + 1));
+                     if(fileExtension == 'mp4') {
+                        var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].jobOrderChecklistFileUrl;
+                     dicJoborder["dicJoborder"+response.data.inquiry.inquiryId] +=`
+                         <!--begin::Col-->
+                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                            <!--begin::Card-->
+                            <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                               <div class="d-flex flex-column align-items-center">
+                                  <!--begin: Icon-->
+                                  <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                                  <!--end: Icon-->
+                                  <!--begin: Tite-->
+                                  <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].jobOrderChecklistFileUrl+`</a>
+                                  <!--end: Tite-->
+                               </div>
+                            </div>
+                            <!--end:: Card-->
+                         </div>
+                         <!--end::Col-->`;
+                     }else if(fileExtension == 'pdf') {
+                        dicJoborder["dicJoborder"+response.data.inquiry.inquiryId] +=`
+                        <!--begin::Col-->
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                           <!--begin::Card-->
+                           <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].jobOrderChecklistFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                              <div class="d-flex flex-column align-items-center">
+                                 <!--begin: Icon-->
+                                 <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                                 <!--end: Icon-->
+                                 <!--begin: Tite-->
+                                 <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].jobOrderChecklistFileUrl+`</a>
+                                 <!--end: Tite-->
+                              </div>
+                           </div>
+                           <!--end:: Card-->
+                        </div>
+                        <!--end::Col-->`;
+                     }else{
+                        dicJoborder["dicJoborder"+response.data.inquiry.inquiryId] +=`
+                        <!--begin::Col-->
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                           <!--begin::Card-->
+                           <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].jobOrderChecklistFileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                              <div class="d-flex flex-column align-items-center">
+                                 <!--begin: Icon-->
+                                 <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                                 <!--end: Icon-->
+                                 <!--begin: Tite-->
+                                 <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].jobOrderChecklistFileUrl+`</a>
+                                 <!--end: Tite-->
+                              </div>
+                           </div>
+                           <!--end:: Card-->
+                        </div>
+                        <!--end::Col-->`;
+                     }
+                    }
+                    if(   dicDetailed["dicDetailed"+response.data.inquiry.inquiryId]==null){
+                     dicDetailed["dicDetailed"+response.data.inquiry.inquiryId]=``;
+                 }
+                 if(jobOrder[0].detailedDesignFile !="" && jobOrder[0].detailedDesignFile !=null){
+                  var fileExtension = jobOrder[0].detailedDesignFile.substr((jobOrder[0].detailedDesignFile.lastIndexOf('.') + 1));
+                  if(fileExtension == 'mp4') {
+                     var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].detailedDesignFile;
+                  dicDetailed["dicDetailed"+response.data.inquiry.inquiryId] +=`
+                      <!--begin::Col-->
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                         <!--begin::Card-->
+                         <div class="card-body" onclick="window.open('`+videoUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                            <div class="d-flex flex-column align-items-center">
+                               <!--begin: Icon-->
+                               <img alt="" class="max-h-65px" src="assets/media/svg/files/mp4.svg" />
+                               <!--end: Icon-->
+                               <!--begin: Tite-->
+                               <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].detailedDesignFile+`</a>
+                               <!--end: Tite-->
+                            </div>
+                         </div>
+                         <!--end:: Card-->
+                      </div>
+                      <!--end::Col-->`;
+                  }else if(fileExtension == 'pdf') {
+                     dicDetailed["dicDetailed"+response.data.inquiry.inquiryId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].detailedDesignFile+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].detailedDesignFile+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+                  }else{
+                     dicDetailed["dicDetailed"+response.data.inquiry.inquiryId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+jobOrder[0].detailedDesignFile+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+jobOrder[0].detailedDesignFile+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+                  }
+                 }
      }
+     //payments files
+     if(response.data.inquiry.quotations.length > 0){
+     if(counter == 0 & response.data.inquiry.quotations[0].payments.length > 0){
+      response.data.inquiry.quotations[0].payments.forEach(payment => {
+         if(payment.paymentTypeId == 2){
+       payment.files.forEach(element => {
+       
+          if(   dicAdvance["dicAdvance"+response.data.inquiry.inquiryId]==null){
+             dicAdvance["dicAdvance"+response.data.inquiry.inquiryId]=``;
+          }
+          if(element.fileContentType=='pdf'){
+             dicAdvance["dicAdvance"+response.data.inquiry.inquiryId] +=`
+                 <!--begin::Col-->
+                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                    <!--begin::Card-->
+                    <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                       <div class="d-flex flex-column align-items-center">
+                          <!--begin: Icon-->
+                          <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                          <!--end: Icon-->
+                          <!--begin: Tite-->
+                          <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                          <!--end: Tite-->
+                       </div>
+                    </div>
+                    <!--end:: Card-->
+                 </div>
+                 <!--end::Col-->`;
+ 
+         }else{
+             dicAdvance["dicAdvance"+response.data.inquiry.inquiryId] +=`
+             <!--begin::Col-->
+             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <!--begin::Card-->
+                <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                   <div class="d-flex flex-column align-items-center">
+                      <!--begin: Icon-->
+                      <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                      <!--end: Icon-->
+                      <!--begin: Tite-->
+                      <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                      <!--end: Tite-->
+                   </div>
+                </div>
+                <!--end:: Card-->
+             </div>
+             <!--end::Col-->`;
+     }
+       }
+       );
+          }
+          if(payment.paymentTypeId == 3){
+            payment.files.forEach(element => {
+            
+               if(   dicBefore["dicBefore"+response.data.inquiry.inquiryId]==null){
+                  dicBefore["dicBefore"+response.data.inquiry.inquiryId]=``;
+               }
+               if(element.fileContentType=='pdf'){
+                  dicBefore["dicBefore"+response.data.inquiry.inquiryId] +=`
+                      <!--begin::Col-->
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                         <!--begin::Card-->
+                         <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                            <div class="d-flex flex-column align-items-center">
+                               <!--begin: Icon-->
+                               <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                               <!--end: Icon-->
+                               <!--begin: Tite-->
+                               <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                               <!--end: Tite-->
+                            </div>
+                         </div>
+                         <!--end:: Card-->
+                      </div>
+                      <!--end::Col-->`;
+      
+              }else{
+                  dicBefore["dicBefore"+response.data.inquiry.inquiryId] +=`
+                  <!--begin::Col-->
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                     <!--begin::Card-->
+                     <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                        <div class="d-flex flex-column align-items-center">
+                           <!--begin: Icon-->
+                           <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                           <!--end: Icon-->
+                           <!--begin: Tite-->
+                           <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                           <!--end: Tite-->
+                        </div>
+                     </div>
+                     <!--end:: Card-->
+                  </div>
+                  <!--end::Col-->`;
+          }
+            }
+            );
+            }
+            if(payment.paymentTypeId == 4){
+               payment.files.forEach(element => {
+               
+                  if(   dicAfter["dicAfter"+response.data.inquiry.inquiryId]==null){
+                     dicAfter["dicAfter"+response.data.inquiry.inquiryId]=``;
+                  }
+                  if(element.fileContentType=='pdf'){
+                     dicAfter["dicAfter"+response.data.inquiry.inquiryId] +=`
+                         <!--begin::Col-->
+                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                            <!--begin::Card-->
+                            <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                               <div class="d-flex flex-column align-items-center">
+                                  <!--begin: Icon-->
+                                  <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                                  <!--end: Icon-->
+                                  <!--begin: Tite-->
+                                  <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                                  <!--end: Tite-->
+                               </div>
+                            </div>
+                            <!--end:: Card-->
+                         </div>
+                         <!--end::Col-->`;
+         
+                 }else{
+                     dicAfter["dicAfter"+response.data.inquiry.inquiryId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+             }
+               }
+               );
+               }
+               if(payment.paymentTypeId == 5){
+                  payment.files.forEach(element => {
+                  
+                     if(   dicInstall["dicInstall"+response.data.inquiry.inquiryId]==null){
+                        dicInstall["dicInstall"+response.data.inquiry.inquiryId]=``;
+                     }
+                     if(element.fileContentType=='pdf'){
+                        dicInstall["dicInstall"+response.data.inquiry.inquiryId] +=`
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                               <!--begin::Card-->
+                               <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                                  <div class="d-flex flex-column align-items-center">
+                                     <!--begin: Icon-->
+                                     <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                                     <!--end: Icon-->
+                                     <!--begin: Tite-->
+                                     <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                                     <!--end: Tite-->
+                                  </div>
+                               </div>
+                               <!--end:: Card-->
+                            </div>
+                            <!--end::Col-->`;
+            
+                    }else{
+                        dicInstall["dicInstall"+response.data.inquiry.inquiryId] +=`
+                        <!--begin::Col-->
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                           <!--begin::Card-->
+                           <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                              <div class="d-flex flex-column align-items-center">
+                                 <!--begin: Icon-->
+                                 <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                                 <!--end: Icon-->
+                                 <!--begin: Tite-->
+                                 <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                                 <!--end: Tite-->
+                              </div>
+                           </div>
+                           <!--end:: Card-->
+                        </div>
+                        <!--end::Col-->`;
+                }
+                  }
+                  );
+                  }  
+        });
+     }
+     }
+
      counter = 1;
             if(isfirst){
+               let Advance='';let Before='';let After='';let Install='';
+              // if(response.data.inquiry.quotations.length > 0){
+               
+                //  if(response.data.inquiry.quotations[0].payments.length >0){
+             // response.data.inquiry.quotations[0].payments.forEach(payment => {
+                // if(payment.paymentTypeId == 2 && payment.files.length > 0){
+                  Advance = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAdvance`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Advance Payment
+                       </div>
+                   </div>
+                   <div id="dicAdvance`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicAdvance`+response.data.inquiry.inquiryId+`">
+                       `+dicAdvance["dicAdvance"+response.data.inquiry.inquiryId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                // }//advance
+                 //if(payment.paymentTypeId == 3 && payment.files.length > 0){
+                  Before = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicBefore`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Before Installation Payment
+                       </div>
+                   </div>
+                   <div id="dicBefore`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicBefore`+response.data.inquiry.inquiryId+`">
+                       `+dicBefore["dicBefore"+response.data.inquiry.inquiryId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                // }//Before
+                // if(payment.paymentTypeId == 4 && payment.files.length > 0){
+                  After = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAfter`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>After Delivery Payment
+                       </div>
+                   </div>
+                   <div id="dicAfter`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicAfter`+response.data.inquiry.inquiryId+`">
+                       `+dicAfter["dicAfter"+response.data.inquiry.inquiryId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 //}//After
+                 //if(payment.paymentTypeId == 5 && payment.files.length > 0 ){
+                  Install = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicInstall`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Installment Payment
+                       </div>
+                   </div>
+                   <div id="dicInstall`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicInstall`+response.data.inquiry.inquiryId+`">
+                       `+dicInstall["dicInstall"+response.data.inquiry.inquiryId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                // }//Install
+              // });
+                //}
+              // }
                 let collect ='';
-                if(response.data.inquiry.jobOrders.length > 0){
+                //if(response.data.inquiry.jobOrders.length > 0){
                    collect =`<div class="card">
                    <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMEP`+element.inquiryWorkscopeId+`">
@@ -733,8 +1208,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    </div>
                    <div id="dicMEP`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                     <div class="card-body" >
-                    <div class="row" id="dicMEP`+jobOrder[0].jobOrderId+`">
-                    `+dicMEP["dicMEP"+jobOrder[0].jobOrderId]+`
+                    <div class="row" id="dicMEP`+response.data.inquiry.inquiryIdd+`">
+                    `+dicMEP["dicMEP"+response.data.inquiry.inquiryId]+`
                     </div>
                     </div>
                    </div>
@@ -747,8 +1222,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     <div id="dicMaterial`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                     <div class="card-body" >
-                    <div class="row" id="dicMaterial`+jobOrder[0].jobOrderId+`">
-                    `+dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]+`
+                    <div class="row" id="dicMaterial`+response.data.inquiry.inquiryId+`">
+                    `+dicMaterial["dicMaterial"+response.data.inquiry.inquiryId]+`
                     </div>
                     </div>
                     </div>
@@ -761,45 +1236,61 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    </div>
                    <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                     <div class="card-body" >
-                    <div class="row" id="dicDatasheet`+jobOrder[0].jobOrderId+`">
-                    `+dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]+`
+                    <div class="row" id="dicDatasheet`+response.data.inquiry.inquiryId+`">
+                    `+dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId]+`
                     </div>
                     </div>
                    </div>
-                </div>`;
-                }
-                tabsHTML+=`
-                <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
-                <!--begin::Accordion-->
-                <div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+element.inquiryWorkscopeId+`">
-                   <div class="card">
-                      <div class="card-header" >
-                         <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
-                            <i class="la la-ruler-combined"></i>Measurement
-                         </div>
-                      </div>
-                      <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-                         <div class="card-body" >
-                               <div class="row" id="measurementRow`+element.measurements[0].measurementId+`">
-                               `+dicMeasurement["measurementRow"+element.measurements[0].measurementId]+`
-                               </div>
-                            </div>
-                      </div>
+                </div>`+` <div class="card">
+                <div class="card-header" >
+                   <div class="card-title collapsed" data-toggle="collapse" data-target="#dicJoborder`+element.inquiryWorkscopeId+`">
+                      <i class="la fab la-codepen"></i> Job order checklist file
                    </div>
-                   <div class="card">
-                      <div class="card-header" >
-                         <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
-                            <i class="la fab la-codepen"></i>Design
-                         </div>
-                      </div>
-                      <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-                       <div class="card-body" >
-                       <div class="row" id="designRow`+element.designs[0].designId+`">
-                       `+dicDesign["DesignRow"+element.designs[0].designId]+`
-                           </div>
+                </div>
+                <div id="dicJoborder`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                 <div class="card-body" >
+                 <div class="row" id="dicJoborder`+response.data.inquiry.inquiryId+`">
+                 `+dicJoborder["dicJoborder"+response.data.inquiry.inquiryId]+`
+                 </div>
+                 </div>
+                </div>
+             </div>`+` <div class="card">
+             <div class="card-header" >
+                <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDetailed`+element.inquiryWorkscopeId+`">
+                   <i class="la fab la-codepen"></i> Detailed Design File
+                </div>
+             </div>
+             <div id="dicDetailed`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+              <div class="card-body" >
+              <div class="row" id="dicDetailed`+response.data.inquiry.inquiryId+`">
+              `+dicDetailed["dicDetailed"+response.data.inquiry.inquiryId]+`
+              </div>
+              </div>
+             </div>
+          </div>`;
+               // }
+               let calculation ='';
+               // if(response.data.inquiry.quotations.length >0){
+                  calculation = `
+                    <div class="card">
+                       <div class="card-header" >
+                          <div class="card-title collapsed" data-toggle="collapse" data-target="#dicCALC`+element.inquiryWorkscopeId+`">
+                             <i class="la fab la-codepen"></i>Calculation SheetFile
+                          </div>
+                       </div>
+                       <div id="dicCALC`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                        <div class="card-body" >
+                        <div class="row" id="dicCALC`+response.data.inquiry.inquiryId+`">
+                        `+dicQuot["dicCALC"+response.data.inquiry.inquiryId]+`
                         </div>
-                      </div>
-                   </div>
+                        </div>
+                       </div>
+                    </div>
+                    `;
+                    //}
+                let quot='';
+                //if(response.data.inquiry.quotations.length >0){
+                   quot = `
                    <div class="card">
                     <div class="card-header" >
                         <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
@@ -808,13 +1299,55 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                     <div class="card-body" >
-                        <div class="row" id="quotRow`+response.data.inquiry.quotations[0].quotationId+`">
-                        `+dicQuot["QuotRow"+response.data.inquiry.quotations[0].quotationId]+`
+                        <div class="row" id="quotRow`+response.data.inquiry.inquiryId+`">
+                        `+dicQuot["QuotRow"+response.data.inquiry.inquiryId]+`
                         </div>
                     </div>
                     </div>
                    </div>
-                   `+collect+`
+                   `;
+               // }
+                let design = '';
+             //   if(element.designs.length > 0){
+                  design =
+                  `<div class="card">
+                  <div class="card-header" >
+                     <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
+                        <i class="la fab la-codepen"></i>Design
+                     </div>
+                  </div>
+                  <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                   <div class="row" id="designRow`+response.data.inquiry.inquiryId+`">
+                   `+dicDesign["DesignRow"+response.data.inquiry.inquiryId]+`
+                       </div>
+                    </div>
+                  </div>
+               </div>`;
+                //}
+                let measur ='';
+                //if(element.measurements.length > 0){
+                  measur = `<div class="card">
+                  <div class="card-header" >
+                     <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
+                        <i class="la la-ruler-combined"></i>Measurement
+                     </div>
+                  </div>
+                  <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                     <div class="card-body" >
+                           <div class="row" id="measurementRow`+response.data.inquiry.inquiryId+`">
+                           `+dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]+`
+                           </div>
+                        </div>
+                  </div>
+               </div>`;
+                //}
+                tabsHTML+=`
+                <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
+                <!--begin::Accordion-->
+                <div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+element.inquiryWorkscopeId+`">
+                   
+                   `+measur+design+quot+calculation+collect+Advance+Before+After+Install+`
               
 
                 </div>
@@ -822,8 +1355,105 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
              </div>`;
             
             }else{
+               let Advance='';let Before='';let After='';let Install='';
+              // if(response.data.inquiry.quotations.length > 0){
+              // if(response.data.inquiry.quotations[0].payments.length >0){
+              //response.data.inquiry.quotations[0].payments.forEach(payment => {
+                // if(payment.paymentTypeId == 2 && payment.files.length > 0){
+                  Advance = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAdvance`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Advance Payment
+                       </div>
+                   </div>
+                   <div id="dicAdvance`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicAdvance`+response.data.inquiry.inquiryId+`">
+                       `+dicAdvance["dicAdvance"+response.data.inquiry.inquiryId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                // }//advance
+                 //if(payment.paymentTypeId == 3 && payment.files.length > 0){
+                  Before = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicBefore`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Before Installation Payment
+                       </div>
+                   </div>
+                   <div id="dicBefore`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicBefore`+response.data.inquiry.inquiryId+`">
+                       `+dicBefore["dicBefore"+response.data.inquiry.inquiryId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                // }//Before
+                // if(payment.paymentTypeId == 4 && payment.files.length > 0){
+                  After = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAfter`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>After Delivery Payment
+                       </div>
+                   </div>
+                   <div id="dicAfter`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicAfter`+response.data.inquiry.inquiryId+`">
+                       `+dicAfter["dicAfter"+response.data.inquiry.inquiryId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 //}//After
+                 //if(payment.paymentTypeId == 5 && payment.files.length > 0){
+                  Install = `
+                  <div class="card">
+                   <div class="card-header" >
+                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicInstall`+element.inquiryWorkscopeId+`">
+                           <i class="la fab la-codepen"></i>Installment Payment
+                       </div>
+                   </div>
+                   <div id="dicInstall`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                   <div class="card-body" >
+                       <div class="row" id="dicInstall`+response.data.inquiry.inquiryId+`">
+                       `+dicInstall["dicInstall"+response.data.inquiry.inquiryId]+`
+                       </div>
+                   </div>
+                   </div>
+                  </div>
+                  `;
+                 //}//Install
+               //});
+               //}}
+               let calculation ='';
+               // if(response.data.inquiry.quotations.length >0){
+                  calculation = `
+                    <div class="card">
+                       <div class="card-header" >
+                          <div class="card-title collapsed" data-toggle="collapse" data-target="#dicCALC`+element.inquiryWorkscopeId+`">
+                             <i class="la fab la-codepen"></i>Calculation SheetFile
+                          </div>
+                       </div>
+                       <div id="dicCALC`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                        <div class="card-body" >
+                        <div class="row" id="dicCALC`+response.data.inquiry.inquiryId+`">
+                        `+dicQuot["dicCALC"+response.data.inquiry.inquiryId]+`
+                        </div>
+                        </div>
+                       </div>
+                    </div>
+                    `;
+                    //}
                 let quot ='';
-                if(response.data.inquiry.quotations.length >0){
+               // if(response.data.inquiry.quotations.length >0){
                     quot = `
                     <div class="card">
                        <div class="card-header" >
@@ -833,16 +1463,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        </div>
                        <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                         <div class="card-body" >
-                        <div class="row" id="quotRow`+response.data.inquiry.quotations[0].quotationId+`">
-                        `+dicQuot["QuotRow"+response.data.inquiry.quotations[0].quotationId]+`
+                        <div class="row" id="quotRow`+response.data.inquiry.inquiryId+`">
+                        `+dicQuot["QuotRow"+response.data.inquiry.inquiryId]+`
                         </div>
                         </div>
                        </div>
                     </div>
                     `;
-                    }
+                    //}
                  let collect ='';
-                 if(response.data.inquiry.jobOrders.length > 0){
+                // if(response.data.inquiry.jobOrders.length > 0){
                     collect =`<div class="card">
                     <div class="card-header" >
                        <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMEP`+element.inquiryWorkscopeId+`">
@@ -851,8 +1481,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     <div id="dicMEP`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                      <div class="card-body" >
-                     <div class="row" id="dicMEP`+jobOrder[0].jobOrderId+`">
-                     `+dicMEP["dicMEP"+jobOrder[0].jobOrderId]+`
+                     <div class="row" id="dicMEP`+response.data.inquiry.inquiryId+`">
+                     `+dicMEP["dicMEP"+response.data.inquiry.inquiryId]+`
                      </div>
                      </div>
                     </div>
@@ -865,8 +1495,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                      </div>
                      <div id="dicMaterial`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                      <div class="card-body" >
-                     <div class="row" id="dicMaterial`+jobOrder[0].jobOrderId+`">
-                     `+dicMaterial["dicMaterial"+jobOrder[0].jobOrderId]+`
+                     <div class="row" id="dicMaterial`+response.data.inquiry.inquiryId+`">
+                     `+dicMaterial["dicMaterial"+response.data.inquiry.inquiryId]+`
                      </div>
                      </div>
                      </div>
@@ -879,48 +1509,82 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </div>
                     <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                      <div class="card-body" >
-                     <div class="row" id="dicDatasheet`+jobOrder[0].jobOrderId+`">
-                     `+dicDatasheet["dicDatasheet"+jobOrder[0].jobOrderId]+`
+                     <div class="row" id="dicDatasheet`+response.data.inquiry.inquiryId+`">
+                     `+dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId]+`
                      </div>
                      </div>
                     </div>
-                 </div>`;
-                 }
-                 
+                 </div>`+` <div class="card">
+                 <div class="card-header" >
+                    <div class="card-title collapsed" data-toggle="collapse" data-target="#dicJoborder`+element.inquiryWorkscopeId+`">
+                       <i class="la fab la-codepen"></i> Job order checklist file
+                    </div>
+                 </div>
+                 <div id="dicJoborder`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                  <div class="card-body" >
+                  <div class="row" id="dicJoborder`+response.data.inquiry.inquiryId+`">
+                  `+dicJoborder["dicJoborder"+response.data.inquiry.inquiryId]+`
+                  </div>
+                  </div>
+                 </div>
+              </div>`+` <div class="card">
+              <div class="card-header" >
+                 <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDetailed`+element.inquiryWorkscopeId+`">
+                    <i class="la fab la-codepen"></i> Detailed Design File
+                 </div>
+              </div>
+              <div id="dicDetailed`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+               <div class="card-body" >
+               <div class="row" id="dicDetailed`+response.data.inquiry.inquiryId+`">
+               `+dicDetailed["dicDetailed"+response.data.inquiry.inquiryId]+`
+               </div>
+               </div>
+              </div>
+           </div>`;
+               //  }
+                 let design ='';
+                 //if(element.designs.length>0){
+                   design =
+                   `<div class="card">
+                   <div class="card-header" >
+                      <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
+                         <i class="la fab la-codepen"></i>Design
+                      </div>
+                   </div>
+                   <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                    <div class="card-body" >
+                    <div class="row" id="designRow`+response.data.inquiry.inquiryId+`">
+                    `+dicDesign["DesignRow"+response.data.inquiry.inquiryId]+`
+                        </div>
+                     </div>
+                   </div>
+                </div>`;
+                // }
+                 let measur ='';
+               // if(element.measurements.length > 0){
+                  measur = `<div class="card">
+                  <div class="card-header" >
+                     <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
+                        <i class="la la-ruler-combined"></i>Measurement
+                     </div>
+                  </div>
+                  <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                     <div class="card-body" >
+                           <div class="row" id="measurementRow`+response.data.inquiry.inquiryId+`">
+                           `+dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]+`
+                           </div>
+                        </div>
+                  </div>
+               </div>`;
+               // }
     tabsHTML+=`
     <div class="tab-pane fade" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
     <!--begin::Accordion-->
     <div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+element.inquiryWorkscopeId+`">
-       <div class="card">
-          <div class="card-header" >
-             <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
-                <i class="la la-ruler-combined"></i>Measurement
-             </div>
-          </div>
-          <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-             <div class="card-body" >
-                   <div class="row" id="measurementRow`+element.measurements[0].measurementId+`">
-                   `+dicMeasurement["measurementRow"+element.measurements[0].measurementId]+`
-                   </div>
-                </div>
-          </div>
-       </div>
-       <div class="card">
-          <div class="card-header" >
-             <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
-                <i class="la fab la-codepen"></i>Design
-             </div>
-          </div>
-          <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
-           <div class="card-body" >
-           <div class="row" id="designRow`+element.designs[0].designId+`">
-           `+dicDesign["DesignRow"+element.designs[0].designId]+`
-               </div>
-            </div>
-          </div>
-       </div>`+
-       quot
-       +collect+
+       
+       `+measur+design+
+       quot+calculation
+       +collect+Advance+Before+After+Install+
        `
     </div>
     <!--end::Accordion-->

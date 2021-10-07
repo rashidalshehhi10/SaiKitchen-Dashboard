@@ -12,7 +12,7 @@ import {
 let user;
 export let workscopelist;
 var fourfile =  new Array();
-var four=new Array() ,five=new Array(),six=new Array();
+var four=new Array() ,five=new Array(),six=new Array(),seven=new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -292,7 +292,7 @@ $('#kt_approve_inquiry_button').click(function () {
     document.getElementById("alert").innerHTML ="MaterialSheet File should be upload";
       return false;
     }
-    var file1='',file2='',file3='';
+    var file1='',file2='',file3='',file4='';
     if(four.length >0){
         file1 = four[0];
     }
@@ -302,6 +302,9 @@ $('#kt_approve_inquiry_button').click(function () {
     if(six.length >0){
         file3 = six[0];
     }
+    if(seven.length >0){
+        file4 = seven[0];
+    }
     var checklistdata = {
         "inquiryId":document.getElementById('inquiryId').value,
         "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
@@ -309,11 +312,12 @@ $('#kt_approve_inquiry_button').click(function () {
         "mepDrawingFileUrl": file2,
         //"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
         "dataSheetApplianceFileUrl":file3,
+        "detailedDesignFile":file4,
       };
     const data = JSON.stringify(checklistdata);
     console.log(data);
     console.log(fourfile);
-      $.ajax({
+       $.ajax({
         type: "Post",
         url: baseURL + '/JobOrder/AddJobOrder',
         headers: {
@@ -329,7 +333,7 @@ $('#kt_approve_inquiry_button').click(function () {
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             document.getElementById("alert").innerHTML ="An error Occured";
         }
-    });  
+    });   
 });
 
 
@@ -499,6 +503,63 @@ success: function(file, response){
     fileuploded.innerHTML = response.data.item1;
 
     six.push(response.data.item1);
+
+}
+
+});
+$('#kt_dropzone_7').dropzone({
+            
+    // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+    url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+    type: "Post",
+    headers : {
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json'
+    },
+    paramName: "file", // The name that will be used to transfer the file
+    maxFiles: 1,
+    maxFilesize: 30000, // MB
+    timeout: 600000,
+    addRemoveLinks: true,
+    removedfile:function(file) {
+        if(file.status =="error"){
+            file.previewElement.remove();
+            return false;
+        }
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        var fileurl ='';
+        var filearr = fileuploded.innerHTML.split(".");
+        if(filearr.length > 1){
+            fileurl = "/File/DeleteFileFromBlob?fileName=";
+        }else{
+            fileurl = "/File/DeleteVideo?VideoId=";
+        }
+        $.ajax({
+            type:"post",
+            url:baseURL+fileurl+fileuploded.innerHTML,
+            cache:false,
+            success: function(){
+                removeA(seven, fileuploded.innerHTML);
+                file.previewElement.remove();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("Error");
+        
+            }
+        });
+
+    },
+
+    acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+    
+init: function() {
+
+},
+success: function(file, response){
+    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+    fileuploded.innerHTML = response.data.item1;
+
+    seven.push(response.data.item1);
 
 }
 
