@@ -313,7 +313,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 				//"isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
 				//"materialSheetFileUrl":fourfile[4]==undefined?"":fourfile[4],
 				//"mepDrawingFileUrl": fourfile[5]==undefined?"":fourfile[5],
-				//"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
+				"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
 				//"dataSheetApplianceFileUrl":fourfile[7]==undefined?"":fourfile[7],
                 "siteMeasurementMatchingWithDesign": $('input[name="isMeasurements"]:checked').val(),
                 "siteMeasurementMatchingWithDesignNotes":document.getElementById("MeasurementsComment").value,
@@ -342,7 +342,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 			const data = JSON.stringify(checklistdata);
 			console.log(data);
 			console.log(fourfile);
- 			 $.ajax({
+  			 $.ajax({
 				type: "Post",
 				url: baseURL + '/CheckList/ApproveinquiryChecklist',
 				headers: {
@@ -363,7 +363,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					document.getElementById("alert").innerHTML ="All fields should be selected";
 				}
-			});   
+			}); 
                 
             })
     }
@@ -693,7 +693,7 @@ $('#resetComponentbtn').click(function () {
                 document.getElementById("ralert").innerHTML ="";
                });
 
-              /*  for (let j = 6; j <= 6; j++) {
+                for (let j = 6; j <= 6; j++) {
                 $('#kt_dropzone_'+j).dropzone({
                              url: baseURL+"/File/UploadFile", // Set the url for your upload script location
                             type: "Head",
@@ -757,4 +757,4 @@ $('#resetComponentbtn').click(function () {
                                 }
                             }
                             return arr;
-                        } */
+                        } 
