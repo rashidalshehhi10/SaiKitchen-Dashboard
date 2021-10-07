@@ -1257,7 +1257,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                       <div id="dicCALC`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                        <div class="card-body" >
                        <div class="row" id="dicCALC`+response.data.inquiry.inquiryId+`">
-                       `+dicQuot["dicCALC"+response.data.inquiry.inquiryId]+`
+                       `+dicCALC["dicCALC"+response.data.inquiry.inquiryId]+`
                        </div>
                        </div>
                       </div>
@@ -1421,7 +1421,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                       <div id="dicCALC`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                        <div class="card-body" >
                        <div class="row" id="dicCALC`+response.data.inquiry.inquiryId+`">
-                       `+dicQuot["dicCALC"+response.data.inquiry.inquiryId]+`
+                       `+dicCALC["dicCALC"+response.data.inquiry.inquiryId]+`
                        </div>
                        </div>
                       </div>
