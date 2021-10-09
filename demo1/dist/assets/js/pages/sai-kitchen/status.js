@@ -1,6 +1,6 @@
 export let inqStatus= {
     1: {
-        'title': 'Measurement Pending',
+        'title': 'Measurement In-Progress',
         'class': 'label-light-primary'
     },
     2: {
@@ -8,7 +8,7 @@ export let inqStatus= {
         'class': ' label-light-danger'
     },
     3: {
-        'title': 'Design Pending',
+        'title': 'Design In-Progress',
         'class': ' label-light-primary'
     },
     4: {
@@ -68,7 +68,7 @@ export let inqStatus= {
         'class': ' label-light-danger'
     },
     18: {
-        'title': 'Technical Checklist Pending',
+        'title': 'Technical Checklist In-Progress',
         'class': ' label-light-primary'
     },
     19: {
@@ -80,7 +80,7 @@ export let inqStatus= {
         'class': ' label-light-danger'
     },
     21: {
-        'title': 'Job Order Pending',
+        'title': 'Job Order In-Progress',
         'class': ' label-light-primary'
     },
     22: {
@@ -108,7 +108,7 @@ export let inqStatus= {
         'class': ' label-light-success'
     },
     28: {
-        'title': 'Delivery Pending',
+        'title': 'Delivery In-Progress',
         'class': ' label-light-primary'
     },
     29: {
@@ -212,7 +212,7 @@ export let inqStatus= {
         'class': ' label-light-primary'
     },
     54: {
-        'title': 'Job Order Files Pending',
+        'title': 'Job Order Files In-Progress',
         'class': ' label-light-primary'
     },
     55: {
@@ -228,7 +228,7 @@ export let inqStatus= {
         'class': ' label-light-info'
     },
     58: {
-        'title': 'Contract Pending',
+        'title': 'Contract In-Progress',
         'class': ' label-light-primary'
     },
     59: {
