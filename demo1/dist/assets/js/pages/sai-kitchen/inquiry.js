@@ -333,7 +333,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             }, 1000);
          });
          $('#MeasurementPending').on('click', function() {
-             table.column(2).search('Measurement Pending',true, false, true ).draw();
+             table.column(2).search('Measurement In-Progress',true, false, true ).draw();
              $('html, body').animate({
                  scrollTop: $("#kt_datatable").offset().top
              }, 1000);
@@ -357,7 +357,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             }, 1000);
          });
          $('#DesignPending').on('click', function() {
-            table.column(2).search('Design'+' '+'Pending',true, false, true).draw();
+            table.column(2).search('Design'+' '+'In-Progress',true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
