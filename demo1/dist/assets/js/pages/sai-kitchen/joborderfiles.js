@@ -162,7 +162,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     render: function(data, type, full, meta) {
                         console.log(full);
                         var action = ``;
-                        
+                        action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewjoborderfiles.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
+                        <i class="la la-ellipsis-h""></i>\
+                        </a>\
+                        `;
 
                         action += `
                         <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Upload">
@@ -389,7 +392,7 @@ success: function(file, response){
     var fileuploded = file.previewElement.querySelector("[data-dz-name]");
     fileuploded.innerHTML = response.data.item1;
     four.push(response.data.item1);
-
+    document.getElementById("alert").innerHTML ='';
 }
     
 });
