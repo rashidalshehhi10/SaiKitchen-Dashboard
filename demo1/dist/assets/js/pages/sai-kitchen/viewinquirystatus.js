@@ -202,6 +202,20 @@ var tabsHTML =``;
 
 var jobHtml =``;
 var jobdetail =``;
+dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]='';
+dicDesign["DesignRow"+response.data.inquiry.inquiryId]='';
+dicQuot["QuotRow"+response.data.inquiry.inquiryId]='';
+dicMEP["dicMEP"+response.data.inquiry.inquiryId]='';
+dicMaterial["dicMaterial"+response.data.inquiry.inquiryId]=``;
+dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId]=``;
+dicJoborder["dicJoborder"+response.data.inquiry.inquiryId]=``;
+dicDetailed["dicDetailed"+response.data.inquiry.inquiryId]=``;
+dicAdvance["dicAdvance"+response.data.inquiry.inquiryId]='';
+dicBefore["dicBefore"+response.data.inquiry.inquiryId]='';
+dicAfter["dicAfter"+response.data.inquiry.inquiryId]='';
+dicInstall["dicInstall"+response.data.inquiry.inquiryId]='';
+dicCALC["dicCALC"+response.data.inquiry.inquiryId]='';
+
 if(response.data.inquiry.jobOrders.length > 0){
    var bool1,bool2,bool2,bool3,bool4,bool5,bool6;
    if(response.data.inquiry.jobOrders[0].siteMeasurementMatchingWithDesign){
@@ -381,6 +395,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 inquiryCode.innerHTML=response.data.inquiry.inquiryCode;
 var isfirst=true;
 var counter = 0;
+
 response.data.inquiry.inquiryWorkscopes.forEach(element => {
     if(isfirst){
         workscopeHtml+=` <li class="nav-item">

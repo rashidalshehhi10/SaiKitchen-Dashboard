@@ -192,6 +192,19 @@ var dicInstall = new Object();
 var dicCALC = new Object();
 var workscopeHtml=``;
 var tabsHTML =``;
+dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]='';
+dicDesign["DesignRow"+response.data.inquiry.inquiryId]='';
+dicQuot["QuotRow"+response.data.inquiry.inquiryId]='';
+dicMEP["dicMEP"+response.data.inquiry.inquiryId]='';
+dicMaterial["dicMaterial"+response.data.inquiry.inquiryId]=``;
+dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId]=``;
+dicJoborder["dicJoborder"+response.data.inquiry.inquiryId]=``;
+dicDetailed["dicDetailed"+response.data.inquiry.inquiryId]=``;
+dicAdvance["dicAdvance"+response.data.inquiry.inquiryId]='';
+dicBefore["dicBefore"+response.data.inquiry.inquiryId]='';
+dicAfter["dicAfter"+response.data.inquiry.inquiryId]='';
+dicInstall["dicInstall"+response.data.inquiry.inquiryId]='';
+dicCALC["dicCALC"+response.data.inquiry.inquiryId]='';
 // response.data.inquiryWorkscopes.forEach(element => {
 // 	console.log(baseFileURL+element.fileUrl);
 
