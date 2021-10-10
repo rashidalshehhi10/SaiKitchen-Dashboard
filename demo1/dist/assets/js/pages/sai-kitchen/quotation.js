@@ -160,6 +160,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         <a href="viewinquiry.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
                         <i class="la la-file-contract"></i>
                     </a>
+                    <a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#Approvequotation" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+								<i class="la la-thumbs-up"></i>
+							</a>
                     `;
                         }
                             return action;
@@ -279,4 +282,33 @@ jQuery(document).ready(function() {
     }
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
+});
+$(function() {
+    $('#method').change(function(){
+       // $('input#txtcount').val(cnt)
+        if($('#method').val()=='1'){
+           document.getElementById('instCnt').value='0';
+        document.getElementById("dynamicdiv").innerHTML='';
+            $('#RowAdv').show(); 
+            $('#RowAfter').show(); 
+         $('#txtAdvancePayment').keyup(function () {
+            advancePayment=  document.getElementById('txtAdvancePayment').value;
+            advancePaymentAmount= (totalAmount/100)*advancePayment;
+            document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+        
+        });
+            //$('#divtAmount').hide(); 
+            $('#diviCnt').hide();
+        }else{
+            //document.getElementById("dynamicdiv").innerHTML='';
+            //$('#divtAmount').show();
+           
+            
+            $('#diviCnt').show(); 
+            $('#RowAfter').hide(); 
+
+        }
+        
+    });
+    
 });

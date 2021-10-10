@@ -228,7 +228,7 @@ export let inqStatus= {
         'class': ' label-light-info'
     },
     58: {
-        'title': 'Contract In-Progress',
+        'title': 'contract Pending',
         'class': ' label-light-primary'
     },
     59: {
@@ -238,5 +238,9 @@ export let inqStatus= {
     60: {
         'title': 'Contract Approved',
         'class': ' label-light-success'
+    },
+    61: {
+        'title': 'quotation Revision Requested',
+        'class': ' label-light-primary'
     },
 };
