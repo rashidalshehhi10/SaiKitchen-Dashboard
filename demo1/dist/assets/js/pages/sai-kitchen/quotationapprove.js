@@ -8,6 +8,13 @@ import {
 } from './status.js'
 let user;
 
+
+let advancePayment=0;
+let advancePaymentAmount=0;
+let totalAmount=0;
+let isMeasurementPromo;
+let measurementFee=0;
+let vatvalue = 0;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -39,7 +46,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/Quotation/GetInquiryForQuotationbyBranchId?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/Quotation/GetInquiryForApprovalQuotationbyBranchId?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
@@ -160,7 +167,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         <a href="viewinquiry.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
                         <i class="la la-file-contract"></i>
                     </a>
-                      `;
+                    <a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#Approvequotation" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+								<i class="la la-thumbs-up"></i>
+							</a>
+                    `;
                         }
                             return action;
                         // } else {
@@ -277,35 +287,76 @@ jQuery(document).ready(function() {
             }
         }
     }
-
+    if(user.data.userRoles[0].branchRole.roleTypeId==1){
+        $('#txtAdvancePayment').prop('readonly', false);}
     KTDatatablesSearchOptionsAdvancedSearch.init();
-});
-$(function() {
-    $('#method').change(function(){
-       // $('input#txtcount').val(cnt)
-        if($('#method').val()=='1'){
-           document.getElementById('instCnt').value='0';
-        document.getElementById("dynamicdiv").innerHTML='';
-            $('#RowAdv').show(); 
-            $('#RowAfter').show(); 
-         $('#txtAdvancePayment').keyup(function () {
-            advancePayment=  document.getElementById('txtAdvancePayment').value;
-            advancePaymentAmount= (totalAmount/100)*advancePayment;
-            document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
-        
-        });
-            //$('#divtAmount').hide(); 
-            $('#diviCnt').hide();
-        }else{
-            //document.getElementById("dynamicdiv").innerHTML='';
-            //$('#divtAmount').show();
-           
+    $(function() {
+        $('#method').change(function(){
+           // $('input#txtcount').val(cnt)
+            if($('#method').val()=='1'){
+               document.getElementById('instCnt').value='0';
+            document.getElementById("dynamicdiv").innerHTML='';
+                $('#RowAdv').show(); 
+                $('#RowAfter').show();
+                 //advancePayment=document.getElementById("txtAdvancePayment").value;
+                // totalAmount=document.getElementById("txtTotalAmount").value; 
+             $('#txtAdvancePayment').keyup(function () {
+                advancePayment=  document.getElementById('txtAdvancePayment').value;
+                advancePaymentAmount= (totalAmount/100)*advancePayment;
+                document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
             
-            $('#diviCnt').show(); 
-            $('#RowAfter').hide(); 
-
-        }
+            });
+                //$('#divtAmount').hide(); 
+                $('#diviCnt').hide();
+            }else{
+                //document.getElementById("dynamicdiv").innerHTML='';
+                //$('#divtAmount').show();
+               
+                
+                $('#diviCnt').show(); 
+                $('#RowAfter').hide(); 
+    
+            }
+            
+        });
         
     });
-    
+    $('#txtAmount').keyup(function () {
+        isMeasurementPromo= document.getElementById("isMeasurementPromo").value;
+        measurementFee = document.getElementById("measurementFee").value;
+        vatvalue  = document.getElementById("vat").value;
+        if(isMeasurementPromo==false){
+            var amountAfterDiscount=($(this).val()/1- (($(this).val()/100)*promoDiscount))-measurementFee;
+             totalAmount=(amountAfterDiscount+ (amountAfterDiscount/100)*vatvalue);
+             if(totalAmount<0){
+                 totalAmount=0;
+             }
+      document.getElementById('txtTotalAmount').value=totalAmount;
+      document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount '+promoDiscount+'% - Measurement Fee AED '+measurementFee+' + VAT '+vatvalue+'%';
+      advancePaymentAmount= (totalAmount/100)*advancePayment;
+      document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED '+advancePaymentAmount;
+    }else{
+         totalAmount= (($(this).val()/1-measurementFee)+ ((($(this).val()-measurementFee)/100)*vatvalue));
+         if(totalAmount<0){
+             totalAmount=0;
+         }
+        document.getElementById('txtTotalAmount').value= totalAmount;   
+           document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount 0% - Measurement Fee AED '+measurementFee+' + VAT '+vatvalue+'%';
+           advancePaymentAmount= (totalAmount/100)*advancePayment;
+           document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+         
+    }
 });
+
+$('#txtAdvancePayment').keyup(function () {
+    advancePayment=  document.getElementById('txtAdvancePayment').value;
+    advancePaymentAmount= (totalAmount/100)*advancePayment;
+    document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+
+});
+
+});
+
+
+
+
