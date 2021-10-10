@@ -48,7 +48,7 @@ export let inqStatus= {
         'class': ' label-light-info'
     },
     13: {
-        'title': 'Quotation Accepted',
+        'title': 'Quotation Approved',
         'class': 'label-light-success'
     },
     14: {

@@ -414,7 +414,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             }, 1000);
          });
          $('#QuotationApproved').on('click', function() {
-            table.column(2).search('Quotation Accepted',true, false, true).draw(); 
+            table.column(2).search('Quotation Approved',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
