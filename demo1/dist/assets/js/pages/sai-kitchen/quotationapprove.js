@@ -6,15 +6,25 @@ import {
 import {
     inqStatus
 } from './status.js'
+import {
+    measurementFile
+} from './constant.js'
 let user;
 
-
+let inquiryId;
+let inquiry;
 let advancePayment=0;
 let advancePaymentAmount=0;
 let totalAmount=0;
 let isMeasurementPromo;
 let measurementFee=0;
 let vatvalue = 0;
+let promoDiscount=0;
+let beforeInstallation=0;
+let afterDelivery=0;
+let isInstallment=false;
+let noOfInstallment=0;
+var calcfile=new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -170,6 +180,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     <a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#Approvequotation" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
 								<i class="la la-thumbs-up"></i>
 							</a>
+                    <a type="button" onclick="document.getElementById('inquiryId').innerHTML =` + full.inquiryId + `;" data-toggle="modal" data-target="#QuotationReject" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
+                            <i class="la la-thumbs-down"></i>
+                        </a>        
                     `;
                         }
                             return action;
@@ -255,12 +268,199 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         });
 
     };
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
+    var _handleaddquotation = function() {
+        var form = KTUtil.getById('kt_add_quotation');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_btn_add_quotation');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        txtTotalAmount: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Total Amount is required'
+                                }
+                            }
+                        },
+                        txtAmount: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Amount is required'
+                                }
+                            }
+                        },
+                        txtAdvancePayment: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Advance Payment is required'
+                                }
+                            }
+                        },
+                        kt_datepicker_2: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Valid Till is required'
+                                }
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+               
+                console.log(measurementFile);
+                var pymnt = new Array();
+                advancePayment= document.getElementById('txtAdvancePayment').value;
+                beforeInstallation= document.getElementById('txtBeforeInstallation').value;
+                afterDelivery= document.getElementById('txtAfterInstallation').value;
+                    if(user.data.userRoles[0].branchRole.roleTypeId==1 ){
+                        if(document.getElementById('method').value=='1'){
+                            isInstallment=false;
+                            advancePayment= document.getElementById('txtAdvancePayment').value;
+                            noOfInstallment =0;
+                        }
+                        else{
+                            isInstallment=true;
+                            advancePayment =document.getElementById('txtAdvancePayment').value;
+                            noOfInstallment=document.getElementById('instCnt').value;
+                            for (let i = 1; i <= parseInt(noOfInstallment); i++) {
+                                pymnt.push({
+                                    paymentName: "",
+                                    paymentDetail: "",
+                                    paymentAmount: 0,
+                                    paymentModeId: 0,
+                                    paymentAmountinPercentage: document.getElementById('ipercent'+i).value,
+                                    paymentExpectedDate: document.getElementById('kt_datepicker'+i).value,
+                                    inquiryId: inquiryId,
+                                    isActive: true,
+                                    isDeleted: false
+                                })
+                            }
+                        }
+                    }
+                    var calc ='';
+                    if(calcfile.length > 0)
+                       calc = calcfile[0];
+                    var quotationModel={
+                    inquiryId: parseInt( document.getElementById('inquiryId').innerHTML),
+                    description: document.getElementById('txtdescription').value,
+                    totalAmount: document.getElementById('txtTotalAmount').value,
+                    amount: document.getElementById('txtAmount').value,
+                    ProposalReferenceNumber: document.getElementById('txtProposalReferenceNumber').value,
+                    advancePayment:advancePayment,
+                    beforeInstallation:beforeInstallation,
+                    afterDelivery:afterDelivery,
+                    isInstallment:isInstallment,
+                    vat:vatvalue,
+                    discount: promoDiscount,
+                    quotationValidityDate: document.getElementById('kt_datepicker_2').value,
+                    quotationFiles: measurementFile,
+                    paymentName: 'Advance Payment',
+                    paymentDetail: '',
+                    paymentAmount:advancePaymentAmount,
+                    noOfInstallment:noOfInstallment,
+                    payments: new Array(),
+                    calculationSheetFile:calc,
+                };
+                quotationModel.payments = pymnt;
+                const data = JSON.stringify(quotationModel);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Quotation/HeadAcceptQuotation',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("quotationapprove.html");
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+            .on('core.form.invalid', function() {
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            });
+    }
     return {
 
         //main function to initiate the module
         init: function() {
             initTable1();
+            _handleaddquotation();
         },
 
     };
@@ -271,9 +471,6 @@ let permissions;
 let quotationPermission;
 
 jQuery(document).ready(function() {
-
-
-
     var login = localStorage.getItem("user");
     if (login !== null) {
         user = JSON.parse(login);
@@ -325,6 +522,7 @@ jQuery(document).ready(function() {
         isMeasurementPromo= document.getElementById("isMeasurementPromo").value;
         measurementFee = document.getElementById("measurementFee").value;
         vatvalue  = document.getElementById("vat").value;
+        promoDiscount = document.getElementById("promoDiscount").value;
         if(isMeasurementPromo==false){
             var amountAfterDiscount=($(this).val()/1- (($(this).val()/100)*promoDiscount))-measurementFee;
              totalAmount=(amountAfterDiscount+ (amountAfterDiscount/100)*vatvalue);
@@ -358,5 +556,145 @@ $('#txtAdvancePayment').keyup(function () {
 });
 
 
+$('#kt_dropzone_4').dropzone({
+            
+    // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+    url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+    type: "Post",
+    headers : {
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json'
+    },
+    paramName: "file", // The name that will be used to transfer the file
+    maxFiles: 1,
+    maxFilesize: 30000, // MB
+    timeout: 600000,
+    addRemoveLinks: true,
+    removedfile:function(file) {
+        if(file.status =="error"){
+            file.previewElement.remove();
+            return false;
+        }
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        var fileurl ='';
+        var filearr = fileuploded.innerHTML.split(".");
+        if(filearr.length > 1){
+            fileurl = "/File/DeleteFileFromBlob?fileName=";
+        }else{
+            fileurl = "/File/DeleteVideo?VideoId=";
+        }
+        $.ajax({
+            type:"post",
+            url:baseURL+fileurl+fileuploded.innerHTML,
+            cache:false,
+            success: function(){
+                removeA(calcfile, fileuploded.innerHTML);
+                file.previewElement.remove();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("Error");
+        
+            }
+        });
 
+    },
+
+    acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+    
+init: function() {
+
+},
+success: function(file, response){
+    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+    fileuploded.innerHTML = response.data.item1;
+
+    calcfile.push(response.data.item1);
+
+}
+
+});
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
+
+$('#kt_reject_inquiry_button').click(function () {
+
+    var form = KTUtil.getById('kt_reject_inquiry');
+    var formSubmitUrl = KTUtil.attr(form, 'action');
+    var formSubmitButton = KTUtil.getById('RejectComment');
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+    if (!form) {
+        return;
+    }
+
+    FormValidation
+        .formValidation(
+            form, {
+                fields: {
+                    RejectComment: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Reason is required'
+                            }
+                        }
+                    },
+                    
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    bootstrap: new FormValidation.plugins.Bootstrap({
+                    })
+                }
+            }
+        )
+        .on('core.form.valid', function() {
+            KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");     
+            var rejectlistdata = {
+                "inquiryId":parseInt(document.getElementById('inquiryId').innerHTML),
+                "reason":document.getElementById('RejectComment').value,
+              };
+
+            const data = JSON.stringify(rejectlistdata);
+            console.log(data);
+             $.ajax({
+                type: "Post",
+                url: baseURL + '/Quotation/HeadDeclineQuotation',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'userId': user.data.userId,
+                    'Access-Control-Allow-Origin': '*',
+                },
+                data: data,
+                success: function(response) {
+                    console.log(response);
+                    window.location.replace("quotationapprove.html");
+                    
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    document.getElementById("ralert").innerHTML ="An error occured";
+                }
+            }); 				
+        })
+        .on('core.form.invalid', function() {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function() {
+                KTUtil.scrollTop();
+            });
+        });
+});
 

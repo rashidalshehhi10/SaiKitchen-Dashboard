@@ -371,10 +371,16 @@ License: You must have a valid license purchased only from themeforest(the above
                   </button>
                 </div>
                 <!--begin::Form-->
+                
                 <form class="form" id="kt_add_quotation" action="" name="addQutotationform">
                     <span id="inquiryId" style="display:none">0</span>
-                  
+                    
                     <div class="modal-body">
+                        <div class="form-group row ">
+                            <div class="col-lg-12" style="text-align: right;">
+                            <button type="button" onclick="enableItems()" id="editform" class="btn btn-primary font-weight-bold">Edit</button>
+                        </div>
+                         </div>
                      <div class="form-group row">
                         <div class="col-lg-6">
                            <label >Payment method:</label>
@@ -538,7 +544,7 @@ License: You must have a valid license purchased only from themeforest(the above
                            <span class="form-text text-muted">Total amount in AED</span>
                        </div>
                         </div>
-                        <div class="form-group row">
+                        <div id="divProposal" class="form-group row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_3" name="quotationFiles">
                                     <div class="dropzone-msg dz-message needsclick">
@@ -548,7 +554,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div id="divCalculation" class="form-group row">
                            <div class="col-lg-12 col-md-12 col-sm-12">
                                <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_4" name="CalculationFiles">
                                    <div class="dropzone-msg dz-message needsclick">
@@ -850,9 +856,47 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
     </div>
+    <div class="modal fade" id="QuotationReject" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form class="form" id="kt_reject_inquiry" action="" name="rejectinquiryform">
+                  
+			   <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Quotation Reject</h5>
+                    <button id="rclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                </div>
+                <div class="modal-body">
+                     <div class="form-group row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Reason</label>
+                                    <div class="input-group">
+
+                                        <input type="text" name="RejectComment" id="RejectComment"
+                                            class="form-control" value=""
+                                            placeholder="" >
+                                    </div>
+                        </div>
+                     </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <span id="ralert" style="color: red;"></span>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="kt_close_reject_inquiry_button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                <button type="submit" id="kt_reject_inquiry_button" class="btn btn-primary font-weight-bold">Reject</button>
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <input type="hidden" id="isMeasurementPromo" value="false" />
     <input type="hidden" id="measurementFee" value="0" />
     <input type="hidden" id="vat" value="0" />
+    <input type="hidden" id="editmode" value="0" />
     <!--end::Chat Panel-->
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">
@@ -966,7 +1010,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script src="assets/js/pages/sai-kitchen/inquirytagify.js" type="Module"></script>
     <!--end::Page Scripts-->
-
+      <!--begin::Page Scripts(used by this page)-->
+      <script src="assets/js/pages/sai-kitchen/dropzone.js" type="Module"></script>
+      <!--end::Page Scripts-->
     <!--begin::Page Scripts(used by this page)-->
     <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
     <!--end::Page Scripts-->
@@ -1083,11 +1129,52 @@ License: You must have a valid license purchased only from themeforest(the above
                     if (response.isError == false) {
                         document.getElementById("inquiryId").innerHTML = response.data.inquiryId;
                         if(response.data.isMeasurementPromo != null)
+                        document.getElementById("promoDiscount").value =response.data.promoDiscount;
                         document.getElementById("isMeasurementPromo").value =response.data.isMeasurementPromo;
                         document.getElementById("measurementFee").value = response.data.measurementFees;
                         document.getElementById("vat").value = response.data.quotations[0].vat;
-                        if(response.data.quotations[0].isInstallment)
+                        if(response.data.quotations[0].isInstallment){
                           $('#method'+' option[value=2]').attr('selected',true).change();
+                          document.getElementById("instCnt").value = response.data.quotations[0].payments.length;
+                          //document.getElementById("instCnt").value =2;
+                          document.getElementById("dynamicdiv").innerHTML='';
+                            var cnt  =$('input#instCnt').val();
+                            var vprcnt = (100-document.getElementById('txtAdvancePayment').value)/parseInt(cnt);
+                            for (let i = 1; i <= parseInt(cnt); i++) {
+                            //second_date.setMonth(second_date.getMonth()+i);
+                           // var ktdatvale =0;
+                            var ktdatvale = response.data.quotations[0].payments[i].paymentExpectedDate;
+                            document.getElementById("dynamicdiv").innerHTML= document.getElementById("dynamicdiv").innerHTML+
+                            ' <div class="form-group row">'+
+                                '<div class="col-lg-6">'+
+                                '<label>Installment Percent:</label>'+
+                                '<div class="input-group">'+
+                                        '<input  type="number" id="ipercent'+i+'" name="ipercent'+i+'" class="form-control" placeholder="0" value="'+vprcnt+'"  min="0" />'+
+                                        '<div class="input-group-append">'+
+                                            '<span class="input-group-text">'+
+                                            '<i class="la la-percent"></i>'+
+                                            '</span>'+
+                                        '</div>'+
+                                '</div>'+
+                                '</div>'+
+                                '<div class="col-lg-6">'+
+                                '<label>Expectation Date:</label>'+
+                                '<div class="input-group date" data-provide="datepicker">'+
+                                    '<input type="text" class="form-control datepicker" id="kt_datepicker'+i+'" value="'+ktdatvale+'"  placeholder="Select date" />'+
+                                    '<div class="input-group-append">'+
+                                        '<span class="input-group-text">'+
+                                            '<i class="la la-calendar-check-o"></i>'+
+                                        '</span>'+
+                                    '</div>'+
+                                '</div>'+
+                                    '<span class="form-text text-muted">Please enter validity date</span>'+
+                            '</div>'+
+                            '</div>';
+                            $('#kt_datepicker_'+i).datepicker({
+                            });
+                            }
+                            
+                        }
                         document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
                         document.getElementById("txtdescription").value = response.data.quotations[0].description;
                         document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;
@@ -1102,21 +1189,25 @@ License: You must have a valid license purchased only from themeforest(the above
                             document.getElementById("dynamicdiv").innerHTML='';
                             $('#RowAdv').show(); 
                             $('#RowAfter').show(); 
-                           /*  let advancePayment=document.getElementById("txtAdvancePayment").value;
-                            let advancePaymentAmount=0;
-                            let totalAmount=document.getElementById("txtTotalAmount").value;
-                            $('#txtAdvancePayment').keyup(function () {
-                                advancePayment=  document.getElementById('txtAdvancePayment').value;
-                                advancePaymentAmount= (totalAmount/100)*advancePayment;
-                                document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
-                            
-                            }); */
                             $('#diviCnt').hide();
                         }else{
                             $('#diviCnt').show(); 
                             $('#RowAfter').hide(); 
                         }
-
+                        $('#method').prop('disabled', 'disabled');
+                        $('#txtdescription').prop('disabled', 'disabled');
+                        $('#txtAdvancePayment').prop('disabled', 'disabled');
+                        $('#txtBeforeInstallation').prop('disabled', 'disabled');
+                        $('#txtAfterInstallation').prop('disabled', 'disabled');
+                        $('#txtProposalReferenceNumber').prop('disabled', 'disabled');
+                        $('#txtAmount').prop('disabled', 'disabled');
+                        $('#kt_datepicker_2').prop('disabled', 'disabled');
+                        $('#txtTotalAmount').prop('disabled', 'disabled');
+                        document.getElementById("divProposal").style.display ='none';
+                        document.getElementById("divCalculation").style.display ='none';
+                        $('#dynamicdiv').find('input').attr('disabled','disabled');
+                        $('#instCnt').prop('disabled', 'disabled');
+                        document.getElementById("editmode").value =1;
                     }else {
                         Swal.fire({
                             text: response.errorMessage,
@@ -1195,7 +1286,23 @@ License: You must have a valid license purchased only from themeforest(the above
             }
             
          }
-        
+        function enableItems(){
+            document.getElementById("editmode").value =1;
+            $('#method').prop('disabled', false );
+            $('#txtdescription').prop('disabled', false );
+            $('#txtAdvancePayment').prop('disabled', false );
+            $('#txtBeforeInstallation').prop('disabled', false);
+            $('#txtAfterInstallation').prop('disabled', false);
+            $('#txtProposalReferenceNumber').prop('disabled', false);
+            $('#txtAmount').prop('disabled', false);
+            $('#kt_datepicker_2').prop('disabled', false);
+            $('#txtTotalAmount').prop('disabled', false);
+            $('#dynamicdiv').find('input').attr('disabled',false);
+            $('#instCnt').prop('disabled', false);
+            $('#divProposal').show();
+            $('#divCalculation').show();
+
+        }
     </script>
 
     <!--end::Page Scripts-->
