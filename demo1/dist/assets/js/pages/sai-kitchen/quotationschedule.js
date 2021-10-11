@@ -284,7 +284,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 var inquirySchedule = {
                     inquiryId:parseInt( document.getElementById("inquiryId").innerHTML),
-                    userId: 0,
+                    userId: user.data.userId,
                     date: document.getElementById('measurement_schedule_date').value,
                 };
                 const data = JSON.stringify(inquirySchedule);

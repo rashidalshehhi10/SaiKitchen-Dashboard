@@ -152,7 +152,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var action = ``;
-                        // if(full.inquiryAddedById==user.data.userId){
+                        if(full.inquiryAddedById==user.data.userId){
                         if (quotationPermission >= 2) {
                             console.log(full.inquiryId);
                          
@@ -160,12 +160,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         <a href="viewinquiry.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
                         <i class="la la-file-contract"></i>
                     </a>
-                      `;
+                    `;
                         }
                             return action;
-                        // } else {
-                        //     return `<span></span>`;
-                        // }
+                        } else {
+                            return `<span></span>`;
+                        }
                     },
                 },
                 {
@@ -279,33 +279,4 @@ jQuery(document).ready(function() {
     }
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
-});
-$(function() {
-    $('#method').change(function(){
-       // $('input#txtcount').val(cnt)
-        if($('#method').val()=='1'){
-           document.getElementById('instCnt').value='0';
-        document.getElementById("dynamicdiv").innerHTML='';
-            $('#RowAdv').show(); 
-            $('#RowAfter').show(); 
-         $('#txtAdvancePayment').keyup(function () {
-            advancePayment=  document.getElementById('txtAdvancePayment').value;
-            advancePaymentAmount= (totalAmount/100)*advancePayment;
-            document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
-        
-        });
-            //$('#divtAmount').hide(); 
-            $('#diviCnt').hide();
-        }else{
-            //document.getElementById("dynamicdiv").innerHTML='';
-            //$('#divtAmount').show();
-           
-            
-            $('#diviCnt').show(); 
-            $('#RowAfter').hide(); 
-
-        }
-        
-    });
-    
 });

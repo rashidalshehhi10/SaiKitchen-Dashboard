@@ -1291,7 +1291,7 @@ $('#kt_add_customer_button').click(function () {
                     // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                     var inquirySchedule = {
                         inquiryId:parseInt( document.getElementById("inquiryId").innerHTML),
-                        userId: 0,
+                        userId: user.data.userId,
                         date: document.getElementById('quotation_schedule_date').value,
                     };
                     const data = JSON.stringify(inquirySchedule);
@@ -1299,7 +1299,6 @@ $('#kt_add_customer_button').click(function () {
                     $.ajax({
                         type: "Post",
                         url: baseURL + '/Quotation/QuotationSchedule',
-    
                         headers: {
                             'Content-Type': 'application/json',
                             'userId': user.data.userId,
