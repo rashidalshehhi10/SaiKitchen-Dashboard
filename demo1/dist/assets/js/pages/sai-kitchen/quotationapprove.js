@@ -174,7 +174,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             console.log(full.inquiryId);
                          
                         action += `
-                        <a href="viewinquiry.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
+                        <a href="viewquotationapprove.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
                         <i class="la la-file-contract"></i>
                     </a>
                     <a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#Approvequotation" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
@@ -361,8 +361,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     var calc ='';
                     if(calcfile.length > 0)
                        calc = calcfile[0];
+                    
+                    var file = ''; 
+                    if(measurementFile.length > 0) 
+                      file = measurementFile[0];
                     var quotationModel={
                     inquiryId: parseInt( document.getElementById('inquiryId').innerHTML),
+                    quotationId: document.getElementById('quotationId').value,
                     description: document.getElementById('txtdescription').value,
                     totalAmount: document.getElementById('txtTotalAmount').value,
                     amount: document.getElementById('txtAmount').value,
@@ -375,12 +380,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     discount: promoDiscount,
                     quotationValidityDate: document.getElementById('kt_datepicker_2').value,
                     quotationFiles: measurementFile,
+                    //file:{fileUrl:file},
                     paymentName: 'Advance Payment',
                     paymentDetail: '',
                     paymentAmount:advancePaymentAmount,
                     noOfInstallment:noOfInstallment,
                     payments: new Array(),
                     calculationSheetFile:calc,
+                    isEdit: document.getElementById("editmode").value,
                 };
                 quotationModel.payments = pymnt;
                 const data = JSON.stringify(quotationModel);
@@ -659,7 +666,7 @@ $('#kt_reject_inquiry_button').click(function () {
             KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");     
             var rejectlistdata = {
                 "inquiryId":parseInt(document.getElementById('inquiryId').innerHTML),
-                "reason":document.getElementById('RejectComment').value,
+                "comment":document.getElementById('RejectComment').value,
               };
 
             const data = JSON.stringify(rejectlistdata);

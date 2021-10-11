@@ -548,7 +548,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_3" name="quotationFiles">
                                     <div class="dropzone-msg dz-message needsclick">
-                                        <h3 class="dropzone-msg-title">Replace Upload Proposal</h3>
+                                        <h3 class="dropzone-msg-title">Replace Uploaded Proposal</h3>
                                         <span class="dropzone-msg-desc">Only pdf files are allowed</span>
                                     </div>
                                 </div>
@@ -896,7 +896,11 @@ License: You must have a valid license purchased only from themeforest(the above
     <input type="hidden" id="isMeasurementPromo" value="false" />
     <input type="hidden" id="measurementFee" value="0" />
     <input type="hidden" id="vat" value="0" />
-    <input type="hidden" id="editmode" value="0" />
+    <input type="hidden" id="promoDiscount" value="0" />
+    <input type="hidden" id="quotationId" value="0" />
+    <input type="hidden" id="editmode" value="false" />
+
+    
     <!--end::Chat Panel-->
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">
@@ -1127,6 +1131,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 success: function(response) {
                     console.log(response);
                     if (response.isError == false) {
+                        document.getElementById("quotationId").value = response.data.quotations[0].quotationId;
                         document.getElementById("inquiryId").innerHTML = response.data.inquiryId;
                         if(response.data.isMeasurementPromo != null)
                         document.getElementById("promoDiscount").value =response.data.promoDiscount;
@@ -1143,7 +1148,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             for (let i = 1; i <= parseInt(cnt); i++) {
                             //second_date.setMonth(second_date.getMonth()+i);
                            // var ktdatvale =0;
-                            var ktdatvale = response.data.quotations[0].payments[i].paymentExpectedDate;
+                            var ktdatvale = response.data.quotations[0].payments[i-1].paymentExpectedDate;
                             document.getElementById("dynamicdiv").innerHTML= document.getElementById("dynamicdiv").innerHTML+
                             ' <div class="form-group row">'+
                                 '<div class="col-lg-6">'+
@@ -1207,7 +1212,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("divCalculation").style.display ='none';
                         $('#dynamicdiv').find('input').attr('disabled','disabled');
                         $('#instCnt').prop('disabled', 'disabled');
-                        document.getElementById("editmode").value =1;
+                        document.getElementById("editmode").value ="false";
                     }else {
                         Swal.fire({
                             text: response.errorMessage,
@@ -1287,7 +1292,7 @@ License: You must have a valid license purchased only from themeforest(the above
             
          }
         function enableItems(){
-            document.getElementById("editmode").value =1;
+            document.getElementById("editmode").value ="true";
             $('#method').prop('disabled', false );
             $('#txtdescription').prop('disabled', false );
             $('#txtAdvancePayment').prop('disabled', false );
