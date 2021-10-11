@@ -298,7 +298,7 @@ if(response.data.inquiry.jobOrders.length > 0){
 `;
 if(response.data.inquiry.jobOrders[0].jobOrderDetails.length >0){
  jobdetail = `<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Material Availablity Date:</span>
+   <span class="font-weight-bold mr-2">Material Requested Date:</span>
    <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialRequestDate+`</span>
 </div>
 <div class="d-flex align-items-center justify-content-between mb-2">

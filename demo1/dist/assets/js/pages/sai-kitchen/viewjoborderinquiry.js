@@ -319,7 +319,7 @@ customerDetail.innerHTML=` <!--begin::User-->
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">Material Availablity Date:</span>
+      <span class="font-weight-bold mr-2">Material Requested Date:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialRequestDate+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
