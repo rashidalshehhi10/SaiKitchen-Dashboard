@@ -320,7 +320,7 @@ customerDetail.innerHTML=` <!--begin::User-->
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Material Availablity Date:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialAvailabilityDate+`</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialRequestDate+`</span>
    </div>
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Shop Drawing Completion Date:</span>
