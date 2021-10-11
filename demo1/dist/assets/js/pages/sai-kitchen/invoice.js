@@ -224,10 +224,32 @@ $( "#rejectbtn" ).click(function() {
         },
         success: function(response) {
             console.log(response);
+            Swal.fire({
+              text: 'Quotation Rejected Succesfully',
+              icon: "success",
+              buttonsStyling: false,
+              confirmButtonText: "Ok, got it!",
+              customClass: {
+                  confirmButton: "btn font-weight-bold btn-light-primary"
+              }
+          }).then(function() {
+              KTUtil.scrollTop();
+          });
             
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log(errorThrown);
+            Swal.fire({
+              text: 'Quotation Rejection Failed',
+              icon: "error",
+              buttonsStyling: false,
+              confirmButtonText: "Ok, got it!",
+              customClass: {
+                  confirmButton: "btn font-weight-bold btn-light-primary"
+              }
+          }).then(function() {
+              KTUtil.scrollTop();
+          });
         }
     });
 
