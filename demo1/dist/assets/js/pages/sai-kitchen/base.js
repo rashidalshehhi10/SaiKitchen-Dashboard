@@ -14,6 +14,14 @@ import {
    baseURL
 } from './constant.js'
 export let user;
+document.addEventListener("DOMContentLoaded", function(event) { 
+   var scrollpos = localStorage.getItem('scrollpos');
+   if (scrollpos) window.scrollTo(0, scrollpos);
+});
+
+window.onbeforeunload = function(e) {
+   localStorage.setItem('scrollpos', window.scrollY);
+};
 // var script = document.createElement('script');
 // script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 // script.type = 'text/javascript';
