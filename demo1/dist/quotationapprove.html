@@ -1153,49 +1153,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("isMeasurementPromo").value =response.data.isMeasurementPromo;
                         document.getElementById("measurementFee").value = response.data.measurementFees;
                         document.getElementById("vat").value = response.data.quotations[0].vat;
-                        if(response.data.quotations[0].isInstallment){
-                          $('#method'+' option[value=2]').attr('selected',true).change();
-                          document.getElementById("instCnt").value = response.data.quotations[0].payments.length;
-                          //document.getElementById("instCnt").value =2;
-                          document.getElementById("dynamicdiv").innerHTML='';
-                            var cnt  =$('input#instCnt').val();
-                            var vprcnt = (100-document.getElementById('txtAdvancePayment').value)/parseInt(cnt);
-                            for (let i = 1; i <= parseInt(cnt); i++) {
-                            //second_date.setMonth(second_date.getMonth()+i);
-                           // var ktdatvale =0;
-                            var ktdatvale = response.data.quotations[0].payments[i-1].paymentExpectedDate;
-                            document.getElementById("dynamicdiv").innerHTML= document.getElementById("dynamicdiv").innerHTML+
-                            ' <div class="form-group row">'+
-                                '<div class="col-lg-6">'+
-                                '<label>Installment Percent:</label>'+
-                                '<div class="input-group">'+
-                                        '<input  type="number" id="ipercent'+i+'" name="ipercent'+i+'" class="form-control" placeholder="0" value="'+vprcnt+'"  min="0" />'+
-                                        '<div class="input-group-append">'+
-                                            '<span class="input-group-text">'+
-                                            '<i class="la la-percent"></i>'+
-                                            '</span>'+
-                                        '</div>'+
-                                '</div>'+
-                                '</div>'+
-                                '<div class="col-lg-6">'+
-                                '<label>Expectation Date:</label>'+
-                                '<div class="input-group date" data-provide="datepicker">'+
-                                    '<input type="text" class="form-control datepicker" id="kt_datepicker'+i+'" value="'+ktdatvale+'"  placeholder="Select date" />'+
-                                    '<div class="input-group-append">'+
-                                        '<span class="input-group-text">'+
-                                            '<i class="la la-calendar-check-o"></i>'+
-                                        '</span>'+
-                                    '</div>'+
-                                '</div>'+
-                                    '<span class="form-text text-muted">Please enter validity date</span>'+
-                            '</div>'+
-                            '</div>';
-                            $('#kt_datepicker_'+i).datepicker({
-                            });
-                            }
-                            
-                        }
-                //        document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
+                            //        document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
                         document.getElementById("txtdescription").value = response.data.quotations[0].description;
                  //       document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;
                  //       document.getElementById("txtAfterInstallation").value =response.data.quotations[0].afterDelivery;
@@ -1204,16 +1162,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("kt_datepicker_2").value = response.data.quotations[0].quotationValidityDate;
                         //document.getElementById("txtPromoCode").value = response.data.quotations[0].quotationValidityDate; 
                         document.getElementById("txtTotalAmount").value = response.data.quotations[0].totalAmount;
-                        if(!response.data.quotations[0].isInstallment){
-                        //    document.getElementById('instCnt').value='0';
-                            document.getElementById("dynamicdiv").innerHTML='';
-                            $('#RowAdv').show(); 
-                            $('#RowAfter').show(); 
-                            $('#diviCnt').hide();
-                        }else{
-                            $('#diviCnt').show(); 
-                            $('#RowAfter').hide(); 
-                        }
                         //$('#method').prop('disabled', 'disabled');
                         $('#txtdescription').prop('disabled', 'disabled');
                         $('#txtProposalReferenceNumber').prop('disabled', 'disabled');
