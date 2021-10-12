@@ -376,12 +376,12 @@ License: You must have a valid license purchased only from themeforest(the above
                     <span id="inquiryId" style="display:none">0</span>
                     
                     <div class="modal-body">
-                        <div class="form-group row ">
+                         <div class="form-group row ">
                             <div class="col-lg-12" style="text-align: right;">
                             <button type="button" onclick="enableItems()" id="editform" class="btn btn-primary font-weight-bold">Edit</button>
                         </div>
-                         </div>
-                     <div class="form-group row">
+                         </div> 
+              <!--        <div class="form-group row">
                         <div class="col-lg-6">
                            <label >Payment method:</label>
                            <div class="input-group input-group-lg input-group-solid">
@@ -392,9 +392,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                  <option value="2" >Pay Later</option>
                               </select>
                            </div>
-                        </div>
+                         </div> -->
                            
-                           <div class="col-lg-3" id="diviCnt" style="display: none;">
+                           <!-- <div class="col-lg-3" id="diviCnt" style="display: none;">
                               <label id="iCnt">Installment Count:</label>
                               <div class="input-group">
                                     <input type="number" id="instCnt" max="5" onblur="addInstallment()"  class="form-control" />
@@ -405,13 +405,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                               </div>
                        
-                           </div>
-                     </div>
+                           </div> 
+                     </div>  -->
 
                        <div id="" >
 
                         <div class="form-group row" id="RowAdv" >
-                           <div class="col-lg-6">
+                           <!-- <div class="col-lg-6">
                               <label id="lblAdvancePayment">Advance Payment:</label>
                               <div class="input-group">
                                     <input type="number" id="txtAdvancePayment" class="form-control" placeholder="50" min="0" max="100" value="50" readonly/>
@@ -422,7 +422,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                               </div>
                               <span class="form-text text-muted">Advance Payment in % of Total Amount</span>
-                           </div>
+                           </div> -->
                           
                            <div class="col-lg-6">
                               <label>Description:</label>
@@ -436,15 +436,30 @@ License: You must have a valid license purchased only from themeforest(the above
                               </div>
                               <span class="form-text text-muted">Please enter description of quotation</span>
                           </div>
+                          <div class="col-lg-6">
+                            <label>Proposal Reference Number:</label>
+                            <div class="input-group">
+                                  <input  type="text" id="txtProposalReferenceNumber" name="txtProposalReferenceNumber" class="form-control" placeholder="Ref-000000" />
+                                  <div class="input-group-append">
+                                     <span class="input-group-text">
+                                        <i class="la 
+                                        la-poll-h"></i>
+                                     </span>
+                                  </div>
+                            </div>
+                            <span class="form-text text-muted">Please enter Reference Number</span>
+                         </div>
+
+
                         </div>
                         
 
                        <div id="dynamicdiv" >
 
                        </div>
-                        <div class="form-group row" id="RowAfter" >
+             <!--             <div class="form-group row" id="RowAfter" >
                            
-                           <div class="col-lg-6">
+                          <div class="col-lg-6">
                               <label id="lblBeforeInstallation">Before Installation 7 Days:</label>
                               <div class="input-group">
                                     <input type="number" id="txtBeforeInstallation" class="form-control" placeholder="50" min="0" max="100" value="50" />
@@ -455,9 +470,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                               </div>
                               <span class="form-text text-muted">Before Insatallation in % of Total Amount</span>
-                           </div>
+                           </div> -->
                            
-                           <div class="col-lg-6">
+                           <!-- <div class="col-lg-6">
                               <label id="lblAfterInstallation">After Installation:</label>
                               <div class="input-group">
                                     <input type="number" id="txtAfterInstallation" class="form-control" placeholder="0" min="0" max="100" value="0" />
@@ -468,14 +483,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                               </div>
                               <span class="form-text text-muted">After Installation in % of Total Amount</span>
-                           </div>
+                           </div> 
                            
                           
                            
-                        </div>
+                        </div> -->
                         </div>
                         
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                            <div class="col-lg-6">
                               <label>Proposal Reference Number:</label>
                               <div class="input-group">
@@ -489,7 +504,7 @@ License: You must have a valid license purchased only from themeforest(the above
                               </div>
                               <span class="form-text text-muted">Please enter Reference Number</span>
                            </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
                            <div class="col-lg-6">
                               <label>Amount:</label>
@@ -1180,17 +1195,17 @@ License: You must have a valid license purchased only from themeforest(the above
                             }
                             
                         }
-                        document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
+                //        document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
                         document.getElementById("txtdescription").value = response.data.quotations[0].description;
-                        document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;
-                        document.getElementById("txtAfterInstallation").value =response.data.quotations[0].afterDelivery;
+                 //       document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;
+                 //       document.getElementById("txtAfterInstallation").value =response.data.quotations[0].afterDelivery;
                         document.getElementById("txtProposalReferenceNumber").value = response.data.quotations[0].proposalReferenceNumber;
                         document.getElementById("txtAmount").value = response.data.quotations[0].amount;
                         document.getElementById("kt_datepicker_2").value = response.data.quotations[0].quotationValidityDate;
                         //document.getElementById("txtPromoCode").value = response.data.quotations[0].quotationValidityDate; 
                         document.getElementById("txtTotalAmount").value = response.data.quotations[0].totalAmount;
                         if(!response.data.quotations[0].isInstallment){
-                            document.getElementById('instCnt').value='0';
+                        //    document.getElementById('instCnt').value='0';
                             document.getElementById("dynamicdiv").innerHTML='';
                             $('#RowAdv').show(); 
                             $('#RowAfter').show(); 
@@ -1199,15 +1214,16 @@ License: You must have a valid license purchased only from themeforest(the above
                             $('#diviCnt').show(); 
                             $('#RowAfter').hide(); 
                         }
-                        $('#method').prop('disabled', 'disabled');
+                        //$('#method').prop('disabled', 'disabled');
                         $('#txtdescription').prop('disabled', 'disabled');
-                        $('#txtAdvancePayment').prop('disabled', 'disabled');
-                        $('#txtBeforeInstallation').prop('disabled', 'disabled');
-                        $('#txtAfterInstallation').prop('disabled', 'disabled');
                         $('#txtProposalReferenceNumber').prop('disabled', 'disabled');
                         $('#txtAmount').prop('disabled', 'disabled');
                         $('#kt_datepicker_2').prop('disabled', 'disabled');
                         $('#txtTotalAmount').prop('disabled', 'disabled');
+                   //     $('#txtAdvancePayment').prop('disabled', 'disabled');
+                     //   $('#txtBeforeInstallation').prop('disabled', 'disabled');
+                     //   $('#txtAfterInstallation').prop('disabled', 'disabled');
+
                         document.getElementById("divProposal").style.display ='none';
                         document.getElementById("divCalculation").style.display ='none';
                         $('#dynamicdiv').find('input').attr('disabled','disabled');
