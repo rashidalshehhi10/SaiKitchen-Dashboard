@@ -328,7 +328,9 @@ jQuery(document).ready(function() {
     });
     $('#txtAdvancePayment').keyup(function () {
         advancePayment=  document.getElementById('txtAdvancePayment').value;
+        totalAmount = document.getElementById('totalAmount').value;
         advancePaymentAmount= (totalAmount/100)*advancePayment;
+        
         document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
     
     });
@@ -374,14 +376,14 @@ $('#kt_approve_inquiry_button').click(function () {
                 paymentModeId: 0,
                 paymentAmountinPercentage: document.getElementById('ipercent'+i).value,
                 paymentExpectedDate: document.getElementById('kt_datepicker'+i).value,
-                inquiryId: inquiryId,
+                inquiryId: parseInt(document.getElementById('inquiryId').value),
                 isActive: true,
                 isDeleted: false
             })
         }
     }
     var checklistdata = {
-        "inquiryId":document.getElementById('inquiryId').value,
+        "inquiryId":parseInt(document.getElementById('inquiryId').value),
         "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
         "materialSheetFileUrl":file1,
         "mepDrawingFileUrl": file2,

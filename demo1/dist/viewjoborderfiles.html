@@ -124,7 +124,7 @@
          <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
             <div class="card-toolbar" style="padding-right: 25px;text-align: right;width: 100%;">
               
-               <a href="#"  data-toggle="modal" data-target="#ScheduleDate"    class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff">
+               <a href="#"  data-toggle="modal" data-target="#ScheduleDate"  onclick="addComponent()"   class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff">
                   <i >
                      <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
@@ -771,6 +771,7 @@
      </div>
  
    
+     <input type="hidden" id="totalAmount" value="0"/>
     
    
 
@@ -1021,6 +1022,7 @@
                      //    document.getElementById("isMeasurementPromo").value =response.data.isMeasurementPromo;
                      //    document.getElementById("measurementFee").value = response.data.measurementFees;
                     //     document.getElementById("vat").value = response.data.quotations[0].vat;
+                           document.getElementById("totalAmount").value = response.data.quotations[0].totalAmount;
                            document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
                      //    document.getElementById("txtdescription").value = response.data.quotations[0].description;
                          document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;

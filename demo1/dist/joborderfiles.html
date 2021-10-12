@@ -522,7 +522,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
 
-
+    <input type="hidden" id="totalAmount" value="0"/>
     <!--end::Chat Panel-->
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop"> 
@@ -764,6 +764,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     //    document.getElementById("isMeasurementPromo").value =response.data.isMeasurementPromo;
                     //    document.getElementById("measurementFee").value = response.data.measurementFees;
                    //     document.getElementById("vat").value = response.data.quotations[0].vat;
+                         document.getElementById("totalAmount").value = response.data.quotations[0].totalAmount;
                           document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
                     //    document.getElementById("txtdescription").value = response.data.quotations[0].description;
                         document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;
