@@ -95,27 +95,36 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                
                 console.log(measurementFile);
                 var pymnt = new Array();
-                advancePayment= document.getElementById('txtAdvancePayment').value;
-                beforeInstallation= document.getElementById('txtBeforeInstallation').value;
-                afterDelivery= document.getElementById('txtAfterInstallation').value;
+              //cc   advancePayment= document.getElementById('txtAdvancePayment').value;
+              advancePayment='';
+
+            // cc   beforeInstallation= document.getElementById('txtBeforeInstallation').value;
+                beforeInstallation= '';
+
+          // cc       afterDelivery= document.getElementById('txtAfterInstallation').value;
+          afterDelivery= '';
+          
                     if(user.data.userRoles[0].branchRole.roleTypeId==1 ){
+                        
                         if(document.getElementById('method').value=='1'){
                             isInstallment=false;
-                            advancePayment= document.getElementById('txtAdvancePayment').value;
+                         //   advancePayment= document.getElementById('txtAdvancePayment').value;
+                            advancePayment= '';
                             noOfInstallment =0;
-                            // pymnt.push({
-                            //     paymentName: "",
-                            //     paymentDetail: "",
-                            //     paymentAmount: advancePaymentAmount,
-                            //     paymentModeId: 0,
-                            //     paymentAmountinPercentage: advancePayment,
-                            //     paymentExpectedDate: "",
-                            //     inquiryId: inquiryId,
-                            //     isActive: true,
-                            //     isDeleted: false
-                            // })
+                            //  pymnt.push({
+                            //       paymentName: "",
+                            //       paymentDetail: "",
+                            //       paymentAmount: advancePaymentAmount,
+                            //       paymentModeId: 0,
+                            //       paymentAmountinPercentage: advancePayment,
+                            //       paymentExpectedDate: "",
+                            //       inquiryId: inquiryId,
+                            //       isActive: true,
+                            //       isDeleted: false
+                            //  })
                         }
                         else{
+                        //  alert(1);
                             isInstallment=true;
                             advancePayment =document.getElementById('txtAdvancePayment').value;
                             noOfInstallment=document.getElementById('instCnt').value;
@@ -161,6 +170,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 quotationModel.payments = pymnt;
                 const data = JSON.stringify(quotationModel);
                 console.log(data);
+                alert(JSON.stringify(data));
                 $.ajax({
                     type: "Post",
                     url: baseURL + '/Quotation/AddQuotation',
@@ -303,9 +313,10 @@ if(inquiry.payments.length > 0)
 const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');
-
-document.getElementById('txtBeforeInstallation').value=response.data.fees[1].feesAmount;
-document.getElementById('txtAfterInstallation').value=response.data.fees[2].feesAmount;
+// cc
+        // document.getElementById('txtBeforeInstallation').value=response.data.fees[1].feesAmount;
+         //document.getElementById('txtAfterInstallation').value=response.data.fees[2].feesAmount;
+// cc
 var dicMeasurement = new Object();
 var dicDesign = new Object();
 var workscopeHtml=``;
@@ -681,16 +692,18 @@ workscope.innerHTML=workscopeHtml;
         document.getElementById('txtTotalAmount').value= totalAmount;   
            document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount 0% - Measurement Fee AED '+measurementFee+' + VAT '+vatvalue+'%';
            advancePaymentAmount= (totalAmount/100)*advancePayment;
-           document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
-         
+           // cc
+      //     document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+         // cc
     }
 });
 
 $('#txtAdvancePayment').keyup(function () {
     advancePayment=  document.getElementById('txtAdvancePayment').value;
     advancePaymentAmount= (totalAmount/100)*advancePayment;
-    document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
-
+    // cc
+     // document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+   // cc
 });
 
 
@@ -715,8 +728,9 @@ $('#txtAdvancePayment').keyup(function () {
             if (response.isError == false) {
                 console.log(response.data.feesAmount);
                 advancePayment=response.data.feesAmount;
-                document.getElementById('txtAdvancePayment').value=advancePayment;
-              
+                // cc
+                     //   document.getElementById('txtAdvancePayment').value=advancePayment;
+               // cc
             } else {
                 Swal.fire({
                     text: response.errorMessage,
@@ -822,8 +836,9 @@ $('#txtAdvancePayment').keyup(function () {
              $('#txtAdvancePayment').keyup(function () {
                 advancePayment=  document.getElementById('txtAdvancePayment').value;
                 advancePaymentAmount= (totalAmount/100)*advancePayment;
-                document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
-            
+                // cc
+            //    document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+              // cc
             });
                 //$('#divtAmount').hide(); 
                 $('#diviCnt').hide();

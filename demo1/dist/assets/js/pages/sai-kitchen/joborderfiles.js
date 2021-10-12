@@ -165,7 +165,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewjoborderfiles.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
                         <i class="la la-ellipsis-h""></i>\
                         </a>\
-                        `;
+                        `;txtAdvancePayment
 
                         action += `
                         <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Upload">
@@ -285,10 +285,42 @@ jQuery(document).ready(function() {
             }
         }
     }
-
+    if(user.data.userRoles[0].branchRole.roleTypeId==1){
+        $('#txtAdvancePayment').prop('readonly', false);}
     KTDatatablesSearchOptionsAdvancedSearch.init();
+    $(function() {
+        $('#method').change(function(){
+           // $('input#txtcount').val(cnt)
+            if($('#method').val()=='1'){
+               document.getElementById('instCnt').value='0';
+            document.getElementById("dynamicdiv").innerHTML='';
+                $('#RowAdv').show(); 
+                $('#RowAfter').show();
+                 //advancePayment=document.getElementById("txtAdvancePayment").value;
+                // totalAmount=document.getElementById("txtTotalAmount").value; 
+             $('#txtAdvancePayment').keyup(function () {
+                advancePayment=  document.getElementById('txtAdvancePayment').value;
+                advancePaymentAmount= (totalAmount/100)*advancePayment;
+                document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+            
+            });
+                //$('#divtAmount').hide(); 
+                $('#diviCnt').hide();
+            }else{
+                //document.getElementById("dynamicdiv").innerHTML='';
+                //$('#divtAmount').show();
+               
+                
+                $('#diviCnt').show(); 
+                $('#RowAfter').hide(); 
+    
+            }
+            
+        });
+        
+    });
 
-   
+ 
 });
 $('#kt_approve_inquiry_button').click(function () {
     if(four.length ==0){
@@ -337,6 +369,39 @@ $('#kt_approve_inquiry_button').click(function () {
             document.getElementById("alert").innerHTML ="An error Occured";
         }
     });   
+});
+
+
+
+$(function() {
+    $('#method').change(function(){
+       // $('input#txtcount').val(cnt)
+        if($('#method').val()=='1'){
+           document.getElementById('instCnt').value='0';
+        document.getElementById("dynamicdiv").innerHTML='';
+            $('#RowAdv').show(); 
+            $('#RowAfter').show(); 
+         $('#txtAdvancePayment').keyup(function () {
+            advancePayment=  document.getElementById('txtAdvancePayment').value;
+            advancePaymentAmount= (totalAmount/100)*advancePayment;
+            // cc
+        //    document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+          // cc
+        });
+            //$('#divtAmount').hide(); 
+            $('#diviCnt').hide();
+        }else{
+            //document.getElementById("dynamicdiv").innerHTML='';
+            //$('#divtAmount').show();
+           
+            
+            $('#diviCnt').show(); 
+            $('#RowAfter').hide(); 
+
+        }
+        
+    });
+    
 });
 
 

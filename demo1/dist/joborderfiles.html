@@ -367,7 +367,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Quick Panel-->
     <!--begin::Chat Panel-->
     <div class="modal fade" id="ScheduleDate" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <form class="form" id="kt_approve_inquiry" action="" name="approveinquiryform">
                     
@@ -379,6 +379,83 @@ License: You must have a valid license purchased only from themeforest(the above
                         </button>
                 </div>
                 <div class="modal-body">
+
+              <div class="form-group row">
+                     <div class="col-lg-6">
+                           <label >Payment method:</label>
+                           <div class="input-group input-group-lg input-group-solid">
+                              <select class="form-control" id="method" name="method"
+                                 class="form-control form-control-lg form-control-solid"
+                                 style="width:100%">
+                                 <option value="1" data-select2-id="1">Pay Now</option>
+                                 <option value="2" >Pay Later</option>
+                              </select>
+                           </div>
+                        </div> 
+                           
+                         <div class="col-lg-3" id="diviCnt" style="display: none;">
+                              <label id="iCnt">Installment Count:</label>
+                              <div class="input-group">
+                                    <input type="number" id="instCnt" max="5" onblur="addInstallment()"  class="form-control" />
+                                    <div class="input-group-append">
+                                       <span class="input-group-text">
+                                          <i class="la la-money-check"></i>
+                                       </span>
+                                    </div>
+                              </div>
+                       
+                           </div> 
+                 </div>
+                 <div id="dynamicdiv" >
+
+                </div>
+                 
+          <div class="form-group row" id="RowAdv" >
+                        <div class="col-lg-6">
+                           <label id="lblAdvancePayment">Advance Payment:</label>
+                           <div class="input-group">
+                                 <input type="number" id="txtAdvancePayment" class="form-control" placeholder="50" min="0" max="100" value="50" readonly/>
+                                 <div class="input-group-append">
+                                    <span class="input-group-text">
+                                       <i class="la la-percent"></i>
+                                    </span>
+                                 </div>
+                           </div>
+                           <span class="form-text text-muted">Advance Payment in % of Total Amount</span>
+                        </div> 
+           </div>    
+                    
+     <div class="form-group row" id="RowAfter" >
+                        <div class="col-lg-6">
+                            <label id="lblAfterInstallation">After Installation:</label>
+                            <div class="input-group">
+                                  <input type="number" id="txtAfterInstallation" class="form-control" placeholder="0" min="0" max="100" value="0" />
+                                  <div class="input-group-append">
+                                     <span class="input-group-text">
+                                        <i class="la la-percent"></i>
+                                     </span>
+                                  </div>
+                            </div>
+                            <span class="form-text text-muted">After Installation in % of Total Amount</span>
+                         </div>
+                      <div class="col-lg-6">
+                        <label id="lblBeforeInstallation">Before Installation 7 Days:</label>
+                        <div class="input-group">
+                              <input type="number" id="txtBeforeInstallation" class="form-control" placeholder="50" min="0" max="100" value="50" />
+                              <div class="input-group-append">
+                                 <span class="input-group-text">
+                                    <i class="la la-percent"></i>
+                                 </span>
+                              </div>
+                        </div>
+                        <span class="form-text text-muted">Before Insatallation in % of Total Amount</span>
+                         </div>
+
+
+
+ </div>
+
+
                     <div class="form-group row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_4" name="measurementDrawing`+count+`">
@@ -666,8 +743,185 @@ License: You must have a valid license purchased only from themeforest(the above
         
         function addComponent(inquiryId) {
              document.getElementById("inquiryId").value = inquiryId;
+
+             $.ajax({
+                type: "post",
+                url: baseURL + '/Quotation/ViewQuotationDetailsById?inquiryId=' + inquiryId,
+
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+
+                success: function(response) {
+                  //  alert(55);
+                    console.log(response);
+                    if (response.isError == false) {
+                    //    document.getElementById("quotationId").value = response.data.quotations[0].quotationId;
+                    //    document.getElementById("inquiryId").innerHTML = response.data.inquiryId;
+                   //     if(response.data.isMeasurementPromo != null)
+                   //     document.getElementById("promoDiscount").value =response.data.promoDiscount;
+                    //    document.getElementById("isMeasurementPromo").value =response.data.isMeasurementPromo;
+                    //    document.getElementById("measurementFee").value = response.data.measurementFees;
+                   //     document.getElementById("vat").value = response.data.quotations[0].vat;
+                        if(response.data.quotations[0].isInstallment){
+                          $('#method'+' option[value=2]').attr('selected',true).change();
+                          document.getElementById("instCnt").value = response.data.quotations[0].payments.length;
+                          document.getElementById("instCnt").value =2;
+                          document.getElementById("dynamicdiv").innerHTML='';
+                            var cnt  =$('input#instCnt').val();
+                            var vprcnt = (100-document.getElementById('txtAdvancePayment').value)/parseInt(cnt);
+                            for (let i = 1; i <= parseInt(cnt); i++) {
+                            //second_date.setMonth(second_date.getMonth()+i);
+                           // var ktdatvale =0;
+                            var ktdatvale = response.data.quotations[0].payments[i-1].paymentExpectedDate;
+                            document.getElementById("dynamicdiv").innerHTML= document.getElementById("dynamicdiv").innerHTML+
+                            ' <div class="form-group row">'+
+                                '<div class="col-lg-6">'+
+                                '<label>Installment Percent:</label>'+
+                                '<div class="input-group">'+
+                                        '<input  type="number" id="ipercent'+i+'" name="ipercent'+i+'" class="form-control" placeholder="0" value="'+vprcnt+'"  min="0" />'+
+                                        '<div class="input-group-append">'+
+                                            '<span class="input-group-text">'+
+                                            '<i class="la la-percent"></i>'+
+                                            '</span>'+
+                                        '</div>'+
+                                '</div>'+
+                                '</div>'+
+                                '<div class="col-lg-6">'+
+                                '<label>Expectation Date:</label>'+
+                                '<div class="input-group date" data-provide="datepicker">'+
+                                    '<input type="text" class="form-control datepicker" id="kt_datepicker'+i+'" value="'+ktdatvale+'"  placeholder="Select date" />'+
+                                    '<div class="input-group-append">'+
+                                        '<span class="input-group-text">'+
+                                            '<i class="la la-calendar-check-o"></i>'+
+                                        '</span>'+
+                                    '</div>'+
+                                '</div>'+
+                                    '<span class="form-text text-muted">Please enter validity date</span>'+
+                            '</div>'+
+                            '</div>';
+                            $('#kt_datepicker_'+i).datepicker({
+                            });
+                            }
+                            
+                        }
+                        document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
+                    //    document.getElementById("txtdescription").value = response.data.quotations[0].description;
+                        document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;
+                        document.getElementById("txtAfterInstallation").value =response.data.quotations[0].afterDelivery;
+                     //   document.getElementById("txtProposalReferenceNumber").value = response.data.quotations[0].proposalReferenceNumber;
+                  //      document.getElementById("txtAmount").value = response.data.quotations[0].amount;
+                  //     document.getElementById("kt_datepicker_2").value = response.data.quotations[0].quotationValidityDate;
+                        //document.getElementById("txtPromoCode").value = response.data.quotations[0].quotationValidityDate; 
+                   //     document.getElementById("txtTotalAmount").value = response.data.quotations[0].totalAmount;
+                        if(!response.data.quotations[0].isInstallment){
+                            document.getElementById('instCnt').value='0';
+                            document.getElementById("dynamicdiv").innerHTML='';
+                            $('#RowAdv').show(); 
+                            $('#RowAfter').show(); 
+                            $('#diviCnt').hide();
+                        }else{
+                         //   $('#diviCnt').show(); 
+                            $('#RowAfter').hide(); 
+                        }
+                 //       $('#method').prop('disabled', 'disabled');
+                        // $('#txtdescription').prop('disabled', 'disabled');
+                     //    $('#txtAdvancePayment').prop('disabled', 'disabled');
+                        // $('#txtBeforeInstallation').prop('disabled', 'disabled');
+                        // $('#txtAfterInstallation').prop('disabled', 'disabled');
+                        // $('#txtProposalReferenceNumber').prop('disabled', 'disabled');
+                        // $('#txtAmount').prop('disabled', 'disabled');
+                        // $('#kt_datepicker_2').prop('disabled', 'disabled');
+                        // $('#txtTotalAmount').prop('disabled', 'disabled');
+                 //       document.getElementById("divProposal").style.display ='none';
+                  //      document.getElementById("divCalculation").style.display ='none';
+                        // $('#dynamicdiv').find('input').attr('disabled','disabled');
+                        // $('#instCnt').prop('disabled', 'disabled');
+                   //     document.getElementById("editmode").value ="false";
+
+                     
+                    }else {
+                        Swal.fire({
+                            text: response.errorMessage,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+                    // alert(errorThrown);
+
+                    Swal.fire({
+                        text: 'Internet Connection Problem',
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    }).then(function() {
+                        KTUtil.scrollTop();
+                    });
+                }
+            });
+
         }
-        
+
+        function addInstallment(){
+            var second_date = new Date(Date.now());
+            
+            document.getElementById("dynamicdiv").innerHTML='';
+            var cnt  =$('input#instCnt').val();
+            var vprcnt = (100-document.getElementById('txtAdvancePayment').value)/parseInt(cnt);
+            for (let i = 1; i <= parseInt(cnt); i++) {
+               //second_date.setMonth(second_date.getMonth()+i);
+               document.getElementById("dynamicdiv").innerHTML= document.getElementById("dynamicdiv").innerHTML+
+               ' <div class="form-group row">'+
+                '<div class="col-lg-6">'+
+                   '<label>Installment Percent:</label>'+
+                   '<div class="input-group">'+
+                         '<input  type="number" id="ipercent'+i+'" name="ipercent'+i+'" class="form-control" placeholder="0" value="'+vprcnt+'"  min="0" />'+
+                         '<div class="input-group-append">'+
+                            '<span class="input-group-text">'+
+                               '<i class="la la-percent"></i>'+
+                            '</span>'+
+                         '</div>'+
+                   '</div>'+
+                '</div>'+
+                '<div class="col-lg-6">'+
+                   '<label>Expectation Date:</label>'+
+                   '<div class="input-group date" data-provide="datepicker">'+
+                       '<input type="text" class="form-control datepicker" id="kt_datepicker'+i+'"  placeholder="Select date" />'+
+                       '<div class="input-group-append">'+
+                           '<span class="input-group-text">'+
+                               '<i class="la la-calendar-check-o"></i>'+
+                           '</span>'+
+                       '</div>'+
+                   '</div>'+
+                    '<span class="form-text text-muted">Please enter validity date</span>'+
+               '</div>'+
+             '</div>';
+            
+            }
+          
+            var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+            var myDate = new Date(y, m, 1);           
+            for (let i = 1; i <= parseInt(cnt); i++) {
+               myDate.setMonth(myDate.getMonth() + 1);
+               $('#kt_datepicker'+i).val(myDate.toLocaleDateString("en-US")).datepicker("update");
+            }
+            
+         }
+         
     </script>
     <!--end::Page Scripts-->
 </body>
