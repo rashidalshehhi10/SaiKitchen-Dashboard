@@ -20,17 +20,18 @@ let inquiryId;
 let inquiry;
 let permissions;
 let measurementPermission;
+let advancePayment=0;
+let advancePaymentAmount =0;
+let totalAmount = 0;
 let promoId=0;
 let promoDiscount=0;
 let isMeasurementPromo;
 let vatvalue=0;
-let advancePayment=0;
-let advancePaymentAmount=0;
-let totalAmount=0;
 let measurementFee=0;
 let noOfInstallment=0;
 let beforeInstallation=0;
 let afterDelivery=0;
+let isInstallment=false;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
    
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
@@ -135,7 +136,8 @@ jQuery(document).ready(function() {
             }
         }
     }
-
+    if(user.data.userRoles[0].branchRole.roleTypeId==1){
+      $('#txtAdvancePayment').prop('readonly', false);}
 
     const queryString = window.location.search;
     console.log(queryString);
@@ -1711,7 +1713,38 @@ workscope.innerHTML=workscopeHtml;
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 
-
+    $(function() {
+      $('#method').change(function(){
+         // $('input#txtcount').val(cnt)
+          if($('#method').val()=='1'){
+             document.getElementById('instCnt').value='0';
+          document.getElementById("dynamicdiv").innerHTML='';
+              $('#RowAdv').show(); 
+              $('#RowAfter').show();
+               //advancePayment=document.getElementById("txtAdvancePayment").value;
+              // totalAmount=document.getElementById("txtTotalAmount").value; 
+    
+              //$('#divtAmount').hide(); 
+              $('#diviCnt').hide();
+          }else{
+              //document.getElementById("dynamicdiv").innerHTML='';
+              //$('#divtAmount').show();
+             
+              
+              $('#diviCnt').show(); 
+              $('#RowAfter').hide(); 
+  
+          }
+          
+      });
+      
+  });
+  $('#txtAdvancePayment').keyup(function () {
+      advancePayment=  document.getElementById('txtAdvancePayment').value;
+      advancePaymentAmount= (totalAmount/100)*advancePayment;
+      document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+  
+  });
    
 
     });
@@ -1734,6 +1767,34 @@ workscope.innerHTML=workscopeHtml;
       if(seven.length >0){
           file4 = seven[0];
       }
+      var pymnt = new Array();
+      advancePayment= document.getElementById('txtAdvancePayment').value;
+      beforeInstallation= document.getElementById('txtBeforeInstallation').value;
+      afterDelivery= document.getElementById('txtAfterInstallation').value;
+      if(document.getElementById('method').value=='1'){
+          isInstallment=false;
+          advancePayment= document.getElementById('txtAdvancePayment').value;
+          noOfInstallment =0;
+          
+      }
+      else{
+          isInstallment=true;
+          advancePayment =document.getElementById('txtAdvancePayment').value;
+          noOfInstallment=document.getElementById('instCnt').value;
+          for (let i = 1; i <= parseInt(noOfInstallment); i++) {
+              pymnt.push({
+                  paymentName: "",
+                  paymentDetail: "",
+                  paymentAmount: 0,
+                  paymentModeId: 0,
+                  paymentAmountinPercentage: document.getElementById('ipercent'+i).value,
+                  paymentExpectedDate: document.getElementById('kt_datepicker'+i).value,
+                  inquiryId: inquiryId,
+                  isActive: true,
+                  isDeleted: false
+              })
+          }
+      }
       var checklistdata = {
           "inquiryId":document.getElementById('inquiryId').value,
           "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
@@ -1742,6 +1803,10 @@ workscope.innerHTML=workscopeHtml;
           //"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
           "dataSheetApplianceFileUrl":file3,
           "detailedDesignFile":file4,
+          "advancePayment":advancePayment,
+          "beforeInstallation":beforeInstallation,
+          "afterDelivery":afterDelivery,
+          "payments":pymnt,
         };
       const data = JSON.stringify(checklistdata);
       console.log(data);

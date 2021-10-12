@@ -243,4 +243,12 @@ export let inqStatus= {
         'title': 'quotation Revision Requested',
         'class': ' label-light-primary'
     },
+    62: {
+        'title': 'Contract In-Progress',
+        'class': ' label-light-primary'
+    },
+    63: {
+        'title': 'Contract Rejected',
+        'class': ' label-light-danger'
+    },
 };

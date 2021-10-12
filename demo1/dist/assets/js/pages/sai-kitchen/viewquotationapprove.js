@@ -1924,7 +1924,13 @@ workscope.innerHTML=workscopeHtml;
            // Show loading state on button
            KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
            // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-          
+           var calc ='';
+           if(calcfile.length > 0)
+                calc = calcfile[0];
+                    
+            var file = ''; 
+           if(measurementFile.length > 0) 
+                      file = measurementFile[0];
            console.log(measurementFile);
            var quotationModel={
             inquiryId: parseInt( document.getElementById('inquiryId').innerHTML),
@@ -1997,7 +2003,7 @@ workscope.innerHTML=workscopeHtml;
                        KTUtil.scrollTop();
                    });
                }
-           });
+           }); 
        })
        .on('core.form.invalid', function() {
            Swal.fire({
