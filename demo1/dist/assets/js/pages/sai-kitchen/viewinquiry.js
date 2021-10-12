@@ -94,83 +94,25 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                
                 console.log(measurementFile);
-                var pymnt = new Array();
-              //cc   advancePayment= document.getElementById('txtAdvancePayment').value;
-              advancePayment='';
-
-            // cc   beforeInstallation= document.getElementById('txtBeforeInstallation').value;
-                beforeInstallation= '';
-
-          // cc       afterDelivery= document.getElementById('txtAfterInstallation').value;
-          afterDelivery= '';
-          
-                    if(user.data.userRoles[0].branchRole.roleTypeId==1 ){
-                        
-                        if(document.getElementById('method').value=='1'){
-                            isInstallment=false;
-                         //   advancePayment= document.getElementById('txtAdvancePayment').value;
-                            advancePayment= '';
-                            noOfInstallment =0;
-                            //  pymnt.push({
-                            //       paymentName: "",
-                            //       paymentDetail: "",
-                            //       paymentAmount: advancePaymentAmount,
-                            //       paymentModeId: 0,
-                            //       paymentAmountinPercentage: advancePayment,
-                            //       paymentExpectedDate: "",
-                            //       inquiryId: inquiryId,
-                            //       isActive: true,
-                            //       isDeleted: false
-                            //  })
-                        }
-                        else{
-                        //  alert(1);
-                            isInstallment=true;
-                            advancePayment =document.getElementById('txtAdvancePayment').value;
-                            noOfInstallment=document.getElementById('instCnt').value;
-                            for (let i = 1; i <= parseInt(noOfInstallment); i++) {
-                                pymnt.push({
-                                    paymentName: "",
-                                    paymentDetail: "",
-                                    paymentAmount: 0,
-                                    paymentModeId: 0,
-                                    paymentAmountinPercentage: document.getElementById('ipercent'+i).value,
-                                    paymentExpectedDate: document.getElementById('kt_datepicker'+i).value,
-                                    inquiryId: inquiryId,
-                                    isActive: true,
-                                    isDeleted: false
-                                })
-                            }
-                        }
-                    }
-                    var calc ='';
-                    if(calcfile.length > 0)
-                       calc = calcfile[0];
-                    var quotationModel={
-                    inquiryId: inquiryId,
-                    description: document.getElementById('txtdescription').value,
-                    totalAmount: document.getElementById('txtTotalAmount').value,
-                    amount: document.getElementById('txtAmount').value,
-                    ProposalReferenceNumber: document.getElementById('txtProposalReferenceNumber').value,
-                    advancePayment:advancePayment,
-                    beforeInstallation:beforeInstallation,
-                    afterDelivery:afterDelivery,
-                    isInstallment:isInstallment,
-                    vat:vatvalue,
-                    discount: promoDiscount,
-                    quotationValidityDate: document.getElementById('kt_datepicker_2').value,
-                    quotationFiles: measurementFile,
-                    paymentName: 'Advance Payment',
-                    paymentDetail: '',
-                    paymentAmount:advancePaymentAmount,
-                    noOfInstallment:noOfInstallment,
-                    payments: new Array(),
-                    calculationSheetFile:calc,
+         
+                var calc ='';
+                if(calcfile.length > 0)
+                   calc = calcfile[0];
+                var quotationModel={
+                inquiryId: inquiryId,
+                description: document.getElementById('txtdescription').value,
+                totalAmount: document.getElementById('txtTotalAmount').value,
+                amount: document.getElementById('txtAmount').value,
+                ProposalReferenceNumber: document.getElementById('txtProposalReferenceNumber').value,
+                paymentTypeId :0,
+                vat:vatvalue,
+                discount: promoDiscount,
+                quotationValidityDate: document.getElementById('kt_datepicker_2').value,
+                quotationFiles: measurementFile,
+                calculationSheetFile:calc,
                 };
-                quotationModel.payments = pymnt;
                 const data = JSON.stringify(quotationModel);
                 console.log(data);
-                alert(JSON.stringify(data));
                 $.ajax({
                     type: "Post",
                     url: baseURL + '/Quotation/AddQuotation',
