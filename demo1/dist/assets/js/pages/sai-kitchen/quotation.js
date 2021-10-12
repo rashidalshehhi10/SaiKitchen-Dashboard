@@ -152,7 +152,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var action = ``;
-                        if(full.inquiryAddedById==user.data.userId){
+                        // if(full.inquiryAddedById==user.data.userId){
                         if (quotationPermission >= 2) {
                             console.log(full.inquiryId);
                          
@@ -163,9 +163,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     `;
                         }
                             return action;
-                        } else {
-                            return `<span></span>`;
-                        }
+                        // } else {
+                        //     return `<span></span>`;
+                        // }
                     },
                 },
                 {
