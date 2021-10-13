@@ -1808,6 +1808,10 @@ workscope.innerHTML=workscopeHtml;
           "beforeInstallation":beforeInstallation,
           "afterDelivery":afterDelivery,
           "payments":pymnt,
+          "isInstallment":isInstallment,
+          "noOfInstallment":noOfInstallment,
+          "pdf": "",
+          "paymentTypeId":paymentTypeId,
         };
       const data = JSON.stringify(checklistdata);
       console.log(data);

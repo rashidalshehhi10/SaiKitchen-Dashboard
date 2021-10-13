@@ -21,6 +21,12 @@ var KTAppsUsersListDatatable = function() {
     var _demo = function() {
         datatable = $('#kt_datatable').KTDatatable({
             // datasource definition
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ],
             data: {
 
                 type: 'remote',
@@ -465,6 +471,9 @@ var KTAppsUsersListDatatable = function() {
   
         $('#kt_datatable_search_status, #kt_datatable_contact_statuss').selectpicker();
         // $('#kt_datatable_search_status').selectpicker();
+        $("#export_pdf").on("click",(function(e){
+            e.preventDefault(),
+            datatable.button(3).trigger()}));
         
     };
 
@@ -646,6 +655,7 @@ var KTAppsUsersListDatatable = function() {
         },
     };
 }();
+
 let permissions;
 let customerPermission;
 jQuery(document).ready(function() {
@@ -690,7 +700,7 @@ jQuery(document).ready(function() {
         }
     }
     KTAppsUsersListDatatable.init();
-
+    
 
 
     const countryOfResidenceList = document.getElementById('kt_country_of_Resdience');

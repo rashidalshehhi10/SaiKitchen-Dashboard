@@ -394,6 +394,10 @@ $('#kt_approve_inquiry_button').click(function () {
         "beforeInstallation":beforeInstallation,
         "afterDelivery":afterDelivery,
         "payments":pymnt,
+        "isInstallment":isInstallment,
+        "noOfInstallment":noOfInstallment,
+        "pdf": "",
+        "paymentTypeId":paymentTypeId,
       };
     const data = JSON.stringify(checklistdata);
     console.log(data);

@@ -370,6 +370,7 @@ $( "#rejectbtn" ).click(function() {
                 PaymentMethod:'',
                 SelectedPaymentMode:$('#slctapprve').val(),
                 pdf: out,
+                comment: "",
               }
               const data = JSON.stringify(apprvObj);
               // console.log(data);
