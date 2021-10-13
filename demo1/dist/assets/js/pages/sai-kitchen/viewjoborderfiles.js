@@ -150,7 +150,51 @@ jQuery(document).ready(function() {
     
 branchTypeId = user.data.userRoles[0].branch.branchTypeId;
 
+$.ajax({
+   type: "POST",
+   url: baseURL + '/Fees/GetAllFees',
    
+   headers: {
+       'Content-Type': 'application/json',
+       'userId': user.data.userId,
+       'userToken': user.data.userToken,
+       'userRoleId': user.data.userRoles[0].userRoleId,
+       'branchId': user.data.userRoles[0].branchId,
+       'branchRoleId': user.data.userRoles[0].branchRoleId,
+       'Access-Control-Allow-Origin': '*',
+   },
+
+   success: function (response) {
+       console.log(response);
+           advancePayment=response[1].feesAmount;
+           // cc
+              document.getElementById('txtAdvancePayment').value=advancePayment;
+              beforeInstallation =response[2].feesAmount;
+              afterDelivery =response[3].feesAmount;
+          // cc
+          document.getElementById("txtBeforeInstallation").value =beforeInstallation;
+          document.getElementById("txtAfterInstallation").value =afterDelivery;
+       
+       
+   },
+   error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+
+       // alert(errorThrown);
+
+       Swal.fire({
+           text: 'Internet Connection Problem',
+           icon: "error",
+           buttonsStyling: false,
+           confirmButtonText: "Ok, got it!",
+           customClass: {
+               confirmButton: "btn font-weight-bold btn-light-primary"
+           }
+       }).then(function () {
+           KTUtil.scrollTop();
+       });
+   }
+});
 
     $.ajax({
         type: "post",

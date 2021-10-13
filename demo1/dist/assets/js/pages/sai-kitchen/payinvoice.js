@@ -216,7 +216,7 @@ $( "#rejectbtn" ).click(function() {
    // console.log(data);
     $.ajax({
         type: "post",
-        url: baseURL + '/Quotation/ClientRejectQuotation' ,
+        url: baseURL + '/JobOrder​/ClientRejectContract' ,
         data: data,
         headers: {
             'Content-Type': 'application/json',
@@ -376,7 +376,7 @@ $( "#rejectbtn" ).click(function() {
               // console.log(data);
               $.ajax({
                   type: "post",
-                  url:  baseURL +'/Quotation/ClientApproveQuotation' ,
+                  url:  baseURL +'/JobOrder​/ClientApproveContract' ,
                   data: data,
                   headers: {
                       'Content-Type': 'application/json',
@@ -506,7 +506,7 @@ $( "#rejectbtn" ).click(function() {
               // console.log(data);
               $.ajax({
                   type: "post",
-                  url:  baseURL +'/Quotation/ClientApproveQuotation' ,
+                  url:  baseURL +'/JobOrder​/ClientApproveContract' ,
                   data: data,
                   headers: {
                       'Content-Type': 'application/json',
