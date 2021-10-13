@@ -21,6 +21,7 @@ var KTAppsUsersListDatatable = function() {
     var _demo = function() {
         datatable = $('#kt_datatable').KTDatatable({
             // datasource definition
+            dom: 'Bfrtip',
             buttons: [
                 'copyHtml5',
                 'excelHtml5',
@@ -473,7 +474,7 @@ var KTAppsUsersListDatatable = function() {
         // $('#kt_datatable_search_status').selectpicker();
         $("#export_pdf").on("click",(function(e){
             e.preventDefault(),
-            datatable.button(3).trigger()}));
+            datatable.button(2).trigger()})); 
         
     };
 

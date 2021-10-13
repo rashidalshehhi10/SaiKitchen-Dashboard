@@ -397,7 +397,7 @@ $('#kt_approve_inquiry_button').click(function () {
         "isInstallment":isInstallment,
         "noOfInstallment":noOfInstallment,
         "pdf": "",
-        "paymentTypeId":paymentTypeId,
+        "paymentTypeId":0,
       };
     const data = JSON.stringify(checklistdata);
     console.log(data);

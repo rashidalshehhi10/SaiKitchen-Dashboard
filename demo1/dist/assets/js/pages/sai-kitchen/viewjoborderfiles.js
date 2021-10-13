@@ -1811,7 +1811,7 @@ workscope.innerHTML=workscopeHtml;
           "isInstallment":isInstallment,
           "noOfInstallment":noOfInstallment,
           "pdf": "",
-          "paymentTypeId":paymentTypeId,
+          "paymentTypeId":0,
         };
       const data = JSON.stringify(checklistdata);
       console.log(data);
