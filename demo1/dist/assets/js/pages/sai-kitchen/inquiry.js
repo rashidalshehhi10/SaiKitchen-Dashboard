@@ -277,10 +277,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         `;
                             }
                         }
-                            return action;
-                        } else {
-                            return `<span></span>`;
-                        }
+                            // return action;
+                        } 
+                        // else {
+                        //     return `<span></span>`;
+                        // }
+                        
+                        return action;
                     },
                 },
                 {
