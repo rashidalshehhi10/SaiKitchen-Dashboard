@@ -1799,6 +1799,37 @@ workscope.innerHTML=workscopeHtml;
         document.getElementById("alert").innerHTML ="MaterialSheet File should be upload";
         return false;
       }
+     // document.getElementById("load").style.removeProperty('display');
+     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+
+   var form = KTUtil.getById('kt_approve_inquiry');
+   var formSubmitUrl = KTUtil.attr(form, 'action');
+   var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
+
+   if (!form) {
+       return;
+   }
+
+   FormValidation
+       .formValidation(
+           form, {
+               fields: {
+                 
+               },
+               plugins: {
+                   trigger: new FormValidation.plugins.Trigger(),
+                   submitButton: new FormValidation.plugins.SubmitButton(),
+                   //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                   bootstrap: new FormValidation.plugins.Bootstrap({
+                       //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                       //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                   })
+               }
+           }
+       )
+       .on('core.form.valid', function() {
+           // Show loading state on button
+           KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
       var file1='',file2='',file3='',file4='';
       if(four.length >0){
           file1 = four[0];
@@ -1860,9 +1891,9 @@ workscope.innerHTML=workscopeHtml;
       const data = JSON.stringify(checklistdata);
       console.log(data);
       console.log(fourfile);
-         $.ajax({
+          $.ajax({
           type: "Post",
-          url: baseURL + '/JobOrder/AddJobOrder',
+          url: baseURL + '/Quotation/AddContract',
           headers: {
               'Content-Type': 'application/json',
               'userId': user.data.userId,
@@ -1874,9 +1905,11 @@ workscope.innerHTML=workscopeHtml;
               window.location.replace("joborderfiles.html");
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
-              document.getElementById("alert").innerHTML ="An error Occured";
+            //document.getElementById("load").style.display = 'none';
+            document.getElementById("alert").innerHTML ="An error Occured";
           }
-      });   
+      });  
+   });   
   });
   
   

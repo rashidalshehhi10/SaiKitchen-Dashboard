@@ -472,11 +472,11 @@ var KTAppsUsersListDatatable = function() {
   
         $('#kt_datatable_search_status, #kt_datatable_contact_statuss').selectpicker();
         // $('#kt_datatable_search_status').selectpicker();
-        $("#export_pdf").on("click",(function(e){
+ /*        $("#export_pdf").on("click",(function(e){
             e.preventDefault(),
-            datatable.button(2).trigger()})); 
+            datatable.button(2).trigger()})); */
         
-    };
+    }; 
 
 
 

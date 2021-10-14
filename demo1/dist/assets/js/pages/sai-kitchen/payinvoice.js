@@ -26,7 +26,7 @@ jQuery(document).ready(function() {
     document.getElementById("inquiryId").value = inquiryId;
     $.ajax({
         type: "post",
-        url: baseURL + '/Quotation/ViewQuotationForCustomer?inquiryId=' + inquiryId,
+        url: baseURL + '/Quotation/ViewContractForCustomer?inquiryId=' + inquiryId,
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
@@ -216,7 +216,7 @@ $( "#rejectbtn" ).click(function() {
    // console.log(data);
     $.ajax({
         type: "post",
-        url: baseURL + '/JobOrder​/ClientRejectContract' ,
+        url: baseURL + '/Quotation/ClientRejectContract' ,
         data: data,
         headers: {
             'Content-Type': 'application/json',
@@ -376,7 +376,7 @@ $( "#rejectbtn" ).click(function() {
               // console.log(data);
               $.ajax({
                   type: "post",
-                  url:  baseURL +'/JobOrder​/ClientApproveContract' ,
+                  url:  baseURL +'/Quotation/ClientApproveContract' ,
                   data: data,
                   headers: {
                       'Content-Type': 'application/json',
@@ -506,7 +506,7 @@ $( "#rejectbtn" ).click(function() {
               // console.log(data);
               $.ajax({
                   type: "post",
-                  url:  baseURL +'/JobOrder​/ClientApproveContract' ,
+                  url:  baseURL +'/Quotation/ClientApproveContract' ,
                   data: data,
                   headers: {
                       'Content-Type': 'application/json',

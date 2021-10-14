@@ -385,84 +385,118 @@ $('#kt_approve_inquiry_button').click(function () {
     document.getElementById("alert").innerHTML ="MaterialSheet File should be upload";
       return false;
     }
-    var file1='',file2='',file3='',file4='';
-    if(four.length >0){
-        file1 = four[0];
-    }
-    if(five.length >0){
-        file2 = five[0];
-    }
-    if(six.length >0){
-        file3 = six[0];
-    }
-    if(seven.length >0){
-        file4 = seven[0];
-    }
-    var pymnt = new Array();
-    advancePayment= document.getElementById('txtAdvancePayment').value;
-    beforeInstallation= document.getElementById('txtBeforeInstallation').value;
-    afterDelivery= document.getElementById('txtAfterInstallation').value;
-    if(document.getElementById('method').value=='1'){
-        isInstallment=false;
-        advancePayment= document.getElementById('txtAdvancePayment').value;
-        noOfInstallment =0;
-        
-    }
-    else{
-        isInstallment=true;
-        advancePayment =document.getElementById('txtAdvancePayment').value;
-        noOfInstallment=document.getElementById('instCnt').value;
-        for (let i = 1; i <= parseInt(noOfInstallment); i++) {
-            pymnt.push({
-                paymentName: "",
-                paymentDetail: "",
-                paymentAmount: 0,
-                paymentModeId: 0,
-                paymentAmountinPercentage: document.getElementById('ipercent'+i).value,
-                paymentExpectedDate: document.getElementById('kt_datepicker'+i).value,
-                inquiryId: parseInt(document.getElementById('inquiryId').value),
-                isActive: true,
-                isDeleted: false
-            })
-        }
-    }
-    var checklistdata = {
-        "inquiryId":parseInt(document.getElementById('inquiryId').value),
-        "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
-        "materialSheetFileUrl":file1,
-        "mepDrawingFileUrl": file2,
-        //"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
-        "dataSheetApplianceFileUrl":file3,
-        "detailedDesignFile":file4,
-        "advancePayment":advancePayment,
-        "beforeInstallation":beforeInstallation,
-        "afterDelivery":afterDelivery,
-        "payments":pymnt,
-        "isInstallment":isInstallment,
-        "noOfInstallment":noOfInstallment,
-        "pdf": "",
-        "paymentTypeId":0,
-      };
-    const data = JSON.stringify(checklistdata);
-    console.log(data);
-    console.log(fourfile);
-        $.ajax({
-        type: "Post",
-        url: baseURL + '/JobOrder/AddJobOrder',
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'Access-Control-Allow-Origin': '*',
-        },
-        data: data,
-        success: function(response) {
-            console.log(response);
-            window.location.replace("joborderfiles.html");
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            document.getElementById("alert").innerHTML ="An error Occured";
-        }
-    });    
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+
+   // document.getElementById("load").style.removeProperty('display');
+   var form = KTUtil.getById('kt_approve_inquiry');
+   var formSubmitUrl = KTUtil.attr(form, 'action');
+   var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
+
+   if (!form) {
+       return;
+   }
+
+   FormValidation
+       .formValidation(
+           form, {
+               fields: {
+                 
+               },
+               plugins: {
+                   trigger: new FormValidation.plugins.Trigger(),
+                   submitButton: new FormValidation.plugins.SubmitButton(),
+                   //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                   bootstrap: new FormValidation.plugins.Bootstrap({
+                       //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                       //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                   })
+               }
+           }
+       )
+       .on('core.form.valid', function() {
+           // Show loading state on button
+           KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+            var file1='',file2='',file3='',file4='';
+            if(four.length >0){
+                file1 = four[0];
+            }
+            if(five.length >0){
+                file2 = five[0];
+            }
+            if(six.length >0){
+                file3 = six[0];
+            }
+            if(seven.length >0){
+                file4 = seven[0];
+            }
+            var pymnt = new Array();
+            advancePayment= document.getElementById('txtAdvancePayment').value;
+            beforeInstallation= document.getElementById('txtBeforeInstallation').value;
+            afterDelivery= document.getElementById('txtAfterInstallation').value;
+            if(document.getElementById('method').value=='1'){
+                isInstallment=false;
+                advancePayment= document.getElementById('txtAdvancePayment').value;
+                noOfInstallment =0;
+                
+            }
+            else{
+                isInstallment=true;
+                advancePayment =document.getElementById('txtAdvancePayment').value;
+                noOfInstallment=document.getElementById('instCnt').value;
+                for (let i = 1; i <= parseInt(noOfInstallment); i++) {
+                    pymnt.push({
+                        paymentName: "",
+                        paymentDetail: "",
+                        paymentAmount: 0,
+                        paymentModeId: 0,
+                        paymentAmountinPercentage: document.getElementById('ipercent'+i).value,
+                        paymentExpectedDate: document.getElementById('kt_datepicker'+i).value,
+                        inquiryId: parseInt(document.getElementById('inquiryId').value),
+                        isActive: true,
+                        isDeleted: false
+                    })
+                }
+            }
+            var checklistdata = {
+                "inquiryId":parseInt(document.getElementById('inquiryId').value),
+                "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
+                "materialSheetFileUrl":file1,
+                "mepDrawingFileUrl": file2,
+                //"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
+                "dataSheetApplianceFileUrl":file3,
+                "detailedDesignFile":file4,
+                "advancePayment":advancePayment,
+                "beforeInstallation":beforeInstallation,
+                "afterDelivery":afterDelivery,
+                "payments":pymnt,
+                "isInstallment":isInstallment,
+                "noOfInstallment":noOfInstallment,
+                "pdf": "",
+                "paymentTypeId":0,
+            };
+            const data = JSON.stringify(checklistdata);
+            console.log(data);
+            console.log(fourfile);
+                $.ajax({
+                type: "Post",
+                url: baseURL + '/Quotation/AddContract',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'userId': user.data.userId,
+                    'Access-Control-Allow-Origin': '*',
+                },
+                data: data,
+                success: function(response) {
+                    console.log(response);
+                    //document.getElementById("load").style.display = 'none';
+                    window.location.replace("joborderfiles.html");
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    //document.getElementById("load").style.display = 'none';
+                    document.getElementById("alert").innerHTML ="An error Occured";
+                }
+            });    
+        }); 
 });
 
 
