@@ -95,71 +95,72 @@ jQuery(document).ready(function() {
                       
                 }
                 for (let i = 0; i < response.data.files.length; i++) {
-                    switch(response.data.files[i].fileContentType) {
+                   var fileExtension = response.data.files[i].substr((response.data.files[i].lastIndexOf('.') + 1));
+                    switch(fileExtension) {
                         case "pdf":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "css":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/css.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/css.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "doc":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/doc.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/doc.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "html":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "javascript":
                               document.getElementById('javascript').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "jpg":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "jpeg":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "mp4":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/mp4.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/mp4.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "xml":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/xml.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/xml.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         case "zip":
                               document.getElementById('icons').innerHTML +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/zip.svg" style="width:100%;"></a>'+
+                               '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="/assets/media/svg/files/zip.svg" style="width:100%;"></a>'+
                               '</div>';
                         break;
                         default:
                             document.getElementById('icons').innerHTML +=
                             '<div   class="divico">'+
-                             '<a href="'+baseFileURL+response.data.files[i].fileUrl+'" target="_blank"> <img  src="" style="width:100%;"></a>'+
+                             '<a href="'+baseFileURL+response.data.files[i]+'" target="_blank"> <img  src="" style="width:100%;"></a>'+
                             '</div>';
 
                       }
