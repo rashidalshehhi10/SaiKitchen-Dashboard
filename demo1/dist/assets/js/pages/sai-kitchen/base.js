@@ -1816,7 +1816,7 @@ if(branchTypeId!=3){
    <img src="/assets//media/svg/saikitchen/attach.png"/>
    <!--end::Svg Icon-->
 	</span>
-	<span class="menu-text">Upload Files</span>
+	<span class="menu-text">Upload Contract</span>
 	
 </a>
 </li>
