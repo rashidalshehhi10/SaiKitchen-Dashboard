@@ -1681,39 +1681,105 @@ workscope.innerHTML=workscopeHtml;
   
 
     $('#kt_approve_inquiry_button').click(function () {
-      var checklistdata = {
-         "inquiryId":parseInt( document.getElementById('inquiryId').value),
-         "materialAvailablityDate": document.getElementById('schedule_date1').value,
-         "shopDrawingCompletionDate": document.getElementById('schedule_date2').value,
-         "productionCompletionDate": document.getElementById('schedule_date3').value,
-         "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
-         "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
-         "counterTopFixingDate": document.getElementById('schedule_date6').value,
-         "InstallationStartDate":document.getElementById('schedule_date7').value,
-         "InstallationCompletionDate":document.getElementById('schedule_date8').value,
-         "notes": document.getElementById('CheckComment').value,
-       };
-        const data = JSON.stringify(checklistdata);
-        console.log(data);
-        
-        $.ajax({
-            type: "Post",
-            url: baseURL + '/JobOrder/JobOrderFactoryApprove',
-            headers: {
-                'Content-Type': 'application/json',
-                'userId': user.data.userId,
-                'Access-Control-Allow-Origin': '*',
-            },
-            data: data,
-            success: function(response) {
-                console.log(response);
-     
-                window.location.replace("joborderapproval.html");
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                document.getElementById("alert").innerHTML ="An error occured";
-            }
-        });
+      var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+
+      // document.getElementById("load").style.removeProperty('display');
+      var form = KTUtil.getById('kt_approve_inquiry');
+      var formSubmitUrl = KTUtil.attr(form, 'action');
+      var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
+   
+      if (!form) {
+          return;
+      }
+   
+      FormValidation
+          .formValidation(
+              form, {
+                  fields: {
+                     schedule_date2: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Production Drawing Completion Date is required'
+                            }
+                        }
+                    },
+                    schedule_date3: {
+                     validators: {
+                         notEmpty: {
+                             message: 'Production Completion Date is required'
+                         }
+                     }
+                 },
+                 schedule_date7: {
+                  validators: {
+                      notEmpty: {
+                          message: 'Planned Installation Date is required'
+                      }
+                  }
+              },
+               schedule_date4: {
+                  validators: {
+                     notEmpty: {
+                        message: 'Wooden Work Completion Date is required'
+                           }
+                        }
+                  },
+                  schedule_date8: {
+               validators: {
+                  notEmpty: {
+                     message: 'Planned Completion Date is required'
+                     }
+                     }
+                  },
+                  },
+                  plugins: {
+                      trigger: new FormValidation.plugins.Trigger(),
+                      submitButton: new FormValidation.plugins.SubmitButton(),
+                      //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                      bootstrap: new FormValidation.plugins.Bootstrap({
+                          //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                          //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                      })
+                  }
+              }
+          )
+          .on('core.form.valid', function() {
+              // Show loading state on button
+              KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+               var checklistdata = {
+                  "inquiryId":parseInt( document.getElementById('inquiryId').value),
+                  "materialAvailablityDate": document.getElementById('schedule_date1').value,
+                  "shopDrawingCompletionDate": document.getElementById('schedule_date2').value,
+                  "productionCompletionDate": document.getElementById('schedule_date3').value,
+                  "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
+                  "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
+                  "counterTopFixingDate": document.getElementById('schedule_date6').value,
+                  "InstallationStartDate":document.getElementById('schedule_date7').value,
+                  "InstallationCompletionDate":document.getElementById('schedule_date8').value,
+                  "notes": document.getElementById('CheckComment').value,
+               };
+               const data = JSON.stringify(checklistdata);
+               console.log(data);
+               
+               $.ajax({
+                     type: "Post",
+                     url: baseURL + '/JobOrder/JobOrderFactoryApprove',
+                     headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'Access-Control-Allow-Origin': '*',
+                     },
+                     data: data,
+                     success: function(response) {
+                        console.log(response);
+            
+                        window.location.replace("joborderapproval.html");
+                     },
+                     error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        document.getElementById("alert").innerHTML ="An error occured";
+                     }
+               });
+            });
     });
     $('#kt_reject_inquiry_button').click(function () {
         var rejectlistdata = {
