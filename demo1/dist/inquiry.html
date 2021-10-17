@@ -604,6 +604,7 @@
                                        <th>Design Added Date</th>
                                        <th>Quotation Added Date</th>
                                        <th>Comment Added Date</th>
+                                       <th>Factory Name</th>
                                        <th>Actions</th>
                                     </tr>
                                  </thead>
@@ -1029,7 +1030,7 @@
                      </div>
                   </div>
                   <div class="modal-footer">
-                     <button type="button" onclick="document.getElementById('inquiryId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                     <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                      <button type="submit" id="kt_add_customer_button" class="btn btn-primary font-weight-bold">Update</button>
                   </div>
                </form>
@@ -1156,6 +1157,43 @@
             <!--end::Form-->
          </div>
       </div>
+      </div>
+
+					
+<div class="modal fade" id="changefactor" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">			
+<div class="modal-dialog modal-dialog-centered modal" role="document">
+<div class="modal-content">
+  <div class="modal-header">
+     <h5 class="modal-title" id="examplemanagedby">Change Factory</h5>
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <i aria-hidden="true" class="ki ki-close"></i>
+     </button>
+  </div>
+  <!--begin::Form-->
+  <form class="form" id="kt_factor" action="" name="kt_factor">
+     <div class="modal-body">
+     <div class="form-group row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                  <label class="">Factory</label>
+              <div class="input-group input-group-lg input-group-solid">
+                  <select class="form-control" id="kt_select_branch" name="param"	class="form-control form-control-lg form-control-solid"
+                          style="width:100%">
+
+                       </select>
+              </div>
+              </div>
+              
+          </div>
+     </div>
+     <div class="modal-footer">
+        <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+        <button type="button" id="kt_factor_button" class="btn btn-primary font-weight-bold">Update</button>
+     </div>
+  </form>
+  <!--end::Form-->
+</div>
+</div>
+</div>
       <!--begin::Scrolltop-->
       <div id="kt_scrolltop" class="scrolltop">   
       </div>
@@ -1518,6 +1556,68 @@
                  moment('12/25/2020'),
              ]
          });
+         function changeFactor(name,inquiryId){
+            document.getElementById("inquiryId").innerHTML = inquiryId;
+            $.ajax({
+               type: "get",
+               url: baseURL + '/Branch/GetBranches',
+
+               headers: {
+                  'Content-Type': 'application/json',
+                  
+                  'Access-Control-Allow-Origin': '*',
+               },
+               success: function (response) {
+                  console.log(response);
+                  if (response.isError == false) {
+                     const branchList = document.getElementById('kt_select_branch');
+                     var branchTypeListHTML = new Array();
+                     var selected='';
+                     
+                     for (var i = 0; i < response.data.length; i++) {
+                         selected='';
+                        if(response.data[i].branchName==name){
+                          selected='selected';
+                        } 
+                        branchTypeListHTML.push(`
+                        <option `+selected+` value="` + response.data[i].branchId + `">` + response.data[i].branchName + `</option>`);
+                     }
+
+                     branchList.innerHTML = branchTypeListHTML.join('');
+
+                  } else {
+                     Swal.fire({
+                        text: response.errorMessage,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                           confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                     }).then(function () {
+                        KTUtil.scrollTop();
+                     });
+                  }
+               },
+               error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+
+                  // alert(errorThrown);
+                  
+            Swal.fire({
+               text: 'Internet Connection Problem',
+               icon: "error",
+               buttonsStyling: false,
+               confirmButtonText: "Ok, got it!",
+               customClass: {
+                  confirmButton: "btn font-weight-bold btn-light-primary"
+               }
+            }).then(function() {
+               KTUtil.scrollTop();
+            });
+               }
+            });
+         }
       </script>
       <!--end::Page Scripts-->
    </body>

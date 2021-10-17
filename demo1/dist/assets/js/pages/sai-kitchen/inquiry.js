@@ -47,7 +47,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'inquiryId', 'inquiryCode', 'status', 'workscopeNames','inquiryComment',
                         'measurementScheduleDate', 'measurementAssignTo','designScheduleDate', 'designAssignTo','isMeasurementProvidedByCustomer','isDesignProvidedByCustomer', 'customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','noOfRevision', 'actions'
+                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','factorName','noOfRevision', 'actions'
                     ],
                 },
             },
@@ -142,6 +142,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'commentAddedOn'
                 },
                 {
+                    data: 'factorName'
+                },
+                {
                     data: 'actions',
                     responsivePriority: -1
                 },
@@ -203,9 +206,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var action = ``;
-                    
                         action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewinquirystatus.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
-                        <i class="la la-ellipsis-h""></i>\
+                        <i class="la la-ellipsis-h"></i>\
+                        </a>\
+                        `;
+                        action += `\<a  href="javascript:;" style="background-color:#734f43;margin:2px" onclick="changeFactor('` + full.factorName + `',`+full.inquiryId+`)"  data-toggle="modal" data-target="#changefactor"  class="btn btn-sm btn-clean btn-icon" title="Change Factory">
+                        <i class="la la-foursquare"></i>\
                         </a>\
                         `;
                         if(full.inquiryAddedById==user.data.userId ||userRoleId==1){
@@ -1363,4 +1369,33 @@ $('#kt_add_customer_button').click(function () {
                     });
                 })
         }
+});
+
+$('#kt_factor_button').click(function () {
+    var Factorlistdata = {
+        "inquiryId":parseInt( document.getElementById('inquiryId').innerHTML),
+        "factoryId": parseInt(document.getElementById('kt_select_branch').value),
+      };
+
+    const data = JSON.stringify(Factorlistdata);
+    console.log(data);
+    
+    $.ajax({
+        type: "Post",
+        url: baseURL + '/JobOrder/ChangeFactory',
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        data: data,
+        success: function(response) {
+            console.log(response);
+ 
+            window.location.replace("inquiry.html");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            
+        }
+    });
 });
