@@ -251,4 +251,12 @@ export let inqStatus= {
         'title': 'Contract Rejected',
         'class': ' label-light-danger'
     },
+    64: {
+        'title': 'job Order Audit Pending ',
+        'class': ' label-light-primary'
+    },
+    65: {
+        'title': 'job Order Audit Rejected',
+        'class': ' label-light-danger'
+    },
 };
