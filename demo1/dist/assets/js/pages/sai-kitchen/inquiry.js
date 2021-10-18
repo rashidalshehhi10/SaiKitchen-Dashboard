@@ -210,10 +210,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         <i class="la la-ellipsis-h"></i>\
                         </a>\
                         `;
-                        action += `\<a  href="javascript:;" style="background-color:#734f43;margin:2px" onclick="changeFactor('` + full.factorName + `',`+full.inquiryId+`)"  data-toggle="modal" data-target="#changefactor"  class="btn btn-sm btn-clean btn-icon" title="Change Factory">
-                        <i class="la la-foursquare"></i>\
-                        </a>\
-                        `;
+                        if(full.status == 46){
+                            action += `\<a  href="javascript:;" style="background-color:#734f43;margin:2px" onclick="changeFactor('` + full.factorName + `',`+full.inquiryId+`)"  data-toggle="modal" data-target="#changefactor"  class="btn btn-sm btn-clean btn-icon" title="Change Factory">
+                            <i class="la la-foursquare"></i>\
+                            </a>\
+                            `;
+                        }
                         if(full.inquiryAddedById==user.data.userId ||userRoleId==1){
                             action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"   data-toggle="modal" data-target="#managedby"  class="btn btn-sm btn-clean btn-icon" title="Change Inquiry Managed By">
                             <i class="la la-user-alt"></i>\

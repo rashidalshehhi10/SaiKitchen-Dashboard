@@ -1620,7 +1620,7 @@ jQuery(document).ready(function () {
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Customer</span>
-	
+   <span id="customerCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1640,7 +1640,7 @@ jQuery(document).ready(function () {
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Inquiry</span>
-	
+	<span id="inquiryCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1665,7 +1665,7 @@ if (permission.includes(7)) {
       <!--end::Svg Icon-->
 		</span>
 		<span class="menu-text">Assignment Request</span>
-		
+		<span id="arequestCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 	</a>
 	</li>
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -1677,7 +1677,7 @@ if (permission.includes(7)) {
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Measurement</span>
-	
+	<span id="measurementCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1693,7 +1693,7 @@ if (permission.includes(7)) {
       <!--end::Svg Icon-->
 		</span>
 		<span class="menu-text">Approval Request</span>
-		
+		<span id="mapprovalCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 	</a>
 	</li>
 	`;
@@ -1719,7 +1719,7 @@ if (permission.includes(8)){
    <!--end::Svg Icon-->
    </span>
    <span class="menu-text">Assignment Request</span>
-   
+   <span id="drequestCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>`;
 
@@ -1734,7 +1734,7 @@ sideMenuHTML += `
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Design</span>
-	
+	<span id="designCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1751,7 +1751,7 @@ if(branchTypeId!=3){
       <!--end::Svg Icon-->
 		</span>
 		<span class="menu-text">Approval Request</span>
-		
+		<span id="dapprovalCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 	</a>
 	</li>
 	`;
@@ -1772,7 +1772,7 @@ if(branchTypeId!=3){
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Assign Schedule</span>
-	
+	<span id="qrequestCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -1784,7 +1784,7 @@ if(branchTypeId!=3){
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Quotation</span>
-	
+	<span id="quotationCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -1796,7 +1796,7 @@ if(branchTypeId!=3){
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Approval Quotation</span>
-	
+	<span id="qapprovalCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1817,7 +1817,7 @@ if(branchTypeId!=3){
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Upload Contract</span>
-	
+	<span id="filesCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 
@@ -1842,7 +1842,7 @@ if (permission.includes(13)) {
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Technical Checklist</span>
-	
+	<span id="technicalCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>`;
       }
@@ -1857,7 +1857,7 @@ if (permission.includes(17)) {
    <!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Commercial Checklist</span>
-	
+	<span id="commercialCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1888,7 +1888,7 @@ if (permission.includes(17)) {
 <!--end::Svg Icon-->
 </span>
    <span class="menu-text">Special Approve</span>
-   
+   <span id="specialCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1908,7 +1908,7 @@ sideMenuHTML += `
 		<!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Job Order Audit</span>
-	
+	<span id="auditCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1928,7 +1928,7 @@ if (permission.includes(18)) {
 		<!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Job Order Confirmation</span>
-	
+	<span id="jconfirmCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>`;
 }
@@ -1949,7 +1949,7 @@ if (permission.includes(14)) {
 		<!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Job Order Status</span>
-	
+	<span id="jstatusCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -1976,7 +1976,7 @@ if (permission.includes(14)) {
 		<!--end::Svg Icon-->
 	</span>
 	<span class="menu-text">Add Payment</span>
-	
+	<span id="paymentCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;
@@ -2023,6 +2023,7 @@ if (permission.includes(14)) {
          <!--end::Svg Icon-->
 			</span>
 			<span class="menu-text">User</span>
+         <span id="userCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 		</a>
 	</li>
 	`;
@@ -2037,6 +2038,7 @@ if (permission.includes(14)) {
          <!--end::Svg Icon-->
 			</span>
 			<span class="menu-text">Branch</span>
+         <span id="branchCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 		</a>
 	</li>`;
       }
@@ -2051,6 +2053,7 @@ if (permission.includes(14)) {
             <!--end::Svg Icon-->
 				</span>
 				<span class="menu-text">Branch Role</span>
+            <span id="branchroleCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 			</a>
 		</li>`;
       }
@@ -2088,6 +2091,7 @@ if (permission.includes(14)) {
             <!--end::Svg Icon-->
 				</span>
 				<span class="menu-text">WorkScope</span>
+            <span id="workscopeCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 			</a>
 		</li>`;
       }
@@ -2126,6 +2130,7 @@ if (permission.includes(14)) {
 					<!--end::Svg Icon-->
 				</span>
 				<span class="menu-text">Promo</span>
+            <span id="promoCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 			</a>
 		</li>
 		
@@ -2345,3 +2350,92 @@ function getNotifications() {
    }
 
 }
+
+jQuery(document).ready(function() {
+
+   $.ajax({
+     type: "Post",
+     url: baseURL + '/Inquiry/GetCountByBranchId?branchId=' + user.data.userRoles[0].branchId,
+
+     headers: {
+       'Content-Type': 'application/json',
+       'Access-Control-Allow-Origin': '*',
+     },
+     success: function (response) {
+      if(document.getElementById("customerCountId")){
+         document.getElementById("customerCountId").innerHTML = response.data[0].customers;
+      }
+      if(document.getElementById("inquiryCountId")){
+         document.getElementById("inquiryCountId").innerHTML = response.data[0].inquiriesCount;
+      }
+      if(document.getElementById("arequestCountId")){
+         document.getElementById("arequestCountId").innerHTML = response.data[0].measurementAssinee;
+      }
+      if(document.getElementById("measurementCountId")){
+         document.getElementById("measurementCountId").innerHTML = response.data[0].measurements;
+      }
+      if(document.getElementById("mapprovalCountId")){
+         document.getElementById("mapprovalCountId").innerHTML = response.data[0].measurementApprovals;
+      }
+      if(document.getElementById("drequestCountId")){
+         document.getElementById("drequestCountId").innerHTML = response.data[0].designAssigne;
+      }
+      if(document.getElementById("designCountId")){
+         document.getElementById("designCountId").innerHTML = response.data[0].designs;
+      }
+      if(document.getElementById("dapprovalCountId")){
+         document.getElementById("dapprovalCountId").innerHTML = response.data[0].designApprovals;
+      }
+      if(document.getElementById("qrequestCountId")){
+         document.getElementById("qrequestCountId").innerHTML = response.data[0].quotationAssign;
+      }
+      if(document.getElementById("quotationCountId")){
+         document.getElementById("quotationCountId").innerHTML = response.data[0].quotations;
+      }
+      if(document.getElementById("qapprovalCountId")){
+         document.getElementById("qapprovalCountId").innerHTML = response.data[0].quotationApprovals;
+      }
+      if(document.getElementById("qapprovalCountId")){
+         document.getElementById("qapprovalCountId").innerHTML = response.data[0].uploadcontract;
+      }
+      if(document.getElementById("technicalCountId")){
+         document.getElementById("technicalCountId").innerHTML = response.data[0].technicalChecklist;
+      }
+      if(document.getElementById("commercialCountId")){
+         document.getElementById("commercialCountId").innerHTML = response.data[0].commericalChecklist;
+      }
+      if(document.getElementById("specialCountId")){
+         document.getElementById("specialCountId").innerHTML = response.data[0].specialApprovals;
+      }
+      if(document.getElementById("auditCountId")){
+         document.getElementById("auditCountId").innerHTML = response.data[0].joborderAudit;
+      }
+      if(document.getElementById("jconfirmCountId")){
+         document.getElementById("jconfirmCountId").innerHTML = response.data[0].joborderApprovals;
+      }
+      if(document.getElementById("jstatusCountId")){
+         document.getElementById("jstatusCountId").innerHTML = response.data[0].joborderStatus;
+      }
+      if(document.getElementById("userCountId")){
+         document.getElementById("userCountId").innerHTML = response.data[0].users;
+      }
+      if(document.getElementById("branchCountId")){
+         document.getElementById("branchCountId").innerHTML = response.data[0].branches;
+      }
+      if(document.getElementById("branchroleCountId")){
+         document.getElementById("branchroleCountId").innerHTML = response.data[0].branchroles;
+      }
+      if(document.getElementById("workscopeCountId")){
+         document.getElementById("workscopeCountId").innerHTML = response.data[0].workscopes;
+      }
+      if(document.getElementById("promoCountId")){
+         document.getElementById("promoCountId").innerHTML = response.data[0].promos;
+      }
+        
+
+     },
+     error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+     }
+  });
+});
