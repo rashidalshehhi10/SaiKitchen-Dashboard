@@ -259,4 +259,12 @@ export let inqStatus= {
         'title': 'job Order Audit Rejected',
         'class': ' label-light-danger'
     },
+    66: {
+        'title': 'special approval pending',
+        'class': ' label-light-primary'
+    },
+    67: {
+        'title': 'Special approval rejected',
+        'class': ' label-light-danger'
+    },
 };

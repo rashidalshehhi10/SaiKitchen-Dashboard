@@ -43,7 +43,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/CheckList/GetInquirycommercialChecklistByBranchId?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/CheckList/GetInquirySpecialApprovalByBranchId?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
@@ -167,7 +167,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             console.log(full.inquiryId);
                          
                         action += `
-                        <a href="viewcommercialchecklist.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
+                        <a href="viewspecialapprove.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
                         <i class="la la-file-contract"></i>
                     </a>
                     `;
@@ -302,7 +302,7 @@ $('#kt_approve_inquiry_button').click(function () {
     var checklistdata = {
         "inquiryId":parseInt( document.getElementById('inquiryId').value),
         "reason": document.getElementById('CheckComment').value,
-        "isSpecialApprovalRequired": $('input[name="IsSpecialApproval"]:checked').val(),
+        "IsSpecialApproval": $('input[name="IsSpecialApproval"]:checked').val(),
       };
 
     const data = JSON.stringify(checklistdata);
@@ -310,7 +310,7 @@ $('#kt_approve_inquiry_button').click(function () {
     
     $.ajax({
         type: "Post",
-        url: baseURL + '/CheckList/ApproveinquiryCommericalChecklist',
+        url: baseURL + '/CheckList/ApproveSpecialApproval',
         headers: {
             'Content-Type': 'application/json',
             'userId': user.data.userId,
@@ -320,7 +320,7 @@ $('#kt_approve_inquiry_button').click(function () {
         success: function(response) {
             console.log(response);
  
-            window.location.replace("commercialchecklist.html");
+            window.location.replace("specialapprove.html");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             document.getElementById("alert").innerHTML ="An error occured";
@@ -337,7 +337,7 @@ $('#kt_reject_inquiry_button').click(function () {
     console.log(data);
      $.ajax({
         type: "Post",
-        url: baseURL + '/CheckList/RejectinquiryCommericalChecklist',
+        url: baseURL + '/CheckList/RejectSpecialApproval',
         headers: {
             'Content-Type': 'application/json',
             'userId': user.data.userId,
@@ -346,7 +346,7 @@ $('#kt_reject_inquiry_button').click(function () {
         data: data,
         success: function(response) {
             console.log(response);
-            window.location.replace("commercialchecklist.html");
+            window.location.replace("specialapprove.html");
             
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

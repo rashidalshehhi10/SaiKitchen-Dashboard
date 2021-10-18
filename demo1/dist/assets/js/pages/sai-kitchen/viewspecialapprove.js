@@ -147,7 +147,7 @@ jQuery(document).ready(function() {
 
     $.ajax({
         type: "post",
-        url: baseURL + '/CheckList/GetinquiryCommercialChecklistDetailsById?inquiryId=' + inquiryId,
+        url: baseURL + '/CheckList/GetinquirySpecialApprovalDetailsById?inquiryId=' + inquiryId,
 
         headers: {
             'Content-Type': 'application/json',
@@ -1680,7 +1680,6 @@ workscope.innerHTML=workscopeHtml;
         var checklistdata = {
             "inquiryId":parseInt( document.getElementById('inquiryId').value),
             "reason": document.getElementById('CheckComment').value,
-            "isSpecialApprovalRequired": $('input[name="IsSpecialApproval"]:checked').val(),
           };
     
         const data = JSON.stringify(checklistdata);
@@ -1688,7 +1687,7 @@ workscope.innerHTML=workscopeHtml;
         
         $.ajax({
             type: "Post",
-            url: baseURL + '/CheckList/ApproveinquiryCommericalChecklist',
+            url: baseURL + '/CheckList/ApproveSpecialApproval',
             headers: {
                 'Content-Type': 'application/json',
                 'userId': user.data.userId,
@@ -1698,7 +1697,7 @@ workscope.innerHTML=workscopeHtml;
             success: function(response) {
                 console.log(response);
      
-                window.location.replace("commercialchecklist.html");
+                window.location.replace("specialapprove.html");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 document.getElementById("alert").innerHTML ="An error occured";
@@ -1715,7 +1714,7 @@ workscope.innerHTML=workscopeHtml;
         console.log(data);
          $.ajax({
             type: "Post",
-            url: baseURL + '/CheckList/RejectinquiryCommericalChecklist',
+            url: baseURL + '/CheckList/RejectSpecialApproval',
             headers: {
                 'Content-Type': 'application/json',
                 'userId': user.data.userId,
@@ -1724,7 +1723,7 @@ workscope.innerHTML=workscopeHtml;
             data: data,
             success: function(response) {
                 console.log(response);
-                window.location.replace("commercialchecklist.html");
+                window.location.replace("specialapprove.html");
                 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
