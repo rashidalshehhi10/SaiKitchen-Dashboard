@@ -2395,8 +2395,8 @@ jQuery(document).ready(function() {
       if(document.getElementById("qapprovalCountId")){
          document.getElementById("qapprovalCountId").innerHTML = response.data[0].quotationApprovals;
       }
-      if(document.getElementById("qapprovalCountId")){
-         document.getElementById("qapprovalCountId").innerHTML = response.data[0].uploadcontract;
+      if(document.getElementById("filesCountId")){
+         document.getElementById("filesCountId").innerHTML = response.data[0].uploadcontract;
       }
       if(document.getElementById("technicalCountId")){
          document.getElementById("technicalCountId").innerHTML = response.data[0].technicalChecklist;
