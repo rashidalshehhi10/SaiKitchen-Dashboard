@@ -218,7 +218,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             }, 1000);
          });
          $('#JobOrderInProgress').on('click', function() {
-             table.column(3).search('Job'+' '+'Order'+' '+'InProgress',true, false, true ).draw();
+             table.column(3).search('Job Order In-Progress',true, false, true ).draw();
              $('html, body').animate({
                  scrollTop: $("#kt_datatable").offset().top
              }, 1000);

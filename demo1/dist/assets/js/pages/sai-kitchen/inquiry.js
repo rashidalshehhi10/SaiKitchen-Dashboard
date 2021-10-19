@@ -966,42 +966,42 @@ jQuery(document).ready(function() {
 
          //   const data1 = JSON.stringify(response.data);
 
-        
-             document.getElementById('a').innerHTML=response.data[0][0].inquiryCount;
+            
+             document.getElementById('a').innerHTML=response.data[0].inquiries[0][0].inquiryCount;
              
-             document.getElementById('b').innerHTML=response.data[1][0].inquiryCount;
+             document.getElementById('b').innerHTML=response.data[0].inquiries[1][0].inquiryCount;
 
-             document.getElementById('c').innerHTML=response.data[8][0].inquiryCount;
+             document.getElementById('c').innerHTML=response.data[0].inquiries[8][0].inquiryCount;
 
-             document.getElementById('d').innerHTML=response.data[7][0].inquiryCount;
+             document.getElementById('d').innerHTML=response.data[0].inquiries[7][0].inquiryCount;
 
-             document.getElementById('e').innerHTML=response.data[2][0].inquiryCount;
+             document.getElementById('e').innerHTML=response.data[0].inquiries[2][0].inquiryCount;
 
-             document.getElementById('f').innerHTML=response.data[3][0].inquiryCount;
+             document.getElementById('f').innerHTML=response.data[0].inquiries[3][0].inquiryCount;
 
-             document.getElementById('g').innerHTML=response.data[15][0].inquiryCount;
+             document.getElementById('g').innerHTML=response.data[0].inquiries[15][0].inquiryCount;
              
-             document.getElementById('h').innerHTML=response.data[10][0].inquiryCount;
+             document.getElementById('h').innerHTML=response.data[0].inquiries[10][0].inquiryCount;
 
-             document.getElementById('i').innerHTML=response.data[4][0].inquiryCount;
+             document.getElementById('i').innerHTML=response.data[0].inquiries[4][0].inquiryCount;
 
-             document.getElementById('j').innerHTML=response.data[5][0].inquiryCount;
+             document.getElementById('j').innerHTML=response.data[0].inquiries[5][0].inquiryCount;
 
-             document.getElementById('k').innerHTML=response.data[14][0].inquiryCount;
+             document.getElementById('k').innerHTML=response.data[0].inquiries[14][0].inquiryCount;
 
-             document.getElementById('l').innerHTML=response.data[13][0].inquiryCount;
+             document.getElementById('l').innerHTML=response.data[0].inquiries[13][0].inquiryCount;
 
-             document.getElementById('m').innerHTML=response.data[55][0].inquiryCount;
+             document.getElementById('m').innerHTML=response.data[0].inquiries[55][0].inquiryCount;
              
-             document.getElementById('n').innerHTML=response.data[12][0].inquiryCount;
+             document.getElementById('n').innerHTML=response.data[0].inquiries[12][0].inquiryCount;
 
-             document.getElementById('o').innerHTML=response.data[46][0].inquiryCount;
+             document.getElementById('o').innerHTML=response.data[0].inquiries[46][0].inquiryCount;
              
-             document.getElementById('p').innerHTML=response.data[25][0].inquiryCount;
+             document.getElementById('p').innerHTML=response.data[0].inquiries[25][0].inquiryCount;
 
-             document.getElementById('q').innerHTML=response.data[26][0].inquiryCount;
-			
-             document.getElementById('l').innerHTML=  table.page.info().recordsTotal;
+             document.getElementById('q').innerHTML=response.data[0].inquiries[26][0].inquiryCount;
+
+             document.getElementById('r').innerHTML=  response.data[0].totalinquiries;
 
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
