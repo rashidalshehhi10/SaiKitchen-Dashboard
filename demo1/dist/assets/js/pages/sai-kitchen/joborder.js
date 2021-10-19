@@ -346,11 +346,11 @@ jQuery(document).ready(function() {
          //   alert(JSON.stringify(table.page.info()));
 
              
-             document.getElementById('b').innerHTML=response.data[46][0].inquiryCount;
+             document.getElementById('b').innerHTML=response.data[0].inquiries[46][0].inquiryCount;
 
-             document.getElementById('c').innerHTML=response.data[25][0].inquiryCount;
+             document.getElementById('c').innerHTML=response.data[0].inquiries[25][0].inquiryCount;
 
-             document.getElementById('d').innerHTML=response.data[26][0].inquiryCount;
+             document.getElementById('d').innerHTML=response.data[0].inquiries[26][0].inquiryCount;
 
              document.getElementById('a').innerHTML=  table.page.info().recordsTotal;
 
