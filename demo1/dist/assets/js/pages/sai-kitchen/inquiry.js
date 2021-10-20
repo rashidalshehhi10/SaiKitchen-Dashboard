@@ -24,7 +24,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             // read more: https://datatables.net/examples/basic_init/dom.html
 
             lengthMenu: [5, 10, 25, 50],
-
+            start:1,
             pageLength: 10,
 
             language: {
@@ -35,11 +35,13 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             order: [
                 [0, 'desc']
             ],
+            //searching:true,
             searchDelay: 0,
             processing: true,
-            serverSide: false,
+            serverSide: true,
             ajax: {
-                url: baseURL + '/Inquiry/GetInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
+                //url: baseURL + '/Inquiry/GetInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/Inquiry/GetPagingInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
@@ -198,6 +200,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             // 	break;
                     }
                 });
+                //var allData = table.data();
             },
 
             columnDefs: [{
@@ -464,7 +467,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             var val = $.fn.dataTable.util.escapeRegex(value);
             table.column(index).search(val ? val : '', false, true);
         };
-
+ 
         $('#kt_search').on('click', function(e) {
             e.preventDefault();
             var params = {};
@@ -481,8 +484,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 table.column(i).search(val ? val : '', false, false);
             });
             table.table().draw();
-        });
+        }); 
 
+        /* $('#kt_search').click(function (e) {
+            //Apply search for Employee Name // DataTable column index 0
+           // oTable.columns(0).search($('#txtEmployeeName').val().trim());
+            //Apply search for Country // DataTable column index 3
+           // oTable.columns(3).search($('#ddCountry').val().trim());
+            //hit search on server
+            table.columns(0).search($('#inqId').val().trim());
+            e.preventDefault();
+            table.draw();
+        }); */
         $('#kt_reset').on('click', function(e) {
             e.preventDefault();
             $('.datatable-input').each(function() {
@@ -499,10 +512,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 rightArrow: '<i class="la la-angle-right"></i>',
             },
         });
+        
 
     };
 
-
+   
 
 
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
