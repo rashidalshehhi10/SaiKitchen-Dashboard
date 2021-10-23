@@ -108,6 +108,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 vat:vatvalue,
                 discount: promoDiscount,
                 quotationValidityDate: document.getElementById('kt_datepicker_2').value,
+                advancePayment: document.getElementById('txtAdvancePayment').value,
+                beforeInstallation: document.getElementById('txtBeforeInstallation').value,
+                afterDelivery: document.getElementById('txtAfterInstallation').value,
                 quotationFiles: measurementFile,
                 calculationSheetFile:calc,
                 };
@@ -644,14 +647,14 @@ $('#txtAdvancePayment').keyup(function () {
     advancePayment=  document.getElementById('txtAdvancePayment').value;
     advancePaymentAmount= (totalAmount/100)*advancePayment;
     // cc
-     // document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+      document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
    // cc
 });
 
 
     KTDatatablesSearchOptionsAdvancedSearch.init();
 
-    $.ajax({
+/*     $.ajax({
         type: "get",
         url: baseURL + '/Fees/GetFeesById?feesId=2',
         
@@ -671,7 +674,7 @@ $('#txtAdvancePayment').keyup(function () {
                 console.log(response.data.feesAmount);
                 advancePayment=response.data.feesAmount;
                 // cc
-                     //   document.getElementById('txtAdvancePayment').value=advancePayment;
+                        document.getElementById('txtAdvancePayment').value=advancePayment;
                // cc
             } else {
                 Swal.fire({
@@ -704,7 +707,52 @@ $('#txtAdvancePayment').keyup(function () {
                 KTUtil.scrollTop();
             });
         }
-    });
+    }); */
+    $.ajax({
+        type: "POST",
+        url: baseURL + '/Fees/GetAllFees',
+        
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+        },
+     
+        success: function (response) {
+            console.log(response);
+                advancePayment=response[1].feesAmount;
+                // cc
+                   document.getElementById('txtAdvancePayment').value=advancePayment;
+                   beforeInstallation =response[2].feesAmount;
+                   afterDelivery =response[3].feesAmount;
+               // cc
+               document.getElementById("txtBeforeInstallation").value =beforeInstallation;
+               document.getElementById("txtAfterInstallation").value =afterDelivery;
+            
+            
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+     
+     
+            // alert(errorThrown);
+     
+            Swal.fire({
+                text: 'Internet Connection Problem',
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+     });
     $.ajax({
         type: "get",
         url: baseURL + '/Fees/GetFeesById?feesId=5',
@@ -779,7 +827,7 @@ $('#txtAdvancePayment').keyup(function () {
                 advancePayment=  document.getElementById('txtAdvancePayment').value;
                 advancePaymentAmount= (totalAmount/100)*advancePayment;
                 // cc
-            //    document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+                document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
               // cc
             });
                 //$('#divtAmount').hide(); 

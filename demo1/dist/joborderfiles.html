@@ -428,6 +428,18 @@ License: You must have a valid license purchased only from themeforest(the above
            </div>    
                     
      <div class="form-group row" id="RowAfter" >
+        <div class="col-lg-6">
+            <label id="lblBeforeInstallation">Before Installation 7 Days:</label>
+            <div class="input-group">
+                  <input type="number" id="txtBeforeInstallation" class="form-control" placeholder="50" min="0" max="100" value="50" />
+                  <div class="input-group-append">
+                     <span class="input-group-text">
+                        <i class="la la-percent"></i>
+                     </span>
+                  </div>
+            </div>
+            <span class="form-text text-muted">Before Insatallation in % of Total Amount</span>
+             </div>
                         <div class="col-lg-6">
                             <label id="lblAfterInstallation">After Installation:</label>
                             <div class="input-group">
@@ -440,20 +452,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <span class="form-text text-muted">After Installation in % of Total Amount</span>
                          </div>
-                      <div class="col-lg-6">
-                        <label id="lblBeforeInstallation">Before Installation 7 Days:</label>
-                        <div class="input-group">
-                              <input type="number" id="txtBeforeInstallation" class="form-control" placeholder="50" min="0" max="100" value="50" />
-                              <div class="input-group-append">
-                                 <span class="input-group-text">
-                                    <i class="la la-percent"></i>
-                                 </span>
-                              </div>
-                        </div>
-                        <span class="form-text text-muted">Before Insatallation in % of Total Amount</span>
-                         </div>
-
-
 
  </div>
 
@@ -767,10 +765,10 @@ License: You must have a valid license purchased only from themeforest(the above
                     //    document.getElementById("measurementFee").value = response.data.measurementFees;
                    //     document.getElementById("vat").value = response.data.quotations[0].vat;
                          document.getElementById("totalAmount").value = response.data.quotations[0].totalAmount;
-                        //  document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
+                          document.getElementById("txtAdvancePayment").value = response.data.quotations[0].advancePayment;
                     //    document.getElementById("txtdescription").value = response.data.quotations[0].description;
-                      //  document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;
-                     //   document.getElementById("txtAfterInstallation").value =response.data.quotations[0].afterDelivery;
+                        document.getElementById("txtBeforeInstallation").value =response.data.quotations[0].beforeInstallation;
+                        document.getElementById("txtAfterInstallation").value =response.data.quotations[0].afterDelivery;
                      //   document.getElementById("txtProposalReferenceNumber").value = response.data.quotations[0].proposalReferenceNumber;
                   //      document.getElementById("txtAmount").value = response.data.quotations[0].amount;
                   //     document.getElementById("kt_datepicker_2").value = response.data.quotations[0].quotationValidityDate;

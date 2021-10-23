@@ -441,7 +441,9 @@ $('#kt_approve_inquiry_button').click(function () {
             }
             else{
                 isInstallment=true;
-                advancePayment =document.getElementById('txtAdvancePayment').value;
+                advancePayment= document.getElementById('txtAdvancePayment').value;
+                beforeInstallation=0;
+                afterDelivery=0;
                 noOfInstallment=document.getElementById('instCnt').value;
                 for (let i = 1; i <= parseInt(noOfInstallment); i++) {
                     pymnt.push({

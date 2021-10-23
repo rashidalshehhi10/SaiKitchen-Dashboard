@@ -348,6 +348,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     vat:document.getElementById("vat").value,
                     discount: document.getElementById("promoDiscount").value,
                     quotationValidityDate: document.getElementById('kt_datepicker_2').value,
+                    advancePayment: document.getElementById('txtAdvancePayment').value,
+                    beforeInstallation: document.getElementById('txtBeforeInstallation').value,
+                    afterDelivery: document.getElementById('txtAfterInstallation').value,
                     quotationFiles: measurementFile,
                     calculationSheetFile:calc,
                     isEdit: document.getElementById("editmode").value,
@@ -470,7 +473,7 @@ jQuery(document).ready(function() {
              $('#txtAdvancePayment').keyup(function () {
                 advancePayment=  document.getElementById('txtAdvancePayment').value;
                 advancePaymentAmount= (totalAmount/100)*advancePayment;
-                //document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+                document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
             
             });
                 //$('#divtAmount').hide(); 
@@ -502,7 +505,7 @@ jQuery(document).ready(function() {
       document.getElementById('txtTotalAmount').value=totalAmount;
       document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount '+promoDiscount+'% - Measurement Fee AED '+measurementFee+' + VAT '+vatvalue+'%';
       advancePaymentAmount= (totalAmount/100)*advancePayment;
-      //document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED '+advancePaymentAmount;
+      document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED '+advancePaymentAmount;
     }else{
          totalAmount= (($(this).val()/1-measurementFee)+ ((($(this).val()-measurementFee)/100)*vatvalue));
          if(totalAmount<0){
@@ -511,15 +514,16 @@ jQuery(document).ready(function() {
         document.getElementById('txtTotalAmount').value= totalAmount;   
            document.getElementById('lblTotalAmount').innerHTML='Total Amount = Amount - Discount 0% - Measurement Fee AED '+measurementFee+' + VAT '+vatvalue+'%';
            advancePaymentAmount= (totalAmount/100)*advancePayment;
-          // document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+           document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
          
     }
 });
 
 $('#txtAdvancePayment').keyup(function () {
     advancePayment=  document.getElementById('txtAdvancePayment').value;
+    totalAmount= document.getElementById('txtTotalAmount').value
     advancePaymentAmount= (totalAmount/100)*advancePayment;
-   // document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
+    document.getElementById('lblAdvancePayment').innerHTML='Advance Payment: AED'+advancePaymentAmount;
 
 });
 
