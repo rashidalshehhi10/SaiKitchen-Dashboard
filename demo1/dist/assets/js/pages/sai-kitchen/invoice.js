@@ -165,7 +165,12 @@ jQuery(document).ready(function() {
 
                       }
                 }
-
+                for (let i = 0; i < response.data.termsAndConditionsDetail.length; i++) {
+                  document.getElementById("terms").innerHTML +=
+                  '<div style="padding-left: 20px;opacity: 80%;">'+
+                  (i+1) +'. '+response.data.termsAndConditionsDetail[i].termsAndConditionsDetail
+                  '</div>';
+              }
 
             } else {
               Swal.fire({
