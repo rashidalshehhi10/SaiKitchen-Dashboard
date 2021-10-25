@@ -954,6 +954,22 @@ jQuery(document).ready(function() {
  
 
 
+
+              //  const handlby = document.getElementById('handledby');
+                var handledbyHTML = new Array();
+                handledbyHTML.push('<option value="">select</option>');
+                for ( var i = 0; i < response.data.length; i++) {
+             
+           
+            //   var m =response.data[0].inquiries[i][0];
+            handledbyHTML.push('<option value ="'+response.data[i].userId+'" >' + response.data[i].userName + '</option>');
+                }
+                document.getElementById('handledby').innerHTML = handledbyHTML.join(''); 
+
+
+                
+
+
             } else {
 
             }
