@@ -157,7 +157,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 this.api().columns().every(function() {
                     var column = this;
 
-                    switch (column.title()) {
+                   /*  switch (column.title()) {
                         // case 'Country':
                         // 	column.data().unique().sort().each(function(d, j) {
                         // 		$('.datatable-input[data-col-index="2"]').append('<option value="' + d + '">' + d + '</option>');
@@ -199,7 +199,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             // 		$('.datatable-input[data-col-index="7"]').append('<option value="' + d + '">' + status[d].title + '</option>');
                             // 	});
                             // 	break;
-                    }
+                    } */
                 });
                 //var allData = table.data();
             },

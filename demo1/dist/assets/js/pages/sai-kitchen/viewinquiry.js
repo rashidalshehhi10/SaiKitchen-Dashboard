@@ -31,6 +31,7 @@ let beforeInstallation=0;
 let afterDelivery=0;
 let isInstallment=false;
 var calcfile=new Array();
+var PromoCodeVal;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
    
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
@@ -94,7 +95,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                
                 console.log(measurementFile);
-         
+                var isPaid = false;
+                
                 var calc ='';
                 if(calcfile.length > 0)
                    calc = calcfile[0];
@@ -113,7 +115,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 afterDelivery: document.getElementById('txtAfterInstallation').value,
                 quotationFiles: measurementFile,
                 calculationSheetFile:calc,
+                isPaid:document.getElementById('testcheck').checked,
+                PromoCode:document.getElementById('txtPromoCode').value
                 };
+
                 const data = JSON.stringify(quotationModel);
                 console.log(data);
                 $.ajax({
@@ -170,7 +175,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             KTUtil.scrollTop();
                         });
                     }
-                });
+                });  
             })
             .on('core.form.invalid', function() {
                 Swal.fire({
@@ -212,7 +217,6 @@ jQuery(document).ready(function() {
             }
         }
     }
-
 
     const queryString = window.location.search;
     console.log(queryString);

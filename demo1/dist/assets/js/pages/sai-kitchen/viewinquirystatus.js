@@ -178,6 +178,18 @@ document.getElementById('txtPromoCode').value=inquiry.promo?.promoName;
 promoDiscount=inquiry.promoDiscount;
 promoId=inquiry.promoId;
 isMeasurementPromo=inquiry.isMeasurementPromo;
+var quotationAmount = 0;
+if(inquiry.quotations.length > 0){
+  document.getElementById("amountId").innerHTML = inquiry.quotations[0].totalAmount;
+  if(inquiry.quotations[0].payments.length > 0){
+   inquiry.quotations[0].payments.forEach(element => {
+     if(element.paymentStatusId ==4 || element.paymentStatusId ==8 ){
+      quotationAmount += element.paymentAmount/100;
+     }
+   });
+  }
+}
+
 if(inquiry.payments.length > 0)
   measurementFee=inquiry.payments[0].paymentAmount;
 const customerDetail = document.getElementById('customerDetail');
@@ -1326,7 +1338,9 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     <div class="card-header" >
                         <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
                             <i class="la fab la-codepen"></i>Quotation
+                            <span id="paidId"  style="float:right">Paid:`+quotationAmount+`</span>    
                         </div>
+                          
                     </div>
                     <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                     <div class="card-body" >

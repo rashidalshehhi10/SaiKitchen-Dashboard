@@ -32,6 +32,7 @@ let noOfInstallment=0;
 let beforeInstallation=0;
 let afterDelivery=0;
 let isInstallment=false;
+var PromoCodeVal = 0;
 var calcfile=new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
    
@@ -1933,6 +1934,7 @@ workscope.innerHTML=workscopeHtml;
            if(measurementFile.length > 0) 
                       file = measurementFile[0];
            console.log(measurementFile);
+           var isPaid =false;
            var quotationModel={
             inquiryId: parseInt( document.getElementById('inquiryId').innerHTML),
             quotationId: document.getElementById('quotationId').value,
@@ -1950,10 +1952,12 @@ workscope.innerHTML=workscopeHtml;
             quotationFiles: measurementFile,
             calculationSheetFile:calc,
             isEdit: document.getElementById("editmode").value,
+            isPaid:document.getElementById('testcheck').checked,
+            PromoCode:document.getElementById('txtPromoCode').value
             };
            const data = JSON.stringify(quotationModel);
            console.log(data);
-           $.ajax({
+            $.ajax({
                type: "Post",
                url: baseURL + '/Quotation/HeadAcceptQuotation',
                headers: {
@@ -2007,7 +2011,7 @@ workscope.innerHTML=workscopeHtml;
                        KTUtil.scrollTop();
                    });
                }
-           }); 
+           });  
        })
        .on('core.form.invalid', function() {
            Swal.fire({

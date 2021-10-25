@@ -799,7 +799,7 @@
                             <div class="col-lg-6">
                               <label>Promo Code:</label>
                               <div class="input-group">
-                                  <input type="text" id="txtPromoCode" class="form-control" placeholder="ABC123" readonly/>
+                                  <input type="text" id="txtPromoCode" class="form-control" placeholder="ABC123"/>
                               </div>
                               <span class="form-text text-muted"></span>
                           </div>
@@ -831,6 +831,18 @@
                               </div>
                               <span class="form-text text-muted">Advance Payment in % of Total Amount</span>
                            </div> 
+                           <div class="col-lg-6">
+                              <label id="lblpaid"></label>
+                              <div class="form-check form-switch">
+                                 <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> -->
+                                 <input class="form-check-input" type="checkbox" id="testcheck">
+                                 <label class="form-check-label" for="flexCheckChecked">
+                                      Paid
+                                 </label>
+                               </div>
+                           </div> 
+
+
                      </div>    
                     
                         <div class="form-group row" id="RowAfter" >
@@ -1176,6 +1188,7 @@
                 success: function(response) {
                     console.log(response);
                     if (response.isError == false) {
+                       var Paid=false;
                         document.getElementById("inquiryId").innerHTML = response.data.inquiryId;
                         document.getElementById("quotationId").value = response.data.quotations[0].quotationId;
                         if(response.data.isMeasurementPromo != null)
@@ -1190,8 +1203,11 @@
                         document.getElementById("txtProposalReferenceNumber").value = response.data.quotations[0].proposalReferenceNumber;
                         document.getElementById("txtAmount").value = response.data.quotations[0].amount;
                         document.getElementById("kt_datepicker_2").value = response.data.quotations[0].quotationValidityDate;
-                        //document.getElementById("txtPromoCode").value = response.data.quotations[0].quotationValidityDate; 
+                        document.getElementById("txtPromoCode").value = response.data.promo; 
                         document.getElementById("txtTotalAmount").value = response.data.quotations[0].totalAmount;
+                       Paid = response.data.quotations[0].isPaid;
+                       if (Paid==true)$('#testcheck').attr('checked', true) 
+
                         //$('#method').prop('disabled', 'disabled');
                         $('#txtdescription').prop('disabled', 'disabled');
                         $('#txtProposalReferenceNumber').prop('disabled', 'disabled');
@@ -1201,6 +1217,8 @@
                         $('#txtAdvancePayment').prop('disabled', 'disabled');
                         $('#txtBeforeInstallation').prop('disabled', 'disabled');
                         $('#txtAfterInstallation').prop('disabled', 'disabled');
+                        $('#testcheck').prop('disabled', 'disabled');
+                        $('#txtPromoCode').prop('disabled', 'disabled');
 
                         document.getElementById("divProposal").style.display ='none';
                         document.getElementById("divCalculation").style.display ='none';
@@ -1300,6 +1318,8 @@
             $('#instCnt').prop('disabled', false);
             $('#divProposal').show();
             $('#divCalculation').show();
+            $('#testcheck').prop('disabled', false);
+            $('#txtPromoCode').prop('disabled', false);
 
         }
       </script>
