@@ -1505,6 +1505,7 @@ License: You must have a valid license purchased only from themeforest(the above
          }
     </script>
 <script>
+    let user;
     function calloption(value){
         document.getElementById("paymentId").value = value;
     }
@@ -1842,11 +1843,25 @@ License: You must have a valid license purchased only from themeforest(the above
         }
     }
 
+    jQuery(document).ready(function() {
+
+    var login = localStorage.getItem("user");
+    if (login !== null) {
+        user = JSON.parse(login);
+        console.log(user);
+        permissions = user.data.userRoles[0].branchRole.permissionRoles;
+        console.log(permissions);
+    }
+   
+});
+ 
     function sendInvoice(){
+       
         document.getElementById("load").style.removeProperty('display');
         var paymentModeId = document.getElementById("method").value;
         var paymentId = document.getElementById("paymentId").value;
 		var payment={
+        "userId": user.data.userId,     
         "paymentId":paymentId,
         "paymentModeId":paymentModeId,
 		"files":measurementFile,
