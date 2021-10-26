@@ -148,6 +148,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                  var checklistdata = {
+                  "userId": user.data.userId,
 				"inquiryId":document.getElementById('inquiryId').value,
 				"factoryId": document.getElementById('kt_select_branch').value,
 				"jobOrderExpectedDeadline": document.getElementById('design_schedule_date').value, 

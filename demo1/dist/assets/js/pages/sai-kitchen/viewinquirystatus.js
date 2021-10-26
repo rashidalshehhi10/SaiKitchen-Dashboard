@@ -1338,7 +1338,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     <div class="card-header" >
                         <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
                             <i class="la fab la-codepen"></i>Quotation
-                            <span id="paidId"  style="float:right">Paid:`+quotationAmount+`</span>    
+                            <span id="paidId"  class="badge badge-default float-right">Paid:`+quotationAmount+`</span>    
                         </div>
                           
                     </div>

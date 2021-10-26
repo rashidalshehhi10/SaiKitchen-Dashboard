@@ -1678,6 +1678,7 @@ workscope.innerHTML=workscopeHtml;
 
     $('#kt_approve_inquiry_button').click(function () {
         var checklistdata = {
+            "userId": user.data.userId,
             "inquiryId":parseInt( document.getElementById('inquiryId').value),
             "reason": document.getElementById('CheckComment').value,
             "isSpecialApprovalRequired": $('input[name="IsSpecialApproval"]:checked').val(),
