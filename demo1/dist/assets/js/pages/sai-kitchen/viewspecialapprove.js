@@ -162,6 +162,8 @@ jQuery(document).ready(function() {
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
+               document.getElementById("appInquiryDescription").innerHTML=response.data.inquiry.inquiryDescription;
+               document.getElementById("rjInquiryDescription").innerHTML=response.data.inquiry.inquiryDescription;
                 response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
 var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
 console.log(inquiryWorkscopelength);
