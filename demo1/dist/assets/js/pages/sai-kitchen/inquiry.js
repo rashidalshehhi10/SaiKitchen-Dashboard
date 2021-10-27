@@ -8,7 +8,6 @@ import {
 } from './status.js'
 let user;
 var table;
-var y = new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -25,7 +24,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             // read more: https://datatables.net/examples/basic_init/dom.html
 
             lengthMenu: [5, 10, 25, 50],
-            start:1,
+
             pageLength: 10,
 
             language: {
@@ -36,13 +35,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             order: [
                 [0, 'desc']
             ],
-            //searching:true,
             searchDelay: 0,
             processing: true,
-            serverSide: true,
+            serverSide: false,
             ajax: {
-                //url: baseURL + '/Inquiry/GetInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
-                url: baseURL + '/Inquiry/GetPagingInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/Inquiry/GetInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
@@ -157,7 +154,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 this.api().columns().every(function() {
                     var column = this;
 
-                   /*  switch (column.title()) {
+                    switch (column.title()) {
                         // case 'Country':
                         // 	column.data().unique().sort().each(function(d, j) {
                         // 		$('.datatable-input[data-col-index="2"]').append('<option value="' + d + '">' + d + '</option>');
@@ -179,7 +176,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             var status = inqStatus;
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
-                                    $('.datatable-input[data-col-index="2"]').append('<option value="' + d + '">' + status[d].title + '</option>');
+                                    $('.datatable-input[data-col-index="2"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
                             });
                             break;
                         case 'Added By':
@@ -199,9 +196,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             // 		$('.datatable-input[data-col-index="7"]').append('<option value="' + d + '">' + status[d].title + '</option>');
                             // 	});
                             // 	break;
-                    } */
+                    }
                 });
-                //var allData = table.data();
             },
 
             columnDefs: [{
@@ -358,103 +354,115 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             }, 1000);
          });
          $('#MeasurementPending').on('click', function() {
-             table.column(2).search(1,true, false, true ).draw();
+             table.column(2).search('Measurement In-Progress',true, false, true ).draw();
              $('html, body').animate({
                  scrollTop: $("#kt_datatable").offset().top
              }, 1000);
           });
          $('#MeasurementDelayed').on('click', function() {
-            table.column(2).search(2,true, false, true).draw(); 
+            table.column(2).search('Measurement'+' '+'Delayed',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          }); 
          $('#MeasurementWaitingForApproval').on('click', function() {
-            table.column(2).search(9,true, false, true).draw(); 
+            table.column(2).search('Measurement'+' '+'Waiting'+' '+'For'+' '+'Approval',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });   
          $('#MeasurementRejected').on('click', function() {
-            table.column(2).search(8,true, false, true).draw();
+            table.column(2).search('Measurement'+' '+'Rejected',true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignPending').on('click', function() {
-            table.column(2).search(3,true, false, true).draw();
+            table.column(2).search('Design'+' '+'In-Progress',true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignDelayed').on('click', function() {
-            table.column(2).search(4,true, false, true).draw();  
+            table.column(2).search('Design'+' '+'Delayed',true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignWaitingForApproval').on('click', function() {
-            table.column(2).search(16,true, false, true).draw();
+            table.column(2).search('Design Waiting For Customer Approval',true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignRejected').on('click', function() {
-            table.column(2).search(11,true, false, true).draw();  
+            table.column(2).search('Design'+' '+'Rejected',true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationPending').on('click', function() {
-            table.column(2).search(5,true, false, true).draw();  
+            table.column(2).search('Quotation'+' '+'Pending',true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
              $('#QuotationDelayed').on('click', function() {
-            table.column(2).search(6,true, false, true).draw();  
+            table.column(2).search('Quotation'+' '+'Delayed',true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationWaitingForCustomerApproval').on('click', function() {
-            table.column(2).search(15,true, false, true).draw();
+            table.column(2).search('Quotation'+' '+'Waiting'+' '+'For'+' '+'Customer'+' '+'Approval',true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);   
          });
          $('#QuotationRejected').on('click', function() {
-            table.column(2).search(14,true, false, true).draw(); 
+            table.column(2).search('Quotation'+' '+'Rejected',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignRevisionRequested').on('click', function() {
-            table.column(2).search(56,true, false, true).draw(); 
+            table.column(2).search('Design Revision Requested',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationApproved').on('click', function() {
-            table.column(2).search(13,true, false, true).draw(); 
+            table.column(2).search('Quotation Approved',true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+         $('#JobOrderFactoryConfirmationPending').on('click', function() {
+            table.column(2).search('Job Order Factory Approval Pending',true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+         $('#JobOrderFactoryConfirmationRejected').on('click', function() {
+            table.column(2).search('Job Order Factory Rejected',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderInProgress').on('click', function() {
-            table.column(2).search(21,true, false, true).draw(); 
+            table.column(2).search('Job Order In-progress',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderDelayed').on('click', function() {
-            table.column(2).search(26,true, false, true).draw(); 
+            table.column(2).search('Job Order Delayed',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderCompleted').on('click', function() {
-            table.column(2).search(27,true, false, true).draw(); 
+            table.column(2).search('Job Order Completed',true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
@@ -468,7 +476,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             var val = $.fn.dataTable.util.escapeRegex(value);
             table.column(index).search(val ? val : '', false, true);
         };
- 
+
         $('#kt_search').on('click', function(e) {
             e.preventDefault();
             var params = {};
@@ -485,18 +493,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 table.column(i).search(val ? val : '', false, false);
             });
             table.table().draw();
-        }); 
+        });
 
-        /* $('#kt_search').click(function (e) {
-            //Apply search for Employee Name // DataTable column index 0
-           // oTable.columns(0).search($('#txtEmployeeName').val().trim());
-            //Apply search for Country // DataTable column index 3
-           // oTable.columns(3).search($('#ddCountry').val().trim());
-            //hit search on server
-            table.columns(0).search($('#inqId').val().trim());
-            e.preventDefault();
-            table.draw();
-        }); */
         $('#kt_reset').on('click', function(e) {
             e.preventDefault();
             $('.datatable-input').each(function() {
@@ -513,11 +511,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 rightArrow: '<i class="la la-angle-right"></i>',
             },
         });
-        
 
     };
 
-   
+
 
 
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
@@ -954,22 +951,6 @@ jQuery(document).ready(function() {
  
 
 
-
-              //  const handlby = document.getElementById('handledby');
-                var handledbyHTML = new Array();
-                handledbyHTML.push('<option value="">select</option>');
-                for ( var i = 0; i < response.data.length; i++) {
-             
-           
-            //   var m =response.data[0].inquiries[i][0];
-            handledbyHTML.push('<option value ="'+response.data[i].userId+'" >' + response.data[i].userName + '</option>');
-                }
-                document.getElementById('handledby').innerHTML = handledbyHTML.join(''); 
-
-
-                
-
-
             } else {
 
             }
@@ -979,6 +960,9 @@ jQuery(document).ready(function() {
 
         }
     });
+
+    KTDatatablesSearchOptionsAdvancedSearch.init();
+    
     $.ajax({
 		type: "Post",
 		url: baseURL + '/Inquiry/GetinquiryStatusByBranch',
@@ -995,10 +979,7 @@ jQuery(document).ready(function() {
 		success: function (response) {
 			console.log(response);
 
-    
-
-
-
+         //   const data1 = JSON.stringify(response.data);
 
             
              document.getElementById('a').innerHTML=response.data[0].inquiries[0][0].inquiryCount;
@@ -1035,23 +1016,12 @@ jQuery(document).ready(function() {
 
              document.getElementById('q').innerHTML=response.data[0].inquiries[26][0].inquiryCount;
 
+
+             document.getElementById('s').innerHTML=response.data[0].inquiries[45][0].inquiryCount;
+             
+             document.getElementById('t').innerHTML=response.data[0].inquiries[47][0].inquiryCount;
+             
              document.getElementById('r').innerHTML=  response.data[0].totalinquiries;
-
-           
-         
-
-          const statusFilter = document.getElementById('selectfilter');
-                 var statusFilterHTML = new Array();
-                 statusFilterHTML.push('<option value="">select</option>');
-                 for ( var i = 0; i < response.data[0].inquiries.length; i++) {
-              
-            
-                var m =response.data[0].inquiries[i][0];
-                     statusFilterHTML.push('<option value ="'+m.inquiryStatusId+'" >' + m.inquiryStatusName + '</option>');
-                 }
-                 document.getElementById('selectfilter').innerHTML = statusFilterHTML.join(''); 
-
-
 
 
 		},
@@ -1059,12 +1029,7 @@ jQuery(document).ready(function() {
 
 		}
 	});
-
-    KTDatatablesSearchOptionsAdvancedSearch.init();
 });
-
-
-
 
 $('#kt_managedby_button').click(function () {
     var checklistdata = {
