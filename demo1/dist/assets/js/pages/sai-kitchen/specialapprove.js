@@ -172,10 +172,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     </a>
                     `;
                     action += `
-                            <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+                            <a type="button"  onclick="addComponent(` + full.inquiryId +`,'`+full.inquiryDescription+ `');" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
 								<i class="la la-thumbs-up"></i>
 							</a>
-                            <a type="button" onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
+                            <a type="button" onclick="addComponent(` + full.inquiryId +`,'`+full.inquiryDescription+ `');" data-toggle="modal" data-target="#measurementScheduleDate" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Rejected">
 								<i class="la la-thumbs-down"></i>
 							</a>
 						`;
