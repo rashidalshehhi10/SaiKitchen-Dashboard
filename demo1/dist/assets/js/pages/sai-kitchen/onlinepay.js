@@ -158,6 +158,22 @@ jQuery(document).ready( function () {
    
         } else {
           // The payment succeeded!
+          //add payment
+                $.ajax({
+                  type: "post",
+                  url: baseURL + '/Payment/AddPaymentByPaymentId?paymentId=' + paymentId,
+                  success: function(response) {
+                        console.log(response);
+                        if (response.isError == false) {
+           
+                        } else {
+            
+                    }
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    
+                  }
+              });
               document.getElementById("load").style.display = 'none';
               orderComplete(result.paymentIntent.id);
               
