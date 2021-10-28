@@ -99,8 +99,7 @@ jQuery(document).ready( function () {
                             try{
               secret = response.data;
               console.log(response.data);
-              
-               payWithCard(stripe, card, secret);
+              payWithCard(stripe, card, secret);
             }catch(Exception ){
 
             }
@@ -159,9 +158,18 @@ jQuery(document).ready( function () {
         } else {
           // The payment succeeded!
           //add payment
+          var apprvObj={
+            "paymentId": paymentId,
+            "paymentIntentToken":result.paymentIntent.id,
+            "clientSecret":result.paymentIntent.client_secret,
+            "PaymentMethod":result.paymentIntent.payment_method,
+            "SelectedPaymentMode":4,
+          }
+          const data = JSON.stringify(apprvObj);
                 $.ajax({
                   type: "post",
-                  url: baseURL + '/Payment/AddPaymentByPaymentId?paymentId=' + paymentId,
+                  url: baseURL + '/Payment/AddPaymentByPaymentId' ,
+                  data:data,
                   success: function(response) {
                         console.log(response);
                         if (response.isError == false) {
@@ -193,6 +201,7 @@ jQuery(document).ready( function () {
         "href",
         "https://dashboard.stripe.com/test/payments/" + paymentIntentId
       );
+      $('#msg').modal('show');
     // document.querySelector(".result-message").classList.remove("hidden");
     //document.querySelector("button").disabled = true;
   };
