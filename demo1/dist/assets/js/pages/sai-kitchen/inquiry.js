@@ -234,7 +234,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 								<i class="la la-calendar"></i>
 							</a>
 						`;    }
-                        if(full.status==3 || full.status==4 || full.status==11 || full.status==39 ||full.status==40 || full.status==41) {
+                        if(full.status==3 || full.status==4 || full.status==11 || full.status==39 ||full.status==40 || full.status==41 || full.status==56) {
                             action += `
                            <a type="button" style="background-color:#734f43;margin:2px" onclick="setInquiryId(` + full.inquiryId + `,2)" data-toggle="modal" data-target="#ScheduleDate" class="btn btn-sm btn-clean btn-icon" title="Re-Schedule">
                                <i class="la la-calendar"></i>
