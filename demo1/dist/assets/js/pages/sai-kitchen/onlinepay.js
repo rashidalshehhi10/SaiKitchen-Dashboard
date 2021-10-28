@@ -89,7 +89,7 @@ jQuery(document).ready( function () {
           document.getElementById("load").style.removeProperty('display');
           $.ajax({
             type: "post",
-            url:  baseURL +'/Quotation/stripe?inquiryId=' + inquiryId,
+            url:  baseURL +'/Quotation/stripeByPaymentId?paymentId=' + paymentId,
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
