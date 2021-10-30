@@ -601,6 +601,18 @@
  
       
     <div id="measurementFiles" style="display: none;"></div>
+    <div id="designFiles" style="display: none;"></div>
+    <div id="quotationFiles" style="display: none;"></div>
+    <div id="calculationFiles" style="display: none;"></div>
+    <div id="mepFiles" style="display: none;"></div>
+    <div id="materialFiles" style="display: none;"></div>
+    <div id="dataFiles" style="display: none;"></div>
+    <div id="jobFiles" style="display: none;"></div>
+    <div id="detailFiles" style="display: none;"></div>
+    <div id="advanceFiles" style="display: none;"></div>
+    <div id="beforeFiles" style="display: none;"></div>
+    <div id="afterFiles" style="display: none;"></div>
+    <div id="installFiles" style="display: none;"></div>
    
 
       <!--begin::Scrolltop-->
@@ -722,8 +734,8 @@
          }
          
   
-         function downloadItems() {
-                var mfiles = document.getElementById("measurementFiles").innerText;
+         function downloadItems(id) {
+                var mfiles = document.getElementById(id).innerText;
                 var arrfiles = mfiles.split(',');
                 if(arrfiles.length==0){
                   return;
