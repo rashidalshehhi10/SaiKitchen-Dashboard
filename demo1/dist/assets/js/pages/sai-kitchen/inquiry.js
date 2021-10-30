@@ -206,6 +206,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     orderable: false,
                     render: function(data, type, full, meta) {
                         var action = ``;
+                        if(full.payments.length>0){
+                        action += `\<a  href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setSelectedCheque(` + full.inquiryId + `)"  data-toggle="modal" data-target="#chequepayment"  class="btn btn-sm btn-clean btn-icon" title="Cheque Payment">
+                            <i class="la la-money""></i>\
+                            </a>\
+                            `;
+                        }
                         action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewinquirystatus.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
                         <i class="la la-ellipsis-h"></i>\
                         </a>\
@@ -1410,6 +1416,26 @@ $('#kt_factor_button').click(function () {
             'Access-Control-Allow-Origin': '*',
         },
         data: data,
+        success: function(response) {
+            console.log(response);
+ 
+            window.location.replace("inquiry.html");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            
+        }
+    });
+});
+$('#kt_cheque_button').click(function () {
+   
+    $.ajax({
+        type: "Post",
+        url: baseURL + '/Payment/PaymentRecieveAmount?paymentId='+parseInt(document.getElementById('kt_select_cheque').value),
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'Access-Control-Allow-Origin': '*',
+        },
         success: function(response) {
             console.log(response);
  
