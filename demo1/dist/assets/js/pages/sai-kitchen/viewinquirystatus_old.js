@@ -120,8 +120,6 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
 var branchTypeId;
 
-var filesForDownload = [];
-
 // Class Initialization
 jQuery(document).ready(function() {
 	var login = localStorage.getItem("user");
@@ -138,37 +136,6 @@ jQuery(document).ready(function() {
         }
     }
 
-    
-   //  function download_files() {
-   //    function download_next(i) {
-   //      if (i >= element.measurements[0].files.length) {
-   //        return;
-   //      }
-   //      var a = document.createElement('a');
-   //      a.href = files[i].download;
-   //      a.target = '_parent';
-   //      // Use a.download if available, it prevents plugins from opening.
-   //      if ('download' in a) {
-   //        a.download = files[i].filename;
-   //      }
-   //      // Add a to the doc for click to work.
-   //      (document.body || document.documentElement).appendChild(a);
-   //      if (a.click) {
-   //        a.click(); // The click method is supported by most browsers.
-   //      } else {
-   //        $(a).click(); // Backup using jquery
-   //      }
-   //      // Delete the temporary link.
-   //      a.parentNode.removeChild(a);
-   //      // Download the next file with a small timeout. The timeout is necessary
-   //      // for IE, which will otherwise only download the first file.
-   //      setTimeout(function() {
-   //        download_next(i + 1);
-   //      }, 500);
-   //    }
-   //    // Initiate the first download.
-   //    download_next(0);
-   //  }
 
     const queryString = window.location.search;
     console.log(queryString);
@@ -222,9 +189,6 @@ if(inquiry.quotations.length > 0){
    });
   }
 }
-
-
-
 
 if(inquiry.payments.length > 0)
   measurementFee=inquiry.payments[0].paymentAmount;
@@ -466,14 +430,11 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
     }
     if(counter == 0 & element.measurements.length > 0){
     element.measurements[0].files.forEach(element => {
-      document.getElementById("measurementFiles").innerHTML += element.fileUrl+',';
-       
         if( dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]==null){
             dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]=``;
         }
         if(element.fileContentType=='mp4'){
             var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
-            //document.getElementById("measurementFiles").innerHTML += videoUrl+',';
             dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
                 <!--begin::Col-->
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -493,7 +454,6 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 <!--end::Col-->`;
         }else if(element.fileContentType=='pdf'){
             var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
-           // document.getElementById("measurementFiles").innerHTML += baseFileURL+element.fileUrl+',';
             dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
             <!--begin::Col-->
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -511,10 +471,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                <!--end:: Card-->
             </div>
             <!--end::Col-->`;
-         
-
         }else{
-         //document.getElementById("measurementFiles").innerHTML += baseFileURL+element.fileUrl+',';
         dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
             <!--begin::Col-->
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -533,18 +490,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             </div>
             <!--end::Col-->`;
         }
-
-// added to download multiple files
-//  var m = response.data.inquiry.inquiryWorkscopes[0].measurements[0];
-//  var s = m.files[0].fileUrl;
-
-//
-
         });
-
-      
-      
-
       }
       if(counter == 0 & element.designs.length > 0){
         element.designs[0].files.forEach(element => {
@@ -1424,27 +1370,12 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   </div>
                </div>`;
                 //}
-                
-
-            
-               var m = response.data.inquiry.inquiryWorkscopes[0].measurements[0];
-              // var s = m.files[0].fileUrl;
-               var s = m.files;
-                  
-                 
-                  
-
-
-        
-               let measur ='';
+                let measur ='';
                 //if(element.measurements.length > 0){
                   measur = `<div class="card">
                   <div class="card-header" >
                      <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
-                        <i class="la la-ruler-combined"></i>Measurement<span class="w-25 p-3 bi bi-download" id="k" onclick="downloadItems();"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                      </svg></span>
+                        <i class="la la-ruler-combined"></i>Measurement
                      </div>
                   </div>
                   <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1455,11 +1386,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                         </div>
                   </div>
                </div>`;
-             
-               
-              
-            
-               
+                //}
                 tabsHTML+=`
                 <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
                 <!--begin::Accordion-->
@@ -1471,7 +1398,6 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 </div>
                 <!--end::Accordion-->
              </div>`;
-             
             
             }else{
                let Advance='';let Before='';let After='';let Install='';
@@ -1797,7 +1723,7 @@ workscope.innerHTML=workscopeHtml;
     });
 
 
-    
+
 
 
 

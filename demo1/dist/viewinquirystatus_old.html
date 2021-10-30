@@ -14,7 +14,6 @@
 <html lang="en">
    <!--begin::Head-->
    <head>
-      <meta http-equiv="content-type" content="application/octet-stream">
       <base href="">
       <meta charset="utf-8" />
       <title>Sai Kitchen & Wardrobes</title>
@@ -252,7 +251,7 @@
                                  <!--begin::Card-->
                                  <div class="card card-custom" id="inquiryDetail">
                                     <div class="card-header card-header-tabs-line">
-                                       <div class="">
+                                       <div class="card-toolbar">
                                           <ul class="nav nav-tabs nav-bold nav-tabs-line" id="workscopedetail">
                                              <!-- <li class="nav-item">
                                                 <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1_4">
@@ -599,8 +598,8 @@
       <!--end::Chat Panel-->
   
  
-      
-    <div id="measurementFiles" style="display: none;"></div>
+   
+    
    
 
       <!--begin::Scrolltop-->
@@ -721,40 +720,6 @@
              });
          }
          
-  
-         function downloadItems() {
-                var mfiles = document.getElementById("measurementFiles").innerText;
-                var arrfiles = mfiles.split(',');
-                if(arrfiles.length==0){
-                  return;
-                }
-                var filesForDownload = [];
-                for(var i=0;i<=arrfiles.length-2;i++){
-                  filesForDownload.push([arrfiles[i],'file'+i])
-                }
-
-    var temporaryDownloadLink = document.createElement("a");
-    temporaryDownloadLink.style.display = 'none';
-
-    document.body.appendChild( temporaryDownloadLink );
-
-    for( var n = 0; n < filesForDownload.length; n++ )
-    {
-        var download = filesForDownload[n];
-        temporaryDownloadLink.setAttribute( 'href', '/files/'+download[0]);
-        temporaryDownloadLink.setAttribute( 'download', download[0] );
-        temporaryDownloadLink.setAttribute( 'target', '_blank' );
-
-        temporaryDownloadLink.click();
-    }
-
-    document.body.removeChild( temporaryDownloadLink );
-// } );
-
-
-
-
-                     }
          
          function notifyMe() {
              // Let's check if the browser supports notifications
@@ -783,10 +748,6 @@
              // want to be respectful there is no need to bother them any more.
          }
          
-         
-         
-
-
          function logoutUser(user) {
          
              // alert('hi ' + branchRoleId);
