@@ -374,11 +374,14 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
    }
    if(counter == 0 & element.measurements.length > 0){
    element.measurements[0].files.forEach(element => {
+     document.getElementById("measurementFiles").innerHTML += element.fileUrl+',';
+      
        if( dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]==null){
            dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]=``;
        }
        if(element.fileContentType=='mp4'){
            var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
+           //document.getElementById("measurementFiles").innerHTML += videoUrl+',';
            dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
                <!--begin::Col-->
                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -398,6 +401,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                <!--end::Col-->`;
        }else if(element.fileContentType=='pdf'){
            var videoUrl="https://player.vimeo.com/video/"+element.fileUrl;
+          // document.getElementById("measurementFiles").innerHTML += baseFileURL+element.fileUrl+',';
            dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
            <!--begin::Col-->
            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -415,7 +419,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
               <!--end:: Card-->
            </div>
            <!--end::Col-->`;
+        
+
        }else{
+        //document.getElementById("measurementFiles").innerHTML += baseFileURL+element.fileUrl+',';
        dicMeasurement["measurementRow"+response.data.inquiry.inquiryId] +=`
            <!--begin::Col-->
            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -434,10 +441,22 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
            </div>
            <!--end::Col-->`;
        }
+
+// added to download multiple files
+//  var m = response.data.inquiry.inquiryWorkscopes[0].measurements[0];
+//  var s = m.files[0].fileUrl;
+
+//
+
        });
+
+     
+     
+
      }
      if(counter == 0 & element.designs.length > 0){
        element.designs[0].files.forEach(element => {
+        document.getElementById("designFiles").innerHTML += element.fileUrl+',';
            if(   dicDesign["DesignRow"+response.data.inquiry.inquiryId]==null){
                dicDesign["DesignRow"+response.data.inquiry.inquiryId]=``;
            }
@@ -483,6 +502,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
   }
    if(counter == 0 & response.data.inquiry.quotations.length > 0){
      response.data.inquiry.quotations[0].files.forEach(element => {
+        document.getElementById("quotationFiles").innerHTML += element.fileUrl+',';
        if(   dicQuot["QuotRow"+response.data.inquiry.inquiryId]==null){
            dicQuot["QuotRow"+response.data.inquiry.inquiryId]=``;
        }
@@ -533,6 +553,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
            dicCALC["dicCALC"+response.data.inquiry.inquiryId]=``;
         }
        if(calculationSheetFile[0].calculationSheetFile != null){
+        document.getElementById("calculationFiles").innerHTML += calculationSheetFile[0].calculationSheetFile+',';
         var fileExtension = calculationSheetFile[0].calculationSheetFile.substr((calculationSheetFile[0].calculationSheetFile.lastIndexOf('.') + 1));
         if(fileExtension == 'mp4') {
            var videoUrl="https://player.vimeo.com/video/"+calculationSheetFile[0].calculationSheetFile;
@@ -599,6 +620,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
            dicMEP["dicMEP"+response.data.inquiry.inquiryId]=``;
         }
        if(jobOrder[0].mepdrawingFileUrl !=""){
+        document.getElementById("mepFiles").innerHTML += jobOrder[0].mepdrawingFileUrl+',';
         var fileExtension = jobOrder[0].mepdrawingFileUrl.substr((jobOrder[0].mepdrawingFileUrl.lastIndexOf('.') + 1));
         if(fileExtension == 'mp4') {
            var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].mepdrawingFileUrl;
@@ -662,6 +684,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                dicMaterial["dicMaterial"+response.data.inquiry.inquiryId]=``;
            }
            if(jobOrder[0].materialSheetFileUrl !=""){
+              document.getElementById("materialFiles").innerHTML += jobOrder[0].materialSheetFileUrl+',';
               var fileExtension = jobOrder[0].materialSheetFileUrl.substr((jobOrder[0].materialSheetFileUrl.lastIndexOf('.') + 1));
               if(fileExtension == 'mp4') {
                  var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].materialSheetFileUrl;
@@ -724,6 +747,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    dicDatasheet["dicDatasheet"+response.data.inquiry.inquiryId]=``;
                }
                if(jobOrder[0].dataSheetApplianceFileUrl !=""){
+                 document.getElementById("dataFiles").innerHTML += jobOrder[0].dataSheetApplianceFileUrl+',';
                  var fileExtension = jobOrder[0].dataSheetApplianceFileUrl.substr((jobOrder[0].dataSheetApplianceFileUrl.lastIndexOf('.') + 1));
                  if(fileExtension == 'mp4') {
                     var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].dataSheetApplianceFileUrl;
@@ -786,6 +810,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        dicJoborder["dicJoborder"+response.data.inquiry.inquiryId]=``;
                    }
                    if(jobOrder[0].jobOrderChecklistFileUrl !="" && jobOrder[0].jobOrderChecklistFileUrl !=null){
+                    document.getElementById("jobFiles").innerHTML += jobOrder[0].jobOrderChecklistFileUrl+',';
                     var fileExtension = jobOrder[0].jobOrderChecklistFileUrl.substr((jobOrder[0].jobOrderChecklistFileUrl.lastIndexOf('.') + 1));
                     if(fileExtension == 'mp4') {
                        var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].jobOrderChecklistFileUrl;
@@ -848,6 +873,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     dicDetailed["dicDetailed"+response.data.inquiry.inquiryId]=``;
                 }
                 if(jobOrder[0].detailedDesignFile !="" && jobOrder[0].detailedDesignFile !=null){
+                 document.getElementById("detailFiles").innerHTML += jobOrder[0].detailedDesignFile+',';
                  var fileExtension = jobOrder[0].detailedDesignFile.substr((jobOrder[0].detailedDesignFile.lastIndexOf('.') + 1));
                  if(fileExtension == 'mp4') {
                     var videoUrl="https://player.vimeo.com/video/"+jobOrder[0].detailedDesignFile;
@@ -913,7 +939,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
      response.data.inquiry.quotations[0].payments.forEach(payment => {
         if(payment.paymentTypeId == 2){
       payment.files.forEach(element => {
-      
+        document.getElementById("advanceFiles").innerHTML += element.fileUrl+',';
          if(   dicAdvance["dicAdvance"+response.data.inquiry.inquiryId]==null){
             dicAdvance["dicAdvance"+response.data.inquiry.inquiryId]=``;
          }
@@ -960,7 +986,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
          }
          if(payment.paymentTypeId == 3){
            payment.files.forEach(element => {
-           
+              document.getElementById("beforeFiles").innerHTML += element.fileUrl+',';
               if(   dicBefore["dicBefore"+response.data.inquiry.inquiryId]==null){
                  dicBefore["dicBefore"+response.data.inquiry.inquiryId]=``;
               }
@@ -1007,7 +1033,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
            }
            if(payment.paymentTypeId == 4){
               payment.files.forEach(element => {
-              
+                 document.getElementById("afterFiles").innerHTML += element.fileUrl+',';
                  if(   dicAfter["dicAfter"+response.data.inquiry.inquiryId]==null){
                     dicAfter["dicAfter"+response.data.inquiry.inquiryId]=``;
                  }
@@ -1054,7 +1080,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
               }
               if(payment.paymentTypeId == 5){
                  payment.files.forEach(element => {
-                 
+                    document.getElementById("installFiles").innerHTML += element.fileUrl+',';
                     if(   dicInstall["dicInstall"+response.data.inquiry.inquiryId]==null){
                        dicInstall["dicInstall"+response.data.inquiry.inquiryId]=``;
                     }
@@ -1115,7 +1141,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  <div class="card">
                   <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAdvance`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i>Advance Payment
+                          <i class="la fab la-codepen"></i>Advance Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('advanceFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg></span>
                       </div>
                   </div>
                   <div id="dicAdvance`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1133,7 +1162,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  <div class="card">
                   <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicBefore`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i>Before Installation Payment
+                          <i class="la fab la-codepen"></i>Before Installation Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('beforeFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg></span>
                       </div>
                   </div>
                   <div id="dicBefore`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1151,7 +1183,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  <div class="card">
                   <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAfter`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i>After Delivery Payment
+                          <i class="la fab la-codepen"></i>After Delivery Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('afterFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg></span>
                       </div>
                   </div>
                   <div id="dicAfter`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1169,7 +1204,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  <div class="card">
                   <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicInstall`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i>Installment Payment
+                          <i class="la fab la-codepen"></i>Installment Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('installFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg></span>
                       </div>
                   </div>
                   <div id="dicInstall`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1190,7 +1228,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   collect =`<div class="card">
                   <div class="card-header" >
                      <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMEP`+element.inquiryWorkscopeId+`">
-                        <i class="la fab la-codepen"></i>MEP Drawing
+                        <i class="la fab la-codepen"></i>MEP Drawing<span class="badge badge-default bi-download" id="k" onclick="downloadItems('mepFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                      </svg></span>
                      </div>
                   </div>
                   <div id="dicMEP`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1204,7 +1245,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    `<div class="card">
                    <div class="card-header" >
                    <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMaterial`+element.inquiryWorkscopeId+`">
-                       <i class="la fab la-codepen"></i> Material sheet
+                       <i class="la fab la-codepen"></i> Material sheet<span class="badge badge-default bi-download" id="k" onclick="downloadItems('materialFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                       <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                     </svg></span>
                    </div>
                    </div>
                    <div id="dicMaterial`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1218,7 +1262,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   +` <div class="card">
                   <div class="card-header" >
                      <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDatasheet`+element.inquiryWorkscopeId+`">
-                        <i class="la fab la-codepen"></i> Data sheet appliances
+                        <i class="la fab la-codepen"></i> Data sheet appliances<span class="badge badge-default bi-download" id="k" onclick="downloadItems('dataFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                      </svg></span>
                      </div>
                   </div>
                   <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1231,7 +1278,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                </div>`+` <div class="card">
                <div class="card-header" >
                   <div class="card-title collapsed" data-toggle="collapse" data-target="#dicJoborder`+element.inquiryWorkscopeId+`">
-                     <i class="la fab la-codepen"></i> Job order checklist file
+                     <i class="la fab la-codepen"></i> Job order checklist file<span class="badge badge-default bi-download" id="k" onclick="downloadItems('jobFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                     <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                   </svg></span>
                   </div>
                </div>
                <div id="dicJoborder`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1244,7 +1294,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             </div>`+` <div class="card">
             <div class="card-header" >
                <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDetailed`+element.inquiryWorkscopeId+`">
-                  <i class="la fab la-codepen"></i> Detailed Design File
+                  <i class="la fab la-codepen"></i> Detailed Design File<span class="badge badge-default bi-download" id="k" onclick="downloadItems('detailFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg></span>
                </div>
             </div>
             <div id="dicDetailed`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1262,7 +1315,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    <div class="card">
                       <div class="card-header" >
                          <div class="card-title collapsed" data-toggle="collapse" data-target="#dicCALC`+element.inquiryWorkscopeId+`">
-                            <i class="la fab la-codepen"></i>Calculation SheetFile
+                            <i class="la fab la-codepen"></i>Calculation SheetFile<span class="badge badge-default bi-download" id="k" onclick="downloadItems('calculationFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                          </svg></span>
                          </div>
                       </div>
                       <div id="dicCALC`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1281,8 +1337,13 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   <div class="card">
                    <div class="card-header" >
                        <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
-                           <i class="la fab la-codepen"></i>Quotation
+                           <i class="la fab la-codepen"></i>Quotation<span class="badge badge-default bi-download" id="k" onclick="downloadItems('quotationFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                         </svg></span>
+                               
                        </div>
+                         
                    </div>
                    <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
                    <div class="card-body" >
@@ -1300,7 +1361,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  `<div class="card">
                  <div class="card-header" >
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
-                       <i class="la fab la-codepen"></i>Design
+                       <i class="la fab la-codepen"></i>Design<span class="badge badge-default bi-download" id="k" onclick="downloadItems('designFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                       <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                     </svg></span>
                     </div>
                  </div>
                  <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1312,12 +1376,27 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  </div>
               </div>`;
                //}
-               let measur ='';
+               
+
+           
+              var m = response.data.inquiry.inquiryWorkscopes[0].measurements[0];
+             // var s = m.files[0].fileUrl;
+              var s = m.files;
+                 
+                
+                 
+
+
+       
+              let measur ='';
                //if(element.measurements.length > 0){
                  measur = `<div class="card">
                  <div class="card-header" >
                     <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
-                       <i class="la la-ruler-combined"></i>Measurement
+                       <i class="la la-ruler-combined"></i>Measurement<span class="badge badge-default bi-download" id="k" onclick="downloadItems('measurementFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                       <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                     </svg></span>
                     </div>
                  </div>
                  <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1328,7 +1407,11 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        </div>
                  </div>
               </div>`;
-               //}
+            
+              
+             
+           
+              
                tabsHTML+=`
                <div class="tab-pane fade show active" id="workscope`+element.workscopeId+`" role="tabpanel" aria-labelledby="workscope`+element.workscopeId+`">
                <!--begin::Accordion-->
@@ -1340,6 +1423,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                </div>
                <!--end::Accordion-->
             </div>`;
+            
            
            }else{
               let Advance='';let Before='';let After='';let Install='';
@@ -1351,7 +1435,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  <div class="card">
                   <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAdvance`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i>Advance Payment
+                          <i class="la fab la-codepen"></i>Advance Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('advanceFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg></span>
                       </div>
                   </div>
                   <div id="dicAdvance`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1369,7 +1456,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  <div class="card">
                   <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicBefore`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i>Before Installation Payment
+                          <i class="la fab la-codepen"></i>Before Installation Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('beforeFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg></span>
                       </div>
                   </div>
                   <div id="dicBefore`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1387,7 +1477,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  <div class="card">
                   <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAfter`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i>After Delivery Payment
+                          <i class="la fab la-codepen"></i>After Delivery Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('afterFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg></span>
                       </div>
                   </div>
                   <div id="dicAfter`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1405,7 +1498,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  <div class="card">
                   <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicInstall`+element.inquiryWorkscopeId+`">
-                          <i class="la fab la-codepen"></i>Installment Payment
+                          <i class="la fab la-codepen"></i>Installment Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('installFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg></span>
                       </div>
                   </div>
                   <div id="dicInstall`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1426,7 +1522,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    <div class="card">
                       <div class="card-header" >
                          <div class="card-title collapsed" data-toggle="collapse" data-target="#dicCALC`+element.inquiryWorkscopeId+`">
-                            <i class="la fab la-codepen"></i>Calculation SheetFile
+                            <i class="la fab la-codepen"></i>Calculation SheetFile<span class="badge badge-default bi-download" id="k" onclick="downloadItems('calculationFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                          </svg></span>
                          </div>
                       </div>
                       <div id="dicCALC`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1445,7 +1544,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    <div class="card">
                       <div class="card-header" >
                          <div class="card-title collapsed" data-toggle="collapse" data-target="#quotRow`+element.inquiryWorkscopeId+`">
-                            <i class="la fab la-codepen"></i>Quotation
+                            <i class="la fab la-codepen"></i>Quotation<span class="badge badge-default bi-download" id="k" onclick="downloadItems('quotationFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                          </svg></span>
                          </div>
                       </div>
                       <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1463,7 +1565,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    collect =`<div class="card">
                    <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMEP`+element.inquiryWorkscopeId+`">
-                         <i class="la fab la-codepen"></i>MEP Drawing
+                         <i class="la fab la-codepen"></i>MEP Drawing<span class="badge badge-default bi-download" id="k" onclick="downloadItems('mepFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                       </svg></span>
                       </div>
                    </div>
                    <div id="dicMEP`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1477,7 +1582,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     `<div class="card">
                     <div class="card-header" >
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#dicMaterial`+element.inquiryWorkscopeId+`">
-                        <i class="la fab la-codepen"></i> Material sheet
+                        <i class="la fab la-codepen"></i> Material sheet<span class="badge badge-default bi-download" id="k" onclick="downloadItems('materialFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                      </svg></span>
                     </div>
                     </div>
                     <div id="dicMaterial`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1491,7 +1599,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    +` <div class="card">
                    <div class="card-header" >
                       <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDatasheet`+element.inquiryWorkscopeId+`">
-                         <i class="la fab la-codepen"></i> Data sheet appliances
+                         <i class="la fab la-codepen"></i> Data sheet appliances<span class="badge badge-default bi-download" id="k" onclick="downloadItems('dataFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                       </svg></span>
                       </div>
                    </div>
                    <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1504,7 +1615,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 </div>`+` <div class="card">
                 <div class="card-header" >
                    <div class="card-title collapsed" data-toggle="collapse" data-target="#dicJoborder`+element.inquiryWorkscopeId+`">
-                      <i class="la fab la-codepen"></i> Job order checklist file
+                      <i class="la fab la-codepen"></i> Job order checklist file<span class="badge badge-default bi-download" id="k" onclick="downloadItems('jobFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg></span>
                    </div>
                 </div>
                 <div id="dicJoborder`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1517,7 +1631,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
              </div>`+` <div class="card">
              <div class="card-header" >
                 <div class="card-title collapsed" data-toggle="collapse" data-target="#dicDetailed`+element.inquiryWorkscopeId+`">
-                   <i class="la fab la-codepen"></i> Detailed Design File
+                   <i class="la fab la-codepen"></i> Detailed Design File<span class="badge badge-default bi-download" id="k" onclick="downloadItems('detailFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                   <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                   <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                 </svg></span>
                 </div>
              </div>
              <div id="dicDetailed`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1535,7 +1652,10 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   `<div class="card">
                   <div class="card-header" >
                      <div class="card-title collapsed" data-toggle="collapse" data-target="#designRow`+element.inquiryWorkscopeId+`">
-                        <i class="la fab la-codepen"></i>Design
+                        <i class="la fab la-codepen"></i>Design<span class="badge badge-default bi-download" id="k" onclick="downloadItems('designFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                      </svg></span>
                      </div>
                   </div>
                   <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1551,8 +1671,11 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
               // if(element.measurements.length > 0){
                  measur = `<div class="card">
                  <div class="card-header" >
-                    <div class="card-title" data-toggle="collapse" data-target="#measurementRow`+element.inquiryWorkscopeId+`">
-                       <i class="la la-ruler-combined"></i>Measurement
+                    <div class="card-title" data-toggle="collapse"  data-target="#measurementRow`+element.inquiryWorkscopeId+`">
+                    <i class="la la-ruler-combined"></i>Measurement<span class="badge badge-default bi-download" id="k" onclick="downloadItems('measurementFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                  </svg></span>
                     </div>
                  </div>
                  <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">

@@ -1426,23 +1426,3 @@ $('#kt_factor_button').click(function () {
         }
     });
 });
-$('#kt_cheque_button').click(function () {
-   
-    $.ajax({
-        type: "Post",
-        url: baseURL + '/Payment/PaymentRecieveAmount?paymentId='+parseInt(document.getElementById('kt_select_cheque').value),
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
-            'Access-Control-Allow-Origin': '*',
-        },
-        success: function(response) {
-            console.log(response);
- 
-            window.location.replace("inquiry.html");
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            
-        }
-    });
-});

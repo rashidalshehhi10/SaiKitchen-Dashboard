@@ -654,7 +654,19 @@
      </div>
     
    
-
+     <div id="measurementFiles" style="display: none;"></div>
+     <div id="designFiles" style="display: none;"></div>
+     <div id="quotationFiles" style="display: none;"></div>
+     <div id="calculationFiles" style="display: none;"></div>
+     <div id="mepFiles" style="display: none;"></div>
+     <div id="materialFiles" style="display: none;"></div>
+     <div id="dataFiles" style="display: none;"></div>
+     <div id="jobFiles" style="display: none;"></div>
+     <div id="detailFiles" style="display: none;"></div>
+     <div id="advanceFiles" style="display: none;"></div>
+     <div id="beforeFiles" style="display: none;"></div>
+     <div id="afterFiles" style="display: none;"></div>
+     <div id="installFiles" style="display: none;"></div>
       <!--begin::Scrolltop-->
       <div id="kt_scrolltop" class="scrolltop">
       </div>
@@ -849,7 +861,56 @@
                  },
              });
          }
-         
+         function downloadItems(id) {
+                var mfiles = document.getElementById(id).innerText;
+                var arrfiles = mfiles.split(',');
+                if(arrfiles.length==0){
+                  return;
+                }
+                var filesForDownload = [];
+                for(var i=0;i<=arrfiles.length-2;i++){
+                  filesForDownload.push([arrfiles[i],'file'+i])
+                }
+                for( var n = 0; n < filesForDownload.length; n++ )
+               {
+                  var download = filesForDownload[n];
+                  $.ajax({
+                  type: "Post",
+                  url:    baseURL +'/File/GetFile?FileName='+download[0],
+                  success: function(result) {
+                     var a = document.createElement('a');
+                     var blob = base64ToBlob(result.data, '');
+                     var url = window.URL.createObjectURL(blob);
+                     a.href = url;
+                     a.download = download[0];
+                     a.click();
+                     window.URL.revokeObjectURL(url);
+                           },
+                  async:   false
+            });      
+               }
+
+                     }
+          function base64ToBlob(base64, mimetype, slicesize) {
+                     if (!window.atob || !window.Uint8Array) {
+                        // The current browser doesn't have the atob function. Cannot continue
+                        return null;
+                     }
+                     //mimetype = mimetype || '';
+                     slicesize = slicesize || 512;
+                     var bytechars = atob(base64);
+                     var bytearrays = [];
+                     for (var offset = 0; offset < bytechars.length; offset += slicesize) {
+                        var slice = bytechars.slice(offset, offset + slicesize);
+                        var bytenums = new Array(slice.length);
+                        for (var i = 0; i < slice.length; i++) {
+                              bytenums[i] = slice.charCodeAt(i);
+                        }
+                        var bytearray = new Uint8Array(bytenums);
+                        bytearrays[bytearrays.length] = bytearray;
+                     }
+                     return new Blob(bytearrays);
+                  };
       </script>
       <!--end::Page Scripts-->
 
