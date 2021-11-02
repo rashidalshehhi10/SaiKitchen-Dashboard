@@ -31,7 +31,14 @@ import {
                   document.getElementById("proposalReferenceNumber").innerText = response.data.proposalReferenceNumber;
   
                    document.getElementById("transactionNumber").innerText = response.data.transactionNumber;
-                   document.getElementById("paymentMethod").innerText = response.data.paymentMethod;
+                   let paymentmethod="";
+                   switch(response.data.paymentMethod){
+                       case 1 :paymentmethod="Cash";
+                       case 2:paymentmethod="Cheque";
+                       case 3:paymentmethod="Bank Transfer";
+                       case 4:paymentmethod="Online Payment";
+                   }
+                   document.getElementById("paymentMethod").innerText = paymentmethod;
                    
                    document.getElementById("paymentDescreption").innerText = response.data.paymentDescreption;
                    document.getElementById("couponCode").innerText = response.data.couponCode;
