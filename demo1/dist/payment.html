@@ -1276,7 +1276,7 @@ License: You must have a valid license purchased only from themeforest(the above
                      <div class="form-group row" >
                        <span style="text-align: center;width: 100%;">File uploaded successfully</span>
                     </div>              
-                       
+                    <spa id="recieptId"></spa>   
                         
                     </div>
             </div>
@@ -1881,6 +1881,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("load").style.display = 'none';
                 $('#payupload').modal('hide');
                 $('#paylist').modal('hide');
+                document.getElementById("receiptId").innerHTML =`<a href='`+baseURL+`/receipt.html?paymentId=`+paymentId+`'>click to open receipt</a>`;
                 $('#msg').modal('show');
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
