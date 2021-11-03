@@ -1881,7 +1881,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("load").style.display = 'none';
                 $('#payupload').modal('hide');
                 $('#paylist').modal('hide');
-                document.getElementById("receiptId").innerHTML =`<a href='https://backendsaikitchen.azurewebsites.net/receipt.html?paymentId=`+paymentId+`'>click to open receipt</a>`;
+                document.getElementById("receiptId").innerHTML =`<a href='receipt.html?paymentId=`+paymentId+`'>click to open receipt</a>`;
                 $('#msg').modal('show');
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
