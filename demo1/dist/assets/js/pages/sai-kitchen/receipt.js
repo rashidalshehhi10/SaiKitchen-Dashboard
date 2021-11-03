@@ -84,7 +84,9 @@ import {
      //   document.getElementById("innerdata").classList.remove("with");
         //document.getElementById("divprint").style.paddingTop ='400px';
         //document.getElementById("footer").style.paddingTop ='400px';
+        document.body.classList.add("body");
         window.print();
+        document.body.classList.remove("body");
      //   document.getElementById("inercontainer").classList.add("padd15");
      //   document.getElementById("innerdata").classList.add("with");
         //document.getElementById("divprint").style.removeProperty('padding-top');
