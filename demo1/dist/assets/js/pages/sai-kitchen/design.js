@@ -309,16 +309,45 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-               
+                console.log(brand);
                 console.log(measurementFile);
+                var worckscopes=[];
+                var wrscpCnt = document.getElementById("wrscpCnt").value;
+                for(var i=0;i<parseInt(wrscpCnt);i++){
+                    var appliance =[];
+                    for(var j=1;j<=parseInt(document.getElementById("HideApplianceLength"+i).value);j++){
+                        appliance.push(
+                            {
+                                brand:document.getElementById("ApplianceSelect"+i+j).value, 
+                                name:document.getElementById("Appliancename"+i+j).value, 
+                                value:document.getElementById("Applianceval"+i+j).value,
+                            });
+                    }
+                    var aseries =[];
+                    for(var j=1;j<=parseInt(document.getElementById("HideAseriesLength"+i).value);j++){
+                        aseries.push(
+                            {
+                                brand:document.getElementById("AseriesSelect"+i+j).value, 
+                                name:document.getElementById("Aseriesname"+i+j).value, 
+                                value:document.getElementById("Aseriesval"+i+j).value,
+                            });
+                    }
+                    var wrscObj = {
+                        worckscoipId:document.getElementById("worckscopeId"+i).value,
+                        appliance:appliance,
+                        aseries:aseries,
+                    }
+                    worckscopes.push(wrscObj);
+                }
                  var designFiles = {
                     "inquiryId": document.getElementById("inquiryWorkscopeId").innerHTML,
                     "comment": document.getElementById('designComment').value,
-                    "base64f3d": measurementFile
+                    "base64f3d": measurementFile,
+                    "worckscopes":worckscopes,
                   };
                 const data = JSON.stringify(designFiles);
                 console.log(data);
-                $.ajax({
+                 $.ajax({
                     type: "Post",
                     url: baseURL + '/Design/AddUpdateDesignfiles',
                     headers: {
@@ -372,7 +401,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             KTUtil.scrollTop();
                         });
                     }
-                });
+                }); 
             })
             .on('core.form.invalid', function() {
                 Swal.fire({

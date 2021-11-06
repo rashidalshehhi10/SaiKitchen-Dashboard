@@ -678,6 +678,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                         </div>
                     </div>
+                    <div id="WorkscopesDiv">
+                        <input type="hidden" id="wrscpCnt" value="0" />
+                    </div>
                     	<!--begin::Form group-->
 									<div class="form-group row">
 										<label class="font-size-h6 font-weight-bolder text-dark">Comment</label>
@@ -819,11 +822,135 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
             });
         }
-
+        var wsnumber =[];
+        var Anumber =[];
+        var brand ='';
+        function addAppliance(i){
+            var counter=0;
+            if(wsnumber[i])
+               wsnumber[i] +=1;
+            else
+               wsnumber[i] =1;
+            document.getElementById("Appliance"+i).innerHTML += 
+            `<div style="padding-bottom:2px;"> <div class="row col ">
+                <div   class="col">
+                     <select id="ApplianceSelect`+i+wsnumber[i]+`" class="form-control datatable-input" >
+     					`+brand+`
+					</select>
+                </div>
+                <div   class="col">
+                    <input type="text" id="Appliancename`+i+wsnumber[i]+`"  class="form-control" value="" placeholder="" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="Applianceval`+i+wsnumber[i]+`"  class="form-control" value="" placeholder="" >
+                </div>
+                    
+                
+              </div></div>  `;
+              document.getElementById("HideApplianceLength"+i).value = wsnumber[i];
+        }
+        function addAseries(i){
+            var counter=0;
+            if(Anumber[i])
+               Anumber[i] +=1;
+            else
+            Anumber[i] =1;
+            document.getElementById("Aseries"+i).innerHTML += 
+            `<div style="padding-bottom:2px;"> <div class="row col ">
+                <div   class="col">
+                     <select id="AseriesSelect`+i+Anumber[i]+`" class="form-control datatable-input" >
+     					`+brand+`
+					</select>
+                </div>
+                <div   class="col">
+                    <input type="text" id="Aseriesname`+i+Anumber[i]+`"  class="form-control" value="" placeholder="" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="Aseriesval`+i+Anumber[i]+`"  class="form-control" value="" placeholder="" >
+                </div>
+                    
+                
+              </div></div>  `;
+              document.getElementById("HideAseriesLength"+i).value = Anumber[i];
+        }
         function setInquiryWorkscopeId(inquiryWorkscope) {
             document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorkscope;
+            document.getElementById("WorkscopesDiv").innerHTML =  `<input type="hidden" id="wrscpCnt" value="0" />`;
             inquiryWorkscopeId = inquiryWorkscope;
             // alert(inquiryWorkscopeId);
+            $.ajax({
+          type: "post",
+          url: baseURL + '/Inquiry/GetWorkscopesByinquiryId?inquiryId=' + inquiryWorkscope,
+          success: function(response) {
+           
+              console.log(response);
+              if (response.isError == false) {
+                document.getElementById("wrscpCnt").value = response.data.length;
+                     for(var i=0;i < response.data.length;i++){
+                         document.getElementById("WorkscopesDiv").innerHTML += 
+                         `<div class="form-group row" id="workscope`+i+`">
+                            <input type="hidden" id="worckscopeId`+i+`" value="`+response.data[i].inquiryWorkscopeId+`" />
+                            <input type="hidden" value="0" id="HideApplianceLength`+i+`" />
+                            <input type="hidden" value="0" id="HideAseriesLength`+i+`" />
+						  <label class="font-size-h6 font-weight-bolder text-dark">`+response.data[i].workScopeName+`</label>
+							<div class="input-group" id="Appliance`+i+`">
+                                <label class=" text-dark" style="padding-left:5px;width:85px;">Appliance</label>
+                                <a type="button" style="margin-top:3px;" onclick="addAppliance(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
+							</div>
+                            <div class="input-group" id="Aseries`+i+`">
+                                <label class=" text-dark" style="padding-left:5px;width:85px;">Accessories </label>
+                                <a type="button" style="margin-top:3px;" onclick="addAseries(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
+							</div>
+						</div>`;
+                     }
+              }else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            }
+
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+             
+          }
+      });
+      $.ajax({
+          type: "post",
+          url: baseURL + '/Brand/GetAllBrand' ,
+          success: function(response) {
+           
+              console.log(response);
+              if (response.isError == false) {
+                  for(var i=0;i<response.data.length;i++){
+                     brand += `<option value="`+response.data[i].brandId+`">`+response.data[i].brandName+`</option>`;
+                  }
+              }else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    KTUtil.scrollTop();
+                });
+            }
+
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+             
+          }
+      });
         }
 
         function notifyMe() {

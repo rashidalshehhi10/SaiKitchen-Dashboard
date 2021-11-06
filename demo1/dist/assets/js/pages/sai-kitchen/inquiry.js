@@ -37,9 +37,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             ],
             searchDelay: 0,
             processing: true,
-            serverSide: false,
+            serverSide: true,
             ajax: {
-                url: baseURL + '/Inquiry/GetInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/Inquiry/GetPagingInquiriesOfBranch?branchId=' + user.data.userRoles[0].branchId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
@@ -176,7 +176,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             var status = inqStatus;
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
-                                    $('.datatable-input[data-col-index="2"]').append('<option value="' + status[d].title + '">' + status[d].title + '</option>');
+                                    $('.datatable-input[data-col-index="2"]').append('<option value="' + d + '">' + status[d].title + '</option>');
                             });
                             break;
                         case 'Added By':
@@ -360,115 +360,103 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             }, 1000);
          });
          $('#MeasurementPending').on('click', function() {
-             table.column(2).search('Measurement In-Progress',true, false, true ).draw();
+             table.column(2).search(1,true, false, true ).draw();
              $('html, body').animate({
                  scrollTop: $("#kt_datatable").offset().top
              }, 1000);
           });
          $('#MeasurementDelayed').on('click', function() {
-            table.column(2).search('Measurement'+' '+'Delayed',true, false, true).draw(); 
+            table.column(2).search(2,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          }); 
          $('#MeasurementWaitingForApproval').on('click', function() {
-            table.column(2).search('Measurement'+' '+'Waiting'+' '+'For'+' '+'Approval',true, false, true).draw(); 
+            table.column(2).search(9,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });   
          $('#MeasurementRejected').on('click', function() {
-            table.column(2).search('Measurement'+' '+'Rejected',true, false, true).draw();
+            table.column(2).search(8,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignPending').on('click', function() {
-            table.column(2).search('Design'+' '+'In-Progress',true, false, true).draw();
+            table.column(2).search(3,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignDelayed').on('click', function() {
-            table.column(2).search('Design'+' '+'Delayed',true, false, true).draw();  
+            table.column(2).search(4,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignWaitingForApproval').on('click', function() {
-            table.column(2).search('Design Waiting For Customer Approval',true, false, true).draw();
+            table.column(2).search(16,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignRejected').on('click', function() {
-            table.column(2).search('Design'+' '+'Rejected',true, false, true).draw();  
+            table.column(2).search(11,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationPending').on('click', function() {
-            table.column(2).search('Quotation'+' '+'Pending',true, false, true).draw();  
+            table.column(2).search(5,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
              $('#QuotationDelayed').on('click', function() {
-            table.column(2).search('Quotation'+' '+'Delayed',true, false, true).draw();  
+            table.column(2).search(6,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationWaitingForCustomerApproval').on('click', function() {
-            table.column(2).search('Quotation'+' '+'Waiting'+' '+'For'+' '+'Customer'+' '+'Approval',true, false, true).draw();
+            table.column(2).search(15,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);   
          });
          $('#QuotationRejected').on('click', function() {
-            table.column(2).search('Quotation'+' '+'Rejected',true, false, true).draw(); 
+            table.column(2).search(14,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignRevisionRequested').on('click', function() {
-            table.column(2).search('Design Revision Requested',true, false, true).draw(); 
+            table.column(2).search(56,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationApproved').on('click', function() {
-            table.column(2).search('Quotation Approved',true, false, true).draw(); 
-            $('html, body').animate({
-                scrollTop: $("#kt_datatable").offset().top
-            }, 1000);
-         });
-         $('#JobOrderFactoryConfirmationPending').on('click', function() {
-            table.column(2).search('Job Order Factory Approval Pending',true, false, true).draw(); 
-            $('html, body').animate({
-                scrollTop: $("#kt_datatable").offset().top
-            }, 1000);
-         });
-         $('#JobOrderFactoryConfirmationRejected').on('click', function() {
-            table.column(2).search('Job Order Factory Rejected',true, false, true).draw(); 
+            table.column(2).search(13,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderInProgress').on('click', function() {
-            table.column(2).search('Job Order In-progress',true, false, true).draw(); 
+            table.column(2).search(21,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderDelayed').on('click', function() {
-            table.column(2).search('Job Order Delayed',true, false, true).draw(); 
+            table.column(2).search(26,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderCompleted').on('click', function() {
-            table.column(2).search('Job Order Completed',true, false, true).draw(); 
+            table.column(2).search(27,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
