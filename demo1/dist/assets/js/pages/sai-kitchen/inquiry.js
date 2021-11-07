@@ -179,7 +179,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     $('.datatable-input[data-col-index="2"]').append('<option value="' + d + '">' + status[d].title + '</option>');
                             });
                             break;
-                        case 'Added By':
+                        case 'Managed By':
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
                                     $('.datatable-input[data-col-index="25"]').append('<option value="' + d+ '">' + d + '</option>');
