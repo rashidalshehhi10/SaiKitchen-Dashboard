@@ -185,7 +185,7 @@ export let inqStatus= {
     },
     47: {
         'title': 'Job Order In-Progress',
-        'class': ' label-light-success'
+        'class': ' label-light-primary'
     },
     48: {
         'title': 'Job Order Factory Rejected',
