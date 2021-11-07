@@ -150,7 +150,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
             ],
 
-            initComplete: function() {
+            initComplete: function(data, type, full, meta) {
                 this.api().columns().every(function() {
                     var column = this;
 
@@ -354,7 +354,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         $('#TotalInquiry').on('click', function() {
             table.column(2).search('',true, false, true ).draw();
             
-            document.getElementById('l').innerHTML=  table.page.info().recordsTotal;
+            document.getElementById('r').innerHTML=  table.page.info().recordsTotal;
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
@@ -445,6 +445,18 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
          $('#JobOrderInProgress').on('click', function() {
             table.column(2).search(21,true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+         $('#JobOrderFactoryConfirmationPending').on('click', function() {
+            table.column(2).search(46,true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+         $('#JobOrderFactoryConfirmationRejected').on('click', function() {
+            table.column(2).search(48,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
