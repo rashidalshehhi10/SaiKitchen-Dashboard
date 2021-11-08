@@ -85,8 +85,11 @@ import {
         //document.getElementById("divprint").style.paddingTop ='400px';
         //document.getElementById("footer").style.paddingTop ='400px';
         document.body.classList.add("body");
+        //("#savePdfbtn").hide();
+        document.getElementById("savePdfbtn").style.display ='none';
         window.print();
         document.body.classList.remove("body");
+        document.getElementById("savePdfbtn").style.removeProperty('display');
      //   document.getElementById("inercontainer").classList.add("padd15");
      //   document.getElementById("innerdata").classList.add("with");
         //document.getElementById("divprint").style.removeProperty('padding-top');
