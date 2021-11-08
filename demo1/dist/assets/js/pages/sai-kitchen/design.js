@@ -314,6 +314,24 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 var worckscopes=[];
                 var wrscpCnt = document.getElementById("wrscpCnt").value;
                 for(var i=0;i<parseInt(wrscpCnt);i++){
+                    var Wooden =[];
+                    for(var j=1;j<=parseInt(document.getElementById("HideWoodenLength"+i).value);j++){
+                        Wooden.push(
+                            {
+                                brand:document.getElementById("WoodenSelect"+i+j).value, 
+                                name:document.getElementById("Woodenname"+i+j).value, 
+                                value:document.getElementById("Woodenval"+i+j).value,
+                            });
+                    }
+                    var counter =[];
+                    for(var j=1;j<=parseInt(document.getElementById("HideCounterLength"+i).value);j++){
+                        counter.push(
+                            {
+                                brand:document.getElementById("CounterSelect"+i+j).value, 
+                                name:document.getElementById("Countername"+i+j).value, 
+                                value:document.getElementById("Counterval"+i+j).value,
+                            });
+                    }
                     var appliance =[];
                     for(var j=1;j<=parseInt(document.getElementById("HideApplianceLength"+i).value);j++){
                         appliance.push(
@@ -332,10 +350,22 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 value:document.getElementById("Aseriesval"+i+j).value,
                             });
                     }
+                    var Material =[];
+                    for(var j=1;j<=parseInt(document.getElementById("HideMaterialLength"+i).value);j++){
+                        Material.push(
+                            {
+                                brand:document.getElementById("MaterialSelect"+i+j).value, 
+                                name:document.getElementById("Materialname"+i+j).value, 
+                                value:document.getElementById("Materialval"+i+j).value,
+                            });
+                    }
                     var wrscObj = {
                         worckscoipId:document.getElementById("worckscopeId"+i).value,
+                        WoodenWork:Wooden,
+                        CounterTop:counter,
                         appliance:appliance,
                         aseries:aseries,
+                        Material:Material,
                     }
                     worckscopes.push(wrscObj);
                 }
@@ -347,7 +377,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                   };
                 const data = JSON.stringify(designFiles);
                 console.log(data);
-                 $.ajax({
+                  $.ajax({
                     type: "Post",
                     url: baseURL + '/Design/AddUpdateDesignfiles',
                     headers: {
@@ -401,7 +431,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             KTUtil.scrollTop();
                         });
                     }
-                }); 
+                });  
             })
             .on('core.form.invalid', function() {
                 Swal.fire({

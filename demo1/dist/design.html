@@ -822,8 +822,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
             });
         }
+        var Wonumber=[];
+        var Cnumber=[];
         var wsnumber =[];
         var Anumber =[];
+        var Mnumber=[];
         var brand ='';
         function addAppliance(i){
             var counter=0;
@@ -839,10 +842,10 @@ License: You must have a valid license purchased only from themeforest(the above
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Appliancename`+i+wsnumber[i]+`"  class="form-control" value="" placeholder="" >
+                    <input type="text" id="Appliancename`+i+wsnumber[i]+`"  class="form-control" value="" placeholder="Name" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="Applianceval`+i+wsnumber[i]+`"  class="form-control" value="" placeholder="" >
+                    <input type="text" id="Applianceval`+i+wsnumber[i]+`"  class="form-control" value="" placeholder="Value" >
                 </div>
                     
                 
@@ -863,16 +866,89 @@ License: You must have a valid license purchased only from themeforest(the above
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Aseriesname`+i+Anumber[i]+`"  class="form-control" value="" placeholder="" >
+                    <input type="text" id="Aseriesname`+i+Anumber[i]+`"  class="form-control" value="" placeholder="Name" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="Aseriesval`+i+Anumber[i]+`"  class="form-control" value="" placeholder="" >
+                    <input type="text" id="Aseriesval`+i+Anumber[i]+`"  class="form-control" value="" placeholder="Value" >
                 </div>
                     
                 
               </div></div>  `;
               document.getElementById("HideAseriesLength"+i).value = Anumber[i];
         }
+        function addWooden(i){
+            var counter=0;
+            if(Wonumber[i])
+            Wonumber[i] +=1;
+            else
+            Wonumber[i] =1;
+            document.getElementById("Wooden"+i).innerHTML += 
+            `<div style="padding-bottom:2px;"> <div class="row col ">
+                <div   class="col">
+                     <select id="WoodenSelect`+i+Wonumber[i]+`" class="form-control datatable-input" >
+     					`+brand+`
+					</select>
+                </div>
+                <div   class="col">
+                    <input type="text" id="Woodenname`+i+Wonumber[i]+`"  class="form-control" value="" placeholder="Name" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="Woodenval`+i+Wonumber[i]+`"  class="form-control" value="" placeholder="Value" >
+                </div>
+                    
+                
+              </div></div>  `;
+              document.getElementById("HideWoodenLength"+i).value = Wonumber[i];
+        }
+        function addCounter(i){
+            var counter=0;
+            if(Cnumber[i])
+            Cnumber[i] +=1;
+            else
+            Cnumber[i] =1;
+            document.getElementById("Counter"+i).innerHTML += 
+            `<div style="padding-bottom:2px;"> <div class="row col ">
+                <div   class="col">
+                     <select id="CounterSelect`+i+Cnumber[i]+`" class="form-control datatable-input" >
+     					`+brand+`
+					</select>
+                </div>
+                <div   class="col">
+                    <input type="text" id="Countername`+i+Cnumber[i]+`"  class="form-control" value="" placeholder="Name" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="Counterval`+i+Cnumber[i]+`"  class="form-control" value="" placeholder="Value" >
+                </div>
+                    
+                
+              </div></div>  `;
+              document.getElementById("HideCounterLength"+i).value = Cnumber[i];
+        }
+        function addMaterial(i){
+            var counter=0;
+            if(Mnumber[i])
+            Mnumber[i] +=1;
+            else
+            Mnumber[i] =1;
+            document.getElementById("Material"+i).innerHTML += 
+            `<div style="padding-bottom:2px;"> <div class="row col ">
+                <div   class="col">
+                     <select id="MaterialSelect`+i+Mnumber[i]+`" class="form-control datatable-input" >
+     					`+brand+`
+					</select>
+                </div>
+                <div   class="col">
+                    <input type="text" id="Materialname`+i+Mnumber[i]+`"  class="form-control" value="" placeholder="Name" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="Materialval`+i+Mnumber[i]+`"  class="form-control" value="" placeholder="Value" >
+                </div>
+                    
+                
+              </div></div>  `;
+              document.getElementById("HideMaterialLength"+i).value = Mnumber[i];
+        }
+        
         function setInquiryWorkscopeId(inquiryWorkscope) {
             document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorkscope;
             document.getElementById("WorkscopesDiv").innerHTML =  `<input type="hidden" id="wrscpCnt" value="0" />`;
@@ -890,16 +966,31 @@ License: You must have a valid license purchased only from themeforest(the above
                          document.getElementById("WorkscopesDiv").innerHTML += 
                          `<div class="form-group row" id="workscope`+i+`">
                             <input type="hidden" id="worckscopeId`+i+`" value="`+response.data[i].inquiryWorkscopeId+`" />
+                            <input type="hidden" value="0" id="HideWoodenLength`+i+`" />
+                            <input type="hidden" value="0" id="HideCounterLength`+i+`" />
                             <input type="hidden" value="0" id="HideApplianceLength`+i+`" />
                             <input type="hidden" value="0" id="HideAseriesLength`+i+`" />
+                            <input type="hidden" value="0" id="HideMaterialLength`+i+`" />
 						  <label class="font-size-h6 font-weight-bolder text-dark">`+response.data[i].workScopeName+`</label>
-							<div class="input-group" id="Appliance`+i+`">
-                                <label class=" text-dark" style="padding-left:5px;width:85px;">Appliance</label>
+                          <div class="input-group" id="Wooden`+i+`">
+                                <label class=" text-dark" style="padding-left:5px;width:100px;">Wooden Work</label>
+                                <a type="button" style="margin-top:3px;" onclick="addWooden(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
+							</div>
+                            <div class="input-group" id="Counter`+i+`">
+                                <label class=" text-dark" style="padding-left:5px;width:100px;">Counter Top</label>
+                                <a type="button" style="margin-top:3px;" onclick="addCounter(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
+							</div>
+                           <div class="input-group" id="Appliance`+i+`">
+                                <label class=" text-dark" style="padding-left:5px;width:100px;">Appliance</label>
                                 <a type="button" style="margin-top:3px;" onclick="addAppliance(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
                             <div class="input-group" id="Aseries`+i+`">
-                                <label class=" text-dark" style="padding-left:5px;width:85px;">Accessories </label>
+                                <label class=" text-dark" style="padding-left:5px;width:100px;">Accessories </label>
                                 <a type="button" style="margin-top:3px;" onclick="addAseries(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
+							</div>
+                            <div class="input-group" id="Material`+i+`">
+                                <label class=" text-dark" style="padding-left:5px;width:100px;">Material </label>
+                                <a type="button" style="margin-top:3px;" onclick="addMaterial(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
 						</div>`;
                      }
