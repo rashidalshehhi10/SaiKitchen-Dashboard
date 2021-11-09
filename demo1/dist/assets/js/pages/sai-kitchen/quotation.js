@@ -46,7 +46,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     columnsDef: [
                         'inquiryId', 'inquiryCode', 'status', 'workscopeNames','customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision', 'actions'
+                         'isOccupied','inquiryDescription','inquiryComment', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','noOfRevision','quotationScheduleDate', 'actions'
                     ],
                 },
             },
@@ -106,6 +106,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'inquiryAddedBy'
+                },
+                {
+                    data: 'quotationScheduleDate'
                 },
                 {
                     data: 'actions',

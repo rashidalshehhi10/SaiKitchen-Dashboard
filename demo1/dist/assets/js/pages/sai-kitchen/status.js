@@ -80,7 +80,7 @@ export let inqStatus= {
         'class': ' label-light-danger'
     },
     21: {
-        'title': 'Job Order In-Progress',
+        'title': 'Job Order Pending',
         'class': ' label-light-primary'
     },
     22: {

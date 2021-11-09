@@ -47,7 +47,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'inquiryId', 'inquiryCode', 'status', 'workscopeNames','inquiryComment',
                         'measurementScheduleDate', 'measurementAssignTo','designScheduleDate', 'designAssignTo','isMeasurementProvidedByCustomer','isDesignProvidedByCustomer', 'customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','factorName','noOfRevision', 'actions'
+                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','factorName','noOfRevision','quotationScheduleDate', 'actions'
                     ],
                 },
             },
@@ -143,6 +143,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'factorName'
+                },
+                {
+                    data:'quotationScheduleDate'
                 },
                 {
                     data: 'actions',
@@ -444,7 +447,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             }, 1000);
          });
          $('#JobOrderInProgress').on('click', function() {
-            table.column(2).search(21,true, false, true).draw(); 
+            table.column(2).search(47,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
