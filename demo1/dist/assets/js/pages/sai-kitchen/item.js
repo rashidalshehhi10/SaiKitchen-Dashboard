@@ -7,7 +7,9 @@ import {
 import {
     measurementFile
 } from './constant.js'
-
+import {
+    baseFileURL
+} from './constant.js'
 
 let user;
 let datatable;
@@ -68,6 +70,104 @@ var KTAppsUsersListDatatable = function() {
                 },
 
                 {
+                    field: 'applianceAccessoryImgUrl',
+                    title: 'Item Image',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        if (data.applianceAccessoryImgUrl != null){
+ 
+
+                var file = data.applianceAccessoryImgUrl.substr((data.applianceAccessoryImgUrl.lastIndexOf('.') + 1));
+                  switch(file) {
+                        case "pdf":                                                         
+                            output+=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "css":
+                            output +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/css.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "doc":
+                            output +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/doc.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "html":
+                            output +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "javascript":
+                            output+=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "jpg":
+                            output +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "jpeg":
+                            output +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "mp4":
+                            output +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/mp4.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "xml":
+                            output+=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/xml.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        case "zip":
+                            output +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/zip.svg" style="width:24px;height:24px;"></a>'+
+                              '</div>';
+                        break;
+                        default:
+                            output +=
+                            '<div   class="divico">'+
+                             '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="" style="width:24px;height:24px;"></a>'+
+                            '</div>';
+
+                      }
+
+//
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        // if (data.applianceAccessoryImgUrl != null) {
+                        //     output += '<div class="font-weight-bold text-muted">' + data.applianceAccessoryImgUrl + '</div>';
+                        //     // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        // }
+                    }
+                        return output;
+                    },
+                },
+                {
                     field: 'applianceAccessoryName',
                     title: 'Item Name',
                     autoHide: true,
@@ -90,44 +190,22 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     },
                 },
+
                 {
-                    field: 'applianceAccesoryDescription',
-                    title: 'Description',
-                    // autoHide: true,
+                    field: 'brandName',
+                    title: 'Brand Name',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
                     template: function(data) {
                         var output = '';
-                        if (data.applianceAccesoryDescription != null) {
-                            output += '<div class="font-weight-bold text-muted">' + data.applianceAccesoryDescription + '</div>';
+
+                        if (data.brandId != null) {
+                            output += '<div class="font-weight-bold text-muted">' + data.brandName + '</div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
                         }
                         return output;
                     },
-                    
-                },
-                {
-                    field: 'applianceAccessoryTypeId',
-                    title: 'Type',
-                    // autoHide: true,
-                    template: function(data) {
-                        var output = '';
-                        if (data.applianceAccessoryTypeId != null) {
-                            output += '<div class="font-weight-bold text-muted">' + data.applianceAccessoryTypeName + '</div>';
-                        }
-                        return output;
-                    },
-                    
-                },
-                {
-                    field: 'unitOfMeasurementId',
-                    title: 'unit Of Measurement',
-                    // autoHide: true,
-                    template: function(data) {
-                        var output = '';
-                        if (data.unitOfMeasurementId != null) {
-                            output += '<div class="font-weight-bold text-muted">' + data.unitOfMeasurementName + '</div>';
-                        }
-                        return output;
-                    },
-                    
                 },
                 {
                     field: 'applianceAccessoryPrice',
@@ -143,23 +221,19 @@ var KTAppsUsersListDatatable = function() {
                     
                 },
 
-             {
-                    field: 'brandName',
-                    title: 'brand Name',
-                    autoHide: true,
-                    // type: 'date',
-                    // format: 'MM/DD/YYYY',
+                {
+                    field: 'applianceAccessoryTypeId',
+                    title: 'Type',
+                    // autoHide: true,
                     template: function(data) {
                         var output = '';
-
-                        if (data.brandId != null) {
-                            output += '<div class="font-weight-bold text-muted">' + data.brandName + '</div>';
-                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        if (data.applianceAccessoryTypeId != null) {
+                            output += '<div class="font-weight-bold text-muted">' + data.applianceAccessoryTypeName + '</div>';
                         }
                         return output;
                     },
+                    
                 },
-                 
                 {
                     field: 'Actions',
                     title: 'Actions',
@@ -215,7 +289,36 @@ var KTAppsUsersListDatatable = function() {
                             return `<span></span>`;
                         }
                     },
+                },
+                {
+                    field: 'unitOfMeasurementId',
+                    title: 'unit Of Measurement',
+                    // autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                        if (data.unitOfMeasurementId != null) {
+                            output += '<div class="font-weight-bold text-muted">' + data.unitOfMeasurementName + '</div>';
+                        }
+                        return output;
+                    },
+                    
+                },
+
+                {
+                    field: 'applianceAccesoryDescription',
+                    title: 'Description',
+                    // autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                        if (data.applianceAccesoryDescription != null) {
+                            output += '<div class="font-weight-bold text-muted">' + data.applianceAccesoryDescription + '</div>';
+                        }
+                        return output;
+                    },
+                    
                 }
+                 
+ 
 
             ],
         });
@@ -253,7 +356,7 @@ var KTAppsUsersListDatatable = function() {
                         applianceAccessoryName: {
                             validators: {
                                 notEmpty: {
-                                    message: 'applianceAccessory Name is required'
+                                    message: 'Item Name is required'
                                 }
                             }
                         },
@@ -303,36 +406,37 @@ var KTAppsUsersListDatatable = function() {
                       
 
                         //
-
+                        var applianceAccessory = {
+                            applianceAccessoryId:  document.getElementById("applianceAccessoryId").innerHTML,
+                            applianceAccessoryName: document.getElementById('applianceAccessoryName').value,
+                            applianceAccesoryDescription: document.getElementById('applianceAccesoryDescription').value,
+                            applianceAccessoryTypeId: document.getElementById('applianceAccessoryTypeId').value,
+                            unitOfMeasurementId: document.getElementById('unitOfMeasurementId').value,
+                            applianceAccessoryImgUrl: measurementFile[0],
+                            applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
+                            brandId: document.getElementById('brandId').value,   
+                            isActive: true,
+                            isDeleted:true,
+                            createdBy: 0,
+                            createdDate: "string",
+                            updatedBy: 0,
+                            updatedDate: "string",
+                            applianceAccessoryType: {},
+                            brand: {},
+                            unitOfMeasurement: {}
+            
+                        };
+                        const data = JSON.stringify(applianceAccessory);
+                        console.log(data);
+                       // alert(JSON.stringify(applianceAccessory))
 
                 
 
-                var applianceAccessory = {
-                    applianceAccessoryId:  document.getElementById("applianceAccessoryId").innerHTML,
-                    applianceAccessoryName: document.getElementById('applianceAccessoryName').value,
-                    applianceAccesoryDescription: document.getElementById('applianceAccesoryDescription').value,
-                    applianceAccessoryTypeId: document.getElementById('applianceAccessoryTypeId').value,
-                    unitOfMeasurementId: document.getElementById('unitOfMeasurementId').value,
-                    applianceAccessoryImgUrl: measurementFile[0],
-                    applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
-                    brandId: document.getElementById('brandId').value,   
-                    isActive: true,
-                    isDeleted:true,
-                    createdBy: 0,
-                    createdDate: "string",
-                    updatedBy: 0,
-                    updatedDate: "string",
-                    applianceAccessoryType: {},
-                    brand: {},
-                    unitOfMeasurement: {}
-    
-                };
-                const data = JSON.stringify(applianceAccessory);
-                console.log(data);
-               // alert(JSON.stringify(applianceAccessory))
+               
                
                
                 if(applianceAccessory.applianceAccessoryId==0){
+
                     $.ajax({
                         type: "Post",
                         url: baseURL + '/ApplianceAccessory/CreateApplianceAccessory',
@@ -392,7 +496,27 @@ var KTAppsUsersListDatatable = function() {
 
                   
                 }
-                else{   
+                else{  
+                    
+                    
+
+                    var applianceAccessoryupdate = {
+                        applianceAccessoryId:  document.getElementById("applianceAccessoryId").innerHTML,
+                        applianceAccessoryName: document.getElementById('applianceAccessoryName').value,
+                        applianceAccesoryDescription: document.getElementById('applianceAccesoryDescription').value,
+                        applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
+                        applianceAccessoryTypeId: document.getElementById('applianceAccessoryTypeId').value,
+                        brandId: document.getElementById('brandId').value,
+                        unitOfMeasurementId: document.getElementById('unitOfMeasurementId').value,
+                        applianceAccessoryImgUrl: measurementFile[0]
+                        
+                    };
+                    const data = JSON.stringify(applianceAccessoryupdate);
+                    console.log(data);
+                   // alert(JSON.stringify(applianceAccessory))
+
+
+
                     $.ajax({
                         type: "Post",
                         url: baseURL + '/ApplianceAccessory/UpdateApplianceAccessoryById',

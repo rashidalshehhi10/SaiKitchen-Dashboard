@@ -319,8 +319,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         Wooden.push(
                             {
                                 brand:document.getElementById("WoodenSelect"+i+j).value, 
-                                name:document.getElementById("Woodenname"+i+j).value, 
-                                value:document.getElementById("Woodenval"+i+j).value,
+                                item:document.getElementById("ItemName"+i+j).value, 
+                                quantity:document.getElementById("Quantity"+i+j).value,
+                                unit:document.getElementById("Unit"+i+j).value,
+                                measurement:document.getElementById("Measurement"+i+j).value,
                             });
                     }
                     var counter =[];
@@ -328,8 +330,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         counter.push(
                             {
                                 brand:document.getElementById("CounterSelect"+i+j).value, 
-                                name:document.getElementById("Countername"+i+j).value, 
-                                value:document.getElementById("Counterval"+i+j).value,
+                                item:document.getElementById("CItemName"+i+j).value, 
+                                quantity:document.getElementById("CQuantity"+i+j).value,
+                                unit:document.getElementById("CUnit"+i+j).value,
+                                measurement:document.getElementById("CMeasurement"+i+j).value,
                             });
                     }
                     var appliance =[];
@@ -337,8 +341,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         appliance.push(
                             {
                                 brand:document.getElementById("ApplianceSelect"+i+j).value, 
-                                name:document.getElementById("Appliancename"+i+j).value, 
-                                value:document.getElementById("Applianceval"+i+j).value,
+                                item:document.getElementById("AItemName"+i+j).value, 
+                                quantity:document.getElementById("AQuantity"+i+j).value,
+                                unit:document.getElementById("AUnit"+i+j).value,
+                                measurement:document.getElementById("AMeasurement"+i+j).value,
                             });
                     }
                     var aseries =[];
@@ -346,8 +352,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         aseries.push(
                             {
                                 brand:document.getElementById("AseriesSelect"+i+j).value, 
-                                name:document.getElementById("Aseriesname"+i+j).value, 
-                                value:document.getElementById("Aseriesval"+i+j).value,
+                                item:document.getElementById("AsItemName"+i+j).value, 
+                                quantity:document.getElementById("AsQuantity"+i+j).value,
+                                unit:document.getElementById("AsUnit"+i+j).value,
+                                measurement:document.getElementById("AsMeasurement"+i+j).value,
                             });
                     }
                     var Material =[];
@@ -355,8 +363,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         Material.push(
                             {
                                 brand:document.getElementById("MaterialSelect"+i+j).value, 
-                                name:document.getElementById("Materialname"+i+j).value, 
-                                value:document.getElementById("Materialval"+i+j).value,
+                                item:document.getElementById("MItemName"+i+j).value, 
+                                quantity:document.getElementById("MQuantity"+i+j).value,
+                                unit:document.getElementById("MUnit"+i+j).value,
+                                measurement:document.getElementById("MMeasurement"+i+j).value,
                             });
                     }
                     var wrscObj = {
@@ -364,7 +374,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         WoodenWork:Wooden,
                         CounterTop:counter,
                         appliance:appliance,
-                        aseries:aseries,
+                        Accessories:aseries,
                         Material:Material,
                     }
                     worckscopes.push(wrscObj);
@@ -377,7 +387,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                   };
                 const data = JSON.stringify(designFiles);
                 console.log(data);
-                  $.ajax({
+                   $.ajax({
                     type: "Post",
                     url: baseURL + '/Design/AddUpdateDesignfiles',
                     headers: {
@@ -431,7 +441,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             KTUtil.scrollTop();
                         });
                     }
-                });  
+                });   
             })
             .on('core.form.invalid', function() {
                 Swal.fire({

@@ -56,6 +56,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
     <meta name="theme-color" content="#db4938" />
     <!--End:PWA-->
+    <style>
+        .divico{border-radius: 5px;background-color: #f0e8ff;padding: 6px;margin-right: 5px;margin-bottom: 5px;float: left}
+    </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -657,7 +660,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!-- Modal-->
     <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <form class="form" id="kt_add_design_file" action="" name="kt_add_design_file">
                 <div class="modal-header">
@@ -835,21 +838,32 @@ License: You must have a valid license purchased only from themeforest(the above
             else
                wsnumber[i] =1;
             document.getElementById("Appliance"+i).innerHTML += 
-            `<div style="padding-bottom:2px;"> <div class="row col ">
+            `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
-                     <select id="ApplianceSelect`+i+wsnumber[i]+`" class="form-control datatable-input" >
+                     <select id="ApplianceSelect`+i+wsnumber[i]+`" style="width:11rem !important;" onchange="getElements('A','ApplianceSelect',`+i+`,`+wsnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Appliancename`+i+wsnumber[i]+`"  class="form-control" value="" placeholder="Name" >
+                    <select id="AItemName`+i+wsnumber[i]+`" style="width:11rem !important;" onchange="GetAppliance('A','ItemName',`+i+`,`+wsnumber[i]+`)"  class="form-control datatable-input " >
+                        <option selected value="0">Select Item</option>
+					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Applianceval`+i+wsnumber[i]+`"  class="form-control" value="" placeholder="Value" >
+                    <input type="text" id="AQuantity`+i+wsnumber[i]+`" style="width:11rem !important;" class="form-control"  value="" placeholder="Quantity" >
                 </div>
-                    
-                
-              </div></div>  `;
+                <div   class="col">
+                    <input type="text" id="AUnit`+i+wsnumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="AMeasurement`+i+wsnumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div id="Aimage`+i+wsnumber[i]+`" style="width:11rem !important;"  class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                    </div>
+                </div>
+              </div></div>   `;
               document.getElementById("HideApplianceLength"+i).value = wsnumber[i];
         }
         function addAseries(i){
@@ -859,21 +873,32 @@ License: You must have a valid license purchased only from themeforest(the above
             else
             Anumber[i] =1;
             document.getElementById("Aseries"+i).innerHTML += 
-            `<div style="padding-bottom:2px;"> <div class="row col ">
+            `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
-                     <select id="AseriesSelect`+i+Anumber[i]+`" class="form-control datatable-input" >
+                     <select id="AseriesSelect`+i+Anumber[i]+`" style="width:11rem !important;" onchange="getElements('As','AseriesSelect',`+i+`,`+Anumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Aseriesname`+i+Anumber[i]+`"  class="form-control" value="" placeholder="Name" >
+                    <select id="AsItemName`+i+Anumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('As','ItemName',`+i+`,`+Anumber[i]+`)"  class="form-control datatable-input " >
+                        <option selected value="0">Select Item</option>
+					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Aseriesval`+i+Anumber[i]+`"  class="form-control" value="" placeholder="Value" >
+                    <input type="text" id="AsQuantity`+i+Anumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" placeholder="Quantity" >
                 </div>
-                    
-                
-              </div></div>  `;
+                <div   class="col">
+                    <input type="text" id="AsUnit`+i+Anumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="AsMeasurement`+i+Anumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div id="Asimage`+i+Anumber[i]+`" style="width:11rem !important;"  class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                    </div>
+                </div>
+              </div></div> `;
               document.getElementById("HideAseriesLength"+i).value = Anumber[i];
         }
         function addWooden(i){
@@ -883,20 +908,32 @@ License: You must have a valid license purchased only from themeforest(the above
             else
             Wonumber[i] =1;
             document.getElementById("Wooden"+i).innerHTML += 
-            `<div style="padding-bottom:2px;"> <div class="row col ">
+            `<div style="padding-bottom:2px;padding-left:10px;">
+              <div class="row col ">
                 <div   class="col">
-                     <select id="WoodenSelect`+i+Wonumber[i]+`" class="form-control datatable-input" >
+                     <select id="WoodenSelect`+i+Wonumber[i]+`" style="width:11rem !important;" onchange="getElements('','WoodenSelect',`+i+`,`+Wonumber[i]+`)" class="form-control datatable-input " >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Woodenname`+i+Wonumber[i]+`"  class="form-control" value="" placeholder="Name" >
+                    <select id="ItemName`+i+Wonumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('','ItemName',`+i+`,`+Wonumber[i]+`)"  class="form-control datatable-input " >
+                        <option selected value="0">Select Item</option>
+					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Woodenval`+i+Wonumber[i]+`"  class="form-control" value="" placeholder="Value" >
+                    <input type="text" id="Quantity`+i+Wonumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" placeholder="Quantity" >
                 </div>
-                    
-                
+                <div   class="col">
+                    <input type="text" id="Unit`+i+Wonumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="Measurement`+i+Wonumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div id="image`+i+Wonumber[i]+`" style="width:11rem !important;"  class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                    </div>
+                </div>
               </div></div>  `;
               document.getElementById("HideWoodenLength"+i).value = Wonumber[i];
         }
@@ -907,21 +944,32 @@ License: You must have a valid license purchased only from themeforest(the above
             else
             Cnumber[i] =1;
             document.getElementById("Counter"+i).innerHTML += 
-            `<div style="padding-bottom:2px;"> <div class="row col ">
+            `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
-                     <select id="CounterSelect`+i+Cnumber[i]+`" class="form-control datatable-input" >
+                     <select id="CounterSelect`+i+Cnumber[i]+`" style="width:11rem !important;" onchange="getElements('C','CounterSelect',`+i+`,`+Cnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Countername`+i+Cnumber[i]+`"  class="form-control" value="" placeholder="Name" >
+                    <select id="CItemName`+i+Cnumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('C','ItemName',`+i+`,`+Cnumber[i]+`)"  class="form-control datatable-input " >
+                        <option selected value="0">Select Item</option>
+					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Counterval`+i+Cnumber[i]+`"  class="form-control" value="" placeholder="Value" >
+                    <input type="text" id="CQuantity`+i+Cnumber[i]+`" style="width:11rem !important;" class="form-control"  value="" placeholder="Quantity" >
                 </div>
-                    
-                
-              </div></div>  `;
+                <div   class="col">
+                    <input type="text" id="CUnit`+i+Cnumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="CMeasurement`+i+Cnumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div id="Cimage`+i+Cnumber[i]+`" style="width:11rem !important;" class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                    </div>
+                </div>
+              </div></div>    `;
               document.getElementById("HideCounterLength"+i).value = Cnumber[i];
         }
         function addMaterial(i){
@@ -931,24 +979,167 @@ License: You must have a valid license purchased only from themeforest(the above
             else
             Mnumber[i] =1;
             document.getElementById("Material"+i).innerHTML += 
-            `<div style="padding-bottom:2px;"> <div class="row col ">
+            `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
-                     <select id="MaterialSelect`+i+Mnumber[i]+`" class="form-control datatable-input" >
+                     <select id="MaterialSelect`+i+Mnumber[i]+`" style="width:11rem !important;" onchange="getElements('M','MaterialSelect',`+i+`,`+Mnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Materialname`+i+Mnumber[i]+`"  class="form-control" value="" placeholder="Name" >
+                    <select id="MItemName`+i+Mnumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('M','ItemName',`+i+`,`+Mnumber[i]+`)"  class="form-control datatable-input " >
+                        <option selected value="0">Select Item</option>
+					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Materialval`+i+Mnumber[i]+`"  class="form-control" value="" placeholder="Value" >
+                    <input type="text" id="MQuantity`+i+Mnumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" placeholder="Quantity" >
                 </div>
-                    
-                
+                <div   class="col">
+                    <input type="text" id="MUnit`+i+Mnumber[i]+`"  style="width:11rem !important;" class="form-control"  value="" disabled placeholder="UnitPrice" >
+                </div>
+                <div   class="col">
+                    <input type="text" id="MMeasurement`+i+Mnumber[i]+`"   class="form-control" style="width:11rem !important;" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div id="Mimage`+i+Mnumber[i]+`" style="width:11rem !important;"  class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                    </div>
+                </div>
               </div></div>  `;
               document.getElementById("HideMaterialLength"+i).value = Mnumber[i];
         }
         
+        function getElements(A,selectName,k,j){
+          let brandId = document.getElementById(selectName+k+j).value;
+        //  document.getElementById(selectName+k+j).style.removeProperty('width');
+          $.ajax({
+                type: "Post",
+                url: baseURL + '/ApplianceAccessory/GetItemByBrandId?brandId='+brandId,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                   const roleTypeList2 = document.getElementById(A+'ItemName'+k+j);
+                  // roleTypeList2.style.removeProperty('width');
+                    var roleTypeListHTML2 = new Array();
+                    roleTypeListHTML2.push('<option selected value="0">Select Item</option>');
+                    var selected='';
+                    for (var i = 0; i < response.data.length; i++) {
+                        selected='';
+                        roleTypeListHTML2.push(`
+                        <option value="` + response.data[i].applianceAccessoryId+ `" >` + response.data[i].applianceAccessoryName + `</option>`);
+                    }
+                    roleTypeList2.innerHTML = roleTypeListHTML2.join('');
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    
+                },
+            });
+       
+        }
+        function GetAppliance(A,selectName,k,j){
+          let applianceAccessoryId = document.getElementById(A+selectName+k+j).value;
+          
+          $.ajax({
+                type: "Post",
+                url: baseURL + '/ApplianceAccessory/GetApplianceAccessoryById?applianceAccessoryId='+applianceAccessoryId,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    if(response.data){
+                    document.getElementById(A+"Unit"+k+j).value =response.data.applianceAccessoryPrice;
+                    document.getElementById(A+"Measurement"+k+j).value =response.data.unitOfMeasurementName;
+                    if(response.data.applianceAccessoryImgUrl){
+                        var data = response.data;
+                        var output ='';
+                        var file = data.applianceAccessoryImgUrl.substr((data.applianceAccessoryImgUrl.lastIndexOf('.') + 1));
+                                        switch(file) {
+                                                case "pdf":                                                         
+                                                    output+=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "css":
+                                                    output +=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/css.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "doc":
+                                                    output +=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/doc.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "html":
+                                                    output +=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "javascript":
+                                                    output+=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "jpg":
+                                                    output +=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "jpeg":
+                                                    output +=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "mp4":
+                                                    output +=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/mp4.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "xml":
+                                                    output+=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/xml.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                case "zip":
+                                                    output +=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/zip.svg" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+                                                break;
+                                                default:
+                                                    output +=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="" style="width:24px;height:24px;"></a>'+
+                                                    '</div>';
+
+                                            }
+                                        document.getElementById(A+"image"+k+j).innerHTML =output;
+                                        }else{
+                                            document.getElementById(A+"image"+k+j).innerHTML =   `<div   class="divico">
+                                          <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a></div>`;
+                    
+                                        }
+                    
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    
+                },
+            });
+       
+        }
         function setInquiryWorkscopeId(inquiryWorkscope) {
             document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorkscope;
             document.getElementById("WorkscopesDiv").innerHTML =  `<input type="hidden" id="wrscpCnt" value="0" />`;
@@ -972,26 +1163,31 @@ License: You must have a valid license purchased only from themeforest(the above
                             <input type="hidden" value="0" id="HideAseriesLength`+i+`" />
                             <input type="hidden" value="0" id="HideMaterialLength`+i+`" />
 						  <label class="font-size-h6 font-weight-bolder text-dark">`+response.data[i].workScopeName+`</label>
-                          <div class="input-group" id="Wooden`+i+`">
+                          <div class="input-group" >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Wooden Work</label>
                                 <a type="button" style="margin-top:3px;" onclick="addWooden(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
-							</div>
-                            <div class="input-group" id="Counter`+i+`">
+                            </div>
+                            <div class="row" id="Wooden`+i+`"></div>
+                            <div class="input-group" >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Counter Top</label>
                                 <a type="button" style="margin-top:3px;" onclick="addCounter(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
-                           <div class="input-group" id="Appliance`+i+`">
+                            <div class="row" id="Counter`+i+`"></div>
+                           <div class="input-group" >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Appliance</label>
                                 <a type="button" style="margin-top:3px;" onclick="addAppliance(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
-                            <div class="input-group" id="Aseries`+i+`">
+                            <div class="row" id="Appliance`+i+`"></div>
+                            <div class="input-group" >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Accessories </label>
                                 <a type="button" style="margin-top:3px;" onclick="addAseries(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
-                            <div class="input-group" id="Material`+i+`">
+                            <div class="row" id="Aseries`+i+`"></div>
+                            <div class="input-group" >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Material </label>
                                 <a type="button" style="margin-top:3px;" onclick="addMaterial(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
+                            <div class="row" id="Material`+i+`"></div>
 						</div>`;
                      }
               }else {
@@ -1020,6 +1216,8 @@ License: You must have a valid license purchased only from themeforest(the above
            
               console.log(response);
               if (response.isError == false) {
+                brand ='';
+                brand =`<option selected value="0">Select Brand</option>`;
                   for(var i=0;i<response.data.length;i++){
                      brand += `<option value="`+response.data[i].brandId+`">`+response.data[i].brandName+`</option>`;
                   }
