@@ -86,73 +86,29 @@ var KTAppsUsersListDatatable = function() {
                         // };
                         if (data.applianceAccessoryImgUrl != null){
  
-
+                    
                 var file = data.applianceAccessoryImgUrl.substr((data.applianceAccessoryImgUrl.lastIndexOf('.') + 1));
                   switch(file) {
-                        case "pdf":                                                         
-                            output+=
-                              '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:24px;height:24px;"></a>'+
-                              '</div>';
-                        break;
-                        case "css":
-                            output +=
-                              '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/css.svg" style="width:24px;height:24px;"></a>'+
-                              '</div>';
-                        break;
-                        case "doc":
-                            output +=
-                              '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/doc.svg" style="width:24px;height:24px;"></a>'+
-                              '</div>';
-                        break;
-                        case "html":
-                            output +=
-                              '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:24px;height:24px;"></a>'+
-                              '</div>';
-                        break;
-                        case "javascript":
-                            output+=
-                              '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:24px;height:24px;"></a>'+
-                              '</div>';
-                        break;
+
+ 
                         case "jpg":
                             output +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:24px;height:24px;"></a>'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src='+baseFileURL+data.applianceAccessoryImgUrl+'  style="width:80px;height:80px;"></a>'+
                               '</div>';
                         break;
                         case "jpeg":
                             output +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:24px;height:24px;"></a>'+
+                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src='+baseFileURL+data.applianceAccessoryImgUrl+' style="width:80px;height:80px;"></a>'+
                               '</div>';
                         break;
-                        case "mp4":
-                            output +=
-                              '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/mp4.svg" style="width:24px;height:24px;"></a>'+
-                              '</div>';
-                        break;
-                        case "xml":
-                            output+=
-                              '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/xml.svg" style="width:24px;height:24px;"></a>'+
-                              '</div>';
-                        break;
-                        case "zip":
-                            output +=
-                              '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/zip.svg" style="width:24px;height:24px;"></a>'+
-                              '</div>';
-                        break;
+
+
                         default:
                             output +=
                             '<div   class="divico">'+
-                             '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="" style="width:24px;height:24px;"></a>'+
+                             '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="" style="width:80px;height:80px;"></a>'+
                             '</div>';
 
                       }

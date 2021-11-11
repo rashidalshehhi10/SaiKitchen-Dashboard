@@ -858,7 +858,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div   class="col">
                     <input type="text" id="AMeasurement`+i+wsnumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
                 </div>
-                <div id="Aimage`+i+wsnumber[i]+`" style="width:11rem !important;"  class="col">
+                <div id="Aimage`+i+wsnumber[i]+`" style="width:12rem !important;"  class="col">
                     <div   class="divico">
                         <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
                     </div>
@@ -893,9 +893,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div   class="col">
                     <input type="text" id="AsMeasurement`+i+Anumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
                 </div>
-                <div id="Asimage`+i+Anumber[i]+`" style="width:11rem !important;"  class="col">
+                <div id="Asimage`+i+Anumber[i]+`" style="width:12rem !important;"  class="col">
                     <div   class="divico">
-                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                        <a href="#" target="_blank"> <img   style="width:80px;height:80px;"></a>
                     </div>
                 </div>
               </div></div> `;
@@ -929,7 +929,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div   class="col">
                     <input type="text" id="Measurement`+i+Wonumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
                 </div>
-                <div id="image`+i+Wonumber[i]+`" style="width:11rem !important;"  class="col">
+                <div id="image`+i+Wonumber[i]+`" style="width:12rem !important;"  class="col">
                     <div   class="divico">
                         <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
                     </div>
@@ -964,7 +964,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div   class="col">
                     <input type="text" id="CMeasurement`+i+Cnumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
                 </div>
-                <div id="Cimage`+i+Cnumber[i]+`" style="width:11rem !important;" class="col">
+                <div id="Cimage`+i+Cnumber[i]+`" style="width:12rem !important;" class="col">
                     <div   class="divico">
                         <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
                     </div>
@@ -999,7 +999,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div   class="col">
                     <input type="text" id="MMeasurement`+i+Mnumber[i]+`"   class="form-control" style="width:11rem !important;" value="" disabled placeholder="MeasurementUnit" >
                 </div>
-                <div id="Mimage`+i+Mnumber[i]+`" style="width:11rem !important;"  class="col">
+                <div id="Mimage`+i+Mnumber[i]+`" style="width:12rem !important;"  class="col">
                     <div   class="divico">
                         <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
                     </div>
@@ -1057,7 +1057,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         var data = response.data;
                         var output ='';
                         var file = data.applianceAccessoryImgUrl.substr((data.applianceAccessoryImgUrl.lastIndexOf('.') + 1));
-                                        switch(file) {
+                                       /*  switch(file) {
                                                 case "pdf":                                                         
                                                     output+=
                                                     '<div   class="divico">'+
@@ -1124,11 +1124,15 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="" style="width:24px;height:24px;"></a>'+
                                                     '</div>';
 
-                                            }
+                                            } */
+                                            output+=
+                                                    '<div   class="divico">'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" style="width:80px;height:80px;"></a>'+
+                                                    '</div>';
                                         document.getElementById(A+"image"+k+j).innerHTML =output;
                                         }else{
                                             document.getElementById(A+"image"+k+j).innerHTML =   `<div   class="divico">
-                                          <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a></div>`;
+                                          <a href="#" target="_blank"> <img   style="width:80px;height:80px;"></a></div>`;
                     
                                         }
                     
