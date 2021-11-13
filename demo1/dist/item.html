@@ -48,6 +48,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/dist/typeahead.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead-addresspicker/0.1.4/typeahead-addresspicker.min.js"></script>
+
+    <style>
+
+        .se-pre-con {
+            position: fixed;
+            left: 50%;
+            top: 40%;
+            width: 60px;
+            height: 60px;
+            z-index: 9999;
+            background: url(assets/media/gif/load.gif) center no-repeat #fff;
+        }
+              </style>    
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -913,6 +926,7 @@
                 document.getElementById('applianceAccessoryName').value = "";
                 document.getElementById('applianceAccesoryDescription').value = "";
                 document.getElementById('applianceAccessoryPrice').value = "";
+                document.getElementById('skuCode').value = "";
                 $('#brandId'+' option[value="0"]').attr('selected',true).change();
                 $('#unitOfMeasurementId'+' option[value="0"]').attr('selected',true).change();
                 $('#applianceAccessoryTypeId'+' option[value="0"]').attr('selected',true).change();
@@ -954,6 +968,7 @@
                             document.getElementById('applianceAccessoryName').value = response.data.applianceAccessoryName;
                             document.getElementById('applianceAccesoryDescription').value = response.data.applianceAccesoryDescription;
                             document.getElementById('applianceAccessoryPrice').value = response.data.applianceAccessoryPrice;
+                            document.getElementById('skuCode').value = response.data.skuCode;
                             unitOfMeasurementNUM = response.data.unitOfMeasurementId;
                             brandNUM = response.data.brandId;
                             applianceAccessoryTypeNUM = response.data.applianceAccessoryTypeId;

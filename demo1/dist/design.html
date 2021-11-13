@@ -59,11 +59,24 @@ License: You must have a valid license purchased only from themeforest(the above
     <style>
         .divico{border-radius: 5px;background-color: #f0e8ff;padding: 6px;margin-right: 5px;margin-bottom: 5px;float: left}
     </style>
+    <style>
+
+        .se-pre-con {
+            position: fixed;
+            left: 50%;
+            top: 40%;
+            width: 60px;
+            height: 60px;
+            z-index: 9999;
+            background: url(assets/media/gif/load.gif) center no-repeat #fff;
+        }
+              </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
 
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+    <div class="se-pre-con" id="load" style="display: none;" ></div>
     <!--begin::Main-->
     <!--begin::Header Mobile-->
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
@@ -840,6 +853,7 @@ License: You must have a valid license purchased only from themeforest(the above
         var brand ='';
         function addAppliance(i){
             var counter=0;
+            var applianceString = '';
             if(wsnumber[i])
                wsnumber[i] +=1;
             else
@@ -852,7 +866,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("AMeasurement"+i+n).setAttribute('value',document.getElementById("AMeasurement"+i+n).value); 
                 document.getElementById("ASkuCode"+i+n).setAttribute('value',document.getElementById("ASkuCode"+i+n).value); 
             }
-            document.getElementById("Appliance"+i).innerHTML += 
+            //document.getElementById("Appliance"+i).innerHTML += 
+            applianceString = 
             `<div style="padding-bottom:2px;padding-left:10px;">
                 <div class="row col ">     
                 <div   class="col">
@@ -889,10 +904,12 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
               </div></div>   `;
+              $('#Appliance'+i).last().before(applianceString);
               document.getElementById("HideApplianceLength"+i).value = wsnumber[i];
         }
         function addAseries(i){
             var counter=0;
+            var aseriesString = '';
             if(Anumber[i])
                Anumber[i] +=1;
             else
@@ -905,7 +922,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("AsMeasurement"+i+n).setAttribute('value',document.getElementById("AsMeasurement"+i+n).value); 
                 document.getElementById("AsSkuCode"+i+n).setAttribute('value',document.getElementById("AsSkuCode"+i+n).value); 
             }
-            document.getElementById("Aseries"+i).innerHTML += 
+           // document.getElementById("Aseries"+i).innerHTML += 
+           aseriesString = 
             `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
@@ -941,10 +959,12 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
               </div></div> `;
+              $('#Aseries'+i).last().before(aseriesString);
               document.getElementById("HideAseriesLength"+i).value = Anumber[i];
         }
         function addWooden(i){
             var counter=0;
+            var woodenString = '';
             if(Wonumber[i])
             Wonumber[i] +=1;
             else
@@ -957,7 +977,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("Measurement"+i+n).setAttribute('value',document.getElementById("Measurement"+i+n).value); 
                 document.getElementById("SkuCode"+i+n).setAttribute('value',document.getElementById("SkuCode"+i+n).value); 
             }
-            document.getElementById("Wooden"+i).innerHTML += 
+           // document.getElementById("Wooden"+i).innerHTML += 
+            woodenString = 
             `<div style="padding-bottom:2px;padding-left:10px;">
               <div class="row col ">
                 <div   class="col">
@@ -994,10 +1015,12 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
               </div></div>  `;
+              $('#Wooden'+i).last().before(woodenString);
               document.getElementById("HideWoodenLength"+i).value = Wonumber[i];
         }
         function addCounter(i){
             var counter=0;
+            var counterString = '';
             if(Cnumber[i])
             Cnumber[i] +=1;
             else
@@ -1010,7 +1033,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("CMeasurement"+i+n).setAttribute('value',document.getElementById("CMeasurement"+i+n).value); 
                 document.getElementById("CSkuCode"+i+n).setAttribute('value',document.getElementById("CSkuCode"+i+n).value); 
             }
-            document.getElementById("Counter"+i).innerHTML += 
+           // document.getElementById("Counter"+i).innerHTML +=
+           counterString = 
             `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
@@ -1046,10 +1070,12 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
               </div></div>    `;
+              $('#Counter'+i).last().before(counterString);
               document.getElementById("HideCounterLength"+i).value = Cnumber[i];
         }
         function addMaterial(i){
             var counter=0;
+            var materialString = '';
             if(Mnumber[i])
             Mnumber[i] +=1;
             else
@@ -1062,7 +1088,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("MMeasurement"+i+n).setAttribute('value',document.getElementById("MMeasurement"+i+n).value); 
                 document.getElementById("MSkuCode"+i+n).setAttribute('value',document.getElementById("MSkuCode"+i+n).value); 
             }
-            document.getElementById("Material"+i).innerHTML += 
+           // document.getElementById("Material"+i).innerHTML += 
+           materialString = 
             `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
@@ -1098,10 +1125,12 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
               </div></div>  `;
+              $('#Material'+i).last().before(materialString);
               document.getElementById("HideMaterialLength"+i).value = Mnumber[i];
         }
         
         function getElements(A,selectName,k,j){
+            document.getElementById("load").style.removeProperty('display');
           let brandId = document.getElementById(selectName+k+j).value;
         //  document.getElementById(selectName+k+j).style.removeProperty('width');
         let typeId =0;
@@ -1117,6 +1146,7 @@ License: You must have a valid license purchased only from themeforest(the above
             typeId:typeId,
         }
         const data = JSON.stringify(obj);
+       
           $.ajax({
                 type: "Post",
                 url: baseURL + '/ApplianceAccessory/GetItemByBrandId',
@@ -1127,6 +1157,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 data:data,
                 success: function(response) {
                     console.log(response);
+                    document.getElementById("load").style.display = 'none';
                    const roleTypeList2 = document.getElementById(A+'ItemName'+k+j);
                   // roleTypeList2.style.removeProperty('width');
                     var roleTypeListHTML2 = new Array();
@@ -1140,7 +1171,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     roleTypeList2.innerHTML = roleTypeListHTML2.join('');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    
+                    document.getElementById("load").style.display = 'none';  
                 },
             });
        
