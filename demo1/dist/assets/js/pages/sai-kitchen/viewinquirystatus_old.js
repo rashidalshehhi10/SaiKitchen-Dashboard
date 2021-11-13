@@ -191,7 +191,7 @@ if(inquiry.quotations.length > 0){
 }
 
 if(inquiry.payments.length > 0)
-  measurementFee=inquiry.payments[0].paymentAmount;
+  measurementFee=inquiry.payments[0]?.paymentAmount;
 const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');

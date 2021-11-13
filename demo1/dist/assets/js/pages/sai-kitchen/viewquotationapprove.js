@@ -114,7 +114,7 @@ promoDiscount=inquiry.promoDiscount;
 promoId=inquiry.promoId;
 isMeasurementPromo=inquiry.isMeasurementPromo;
 if(inquiry.payments.length > 0)
-  measurementFee=inquiry.payments[0].paymentAmount;
+  measurementFee=inquiry.payments[0]?.paymentAmount;
 const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');
