@@ -175,19 +175,19 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             var v=column.title();
                         break;
                         
-                        case 'Status':
+                      /*   case 'Status':
                             var status = inqStatus;
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
                                     $('.datatable-input[data-col-index="2"]').append('<option value="' + d + '">' + status[d].title + '</option>');
                             });
-                            break;
-                        case 'Managed By':
+                            break; */
+                       /*  case 'Managed By':
                             column.data().unique().sort().each(function(d, j) {
                                 if (d != null)
                                     $('.datatable-input[data-col-index="25"]').append('<option value="' + d+ '">' + d + '</option>');
                             });
-                            break;
+                            break; */
 
                             // case 'Type':
                             // 	var status = {
@@ -1038,6 +1038,92 @@ jQuery(document).ready(function() {
 
 		}
 	});
+    $.ajax({
+        type: "post",
+        url: baseURL + '/Inquiry/GetInquiryStatusForInquiries?branchId=' + user.data.userRoles[0].branch.branchId,
+
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        },
+
+        success: function(response) {
+            console.log(response);
+            if (response.isError == false) {
+
+                console.log(response.data[0].userName);
+                const statusList = document.getElementById('statusId');
+                var statusListHTML = new Array();
+                statusListHTML.push(`
+                <option value="">Select</option>`);
+                for (var i = 0; i < response.data.length; i++) {
+                    statusListHTML.push(`
+					<option value="` + response.data[i].inquiryStatusId + `">` + response.data[i].inquiryStatusName + `</option>`);
+                }
+
+                statusList.innerHTML = statusListHTML.join('');
+
+            } else {
+                Swal.fire({
+                    text: 'Status error',
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+       }
+    });
+    $.ajax({
+        type: "post",
+        url: baseURL + '/Inquiry/GetManagedByForInquiries?branchId=' + user.data.userRoles[0].branch.branchId,
+
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        },
+
+        success: function(response) {
+            console.log(response);
+            if (response.isError == false) {
+
+                console.log(response.data[0].userName);
+                const HandledList = document.getElementById('HandledId');
+                var HandledListHTML = new Array();
+                HandledListHTML.push(`
+                <option value="">Select</option>`);
+                for (var i = 0; i < response.data.length; i++) {
+                    HandledListHTML.push(`
+					<option value="` + response.data[i].managedById + `">` + response.data[i].managedByName + `</option>`);
+                }
+
+                HandledList.innerHTML = HandledListHTML.join('');
+
+            } else {
+                Swal.fire({
+                    text: 'Status error',
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+       }
+    });
 });
 
 $('#kt_managedby_button').click(function () {

@@ -178,6 +178,19 @@ var KTAppsUsersListDatatable = function() {
                 },
 
                 {
+                    field: 'skuCode',
+                    title: 'skuCode',
+                    // autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                        if (data.skuCode != null) {
+                            output += '<div class="font-weight-bold text-muted">' + data.skuCode + '</div>';
+                        }
+                        return output;
+                    },
+                    
+                },
+                {
                     field: 'applianceAccessoryTypeId',
                     title: 'Type',
                     // autoHide: true,
@@ -370,7 +383,8 @@ var KTAppsUsersListDatatable = function() {
                             unitOfMeasurementId: document.getElementById('unitOfMeasurementId').value,
                             applianceAccessoryImgUrl: measurementFile[0],
                             applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
-                            brandId: document.getElementById('brandId').value,   
+                            brandId: document.getElementById('brandId').value,
+                            skuCode: document.getElementById('skuCode').value,
                             isActive: true,
                             isDeleted:true,
                             createdBy: 0,
@@ -463,6 +477,7 @@ var KTAppsUsersListDatatable = function() {
                         applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
                         applianceAccessoryTypeId: document.getElementById('applianceAccessoryTypeId').value,
                         brandId: document.getElementById('brandId').value,
+                        skuCode: document.getElementById('skuCode').value,
                         unitOfMeasurementId: document.getElementById('unitOfMeasurementId').value,
                         applianceAccessoryImgUrl: measurementFile[0]
                         

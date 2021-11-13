@@ -850,27 +850,38 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("AQuantity"+i+n).setAttribute('value',document.getElementById("AQuantity"+i+n).value); 
                 document.getElementById("AUnit"+i+n).setAttribute('value',document.getElementById("AUnit"+i+n).value); 
                 document.getElementById("AMeasurement"+i+n).setAttribute('value',document.getElementById("AMeasurement"+i+n).value); 
+                document.getElementById("ASkuCode"+i+n).setAttribute('value',document.getElementById("ASkuCode"+i+n).value); 
             }
             document.getElementById("Appliance"+i).innerHTML += 
-            `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
+            `<div style="padding-bottom:2px;padding-left:10px;">
+                <div class="row col ">     
                 <div   class="col">
+                    <label style="padding-left:2px;">Brand</label>
                      <select id="ApplianceSelect`+i+wsnumber[i]+`" style="width:11rem !important;" onchange="getElements('A','ApplianceSelect',`+i+`,`+wsnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
+                    <label style="padding-left:2px;">Item</label>
                     <select id="AItemName`+i+wsnumber[i]+`" style="width:11rem !important;" onchange="GetAppliance('A','ItemName',`+i+`,`+wsnumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="AQuantity`+i+wsnumber[i]+`" style="width:11rem !important;" class="form-control"  value="" placeholder="Quantity" >
+                    <label style="padding-left:2px;">Quantity</label>
+                    <input type="text" id="AQuantity`+i+wsnumber[i]+`" style="width:7rem !important;" class="form-control"  value="" placeholder="Quantity" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="AUnit`+i+wsnumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <label style="padding-left:2px;">UnitPrice</label>
+                    <input type="text" id="AUnit`+i+wsnumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="AMeasurement`+i+wsnumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                    <label style="padding-right:40px;">MeasurementUnit</label>
+                    <input type="text" id="AMeasurement`+i+wsnumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div   class="col">
+                    <label style="padding-right:40px;">SkuCode</label>
+                    <input type="text" id="ASkuCode`+i+wsnumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="SkuCode" >
                 </div>
                 <div id="Aimage`+i+wsnumber[i]+`" style="width:12rem !important;"  class="col">
                     <div   class="divico">
@@ -892,27 +903,37 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("AsQuantity"+i+n).setAttribute('value',document.getElementById("AsQuantity"+i+n).value); 
                 document.getElementById("AsUnit"+i+n).setAttribute('value',document.getElementById("AsUnit"+i+n).value); 
                 document.getElementById("AsMeasurement"+i+n).setAttribute('value',document.getElementById("AsMeasurement"+i+n).value); 
+                document.getElementById("AsSkuCode"+i+n).setAttribute('value',document.getElementById("AsSkuCode"+i+n).value); 
             }
             document.getElementById("Aseries"+i).innerHTML += 
             `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
+                    <label style="padding-left:2px;">Brand</label>
                      <select id="AseriesSelect`+i+Anumber[i]+`" style="width:11rem !important;" onchange="getElements('As','AseriesSelect',`+i+`,`+Anumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
+                    <label style="padding-left:2px;">Item</label>
                     <select id="AsItemName`+i+Anumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('As','ItemName',`+i+`,`+Anumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="AsQuantity`+i+Anumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" placeholder="Quantity" >
+                    <label style="padding-left:2px;">Quantity</label>
+                    <input type="text" id="AsQuantity`+i+Anumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" placeholder="Quantity" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="AsUnit`+i+Anumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <label style="padding-left:2px;">UnitPrice</label>
+                    <input type="text" id="AsUnit`+i+Anumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="AsMeasurement`+i+Anumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                    <label style="padding-right:40px;">MeasurementUnit</label>
+                    <input type="text" id="AsMeasurement`+i+Anumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div   class="col">
+                    <label style="padding-right:40px;">SkuCode</label>
+                    <input type="text" id="AsSkuCode`+i+Anumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="SkuCode" >
                 </div>
                 <div id="Asimage`+i+Anumber[i]+`" style="width:12rem !important;"  class="col">
                     <div   class="divico">
@@ -934,28 +955,38 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("Quantity"+i+n).setAttribute('value',document.getElementById("Quantity"+i+n).value); 
                 document.getElementById("Unit"+i+n).setAttribute('value',document.getElementById("Unit"+i+n).value); 
                 document.getElementById("Measurement"+i+n).setAttribute('value',document.getElementById("Measurement"+i+n).value); 
+                document.getElementById("SkuCode"+i+n).setAttribute('value',document.getElementById("SkuCode"+i+n).value); 
             }
             document.getElementById("Wooden"+i).innerHTML += 
             `<div style="padding-bottom:2px;padding-left:10px;">
               <div class="row col ">
                 <div   class="col">
+                    <label style="padding-left:2px;">Brand</label>
                      <select id="WoodenSelect`+i+Wonumber[i]+`" style="width:11rem !important;" onchange="getElements('','WoodenSelect',`+i+`,`+Wonumber[i]+`)" class="form-control datatable-input " >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
+                    <label style="padding-left:2px;">Item</label>
                     <select id="ItemName`+i+Wonumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('','ItemName',`+i+`,`+Wonumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="Quantity`+i+Wonumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" placeholder="Quantity" >
+                    <label style="padding-left:2px;">Quantity</label>
+                    <input type="text" id="Quantity`+i+Wonumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" placeholder="Quantity" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="Unit`+i+Wonumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <label style="padding-left:2px;">UnitPrice</label>
+                    <input type="text" id="Unit`+i+Wonumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="Measurement`+i+Wonumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                     <label style="padding-right:40px;">MeasurementUnit</label>
+                    <input type="text" id="Measurement`+i+Wonumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div   class="col">
+                     <label style="padding-right:40px;">SkuCode</label>
+                    <input type="text" id="SkuCode`+i+Wonumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="SkuCode" >
                 </div>
                 <div id="image`+i+Wonumber[i]+`" style="width:12rem !important;"  class="col">
                     <div   class="divico">
@@ -977,27 +1008,37 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("CQuantity"+i+n).setAttribute('value',document.getElementById("CQuantity"+i+n).value); 
                 document.getElementById("CUnit"+i+n).setAttribute('value',document.getElementById("CUnit"+i+n).value); 
                 document.getElementById("CMeasurement"+i+n).setAttribute('value',document.getElementById("CMeasurement"+i+n).value); 
+                document.getElementById("CSkuCode"+i+n).setAttribute('value',document.getElementById("CSkuCode"+i+n).value); 
             }
             document.getElementById("Counter"+i).innerHTML += 
             `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
+                    <label style="padding-left:2px;">Brand</label>
                      <select id="CounterSelect`+i+Cnumber[i]+`" style="width:11rem !important;" onchange="getElements('C','CounterSelect',`+i+`,`+Cnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
+                    <label style="padding-left:2px;">Item</label>
                     <select id="CItemName`+i+Cnumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('C','ItemName',`+i+`,`+Cnumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="CQuantity`+i+Cnumber[i]+`" style="width:11rem !important;" class="form-control"  value="" placeholder="Quantity" >
+                    <label style="padding-left:2px;">Quantity</label>
+                    <input type="text" id="CQuantity`+i+Cnumber[i]+`" style="width:7rem !important;" class="form-control"  value="" placeholder="Quantity" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="CUnit`+i+Cnumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <label style="padding-left:2px;">UnitPrice</label>
+                    <input type="text" id="CUnit`+i+Cnumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="CMeasurement`+i+Cnumber[i]+`" style="width:11rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                    <label style="padding-right:40px;">MeasurementUnit</label>
+                    <input type="text" id="CMeasurement`+i+Cnumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div   class="col">
+                    <label style="padding-right:40px;">SkuCode</label>
+                    <input type="text" id="CSkuCode`+i+Cnumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="SkuCode" >
                 </div>
                 <div id="Cimage`+i+Cnumber[i]+`" style="width:12rem !important;" class="col">
                     <div   class="divico">
@@ -1019,27 +1060,37 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("MQuantity"+i+n).setAttribute('value',document.getElementById("MQuantity"+i+n).value); 
                 document.getElementById("MUnit"+i+n).setAttribute('value',document.getElementById("MUnit"+i+n).value); 
                 document.getElementById("MMeasurement"+i+n).setAttribute('value',document.getElementById("MMeasurement"+i+n).value); 
+                document.getElementById("MSkuCode"+i+n).setAttribute('value',document.getElementById("MSkuCode"+i+n).value); 
             }
             document.getElementById("Material"+i).innerHTML += 
             `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
                 <div   class="col">
+                    <label style="padding-left:2px;">Brand</label>
                      <select id="MaterialSelect`+i+Mnumber[i]+`" style="width:11rem !important;" onchange="getElements('M','MaterialSelect',`+i+`,`+Mnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
+                    <label style="padding-left:2px;">Item</label>
                     <select id="MItemName`+i+Mnumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('M','ItemName',`+i+`,`+Mnumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
-                    <input type="text" id="MQuantity`+i+Mnumber[i]+`" style="width:11rem !important;"  class="form-control"  value="" placeholder="Quantity" >
+                     <label style="padding-left:2px;">Quantity</label>
+                    <input type="text" id="MQuantity`+i+Mnumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" placeholder="Quantity" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="MUnit`+i+Mnumber[i]+`"  style="width:11rem !important;" class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <label style="padding-left:2px;">UnitPrice</label>
+                    <input type="text" id="MUnit`+i+Mnumber[i]+`"  style="width:7rem !important;" class="form-control"  value="" disabled placeholder="UnitPrice" >
                 </div>
                 <div   class="col">
-                    <input type="text" id="MMeasurement`+i+Mnumber[i]+`"   class="form-control" style="width:11rem !important;" value="" disabled placeholder="MeasurementUnit" >
+                    <label style="padding-right:40px;">MeasurementUnit</label>
+                    <input type="text" id="MMeasurement`+i+Mnumber[i]+`"   class="form-control" style="width:7rem !important;" value="" disabled placeholder="MeasurementUnit" >
+                </div>
+                <div   class="col">
+                    <label style="padding-right:40px;">MSkuCode</label>
+                    <input type="text" id="MSkuCode`+i+Mnumber[i]+`"   class="form-control" style="width:11rem !important;" value="" disabled placeholder="SkuCode" >
                 </div>
                 <div id="Mimage`+i+Mnumber[i]+`" style="width:12rem !important;"  class="col">
                     <div   class="divico">
@@ -1109,6 +1160,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     if(response.data){
                     document.getElementById(A+"Unit"+k+j).value =response.data.applianceAccessoryPrice;
                     document.getElementById(A+"Measurement"+k+j).value =response.data.unitOfMeasurementName;
+                    document.getElementById(A+"SkuCode"+k+j).value =response.data.skuCode;
                     if(response.data.applianceAccessoryImgUrl){
                         var data = response.data;
                         var output ='';
