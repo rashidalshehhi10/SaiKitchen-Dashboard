@@ -1908,8 +1908,9 @@ workscope.innerHTML=workscopeHtml;
         var rejectlistdata = {
             "inquiryId":parseInt(document.getElementById('inquiryId').value),
             "reason":document.getElementById('RejectComment1').value,
+            "base64f3d": measurementFile[0],
           };
-    
+          
         const data = JSON.stringify(rejectlistdata);
         console.log(data);
          $.ajax({

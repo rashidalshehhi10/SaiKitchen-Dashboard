@@ -376,16 +376,17 @@ $('#kt_reject_inquiry_button').click(function () {
     var rejectlistdata = {
         "inquiryId":parseInt(document.getElementById('inquiryId').value),
         "reason":document.getElementById('RejectComment1').value,
+        "base64f3d": measurementFile[0],
       };
-
+     
     const data = JSON.stringify(rejectlistdata);
     console.log(data);
-     $.ajax({
-        type: "Post",
-        url: baseURL + '/JobOrder/JobOrderFactoryReject',
-        headers: {
-            'Content-Type': 'application/json',
-            'userId': user.data.userId,
+      $.ajax({
+         type: "Post",
+         url: baseURL + '/JobOrder/JobOrderFactoryReject',
+         headers: {
+             'Content-Type': 'application/json',
+             'userId': user.data.userId,
             'Access-Control-Allow-Origin': '*',
         },
         data: data,
