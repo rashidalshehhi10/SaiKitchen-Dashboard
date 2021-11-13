@@ -392,61 +392,61 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                   };
                 const data = JSON.stringify(designFiles);
                 console.log(data);
-                //    $.ajax({
-                //     type: "Post",
-                //     url: baseURL + '/Design/AddUpdateDesignfiles',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         'userId': user.data.userId,
-                //         'userToken': user.data.userToken,
-                //         'userRoleId': user.data.userRoles[0].userRoleId,
-                //         'branchId': user.data.userRoles[0].branchId,
-                //         'branchRoleId': user.data.userRoles[0].branchRoleId,
-                //         'Access-Control-Allow-Origin': '*',
-                //     },
-                //     data: data,
-                //     success: function(response) {
-                //         // Release button
-                //         KTUtil.btnRelease(formSubmitButton);
-                //         console.log(response);
-                //         // window.location.replace("home.html");
-                //         if (response.isError == false) {
-                //             // sessionStorage.setItem('user', JSON.stringify(response));
-                //             window.location.replace("design.html");
+                   $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Design/AddUpdateDesignfiles',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("design.html");
 
-                //         } else {
-                //             Swal.fire({
-                //                 text: response.errorMessage,
-                //                 icon: "error",
-                //                 buttonsStyling: false,
-                //                 confirmButtonText: "Ok, got it!",
-                //                 customClass: {
-                //                     confirmButton: "btn font-weight-bold btn-light-primary"
-                //                 }
-                //             }).then(function() {
-                //                 KTUtil.scrollTop();
-                //             });
-                //         }
-                //     },
-                //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                //         // Release button
-                //         KTUtil.btnRelease(formSubmitButton);
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
 
-                //         // alert(errorThrown);
+                        // alert(errorThrown);
 
-                //         Swal.fire({
-                //             text: 'Internet Connection Problem',
-                //             icon: "error",
-                //             buttonsStyling: false,
-                //             confirmButtonText: "Ok, got it!",
-                //             customClass: {
-                //                 confirmButton: "btn font-weight-bold btn-light-primary"
-                //             }
-                //         }).then(function() {
-                //             KTUtil.scrollTop();
-                //         });
-                //     }
-                // });   
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });   
             })
             .on('core.form.invalid', function() {
                 Swal.fire({
