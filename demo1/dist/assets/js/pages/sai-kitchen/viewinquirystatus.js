@@ -138,7 +138,342 @@ jQuery(document).ready(function() {
         }
     }
 
+    var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+    $('#uploadfiles').click(function () {
+      var form = KTUtil.getById('kt_add_measurement_file');
+      var formSubmitUrl = KTUtil.attr(form, 'action');
+      var formSubmitButton = KTUtil.getById('uploadfiles');
+
+      if (!form) {
+          return;
+      }
+
+      FormValidation
+          .formValidation(
+              form, {
+                  fields: {
+                    
+                  },
+                  plugins: {
+                      trigger: new FormValidation.plugins.Trigger(),
+                      submitButton: new FormValidation.plugins.SubmitButton(),
+                      //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                      bootstrap: new FormValidation.plugins.Bootstrap({
+                          //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                          //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                      })
+                  }
+              }
+          )
+          .on('core.form.valid', function() {
+              // Show loading state on button
+              KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
     
+      const queryString = window.location.search;
+      console.log(queryString);
+      const urlParams = new URLSearchParams(queryString);
+      inquiryId = urlParams.get('inquiryId');
+      i = document.getElementById("workscopetype").value
+     
+      
+     
+       
+       if(i==1) {
+                           // measurement
+                  obj = {
+                     inquiryId:inquiryId,
+                     measurement:measurementFile,
+                     desgin:[],
+                     quotation:[],
+                     calculationSheetFile:"",
+                     mepDrawing:"",
+                     matrialSheet:"",
+                     dataSheetAppliance:"",
+                     detailedDesignFile:"",
+                     jobOrderChecklist:"",
+                     advancePayment:[],
+                     beforeInstalltionPayment:[],
+                     afterDelieveryPayment:[]
+                     }
+                
+                 
+
+            }
+         else if (i==2){
+
+                           // desgin
+            obj = {
+               inquiryId:inquiryId,
+               measurement:[],
+               desgin:measurementFile,
+               quotation:[],
+               calculationSheetFile:"",
+               mepDrawing:"",
+               matrialSheet:"",
+               dataSheetAppliance:"",
+               detailedDesignFile:"",
+               jobOrderChecklist:"",
+               advancePayment:[],
+               beforeInstalltionPayment:[],
+               afterDelieveryPayment:[]
+               }
+           
+         
+
+
+         }   
+
+       else if( i==3)  {
+                                // quotation         
+               obj = {
+                  inquiryId:inquiryId,
+                  measurement:[],
+                  desgin:[],
+                  quotation:measurementFile,
+                  calculationSheetFile:"",
+                  mepDrawing:"",
+                  matrialSheet:"",
+                  dataSheetAppliance:"",
+                  detailedDesignFile:"",
+                  jobOrderChecklist:"",
+                  advancePayment:[],
+                  beforeInstalltionPayment:[],
+                  afterDelieveryPayment:[]
+                  }
+             
+           
+
+
+      }  
+
+       else if (i==4) {
+                                 // calculationSheetFile 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:measurementFile[0],
+            mepDrawing:"",
+            matrialSheet:"",
+            dataSheetAppliance:"",
+            detailedDesignFile:"",
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+       
+    
+
+       }
+
+       else if (i==5){
+                                  // mepDrawing 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:"",
+            mepDrawing:measurementFile[0],
+            matrialSheet:"",
+            dataSheetAppliance:"",
+            detailedDesignFile:"",
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+        
+        
+
+       }
+
+       else if (i==6){
+                                  // matrialSheet 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:"",
+            mepDrawing:"",
+            matrialSheet:measurementFile[0],
+            dataSheetAppliance:"",
+            detailedDesignFile:"",
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+       
+       
+
+       }
+
+       else if (i==7){
+                                  // dataSheetAppliance 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:"",
+            mepDrawing:"",
+            matrialSheet:"",
+            dataSheetAppliance:measurementFile[0],
+            detailedDesignFile:"",
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+        
+      
+
+       }
+
+       else if (i==8){
+                                   // detailedDesignFile 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:"",
+            mepDrawing:"",
+            matrialSheet:"",
+            dataSheetAppliance:"",
+            detailedDesignFile:measurementFile[0],
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+       
+
+       }
+
+       else if (i==9){
+                          // jobOrderChecklist 
+               obj = {
+               inquiryId:inquiryId,
+               measurement:[],
+               desgin:[],
+               quotation:[],
+               calculationSheetFile:"",
+               mepDrawing:"",
+               matrialSheet:"",
+               dataSheetAppliance:"",
+               detailedDesignFile:"",
+               jobOrderChecklist:measurementFile[0],
+               advancePayment:[],
+               beforeInstalltionPayment:[],
+               afterDelieveryPayment:[]
+               }
+              
+             
+
+               }
+
+               else if (i==10){
+                                  // advancePayment 
+                        obj = {
+                        inquiryId:inquiryId,
+                        measurement:[],
+                        desgin:[],
+                        quotation:[],
+                        calculationSheetFile:"",
+                        mepDrawing:"",
+                        matrialSheet:"",
+                        dataSheetAppliance:"",
+                        detailedDesignFile:"",
+                        jobOrderChecklist:"",
+                        advancePayment:measurementFile,
+                        beforeInstalltionPayment:[],
+                        afterDelieveryPayment:[]
+                        }
+                      
+                        
+
+                        }
+ 
+           else if (i==11){
+                                  // beforeInstalltionPayment 
+                        obj = {
+                        inquiryId:inquiryId,
+                        measurement:[],
+                        desgin:[],
+                        quotation:[],
+                        calculationSheetFile:"",
+                        mepDrawing:"",
+                        matrialSheet:"",
+                        dataSheetAppliance:"",
+                        detailedDesignFile:"",
+                        jobOrderChecklist:"",
+                        advancePayment:[],
+                        beforeInstalltionPayment:measurementFile,
+                        afterDelieveryPayment:[]
+                        }
+                  
+
+                        }
+
+       else if (i==12){
+                           // afterDelieveryPayment 
+                 obj = {
+                 inquiryId:inquiryId,
+                 measurement:[],
+                 desgin:[],
+                 quotation:[],
+                 calculationSheetFile:"",
+                 mepDrawing:"",
+                 matrialSheet:"",
+                 dataSheetAppliance:"",
+                 detailedDesignFile:"",
+                 jobOrderChecklist:"",
+                 advancePayment:[],
+                 beforeInstalltionPayment:[],
+                 afterDelieveryPayment:measurementFile,
+                 }
+               
+               
+
+                 }
+
+               
+        
+
+                            const data = JSON.stringify(obj);
+                            console.log(data)
+                           $.ajax({
+                              type: "Post",
+                              url: baseURL + '/Inquiry/EditFiles',
+                              headers: {
+                                 'Content-Type': 'application/json',
+                                 'userId': user.data.userId,
+                                 'Access-Control-Allow-Origin': '*',
+                              },
+                              data: data,
+                              success: function(response) {
+                                 console.log(response);
+                             
+                                 window.location.replace("viewinquirystatus.html?inquiryId="+inquiryId);
+                              },
+                              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                 
+                              }
+                        })
+                 
+                     });
+   
+   });
+    
+   
+
+
+
    //  function download_files() {
    //    function download_next(i) {
    //      if (i >= element.measurements[0].files.length) {
@@ -434,6 +769,10 @@ customerDetail.innerHTML=` <!--begin::User-->
    <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Type Of Unit:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingTypeOfUnit+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Comment:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.inquiryComment+`</span>
    </div>
    `+jobHtml+`
    
@@ -1237,6 +1576,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                          </svg></span>
+
+                         <span class="badge badge-default bi-download" id="k" ">
+                         <a href="javascript:;" style="margin:2px" onclick="editfiles(10);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                            </svg>
+                         </a>
+                       </span>
+
                        </div>
                    </div>
                    <div id="dicAdvance`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1258,6 +1607,15 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                          </svg></span>
+
+                         <span class="badge badge-default bi-download" id="k" ">
+                         <a href="javascript:;" style="margin:2px" onclick="editfiles(11);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                            </svg>
+                         </a>
+                       </span>
                        </div>
                    </div>
                    <div id="dicBefore`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1275,10 +1633,22 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   <div class="card">
                    <div class="card-header" >
                        <div class="card-title collapsed" data-toggle="collapse" data-target="#dicAfter`+element.inquiryWorkscopeId+`">
-                           <i class="la fab la-codepen"></i>After Delivery Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('afterFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                           <i class="la fab la-codepen"></i>After Delivery Payment<span class="badge badge-default bi-download" id="k" onclick="downloadItems('afterFiles');">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                          </svg></span>
+
+
+                         <span class="badge badge-default bi-download" id="k" ">
+                         <a href="javascript:;" style="margin:2px" onclick="editfiles(12);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                            </svg>
+                         </a>
+                       </span>
+
                        </div>
                    </div>
                    <div id="dicAfter`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1300,6 +1670,14 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                          </svg></span>
+
+                         <!--<span class="badge badge-default bi-download" id="k" onclick="downloadItems('installFiles');">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                         <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                         </svg>
+                       </span>-->
+
                        </div>
                    </div>
                    <div id="dicInstall`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1324,6 +1702,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                        </svg></span>
+
+                       <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(5);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                       </div>
                    </div>
                    <div id="dicMEP`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1341,6 +1729,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                       </svg></span>
+
+                      <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(6);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                     </div>
                     </div>
                     <div id="dicMaterial`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1358,6 +1756,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                        </svg></span>
+
+                       <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(7);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                       </div>
                    </div>
                    <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1374,6 +1782,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                       <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                     </svg></span>
+
+                    <span class="badge badge-default bi-download" id="k" ">
+                    <a href="javascript:;" style="margin:2px" onclick="editfiles(9);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                       <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                       </svg>
+                    </a>
+                  </span>
+
                    </div>
                 </div>
                 <div id="dicJoborder`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1390,6 +1808,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                  </svg></span>
+
+                 <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(8);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                 </div>
              </div>
              <div id="dicDetailed`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1411,6 +1839,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                            </svg></span>
+
+                           <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(4);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                           </div>
                        </div>
                        <div id="dicCALC`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1433,6 +1871,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                             <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                           </svg></span>
+
+                          <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(3);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                             <span id="paidId"  class="badge badge-default float-right">Paid:`+quotationAmount+`</span>    
                         </div>
                           
@@ -1457,6 +1905,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                       </svg></span>
+
+                      <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(2);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                      </div>
                   </div>
                   <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1488,7 +1946,18 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                         <i class="la la-ruler-combined"></i>Measurement<span class="badge badge-default bi-download" id="k" onclick="downloadItems('measurementFiles');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                      </svg></span>
+                      </svg>
+                      </span>
+
+                      <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(1);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                      </div>
                   </div>
                   <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1531,6 +2000,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                          </svg></span>
+
+                         <span class="badge badge-default bi-download" id="k" ">
+                         <a href="javascript:;" style="margin:2px" onclick="editfiles(10);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                            </svg>
+                         </a>
+                       </span>
+
                        </div>
                    </div>
                    <div id="dicAdvance`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1552,6 +2031,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                          </svg></span>
+
+                         <span class="badge badge-default bi-download" id="k" ">
+                         <a href="javascript:;" style="margin:2px" onclick="editfiles(11);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                            </svg>
+                         </a>
+                       </span>
+
                        </div>
                    </div>
                    <div id="dicBefore`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1573,6 +2062,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                          </svg></span>
+                         <span class="badge badge-default bi-download" id="k" ">
+                         <a href="javascript:;" style="margin:2px" onclick="editfiles(12);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                            </svg>
+                         </a>
+                       </span>
+                         
+
                        </div>
                    </div>
                    <div id="dicAfter`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1594,6 +2093,9 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                          </svg></span>
+
+                         
+
                        </div>
                    </div>
                    <div id="dicInstall`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1618,6 +2120,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                            </svg></span>
+
+                           <span class="badge badge-default bi-download" id="k" ">
+                           <a href="javascript:;" style="margin:2px" onclick="editfiles(4);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                              <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                              </svg>
+                           </a>
+                         </span>
+
                           </div>
                        </div>
                        <div id="dicCALC`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1640,6 +2152,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                            </svg></span>
+
+                           <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(3);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                           </div>
                        </div>
                        <div id="quotRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1661,6 +2183,17 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                           <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                         </svg></span>
+
+                        <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(5);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
+
                        </div>
                     </div>
                     <div id="dicMEP`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1678,6 +2211,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                        </svg></span>
+
+                       <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(6);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                      </div>
                      </div>
                      <div id="dicMaterial`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1695,6 +2238,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                           <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                         </svg></span>
+
+                        <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(7);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                        </div>
                     </div>
                     <div id="dicDatasheet`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1711,6 +2264,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                      </svg></span>
+
+                     <span class="badge badge-default bi-download" id="k" ">
+                    <a href="javascript:;" style="margin:2px" onclick="editfiles(9);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                       <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                       </svg>
+                    </a>
+                  </span>
+
                     </div>
                  </div>
                  <div id="dicJoborder`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1727,6 +2290,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                     <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                   </svg></span>
+
+                  <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(8);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                  </div>
               </div>
               <div id="dicDetailed`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1748,6 +2321,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                        </svg></span>
+
+                       <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(2);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                       </div>
                    </div>
                    <div id="designRow`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1768,6 +2351,16 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                    </svg></span>
+
+                   <span class="badge badge-default bi-download" id="k" ">
+                        <a href="javascript:;" style="margin:2px" onclick="editfiles(1);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                           <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                           </svg>
+                        </a>
+                      </span>
+
                      </div>
                   </div>
                   <div id="measurementRow`+element.inquiryWorkscopeId+`" class="collapse show" data-parent="#accordion`+element.inquiryWorkscopeId+`">
@@ -1844,6 +2437,7 @@ workscope.innerHTML=workscopeHtml;
 //             <!--end::Col-->`;
 //         });
 // });
+
 	
 
             }else {
