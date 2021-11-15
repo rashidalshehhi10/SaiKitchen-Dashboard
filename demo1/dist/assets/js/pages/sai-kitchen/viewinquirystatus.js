@@ -8,6 +8,9 @@ import {
 import {
     measurementFile
 } from './constant.js'
+import {
+   customizeFile
+} from './constant.js'
 export let user;
 var filearry = new Array();
 var fourfile =  new Array();
@@ -245,137 +248,7 @@ jQuery(document).ready(function() {
 
 
       }  
-
-       else if (i==4) {
-                                 // calculationSheetFile 
-         obj = {
-            inquiryId:inquiryId,
-            measurement:[],
-            desgin:[],
-            quotation:[],
-            calculationSheetFile:measurementFile[0],
-            mepDrawing:"",
-            matrialSheet:"",
-            dataSheetAppliance:"",
-            detailedDesignFile:"",
-            jobOrderChecklist:"",
-            advancePayment:[],
-            beforeInstalltionPayment:[],
-            afterDelieveryPayment:[]
-            }
-       
-    
-
-       }
-
-       else if (i==5){
-                                  // mepDrawing 
-         obj = {
-            inquiryId:inquiryId,
-            measurement:[],
-            desgin:[],
-            quotation:[],
-            calculationSheetFile:"",
-            mepDrawing:measurementFile[0],
-            matrialSheet:"",
-            dataSheetAppliance:"",
-            detailedDesignFile:"",
-            jobOrderChecklist:"",
-            advancePayment:[],
-            beforeInstalltionPayment:[],
-            afterDelieveryPayment:[]
-            }
-        
-        
-
-       }
-
-       else if (i==6){
-                                  // matrialSheet 
-         obj = {
-            inquiryId:inquiryId,
-            measurement:[],
-            desgin:[],
-            quotation:[],
-            calculationSheetFile:"",
-            mepDrawing:"",
-            matrialSheet:measurementFile[0],
-            dataSheetAppliance:"",
-            detailedDesignFile:"",
-            jobOrderChecklist:"",
-            advancePayment:[],
-            beforeInstalltionPayment:[],
-            afterDelieveryPayment:[]
-            }
-       
-       
-
-       }
-
-       else if (i==7){
-                                  // dataSheetAppliance 
-         obj = {
-            inquiryId:inquiryId,
-            measurement:[],
-            desgin:[],
-            quotation:[],
-            calculationSheetFile:"",
-            mepDrawing:"",
-            matrialSheet:"",
-            dataSheetAppliance:measurementFile[0],
-            detailedDesignFile:"",
-            jobOrderChecklist:"",
-            advancePayment:[],
-            beforeInstalltionPayment:[],
-            afterDelieveryPayment:[]
-            }
-        
-      
-
-       }
-
-       else if (i==8){
-                                   // detailedDesignFile 
-         obj = {
-            inquiryId:inquiryId,
-            measurement:[],
-            desgin:[],
-            quotation:[],
-            calculationSheetFile:"",
-            mepDrawing:"",
-            matrialSheet:"",
-            dataSheetAppliance:"",
-            detailedDesignFile:measurementFile[0],
-            jobOrderChecklist:"",
-            advancePayment:[],
-            beforeInstalltionPayment:[],
-            afterDelieveryPayment:[]
-            }
-       
-
-       }
-
-       else if (i==9){
-                          // jobOrderChecklist 
-               obj = {
-               inquiryId:inquiryId,
-               measurement:[],
-               desgin:[],
-               quotation:[],
-               calculationSheetFile:"",
-               mepDrawing:"",
-               matrialSheet:"",
-               dataSheetAppliance:"",
-               detailedDesignFile:"",
-               jobOrderChecklist:measurementFile[0],
-               advancePayment:[],
-               beforeInstalltionPayment:[],
-               afterDelieveryPayment:[]
-               }
-              
-             
-
-               }
+ 
 
                else if (i==10){
                                   // advancePayment 
@@ -443,7 +316,7 @@ jQuery(document).ready(function() {
                  }
 
                
-        
+      
 
                             const data = JSON.stringify(obj);
                             console.log(data)
@@ -470,6 +343,206 @@ jQuery(document).ready(function() {
    
    });
     
+
+   //////
+
+
+
+   $('#uploadcustomizefiles').click(function () {
+      var form = KTUtil.getById('kt_add_customize_file');
+      var formSubmitUrl = KTUtil.attr(form, 'action');
+      var formSubmitButton = KTUtil.getById('uploadcustomizefiles');
+
+      if (!form) {
+          return;
+      }
+
+      FormValidation
+          .formValidation(
+              form, {
+                  fields: {
+                    
+                  },
+                  plugins: {
+                      trigger: new FormValidation.plugins.Trigger(),
+                      submitButton: new FormValidation.plugins.SubmitButton(),
+                      //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                      bootstrap: new FormValidation.plugins.Bootstrap({
+                          //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                          //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                      })
+                  }
+              }
+          )
+          .on('core.form.valid', function() {
+              // Show loading state on button
+              KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+    
+      const queryString = window.location.search;
+      console.log(queryString);
+      const urlParams = new URLSearchParams(queryString);
+      inquiryId = urlParams.get('inquiryId');
+      i = document.getElementById("workscopetypecustomize").value
+     
+  
+
+        if (i==4) {
+                                 // calculationSheetFile 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:customizeFile[0],
+            mepDrawing:"",
+            matrialSheet:"",
+            dataSheetAppliance:"",
+            detailedDesignFile:"",
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+       
+   
+
+       }
+
+       else if (i==5){
+                                  // mepDrawing 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:"",
+            mepDrawing:customizeFile[0],
+            matrialSheet:"",
+            dataSheetAppliance:"",
+            detailedDesignFile:"",
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+        
+        
+
+       }
+
+       else if (i==6){
+                                  // matrialSheet 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:"",
+            mepDrawing:"",
+            matrialSheet:customizeFile[0],
+            dataSheetAppliance:"",
+            detailedDesignFile:"",
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+       
+       
+
+       }
+
+       else if (i==7){
+                                  // dataSheetAppliance 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:"",
+            mepDrawing:"",
+            matrialSheet:"",
+            dataSheetAppliance:customizeFile[0],
+            detailedDesignFile:"",
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+        
+      
+
+       }
+
+       else if (i==8){
+                                   // detailedDesignFile 
+         obj = {
+            inquiryId:inquiryId,
+            measurement:[],
+            desgin:[],
+            quotation:[],
+            calculationSheetFile:"",
+            mepDrawing:"",
+            matrialSheet:"",
+            dataSheetAppliance:"",
+            detailedDesignFile:customizeFile[0],
+            jobOrderChecklist:"",
+            advancePayment:[],
+            beforeInstalltionPayment:[],
+            afterDelieveryPayment:[]
+            }
+       
+
+       }
+
+       else if (i==9){
+                          // jobOrderChecklist 
+               obj = {
+               inquiryId:inquiryId,
+               measurement:[],
+               desgin:[],
+               quotation:[],
+               calculationSheetFile:"",
+               mepDrawing:"",
+               matrialSheet:"",
+               dataSheetAppliance:"",
+               detailedDesignFile:"",
+               jobOrderChecklist:customizeFile[0],
+               advancePayment:[],
+               beforeInstalltionPayment:[],
+               afterDelieveryPayment:[]
+               }
+              
+             
+
+               }
+
+              
+      
+                            const data = JSON.stringify(obj);
+                            console.log(data)
+                           $.ajax({
+                              type: "Post",
+                              url: baseURL + '/Inquiry/EditFiles',
+                              headers: {
+                                 'Content-Type': 'application/json',
+                                 'userId': user.data.userId,
+                                 'Access-Control-Allow-Origin': '*',
+                              },
+                              data: data,
+                              success: function(response) {
+                                 console.log(response);
+                             
+                                 window.location.replace("viewinquirystatus.html?inquiryId="+inquiryId);
+                              },
+                              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                 
+                              }
+                        })
+                 
+                     });
+   
+   });
    
 
 
@@ -1704,7 +1777,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        </svg></span>
 
                        <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(5);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(5);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -1731,7 +1804,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                       </svg></span>
 
                       <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(6);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(6);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -1758,7 +1831,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        </svg></span>
 
                        <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(7);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(7);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -1784,7 +1857,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                     </svg></span>
 
                     <span class="badge badge-default bi-download" id="k" ">
-                    <a href="javascript:;" style="margin:2px" onclick="editfiles(9);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                    <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(9);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -1810,7 +1883,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                  </svg></span>
 
                  <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(8);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(8);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -1841,7 +1914,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            </svg></span>
 
                            <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(4);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(4);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Customize Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -2122,7 +2195,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                            </svg></span>
 
                            <span class="badge badge-default bi-download" id="k" ">
-                           <a href="javascript:;" style="margin:2px" onclick="editfiles(4);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                           <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(4);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                               <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                               <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -2185,7 +2258,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                         </svg></span>
 
                         <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(5);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(5);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -2213,7 +2286,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                        </svg></span>
 
                        <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(6);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(6);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -2240,7 +2313,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                         </svg></span>
 
                         <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(7);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(7);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -2266,7 +2339,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                      </svg></span>
 
                      <span class="badge badge-default bi-download" id="k" ">
-                    <a href="javascript:;" style="margin:2px" onclick="editfiles(9);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                    <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(9);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -2292,7 +2365,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                   </svg></span>
 
                   <span class="badge badge-default bi-download" id="k" ">
-                        <a href="javascript:;" style="margin:2px" onclick="editfiles(8);"   data-toggle="modal" data-target="#EditFiles"  title="Edit Files">                          
+                        <a href="javascript:;" style="margin:2px" onclick="editcustomizefiles(8);"   data-toggle="modal" data-target="#CustomizeFiles"  title="Edit Files">                          
                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>

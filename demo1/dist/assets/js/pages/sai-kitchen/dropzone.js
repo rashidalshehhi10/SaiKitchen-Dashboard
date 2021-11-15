@@ -9,6 +9,10 @@ import {
     measurementFile
 } from './constant.js'
 
+import {
+    customizeFile
+} from './constant.js'
+
 
 var KTDropzoneDemo = function() {
     // Private functions
@@ -135,6 +139,97 @@ var KTDropzoneDemo = function() {
             // }
         });
         
+        $('#kt_dropzone_4').dropzone({
+            
+            // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+            url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+            type: "Post",
+            headers : {
+                'Access-Control-Allow-Origin': '*',
+                // 'Content-Type': 'application/json'
+            },
+            paramName: "file", // The name that will be used to transfer the file
+            maxFiles: 1,
+            maxFilesize: 30000, // MB
+            timeout: 600000,
+            addRemoveLinks: true,
+            removedfile:function(file) {
+                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                var fileurl ='';
+                var filearr = fileuploded.innerHTML.split(".");
+                if(filearr.length > 1){
+                    fileurl = "/File/DeleteFileFromBlob?fileName=";
+                }else{
+                    fileurl = "/File/DeleteVideo?VideoId=";
+                }
+                $.ajax({
+                    type:"post",
+                    url:baseURL+fileurl+fileuploded.innerHTML,
+                    cache:false,
+                    success: function(){
+                        removeA(customizeFile, fileuploded.innerHTML);
+                        file.previewElement.remove();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log("Error");
+                
+                    }
+                });
+    
+            },
+      
+            acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+            
+        init: function() {
+            // this.on("addedfile", function (file) {
+            //     var reader = new FileReader();
+            //     reader.onload = function(event) {
+            //         // event.target.result contains base64 encoded image
+            //         var base64String = event.target.result;
+            //         var fileName = file.name;
+            //         var finalbase64 = base64String.split(",")[1]
+            //         customizeFile.push(finalbase64);
+            //         // handlePictureDropUpload(base64String ,fileName );
+            //     };
+            //     reader.readAsDataURL(file);
+
+            // });
+        },
+        success: function(file, response){
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            fileuploded.innerHTML = response.data.item1;
+            //var btndelete = file.previewElement.querySelector(".delete");
+           // btndelete.setAttribute("id", 'delete-midia-id-'+response.midia_id);
+            // alert(response.data.item1);
+            customizeFile.push(response.data.item1);
+        
+        }
+            // accept: function(file, done) {
+            //     if (file.name == "justinbieber.jpg") {
+            //         done("Naha, you don't.");
+            //     } else {
+            //         var reader = new FileReader();
+            //         var fileByteArray = [];
+            //         reader.readAsArrayBuffer(file);
+            //         reader.onloadend = function(evt) {
+            //             if (evt.target.readyState == FileReader.DONE) {
+            //                 var arrayBuffer = evt.target.result,
+            //                     array = new Uint8Array(arrayBuffer);
+            //                 for (var i = 0; i < array.length; i++) {
+            //                     fileByteArray.push(array[i]);
+            //                 }
+            //                 measurementFile.push(fileByteArray);
+            //                 console.log(measurementFile);
+            //             }
+            //         }
+            //         // file.accepted();
+            //         done("");
+            //     }
+            // }
+        });
+
+
+
     }
 
 

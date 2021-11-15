@@ -57,7 +57,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta name="theme-color" content="#db4938" />
     <!--End:PWA-->
     <style>
-        .divico{border-radius: 5px;background-color: #f0e8ff;padding: 6px;margin-right: 5px;margin-bottom: 5px;float: left}
+        .divico{margin-bottom: 5px;float: left;}
+        
     </style>
     <style>
 
@@ -868,40 +869,48 @@ License: You must have a valid license purchased only from themeforest(the above
             // }
             //document.getElementById("Appliance"+i).innerHTML += 
             applianceString = 
-            `<div style="padding-bottom:2px;padding-left:10px;">
-                <div class="row col ">     
+            `<div id="Appliance`+i+wsnumber[i]+`" style="padding-bottom:2px;padding-left:10px;">
+                <div  class="row col ">     
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
-                     <select id="ApplianceSelect`+i+wsnumber[i]+`" style="width:11rem !important;" onchange="getElements('A','ApplianceSelect',`+i+`,`+wsnumber[i]+`)" class="form-control datatable-input" >
+                     <select id="ApplianceSelect`+i+wsnumber[i]+`" style="width:10rem !important;" onchange="getElements('A','ApplianceSelect',`+i+`,`+wsnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Item</label>
-                    <select id="AItemName`+i+wsnumber[i]+`" style="width:11rem !important;" onchange="GetAppliance('A','ItemName',`+i+`,`+wsnumber[i]+`)"  class="form-control datatable-input " >
+                    <select id="AItemName`+i+wsnumber[i]+`" style="width:10rem !important;" onchange="GetAppliance('A','ItemName',`+i+`,`+wsnumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Quantity</label>
-                    <input type="text" id="AQuantity`+i+wsnumber[i]+`" style="width:7rem !important;" class="form-control"  value="" placeholder="Quantity" >
+                    <input type="text" id="AQuantity`+i+wsnumber[i]+`" style="width:6rem !important;" class="form-control"  value="" placeholder="" >
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">UnitPrice</label>
-                    <input type="text" id="AUnit`+i+wsnumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <input type="text" id="AUnit`+i+wsnumber[i]+`" style="width:6rem !important;"  class="form-control"  value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                    <label style="padding-right:40px;">MeasurementUnit</label>
-                    <input type="text" id="AMeasurement`+i+wsnumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                    <label >MeasurementUnit</label>
+                    <input type="text" id="AMeasurement`+i+wsnumber[i]+`" style="width:9rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                    <label style="padding-right:40px;">SkuCode</label>
-                    <input type="text" id="ASkuCode`+i+wsnumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="SkuCode" >
+                    <label >SkuCode</label>
+                    <input type="text" id="ASkuCode`+i+wsnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
-                <div id="Aimage`+i+wsnumber[i]+`" style="width:12rem !important;"  class="col">
+                <div id="Aimage`+i+wsnumber[i]+`" style="width:15rem !important;"  class="col">
                     <div   class="divico">
-                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                        <a href="#" target="_blank"> <img   ></a>
                     </div>
+                </div>
+                <div id="" style="padding-top:2rem"  class="col">
+                        <span onclick="removeappliance(`+i+`,`+wsnumber[i]+`);" style="background-color: #f0e8ff;">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                         </svg>
+                        </span>
                 </div>
               </div></div>   `;
               $('#Appliance'+i).last().before(applianceString);
@@ -924,39 +933,48 @@ License: You must have a valid license purchased only from themeforest(the above
             // }
            // document.getElementById("Aseries"+i).innerHTML += 
            aseriesString = 
-            `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
+            `<div  id="Aseries`+i+Anumber[i]+`" style="padding-bottom:2px;padding-left:10px;"> 
+                <div  class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
-                     <select id="AseriesSelect`+i+Anumber[i]+`" style="width:11rem !important;" onchange="getElements('As','AseriesSelect',`+i+`,`+Anumber[i]+`)" class="form-control datatable-input" >
+                     <select id="AseriesSelect`+i+Anumber[i]+`" style="width:10rem !important;" onchange="getElements('As','AseriesSelect',`+i+`,`+Anumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Item</label>
-                    <select id="AsItemName`+i+Anumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('As','ItemName',`+i+`,`+Anumber[i]+`)"  class="form-control datatable-input " >
+                    <select id="AsItemName`+i+Anumber[i]+`" style="width:10rem !important;"  onchange="GetAppliance('As','ItemName',`+i+`,`+Anumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Quantity</label>
-                    <input type="text" id="AsQuantity`+i+Anumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" placeholder="Quantity" >
+                    <input type="text" id="AsQuantity`+i+Anumber[i]+`" style="width:6rem !important;"  class="form-control"  value="" placeholder="" >
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">UnitPrice</label>
-                    <input type="text" id="AsUnit`+i+Anumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <input type="text" id="AsUnit`+i+Anumber[i]+`" style="width:6rem !important;"  class="form-control"  value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                    <label style="padding-right:40px;">MeasurementUnit</label>
-                    <input type="text" id="AsMeasurement`+i+Anumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                    <label >MeasurementUnit</label>
+                    <input type="text" id="AsMeasurement`+i+Anumber[i]+`" style="width:9rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                    <label style="padding-right:40px;">SkuCode</label>
-                    <input type="text" id="AsSkuCode`+i+Anumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="SkuCode" >
+                    <label >SkuCode</label>
+                    <input type="text" id="AsSkuCode`+i+Anumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
-                <div id="Asimage`+i+Anumber[i]+`" style="width:12rem !important;"  class="col">
+                <div id="Asimage`+i+Anumber[i]+`" style="width:15rem !important;"  class="col">
                     <div   class="divico">
-                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                        <a href="#" target="_blank"> <img   ></a>
                     </div>
+                </div>
+                <div id="" style="padding-top:2rem"  class="col">
+                        <span onclick="removeaseries(`+i+`,`+Anumber[i]+`);" style="background-color: #f0e8ff;">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                         </svg>
+                        </span>
                 </div>
               </div></div> `;
               $('#Aseries'+i).last().before(aseriesString);
@@ -979,41 +997,52 @@ License: You must have a valid license purchased only from themeforest(the above
             // }
            // document.getElementById("Wooden"+i).innerHTML += 
             woodenString = 
-            `<div style="padding-bottom:2px;padding-left:10px;">
-              <div class="row col ">
+            `<div  id="Wooden`+i+Wonumber[i]+`"  style="padding-bottom:2px;padding-left:10px;">
+              <div  class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
-                     <select id="WoodenSelect`+i+Wonumber[i]+`" style="width:11rem !important;" onchange="getElements('','WoodenSelect',`+i+`,`+Wonumber[i]+`)" class="form-control datatable-input " >
+                     <select id="WoodenSelect`+i+Wonumber[i]+`" style="width:10rem !important;" onchange="getElements('','WoodenSelect',`+i+`,`+Wonumber[i]+`)" class="form-control datatable-input " >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Item</label>
-                    <select id="ItemName`+i+Wonumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('','ItemName',`+i+`,`+Wonumber[i]+`)"  class="form-control datatable-input " >
+                    <select id="ItemName`+i+Wonumber[i]+`" style="width:10rem !important;"  onchange="GetAppliance('','ItemName',`+i+`,`+Wonumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Quantity</label>
-                    <input type="text" id="Quantity`+i+Wonumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" placeholder="Quantity" >
+                    <input type="text" id="Quantity`+i+Wonumber[i]+`" style="width:6rem !important;"  class="form-control"  value="" placeholder="" >
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">UnitPrice</label>
-                    <input type="text" id="Unit`+i+Wonumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <input type="text" id="Unit`+i+Wonumber[i]+`" style="width:6rem !important;"  class="form-control"  value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                     <label style="padding-right:40px;">MeasurementUnit</label>
-                    <input type="text" id="Measurement`+i+Wonumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                     <label >MeasurementUnit</label>
+                    <input type="text" id="Measurement`+i+Wonumber[i]+`" style="width:9rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                     <label style="padding-right:40px;">SkuCode</label>
-                    <input type="text" id="SkuCode`+i+Wonumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="SkuCode" >
+                     <label >SkuCode</label>
+                    <input type="text" id="SkuCode`+i+Wonumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
-                <div id="image`+i+Wonumber[i]+`" style="width:12rem !important;"  class="col">
+                <div id="image`+i+Wonumber[i]+`" style="width:15rem !important;"  class="col">
                     <div   class="divico">
-                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                        <a href="#" target="_blank"> <img   ></a>
                     </div>
                 </div>
+                 <div id="" style="padding-top:2rem"  class="col">
+                    
+                        <span onclick="removewooden(`+i+`,`+Wonumber[i]+`);" style="background-color: #f0e8ff;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                        </span>
+                  
+                </div>
+                
               </div></div>  `;
               $('#Wooden'+i).last().before(woodenString);
               document.getElementById("HideWoodenLength"+i).value = Wonumber[i];
@@ -1035,39 +1064,48 @@ License: You must have a valid license purchased only from themeforest(the above
             // }
            // document.getElementById("Counter"+i).innerHTML +=
            counterString = 
-            `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
+            `<div  id="Counter`+i+Cnumber[i]+`"  style="padding-bottom:2px;padding-left:10px;">
+                 <div   class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
-                     <select id="CounterSelect`+i+Cnumber[i]+`" style="width:11rem !important;" onchange="getElements('C','CounterSelect',`+i+`,`+Cnumber[i]+`)" class="form-control datatable-input" >
+                     <select id="CounterSelect`+i+Cnumber[i]+`" style="width:10rem !important;" onchange="getElements('C','CounterSelect',`+i+`,`+Cnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Item</label>
-                    <select id="CItemName`+i+Cnumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('C','ItemName',`+i+`,`+Cnumber[i]+`)"  class="form-control datatable-input " >
+                    <select id="CItemName`+i+Cnumber[i]+`" style="width:10rem !important;"  onchange="GetAppliance('C','ItemName',`+i+`,`+Cnumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Quantity</label>
-                    <input type="text" id="CQuantity`+i+Cnumber[i]+`" style="width:7rem !important;" class="form-control"  value="" placeholder="Quantity" >
+                    <input type="text" id="CQuantity`+i+Cnumber[i]+`" style="width:6rem !important;" class="form-control"  value="" placeholder="" >
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">UnitPrice</label>
-                    <input type="text" id="CUnit`+i+Cnumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <input type="text" id="CUnit`+i+Cnumber[i]+`" style="width:6rem !important;"  class="form-control"  value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                    <label style="padding-right:40px;">MeasurementUnit</label>
-                    <input type="text" id="CMeasurement`+i+Cnumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="MeasurementUnit" >
+                    <label >MeasurementUnit</label>
+                    <input type="text" id="CMeasurement`+i+Cnumber[i]+`" style="width:9rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                    <label style="padding-right:40px;">SkuCode</label>
-                    <input type="text" id="CSkuCode`+i+Cnumber[i]+`" style="width:7rem !important;"  class="form-control" value="" disabled placeholder="SkuCode" >
+                    <label >SkuCode</label>
+                    <input type="text" id="CSkuCode`+i+Cnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
-                <div id="Cimage`+i+Cnumber[i]+`" style="width:12rem !important;" class="col">
+                <div id="Cimage`+i+Cnumber[i]+`" style="width:15rem !important;" class="col">
                     <div   class="divico">
-                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                        <a href="#" target="_blank"> <img   ></a>
                     </div>
+                </div>
+                <div id="" style="padding-top:2rem" class="col">
+                         <span onclick="removecounter(`+i+`,`+Cnumber[i]+`);" style="background-color: #f0e8ff;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                        </span>
                 </div>
               </div></div>    `;
               $('#Counter'+i).last().before(counterString);
@@ -1090,45 +1128,88 @@ License: You must have a valid license purchased only from themeforest(the above
             // }
            // document.getElementById("Material"+i).innerHTML += 
            materialString = 
-            `<div style="padding-bottom:2px;padding-left:10px;"> <div class="row col ">
+            `<div  id="Material`+i+Mnumber[i]+`"  style="padding-bottom:2px;padding-left:10px;"> 
+                <div   class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
-                     <select id="MaterialSelect`+i+Mnumber[i]+`" style="width:11rem !important;" onchange="getElements('M','MaterialSelect',`+i+`,`+Mnumber[i]+`)" class="form-control datatable-input" >
+                     <select id="MaterialSelect`+i+Mnumber[i]+`" style="width:10rem !important;" onchange="getElements('M','MaterialSelect',`+i+`,`+Mnumber[i]+`)" class="form-control datatable-input" >
      					`+brand+`
 					</select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Item</label>
-                    <select id="MItemName`+i+Mnumber[i]+`" style="width:11rem !important;"  onchange="GetAppliance('M','ItemName',`+i+`,`+Mnumber[i]+`)"  class="form-control datatable-input " >
+                    <select id="MItemName`+i+Mnumber[i]+`" style="width:10rem !important;"  onchange="GetAppliance('M','ItemName',`+i+`,`+Mnumber[i]+`)"  class="form-control datatable-input " >
                         <option selected value="0">Select Item</option>
 					</select>
                 </div>
                 <div   class="col">
                      <label style="padding-left:2px;">Quantity</label>
-                    <input type="text" id="MQuantity`+i+Mnumber[i]+`" style="width:7rem !important;"  class="form-control"  value="" placeholder="Quantity" >
+                    <input type="text" id="MQuantity`+i+Mnumber[i]+`" style="width:6rem !important;"  class="form-control"  value="" placeholder="" >
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">UnitPrice</label>
-                    <input type="text" id="MUnit`+i+Mnumber[i]+`"  style="width:7rem !important;" class="form-control"  value="" disabled placeholder="UnitPrice" >
+                    <input type="text" id="MUnit`+i+Mnumber[i]+`"  style="width:6rem !important;" class="form-control"  value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                    <label style="padding-right:40px;">MeasurementUnit</label>
-                    <input type="text" id="MMeasurement`+i+Mnumber[i]+`"   class="form-control" style="width:7rem !important;" value="" disabled placeholder="MeasurementUnit" >
+                    <label >MeasurementUnit</label>
+                    <input type="text" id="MMeasurement`+i+Mnumber[i]+`"   class="form-control" style="width:9rem !important;" value="" disabled placeholder="" >
                 </div>
                 <div   class="col">
-                    <label style="padding-right:40px;">MSkuCode</label>
-                    <input type="text" id="MSkuCode`+i+Mnumber[i]+`"   class="form-control" style="width:11rem !important;" value="" disabled placeholder="SkuCode" >
+                    <label >MSkuCode</label>
+                    <input type="text" id="MSkuCode`+i+Mnumber[i]+`"   class="form-control" style="width:6rem !important;" value="" disabled placeholder="" >
                 </div>
-                <div id="Mimage`+i+Mnumber[i]+`" style="width:12rem !important;"  class="col">
+                <div id="Mimage`+i+Mnumber[i]+`" style="width:15rem !important;"  class="col">
                     <div   class="divico">
-                        <a href="#" target="_blank"> <img   style="width:24px;height:24px;"></a>
+                        <a href="#" target="_blank"> <img   ></a>
                     </div>
+                </div>
+                <div id=""   class="col">
+                        <span onclick="removematerial(`+i+`,`+Mnumber[i]+`);" style="background-color: #f0e8ff;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                        </span>
                 </div>
               </div></div>  `;
               $('#Material'+i).last().before(materialString);
               document.getElementById("HideMaterialLength"+i).value = Mnumber[i];
         }
         
+       function removewooden (i,j){
+     
+        document.getElementById('Wooden'+i+j).remove();
+
+       }
+
+       function removeaseries (i,j){
+     
+     document.getElementById('Aseries'+i+j).remove();
+
+    }
+
+    function removeappliance (i,j){
+     
+     document.getElementById('Appliance'+i+j).remove();
+
+    }
+
+    function removecounter (i,j){
+     
+     document.getElementById('Counter'+i+j).remove();
+
+    }
+
+    function removematerial (i,j){
+     
+     document.getElementById('Material'+i+j).remove();
+
+    }
+
+
+
+
+
         function getElements(A,selectName,k,j){
             document.getElementById("load").style.removeProperty('display');
           let brandId = document.getElementById(selectName+k+j).value;
@@ -1306,27 +1387,27 @@ License: You must have a valid license purchased only from themeforest(the above
                             <input type="hidden" value="0" id="HideAseriesLength`+i+`" />
                             <input type="hidden" value="0" id="HideMaterialLength`+i+`" />
 						  <label class="font-size-h6 font-weight-bolder text-dark">`+response.data[i].workScopeName+`</label>
-                          <div class="input-group" >
+                          <div class="input-group"   >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Wooden Work</label>
                                 <a type="button" style="margin-top:3px;" onclick="addWooden(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
                             </div>
                             <div class="row" id="Wooden`+i+`"></div>
-                            <div class="input-group" >
+                            <div class="input-group"   >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Counter Top</label>
                                 <a type="button" style="margin-top:3px;" onclick="addCounter(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
                             <div class="row" id="Counter`+i+`"></div>
-                           <div class="input-group" >
+                           <div class="input-group"   >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Appliance</label>
                                 <a type="button" style="margin-top:3px;" onclick="addAppliance(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
                             <div class="row" id="Appliance`+i+`"></div>
-                            <div class="input-group" >
+                            <div class="input-group"   >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Accessories </label>
                                 <a type="button" style="margin-top:3px;" onclick="addAseries(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>
                             <div class="row" id="Aseries`+i+`"></div>
-                            <div class="input-group" >
+                            <div class="input-group"  >
                                 <label class=" text-dark" style="padding-left:5px;width:100px;">Material </label>
                                 <a type="button" style="margin-top:3px;" onclick="addMaterial(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
 							</div>

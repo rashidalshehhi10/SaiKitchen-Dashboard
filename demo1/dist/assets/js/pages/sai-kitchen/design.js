@@ -316,6 +316,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 for(var i=0;i<parseInt(wrscpCnt);i++){
                     var Wooden =[];
                     for(var j=1;j<=parseInt(document.getElementById("HideWoodenLength"+i).value);j++){
+                      if(document.getElementById("WoodenSelect"+i+j) != null)
                         Wooden.push(
                             {
                                 brand:document.getElementById("WoodenSelect"+i+j).value, 
@@ -328,6 +329,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     }
                     var counter =[];
                     for(var j=1;j<=parseInt(document.getElementById("HideCounterLength"+i).value);j++){
+                       if(document.getElementById("CounterSelect"+i+j) != null)
                         counter.push(
                             {
                                 brand:document.getElementById("CounterSelect"+i+j).value, 
@@ -340,6 +342,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     }
                     var appliance =[];
                     for(var j=1;j<=parseInt(document.getElementById("HideApplianceLength"+i).value);j++){
+                        if(document.getElementById("ApplianceSelect"+i+j) != null)
                         appliance.push(
                             {
                                 brand:document.getElementById("ApplianceSelect"+i+j).value, 
@@ -352,6 +355,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     }
                     var aseries =[];
                     for(var j=1;j<=parseInt(document.getElementById("HideAseriesLength"+i).value);j++){
+                        if(document.getElementById("AseriesSelect"+i+j) != null)
                         aseries.push(
                             {
                                 brand:document.getElementById("AseriesSelect"+i+j).value, 
@@ -364,6 +368,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     }
                     var Material =[];
                     for(var j=1;j<=parseInt(document.getElementById("HideMaterialLength"+i).value);j++){
+                        if(document.getElementById("MaterialSelect"+i+j) != null)
                         Material.push(
                             {
                                 brand:document.getElementById("MaterialSelect"+i+j).value, 
