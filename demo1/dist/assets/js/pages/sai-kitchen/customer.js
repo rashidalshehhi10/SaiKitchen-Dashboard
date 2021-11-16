@@ -439,6 +439,17 @@ var KTAppsUsersListDatatable = function() {
                         output += '<div class="font-weight-bold text-muted">' + data.userName + '</div>';
 
                         return output;
+                    },
+                },{
+                    field: 'AddedOn',
+                    title: 'Added On',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.addedOn + '</div>';
+
+                        return output;
                     }
                 }
             ],
