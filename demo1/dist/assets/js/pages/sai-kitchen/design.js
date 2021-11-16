@@ -325,6 +325,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 unit:document.getElementById("Unit"+i+j).value,
                                 measurement:document.getElementById("Measurement"+i+j).value,
                                 skuCode:document.getElementById("SkuCode"+i+j).value,
+                                discription:document.getElementById("DescId"+i+j).value,
                             });
                     }
                     var counter =[];
@@ -338,6 +339,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 unit:document.getElementById("CUnit"+i+j).value,
                                 measurement:document.getElementById("CMeasurement"+i+j).value,
                                 skuCode:document.getElementById("CSkuCode"+i+j).value,
+                                discription:document.getElementById("CDescId"+i+j).value,
                             });
                     }
                     var appliance =[];
@@ -351,6 +353,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 unit:document.getElementById("AUnit"+i+j).value,
                                 measurement:document.getElementById("AMeasurement"+i+j).value,
                                 skuCode:document.getElementById("ASkuCode"+i+j).value,
+                                discription:document.getElementById("ADescId"+i+j).value,
                             });
                     }
                     var aseries =[];
@@ -364,6 +367,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 unit:document.getElementById("AsUnit"+i+j).value,
                                 measurement:document.getElementById("AsMeasurement"+i+j).value,
                                 skuCode:document.getElementById("AsSkuCode"+i+j).value,
+                                discription:document.getElementById("AsDescId"+i+j).value,
                             });
                     }
                     var Material =[];
@@ -377,6 +381,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                 unit:document.getElementById("MUnit"+i+j).value,
                                 measurement:document.getElementById("MMeasurement"+i+j).value,
                                 skuCode:document.getElementById("MSkuCode"+i+j).value,
+                                discription:document.getElementById("MDescId"+i+j).value,
                             });
                     }
                     var wrscObj = {

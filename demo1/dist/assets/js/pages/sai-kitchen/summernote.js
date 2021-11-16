@@ -1,0 +1,1 @@
+"use strict";var KTSummernoteDemo={init:function(){$(".summernote").summernote({height:200,tabsize:2})}};jQuery(document).ready((function(){KTSummernoteDemo.init()}));

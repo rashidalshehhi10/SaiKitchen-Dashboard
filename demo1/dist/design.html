@@ -859,15 +859,7 @@ License: You must have a valid license purchased only from themeforest(the above
                wsnumber[i] +=1;
             else
                wsnumber[i] =1;
-            // for(var n=1;n<wsnumber[i];n++){
-            //     document.getElementById("ApplianceSelect"+i+n).options[document.getElementById("ApplianceSelect"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("AItemName"+i+n).options[document.getElementById("AItemName"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("AQuantity"+i+n).setAttribute('value',document.getElementById("AQuantity"+i+n).value); 
-            //     document.getElementById("AUnit"+i+n).setAttribute('value',document.getElementById("AUnit"+i+n).value); 
-            //     document.getElementById("AMeasurement"+i+n).setAttribute('value',document.getElementById("AMeasurement"+i+n).value); 
-            //     document.getElementById("ASkuCode"+i+n).setAttribute('value',document.getElementById("ASkuCode"+i+n).value); 
-            // }
-            //document.getElementById("Appliance"+i).innerHTML += 
+            
             applianceString = 
             `<div id="Appliance`+i+wsnumber[i]+`" style="padding-bottom:2px;padding-left:10px;">
                 <div  class="row col ">     
@@ -912,8 +904,14 @@ License: You must have a valid license purchased only from themeforest(the above
                          </svg>
                         </span>
                 </div>
-              </div></div>   `;
-              $('#Appliance'+i).last().before(applianceString);
+              </div>
+              <div  class="row col " style="padding-top:2px;">
+                  <div class="col-11">
+                    <textarea id="ADescId`+i+wsnumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                  </div>
+                </div>
+              </div>   `;
+              $('#Appliance'+i).last().after(applianceString);
               document.getElementById("HideApplianceLength"+i).value = wsnumber[i];
         }
         function addAseries(i){
@@ -923,15 +921,7 @@ License: You must have a valid license purchased only from themeforest(the above
                Anumber[i] +=1;
             else
             Anumber[i] =1;
-            // for(var n=1;n<Anumber[i];n++){
-            //     document.getElementById("AseriesSelect"+i+n).options[document.getElementById("AseriesSelect"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("AsItemName"+i+n).options[document.getElementById("AsItemName"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("AsQuantity"+i+n).setAttribute('value',document.getElementById("AsQuantity"+i+n).value); 
-            //     document.getElementById("AsUnit"+i+n).setAttribute('value',document.getElementById("AsUnit"+i+n).value); 
-            //     document.getElementById("AsMeasurement"+i+n).setAttribute('value',document.getElementById("AsMeasurement"+i+n).value); 
-            //     document.getElementById("AsSkuCode"+i+n).setAttribute('value',document.getElementById("AsSkuCode"+i+n).value); 
-            // }
-           // document.getElementById("Aseries"+i).innerHTML += 
+             
            aseriesString = 
             `<div  id="Aseries`+i+Anumber[i]+`" style="padding-bottom:2px;padding-left:10px;"> 
                 <div  class="row col ">
@@ -976,8 +966,14 @@ License: You must have a valid license purchased only from themeforest(the above
                          </svg>
                         </span>
                 </div>
-              </div></div> `;
-              $('#Aseries'+i).last().before(aseriesString);
+              </div>
+              <div  class="row col " style="padding-top:2px;">
+                  <div class="col-11">
+                    <textarea id="AsDescId`+i+Anumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                  </div>
+                </div>
+              </div> `;
+              $('#Aseries'+i).last().after(aseriesString);
               document.getElementById("HideAseriesLength"+i).value = Anumber[i];
         }
         function addWooden(i){
@@ -987,15 +983,7 @@ License: You must have a valid license purchased only from themeforest(the above
             Wonumber[i] +=1;
             else
             Wonumber[i] =1;
-            // for(var n=1;n<Wonumber[i];n++){
-            //     document.getElementById("WoodenSelect"+i+n).options[document.getElementById("WoodenSelect"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("ItemName"+i+n).options[document.getElementById("ItemName"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("Quantity"+i+n).setAttribute('value',document.getElementById("Quantity"+i+n).value); 
-            //     document.getElementById("Unit"+i+n).setAttribute('value',document.getElementById("Unit"+i+n).value); 
-            //     document.getElementById("Measurement"+i+n).setAttribute('value',document.getElementById("Measurement"+i+n).value); 
-            //     document.getElementById("SkuCode"+i+n).setAttribute('value',document.getElementById("SkuCode"+i+n).value); 
-            // }
-           // document.getElementById("Wooden"+i).innerHTML += 
+            
             woodenString = 
             `<div  id="Wooden`+i+Wonumber[i]+`"  style="padding-bottom:2px;padding-left:10px;">
               <div  class="row col ">
@@ -1032,7 +1020,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <a href="#" target="_blank"> <img   ></a>
                     </div>
                 </div>
-                 <div id="" style="padding-top:2rem"  class="col">
+                <div id="" style="padding-top:2rem"  class="col">
                     
                         <span onclick="removewooden(`+i+`,`+Wonumber[i]+`);" style="background-color: #f0e8ff;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -1043,8 +1031,14 @@ License: You must have a valid license purchased only from themeforest(the above
                   
                 </div>
                 
-              </div></div>  `;
-              $('#Wooden'+i).last().before(woodenString);
+              </div>
+               <div  class="row col " style="padding-top:2px;">
+                  <div class="col-11">
+                    <textarea id="DescId`+i+Wonumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                  </div>
+                </div>
+              </div>  `;
+              $('#Wooden'+i).last().after(woodenString);
               document.getElementById("HideWoodenLength"+i).value = Wonumber[i];
         }
         function addCounter(i){
@@ -1054,15 +1048,7 @@ License: You must have a valid license purchased only from themeforest(the above
             Cnumber[i] +=1;
             else
             Cnumber[i] =1;
-            // for(var n=1;n<Cnumber[i];n++){
-            //     document.getElementById("CounterSelect"+i+n).options[document.getElementById("CounterSelect"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("CItemName"+i+n).options[document.getElementById("CItemName"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("CQuantity"+i+n).setAttribute('value',document.getElementById("CQuantity"+i+n).value); 
-            //     document.getElementById("CUnit"+i+n).setAttribute('value',document.getElementById("CUnit"+i+n).value); 
-            //     document.getElementById("CMeasurement"+i+n).setAttribute('value',document.getElementById("CMeasurement"+i+n).value); 
-            //     document.getElementById("CSkuCode"+i+n).setAttribute('value',document.getElementById("CSkuCode"+i+n).value); 
-            // }
-           // document.getElementById("Counter"+i).innerHTML +=
+            
            counterString = 
             `<div  id="Counter`+i+Cnumber[i]+`"  style="padding-bottom:2px;padding-left:10px;">
                  <div   class="row col ">
@@ -1107,8 +1093,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         </svg>
                         </span>
                 </div>
-              </div></div>    `;
-              $('#Counter'+i).last().before(counterString);
+              </div>
+              <div  class="row col " style="padding-top:2px;">
+                  <div class="col-11">
+                    <textarea id="CDescId`+i+Cnumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                  </div>
+                </div>
+              </div>    `;
+              $('#Counter'+i).last().after(counterString);
               document.getElementById("HideCounterLength"+i).value = Cnumber[i];
         }
         function addMaterial(i){
@@ -1118,15 +1110,7 @@ License: You must have a valid license purchased only from themeforest(the above
             Mnumber[i] +=1;
             else
             Mnumber[i] =1;
-            // for(var n=1;n<Mnumber[i];n++){
-            //     document.getElementById("MaterialSelect"+i+n).options[document.getElementById("MaterialSelect"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("MItemName"+i+n).options[document.getElementById("MItemName"+i+n).options.selectedIndex].setAttribute("selected", "selected");
-            //     document.getElementById("MQuantity"+i+n).setAttribute('value',document.getElementById("MQuantity"+i+n).value); 
-            //     document.getElementById("MUnit"+i+n).setAttribute('value',document.getElementById("MUnit"+i+n).value); 
-            //     document.getElementById("MMeasurement"+i+n).setAttribute('value',document.getElementById("MMeasurement"+i+n).value); 
-            //     document.getElementById("MSkuCode"+i+n).setAttribute('value',document.getElementById("MSkuCode"+i+n).value); 
-            // }
-           // document.getElementById("Material"+i).innerHTML += 
+            
            materialString = 
             `<div  id="Material`+i+Mnumber[i]+`"  style="padding-bottom:2px;padding-left:10px;"> 
                 <div   class="row col ">
@@ -1171,8 +1155,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         </svg>
                         </span>
                 </div>
-              </div></div>  `;
-              $('#Material'+i).last().before(materialString);
+              </div>
+              <div  class="row col " style="padding-top:2px;">
+                  <div class="col-11">
+                    <textarea id="MDescId`+i+Mnumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                  </div>
+                </div>
+              </div>  `;
+              $('#Material'+i).last().after(materialString);
               document.getElementById("HideMaterialLength"+i).value = Mnumber[i];
         }
         
@@ -1277,74 +1267,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         var data = response.data;
                         var output ='';
                         var file = data.applianceAccessoryImgUrl.substr((data.applianceAccessoryImgUrl.lastIndexOf('.') + 1));
-                                       /*  switch(file) {
-                                                case "pdf":                                                         
-                                                    output+=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "css":
-                                                    output +=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/css.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "doc":
-                                                    output +=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/doc.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "html":
-                                                    output +=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "javascript":
-                                                    output+=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/html.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "jpg":
-                                                    output +=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "jpeg":
-                                                    output +=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "mp4":
-                                                    output +=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/mp4.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "xml":
-                                                    output+=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/xml.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                case "zip":
-                                                    output +=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="/assets/media/svg/files/zip.svg" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-                                                break;
-                                                default:
-                                                    output +=
-                                                    '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="" style="width:24px;height:24px;"></a>'+
-                                                    '</div>';
-
-                                            } */
+                                       
                                             output+=
                                                     '<div   class="divico">'+
                                                     '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" style="width:80px;height:80px;"></a>'+
