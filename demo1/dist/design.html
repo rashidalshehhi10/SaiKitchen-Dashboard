@@ -809,7 +809,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="assets/js/pages/sai-kitchen/firebase.js" type="module"></script>
 
 
-
+ <script src="assets/js/pages/sai-kitchen/dropdown.js"></script>
     <script src="assets/js/pages/sai-kitchen/base.js" type="module"></script>
 
     <!--begin::Page Vendors(used by this page)-->
@@ -853,6 +853,10 @@ License: You must have a valid license purchased only from themeforest(the above
         var Mnumber=[];
         var brand ='';
         function addAppliance(i){
+
+            $(document).ready(function() {
+                $('#ApplianceSelect'+i+wsnumber[i]).select2();
+            });
             var counter=0;
             var applianceString = '';
             if(wsnumber[i])
@@ -865,7 +869,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div  class="row col ">     
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
-                     <select id="ApplianceSelect`+i+wsnumber[i]+`" style="width:10rem !important;" onchange="getElements('A','ApplianceSelect',`+i+`,`+wsnumber[i]+`)" class="form-control datatable-input" >
+                     <select id="ApplianceSelect`+i+wsnumber[i]+`" style="width:10rem !important;" onchange="getElements('A','ApplianceSelect',`+i+`,`+wsnumber[i]+`)" class="form-control form-control-lg form-control-solid " data-live-search="true">
      					`+brand+`
 					</select>
                 </div>
@@ -915,6 +919,9 @@ License: You must have a valid license purchased only from themeforest(the above
               document.getElementById("HideApplianceLength"+i).value = wsnumber[i];
         }
         function addAseries(i){
+            $(document).ready(function() {
+                $('#AseriesSelect'+i+Anumber[i]).select2();
+            });
             var counter=0;
             var aseriesString = '';
             if(Anumber[i])
@@ -977,6 +984,9 @@ License: You must have a valid license purchased only from themeforest(the above
               document.getElementById("HideAseriesLength"+i).value = Anumber[i];
         }
         function addWooden(i){
+            $(document).ready(function() {
+                $('#WoodenSelect'+i+Wonumber[i]).select2();
+            });
             var counter=0;
             var woodenString = '';
             if(Wonumber[i])
@@ -1042,6 +1052,9 @@ License: You must have a valid license purchased only from themeforest(the above
               document.getElementById("HideWoodenLength"+i).value = Wonumber[i];
         }
         function addCounter(i){
+            $(document).ready(function() {
+                $('#CounterSelect'+i+Cnumber[i]).select2();
+            });
             var counter=0;
             var counterString = '';
             if(Cnumber[i])
@@ -1104,6 +1117,9 @@ License: You must have a valid license purchased only from themeforest(the above
               document.getElementById("HideCounterLength"+i).value = Cnumber[i];
         }
         function addMaterial(i){
+            $(document).ready(function() {
+                $('#MaterialSelect'+i+Mnumber[i]).select2();
+            });
             var counter=0;
             var materialString = '';
             if(Mnumber[i])
@@ -1116,7 +1132,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div   class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
-                     <select id="MaterialSelect`+i+Mnumber[i]+`" style="width:10rem !important;" onchange="getElements('M','MaterialSelect',`+i+`,`+Mnumber[i]+`)" class="form-control datatable-input" >
+                     <select id="MaterialSelect`+i+Mnumber[i]+`" style="width:10rem !important;" onchange="getElements('M','MaterialSelect',`+i+`,`+Mnumber[i]+`)" class="form-control form-control-lg form-control-solid" >
      					`+brand+`
 					</select>
                 </div>
