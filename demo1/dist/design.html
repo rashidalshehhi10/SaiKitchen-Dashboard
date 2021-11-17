@@ -907,7 +907,7 @@ License: You must have a valid license purchased only from themeforest(the above
               </div>
               <div  class="row col " style="padding-top:2px;">
                   <div class="col-11">
-                    <textarea id="ADescId`+i+wsnumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                    <textarea id="ADescId`+i+wsnumber[i]+`" class="form-control" rows="2" disabled placeholder=""></textarea>
                   </div>
                 </div>
               </div>   `;
@@ -969,7 +969,7 @@ License: You must have a valid license purchased only from themeforest(the above
               </div>
               <div  class="row col " style="padding-top:2px;">
                   <div class="col-11">
-                    <textarea id="AsDescId`+i+Anumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                    <textarea id="AsDescId`+i+Anumber[i]+`" class="form-control" rows="2" disabled placeholder=""></textarea>
                   </div>
                 </div>
               </div> `;
@@ -1034,7 +1034,7 @@ License: You must have a valid license purchased only from themeforest(the above
               </div>
                <div  class="row col " style="padding-top:2px;">
                   <div class="col-11">
-                    <textarea id="DescId`+i+Wonumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                    <textarea id="DescId`+i+Wonumber[i]+`" class="form-control" disabled rows="2" placeholder=""></textarea>
                   </div>
                 </div>
               </div>  `;
@@ -1096,7 +1096,7 @@ License: You must have a valid license purchased only from themeforest(the above
               </div>
               <div  class="row col " style="padding-top:2px;">
                   <div class="col-11">
-                    <textarea id="CDescId`+i+Cnumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                    <textarea id="CDescId`+i+Cnumber[i]+`" disabled class="form-control" rows="2" placeholder=""></textarea>
                   </div>
                 </div>
               </div>    `;
@@ -1158,7 +1158,7 @@ License: You must have a valid license purchased only from themeforest(the above
               </div>
               <div  class="row col " style="padding-top:2px;">
                   <div class="col-11">
-                    <textarea id="MDescId`+i+Mnumber[i]+`" class="form-control" rows="2" placeholder="Type a Description"></textarea>
+                    <textarea id="MDescId`+i+Mnumber[i]+`" class="form-control" disabled rows="2" placeholder=""></textarea>
                   </div>
                 </div>
               </div>  `;
@@ -1263,6 +1263,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     document.getElementById(A+"Unit"+k+j).value =response.data.applianceAccessoryPrice;
                     document.getElementById(A+"Measurement"+k+j).value =response.data.unitOfMeasurementName;
                     document.getElementById(A+"SkuCode"+k+j).value =response.data.skuCode;
+                    document.getElementById(A+"DescId"+k+j).value =response.data.applianceAccesoryDescription;
                     if(response.data.applianceAccessoryImgUrl){
                         var data = response.data;
                         var output ='';
