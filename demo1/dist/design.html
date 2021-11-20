@@ -866,7 +866,7 @@ License: You must have a valid license purchased only from themeforest(the above
                wsnumber[i] =1;
             
             applianceString = 
-            `<div id="Appliance`+i+wsnumber[i]+`" style="padding-bottom:2px;padding-left:10px;">
+            `<div id="Appliance`+i+wsnumber[i]+`" style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
                 <div  class="row col ">     
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
@@ -896,11 +896,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <label >SkuCode</label>
                     <input type="text" id="ASkuCode`+i+wsnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
-                <div id="Aimage`+i+wsnumber[i]+`" style="width:15rem !important;"  class="col">
-                    <div   class="divico">
-                        <a href="#" target="_blank"> <img   ></a>
-                    </div>
-                </div>
+                <div class="col">
+                    <label >Color</label>
+                    <input type="text" id="AColorId`+i+Cnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
+                  </div>
+ 
                 <div id="" style="padding-top:2rem"  class="col">
                         <span onclick="removeappliance(`+i+`,`+wsnumber[i]+`);" style="background-color: #f0e8ff;">
                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -911,9 +911,15 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
               </div>
               <div  class="row col " style="padding-top:2px;">
-                  <div class="col-11">
+                  <div class="col-10">
+                    <label >Description</label>
                     <textarea id="ADescId`+i+wsnumber[i]+`" class="form-control" rows="2" disabled placeholder=""></textarea>
                   </div>
+                  <div id="Aimage`+i+wsnumber[i]+`" style="width:15rem !important;"  class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   ></a>
+                    </div>
+                </div>
                 </div>
               </div>   `;
               $('#Appliance'+i).last().after(applianceString);
@@ -932,7 +938,7 @@ License: You must have a valid license purchased only from themeforest(the above
             Anumber[i] =1;
              
            aseriesString = 
-            `<div  id="Aseries`+i+Anumber[i]+`" style="padding-bottom:2px;padding-left:10px;"> 
+            `<div  id="Aseries`+i+Anumber[i]+`" style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;"> 
                 <div  class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
@@ -962,11 +968,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <label >SkuCode</label>
                     <input type="text" id="AsSkuCode`+i+Anumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
-                <div id="Asimage`+i+Anumber[i]+`" style="width:15rem !important;"  class="col">
-                    <div   class="divico">
-                        <a href="#" target="_blank"> <img   ></a>
-                    </div>
-                </div>
+                <div class="col">
+                    <label >Color</label>
+                    <input type="text" id="AsColorId`+i+Cnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
+                  </div>
+               
                 <div id="" style="padding-top:2rem"  class="col">
                         <span onclick="removeaseries(`+i+`,`+Anumber[i]+`);" style="background-color: #f0e8ff;">
                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -977,9 +983,15 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
               </div>
               <div  class="row col " style="padding-top:2px;">
-                  <div class="col-11">
+                  <div class="col-10">
+                    <label >Description</label>
                     <textarea id="AsDescId`+i+Anumber[i]+`" class="form-control" rows="2" disabled placeholder=""></textarea>
                   </div>
+                  <div id="Asimage`+i+Anumber[i]+`" style="width:15rem !important;"  class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   ></a>
+                    </div>
+                </div>
                 </div>
               </div> `;
               $('#Aseries'+i).last().after(aseriesString);
@@ -998,7 +1010,7 @@ License: You must have a valid license purchased only from themeforest(the above
             Wonumber[i] =1;
             
             woodenString = 
-            `<div  id="Wooden`+i+Wonumber[i]+`"  style="padding-bottom:2px;padding-left:10px;">
+            `<div  id="Wooden`+i+Wonumber[i]+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
               <div  class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
@@ -1028,11 +1040,11 @@ License: You must have a valid license purchased only from themeforest(the above
                      <label >SkuCode</label>
                     <input type="text" id="SkuCode`+i+Wonumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
-                <div id="image`+i+Wonumber[i]+`" style="width:15rem !important;"  class="col">
-                    <div   class="divico">
-                        <a href="#" target="_blank"> <img   ></a>
-                    </div>
-                </div>
+                <div class="col">
+                    <label >Color</label>
+                    <input type="text" id="AsColorId`+i+Cnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
+                  </div>
+               
                 <div id="" style="padding-top:2rem"  class="col">
                     
                         <span onclick="removewooden(`+i+`,`+Wonumber[i]+`);" style="background-color: #f0e8ff;">
@@ -1046,9 +1058,15 @@ License: You must have a valid license purchased only from themeforest(the above
                 
               </div>
                <div  class="row col " style="padding-top:2px;">
-                  <div class="col-11">
+                  <div class="col-10">
+                    <label >Description</label>
                     <textarea id="DescId`+i+Wonumber[i]+`" class="form-control" disabled rows="2" placeholder=""></textarea>
                   </div>
+                  <div id="image`+i+Wonumber[i]+`" style="width:15rem !important;"  class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   ></a>
+                    </div>
+                </div>
                 </div>
               </div>  `;
               $('#Wooden'+i).last().after(woodenString);
@@ -1067,7 +1085,7 @@ License: You must have a valid license purchased only from themeforest(the above
             Cnumber[i] =1;
             
            counterString = 
-            `<div  id="Counter`+i+Cnumber[i]+`"  style="padding-bottom:2px;padding-left:10px;">
+            `<div  id="Counter`+i+Cnumber[i]+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
                  <div   class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
@@ -1097,11 +1115,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <label >SkuCode</label>
                     <input type="text" id="CSkuCode`+i+Cnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
                 </div>
-                <div id="Cimage`+i+Cnumber[i]+`" style="width:15rem !important;" class="col">
-                    <div   class="divico">
-                        <a href="#" target="_blank"> <img   ></a>
-                    </div>
-                </div>
+                <div class="col">
+                    <label >Color</label>
+                    <input type="text" id="CColorId`+i+Cnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
+                  </div>
+               
                 <div id="" style="padding-top:2rem" class="col">
                          <span onclick="removecounter(`+i+`,`+Cnumber[i]+`);" style="background-color: #f0e8ff;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -1112,9 +1130,15 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
               </div>
               <div  class="row col " style="padding-top:2px;">
-                  <div class="col-11">
+                  <div class="col-10">
+                    <label >Description</label>
                     <textarea id="CDescId`+i+Cnumber[i]+`" disabled class="form-control" rows="2" placeholder=""></textarea>
                   </div>
+                  <div id="Cimage`+i+Cnumber[i]+`" style="width:15rem !important;" class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   ></a>
+                    </div>
+                </div>
                 </div>
               </div>    `;
               $('#Counter'+i).last().after(counterString);
@@ -1133,7 +1157,7 @@ License: You must have a valid license purchased only from themeforest(the above
             Mnumber[i] =1;
             
            materialString = 
-            `<div  id="Material`+i+Mnumber[i]+`"  style="padding-bottom:2px;padding-left:10px;"> 
+            `<div  id="Material`+i+Mnumber[i]+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;"> 
                 <div   class="row col ">
                 <div   class="col">
                     <label style="padding-left:2px;">Brand</label>
@@ -1163,11 +1187,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <label >MSkuCode</label>
                     <input type="text" id="MSkuCode`+i+Mnumber[i]+`"   class="form-control" style="width:6rem !important;" value="" disabled placeholder="" >
                 </div>
-                <div id="Mimage`+i+Mnumber[i]+`" style="width:15rem !important;"  class="col">
-                    <div   class="divico">
-                        <a href="#" target="_blank"> <img   ></a>
-                    </div>
-                </div>
+                <div class="col">
+                    <label >Color</label>
+                    <input type="text" id="MColorId`+i+Cnumber[i]+`" style="width:6rem !important;"  class="form-control" value="" disabled placeholder="" >
+                  </div>
+                
                 <div id=""   class="col">
                         <span onclick="removematerial(`+i+`,`+Mnumber[i]+`);" style="background-color: #f0e8ff;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -1178,9 +1202,15 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
               </div>
               <div  class="row col " style="padding-top:2px;">
-                  <div class="col-11">
+                  <div class="col-10">
+                    <label >Description</label>
                     <textarea id="MDescId`+i+Mnumber[i]+`" class="form-control" disabled rows="2" placeholder=""></textarea>
                   </div>
+                  <div id="Mimage`+i+Mnumber[i]+`" style="width:15rem !important;"  class="col">
+                    <div   class="divico">
+                        <a href="#" target="_blank"> <img   ></a>
+                    </div>
+                </div>
                 </div>
               </div>  `;
               $('#Material'+i).last().after(materialString);
@@ -1285,14 +1315,15 @@ License: You must have a valid license purchased only from themeforest(the above
                     document.getElementById(A+"Measurement"+k+j).value =response.data.unitOfMeasurementName;
                     document.getElementById(A+"SkuCode"+k+j).value =response.data.skuCode;
                     document.getElementById(A+"DescId"+k+j).value =response.data.applianceAccesoryDescription;
-                    if(response.data.applianceAccessoryImgUrl){
+                    document.getElementById(A+"ColorId"+k+j).value =response.data.colorName;
+                    if(response.data.imgUrl){
                         var data = response.data;
                         var output ='';
-                        var file = data.applianceAccessoryImgUrl.substr((data.applianceAccessoryImgUrl.lastIndexOf('.') + 1));
+                        var file = data.imgUrl.substr((data.imgUrl.lastIndexOf('.') + 1));
                                        
                                             output+=
                                                     '<div   class="divico">'+
-                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.applianceAccessoryImgUrl+'" style="width:80px;height:80px;"></a>'+
+                                                    '<a href="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.imgUrl+'" target="_blank"> <img  src="'+"https://saikitchenstorage.blob.core.windows.net/files/"+data.imgUrl+'" style="width:80px;height:80px;"></a>'+
                                                     '</div>';
                                         document.getElementById(A+"image"+k+j).innerHTML =output;
                                         }else{

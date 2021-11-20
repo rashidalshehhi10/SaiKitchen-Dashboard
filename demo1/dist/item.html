@@ -734,10 +734,10 @@
                                 </div> 
                                 <div class="col-xl-6">
                                     <div class="form-group">
-                                        <label class="font-size-h6 font-weight-bolder text-dark">Unit Price</label>
+                                        <label class="font-size-h6 font-weight-bolder text-dark">Unit Price*</label>
                                         <div class="input-group input-group-lg input-group-solid">
 
-                                            <input type="text" name="applianceAccessoryPrice" id="applianceAccessoryPrice" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
+                                            <input type="number" name="applianceAccessoryPrice" id="applianceAccessoryPrice" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -747,7 +747,17 @@
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="form-group">
-                                        <label class="font-size-h6 font-weight-bolder text-dark">SKUCode</label>
+                                        <label class="font-size-h6 font-weight-bolder text-dark">Color</label>
+                                        <div class="input-group input-group-lg input-group-solid">
+                                           <select class="form-control" id="colorId" name="colorId" class="form-control form-control-lg form-control-solid" style="width:100%">
+         
+                                            </select>
+                                        </div>
+                                     </div>
+                                </div> 
+                                <div class="col-xl-6">
+                                    <div class="form-group">
+                                        <label class="font-size-h6 font-weight-bolder text-dark">skuCode</label>
                                         <div class="input-group input-group-lg input-group-solid">
 
                                             <input type="text" name="skuCode" id="skuCode" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>
@@ -923,14 +933,20 @@
                 
                 document.getElementById("exampleModalLabel").innerHTML = "New Item";
                 document.getElementById("kt_add_applianceAccessory_button").innerHTML = "Add";
-                document.getElementById("applianceAccessoryId").innerHTML = '0';
+               // document.getElementById("applianceAccessoryId").innerHTML = '0';
                 document.getElementById('applianceAccessoryName').value = "";
                 document.getElementById('applianceAccesoryDescription').value = "";
                 document.getElementById('applianceAccessoryPrice').value = "";
                 document.getElementById('skuCode').value = "";
-                $('#brandId'+' option[value="0"]').attr('selected',true).change();
-                $('#unitOfMeasurementId'+' option[value="0"]').attr('selected',true).change();
-                $('#applianceAccessoryTypeId'+' option[value="0"]').attr('selected',true).change();
+                // $('#brandId'+' option[value="0"]').attr('selected',true).change();
+                // $('#unitOfMeasurementId'+' option[value="0"]').attr('selected',true).change();
+                // $('#applianceAccessoryTypeId'+' option[value="0"]').attr('selected',true).change();
+                // $('#colorId'+' option[value="0"]').attr('selected',true).change(); 
+                //  $('#colorId').prop('selectedIndex',0);
+                $('#colorId option:first').prop('selected',true);
+                $('#brandId option:first').prop('selected',true);
+                $('#applianceAccessoryTypeId option:first').prop('selected',true);
+                $('#unitOfMeasurementId option:first').prop('selected',true);
 
             } catch (error) {
 
@@ -946,8 +962,8 @@
   
 
             // alert('hi ' + baseURL);  /Api/ApplianceAccessory/GetApplianceAccessoryById
-            $.ajax({
-                type: "Post", 
+            $.ajax({   
+                type: "Post",
                 url: baseURL + '/ApplianceAccessory/GetApplianceAccessoryById?applianceAccessoryId=' + applianceAccessoryId,
                 headers: {
                     'Content-Type': 'application/json',
@@ -976,6 +992,7 @@
                             $('#unitOfMeasurementId'+' option[value="'+response.data.unitOfMeasurementId+'"]').attr('selected',true).change();
                             $('#brandId'+' option[value="'+response.data.brandId+'"]').attr('selected',true).change();
                             $('#applianceAccessoryTypeId'+' option[value="'+response.data.applianceAccessoryTypeId+'"]').attr('selected',true).change();
+                            $('#colorId'+' option[value="'+response.data.colorId+'"]').attr('selected',true).change();
                       
                         } catch (error) {
 

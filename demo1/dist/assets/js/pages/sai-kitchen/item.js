@@ -24,7 +24,7 @@ var KTAppsUsersListDatatable = function() {
             data: {
 
                 type: 'remote',
-                source: {
+                source: { 
                     read: {  
                         url: baseURL + '/ApplianceAccessory/GetAllApplianceAccessory',
                     },
@@ -70,7 +70,7 @@ var KTAppsUsersListDatatable = function() {
                 },
 
                 {
-                    field: 'applianceAccessoryImgUrl',
+                    field: 'imgUrl',
                     title: 'Item Image',
                     autoHide: true,
                     // type: 'date',
@@ -84,23 +84,23 @@ var KTAppsUsersListDatatable = function() {
                         // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
                         // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
                         // };
-                        if (data.applianceAccessoryImgUrl != null){
+                        if (data.imgUrl != null){
  
                     
-                var file = data.applianceAccessoryImgUrl.substr((data.applianceAccessoryImgUrl.lastIndexOf('.') + 1));
+                var file = data.imgUrl.substr((data.imgUrl.lastIndexOf('.') + 1));
                   switch(file) {
 
  
                         case "jpg":
                             output +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src='+baseFileURL+data.applianceAccessoryImgUrl+'  style="width:80px;height:80px;"></a>'+
+                               '<a href="'+baseFileURL+data.imgUrl+'" target="_blank"> <img  src='+baseFileURL+data.imgUrl+'  style="width:80px;height:80px;"></a>'+
                               '</div>';
                         break;
                         case "jpeg":
                             output +=
                               '<div   class="divico">'+
-                               '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src='+baseFileURL+data.applianceAccessoryImgUrl+' style="width:80px;height:80px;"></a>'+
+                               '<a href="'+baseFileURL+data.imgUrl+'" target="_blank"> <img  src='+baseFileURL+data.imgUrl+' style="width:80px;height:80px;"></a>'+
                               '</div>';
                         break;
 
@@ -108,7 +108,7 @@ var KTAppsUsersListDatatable = function() {
                         default:
                             output +=
                             '<div   class="divico">'+
-                             '<a href="'+baseFileURL+data.applianceAccessoryImgUrl+'" target="_blank"> <img  src="" style="width:80px;height:80px;"></a>'+
+                             '<a href="'+baseFileURL+data.imgUrl+'" target="_blank"> <img  src="" style="width:80px;height:80px;"></a>'+
                             '</div>';
 
                       }
@@ -203,6 +203,7 @@ var KTAppsUsersListDatatable = function() {
                     },
                     
                 },
+               
                 {
                     field: 'Actions',
                     title: 'Actions',
@@ -258,6 +259,20 @@ var KTAppsUsersListDatatable = function() {
                             return `<span></span>`;
                         }
                     },
+                },
+                {
+                    field: 'colorId',
+                    title: 'Color',
+                    width: 100,
+                     autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                        if (data.colorId != null) {
+                            output += '<div class="font-weight-bold text-muted">' + data.colorName + '</div>';
+                        }
+                        return output;
+                    },
+                    
                 },
                 {
                     field: 'unitOfMeasurementId',
@@ -329,13 +344,13 @@ var KTAppsUsersListDatatable = function() {
                                 }
                             }
                         },
-                        // promoCode: {
-                        //     validators: {
-                        //         notEmpty: {
-                        //             message: 'Code is required'
-                        //         }
-                        //     }
-                        // },
+                        applianceAccessoryPrice: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Unit Price is required'
+                                }
+                            }
+                        },
                         // kt_datepicker_3: {
                         //     validators: {
                         //         notEmpty: {
@@ -376,24 +391,16 @@ var KTAppsUsersListDatatable = function() {
 
                         //
                         var applianceAccessory = {
-                            applianceAccessoryId:  document.getElementById("applianceAccessoryId").innerHTML,
+              
+                            skuCode: document.getElementById('skuCode').value,
                             applianceAccessoryName: document.getElementById('applianceAccessoryName').value,
                             applianceAccesoryDescription: document.getElementById('applianceAccesoryDescription').value,
-                            applianceAccessoryTypeId: document.getElementById('applianceAccessoryTypeId').value,
+                            applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
+                            applianceAccessoryTypeId: document.getElementById('applianceAccessoryTypeId').value, 
+                            brandId: document.getElementById('brandId').value,
                             unitOfMeasurementId: document.getElementById('unitOfMeasurementId').value,
                             applianceAccessoryImgUrl: measurementFile[0],
-                            applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
-                            brandId: document.getElementById('brandId').value,
-                            skuCode: document.getElementById('skuCode').value,
-                            isActive: true,
-                            isDeleted:true,
-                            createdBy: 0,
-                            createdDate: "string",
-                            updatedBy: 0,
-                            updatedDate: "string",
-                            applianceAccessoryType: {},
-                            brand: {},
-                            unitOfMeasurement: {}
+                            colorId: document.getElementById('colorId').value,
             
                         };
                         const data = JSON.stringify(applianceAccessory);
@@ -405,11 +412,11 @@ var KTAppsUsersListDatatable = function() {
                
                
                
-                if(applianceAccessory.applianceAccessoryId==0){
+                // if(applianceAccessory.applianceAccessoryId==0){
 
                     $.ajax({
                         type: "Post",
-                        url: baseURL + '/ApplianceAccessory/CreateApplianceAccessory',
+                        url: baseURL + '/ApplianceAccessory/CreateUpdateApplianceAccessory',
     
                         headers: {
                             'Content-Type': 'application/json',
@@ -465,86 +472,97 @@ var KTAppsUsersListDatatable = function() {
                     });
 
                   
-                }
-                else{  
+         //       }
+          //      else{  
                     
                     
 
-                    var applianceAccessoryupdate = {
-                        applianceAccessoryId:  document.getElementById("applianceAccessoryId").innerHTML,
-                        applianceAccessoryName: document.getElementById('applianceAccessoryName').value,
-                        applianceAccesoryDescription: document.getElementById('applianceAccesoryDescription').value,
-                        applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
-                        applianceAccessoryTypeId: document.getElementById('applianceAccessoryTypeId').value,
-                        brandId: document.getElementById('brandId').value,
-                        skuCode: document.getElementById('skuCode').value,
-                        unitOfMeasurementId: document.getElementById('unitOfMeasurementId').value,
-                        applianceAccessoryImgUrl: measurementFile[0]
-                        
-                    };
-                    const data = JSON.stringify(applianceAccessoryupdate);
-                    console.log(data);
-                   // alert(JSON.stringify(applianceAccessory))
+                //     var applianceAccessory = {
+                //  //       applianceAccessoryId:  document.getElementById("applianceAccessoryId").innerHTML,
+                //         skuCode: document.getElementById('skuCode').value,
+                //         applianceAccessoryName: document.getElementById('applianceAccessoryName').value,
+                //         applianceAccesoryDescription: document.getElementById('applianceAccesoryDescription').value,
+                //         applianceAccessoryPrice: document.getElementById('applianceAccessoryPrice').value,
+                //         applianceAccessoryTypeId: document.getElementById('applianceAccessoryTypeId').value,                       
+                //         brandId: document.getElementById('brandId').value,
+                //         unitOfMeasurementId: document.getElementById('unitOfMeasurementId').value,
+                //         applianceAccessoryImgUrl: measurementFile[0],
+                //         colorId: document.getElementById('colorId').value
+                      
+                //         // isActive: true,
+                //         // isDeleted:true,
+                //         // createdBy: 0,
+                //         // createdDate: "string",
+                //         // updatedBy: 0,
+                //         // updatedDate: "string",
+                //         // applianceAccessoryType: {},
+                //         // brand: {},
+                //         // unitOfMeasurement: {}
+        
+                //     };
+                //     const data = JSON.stringify(applianceAccessoryupdate);
+                //     console.log(data);
+                //    // alert(JSON.stringify(applianceAccessory))
 
 
 
-                    $.ajax({
-                        type: "Post",
-                        url: baseURL + '/ApplianceAccessory/UpdateApplianceAccessoryById',
+                    // $.ajax({
+                    //     type: "Post",
+                    //     url: baseURL + '/ApplianceAccessory/CreateUpdateApplianceAccessory',
     
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'userId': user.data.userId,
-                            'userToken': user.data.userToken,
-                            'userRoleId': user.data.userRoles[0].userRoleId,
-                            'branchId': user.data.userRoles[0].branchId,
-                            'branchRoleId': user.data.userRoles[0].branchRoleId,
-                            'Access-Control-Allow-Origin': '*',
-                        },
-                        data: data,
-                        success: function(response) {
-                            // Release button
-                            KTUtil.btnRelease(formSubmitButton);
-                            console.log(response);
-                            // window.location.replace("home.html");
-                            if (response.isError == false) {
-                                // sessionStorage.setItem('user', JSON.stringify(response));
-                                window.location.replace("item.html");
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'userId': user.data.userId,
+                    //         'userToken': user.data.userToken,
+                    //         'userRoleId': user.data.userRoles[0].userRoleId,
+                    //         'branchId': user.data.userRoles[0].branchId,
+                    //         'branchRoleId': user.data.userRoles[0].branchRoleId,
+                    //         'Access-Control-Allow-Origin': '*',
+                    //     },
+                    //     data: data,
+                    //     success: function(response) {
+                    //         // Release button
+                    //         KTUtil.btnRelease(formSubmitButton);
+                    //         console.log(response);
+                    //         // window.location.replace("home.html");
+                    //         if (response.isError == false) {
+                    //             // sessionStorage.setItem('user', JSON.stringify(response));
+                    //             window.location.replace("item.html");
     
-                            } else {
-                                Swal.fire({
-                                    text: response.errorMessage,
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn font-weight-bold btn-light-primary"
-                                    }
-                                }).then(function() {
-                                    KTUtil.scrollTop();
-                                });
-                            }
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            // Release button
-                            KTUtil.btnRelease(formSubmitButton);
+                    //         } else {
+                    //             Swal.fire({
+                    //                 text: response.errorMessage,
+                    //                 icon: "error",
+                    //                 buttonsStyling: false,
+                    //                 confirmButtonText: "Ok, got it!",
+                    //                 customClass: {
+                    //                     confirmButton: "btn font-weight-bold btn-light-primary"
+                    //                 }
+                    //             }).then(function() {
+                    //                 KTUtil.scrollTop();
+                    //             });
+                    //         }
+                    //     },
+                    //     error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    //         // Release button
+                    //         KTUtil.btnRelease(formSubmitButton);
     
-                            // alert(errorThrown);
+                    //         // alert(errorThrown);
     
-                            Swal.fire({
-                                text: 'Internet Connection Problem',
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
-                                }
-                            }).then(function() {
-                                KTUtil.scrollTop();
-                            });
-                        }
-                    });
-                }
+                    //         Swal.fire({
+                    //             text: 'Internet Connection Problem',
+                    //             icon: "error",
+                    //             buttonsStyling: false,
+                    //             confirmButtonText: "Ok, got it!",
+                    //             customClass: {
+                    //                 confirmButton: "btn font-weight-bold btn-light-primary"
+                    //             }
+                    //         }).then(function() {
+                    //             KTUtil.scrollTop();
+                    //         });
+                    //     }
+                    // });
+          //      }
 
               
 
@@ -766,6 +784,54 @@ $.ajax({
 });
 
 
+
+$.ajax({  
+    type: "post",
+    url: baseURL + '/Color/GetAllColor' ,
+    success: function(response) {
+    
+
+    
+        console.log(response);
+        if (response.isError == false) {
+            // for(var i=0;i<response.data.length;i++){
+            // brand += `<option value="`+response.data[i].brandId+`">`+response.data[i].brandName+`</option>`;
+            // }
+
+            const roleTypeList4 = document.getElementById('colorId');
+            var roleTypeListHTML4 = new Array();
+            roleTypeListHTML4.push('<option value="0"></option>');
+            var selected='';
+            for (var i = 0; i < response.data.length; i++) {
+                selected='';
+                // if(colorId == response.data[i].colorId){
+                //     selected='selected';
+                // }
+                roleTypeListHTML4.push(`
+                <option value="` + response.data[i].colorId+ `" `+selected+`>` + response.data[i].colorName + `</option>`);
+            }
+            roleTypeList4.innerHTML = roleTypeListHTML4.join('');
+
+
+        }else {
+        Swal.fire({
+            text: response.errorMessage,
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    }
+
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+    
+    }
+});
 
 
 
