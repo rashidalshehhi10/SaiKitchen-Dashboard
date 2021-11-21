@@ -230,7 +230,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             <i class="la la-user-alt"></i>\
                             </a>\
                         `;  
-                            action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
+                            action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `);document.getElementById('oldComment').innerHTML='` + full.inquiryComment + `';"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
                             <i class="la la-file-text-o"></i>\
 							</a>\
                         `;
