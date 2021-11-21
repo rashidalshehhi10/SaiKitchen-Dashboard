@@ -424,7 +424,7 @@ License: You must have a valid license purchased only from themeforest(the above
                       <!--begin::Toolbar-->
                       <!--end::Toolbar-->
                       <div class="card-toolbar" id="paybtn" style="display: none;">
-                         <a href="#"  data-toggle="modal" data-target="#paylist" onclick="GetUnPaid()"  class="btn btn-sm font-weight-bold" style="background-color: #F1583E; color:#ffffff">
+                         <a href="#" id="paybtnId"  data-toggle="modal" data-target="#paylist" onclick="GetUnPaid()"  class="btn btn-sm font-weight-bold" style="background-color: #F1583E; color:#ffffff">
                             <i>
                                <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
                                   <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
@@ -441,7 +441,27 @@ License: You must have a valid license purchased only from themeforest(the above
                             </i>
                             Pay Now
                          </a>
+    
+                                   
+                          <a href="#" id="payuploadbeforequotationId"  data-toggle="modal" data-target="#payuploadbeforequotation" onclick="createUploadbefore();"  class="btn btn-sm font-weight-bold" style="background-color: #F1583E; color:#ffffff">
+                            <i>
+                               <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
+                                  <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <circle fill="#000000" opacity="0.3" cx="20.5" cy="12.5" r="1.5"/>
+                                        <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 6.500000) rotate(-15.000000) translate(-12.000000, -6.500000) " x="3" y="3" width="18" height="7" rx="1"/>
+                                        <path d="M22,9.33681558 C21.5453723,9.12084552 21.0367986,9 20.5,9 C18.5670034,9 17,10.5670034 17,12.5 C17,14.4329966 18.5670034,16 20.5,16 C21.0367986,16 21.5453723,15.8791545 22,15.6631844 L22,18 C22,19.1045695 21.1045695,20 20,20 L4,20 C2.8954305,20 2,19.1045695 2,18 L2,6 C2,4.8954305 2.8954305,4 4,4 L20,4 C21.1045695,4 22,4.8954305 22,6 L22,9.33681558 Z" fill="#000000"/>
+                                    </g>
+                                  </svg>
+                                  <!--end::Svg Icon-->
+                               </span>
+                            </i>
+                            pay against inquiry
+                         </a>
                       </div>
+                      
                    </div>
                 </div>
                 <!--end::Subheader-->
@@ -1214,6 +1234,68 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
 
+
+    <div class="modal fade" id="payuploadbeforequotation"  tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-x1"  role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 1.5rem 1.5rem 0px;border-bottom: 0px;" >
+                    <h5 class="modal-title" id="inoiceModal" style="font-weight: bold;">Pay against inquiry</h5>
+                    
+                    <div style="padding: 10px;background-color: whitesmoke;border-radius: 2px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                     </div>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_uploadbefore" action="" name="kt_uploadbefore">
+                    <div id="bodyuploadbefore" class="modal-body">     
+                        <input type="hidden" id="inquiryId" value="0" />
+                        <div class="form-group row">
+                        <div class="col-lg-6">
+                           <label >Payment mode:</label>
+                           <div class="input-group input-group-lg input-group-solid">
+                              <select class="form-control" id="methodbefore" name="methodbefore"
+                                 class="form-control form-control-lg form-control-solid"
+                                 style="width:100%">
+                                 <option value="1" data-select2-id="1">Cash</option>
+                                 <option value="2" >Cheque</option>
+								 <option value="3" >Bank Transfer</option>
+                              </select>
+                           </div>
+                        </div>
+                        </div>  
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label >Amount</label>
+                                <div class="input-group input-group-lg input-group-solid">
+                                    <input class="form-control" type="number" name="amountbefore" id="amountbefore" class="form-control form-control-lg form-control-solid" value="" placeholder="" required>                                           
+                                </div>
+                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                               <label >upload files:</label>
+                               <div  id="divdropzonebedore">
+
+                                </div>      						
+                                
+                            </div> 
+                        </div> 	
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                               <div  >
+                                 <button type="button" id="sendbtnbefore" onclick="sendInvoicebefore()"  class="btn btn-primary btn-sm" >Pay</button>
+                                </div>      						
+                            </div> 
+                        </div> 	            
+                    </div>                  
+                    </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="payoption"  tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-x1"  role="document">
             <div class="modal-content">
@@ -1517,6 +1599,7 @@ License: You must have a valid license purchased only from themeforest(the above
     }
 });
     function callapi() {
+      
         document.getElementById("result").innerText ="";
     var code =$('#kt_subheader_search_form').val().toLowerCase();
     if(code==''){
@@ -1524,8 +1607,10 @@ License: You must have a valid license purchased only from themeforest(the above
         document.getElementById("paybtn").style.display = 'none';
        return false;
     }
+
     document.getElementById("quotationid").value=code;
     $.ajax({
+
 		type: "Post",
 		url: baseURL + '/Payment/GetQuotationDetailsFromCode?code='+code,
 
@@ -1540,6 +1625,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById("innerdata").style.display = 'none';
                 document.getElementById("paybtn").style.display = 'none';
                 document.getElementById("result").innerText = response.errorMessage;
+             
              return false;
             }
             $(".divoddendrow").remove();
@@ -1549,7 +1635,21 @@ License: You must have a valid license purchased only from themeforest(the above
             $(".divevenrow").remove();
             document.getElementById("innerdata").style.removeProperty('display');	
             document.getElementById("paybtn").style.removeProperty('display');
+
 			if (response.isError == false) {
+                document.getElementById("inquiryId").value = response.data.inquiryId;
+
+                if(!response.data.isQuotation){
+                    $('#paybtnId').hide();
+                    $('#payuploadbeforequotationId').show();
+                    document.getElementById("innerdata").style.display = 'none';
+                    return false;
+
+                }
+                $('#paybtnId').show();
+                $('#payuploadbeforequotationId').hide();
+              
+                 // $('#payuploadbeforequotationId').hide();
                   document.getElementById("invoID").innerText = response.data.invoiceNo;
                   document.getElementById("invoDate").innerText = response.data.createdDate;
                   document.getElementById("invoDuDate").innerText = response.data.validDate;
@@ -1561,8 +1661,9 @@ License: You must have a valid license purchased only from themeforest(the above
                   document.getElementById("buildingAddress").innerText = response.data.buildingAddress;
                   document.getElementById("customerEmail").innerText = response.data.customerEmail;
                   document.getElementById("customerContact").innerText = response.data.customerContact;
-                  // document.getElementById("amount").innerHTML = parseInt(response.data.amount) + ' AED';
                   
+                  // document.getElementById("amount").innerHTML = parseInt(response.data.amount) + ' AED';
+                 
                   // var disval =  Math.round((parseFloat(response.data.discount)/100)*parseFloat(response.data.amount));
                 var subtotal=  parseFloat(response.data.amount);
                   var disval =  parseFloat(response.data.discount);
@@ -1697,6 +1798,9 @@ License: You must have a valid license purchased only from themeforest(the above
                document.getElementById("result").innerText = errorThrown; 
 		}
 	});
+
+
+    
 }
     function GetUnPaid(){
         var code =$('#kt_subheader_search_form').val().toLowerCase();
@@ -1744,6 +1848,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
             }
         });
+
+
+
     }
     /* $('#paymethod').on('change', function() {
         
@@ -1843,6 +1950,122 @@ License: You must have a valid license purchased only from themeforest(the above
         }
     }
 
+    var customizeFile =new Array();
+    
+    function createUploadbefore(){
+        Dropzone.autoDiscover = false;
+        customizeFile =[];
+        document.getElementById("divdropzonebedore").innerHTML =`
+        <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_4" name="customizDrawing3">
+                                    <div class="dropzone-msg dz-message needsclick">
+                                        <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                        <span class="dropzone-msg-desc">Only image, video & pdf files are allowed for upload</span>
+                                    </div>
+                                </div><span id="error"></span>
+        `;
+        $('#kt_dropzone_4').dropzone({
+            
+            // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+            url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+            type: "Post",
+            headers : {
+                'Access-Control-Allow-Origin': '*',
+                // 'Content-Type': 'application/json'
+            },
+            paramName: "file", // The name that will be used to transfer the file
+            maxFiles: 10,
+            maxFilesize: 30000, // MB
+            timeout: 600000,
+            addRemoveLinks: true,
+            removedfile:function(file) {
+                var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+                var fileurl ='';
+                var filearr = fileuploded.innerHTML.split(".");
+                if(filearr.length > 1){
+                    fileurl = "/File/DeleteFileFromBlob?fileName=";
+                }else{
+                    fileurl = "/File/DeleteVideo?VideoId=";
+                }
+                $.ajax({
+                    type:"post",
+                    url:baseURL+fileurl+fileuploded.innerHTML,
+                    cache:false,
+                    success: function(){
+                        removeA(customizeFile, fileuploded.innerHTML);
+                        file.previewElement.remove();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log("Error");
+                
+                    }
+                });
+    
+            },
+      
+            acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+            
+        init: function() {
+            // this.on("addedfile", function (file) {
+            //     var reader = new FileReader();
+            //     reader.onload = function(event) {
+            //         // event.target.result contains base64 encoded image
+            //         var base64String = event.target.result;
+            //         var fileName = file.name;
+            //         var finalbase64 = base64String.split(",")[1]
+            //         customizeFile.push(finalbase64);
+            //         // handlePictureDropUpload(base64String ,fileName );
+            //     };
+            //     reader.readAsDataURL(file);
+
+            // });
+        },
+        success: function(file, response){
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            fileuploded.innerHTML = response.data.item1;
+            //var btndelete = file.previewElement.querySelector(".delete");
+           // btndelete.setAttribute("id", 'delete-midia-id-'+response.midia_id);
+            // alert(response.data.item1);
+            customizeFile.push(response.data.item1);
+        
+        }
+            // accept: function(file, done) {
+            //     if (file.name == "justinbieber.jpg") {
+            //         done("Naha, you don't.");
+            //     } else {
+            //         var reader = new FileReader();
+            //         var fileByteArray = [];
+            //         reader.readAsArrayBuffer(file);
+            //         reader.onloadend = function(evt) {
+            //             if (evt.target.readyState == FileReader.DONE) {
+            //                 var arrayBuffer = evt.target.result,
+            //                     array = new Uint8Array(arrayBuffer);
+            //                 for (var i = 0; i < array.length; i++) {
+            //                     fileByteArray.push(array[i]);
+            //                 }
+            //                 measurementFile.push(fileByteArray);
+            //                 console.log(measurementFile);
+            //             }
+            //         }
+            //         // file.accepted();
+            //         done("");
+            //     }
+            // }
+        });
+        function removeA(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax= arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+    }
+
+
+
+
     jQuery(document).ready(function() {
 
     var login = localStorage.getItem("user");
@@ -1890,6 +2113,48 @@ License: You must have a valid license purchased only from themeforest(the above
             }
         });
     }
+
+
+
+    function sendInvoicebefore(){
+       
+       document.getElementById("load").style.removeProperty('display');
+       var paymentModeId = document.getElementById("methodbefore").value;
+       var inquiryId = document.getElementById("inquiryId").value;
+       var amountbefore = document.getElementById("amountbefore").value;
+       var payment={
+       "inquiryId":inquiryId ,     
+       "paymentModeId":paymentModeId,
+       "files":customizeFile,
+       "amount":amountbefore
+       }
+       const data = JSON.stringify(payment);
+       console.log(data);
+       $.ajax({
+           type: "Post",  
+           url: baseURL + '/Payment/AddPaymentBeforeQuotation',
+           data:data,
+           headers: {
+               'Content-Type': 'application/json',
+               'Access-Control-Allow-Origin': '*',
+           },
+           success: function (response) {
+               console.log(response);
+               document.getElementById("load").style.display = 'none';
+               $('#payuploadbeforequotation').modal('hide');
+             //  $('#paylist').modal('hide');
+               document.getElementById("receiptId").innerHTML =`payment added  successfully`;
+               $('#msg').modal('show');
+           },
+           error: function (XMLHttpRequest, textStatus, errorThrown) {
+            // document.getElementById("load").style.display = 'none';
+            // document.getElementById("error").value = "there is a problem in sending..";
+           }
+       });
+   }
+
+
+
 
 </script>
     <!--end::Page Scripts-->
