@@ -206,7 +206,7 @@ jQuery(document).ready(function() {
                             eventcolor ='#FF95ED';
                           break;
                         case 7:
-                            eventcolor ='#FFCCFF';
+                            eventcolor ='#ffc107';
                           break;
                         case 8:
                             eventcolor ='#FF00F0';

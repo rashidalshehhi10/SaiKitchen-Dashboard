@@ -641,6 +641,34 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
     <!--end::Chat Panel-->
+    <div class="modal fade" id="Requestforescalation" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Request For Escalation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_escalation" action="" name="escalationform">
+                   <span id="inquiryWorkscopeEscalationId" style="display:none">0</span>
+                    <div class="modal-body">
+                       
+                        <div class="form-group row" style="padding-left:25px ;">
+                            <label class="">Are you sure to request for escalation?</label>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">No</button>
+                        <button type="submit" id="kt_escalation_button" class="btn btn-primary font-weight-bold">Yes</button>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">
     </div>
@@ -805,6 +833,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
             // At last, if the user has denied notifications, and you
             // want to be respectful there is no need to bother them any more.
+        }
+
+        function setInquiryEscalationId(inquiryId) {
+            document.getElementById("inquiryWorkscopeEscalationId").innerHTML = inquiryId;
         }
 
         function logoutUser(user) {

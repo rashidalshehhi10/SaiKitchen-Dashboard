@@ -183,6 +183,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 								<i class="la la-thumbs-down"></i>
 							</a>
 						`;
+                        if (full.isEscalationRequested==false){
+                            action += `
+                            <a type="button" onclick="setInquiryEscalationId(` + full.inquiryId + `)" data-toggle="modal" data-target="#Requestforescalation" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Request For Escalation">
+                            <i class="la la-question"></i>
+                            </a>  
+						`;
+
+                        }
                             return action;
                         } else {
                             return `<span></span>`;
@@ -516,6 +524,101 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 });
             });
     }
+
+    var _handleFormRequestforescalation = function() {
+        var form = KTUtil.getById('kt_escalation');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_escalation_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                var inquiryRequestforEscalation = {
+                    "inquiryId":parseInt(document.getElementById("inquiryWorkscopeEscalationId").innerHTML),
+                    "id":user.data.userId,
+
+                };
+                const data = JSON.stringify(inquiryRequestforEscalation);
+                console.log(data);
+               
+                $.ajax({
+                    type: "Post",  
+                    url: baseURL + '/Inquiry/EscalationRequest',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                       // KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("designrequest.html");
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+
+    }
+
     return {
 
         //main function to initiate the module
@@ -523,6 +626,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             initTable1();
             _handleFormAcceptMeasurement();
             _handleFormRejectMeasurement();
+            _handleFormRequestforescalation();
         },
 
     };
