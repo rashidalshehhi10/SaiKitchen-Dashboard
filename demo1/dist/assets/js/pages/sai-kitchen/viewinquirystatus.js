@@ -808,6 +808,10 @@ customerDetail.innerHTML=` <!--begin::User-->
 <!--begin::Contact-->
 <div class="py-9">
    <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Status:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.inquiryStatus.inquiryStatusName+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
       <span class="font-weight-bold mr-2">Code:</span>
       <span class="text-muted" style=" text-align: right;">CS`+response.data.inquiry.branchId+``+response.data.inquiry.customerId+`</span>
    </div>
@@ -852,6 +856,7 @@ customerDetail.innerHTML=` <!--begin::User-->
 </div>
 <!--end::Contact-->
 `;
+
 inquiryCode.innerHTML=response.data.inquiry.inquiryCode;
 var isfirst=true;
 var counter = 0;

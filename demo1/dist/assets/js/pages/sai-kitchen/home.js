@@ -223,6 +223,18 @@ jQuery(document).ready(function() {
                         case 12:
                             eventcolor ='#C0C0C0';
                           break;
+
+                          case 16:
+                            eventcolor ='#30f70c ';
+                          break;
+                          case 17:
+                            eventcolor ='#65c454';
+                          break;
+
+                          case 18:
+                            eventcolor ='#0c73f7';
+                          break;
+                          
                         
                         default:
                             eventcolor = '';
