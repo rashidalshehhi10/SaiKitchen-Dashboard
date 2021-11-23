@@ -1119,8 +1119,10 @@ $( "#kt_contact_status" ).change(function () {
 	if($('#kt_contact_status').val()=="1"){
 $("#nextMeetingDate").hide();
 document.getElementById('next_meeting_date').value = "";
+$("#next_meeting_date").prop('required',false);
 }else{
 	$("#nextMeetingDate").show();
+	$("#next_meeting_date").prop('required',true);
 }
 });  
 
