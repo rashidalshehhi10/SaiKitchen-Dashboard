@@ -959,13 +959,15 @@
                   type: "Post",
                   url:    baseURL +'/File/GetFile?FileName='+download[0],
                   success: function(result) {
-                     var a = document.createElement('a');
-                     var blob = base64ToBlob(result.data, '');
-                     var url = window.URL.createObjectURL(blob);
-                     a.href = url;
-                     a.download = download[0];
-                     a.click();
-                     window.URL.revokeObjectURL(url);
+                     if(!result.isError){
+                        var a = document.createElement('a');
+                        var blob = base64ToBlob(result.data, '');
+                        var url = window.URL.createObjectURL(blob);
+                        a.href = url;
+                        a.download = download[0];
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                     }
                            },
                   async:   false
             });      
