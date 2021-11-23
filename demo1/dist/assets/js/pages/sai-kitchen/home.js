@@ -244,7 +244,7 @@ jQuery(document).ready(function() {
                           break;
 
                           case 18:
-                            eventcolor ='#0c73f7';
+                            eventcolor ='#ADDFFF';
                           break;
                           
                         
