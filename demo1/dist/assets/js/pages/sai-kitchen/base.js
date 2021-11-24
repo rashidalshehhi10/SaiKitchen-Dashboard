@@ -1746,7 +1746,7 @@ jQuery(document).ready(function () {
    <img src="/assets//media/svg/saikitchen/inquiry.svg"/>
    <!--end::Svg Icon-->
 	</span>
-	<span class="menu-text">Deleted Inquiry</span>
+	<span class="menu-text">Escalated Inquiry</span>
 	<span id="deletedinquiryCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
