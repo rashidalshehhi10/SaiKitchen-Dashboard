@@ -1583,6 +1583,9 @@ jQuery(document).ready(function () {
        if(document.getElementById("inquiryCountId")){
           document.getElementById("inquiryCountId").innerHTML = response.data[0].inquiriesCount;
        }
+       if(document.getElementById("deletedinquiryCountId")){
+         document.getElementById("deletedinquiryCountId").innerHTML = response.data[0].deletedInquiries;
+      }
        if(document.getElementById("arequestCountId")){
           document.getElementById("arequestCountId").innerHTML = response.data[0].measurementAssinee;
        }
@@ -1733,6 +1736,18 @@ jQuery(document).ready(function () {
 	</span>
 	<span class="menu-text">Inquiry</span>
 	<span id="inquiryCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
+</a>
+</li>
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+<a href="deletedinquiry.html" class="menu-link menu-toggle">
+	<span class="svg-icon menu-icon">
+	
+   <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+   <img src="/assets//media/svg/saikitchen/inquiry.svg"/>
+   <!--end::Svg Icon-->
+	</span>
+	<span class="menu-text">Deleted Inquiry</span>
+	<span id="deletedinquiryCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
 `;

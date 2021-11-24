@@ -609,9 +609,10 @@ branchTypeId = user.data.userRoles[0].branch.branchTypeId;
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
-                  response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
-var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
-console.log(inquiryWorkscopelength);
+
+                  //response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
+//var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
+//console.log(inquiryWorkscopelength);
 inquiry=response.data.inquiry;
 if(inquiry.promo!=null){
 document.getElementById('txtPromoCode').value=inquiry.promo?.promoName;
