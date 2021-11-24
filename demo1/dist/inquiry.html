@@ -1152,12 +1152,29 @@
                         <label id="oldComment" style="font-size: 14px;"  class=""></label>
                         
                      </div> -->
+                   
+
                      <div class="form-group">
-                        <label class="">Comment*</label>
+                        <label class="">Add Comment*</label>
                         <div class="">
                            <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="inqtxtComment" name="inqtxtComment" class="form-control" placeholder="" rows="7"></textarea>
                         </div>
                      </div>
+
+                     <table  class="table table-striped table-bordered">
+                        <label class="font-size-h6 font-weight-bolder text-dark">Old Comments</label>
+                        <thead>
+                          <tr>
+                            <th scope="col">Comment</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Added By</th>
+                            <th scope="col">Created Date</th>
+                          </tr>
+                        </thead>
+                        <tbody id="bodyoftable">
+                        </tbody>
+                      </table>
+
                   </div>
                   <div class="modal-footer">
                      <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
@@ -1456,6 +1473,81 @@
          function setInquiryWorkscopeId(inquiryWorskcopeId) {
              document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorskcopeId;
          }
+
+
+    // get all comments
+
+    function getAllComments(inquiryId) {
+
+$.ajax({
+    type: "post",
+    url: baseURL + '/Inquiry/GetAllCommentByInquiryId?inquiryId=' + inquiryId,
+
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+    },
+
+    success: function(response) {
+        console.log(response);
+        if (response.isError == false) {
+
+         document.getElementById('bodyoftable').innerHTML = '';
+      
+
+         if(response.data.length==0)
+         {
+            document.getElementById('bodyoftable').innerHTML +=
+                           `<tr>
+                            <td>no comments</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>`;
+
+         }
+
+         else 
+         {
+                  for(var i=0 ; i<response.data.length;i++)
+                     {
+                        
+                              document.getElementById('bodyoftable').innerHTML +=
+                                             `<tr>
+                                             <td>`+response.data[i].commentDetail+`</td>
+                                             <td>`+response.data[i].commentName+`</td>
+                                             <td>`+response.data[i].commentAddedBy+`</td>
+                                             <td>`+response.data[i].createdDate+`</td>
+                                             </tr>`;
+                     
+                                    
+                     }
+
+
+         }
+
+        } else {
+            Swal.fire({
+                text: 'Status error',
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+   }
+});
+//
+}
+
+
          
          function deleteInquiryWorkscope(inquiryWorskcopeId) {
              if (confirm('Are you sure you want delete workscope?')) {

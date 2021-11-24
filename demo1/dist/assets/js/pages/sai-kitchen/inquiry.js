@@ -239,7 +239,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         var inquiryComment='';
                         if(full.inquiryComment != null)
                            inquiryComment =full.inquiryComment ;
-                        action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `);document.getElementById('inqtxtComment').value='` + inquiryComment + `';"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
+                        action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `);document.getElementById('inqtxtComment').value='` + inquiryComment + `';getAllComments(` + full.inquiryId + `);"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
                             <i class="la la-file-text-o"></i>\
 							</a>\
                         `;
@@ -1134,6 +1134,10 @@ jQuery(document).ready(function() {
 
        }
     });
+
+
+
+
 });
 
 $('#kt_managedby_button').click(function () {
