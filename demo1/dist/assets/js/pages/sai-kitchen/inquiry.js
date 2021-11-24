@@ -47,7 +47,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'inquiryId', 'inquiryCode', 'status', 'workscopeNames','inquiryComment',
                         'measurementScheduleDate', 'measurementAssignTo','designScheduleDate', 'designAssignTo','isMeasurementProvidedByCustomer','isDesignProvidedByCustomer', 'customerCode', 'customerName',
                         'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','factorName','noOfRevision','quotationScheduleDate', 'actions'
+                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','factorName','noOfRevision','quotationScheduleDate','escalationRequestedBy','escalationRequestedOn', 'actions'
                     ],
                 },
             },
@@ -148,6 +148,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data:'quotationScheduleDate'
                 },
                 {
+                    data:'escalationRequestedBy'
+                },
+                {
+                    data:'escalationRequestedOn'
+                },
+                {
                     data: 'actions',
                     responsivePriority: -1
                 },
@@ -230,7 +236,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             <i class="la la-user-alt"></i>\
                             </a>\
                         `;  
-                            action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `);document.getElementById('inqtxtComment').value='` + full.inquiryComment + `';"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
+                        var inquiryComment='';
+                        if(full.inquiryComment != null)
+                           inquiryComment =full.inquiryComment ;
+                        action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `);document.getElementById('inqtxtComment').value='` + inquiryComment + `';"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
                             <i class="la la-file-text-o"></i>\
 							</a>\
                         `;
@@ -295,6 +304,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         `;
                         }
                             if (inquiryPermission >= 5) {
+                             if(full.isEscalationRequested)
                                 action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="GetWorkscopesByinquiryId(` + full.inquiryId + `)"  data-toggle="modal" data-target="#DelWorkscope"  class="btn btn-sm btn-clean btn-icon" title="Delete workscope">
                             <i class="la la-trash"></i>\
 							</a>\
