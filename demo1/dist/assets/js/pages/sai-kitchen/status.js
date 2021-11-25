@@ -267,4 +267,17 @@ export let inqStatus= {
         'title': 'Special approval rejected',
         'class': ' label-light-danger'
     },
+
+    69: {
+        'title': 'Job Order Procurement Delayed',
+        'class': ' label-light-danger'
+    },
+    70: {
+        'title': 'Job Order Customer Request Reschedule',
+        'class': ' label-light-primary'
+    },
+    71: {
+        'title': 'Job Order Design Team Delay',
+        'class': ' label-light-danger'
+    },
 };
