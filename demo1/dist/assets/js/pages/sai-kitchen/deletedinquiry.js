@@ -222,7 +222,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         //     `;
                         // }
                        
-                        action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewinquirystatus.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
+                        action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewescalatedinquiry.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
                         <i class="la la-ellipsis-h"></i>\
                         </a>\
                         `;
