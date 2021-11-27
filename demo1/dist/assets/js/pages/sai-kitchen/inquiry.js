@@ -367,7 +367,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         $('#TotalInquiry').on('click', function() {
             table.column(2).search('',true, false, true ).draw();
             
-            document.getElementById('r').innerHTML=  table.page.info().recordsTotal;
+            // document.getElementById('r').innerHTML=  table.page.info().recordsTotal;
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
