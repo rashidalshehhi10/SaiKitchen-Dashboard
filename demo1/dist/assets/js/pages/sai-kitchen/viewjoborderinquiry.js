@@ -1923,7 +1923,7 @@ workscope.innerHTML=workscopeHtml;
            "inquiryId":parseInt( document.getElementById('inquiryId').value),
            "installationStartDate": document.getElementById('schedule_date2').value,
            "notes": document.getElementById('CheckComment').value,
-           "status":document.getElementById('statusId').value,
+           "status":parent(document.getElementById('statusId').value),
          };
       }
       if(choose == "3"){
@@ -1953,7 +1953,7 @@ workscope.innerHTML=workscopeHtml;
         const data = JSON.stringify(checklistdata);
         console.log(data);
         
-       /*  $.ajax({
+         $.ajax({
             type: "Post",
             url: baseURL + addURL,
             headers: {
@@ -1970,7 +1970,7 @@ workscope.innerHTML=workscopeHtml;
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 //document.getElementById("alert").innerHTML ="An error occured";
             }
-        }); */
+        }); 
     });
     $('#kt_reject_inquiry_button').click(function () {
         var rejectlistdata = {
