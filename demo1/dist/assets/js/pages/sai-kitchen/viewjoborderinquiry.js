@@ -1923,7 +1923,7 @@ workscope.innerHTML=workscopeHtml;
            "inquiryId":parseInt( document.getElementById('inquiryId').value),
            "installationStartDate": document.getElementById('schedule_date2').value,
            "notes": document.getElementById('CheckComment').value,
-           "status":parent(document.getElementById('statusId').value),
+           "status":parseInt(document.getElementById('statusId').value),
          };
       }
       if(choose == "3"){

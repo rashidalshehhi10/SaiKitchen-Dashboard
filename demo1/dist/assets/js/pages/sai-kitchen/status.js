@@ -268,12 +268,17 @@ export let inqStatus= {
         'class': ' label-light-danger'
     },
 
+    68: {
+        'title': 'Job Order Factory Delayed',
+        'class': ' label-light-danger'
+    },
+
     69: {
         'title': 'Job Order Procurement Delayed',
         'class': ' label-light-danger'
     },
     70: {
-        'title': 'Job Order Customer Request Reschedule',
+        'title': 'Job Order Site Not Ready',
         'class': ' label-light-primary'
     },
     71: {
