@@ -23,7 +23,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
             // read more: https://datatables.net/examples/basic_init/dom.html
 
-            lengthMenu: [5, 10, 25, 50],
+            lengthMenu: [5, 10, 25, 50, 100, 150, 200, 250],
 
             pageLength: 10,
 

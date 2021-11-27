@@ -39,7 +39,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/Inquiry/GetApprovalDesignOfBranch?branchId=' + user.data.userRoles[0].branchId,
+                url: baseURL + '/Inquiry/GetApprovalDesignOfBranch?branchId=' + user.data.userRoles[0].branchId+'&userId='+user.data.userId,
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
