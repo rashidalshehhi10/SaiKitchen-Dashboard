@@ -14,6 +14,7 @@ const countryList = ["United Arab Emirates", "Afghanistan", "Åland Islands", "A
 let user;
 let datatable;
 let customerData;
+let fuserId=0;
 var KTAppsUsersListDatatable = function() {
     // Private functions
 
@@ -33,7 +34,16 @@ var KTAppsUsersListDatatable = function() {
                 type: 'remote',
                 source: {
                     read: {
-                        url: baseURL + '/Customer/GetCustomerOfBranch?branchId=' + user.data.userRoles[0].branchId,
+                        url: baseURL + '/Customer/GetCustomerOfBranch?userId=' + parseInt(fuserId),
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'userId': user.data.userId,
+                            'userToken': user.data.userToken,
+                            'userRoleId': user.data.userRoles[0].userRoleId,
+                            'branchId': user.data.userRoles[0].branchId,
+                            'branchRoleId': user.data.userRoles[0].branchRoleId,
+                            'Access-Control-Allow-Origin': '*',
+                        },
                     },
                 },
                 pageSize: 10, // display 20 records per page
@@ -673,6 +683,10 @@ var KTAppsUsersListDatatable = function() {
 let permissions;
 let customerPermission;
 jQuery(document).ready(function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    if(urlParams.get('fuserId')!=null)
+     fuserId = urlParams.get('fuserId');
 
     var login = localStorage.getItem("user");
     if (login !== null) {
@@ -898,9 +912,8 @@ jQuery(document).ready(function() {
                                                             <!--begin::Tiles Widget 4-->
                                                         <div class="card card-custom gutter-b" style="height: 130px;">
                                                             <!--begin::Body-->
-                                                            <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterUser("userdiv`+counter+`")>
+                                                            <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterUser(`+response.data[counter].userId+`)>
                                                                 <!--begin::Stats-->
-                                                                <div style="display:none;" id="userdiv`+counter+`">`+response.data[counter].user+`</div>
                                                                 <div class="flex-grow-1">
                                                                     <div class="text-dark-50 font-weight-bold">Customers Added By: `+response.data[counter].user+`</div>
                                                                     <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].customers+`</div>

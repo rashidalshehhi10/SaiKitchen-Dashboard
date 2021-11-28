@@ -322,7 +322,22 @@
 									   
 
 									   <div id="customerbyUser" class="row">
-
+										<div class="col-xl-3">
+											<!--begin::Tiles Widget 4-->
+										<div class="card card-custom gutter-b" style="height: 130px;">
+											<!--begin::Body-->
+											<div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=refresh()>
+												<!--begin::Stats-->
+												<div class="flex-grow-1">
+													<div class="text-dark-50 font-weight-bold">All Customers </div>
+													<div class="font-weight-bolder font-size-h3" id=""></div>
+												</div>
+												<!--end::Stats-->
+											</div>
+											<!--end::Body-->
+										</div>
+										<!--end::Tiles Widget 4-->
+										</div>
 									   </div>
 										<!--begin::Card-->
 										<div class="card card-custom">
@@ -1382,10 +1397,15 @@ try {
 			// At last, if the user has denied notifications, and you
 			// want to be respectful there is no need to bother them any more.
 		}
-		function filterUser(user){
-            document.getElementById("kt_subheader_search_form").value =document.getElementById(user).innerText ;
-            $('#kt_datatable').KTDatatable().search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+		function filterUser(userId){
+           // document.getElementById("kt_subheader_search_form").value =document.getElementById(user).innerText ;
+           //$('#kt_datatable').KTDatatable().search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+		   window.location.replace("customer.html?fuserId="+userId);
+
         }
+		function refresh(){
+			window.location.replace('customer.html');
+		}
 	</script>
 	<!--end::Page Scripts-->
 	
