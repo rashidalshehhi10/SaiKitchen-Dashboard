@@ -177,6 +177,13 @@ if(branchTypeId==2||branchTypeId==1){
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
+
+                  if(response.data.inquiry.inquiryStatusId == 27 )
+                  {
+                     $('#jocomp').hide(); 
+                     $('#adelay').hide();
+                  } 
+
                document.getElementById("schedule_date1").value = response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate;
                document.getElementById("schedule_date2").value = response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate;
                document.getElementById("schedule_date3").value = response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate;

@@ -862,6 +862,110 @@ jQuery(document).ready(function() {
         }
     });
 
+ // get customers by user
+
+ $.ajax({
+    type: "get",
+    url: baseURL + '/Customer/GetCustomerbyUser',
+
+    headers: {
+        'Content-Type': 'application/json',
+        'userId': user.data.userId,
+        'userToken': user.data.userToken,
+        'userRoleId': user.data.userRoles[0].userRoleId,
+        'branchId': user.data.userRoles[0].branchId,
+        'branchRoleId': user.data.userRoles[0].branchRoleId,
+        'Access-Control-Allow-Origin': '*',
+    },
+    success: function(response) {
+        console.log(response);
+        if (response.isError == false) {
+
+
+       
+        
+     for (var counter=0;counter<response.data.length;counter++)
+        {
+                     if(response.data[counter].customers > 0)
+                   {
+                    
+                        document.getElementById('customerbyUser').innerHTML +=`
+
+                                            <div class="col-xl-3">
+                                                            <!--begin::Tiles Widget 4-->
+                                                        <div class="card card-custom gutter-b" style="height: 130px;">
+                                                            <!--begin::Body-->
+                                                            <div id=""  style="border-radius: .42rem;" class="card-body d-flex flex-column">
+                                                                <!--begin::Stats-->
+                                                                <div class="flex-grow-1">
+                                                                    <div class="text-dark-50 font-weight-bold">Customers Added By: `+response.data[counter].user+`</div>
+                                                                    <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].customers+`</div>
+                                                                </div>
+                                                                <!--end::Stats-->
+                                                            </div>
+                                                            <!--end::Body-->
+                                                        </div>
+                                                        <!--end::Tiles Widget 4-->
+                                                        </div>`;
+                        
+                 
+                    }
+                 
+         
+
+        }
+
+
+
+
+            // console.log(response.data[0].contactStatusName);
+            // const contactWayList = document.getElementById('kt_wayofcontact');
+            // var contactWayListHTML = new Array();
+
+            // for (var i = 0; i < response.data.length; i++) {
+            //     contactWayListHTML.push(`
+            //     <option value="` + response.data[i].wayOfContactId + `">` + response.data[i].wayOfContactName + `</option>`);
+            // }
+
+            // contactWayList.innerHTML = contactWayListHTML.join('');
+
+        } else {
+            Swal.fire({
+                text: response.errorMessage,
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+        // alert(errorThrown);
+
+        Swal.fire({
+            text: 'Internet Connection Problem',
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    }
+});
+
+
+ // end
+
+
 
     $('#kt_country_of_Resdience').on('change', function() {
         // var countrylist = {
