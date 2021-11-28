@@ -61,6 +61,7 @@
 	#divclk3:active {
     background-color: #3699ff;
     }
+	
 </style>
 </head>
 <!--end::Head-->
@@ -1381,6 +1382,10 @@ try {
 			// At last, if the user has denied notifications, and you
 			// want to be respectful there is no need to bother them any more.
 		}
+		function filterUser(user){
+            document.getElementById("kt_subheader_search_form").value =document.getElementById(user).innerText ;
+            $('#kt_datatable').KTDatatable().search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+        }
 	</script>
 	<!--end::Page Scripts-->
 	

@@ -480,7 +480,9 @@ var KTAppsUsersListDatatable = function() {
             document.getElementById("kt_subheader_search_form").value = '';
             datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
-  
+
+         
+ 
         $('#kt_datatable_search_status, #kt_datatable_contact_statuss').selectpicker();
         // $('#kt_datatable_search_status').selectpicker();
  /*        $("#export_pdf").on("click",(function(e){
@@ -882,6 +884,7 @@ jQuery(document).ready(function() {
         if (response.isError == false) {
 
 
+      
        
         
      for (var counter=0;counter<response.data.length;counter++)
@@ -895,8 +898,9 @@ jQuery(document).ready(function() {
                                                             <!--begin::Tiles Widget 4-->
                                                         <div class="card card-custom gutter-b" style="height: 130px;">
                                                             <!--begin::Body-->
-                                                            <div id=""  style="border-radius: .42rem;" class="card-body d-flex flex-column">
+                                                            <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterUser("userdiv`+counter+`")>
                                                                 <!--begin::Stats-->
+                                                                <div style="display:none;" id="userdiv`+counter+`">`+response.data[counter].user+`</div>
                                                                 <div class="flex-grow-1">
                                                                     <div class="text-dark-50 font-weight-bold">Customers Added By: `+response.data[counter].user+`</div>
                                                                     <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].customers+`</div>
@@ -915,19 +919,6 @@ jQuery(document).ready(function() {
 
         }
 
-
-
-
-            // console.log(response.data[0].contactStatusName);
-            // const contactWayList = document.getElementById('kt_wayofcontact');
-            // var contactWayListHTML = new Array();
-
-            // for (var i = 0; i < response.data.length; i++) {
-            //     contactWayListHTML.push(`
-            //     <option value="` + response.data[i].wayOfContactId + `">` + response.data[i].wayOfContactName + `</option>`);
-            // }
-
-            // contactWayList.innerHTML = contactWayListHTML.join('');
 
         } else {
             Swal.fire({
