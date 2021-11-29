@@ -955,7 +955,7 @@ jQuery(document).ready(function() {
                                                                    <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterUser(`+response.data[counter].userId+`)>
                                                                        <!--begin::Stats-->
                                                                        <div class="flex-grow-1">
-                                                                           <div class="text-dark-50 font-weight-bold">Customers Added By: `+response.data[counter].user+`</div>
+                                                                           <div class="text-dark-50 font-weight-bold">Customers Managed By: `+response.data[counter].user+`</div>
                                                                            <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].customers+`</div>
                                                                        </div>
                                                                        <!--end::Stats-->
