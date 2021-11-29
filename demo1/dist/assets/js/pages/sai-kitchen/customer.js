@@ -993,6 +993,15 @@ jQuery(document).ready(function() {
   $.ajax({
     type: "Get",
     url: baseURL + '/User/GetAuthUser' ,
+    headers: {
+        'Content-Type': 'application/json',
+        'userId': user.data.userId,
+        'userToken': user.data.userToken,
+        'userRoleId': user.data.userRoles[0].userRoleId,
+        'branchId': user.data.userRoles[0].branchId,
+        'branchRoleId': user.data.userRoles[0].branchRoleId,
+        'Access-Control-Allow-Origin': '*',
+    },
     success: function(response) {
 
         console.log(response);
