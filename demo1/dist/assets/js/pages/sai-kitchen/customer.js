@@ -441,7 +441,7 @@ var KTAppsUsersListDatatable = function() {
                     },
                 }, {
                     field: 'AddedBy',
-                    title: 'Added By',
+                    title: 'Managed By',
                     autoHide: true,
                     template: function(data) {
                         var output = '';
@@ -464,12 +464,24 @@ var KTAppsUsersListDatatable = function() {
                 }
                 ,{
                     field: 'customerAssignedToName',
-                    title: 'Customer AssignedTo Name',
+                    title: 'Assigned To',
                     autoHide: true,
                     template: function(data) {
                         var output = '';
 
                         output += '<div class="font-weight-bold text-muted">' + data.customerAssignedToName + '</div>';
+
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'customerAssignedByName',
+                    title: 'Assigned By',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.customerAssignedByName + '</div>';
 
                         return output;
                     }
