@@ -462,6 +462,18 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     }
                 }
+                ,{
+                    field: 'customerAssignedToName',
+                    title: 'Customer AssignedTo Name',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.customerAssignedToName + '</div>';
+
+                        return output;
+                    }
+                }
             ],
         });
 
@@ -586,6 +598,9 @@ var KTAppsUsersListDatatable = function() {
                 customer.customerCity = $('#kt_city_of_Resdience').val();
                 customer.customerNationality = $('#kt_nationality').val();
                 customer.customerWhatsapp = document.getElementById('whatsapp').value;
+                customer.CustomerAssignedTo = document.getElementById('CustomerAssignedTo').value;
+              
+               
                 // branchRole.permissionRoles.push({
                 // 	permissionId: 1,
                 // 	isActive: true,
@@ -901,36 +916,37 @@ jQuery(document).ready(function() {
       
        
         
-     for (var counter=0;counter<response.data.length;counter++)
-        {
-                     if(response.data[counter].customers > 0)
-                   {
-                    
-                        document.getElementById('customerbyUser').innerHTML +=`
-
-                                            <div class="col-xl-3">
-                                                            <!--begin::Tiles Widget 4-->
-                                                        <div class="card card-custom gutter-b" style="height: 130px;">
-                                                            <!--begin::Body-->
-                                                            <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterUser(`+response.data[counter].userId+`)>
-                                                                <!--begin::Stats-->
-                                                                <div class="flex-grow-1">
-                                                                    <div class="text-dark-50 font-weight-bold">Customers Added By: `+response.data[counter].user+`</div>
-                                                                    <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].customers+`</div>
-                                                                </div>
-                                                                <!--end::Stats-->
-                                                            </div>
-                                                            <!--end::Body-->
-                                                        </div>
-                                                        <!--end::Tiles Widget 4-->
-                                                        </div>`;
+            let all=0;    
+            for (var counter=0;counter<response.data.length;counter++)
+               {
+                            if(response.data[counter].customers > 0)
+                          {
+                           all += parseInt(response.data[counter].customers);
+                               document.getElementById('customerbyUser').innerHTML +=`
+       
+                                                   <div class="col-xl-3">
+                                                                   <!--begin::Tiles Widget 4-->
+                                                               <div class="card card-custom gutter-b" style="height: 130px;">
+                                                                   <!--begin::Body-->
+                                                                   <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterUser(`+response.data[counter].userId+`)>
+                                                                       <!--begin::Stats-->
+                                                                       <div class="flex-grow-1">
+                                                                           <div class="text-dark-50 font-weight-bold">Customers Added By: `+response.data[counter].user+`</div>
+                                                                           <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].customers+`</div>
+                                                                       </div>
+                                                                       <!--end::Stats-->
+                                                                   </div>
+                                                                   <!--end::Body-->
+                                                               </div>
+                                                               <!--end::Tiles Widget 4-->
+                                                               </div>`;
+                               
+                                                               document.getElementById('AllCustomers').innerHTML = all;
+                           }
                         
-                 
-                    }
-                 
-         
-
-        }
+                
+       
+               }
 
 
         } else {
@@ -967,7 +983,59 @@ jQuery(document).ready(function() {
 });
 
 
- // end
+ // end customers by user
+
+
+
+
+         //  begin get assigned to
+         
+  $.ajax({
+    type: "Get",
+    url: baseURL + '/User/GetAuthUser' ,
+    success: function(response) {
+
+        console.log(response);
+        if (response.isError == false) {
+           
+
+            const roleTypeList = document.getElementById('CustomerAssignedTo');
+            var roleTypeListHTML = new Array();
+            roleTypeListHTML.push('<option value="0"></option>');
+            var selected='';
+            for (var i = 0; i < response.data.length; i++) {
+                selected='';
+                // if( CustomerAssignedBy == response.data[i].CustomerAssignedBy){
+                //     selected='selected';
+                // }
+                roleTypeListHTML.push(`
+                <option value="` + response.data[i].userId+ `" `+selected+`>` + response.data[i].userName + `</option>`);
+            }
+            roleTypeList.innerHTML = roleTypeListHTML.join('');
+
+
+        }else {
+        Swal.fire({
+            text: response.errorMessage,
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    }
+
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+    
+    }
+});
+
+
+  // endassigned to
 
 
 

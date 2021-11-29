@@ -330,7 +330,7 @@
 												<!--begin::Stats-->
 												<div class="flex-grow-1">
 													<div class="text-dark-50 font-weight-bold">All Customers </div>
-													<div class="font-weight-bolder font-size-h3" id=""></div>
+													<div class="font-weight-bolder font-size-h3" id="AllCustomers"></div>
 												</div>
 												<!--end::Stats-->
 											</div>
@@ -970,6 +970,17 @@
 											</select>
 										</div>
 									</div>
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Assigned To</label>
+										<div class="input-group input-group-lg input-group-solid">
+												<select class="form-control" id="CustomerAssignedTo" name="CustomerAssignedTo"
+												class="form-control form-control-lg form-control-solid"
+												style="width:100%">
+
+											</select>
+										</div>
+									</div>
+									
 
 									
 
@@ -1162,6 +1173,8 @@ try {
 			document.getElementById('customerContact').value = "";
 			document.getElementById('customerAddress').value = "";
 			document.getElementById('customerNationalId').value = "";
+		    $('#CustomerAssignedTo option:first').prop('selected',true);
+
 			// $('#kt_contact_status').val(response.data.contactStatusId).change();
 			// $('#kt_wayofcontact').val(response.data.wayofContactId).change();
 			// $('#kt_country_of_Resdience').val(response.data.customerCountry).change();
@@ -1215,7 +1228,8 @@ try {
 						$('#kt_city_of_Resdience').val(response.data.customerCity).change();
 						document.getElementById("customerCity").innerHTML = response.data.customerCity;
 						$('#kt_nationality').val(response.data.customerNationality).change();
-						document.getElementById('whatsapp').value =response.data.customerWhatsapp;	
+						document.getElementById('whatsapp').value =response.data.customerWhatsapp;
+						$('#CustomerAssignedTo'+' option[value="'+response.data.customerAssignedTo+'"]').attr('selected',true).change();	
 						} catch (error) {
 							
 						}
