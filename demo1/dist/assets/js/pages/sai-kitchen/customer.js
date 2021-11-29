@@ -486,6 +486,18 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     }
                 }
+                ,{
+                    field: 'customerAssignedDate',
+                    title: 'Assigned On',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.customerAssignedDate + '</div>';
+
+                        return output;
+                    }
+                }
             ],
         });
 
