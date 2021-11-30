@@ -15,6 +15,9 @@ let user;
 let datatable;
 let customerData;
 let fuserId=0;
+let filter = 1;
+let usercard = 1;
+
 var KTAppsUsersListDatatable = function() {
     // Private functions
 
@@ -34,7 +37,7 @@ var KTAppsUsersListDatatable = function() {
                 type: 'remote',
                 source: {
                     read: {
-                        url: baseURL + '/Customer/GetCustomerOfBranch?userId=' + parseInt(fuserId),
+                        url: baseURL + '/Customer/GetCustomerOfBranch?userId=' + parseInt(fuserId) +"&filter="+ parseInt(filter),
                         headers: {
                             'Content-Type': 'application/json',
                             'userId': user.data.userId,
@@ -87,6 +90,84 @@ var KTAppsUsersListDatatable = function() {
                         $("#contactedCustomer").html(data.contactedCustomers);
                         $("#needToContact").html(data.needToContactCustomers);
                         $("#noInquiryCustomer").html(data.customerWithoutInquiry);
+
+                       if(data.direct>0){
+                          
+                           $("#Directcol").attr("hidden",false);
+                           $("#Direct").html(data.direct); 
+                               }
+                       if(data.google>0){
+                               
+                                $("#Googlecol").attr("hidden",false);
+                                $("#Google").html(data.google);
+                               }
+
+                       if(data.faceBook>0){
+
+                               $("#Facebookcol").attr("hidden",false);
+                               $("#Facebook").html(data.faceBook);
+
+                                  }    
+                                
+
+                       if(data.linkedin>0){
+                             $("#Linkedincol").attr("hidden",false);
+                             $("#Linkedin").html(data.linkedin);
+                             }    
+                            
+                       if(data.twitter>0){
+                                $("#Twittercol").attr("hidden",false);
+                                $("#Twitter").html(data.twitter);
+                                 }  
+
+                                      
+                       if(data.friends>0){
+                        $("#Friendsrecommendedcol").attr("hidden",false);
+                        $("#Friendsrecommended").html(data.friends);
+                         }  
+                            
+                       if(data.website>0){
+
+                               $("#Websitecol").attr("hidden",false);
+                               $("#Website").html(data.website);
+                               
+                                 }      
+                            
+                      if(data.mobileApp>0){ 
+                               $("#MobileAppcol").attr("hidden",false);
+                               $("#MobileApp").html(data.mobileApp);
+                               
+                                  } 
+
+                     if(data.ownerReference>0) {
+                                $("#OwnerReferencecol").attr("hidden",false);
+                                $("#OwnerReference").html(data.ownerReference);
+                                      }     
+
+                     if(data.instagram>0) {
+                     
+                                $("#Instagramcol").attr("hidden",false);
+                                $("#Instagram").html(data.instagram);
+                     }   
+
+                     if(data.other>0){
+                            
+                                $("#Othercol").attr("hidden",false);
+                                $("#Other").html(data.other);
+                                  
+                        }      
+                            
+
+                        // $("#Google").html(data.);
+                        // $("#Facebook").html(data.);
+                        // $("#Linkedin").html(data.);
+                        // $("#Twitter").html(data.);
+                        // $("#Website").html(data.);
+                        // $("#MobileApp").html(data.);
+                        // $("#OwnerReference").html(data.);
+                        // $("#Instagram").html(data.);
+                        // $("#Other").html(data.);
+
                         return '<span class="font-weight-bolder">' + data.customerId + '</span>';
 
                     }
@@ -510,22 +591,133 @@ var KTAppsUsersListDatatable = function() {
         });
 
         $('#divclk').on('click', function() {
-           document.getElementById("kt_subheader_search_form").value = 'Need to Contact';
-           datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+       
+           usercard =  document.getElementById('filtecardsId').value;
+           window.location.replace("customer.html?fuserId="+usercard+"&filter=3");
+
+            //    document.getElementById("kt_subheader_search_form").value = 'Need to Contact';
+           //    datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
         });
 
         $('#divclk2').on('click', function() {
-            document.getElementById("kt_subheader_search_form").value = 'Contacted';
-            datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+
+            usercard =  document.getElementById('filtecardsId').value;
+            window.location.replace("customer.html?fuserId="+usercard+"&filter=2");
+
+
+             // document.getElementById("kt_subheader_search_form").value = 'Contacted';
+            // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
+
          $('#divclk3').on('click', function() {
-            document.getElementById("kt_subheader_search_form").value = 'No Inquiries';
-            datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+           
+             usercard =  document.getElementById('filtecardsId').value;
+            window.location.replace("customer.html?fuserId="+usercard+"&filter=4");
+
+             // document.getElementById("kt_subheader_search_form").value = 'No Inquiries';
+            // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
+
          $('#divclk1').on('click', function() {
-            document.getElementById("kt_subheader_search_form").value = '';
-            datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+
+             usercard =  document.getElementById('filtecardsId').value;
+            window.location.replace("customer.html?fuserId="+usercard+"&filter=1");
+
+           // document.getElementById("kt_subheader_search_form").value = '';
+            // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
+
+   //  way of contacts filters
+
+            $('#DirectDiv').on('click', function() {
+
+                usercard =  document.getElementById('filtecardsId').value;
+            window.location.replace("customer.html?fuserId="+usercard+"&filter=5");
+
+                        });
+
+            $('#GoogleDiv').on('click', function() {
+
+                usercard =  document.getElementById('filtecardsId').value;
+                window.location.replace("customer.html?fuserId="+usercard+"&filter=6");
+            
+                        });
+
+                $('#FacebookDiv').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                    window.location.replace("customer.html?fuserId="+usercard+"&filter=7");
+                
+                            });
+
+                $('#LinkedinDiv').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                    window.location.replace("customer.html?fuserId="+usercard+"&filter=8");
+                
+                            });
+
+                $('#TwitterDiv').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                    window.location.replace("customer.html?fuserId="+usercard+"&filter=9");
+                
+                            });
+
+
+                $('#FriendsrecommendedDiv').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                    window.location.replace("customer.html?fuserId="+usercard+"&filter=10");
+                
+                            });
+
+
+            $('#WebsiteDiv').on('click', function() {
+
+                usercard =  document.getElementById('filtecardsId').value;
+                window.location.replace("customer.html?fuserId="+usercard+"&filter=11");
+            
+                        });
+
+                $('#MobileAppDiv').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                    window.location.replace("customer.html?fuserId="+usercard+"&filter=12");
+                
+                            });
+
+                $('#OwnerReferenceDiv').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                    window.location.replace("customer.html?fuserId="+usercard+"&filter=13");
+                
+                            });  
+
+                            
+                    $('#InstagramDiv').on('click', function() {
+
+                        usercard =  document.getElementById('filtecardsId').value;
+                        window.location.replace("customer.html?fuserId="+usercard+"&filter=14");
+                    
+                                });   
+
+
+
+                    $('#OtherDiv').on('click', function() {
+
+                        usercard =  document.getElementById('filtecardsId').value;
+                        window.location.replace("customer.html?fuserId="+usercard+"&filter=15");
+                    
+                                });   
+             
+
+
+
+   // 
+
+
+
 
          
  
@@ -724,8 +916,13 @@ let customerPermission;
 jQuery(document).ready(function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+
     if(urlParams.get('fuserId')!=null)
-     fuserId = urlParams.get('fuserId');
+       fuserId = urlParams.get('fuserId');
+    document.getElementById("filtecardsId").value = fuserId;
+     
+    if(urlParams.get('filter')!=null)
+      filter = urlParams.get('filter');
 
     var login = localStorage.getItem("user");
     if (login !== null) {
@@ -955,7 +1152,7 @@ jQuery(document).ready(function() {
                                                                    <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterUser(`+response.data[counter].userId+`)>
                                                                        <!--begin::Stats-->
                                                                        <div class="flex-grow-1">
-                                                                           <div class="text-dark-50 font-weight-bold">Customers Managed By: `+response.data[counter].user+`</div>
+                                                                           <div class="text-dark-50 font-weight-bold">Customers Account By: `+response.data[counter].user+`</div>
                                                                            <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].customers+`</div>
                                                                        </div>
                                                                        <!--end::Stats-->
