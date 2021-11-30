@@ -87,9 +87,9 @@ var KTAppsUsersListDatatable = function() {
                         customerData = data;
                         console.log(customerData);
                         $("#totalCustomer").html(data.totalCustomers);
-                        $("#contactedCustomer").html(data.contactedCustomers);
+                        $("#contactedCustomer").html(data.customerWithoutInquiry);
                         $("#needToContact").html(data.needToContactCustomers);
-                        $("#noInquiryCustomer").html(data.customerWithoutInquiry);
+                        $("#noInquiryCustomer").html(data.customerWithInquiry);
 
                        if(data.direct>0){
                           
