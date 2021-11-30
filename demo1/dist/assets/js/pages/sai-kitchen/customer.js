@@ -86,77 +86,79 @@ var KTAppsUsersListDatatable = function() {
                     template: function(data) {
                         customerData = data;
                         console.log(customerData);
+                        //if(data.totalCustomers = 0)
+                        //$("#totalCustomer").children().bind('click', function(){ return false; });
+                        if(data.totalCustomers == 0)
+                           document.getElementById('divclk1').style.pointerEvents = 'none';
                         $("#totalCustomer").html(data.totalCustomers);
+
+                        if(data.customerWithoutInquiry == 0)
+                           document.getElementById('divclk2').style.pointerEvents = 'none';
                         $("#contactedCustomer").html(data.customerWithoutInquiry);
+
+                        if(data.needToContactCustomers == 0)
+                           document.getElementById('divclk').style.pointerEvents = 'none';
                         $("#needToContact").html(data.needToContactCustomers);
+                        
+                        if(data.customerWithInquiry == 0)
+                           document.getElementById('divclk3').style.pointerEvents = 'none';
                         $("#noInquiryCustomer").html(data.customerWithInquiry);
 
-                       if(data.direct>0){
-                          
-                           $("#Directcol").attr("hidden",false);
-                           $("#Direct").html(data.direct); 
-                               }
-                       if(data.google>0){
+                       if(data.direct==0){
+                            document.getElementById('DirectDiv').style.pointerEvents = 'none';
+                           
+                        }
+                        $("#Direct").html(data.direct); 
+                        if(data.google==0){
+                             document.getElementById('GoogleDiv').style.pointerEvents = 'none';
+                                  
+                        }
+                        $("#Google").html(data.google);
+                       if(data.faceBook==0){
+                        document.getElementById('FacebookDiv').style.pointerEvents = 'none';
+                       }    
+                       $("#Facebook").html(data.faceBook);        
+
+                       if(data.linkedin==0){
+                        document.getElementById('LinkedinDiv').style.pointerEvents = 'none';
+                       }    
+                       $("#Linkedin").html(data.linkedin);    
+                       if(data.twitter==0){
+                        document.getElementById('TwitterDiv').style.pointerEvents = 'none';
                                
-                                $("#Googlecol").attr("hidden",false);
-                                $("#Google").html(data.google);
-                               }
-
-                       if(data.faceBook>0){
-
-                               $("#Facebookcol").attr("hidden",false);
-                               $("#Facebook").html(data.faceBook);
-
-                                  }    
-                                
-
-                       if(data.linkedin>0){
-                             $("#Linkedincol").attr("hidden",false);
-                             $("#Linkedin").html(data.linkedin);
-                             }    
-                            
-                       if(data.twitter>0){
-                                $("#Twittercol").attr("hidden",false);
-                                $("#Twitter").html(data.twitter);
-                                 }  
+                       }  
+                       $("#Twitter").html(data.twitter);
 
                                       
-                       if(data.friends>0){
-                        $("#Friendsrecommendedcol").attr("hidden",false);
-                        $("#Friendsrecommended").html(data.friends);
+                       if(data.friends==0){
+                        document.getElementById('FriendsrecommendedDiv').style.pointerEvents = 'none';
+                        
                          }  
-                            
-                       if(data.website>0){
+                         $("#Friendsrecommended").html(data.friends);  
+                       if(data.website==0){
+                           document.getElementById('WebsiteDiv').style.pointerEvents = 'none';
+                        }      
+                        $("#Website").html(data.website);    
+                      if(data.mobileApp==0){ 
+                        document.getElementById('MobileAppDiv').style.pointerEvents = 'none';
+                       } 
+                       $("#MobileApp").html(data.mobileApp);
+                     if(data.ownerReference==0) {
+                        document.getElementById('OwnerReferenceDiv').style.pointerEvents = 'none';
+                      }     
+                      $("#OwnerReference").html(data.ownerReference);
 
-                               $("#Websitecol").attr("hidden",false);
-                               $("#Website").html(data.website);
-                               
-                                 }      
-                            
-                      if(data.mobileApp>0){ 
-                               $("#MobileAppcol").attr("hidden",false);
-                               $("#MobileApp").html(data.mobileApp);
-                               
-                                  } 
-
-                     if(data.ownerReference>0) {
-                                $("#OwnerReferencecol").attr("hidden",false);
-                                $("#OwnerReference").html(data.ownerReference);
-                                      }     
-
-                     if(data.instagram>0) {
-                     
-                                $("#Instagramcol").attr("hidden",false);
-                                $("#Instagram").html(data.instagram);
+                     if(data.instagram==0) {
+                        document.getElementById('InstagramDiv').style.pointerEvents = 'none';
+                                
                      }   
-
-                     if(data.other>0){
-                            
-                                $("#Othercol").attr("hidden",false);
-                                $("#Other").html(data.other);
+                     $("#Instagram").html(data.instagram);
+                     if(data.other==0){
+                        document.getElementById('OtherDiv').style.pointerEvents = 'none';
+                               
                                   
                         }      
-                            
+                        $("#Other").html(data.other);
 
                         // $("#Google").html(data.);
                         // $("#Facebook").html(data.);
