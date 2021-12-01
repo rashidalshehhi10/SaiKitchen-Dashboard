@@ -553,7 +553,25 @@
 
 									 </div>
 
-									  
+									 <div id="assignmentTobar" class="row">
+										<div class="col-xl-12">
+											<!--begin::Tiles Widget 4-->
+										<div class="card card-custom gutter-b" >
+											<!--begin::Body-->
+											<div id=""  style="border-radius: .42rem;font-size: large;" class="card-body d-flex flex-column " >
+												Assignment To :
+											</div>
+											<!--end::Body-->
+										</div>
+										<!--end::Tiles Widget 4-->
+										</div>
+									   </div>
+									 
+									   <div id="assignmentTo" class="row">
+										
+									   </div>
+
+
 										<!--begin::Card-->
 										<div class="card card-custom">
 											<!--begin::Header-->
@@ -1634,9 +1652,19 @@ try {
 		   window.location.replace("customer.html?fuserId="+userId);
 
         }
+
 		function refresh(){
 			window.location.replace('customer.html');
 		}
+
+
+		function filterAssignedTo(assignedUserId){
+
+			window.location.replace("customer.html?fuserId="+assignedUserId+"&filter=16")
+		} 
+
+
+
 	</script>
 	<!--end::Page Scripts-->
 	

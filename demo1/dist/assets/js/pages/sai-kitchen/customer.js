@@ -921,11 +921,13 @@ jQuery(document).ready(function() {
 
     if(urlParams.get('fuserId')!=null)
        fuserId = urlParams.get('fuserId');
-    document.getElementById("filtecardsId").value = fuserId;
+    
      
     if(urlParams.get('filter')!=null)
       filter = urlParams.get('filter');
-
+    document.getElementById("filtecardsId").value = fuserId;  
+    if(filter ==16) 
+        document.getElementById("filtecardsId").value = 0;
     var login = localStorage.getItem("user");
     if (login !== null) {
         user = JSON.parse(login);
@@ -1207,6 +1209,103 @@ jQuery(document).ready(function() {
 
 
  // end customers by user
+
+
+
+  //  begin Assignment To
+
+
+  $.ajax({
+    type: "get",
+    url: baseURL + '/Customer/GetCustomerbyAssigned',
+
+    headers: {
+        'Content-Type': 'application/json',
+        'userId': user.data.userId,
+        'userToken': user.data.userToken,
+        'userRoleId': user.data.userRoles[0].userRoleId,
+        'branchId': user.data.userRoles[0].branchId,
+        'branchRoleId': user.data.userRoles[0].branchRoleId,
+        'Access-Control-Allow-Origin': '*',
+    },
+    success: function(response) {
+        console.log(response);
+        if (response.isError == false) {
+
+
+      
+          
+          
+            for (var i=0;i<response.data.length;i++)
+               {
+                            if(response.data[i].customers > 0)
+                          {
+               
+                               document.getElementById('assignmentTo').innerHTML +=`
+       
+                                                   <div class="col-xl-3">
+                                                                   <!--begin::Tiles Widget 4-->
+                                                               <div class="card card-custom gutter-b" style="height: 130px;">
+                                                                   <!--begin::Body-->
+                                                                   <div id="divclkAssignment"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterAssignedTo(`+response.data[i].userId+`)>
+                                                                       <!--begin::Stats-->
+                                                                       <div class="flex-grow-1">
+                                                                           <div class="text-dark-50 font-weight-bold">Assigned To :   `+response.data[i].user+`</div>
+                                                                           <div class="font-weight-bolder font-size-h3" id="">`+response.data[i].customers+`</div>
+                                                                       </div>
+                                                                       <!--end::Stats-->
+                                                                   </div>
+                                                                   <!--end::Body-->
+                                                               </div>
+                                                               <!--end::Tiles Widget 4-->
+                                                               </div>`;
+                               
+                                                
+                           }
+                        
+                
+       
+               }
+
+
+        } else {
+            Swal.fire({
+                text: response.errorMessage,
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+        // alert(errorThrown);
+
+        Swal.fire({
+            text: 'Internet Connection Problem',
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    }
+});
+
+  // end Assignment To
+
+
+
+
 
 
 
