@@ -26,7 +26,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             lengthMenu: [5, 10, 25, 50, 100, 150, 200, 250],
 
             pageLength: 10,
-
+            stateSave: true,
             language: {
                 'lengthMenu': 'Display _MENU_',
             },
@@ -337,7 +337,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     },
                 },
                 {
-                	targets: 16,
+                	targets: 24,
                 	render: function(data, type, full, meta) {
                 	
                 		if (typeof data === 'undefined' || data===null || data=="") {

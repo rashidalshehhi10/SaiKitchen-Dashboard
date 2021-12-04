@@ -50,7 +50,7 @@ var KTAppsUsersListDatatable = function() {
                     },
                 },
                 pageSize: 10, // display 20 records per page
-                serverPaging: true,
+               // serverPaging: true,
                 serverFiltering: false,
                 serverSorting: false,
             },
@@ -65,7 +65,7 @@ var KTAppsUsersListDatatable = function() {
             sortable: true,
 
             pagination: true,
-
+            stateSave: true,
             processing: true,
             serverSide: false,
             search: {
@@ -583,7 +583,7 @@ var KTAppsUsersListDatatable = function() {
                 }
             ],
         });
-
+        //console.log(datatable.rows().data());
          $('#kt_subheader_search_form').on('blur', function() {
             datatable.search($(this).val().toLowerCase());
         }); 
