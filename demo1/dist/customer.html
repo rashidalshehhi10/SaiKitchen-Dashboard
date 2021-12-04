@@ -1383,14 +1383,18 @@
 		var user=	JSON.parse(localStorage.getItem("user"));
 
 $( "#kt_contact_status" ).change(function () {    
-	if($('#kt_contact_status').val()=="1"){
-$("#nextMeetingDate").hide();
-document.getElementById('next_meeting_date').value = "";
-$("#next_meeting_date").prop('required',false);
-}else{
-	$("#nextMeetingDate").show();
-	$("#next_meeting_date").prop('required',true);
-}
+    var today  = new Date();
+    var hours = new Date();
+    $("#next_meeting_date").val(today.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
+
+	if($('#kt_contact_status').val()=="1" || $('#kt_contact_status').val()=="2"){
+         $("#nextMeetingDate").hide();
+         document.getElementById('next_meeting_date').value = "";
+	$("#next_meeting_date").prop('required',false);
+	}else{
+		$("#nextMeetingDate").show();
+		$("#next_meeting_date").prop('required',true);
+	}
 });  
 
 		function customFormReset() {
@@ -1407,6 +1411,9 @@ try {
 			document.getElementById('customerAddress').value = "";
 			document.getElementById('customerNationalId').value = "";
 		    $('#CustomerAssignedTo option:first').prop('selected',true);
+			var today  = new Date();
+			var hours = new Date();
+			$("#next_meeting_date").val(today.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
 
 			// $('#kt_contact_status').val(response.data.contactStatusId).change();
 			// $('#kt_wayofcontact').val(response.data.wayofContactId).change();
@@ -1453,9 +1460,10 @@ try {
 						document.getElementById('customerContact').value = response.data.customerContact;
 						document.getElementById('customerAddress').value = response.data.customerAddress;
 						document.getElementById('customerNotes').value = response.data.customerNotes;	
-						document.getElementById('next_meeting_date').value = response.data.customerNextMeetingDate;
+						
 						document.getElementById('customerNationalId').value = response.data.customerNationalId;
 						$('#kt_contact_status').val(response.data.contactStatusId).change();
+						document.getElementById('next_meeting_date').value = response.data.customerNextMeetingDate;
 						$('#kt_wayofcontact').val(response.data.wayofContactId).change();
 						$('#kt_country_of_Resdience').val(response.data.customerCountry).change();
 						$('#kt_city_of_Resdience').val(response.data.customerCity).change();

@@ -307,6 +307,10 @@ var KTAppsUsersListDatatable = function() {
                             2: {
                                 'title': 'Need to Contact',
                                 'class': ' label-light-danger'
+                            },
+                            3: {
+                                'title': 'Need to Follow-up',
+                                'class': ' label-light-danger'
                             }
                         };
                         return '<span class="label label-lg font-weight-bold ' + status[data.contactStatusId].class + ' label-inline">' +data.contactStatus + '</span>';
