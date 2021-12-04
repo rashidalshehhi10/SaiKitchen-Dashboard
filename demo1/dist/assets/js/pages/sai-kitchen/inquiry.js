@@ -44,10 +44,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryId', 'inquiryCode', 'status', 'workscopeNames','inquiryComment',
-                        'measurementScheduleDate', 'measurementAssignTo','designScheduleDate', 'designAssignTo','isMeasurementProvidedByCustomer','isDesignProvidedByCustomer', 'customerCode', 'customerName',
-                        'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied','inquiryDescription', 'inquiryStartDate', 'inquiryEndDate', 'inquiryAddedBy','inquiryAddedById','measurementAddedOn','designAddedOn','quotationAddedOn','commentAddedOn','factorName','noOfRevision','quotationScheduleDate','escalationRequestedBy','escalationRequestedOn', 'actions'
+                        'inquiryId', 'status','inquiryComment','customerName','inquiryAddedBy','workscopeNames','inquiryCode', 'inquiryDescription','inquiryStartDate', 'inquiryEndDate', 'isMeasurementProvidedByCustomer', 
+                        'measurementScheduleDate', 'measurementAssignTo','measurementAddedOn','isDesignProvidedByCustomer','designScheduleDate', 'designAssignTo','designAddedOn','quotationScheduleDate','quotationAddedOn',
+                         'customerCode', 'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+                         'isOccupied', 'inquiryAddedById','commentAddedOn','factorName','noOfRevision','escalationRequestedBy','escalationRequestedOn', 'actions'
                     ],
                 },
             },
@@ -55,19 +55,34 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'inquiryId'
                 },
                 {
-                    data: 'inquiryCode'
+                    data: 'status'
                 },
                 {
-                    data: 'status'
+                    data: 'inquiryComment'
                 },
                 {
                     data: 'customerName'
                 },
                 {
+                    data: 'inquiryAddedBy'
+                },
+                {
                     data: 'workscopeNames'
                 },
                 {
-                    data: 'inquiryComment'
+                    data: 'inquiryCode'
+                },
+                {
+                    data: 'inquiryDescription'
+                },
+                {
+                    data: 'inquiryStartDate'
+                },
+                {
+                    data: 'inquiryEndDate'
+                },
+                {
+                    data: 'isMeasurementProvidedByCustomer'
                 },
                 {
                     data: 'measurementScheduleDate'
@@ -76,17 +91,27 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     data: 'measurementAssignTo'
                 },
                 {
+                    data: 'measurementAddedOn'
+                },
+                {
+                    data: 'isDesignProvidedByCustomer'
+                },
+                {
                     data: 'designScheduleDate'
                 },
                 {
                     data: 'designAssignTo'
                 },
                 {
-                    data: 'isMeasurementProvidedByCustomer'
+                    data: 'designAddedOn'
                 },
                 {
-                    data: 'isDesignProvidedByCustomer'
+                    data:'quotationScheduleDate'
                 },
+                {
+                    data: 'quotationAddedOn'
+                },
+               
                 {
                     data: 'customerCode'
                 },
@@ -117,36 +142,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 {
                     data: 'isOccupied'
                 },
-                {
-                    data: 'inquiryDescription'
-                },
-                {
-                    data: 'inquiryStartDate'
-                },
-                {
-                    data: 'inquiryEndDate'
-                },
-                {
-                    data: 'inquiryAddedBy'
-                },
-                {
-                    data: 'measurementAddedOn'
-                },
-                {
-                    data: 'designAddedOn'
-                },
-                {
-                    data: 'quotationAddedOn'
-                },
+               
                 {
                     data: 'commentAddedOn'
                 },
                 {
                     data: 'factorName'
                 },
-                {
-                    data:'quotationScheduleDate'
-                },
+               
                 {
                     data:'escalationRequestedBy'
                 },
@@ -321,7 +324,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     },
                 },
                 {
-                    targets: 2,
+                    targets: 1,
                     render: function(data, type, full, meta) {
                         var status = inqStatus;
 
