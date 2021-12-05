@@ -1264,7 +1264,7 @@
                 <!--begin::Form-->
                 <form class="form" id="kt_approve_inquiry" action="" name="approveinquiryform">
                     <div class="modal-body">
-                        <div class="form-group row">
+                        <div class="form-group">
 							<table class="table table-bordered table-hover table-checkable" id="kt_datatableInquiry">
 								<thead>
 								   <tr>
@@ -1278,7 +1278,7 @@
 									  <th>Description</th>
 									  <th>Start Date</th>
 									  <th>End Date</th>
-									 <!--  <th>Measurement Provided By Customer</th>
+									  <th>Measurement Provided By Customer</th>
 									  <th>Measurement Schedule Date</th>
 									  <th>Measurement Assign To</th>
 									  <th>Measurement Added Date</th>
@@ -1306,7 +1306,7 @@
 									  <th>Factory Name</th>
 									  
 									  <th>Escalation Requested By</th>
-									  <th>Escalation Requested On</th> -->
+									  <th>Escalation Requested On</th> 
 									  
 								   </tr>
 								</thead>
@@ -1813,7 +1813,10 @@ try {
 						data: {
 							// parameters for custom backend script demo
 							columnsDef: [
-								'inquiryId', 'status','inquiryComment','customerName','inquiryAddedBy','workscopeNames','inquiryCode', 'inquiryDescription','inquiryStartDate', 'inquiryEndDate'
+								'inquiryId', 'status','inquiryComment','customerName','inquiryAddedBy','workscopeNames','inquiryCode', 'inquiryDescription','inquiryStartDate', 'inquiryEndDate', 'isMeasurementProvidedByCustomer', 
+								'measurementScheduleDate', 'measurementAssignTo','measurementAddedOn','isDesignProvidedByCustomer','designScheduleDate', 'designAssignTo','designAddedOn','quotationScheduleDate','quotationAddedOn',
+								'customerCode', 'customerContact','customerEmail','contactStatus','nextMeetingDate','customerNotes', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+								'isOccupied', 'inquiryAddedById','commentAddedOn','factorName','noOfRevision','escalationRequestedBy','escalationRequestedOn'
 							],
 						},
 					},
@@ -1857,7 +1860,7 @@ try {
 							data: 'inquiryEndDate',
 							autoHide: false,
 						},
-						/* {
+						 {
 							data: 'isMeasurementProvidedByCustomer',
 							autoHide: true,
 						},
@@ -1967,7 +1970,7 @@ try {
 						{
 							data:'escalationRequestedOn',
 							autoHide: true,
-						}, */
+						}, 
 					],
 
 			/* 		initComplete: function(data, type, full, meta) {
