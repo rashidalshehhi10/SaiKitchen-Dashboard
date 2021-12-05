@@ -1950,6 +1950,11 @@ $.ajax({
                }
             });
          }
+         function followUp(contactStatusId,nextMeetingDate,customerNotes){
+            $('#kt_contact_status'+' option[value="'+contactStatusId+'"]').attr('selected',true).change();
+            document.getElementById('next_meeting_date').value = nextMeetingDate;
+            document.getElementById('custxtComment').value = customerNotes;
+         }
       </script>
       <!--end::Page Scripts-->
    </body>
