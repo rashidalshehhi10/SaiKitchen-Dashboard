@@ -46,7 +46,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     columnsDef: [
                         'inquiryId', 'status','inquiryComment','customerName','inquiryAddedBy','workscopeNames','inquiryCode', 'inquiryDescription','inquiryStartDate', 'inquiryEndDate', 'isMeasurementProvidedByCustomer', 
                         'measurementScheduleDate', 'measurementAssignTo','measurementAddedOn','isDesignProvidedByCustomer','designScheduleDate', 'designAssignTo','designAddedOn','quotationScheduleDate','quotationAddedOn',
-                         'customerCode', 'customerContact','customerEmail', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+                         'customerCode', 'customerContact','customerEmail','contactStatus','nextMeetingDate','customerNotes', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
                          'isOccupied', 'inquiryAddedById','commentAddedOn','factorName','noOfRevision','escalationRequestedBy','escalationRequestedOn', 'actions'
                     ],
                 },
@@ -120,6 +120,15 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data: 'customerEmail'
+                },
+                {
+                    data: 'contactStatus'
+                },
+                {
+                    data: 'nextMeetingDate'
+                },
+                {
+                    data: 'customerNotes'
                 },
                 {
                     data: 'buildingAddress'
@@ -337,7 +346,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     },
                 },
                 {
-                	targets: 24,
+                	targets: 27,
                 	render: function(data, type, full, meta) {
                 	
                 		if (typeof data === 'undefined' || data===null || data=="") {
