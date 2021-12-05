@@ -1181,6 +1181,7 @@
 
                   </div>
                   <div class="modal-footer">
+                     <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal" data-toggle="modal" data-target="#customerpop">Follow-up</button>
                      <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                      <button type="submit"  id="kt_comment_button"  class="btn btn-primary font-weight-bold">Add</button>
                   </div>
@@ -1189,6 +1190,58 @@
             </div>
          </div>
       </div>
+      <div class="modal fade" id="customerpop" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered modal" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="examplecustomer">Follow Up</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i aria-hidden="true" class="ki ki-close"></i>
+                  </button>
+               </div>
+               <!--begin::Form-->
+               <form class="form" id="kt_customerform" action="" name="kt_customerform">
+                  <div class="modal-body">
+                     <div class="form-group row">
+                                 <label class="font-size-h6 font-weight-bolder text-dark">Contact Status*</label>
+                                 <div class="input-group input-group-lg input-group-solid">
+                                    <select class="form-control" id="kt_contact_status" name="contactstatus"
+                                       class="form-control form-control-lg form-control-solid"
+                                       style="width:100%">
+                                    </select>
+                                 </div>
+                  </div>
+                  <div class="form-group row">
+                                 <label class="font-size-h6 font-weight-bolder text-dark">Next Follow-up Date</label>
+                                 <div class="input-group input-group-lg input-group-solid">
+                                    <div class="input-group date" id="kt_datetimepicker_cus" data-target-input="nearest">
+                                       <input type="text" id="next_meeting_date" name="next_meeting_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_cus">
+                                       <div class="input-group-append" data-target="#kt_datetimepicker_cus" data-toggle="datetimepicker">
+                                          <span class="input-group-text">
+                                             <i class="ki ki-calendar"></i>
+                                          </span>
+                                       </div>
+                                    </div>
+                                 </div>
+                   </div>
+                  <div class="form-group row">
+                           <label class="">Add Comment*</label>
+                           <div class="input-group input-group-lg input-group-solid">
+                              <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="custxtComment" name="custxtComment" class="form-control" placeholder="" rows="7"></textarea>
+                           </div>
+                        </div>
+                  
+                  </div>
+                  <div class="modal-footer">
+                    
+                     <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                     <button type="submit" id="kt_customer_button" class="btn btn-primary font-weight-bold">Add</button>
+                  </div>
+               </form>
+               <!--end::Form-->
+            </div>
+         </div>
+         </div>
       <div class="modal fade" id="managedby" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal" role="document">
          <div class="modal-content">

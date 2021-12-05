@@ -751,6 +751,109 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 });
             })
     }
+    var _handleFormCustomer = function() {
+        var form = KTUtil.getById('kt_customerform');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_customer_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        custxtComment: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Comment is required'
+                                }
+                            }
+                        },
+						next_meeting_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Date is required'
+                                }
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                var inquiryComment = {
+                    inquiryId:parseInt( document.getElementById("inquiryWorkscopeId").innerHTML),
+                    comment: $('#custxtComment').val(),
+					contactStatusId:parseInt($('#kt_contact_status').val()),
+					date:document.getElementById('next_meeting_date').value,
+                };
+                const data = JSON.stringify(inquiryComment);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Inquiry/NeedToFollowUpComment',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        console.log(response);
+                        if (response.isError == false) {
+                            window.location.replace("inquiry.html");
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+    }
     return {
 
         //main function to initiate the module
@@ -758,6 +861,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             initTable1();
             _handleFormAddWorkscope();
             _handleFormComment();
+            _handleFormCustomer();
         },
 
     };
@@ -770,7 +874,7 @@ let inquiryPermission;
 
 jQuery(document).ready(function() {
 
-
+   
 
     var login = localStorage.getItem("user");
     if (login !== null) {
@@ -1138,7 +1242,66 @@ jQuery(document).ready(function() {
        }
     });
 
+    $.ajax({
+        type: "get",
+        url: baseURL + '/Customer/GetContactStatus',
 
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        success: function(response) {
+            console.log(response);
+            if (response.isError == false) {
+
+                const contactStatusList = document.getElementById('kt_contact_status');
+                var contactStatusListHTML = new Array();
+
+                for (var i = 0; i < response.data.length; i++) {
+                    contactStatusListHTML.push(`
+					<option value="` + response.data[i].contactStatusId + `">` + response.data[i].contactStatusName + `</option>`);
+                }
+
+                contactStatusList.innerHTML = contactStatusListHTML.join('');
+                
+    
+            } else {
+                Swal.fire({
+                    text: response.errorMessage,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+            // alert(errorThrown);
+
+            Swal.fire({
+                text: 'Internet Connection Problem',
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function() {
+                KTUtil.scrollTop();
+            });
+        }
+    });
 
 
 });

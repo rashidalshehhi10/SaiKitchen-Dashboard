@@ -6,7 +6,7 @@ var KTBootstrapDatetimepicker = function () {
         // Demo 1
         // $('#kt_datetimepicker_1').datetimepicker();
         
-        $('#kt_datetimepicker_1,#kt_design_datetimepicker').datetimepicker({
+        $('#kt_datetimepicker_1,#kt_design_datetimepicker,#kt_datetimepicker_cus').datetimepicker({
             // useCurrent: true,
            minDate: new Date().getDate(),
            daysOfWeekDisabled: [5],
