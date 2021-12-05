@@ -820,7 +820,10 @@ var KTAppsUsersListDatatable = function() {
                 customer.customerCity = $('#kt_city_of_Resdience').val();
                 customer.customerNationality = $('#kt_nationality').val();
                 customer.customerWhatsapp = document.getElementById('whatsapp').value;
-                customer.CustomerAssignedTo = document.getElementById('CustomerAssignedTo').value;
+                if(document.getElementById('CustomerAssignedTo').value=="0")
+                   customer.CustomerAssignedTo =user.data.userId;
+                else
+                   customer.CustomerAssignedTo = document.getElementById('CustomerAssignedTo').value;
               
                
                 // branchRole.permissionRoles.push({
