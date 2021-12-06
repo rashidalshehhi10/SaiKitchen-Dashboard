@@ -354,16 +354,18 @@ var KTAppsUsersListDatatable = function() {
 		</button>\
 		';
                             }
-                            action += '\
-                            <button type="button" onclick="showInquiry(\'' + data.customerId + '\')" name="' + data.customerId + '"   class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" title="Show Inquires">\
-                            <span class="svg-icon svg-icon-md">\
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">\
-                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"></path>\
-                            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"></path>\
-                          </svg>\
-                            </span>\
-                        </button>\
-                        ';
+                            if(data.totalNoOfInquiries !="No Inquiries"){
+                                action += '\
+                                <button type="button" onclick="showInquiry(\'' + data.customerId + '\')" name="' + data.customerId + '"   class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" title="Show Inquires">\
+                                <span class="svg-icon svg-icon-md">\
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">\
+                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"></path>\
+                                <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"></path>\
+                            </svg>\
+                                </span>\
+                            </button>\
+                            ';
+                            }
                             return action;
                         } else {
                             return `<span></span>`;
@@ -922,11 +924,221 @@ var KTAppsUsersListDatatable = function() {
                 });
             });
     }
+    var _handleFormComment = function() {
+        var form = KTUtil.getById('kt_inq_comment');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_comment_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        inqtxtComment: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Comment is required'
+                                }
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                var inquiryComment = {
+                    inquiryId: document.getElementById("inquiryWorkscopeId").innerHTML,
+                    comment: $('#inqtxtComment').val(),
+                };
+                const data = JSON.stringify(inquiryComment);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Inquiry/AddComment',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        console.log(response);
+                        if (response.isError == false) {
+                            window.location.replace("customer.html");
+                          // $('#InquiryComment').modal('hide');
+                          // $('#customerpop').modal('hide');
+                          // document.getElementById('custxtComment').value ="";
+                          // document.getElementById('inqtxtComment').value ="";
+                          // $('#kt_datatableInquiry').dataTable().ajax.reload( null, false );
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+    }
+    var _handleFormCustomer = function() {
+        var form = KTUtil.getById('kt_customerform');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_customer_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        custxtComment: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Comment is required'
+                                }
+                            }
+                        },
+						next_meeting_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Date is required'
+                                }
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                var inquiryComment = {
+                    inquiryId:parseInt( document.getElementById("inquiryWorkscopeId").innerHTML),
+                    comment: $('#custxtComment').val(),
+					contactStatusId:parseInt($('#kt_follow_status').val()),
+					date:document.getElementById('next_follow_date').value,
+                };
+                const data = JSON.stringify(inquiryComment);
+                console.log(data);
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Inquiry/NeedToFollowUpComment',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        console.log(response);
+                        if (response.isError == false) {
+                            window.location.replace("customer.html");
+                           // $('#InquiryComment').modal('hide');
+                          //  $('#customerpop').modal('hide');
+                            //document.getElementById('custxtComment').value ="";
+                           // document.getElementById('inqtxtComment').value ="";
+                            
+                         //  $('#kt_datatableInquiry').dataTable().ajax.reload( null, false );
+
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+    }
     return {
         // public functions
         init: function() {
             _demo();
             _handleFormAddCustomer();
+            _handleFormComment();
+            _handleFormCustomer();
         },
     };
 }();
@@ -1004,8 +1216,7 @@ jQuery(document).ready(function() {
 
 
     GetCity(countryList[0]);
-    console.log(baseURL + '/Customer/GetContactStatus');
-
+   
     $.ajax({
         type: "get",
         url: baseURL + '/Customer/GetContactStatus',
@@ -1034,14 +1245,16 @@ jQuery(document).ready(function() {
 
                 contactStatusList.innerHTML = contactStatusListHTML.join('');
                 const searchContactStatusList = document.getElementById('kt_datatable_contact_status');
-                // searchContactStatusList.innerHTML = contactStatusListHTML.join('');
+                
+                const followStatusList = document.getElementById('kt_follow_status');
+                var followStatusListHTML = new Array();
 
-                // $('#kt_datatable_contact_status').on('change', function () {
-                // 	datatable.search($(this).val().toLowerCase(), 'ContactStatus');
-                // });
+                for (var i = 0; i < response.data.length; i++) {
+                    followStatusListHTML.push(`
+					<option value="` + response.data[i].contactStatusId + `">` + response.data[i].contactStatusName + `</option>`);
+                }
 
-
-                // $('#kt_datatable_search_status').selectpicker();
+                followStatusList.innerHTML = followStatusListHTML.join('');
             } else {
                 Swal.fire({
                     text: response.errorMessage,
@@ -1385,7 +1598,6 @@ jQuery(document).ready(function() {
 
 
   // endassigned to
-
 
 
     $('#kt_country_of_Resdience').on('change', function() {
