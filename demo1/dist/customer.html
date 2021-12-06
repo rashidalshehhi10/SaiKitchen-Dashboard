@@ -2117,7 +2117,7 @@ try {
                         </a>\
                         `;
 
-                        if(full.inquiryAddedById==user.data.userId ||userRoleId==1){
+                        if(full.inquiryAddedById==user.data.userId ||user.data.userRoles[0].branchRole.roleTypeId==1){
                         var inquiryComment='';
                         if(full.inquiryComment != null)
                            inquiryComment =full.inquiryComment ;
