@@ -60,6 +60,9 @@
     }
 	#divclk3:active {
     background-color: #3699ff;
+    }  
+	#divclk4:active {
+    background-color: #3699ff;
     }
 	.modal {
   overflow-y:auto;
@@ -266,6 +269,24 @@
 												</div>
 												<!--end::Tiles Widget 4-->
 												</div>
+
+
+												<div class="col-xl-3">
+													<!--begin::Tiles Widget 4-->
+													<div class="card card-custom gutter-b" style="height: 130px">
+														<!--begin::Body-->
+														<div id="divclk3"  style="border-radius: .42rem;cursor: pointer;background-color:#00FF00;" class="card-body d-flex flex-column">
+															<!--begin::Stats-->
+															<div class="flex-grow-1">
+																<div class="text-dark-50 font-weight-bold">Contacted Customers with Inquiry</div>
+																<div class="text-dark-50 font-weight-bolder font-size-h3" id="noInquiryCustomer">0</div>
+															</div>
+															<!--end::Stats-->
+														</div>
+														<!--end::Body-->
+													</div>
+												<!--end::Tiles Widget 4-->
+												</div>
 												<!--end::Tiles Widget 2-->
 											<div class="col-xl-3">
 											
@@ -304,16 +325,16 @@
 												</div>
 												<!--end::Tiles Widget 3-->
 											</div>
-											
+
 											<div class="col-xl-3">
 												<!--begin::Tiles Widget 4-->
-												<div class="card card-custom gutter-b" style="height: 130px">
+												<div class="card card-custom gutter-b" style="height: 130px;background-color: #FFD700;">
 													<!--begin::Body-->
-													<div id="divclk3"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+													<div id="divclk4"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
 														<!--begin::Stats-->
 														<div class="flex-grow-1">
-															<div class="text-dark-50 font-weight-bold">Customers with Inquiry</div>
-															<div class="font-weight-bolder font-size-h3" id="noInquiryCustomer">0</div>
+															<div class="text-dark-100 font-weight-bold">Need to follow up</div>
+															<div class="text-dark-100 font-weight-bolder font-size-h3" id="needtofollowup">0</div>
 														</div>
 														<!--end::Stats-->
 													</div>
@@ -321,11 +342,20 @@
 												</div>
 											<!--end::Tiles Widget 4-->
 											</div>
+											
+											
+											
+
+											
 
 									   </div>
 									   
 
 									   <div id="customerbyUser" class="row">
+
+										
+
+
 										<div class="col-xl-3">
 											<!--begin::Tiles Widget 4-->
 										<div class="card card-custom gutter-b" style="height: 130px;">

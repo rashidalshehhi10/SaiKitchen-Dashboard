@@ -99,6 +99,12 @@ var KTAppsUsersListDatatable = function() {
                         if(data.needToContactCustomers == 0)
                            document.getElementById('divclk').style.pointerEvents = 'none';
                         $("#needToContact").html(data.needToContactCustomers);
+
+
+                        if(data.needToFollowUp==0) 
+                           document.getElementById('divclk4').style.pointerEvents = 'none';
+                           $("#needtofollowup").html(data.needToFollowUp); 
+                       
                         
                         if(data.customerWithInquiry == 0)
                            document.getElementById('divclk3').style.pointerEvents = 'none';
@@ -622,6 +628,16 @@ var KTAppsUsersListDatatable = function() {
 
             usercard =  document.getElementById('filtecardsId').value;
             window.location.replace("customer.html?fuserId="+usercard+"&filter=2");
+
+
+             // document.getElementById("kt_subheader_search_form").value = 'Contacted';
+            // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+         });
+
+         $('#divclk4').on('click', function() {
+
+            usercard =  document.getElementById('filtecardsId').value;
+            window.location.replace("customer.html?fuserId="+usercard+"&filter=17");
 
 
              // document.getElementById("kt_subheader_search_form").value = 'Contacted';
