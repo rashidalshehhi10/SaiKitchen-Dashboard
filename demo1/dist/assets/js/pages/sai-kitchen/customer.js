@@ -648,6 +648,8 @@ var KTAppsUsersListDatatable = function() {
            
              usercard =  document.getElementById('filtecardsId').value;
             window.location.replace("customer.html?fuserId="+usercard+"&filter=4");
+          
+
 
              // document.getElementById("kt_subheader_search_form").value = 'No Inquiries';
             // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
@@ -1213,10 +1215,54 @@ jQuery(document).ready(function() {
 			<!--end::Button-->`;
         }
     }
+
+    $.ajax({
+        type: "Get",
+        url: baseURL + '/User/GetInquiryCreateUser',
+        data:null,
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        success: function(response) {
+            console.log(response);
+            if (response.isError == false) {
+                const roleTypeList = document.getElementById('kt_selectmanagedby');
+                var roleTypeListHTML = new Array();
+                var selected='';
+                for (var i = 0; i < response.data.length; i++) {
+                    selected='';
+                    roleTypeListHTML.push(`<option value="` + response.data[i].userId+ `" `+selected+`>` + response.data[i].userName + `</option>`);
+                }
+                roleTypeList.innerHTML = roleTypeListHTML.join('');
+ 
+
+
+            } else {
+
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+        }
+    });
+
     KTAppsUsersListDatatable.init();
     
 
+     
+    // begin offset 
 
+    $("html, body").animate({ scrollTop: $("#kt_datatable").offset().top }, 1000);
+
+   // end offset
+    
     const countryOfResidenceList = document.getElementById('kt_country_of_Resdience');
     const nationalityList = document.getElementById('kt_nationality');
     var countryListHTML = new Array();
@@ -1396,7 +1442,7 @@ jQuery(document).ready(function() {
                            all += parseInt(response.data[counter].customers);
                                document.getElementById('customerbyUser').innerHTML +=`
        
-                                                   <div class="col-xl-3">
+                                                   <div class="col-xl-2">
                                                                    <!--begin::Tiles Widget 4-->
                                                                <div class="card card-custom gutter-b" style="height: 130px;">
                                                                    <!--begin::Body-->
@@ -1490,7 +1536,7 @@ jQuery(document).ready(function() {
                
                                document.getElementById('assignmentTo').innerHTML +=`
        
-                                                   <div class="col-xl-3">
+                                                   <div class="col-xl-2">
                                                                    <!--begin::Tiles Widget 4-->
                                                                <div class="card card-custom gutter-b" style="height: 130px;">
                                                                    <!--begin::Body-->
@@ -1671,4 +1717,35 @@ $('#customerContact').blur('change', function() {
 
  $('#whatsapp').val($('#customerContact').val());
 
+});
+
+
+$('#kt_managedby_button').click(function () {
+    var checklistdata = {
+        "inquiryId":parseInt( document.getElementById('inquiryWorkscopeId').innerHTML),
+        "id": parseInt(document.getElementById('kt_selectmanagedby').value),
+      };
+     
+
+    const data = JSON.stringify(checklistdata);
+    console.log(data);
+    
+    $.ajax({
+        type: "Post",
+        url: baseURL + '/Inquiry/ChangeInquiryManagedBy',
+        headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'Access-Control-Allow-Origin': '*',
+        },
+        data: data,
+        success: function(response) {
+            console.log(response);
+ 
+            window.location.replace("customer.html");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            
+        }
+    });
 });
