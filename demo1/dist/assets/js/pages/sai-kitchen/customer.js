@@ -105,6 +105,10 @@ var KTAppsUsersListDatatable = function() {
                            document.getElementById('divclk4').style.pointerEvents = 'none';
                            $("#needtofollowup").html(data.needToFollowUp); 
                        
+                        if(data.notResponding==0) 
+                        document.getElementById('divclk5').style.pointerEvents = 'none';
+                        $("#notresponding").html(data.notResponding); 
+
                         
                         if(data.customerWithInquiry == 0)
                            document.getElementById('divclk3').style.pointerEvents = 'none';
@@ -316,6 +320,10 @@ var KTAppsUsersListDatatable = function() {
                             },
                             3: {
                                 'title': 'Need to Follow-up',
+                                'class': ' label-light-danger'
+                            },
+                            4: {
+                                'title': 'Not Responding',
                                 'class': ' label-light-danger'
                             }
                         };
@@ -643,6 +651,15 @@ var KTAppsUsersListDatatable = function() {
              // document.getElementById("kt_subheader_search_form").value = 'Contacted';
             // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
+
+
+         $('#divclk5').on('click', function() {
+
+            usercard =  document.getElementById('filtecardsId').value;
+            window.location.replace("customer.html?fuserId="+usercard+"&filter=18");
+
+         });
+
 
          $('#divclk3').on('click', function() {
            

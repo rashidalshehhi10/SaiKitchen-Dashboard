@@ -188,7 +188,7 @@ jQuery(document).ready(function() {
                       mstart ='';
                       switch(response.data.calendar[i].eventTypeId) {
                         case 1:
-                            eventcolor ='#fb9c56';
+                            eventcolor ='#FB9CB4';
                           break;
                         case 2:
                             eventcolor ='#FF7F50';
