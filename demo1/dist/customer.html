@@ -1543,6 +1543,64 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="Approveescalation" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Approve Escalation</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<i aria-hidden="true" class="ki ki-close"></i>
+						</button>
+					</div>
+					<!--begin::Form-->
+					<form class="form" id="kt_approveescalation" action="" name="approveescalationform">
+					   <span id="customerApproveEscalationId" style="display:none">0</span>
+						<div class="modal-body">
+						   
+							<div class="form-group row" style="padding-left:25px ;">
+								<label class="">Are you sure to approve escalation?</label>
+								
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">No</button>
+							<button type="submit" id="kt_approveescalation_button" class="btn btn-primary font-weight-bold">Approve</button>
+						</div>
+					</form>
+					<!--end::Form-->
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="Rervertescalation" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Revert Escalation</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<i aria-hidden="true" class="ki ki-close"></i>
+						</button>
+					</div>
+					<!--begin::Form-->
+					<form class="form" id="kt_revertescalation" action="" name="revertescalationform">
+					   <span id="customerRevertEscalationId" style="display:none">0</span>
+						<div class="modal-body">
+						   
+							<div class="form-group row" style="padding-left:25px ;">
+								<label class="">Are you sure to approve escalation?</label>
+								
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">No</button>
+							<button type="submit" id="kt_revertescalation_button" class="btn btn-primary font-weight-bold">Revert</button>
+						</div>
+					</form>
+					<!--end::Form-->
+				</div>
+			</div>
+		</div>
+
 	<div id="kt_scrolltop" class="scrolltop">
 	</div>
 	<!--end::Scrolltop-->
@@ -2379,8 +2437,18 @@ try {
 		}
 
 
-		function setInquiryEscalationId(customerId) {
+		function setCustomerEscalationId(customerId) {
             document.getElementById("customerEscalationId").innerHTML = customerId;
+		
+        }
+
+		function setCustomerApproveEscalationId(customerId) {
+            document.getElementById("customerApproveEscalationId").innerHTML = customerId;
+		
+        }
+
+		function setCustomerRevertEscalationId(customerId) {
+            document.getElementById("customerRevertEscalationId").innerHTML = customerId;
 		
         }
 
