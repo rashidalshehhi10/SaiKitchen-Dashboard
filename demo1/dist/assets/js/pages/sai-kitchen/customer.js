@@ -306,7 +306,7 @@ var KTAppsUsersListDatatable = function() {
                     field: 'Actions',
                     title: 'Actions',
                     sortable: false,
-                    // width: 130,
+                     width: 180 ,
                     // overflow: 'visible',
                     autoHide: false,
                     template: function(data) {
@@ -630,13 +630,13 @@ var KTAppsUsersListDatatable = function() {
                     }
                 }
                 ,{
-                    field: 'escalationRequestedBy',
+                    field: 'escalationRequestedByName',
                     title: 'Escalation Requested By:',
                     autoHide: true,
                     template: function(data) {
                         var output = '';
-                        if (data.escalationRequestedBy !== null) {
-                        output += '<div class="font-weight-bold text-muted">' + data.escalationRequestedBy + '</div>';
+                        if (data.escalationRequestedByName !== null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.escalationRequestedByName + '</div>';
                         }
                         return output;
                     }
@@ -654,13 +654,13 @@ var KTAppsUsersListDatatable = function() {
                     }
                 }
                 ,{
-                    field: 'escalatedBy',
+                    field: 'escalatedByName',
                     title: 'Escalation By:',
                     autoHide: true,
                     template: function(data) {
                         var output = '';
-                        if (data.escalatedBy !== null) {
-                        output += '<div class="font-weight-bold text-muted">' + data.escalatedBy + '</div>';
+                        if (data.escalatedByName !== null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.escalatedByName + '</div>';
                         }
                         return output;
                     }
