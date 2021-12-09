@@ -268,7 +268,7 @@ var KTAppsUsersListDatatable = function() {
                 }, {
                     field: 'Phone',
                     title: 'Contact',
-                    autoHide: false,
+                    autoHide: true,
                     // type: 'date',
                     // format: 'MM/DD/YYYY',
                     template: function(data) {
@@ -302,35 +302,7 @@ var KTAppsUsersListDatatable = function() {
                            return '<span class="label label-lg font-weight-bold  label-inline">'+data.totalNoOfInquiries+'</span>';
 
                     },
-                }, {
-                    field: 'ContactStatus',
-                    title: 'Contact Status',
-                    autoHide: true,
-                    // overflow: 'visible',
-                    // callback function support for column rendering
-                    template: function(data) {
-                        var status = {
-                            1: {
-                                'title': 'Contacted',
-                                'class': ' label-light-primary'
-                            },
-                            2: {
-                                'title': 'Need to Contact',
-                                'class': ' label-light-danger'
-                            },
-                            3: {
-                                'title': 'Need to Follow-up',
-                                'class': ' label-light-danger'
-                            },
-                            4: {
-                                'title': 'Not Responding',
-                                'class': ' label-light-danger'
-                            }
-                        };
-                        return '<span class="label label-lg font-weight-bold ' + status[data.contactStatusId].class + ' label-inline">' +data.contactStatus + '</span>';
-
-                    },
-                }, {
+                },  {
                     field: 'Actions',
                     title: 'Actions',
                     sortable: false,
@@ -380,6 +352,22 @@ var KTAppsUsersListDatatable = function() {
                             </button>\
                             ';
                             }
+
+                      //      if (data.isEscalationRequested==false){
+                        if (1==1){
+                                action += `
+                                <a type="button" onclick="setInquiryEscalationId(` + data.customerId + `)" data-toggle="modal" data-target="#Requestforescalation" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon"  style="margin:2px" title="Request For Escalation">
+                                <span class="svg-icon svg-icon-md">\
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                                </svg>
+                                </span>\
+                                </a>  
+                            `; 
+                            }
+
+                            
                             return action;
                         } else {
                             return `<span></span>`;
@@ -609,6 +597,30 @@ var KTAppsUsersListDatatable = function() {
 
                         output += '<div class="font-weight-bold text-muted">' + data.customerAssignedDate + '</div>';
 
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'escalationRequestedBy',
+                    title: 'Escalation Requested By:',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                        if (data.escalationRequestedBy !== null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.escalationRequestedBy + '</div>';
+                        }
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'escalationRequestedOn',
+                    title: 'Escalation Requested On:',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                    if (data.escalationRequestedOn !== null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.escalationRequestedOn + '</div>';
+                        }   
                         return output;
                     }
                 }
@@ -1167,6 +1179,101 @@ var KTAppsUsersListDatatable = function() {
                 });
             })
     }
+
+    var _handleFormRequestforescalation = function() {
+        var form = KTUtil.getById('kt_escalation');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_escalation_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+               /*  var customerRequestforEscalation = {
+                    "customerId":parseInt(document.getElementById("customerEscalationId").innerHTML),
+                    "id":user.data.userId,
+
+                };
+                const data = JSON.stringify(customerRequestforEscalation);
+                console.log(data); */
+              
+                $.ajax({
+                    type: "Post",  
+                    url: baseURL + '/Customer/CustomerEscalationRequest?customerId='+parseInt(document.getElementById("customerEscalationId").innerHTML),
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                  //  data: data,
+                    success: function(response) {
+                        // Release button
+                       // KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                            window.location.replace("customer.html");
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+
+    }
+
     return {
         // public functions
         init: function() {
@@ -1174,6 +1281,7 @@ var KTAppsUsersListDatatable = function() {
             _handleFormAddCustomer();
             _handleFormComment();
             _handleFormCustomer();
+            _handleFormRequestforescalation();
         },
     };
 }();
