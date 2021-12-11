@@ -255,20 +255,9 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     }
                 }, {
-                    field: 'Country',
-                    title: 'Country',
-                    template: function(data) {
-                        var output = '';
-
-                        output += '<div class="font-weight-bolder font-size-lg mb-0">' + data.customerCountry + '</div>';
-                        output += '<div class="font-weight-bold text-muted">Nationality: ' + data.customerNationality + '</div>';
-
-                        return output;
-                    }
-                }, {
                     field: 'Phone',
                     title: 'Contact',
-                    autoHide: true,
+                    autoHide: false,
                     // type: 'date',
                     // format: 'MM/DD/YYYY',
                     template: function(data) {
@@ -302,11 +291,23 @@ var KTAppsUsersListDatatable = function() {
                            return '<span class="label label-lg font-weight-bold  label-inline">'+data.totalNoOfInquiries+'</span>';
 
                     },
-                },  {
+                },{
+                    field: 'AddedOn',
+                    title: 'Added On',
+                    autoHide: false,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.addedOn + '</div>';
+
+                        return output;
+                    }
+                }
+                ,  {
                     field: 'Actions',
                     title: 'Actions',
                     sortable: false,
-                     width: 180 ,
+                    //  width: 180 ,
                     // overflow: 'visible',
                     autoHide: false,
                     template: function(data) {
@@ -352,7 +353,7 @@ var KTAppsUsersListDatatable = function() {
                             </button>\
                             ';
                             }
-                                  if (customerPermission >= 4) {
+                                  if (customerPermission == 4) {
                                                             if (data.isEscalationRequested!==true)
                                                              {
                                                         
@@ -402,6 +403,18 @@ var KTAppsUsersListDatatable = function() {
                             return `<span></span>`;
                         }
                     },
+                }, {
+                    field: 'Country',
+                    title: 'Country',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bolder font-size-lg mb-0">' + data.customerCountry + '</div>';
+                        output += '<div class="font-weight-bold text-muted">Nationality: ' + data.customerNationality + '</div>';
+
+                        return output;
+                    }
                 }, {
                     field: 'WayofContact',
                     title: 'Way of Contact',
@@ -504,6 +517,34 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     },
                 }, {
+                    field: 'ContactStatus',
+                    title: 'Contact Status',
+                    autoHide: true,
+                    // overflow: 'visible',
+                    // callback function support for column rendering
+                    template: function(data) {
+                        var status = {
+                            1: {
+                                'title': 'Contacted',
+                                'class': ' label-light-primary'
+                            },
+                            2: {
+                                'title': 'Need to Contact',
+                                'class': ' label-light-danger'
+                            },
+                            3: {
+                                'title': 'Need to Follow-up',
+                                'class': ' label-light-danger'
+                            },
+                            4: {
+                                'title': 'Not Responding',
+                                'class': ' label-light-danger'
+                            }
+                        };
+                        return '<span class="label label-lg font-weight-bold ' + status[data.contactStatusId].class + ' label-inline">' +data.contactStatus + '</span>';
+
+                    },
+                }, {
                     field: 'CustomerNextMeetingDate',
                     title: 'Next Follow-up Date',
                     autoHide: true,
@@ -582,18 +623,6 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     },
                 },{
-                    field: 'AddedOn',
-                    title: 'Added On',
-                    autoHide: true,
-                    template: function(data) {
-                        var output = '';
-
-                        output += '<div class="font-weight-bold text-muted">' + data.addedOn + '</div>';
-
-                        return output;
-                    }
-                }
-                ,{
                     field: 'customerAssignedToName',
                     title: 'Assigned To',
                     autoHide: true,
