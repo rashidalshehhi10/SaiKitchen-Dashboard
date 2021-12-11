@@ -189,6 +189,7 @@ var KTAppsUsersListDatatable = function() {
                     field: 'Code',
                     title: 'Code',
                     autoHide: true,
+                    width: 100 ,
                     // type: 'date',
                     // format: 'MM/DD/YYYY',
                     template: function(data) {
@@ -257,6 +258,7 @@ var KTAppsUsersListDatatable = function() {
                 }, {
                     field: 'Phone',
                     title: 'Contact',
+                    width: 100 ,
                     autoHide: false,
                     // type: 'date',
                     // format: 'MM/DD/YYYY',
@@ -279,6 +281,7 @@ var KTAppsUsersListDatatable = function() {
                 },{
                     field: 'TotalNoOfInquiries',
                     title: 'Total Inquiries',
+                    width: 150 ,
                     autoHide: true,
                     // overflow: 'visible',
                     // callback function support for column rendering
@@ -294,6 +297,7 @@ var KTAppsUsersListDatatable = function() {
                 },{
                     field: 'AddedOn',
                     title: 'Added On',
+                    width: 150 ,
                     autoHide: false,
                     template: function(data) {
                         var output = '';
@@ -307,7 +311,7 @@ var KTAppsUsersListDatatable = function() {
                     field: 'Actions',
                     title: 'Actions',
                     sortable: false,
-                    //  width: 180 ,
+                      width: 120 ,
                     // overflow: 'visible',
                     autoHide: false,
                     template: function(data) {
