@@ -249,9 +249,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             </a>\
                         `;  
                         var inquiryComment='';
+                        var txtfollow = '';
                         if(full.inquiryComment != null)
-                           inquiryComment =full.inquiryComment ;
-                        action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `);document.getElementById('inqtxtComment').value='` + inquiryComment + `';getAllComments(` + full.inquiryId + `);followUp(` + full.contactStatusId + `,'` + full.nextMeetingDate + `','` + full.customerNotes + `')"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
+                           inquiryComment =full.inquiryComment.replace(/\r?\n?/g, ''); 
+                        if(full.customerNotes != null)
+                           txtfollow =full.customerNotes.replace(/\r?\n?/g, '');                           
+                        action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `);setcomment('` + inquiryComment + `'); getAllComments(` + full.inquiryId + `);followUp(` + full.contactStatusId + `,'` + full.nextMeetingDate + `','` + txtfollow + `')"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
                             <i class="la la-file-text-o"></i>\
 							</a>\
                         `;

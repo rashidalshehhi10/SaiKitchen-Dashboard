@@ -178,6 +178,14 @@ jQuery(document).ready(function() {
             document.getElementById('lblPendingInquiry').innerHTML=response.data.inquiryIncomplete;
             document.getElementById('lblApprovedQuotation').innerHTML=response.data.quotationAccepted;
             document.getElementById('lblRejectedQuotation').innerHTML=response.data.quotationRejected;
+            
+            document.getElementById('totalCustomer').innerHTML=response.data.customerRegistered;
+            document.getElementById('noInquiryCustomer').innerHTML=response.data.contactedWithInquiry;
+            document.getElementById('contactedCustomer').innerHTML=response.data.contactedWithoutinquiry;
+            document.getElementById('needToContact').innerHTML=response.data.customerNeedtoContact;
+            document.getElementById('needtofollowup').innerHTML=response.data.needToFollowUp;
+            document.getElementById('notresponding').innerHTML=response.data.notResponding;
+           
 			eventList =[];
             let mstart ='';
             let eventcolor ='';

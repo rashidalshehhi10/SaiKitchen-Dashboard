@@ -2069,6 +2069,7 @@ try {
       function showInquiry(customerId){
 		$('#kt_datatableInquiry').dataTable().fnDestroy();
 		var table;
+		$('#kt_datatableInquiry').hide();
 		table = $('#kt_datatableInquiry').DataTable({
 					responsive: true,
 					// Pagination settings
@@ -2335,8 +2336,11 @@ try {
 
 
 					],
+					"initComplete": function( settings, json ) {
+						$(this).show()
+					},
 				});
-
+        
 			
 		$('#inquires').modal('show');
 	  }
