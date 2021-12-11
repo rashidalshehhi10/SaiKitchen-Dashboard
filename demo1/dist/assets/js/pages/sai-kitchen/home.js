@@ -152,6 +152,70 @@ jQuery(document).ready(function() {
 		user = JSON.parse(login);
 		console.log(user);
     }
+
+    $('#divclk').on('click', function() {
+      window.location.replace("customer.html?filter=1");
+   });  
+
+   $('#divclk1').on('click', function() {
+    window.location.replace("customer.html?filter=4");
+    }); 
+    
+    $('#divclk2').on('click', function() {
+      window.location.replace("customer.html?filter=2");
+    });  
+
+    $('#divclk3').on('click', function() {
+      window.location.replace("customer.html?filter=3");
+    });  
+
+    $('#divclk4').on('click', function() {
+      window.location.replace("customer.html?filter=17");
+    });  
+
+    $('#divclk5').on('click', function() {
+      window.location.replace("customer.html?filter=18");
+    });  
+
+    $('#divclk10').on('click', function() {
+      window.location.replace("customer.html");
+    });
+    
+    $('#divclk11').on('click', function() {
+      window.location.replace("inquiry.html");
+    }); 
+
+    $('#divclk12').on('click', function() {
+      window.location.replace("quotation.html");
+    }); 
+
+    $('#divclk13').on('click', function() {
+      window.location.replace("joborder.html");
+    }); 
+
+    $('#divclk14').on('click', function() {
+      window.location.replace("customer.html");
+    });
+
+    $('#divclk15').on('click', function() {
+      window.location.replace("customer.html");
+    });
+
+    $('#divclk16').on('click', function() {
+      window.location.replace("inquiry.html");
+    });
+
+    $('#divclk17').on('click', function() {
+      window.location.replace("inquiry.html");
+    });
+
+    $('#divclk18').on('click', function() {
+      window.location.replace("quotation.html");
+    });
+
+    $('#divclk19').on('click', function() {
+      window.location.replace("quotation.html");
+    });
     
 	$.ajax({
 		type: "Post",
