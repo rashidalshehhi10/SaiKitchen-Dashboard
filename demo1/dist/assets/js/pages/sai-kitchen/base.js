@@ -1707,7 +1707,7 @@ jQuery(document).ready(function () {
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-<a href="customer.html" class="menu-link menu-toggle">
+<a href="customer.html?fuserId=`+ user.data.userId +`" class="menu-link menu-toggle">
 	<span class="svg-icon menu-icon">
 	
    <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
