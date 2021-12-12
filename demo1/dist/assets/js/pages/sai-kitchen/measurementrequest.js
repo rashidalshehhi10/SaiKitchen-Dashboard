@@ -7,7 +7,7 @@ import {
     inqStatus
 } from './status.js'
 let user;
-
+var table;
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -16,7 +16,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     var initTable1 = function() {
         // begin first table
-        var table = $('#kt_datatable').DataTable({
+         table = $('#kt_datatable').DataTable({
             responsive: true,
             // Pagination settings
             dom: `<'row'<'col-sm-12'tr>>
@@ -801,6 +801,35 @@ jQuery(document).ready(function() {
                 KTUtil.scrollTop();
             });
         }
+    });
+
+
+    $('#kt_datatable').on('click', 'td.dtr-control', function () {
+      
+        $('#kt_datatable').DataTable().rows().every(function(){
+            // If row has details expanded
+            //if(this.child.isShown()){
+                // Collapse row details
+                this.child.hide();
+                $(this.node()).removeClass('shown');
+                $(this.node()).removeClass('parent');
+            //}
+        });
+     var tr = $(this).closest('tr');
+     var row = table.row( tr );
+
+     if ( row.child.isShown() ) {
+         // This row is already open - close it
+         row.child.hide();
+         tr.removeClass('shown');
+         tr.removeClass('parent');
+     }
+     else {
+         // Open this row
+         row.child.show();
+         tr.addClass('shown');
+         tr.addClass('parent');
+     }
     });
 
 

@@ -10,6 +10,7 @@ import {
     measurementFile
 } from './constant.js'
 let user;
+var table;
 
 let inquiryId;
 let inquiry;
@@ -34,7 +35,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     var initTable1 = function() {
         // begin first table
-        var table = $('#kt_datatable').DataTable({
+         table = $('#kt_datatable').DataTable({
             responsive: true,
             // Pagination settings
             dom: `<'row'<'col-sm-12'tr>>
@@ -566,6 +567,37 @@ jQuery(document).ready(function() {
     }
     if(user.data.userRoles[0].branchRole.roleTypeId==1){
         $('#txtAdvancePayment').prop('readonly', false);}
+
+
+        $('#kt_datatable').on('click', 'td.dtr-control', function () {
+      
+            table.rows().every(function(){
+                // If row has details expanded
+                //if(this.child.isShown()){
+                    // Collapse row details
+                    this.child.hide();
+                    $(this.node()).removeClass('shown');
+                    $(this.node()).removeClass('parent');
+                //}
+            });
+         var tr = $(this).closest('tr');
+         var row = table.row( tr );
+    
+         if ( row.child.isShown() ) {
+             // This row is already open - close it
+             row.child.hide();
+             tr.removeClass('shown');
+             tr.removeClass('parent');
+         }
+         else {
+             // Open this row
+             row.child.show();
+             tr.addClass('shown');
+             tr.addClass('parent');
+         }
+        });
+
+
     KTDatatablesSearchOptionsAdvancedSearch.init();
     $(function() {
         $('#method').change(function(){
