@@ -53,6 +53,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             },
             columns: [{
                     data: 'inquiryId'
+
                 },
                 {
                     data: 'status'
@@ -936,8 +937,34 @@ jQuery(document).ready(function() {
                         </svg>
                         </span>New Inquiry</a>`;
     }
+  
+    $('#kt_datatable').on('click', 'td.dtr-control', function () {
+      
+        table.rows().every(function(){
+            // If row has details expanded
+            //if(this.child.isShown()){
+                // Collapse row details
+                this.child.hide();
+                $(this.node()).removeClass('shown');
+                $(this.node()).removeClass('parent');
+            //}
+        });
+     var tr = $(this).closest('tr');
+     var row = table.row( tr );
 
-
+     if ( row.child.isShown() ) {
+         // This row is already open - close it
+         row.child.hide();
+         tr.removeClass('shown');
+         tr.removeClass('parent');
+     }
+     else {
+         // Open this row
+         row.child.show();
+         tr.addClass('shown');
+         tr.addClass('parent');
+     }
+    });
 
     $.ajax({
         type: "post",
