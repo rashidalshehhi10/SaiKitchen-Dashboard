@@ -1086,7 +1086,7 @@ var KTAppsUsersListDatatable = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("customer.html");
+                            location.reload();
 
                         } else {
                             Swal.fire({
@@ -1739,34 +1739,7 @@ jQuery(document).ready(function() {
 
 
     
-    $('#kt_datatable').on('click', 'td.datatable-cell', function () {
-      
-     
-        $('#kt_datatable').KTDatatable().rows().every(function(){
-            // If row has details expanded
-            //if(this.child.isShown()){
-                // Collapse row details
-                this.child.hide();
-                $(this.node()).removeClass('shown');
-                $(this.node()).removeClass('parent');
-            //}
-        });
-     var tr = $(this).closest('tr');
-     var row = datatable.row( tr );
-
-     if ( row.child.isShown() ) {
-         // This row is already open - close it
-         row.child.hide();
-         tr.removeClass('shown');
-         tr.removeClass('parent');
-     }
-     else {
-         // Open this row
-         row.child.show();
-         tr.addClass('shown');
-         tr.addClass('parent');
-     }
-    });
+   
 
 
     KTAppsUsersListDatatable.init();
