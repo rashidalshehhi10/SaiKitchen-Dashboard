@@ -2268,9 +2268,8 @@ $('#kt_managedby_button').click(function () {
 $(document).ready(function () {
     $("#btnExcelExport").click(function(e) 
     {
-        window.open('data:application/vnd.ms-excel,' + 
-            encodeURIComponent($('#kt_datatable').parent().html()));
-
-
+        //window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#kt_datatable').parent().html()));
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('.datatable-table')[0].outerHTML));
+        
     });
 });
