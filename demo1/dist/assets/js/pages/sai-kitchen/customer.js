@@ -170,6 +170,24 @@ var KTAppsUsersListDatatable = function() {
                         }      
                         $("#Other").html(data.other);
 
+
+                          if(data.needToContactToday==0) 
+                           document.getElementById('divclk6').style.pointerEvents = 'none';
+                           $("#needtocontacttoday").html(data.needToContactToday); 
+
+                           if(data.needToContactDelay==0) 
+                           document.getElementById('divclk7').style.pointerEvents = 'none';
+                           $("#needtocontactdelayed").html(data.needToContactDelay); 
+
+
+                           if(data.needToFollowUpToday==0) 
+                           document.getElementById('divclk8').style.pointerEvents = 'none';
+                           $("#needtofollowuptoday").html(data.needToFollowUpToday); 
+
+                           if(data.needToFollowUpDelay==0) 
+                           document.getElementById('divclk9').style.pointerEvents = 'none';
+                           $("#needtofollowupdelayed").html(data.needToFollowUpDelay); 
+
                         // $("#Google").html(data.);
                         // $("#Facebook").html(data.);
                         // $("#Linkedin").html(data.);
@@ -789,6 +807,48 @@ var KTAppsUsersListDatatable = function() {
 
    //  way of contacts filters
 
+
+                $('#divclk6').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+           window.location.replace("customer.html?fuserId="+usercard+"&filter=19");
+
+                // document.getElementById("kt_subheader_search_form").value = '';
+                // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+                });
+
+                $('#divclk7').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                 
+               window.location.replace("customer.html?fuserId="+usercard+"&filter=20");
+
+                // document.getElementById("kt_subheader_search_form").value = '';
+                // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+                });
+
+                $('#divclk8').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                window.location.replace("customer.html?fuserId="+usercard+"&filter=21");
+
+                // document.getElementById("kt_subheader_search_form").value = '';
+                // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+                });
+
+
+                $('#divclk9').on('click', function() {
+
+                    usercard =  document.getElementById('filtecardsId').value;
+                   window.location.replace("customer.html?fuserId="+usercard+"&filter=22");
+
+                // document.getElementById("kt_subheader_search_form").value = '';
+                // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+                });
+
+
+
+
             $('#DirectDiv').on('click', function() {
 
                 usercard =  document.getElementById('filtecardsId').value;
@@ -917,6 +977,17 @@ var KTAppsUsersListDatatable = function() {
                             validators: {
                                 notEmpty: {
                                     message: 'Contact is required'
+                                },
+                                // regexp: {
+                                //     regexp: /^(?:\+971|00971|0)?(?:50|51|52|55|56|2|3|4|6|7|9)\d{11}$/,
+                                //     message: 'Invalid'
+                                // }
+                            }
+                        },
+                        next_meeting_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'FollowUp date is required'
                                 },
                                 // regexp: {
                                 //     regexp: /^(?:\+971|00971|0)?(?:50|51|52|55|56|2|3|4|6|7|9)\d{11}$/,
@@ -1663,6 +1734,41 @@ jQuery(document).ready(function() {
         }
     });
 
+
+
+
+
+    
+    $('#kt_datatable').on('click', 'td.datatable-cell', function () {
+      
+     
+        $('#kt_datatable').KTDatatable().rows().every(function(){
+            // If row has details expanded
+            //if(this.child.isShown()){
+                // Collapse row details
+                this.child.hide();
+                $(this.node()).removeClass('shown');
+                $(this.node()).removeClass('parent');
+            //}
+        });
+     var tr = $(this).closest('tr');
+     var row = datatable.row( tr );
+
+     if ( row.child.isShown() ) {
+         // This row is already open - close it
+         row.child.hide();
+         tr.removeClass('shown');
+         tr.removeClass('parent');
+     }
+     else {
+         // Open this row
+         row.child.show();
+         tr.addClass('shown');
+         tr.addClass('parent');
+     }
+    });
+
+
     KTAppsUsersListDatatable.init();
     
 
@@ -2157,5 +2263,14 @@ $('#kt_managedby_button').click(function () {
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             
         }
+    });
+});
+$(document).ready(function () {
+    $("#btnExcelExport").click(function(e) 
+    {
+        window.open('data:application/vnd.ms-excel,' + 
+            encodeURIComponent($('#kt_datatable').parent().html()));
+
+
     });
 });
