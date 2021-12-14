@@ -341,7 +341,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("joborderfiles.html");
+                            //window.location.replace("joborderfiles.html");
+                            location.reload();
                         } else {
                             Swal.fire({
                                 text: response.errorMessage,
@@ -742,7 +743,8 @@ $('#kt_approve_inquiry_button').click(function () {
                 success: function(response) {
                     console.log(response);
                     //document.getElementById("load").style.display = 'none';
-                    window.location.replace("joborderfiles.html");
+                   // window.location.replace("joborderfiles.html");
+                   location.reload()
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     //document.getElementById("load").style.display = 'none';
