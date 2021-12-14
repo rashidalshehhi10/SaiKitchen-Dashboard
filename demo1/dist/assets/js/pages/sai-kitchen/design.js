@@ -218,7 +218,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         if (typeof status[data] === 'undefined') {
                             return data;
                         }
-                        return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
+                        return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline" style="background-color:white;height:80px;">' + status[data].title + '</span>';
 
                     },
                 },
