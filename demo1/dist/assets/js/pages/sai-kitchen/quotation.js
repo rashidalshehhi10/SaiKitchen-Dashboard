@@ -425,6 +425,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     success: function(response) {
                         // Release button
                        // KTUtil.btnRelease(formSubmitButton);
+                       // 
                         console.log(response);
                         // window.location.replace("home.html");
                         if (response.isError == false) {
