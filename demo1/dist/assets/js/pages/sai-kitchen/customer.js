@@ -104,7 +104,14 @@ var KTAppsUsersListDatatable = function() {
                         if(data.needToFollowUp==0) 
                            document.getElementById('divclk4').style.pointerEvents = 'none';
                            $("#needtofollowup").html(data.needToFollowUp); 
-                       
+
+                         if(data.needToFollowUpWithInquiry==0) 
+                           document.getElementById('divclk10').style.pointerEvents = 'none';
+                           $("#needtofollowupWithInquiry").html(data.needToFollowUpWithInquiry); 
+                        if(data.needToFollowUpWithOutInquiry==0) 
+                           document.getElementById('divclk11').style.pointerEvents = 'none';
+                           $("#needtofollowupWithoutInquiry").html(data.needToFollowUpWithOutInquiry);  
+
                         if(data.notResponding==0) 
                         document.getElementById('divclk5').style.pointerEvents = 'none';
                         $("#notresponding").html(data.notResponding); 
@@ -775,8 +782,16 @@ var KTAppsUsersListDatatable = function() {
              // document.getElementById("kt_subheader_search_form").value = 'Contacted';
             // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
+         $('#divclk10').on('click', function() {
 
+            usercard =  document.getElementById('filtecardsId').value;
+            window.location.replace("customer.html?fuserId="+usercard+"&filter=23");
+         });
+         $('#divclk11').on('click', function() {
 
+            usercard =  document.getElementById('filtecardsId').value;
+            window.location.replace("customer.html?fuserId="+usercard+"&filter=24");
+         });
          $('#divclk5').on('click', function() {
 
             usercard =  document.getElementById('filtecardsId').value;
