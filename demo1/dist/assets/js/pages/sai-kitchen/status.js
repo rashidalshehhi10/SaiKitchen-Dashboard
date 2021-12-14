@@ -168,15 +168,15 @@ export let inqStatus= {
         'class': ' label-light-primary'
     },
     43: {
-        'title': 'Commerical Checklist Pending',
+        'title': 'Commercial Checklist Pending',
         'class': ' label-light-primary'
     },
     44: {
-        'title': 'Commerical Checklist Accepted',
+        'title': 'Commercial Checklist Accepted',
         'class': ' label-light-success'
     },
     45: {
-        'title': 'Commerical Checklist Rejected',
+        'title': 'Commercial Checklist Rejected',
         'class': ' label-light-danger'
     },
     46: {
