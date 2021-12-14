@@ -608,7 +608,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
-                            window.location.replace("inquiry.html");
+                           // window.location.replace("inquiry.html");
+                           location.reload();
 
                         } else {
                             Swal.fire({
@@ -715,8 +716,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     success: function(response) {
                         console.log(response);
                         if (response.isError == false) {
-                            window.location.replace("inquiry.html");
-
+                           // window.location.replace("inquiry.html");
+                           location.reload();
                         } else {
                             Swal.fire({
                                 text: response.errorMessage,
