@@ -669,6 +669,41 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="RejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Quotation Reject</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_reject_quotation" action="" name="">
+                    <span id="inquiryWorkscopeId" style="display:none">0</span>
+                    <div class="modal-body">
+                 	<!--begin::Form group-->
+									<div class="form-group row">
+										<label class="">Comment</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<!-- <input type="text" name="measurementComment" id="measurementComment"
+												class="form-control" value=""
+												placeholder="" > -->
+                                                <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="rejectReason" name="rejectReason" class="form-control" placeholder="" rows="3" required></textarea>
+										</div>
+									</div>
+									<!--end::Form group-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="submit" id="kt_reject_quotation_button" class="btn btn-primary font-weight-bold">Rejected</button>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">
     </div>
@@ -838,6 +873,11 @@ License: You must have a valid license purchased only from themeforest(the above
         function setInquiryEscalationId(inquiryId) {
             document.getElementById("inquiryWorkscopeEscalationId").innerHTML = inquiryId;
         }
+
+        function setInquiryId(inquiryId) {
+            document.getElementById("inquiryWorkscopeId").innerHTML = inquiryId;
+        }
+
 
         function logoutUser(user) {
 

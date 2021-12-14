@@ -193,6 +193,14 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             <i class="la la-file-pdf-o"></i>
                         </a>                       
                            `;
+
+                           action +=
+                           `<a type="button" onclick="setInquiryId(` + full.inquiryId + `)" data-toggle="modal" data-target="#RejectModal" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Reject Joborder">
+                               <i class="la la-thumbs-down"></i>
+                           </a> 
+                           `;
+
+
                             return action;
                        
                     },
@@ -274,7 +282,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         });
 
     };
+
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
+
     var _handleFormRequestforescalation = function() {
         var form = KTUtil.getById('kt_escalation');
         var formSubmitUrl = KTUtil.attr(form, 'action');
@@ -369,6 +379,111 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     }
 
+    var _handleFormRejectJoborder = function() {
+        var form = KTUtil.getById('kt_reject_joborder');
+        var formSubmitUrl = KTUtil.attr(form, 'action');
+        var formSubmitButton = KTUtil.getById('kt_reject_joborder_button');
+
+        if (!form) {
+            return;
+        }
+
+        FormValidation
+            .formValidation(
+                form, {
+                    fields: {
+                        rejectReason: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Joborder reject reason  is required'
+                                }
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            //	eleInvalidClass: '', // Repace with uncomment to hide bootstrap validation icons
+                            //	eleValidClass: '',   // Repace with uncomment to hide bootstrap validation icons
+                        })
+                    }
+                }
+            )
+            .on('core.form.valid', function() {
+                // Show loading state on button
+                KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+                // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                var JoborderRejected = {
+                    "inquiryId":parseInt(document.getElementById("inquiryWorkscopeId").innerHTML),
+                    "comment": document.getElementById("rejectReason").value,
+                    "feedBackReactionId": 0,
+                };
+              
+                const data = JSON.stringify(JoborderRejected);
+                console.log(data);
+
+                $.ajax({
+                    type: "Post",
+                    url: baseURL + '/Quotation/RejectContract',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userId': user.data.userId,
+                        'userToken': user.data.userToken,
+                        'userRoleId': user.data.userRoles[0].userRoleId,
+                        'branchId': user.data.userRoles[0].branchId,
+                        'branchRoleId': user.data.userRoles[0].branchRoleId,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    data: data,
+                    success: function(response) {
+                        // Release button
+                       // KTUtil.btnRelease(formSubmitButton);
+                        console.log(response);
+                        // window.location.replace("home.html");
+                        if (response.isError == false) {
+                            // sessionStorage.setItem('user', JSON.stringify(response));
+                          
+                            location.reload();
+                        } else {
+                            Swal.fire({
+                                text: response.errorMessage,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        // Release button
+                        KTUtil.btnRelease(formSubmitButton);
+
+                        // alert(errorThrown);
+
+                        Swal.fire({
+                            text: 'Internet Connection Problem',
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                });
+            })
+
+    }
+
 
     return {
 
@@ -376,6 +491,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         init: function() {
             initTable1();
             _handleFormRequestforescalation();
+            _handleFormRejectJoborder();
         },
 
     };
@@ -513,6 +629,8 @@ jQuery(document).ready(function() {
     });
  
 });
+
+
 $('#kt_approve_inquiry_button').click(function () {
     if(four.length ==0){
     document.getElementById("alert").innerHTML ="MaterialSheet File should be upload";
@@ -752,6 +870,7 @@ success: function(file, response){
 }
 
 });
+
 $('#kt_dropzone_6').dropzone({
             
     // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location

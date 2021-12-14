@@ -462,6 +462,45 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
+         //
+
+
+         $('#contractPending').on('click', function() {
+            table.column(2).search(58,true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+
+         $('#contractWaitingForCustomerApproval').on('click', function() {
+            table.column(2).search(59,true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+
+         $('#contractApproved').on('click', function() {
+            table.column(2).search(60,true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+
+         $('#contractInProgress').on('click', function() {
+            table.column(2).search(62,true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+
+         $('#contractRejected').on('click', function() {
+            table.column(2).search(63,true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+         });
+
+         //
          $('#DesignRevisionRequested').on('click', function() {
             table.column(2).search(56,true, false, true).draw(); 
             $('html, body').animate({
@@ -1190,6 +1229,20 @@ jQuery(document).ready(function() {
              document.getElementById('s').innerHTML=response.data[0].inquiries[45][0].inquiryCount;
              
              document.getElementById('t').innerHTML=response.data[0].inquiries[47][0].inquiryCount;
+
+             //
+
+             document.getElementById('ff').innerHTML=response.data[0].inquiries[57][0].inquiryCount;
+
+             document.getElementById('vv').innerHTML=response.data[0].inquiries[58][0].inquiryCount;
+
+             document.getElementById('cc').innerHTML=response.data[0].inquiries[59][0].inquiryCount;
+
+             document.getElementById('dd').innerHTML=response.data[0].inquiries[61][0].inquiryCount;
+
+             document.getElementById('nn').innerHTML=response.data[0].inquiries[62][0].inquiryCount;
+
+             //
              
              document.getElementById('r').innerHTML=  response.data[0].totalinquiries;
 
