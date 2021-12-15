@@ -1682,6 +1682,19 @@ jQuery(document).ready(function () {
 	</a>
  </li>
  `;
+  sideMenuHTML += `	<ul class="menu-nav">
+<li class="menu-item menu-item-active" aria-haspopup="true">
+<a href="chat.html" class="menu-link">
+ <span class="svg-icon menu-icon svg-icon-light">
+
+ <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+ <img src="/assets//media/svg/saikitchen/dashboard.svg"/>
+ <!--end::Svg Icon-->
+ </span>
+ <span class="menu-text">Chat</span>
+</a>
+</li>
+`;
 
       var permission = new Array();
 
