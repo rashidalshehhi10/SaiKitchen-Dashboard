@@ -131,6 +131,41 @@ document.getElementById("kt_header").innerHTML =
                      <!--end::Header Menu Wrapper-->
                      <!--begin::Topbar-->
                      <div class="topbar">
+                     <!--begin::Notifications-->
+                     <div class="dropdown">
+                        <!--begin::Toggle-->
+                        <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="false">
+                           <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary">
+                              <span class="svg-icon svg-icon-xl svg-icon-primary">
+                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Code/Compiling.svg-->
+                                <img src="data:image/png;base64,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"/>
+                                 <!--end::Svg Icon-->
+                              </span>
+                              <span class="pulse-ring"></span>
+                           </div>
+                        </div>
+                        <!--end::Toggle-->
+                        <!--begin::Dropdown-->
+                        <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg " style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-292px, 65px, 0px);" x-placement="bottom-end">
+                           <form>
+                              <!--begin::Header-->
+
+                              <!--end::Header-->
+                              <!--begin::Content-->
+                              <div class="tab-content">
+                                 <!--begin::Tabpane-->
+                                 <div class="tab-pane active show p-8" id="topbar_notifications_notifications" role="tabpanel">
+                                     <iframe  width="300px" height="535px" allow="camera;microphone" src="https://lucid-greider.147-182-217-248.plesk.page/chat/" frameborder=0 allowfullscreen></iframe>
+                                 </div>
+                                 <!--end::Tabpane-->
+
+                              </div>
+                              <!--end::Content-->
+                           </form>
+                        </div>
+                        <!--end::Dropdown-->
+                     </div>
+                     <!--end::Notifications-->
                         <!--begin::Notifications-->
                         <div class="dropdown">
                            <!--begin::Toggle-->
