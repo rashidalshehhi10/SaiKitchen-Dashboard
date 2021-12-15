@@ -64,9 +64,17 @@
 	/* #divclk4:active {
     background-color: #3699ff;
     } */
-	#divclk5:active {
+
+	#divclkNotRespondingWithInquiry:active {
     background-color: #3699ff;
     }
+	#divclkNotRespondingWithoutInquiry:active {
+    background-color: #3699ff;
+    }
+
+	/* #divclk5:active {
+    background-color: #3699ff;
+    } */
 
 	#divclk6:active {
     background-color: #3699ff;
@@ -496,15 +504,34 @@
 												</div>
 											<!--end::Tiles Widget 4-->
 											</div>
+											
+
 											<div class="col-xl-2">
 												<!--begin::Tiles Widget 4-->
 												<div class="card card-custom gutter-b" style="height: 130px;">
 													<!--begin::Body-->
-													<div id="divclk5"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+													<div id="divclkNotRespondingWithInquiry"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
 														<!--begin::Stats-->
 														<div class="flex-grow-1">
-															<div class="text-dark-50 font-weight-bold">Not Responding</div>
-															<div class="font-weight-bolder font-size-h3" id="notresponding">0</div>
+															<div class="text-dark-50 font-weight-bold">Not Responding With Inquiry</div>
+															<div class="font-weight-bolder font-size-h3" id="notrespondingwithinquiry">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+
+											<div class="col-xl-2">
+												<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px;">
+													<!--begin::Body-->
+													<div id="divclkNotRespondingWithoutInquiry"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold">Not Responding Without Inquiry</div>
+															<div class="font-weight-bolder font-size-h3" id="notrespondingwithoutinquiry">0</div>
 														</div>
 														<!--end::Stats-->
 													</div>
