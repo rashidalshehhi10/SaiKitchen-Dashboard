@@ -61,9 +61,9 @@
 	#divclk3:active {
     background-color: #3699ff;
     }  
-	#divclk4:active {
+	/* #divclk4:active {
     background-color: #3699ff;
-    }
+    } */
 	#divclk5:active {
     background-color: #3699ff;
     }
@@ -271,6 +271,105 @@
 								<div class="d-flex flex-column-fluid">
 									<!--begin::Container-->
 									<div class="container">
+
+
+										<div id="customerbyUser" class="row">
+
+										
+
+
+											<div class="col-xl-2">
+												<!--begin::Tiles Widget 4-->
+											<div class="card card-custom gutter-b" style="height: 130px;">
+												<!--begin::Body-->
+												<div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=refresh()>
+													<!--begin::Stats-->
+													<div class="flex-grow-1">
+														<div class="text-dark-50 font-weight-bold">Total Customers </div>
+														<div class="font-weight-bolder font-size-h3" id="AllCustomers"></div>
+													</div>
+													<!--end::Stats-->
+												</div>
+												<!--end::Body-->
+											</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+										   </div>
+
+										   <div class="row">
+
+											<div class="col-xl-3">
+												<!--begin::Tiles Widget 4-->
+											<div class="card card-custom gutter-b" style="height: 130px">
+												<!--begin::Body-->
+												<div id="divclk6"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+													<!--begin::Stats-->
+													<div class="flex-grow-1">
+														<div class="text-dark-50 font-weight-bold">Need To Contact Today</div>
+														<div class="font-weight-bolder font-size-h3" id="needtocontacttoday"></div>
+													</div>
+													<!--end::Stats-->
+												</div>
+												<!--end::Body-->
+											</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+	
+											<div class="col-xl-3">
+												<!--begin::Tiles Widget 4-->
+											<div class="card card-custom gutter-b bg-danger" style="height: 130px">
+												<!--begin::Body-->
+												<div id="divclk7"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+													<!--begin::Stats-->
+													<div class="flex-grow-1">
+														<div class="text-inverse-danger font-weight-bold">Need To Contact Delayed</div>
+														<div class="text-inverse-danger font-size-h3" id="needtocontactdelayed"></div>
+													</div>
+													<!--end::Stats-->
+												</div>
+												<!--end::Body-->
+											</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+	
+											<div class="col-xl-3">
+												<!--begin::Tiles Widget 4-->
+											<div class="card card-custom gutter-b" style="height: 130px">
+												<!--begin::Body-->
+												<div id="divclk8"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+													<!--begin::Stats-->
+													<div class="flex-grow-1">
+														<div class="text-dark-50 font-weight-bold">Need To Follow-Up Today</div>
+														<div class="font-weight-bolder font-size-h3" id="needtofollowuptoday"></div>
+													</div>
+													<!--end::Stats-->
+												</div>
+												<!--end::Body-->
+											</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+	
+											<div class="col-xl-3">
+												<!--begin::Tiles Widget 4-->
+											<div class="card card-custom gutter-b bg-danger" style="height: 130px">
+												<!--begin::Body-->
+												<div id="divclk9"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+													<!--begin::Stats-->
+													<div class="flex-grow-1">
+														<div class="text-inverse-danger font-weight-bold">Need To Follow-Up Delayed</div>
+														<div class="text-inverse-danger font-size-h3" id="needtofollowupdelayed"></div>
+													</div>
+													<!--end::Stats-->
+												</div>
+												<!--end::Body-->
+											</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+	
+										   </div>
+
+
+
 										
 										<div class="row">
 										  <div hidden id="filtecardsId"></div>
@@ -348,22 +447,23 @@
 												<!--end::Tiles Widget 3-->
 											</div>
 
-											<div class="col-xl-2">
-												<!--begin::Tiles Widget 4-->
+											<!-- <div class="col-xl-2">
+												
 												<div class="card card-custom gutter-b" style="height: 130px;">
-													<!--begin::Body-->
+													
 													<div id="divclk4"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-														<!--begin::Stats-->
+														
 														<div class="flex-grow-1">
 															<div class="text-dark-50 font-weight-bold">Need to follow up</div>
 															<div class="font-weight-bolder font-size-h3" id="needtofollowup">0</div>
 														</div>
-														<!--end::Stats-->
+														
 													</div>
-													<!--end::Body-->
+													
 												</div>
-											<!--end::Tiles Widget 4-->
-											</div>
+											
+											</div> -->
+
 											<div class="col-xl-2">
 												<!--begin::Tiles Widget 4-->
 												<div class="card card-custom gutter-b" style="height: 130px;">
@@ -420,317 +520,6 @@
 
 									   </div>
 									   
-
-
-									   <div class="row">
-
-										<div class="col-xl-3">
-											<!--begin::Tiles Widget 4-->
-										<div class="card card-custom gutter-b" style="height: 130px">
-											<!--begin::Body-->
-											<div id="divclk6"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-												<!--begin::Stats-->
-												<div class="flex-grow-1">
-													<div class="text-dark-50 font-weight-bold">Need To Contact Today</div>
-													<div class="font-weight-bolder font-size-h3" id="needtocontacttoday"></div>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Body-->
-										</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div class="col-xl-3">
-											<!--begin::Tiles Widget 4-->
-										<div class="card card-custom gutter-b" style="height: 130px">
-											<!--begin::Body-->
-											<div id="divclk7"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-												<!--begin::Stats-->
-												<div class="flex-grow-1">
-													<div class="text-dark-50 font-weight-bold">Need To Contact Delayed</div>
-													<div class="font-weight-bolder font-size-h3" id="needtocontactdelayed"></div>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Body-->
-										</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div class="col-xl-3">
-											<!--begin::Tiles Widget 4-->
-										<div class="card card-custom gutter-b" style="height: 130px">
-											<!--begin::Body-->
-											<div id="divclk8"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-												<!--begin::Stats-->
-												<div class="flex-grow-1">
-													<div class="text-dark-50 font-weight-bold">Need To Follow-Up Today</div>
-													<div class="font-weight-bolder font-size-h3" id="needtofollowuptoday"></div>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Body-->
-										</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div class="col-xl-3">
-											<!--begin::Tiles Widget 4-->
-										<div class="card card-custom gutter-b" style="height: 130px">
-											<!--begin::Body-->
-											<div id="divclk9"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-												<!--begin::Stats-->
-												<div class="flex-grow-1">
-													<div class="text-dark-50 font-weight-bold">Need To Follow-Up Delayed</div>
-													<div class="font-weight-bolder font-size-h3" id="needtofollowupdelayed"></div>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Body-->
-										</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-									   </div>
-
-
-
-
-									   <div id="customerbyUser" class="row">
-
-										
-
-
-										<div class="col-xl-2">
-											<!--begin::Tiles Widget 4-->
-										<div class="card card-custom gutter-b" style="height: 130px;">
-											<!--begin::Body-->
-											<div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=refresh()>
-												<!--begin::Stats-->
-												<div class="flex-grow-1">
-													<div class="text-dark-50 font-weight-bold">Total Customers </div>
-													<div class="font-weight-bolder font-size-h3" id="AllCustomers"></div>
-												</div>
-												<!--end::Stats-->
-											</div>
-											<!--end::Body-->
-										</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-									   </div>
-
-									 
-									   <div id="" class="row">
-										<div class="col-xl-12">
-											<!--begin::Tiles Widget 4-->
-										<div class="card card-custom gutter-b" >
-											<!--begin::Body-->
-											<div id=""  style="border-radius: .42rem;font-size: large;" class="card-body d-flex flex-column " >
-												Way of Contact:
-											</div>
-											<!--end::Body-->
-										</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-									   </div>
-
-
-									   
-									   <div class="row">
-										<div hidden id="wayofcontactsCards"></div>
-
-										  <div id="Directcol"  class="col-xl-2"  >
-												  <!--begin::Tiles Widget 4-->
-											  <div class="card card-custom gutter-b" style="height: 130px">
-												  <!--begin::Body-->
-												  <div id="DirectDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													  <!--begin::Stats-->
-													  <div class="flex-grow-1">
-														  <div class="text-dark-50 font-weight-bold">Direct</div>
-														  <div class="font-weight-bolder font-size-h3" id="Direct">0</div>
-													  </div>
-													  <!--end::Stats-->
-												  </div>
-												  <!--end::Body-->
-											  </div>
-											  <!--end::Tiles Widget 4-->
-											  </div>
-											  <!--end::Tiles Widget 2-->
-											  <div id="Googlecol" class="col-xl-2" >
-												<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="GoogleDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Google</div>
-														<div class="font-weight-bolder font-size-h3" id="Google">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-											<!--end::Tiles Widget 4-->
-											</div>
-
-											<div id="Facebookcol" class="col-xl-2" >
-												<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="FacebookDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Facebook</div>
-														<div class="font-weight-bolder font-size-h3" id="Facebook">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-											<!--end::Tiles Widget 4-->
-											</div>
-
-										  
-										  
-										  <div id="Linkedincol" class="col-xl-2" >
-											  <!--begin::Tiles Widget 4-->
-											  <div class="card card-custom gutter-b" style="height: 130px">
-												  <!--begin::Body-->
-												  <div id="LinkedinDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													  <!--begin::Stats-->
-													  <div class="flex-grow-1">
-														  <div class="text-dark-50 font-weight-bold">Linkedin</div>
-														  <div class="font-weight-bolder font-size-h3" id="Linkedin">0</div>
-													  </div>
-													  <!--end::Stats-->
-												  </div>
-												  <!--end::Body-->
-											  </div>
-										  <!--end::Tiles Widget 4-->
-										  </div>
-
-										  <div id="Twittercol" class="col-xl-2" >
-											<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="TwitterDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Twitter</div>
-														<div class="font-weight-bolder font-size-h3" id="Twitter">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div id="Friendsrecommendedcol" class="col-xl-2" >
-											<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="FriendsrecommendedDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Friends Recommended</div>
-														<div class="font-weight-bolder font-size-h3" id="Friendsrecommended">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div id="Websitecol"  class="col-xl-2" >
-											<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="WebsiteDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Website</div>
-														<div class="font-weight-bolder font-size-h3" id="Website">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div id="MobileAppcol" class="col-xl-2" >
-											<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="MobileAppDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Mobile App</div>
-														<div class="font-weight-bolder font-size-h3" id="MobileApp">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div id="OwnerReferencecol" class="col-xl-2" >
-											<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="OwnerReferenceDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Owner Reference </div>
-														<div class="font-weight-bolder font-size-h3" id="OwnerReference">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div id="Instagramcol" class="col-xl-2" >
-											<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="InstagramDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Instagram</div>
-														<div class="font-weight-bolder font-size-h3" id="Instagram">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-										<div  id="Othercol" class="col-xl-2"  >
-											<!--begin::Tiles Widget 4-->
-											<div class="card card-custom gutter-b" style="height: 130px">
-												<!--begin::Body-->
-												<div id="OtherDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
-													<!--begin::Stats-->
-													<div class="flex-grow-1">
-														<div class="text-dark-50 font-weight-bold"> Other</div>
-														<div class="font-weight-bolder font-size-h3" id="Other">0</div>
-													</div>
-													<!--end::Stats-->
-												</div>
-												<!--end::Body-->
-											</div>
-										<!--end::Tiles Widget 4-->
-										</div>
-
-									 </div>
-
 
 									 <div id="assignmentTobar" class="row">
 										<div class="col-xl-12">
@@ -870,12 +659,224 @@
 											<!--end::Body-->
 										</div>
 										<!--end::Card-->
+										<br/>
+										<div id="" class="row">
+											<div class="col-xl-12">
+												<!--begin::Tiles Widget 4-->
+											<div class="card card-custom gutter-b" >
+												<!--begin::Body-->
+												<div id=""  style="border-radius: .42rem;font-size: large;" class="card-body d-flex flex-column " >
+													Way of Contact:
+												</div>
+												<!--end::Body-->
+											</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+										</div>
+			
+										<div class="row">
+											<div hidden id="wayofcontactsCards"></div>
+			
+											  <div id="Directcol"  class="col-xl-2"  >
+													  <!--begin::Tiles Widget 4-->
+												  <div class="card card-custom gutter-b" style="height: 130px">
+													  <!--begin::Body-->
+													  <div id="DirectDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														  <!--begin::Stats-->
+														  <div class="flex-grow-1">
+															  <div class="text-dark-50 font-weight-bold">Direct</div>
+															  <div class="font-weight-bolder font-size-h3" id="Direct">0</div>
+														  </div>
+														  <!--end::Stats-->
+													  </div>
+													  <!--end::Body-->
+												  </div>
+												  <!--end::Tiles Widget 4-->
+												  </div>
+												  <!--end::Tiles Widget 2-->
+												  <div id="Googlecol" class="col-xl-2" >
+													<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="GoogleDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Google</div>
+															<div class="font-weight-bolder font-size-h3" id="Google">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Tiles Widget 4-->
+												</div>
+			
+												<div id="Facebookcol" class="col-xl-2" >
+													<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="FacebookDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Facebook</div>
+															<div class="font-weight-bolder font-size-h3" id="Facebook">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Tiles Widget 4-->
+												</div>
+			
+											  
+											  
+											  <div id="Linkedincol" class="col-xl-2" >
+												  <!--begin::Tiles Widget 4-->
+												  <div class="card card-custom gutter-b" style="height: 130px">
+													  <!--begin::Body-->
+													  <div id="LinkedinDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														  <!--begin::Stats-->
+														  <div class="flex-grow-1">
+															  <div class="text-dark-50 font-weight-bold">Linkedin</div>
+															  <div class="font-weight-bolder font-size-h3" id="Linkedin">0</div>
+														  </div>
+														  <!--end::Stats-->
+													  </div>
+													  <!--end::Body-->
+												  </div>
+											  <!--end::Tiles Widget 4-->
+											  </div>
+			
+											  <div id="Twittercol" class="col-xl-2" >
+												<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="TwitterDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Twitter</div>
+															<div class="font-weight-bolder font-size-h3" id="Twitter">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+			
+											<div id="Friendsrecommendedcol" class="col-xl-2" >
+												<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="FriendsrecommendedDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Friends Recommended</div>
+															<div class="font-weight-bolder font-size-h3" id="Friendsrecommended">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+			
+											<div id="Websitecol"  class="col-xl-2" >
+												<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="WebsiteDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Website</div>
+															<div class="font-weight-bolder font-size-h3" id="Website">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+			
+											<div id="MobileAppcol" class="col-xl-2" >
+												<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="MobileAppDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Mobile App</div>
+															<div class="font-weight-bolder font-size-h3" id="MobileApp">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+			
+											<div id="OwnerReferencecol" class="col-xl-2" >
+												<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="OwnerReferenceDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Owner Reference </div>
+															<div class="font-weight-bolder font-size-h3" id="OwnerReference">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+			
+											<div id="Instagramcol" class="col-xl-2" >
+												<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="InstagramDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Instagram</div>
+															<div class="font-weight-bolder font-size-h3" id="Instagram">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+			
+											<div  id="Othercol" class="col-xl-2"  >
+												<!--begin::Tiles Widget 4-->
+												<div class="card card-custom gutter-b" style="height: 130px">
+													<!--begin::Body-->
+													<div id="OtherDiv"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column">
+														<!--begin::Stats-->
+														<div class="flex-grow-1">
+															<div class="text-dark-50 font-weight-bold"> Other</div>
+															<div class="font-weight-bolder font-size-h3" id="Other">0</div>
+														</div>
+														<!--end::Stats-->
+													</div>
+													<!--end::Body-->
+												</div>
+											<!--end::Tiles Widget 4-->
+											</div>
+			
+										 </div>
 									</div>
 									<!--end::Container-->
 								</div>
 								<!--end::Entry-->
 							</div>
 							<!--end::Content-->
+ 
+							
+
+
 							<!--end::Dashboard-->
 							<!--end::CustomBody-->
 						</div>

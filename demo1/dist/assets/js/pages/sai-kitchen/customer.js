@@ -101,13 +101,14 @@ var KTAppsUsersListDatatable = function() {
                         $("#needToContact").html(data.needToContactCustomers);
 
 
-                        if(data.needToFollowUp==0) 
-                           document.getElementById('divclk4').style.pointerEvents = 'none';
-                           $("#needtofollowup").html(data.needToFollowUp); 
+                        // if(data.needToFollowUp==0) 
+                        //    document.getElementById('divclk4').style.pointerEvents = 'none';
+                        //    $("#needtofollowup").html(data.needToFollowUp); 
 
                          if(data.needToFollowUpWithInquiry==0) 
                            document.getElementById('divclk10').style.pointerEvents = 'none';
                            $("#needtofollowupWithInquiry").html(data.needToFollowUpWithInquiry); 
+
                         if(data.needToFollowUpWithOutInquiry==0) 
                            document.getElementById('divclk11').style.pointerEvents = 'none';
                            $("#needtofollowupWithoutInquiry").html(data.needToFollowUpWithOutInquiry);  
@@ -773,15 +774,16 @@ var KTAppsUsersListDatatable = function() {
             // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
          });
 
-         $('#divclk4').on('click', function() {
+        //  $('#divclk4').on('click', function() {
 
-            usercard =  document.getElementById('filtecardsId').value;
-            window.location.replace("customer.html?fuserId="+usercard+"&filter=17");
+        //     usercard =  document.getElementById('filtecardsId').value;
+        //     window.location.replace("customer.html?fuserId="+usercard+"&filter=17");
 
 
-             // document.getElementById("kt_subheader_search_form").value = 'Contacted';
-            // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
-         });
+        //      // document.getElementById("kt_subheader_search_form").value = 'Contacted';
+        //     // datatable.search((document.getElementById("kt_subheader_search_form").value).toLowerCase());
+        //  });
+
          $('#divclk10').on('click', function() {
 
             usercard =  document.getElementById('filtecardsId').value;
