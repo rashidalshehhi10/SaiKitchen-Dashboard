@@ -525,6 +525,105 @@ jQuery(document).ready(function () {
 	}
 
 
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	var customerContact = urlParams.get('customerContact');
+
+			if(urlParams.get('customerContact')!=null)
+			{
+					
+				$.ajax({
+					type: "Post",
+					url: baseURL + '/Customer/GetCustomerbyContact?customerContact=' + customerContact,
+				
+					headers: {
+						'Content-Type': 'application/json',
+						'userId': user.data.userId,
+						'userToken': user.data.userToken,
+						'userRoleId': user.data.userRoles[0].userRoleId,
+						'branchId': user.data.userRoles[0].branchId,
+						'branchRoleId': user.data.userRoles[0].branchRoleId,
+						'Access-Control-Allow-Origin': '*',
+					},
+					// data: data,
+					success: function (response) {
+						console.log(response);
+						// window.location.replace("home.html");
+						if (response.isError == false) {
+							// sessionStorage.setItem('user', JSON.stringify(response));
+							try {
+	
+								document.getElementById('customerName').value = response.data.customerName;
+								document.getElementById('customerEmail').value = response.data.customerEmail;
+								document.getElementById('customerContact').value = response.data.customerContact;
+								document.getElementById('customerAddress').value = response.data.customerAddress;
+								document.getElementById('customerNationalId').value = response.data.customerNationalId;
+								$('#kt_contact_status').val(response.data.contactStatusId).change();
+								$('#kt_wayofcontact').val(response.data.wayofContactId).change();
+								$('#kt_country_of_Resdience').val(response.data.customerCountry).change();
+								$('#kt_city_of_Resdience').val(response.data.customerCity).change();
+								document.getElementById("customerCity").innerHTML = response.data.customerCity;
+								$('#kt_nationality').val(response.data.customerNationality).change();
+								document.getElementById('whatsapp').value = response.data.customerWhatsapp;
+							} catch (error) {
+								document.getElementById('customerName').value = "";
+								document.getElementById('customerEmail').value = "";
+								document.getElementById('customerAddress').value = "";
+								document.getElementById('customerNationalId').value = "";
+							}
+	
+							//  document.getElementById('customerEmail').value;
+							// 	customer.customerEmail = document.getElementById('customerEmail').value;
+							// 	customer.customerContact = document.getElementById('customerContact').value;
+							// 	customer.customerAddress = document.getElementById('customerAddress').value;
+							// 	customer.customerNationalId = document.getElementById('customerNationalId').value;
+							// 	customer.contactStatusId = $('#kt_contact_status').val();
+							// 	customer.wayofContactId = $('#kt_wayofcontact').val();
+							// 	customer.customerCountry = $('#kt_country_of_Resdience').val();
+							// 	customer.customerCity = $('#kt_city_of_Resdience').val();
+							// 	customer.customerNationality = $('#kt_nationality').val();
+	
+							// window.location.replace("branchrole.html");
+	
+						} else {
+							Swal.fire({
+								text: response.errorMessage,
+								icon: "error",
+								buttonsStyling: false,
+								confirmButtonText: "Ok, got it!",
+								customClass: {
+									confirmButton: "btn font-weight-bold btn-light-primary"
+								}
+							}).then(function () {
+								KTUtil.scrollTop();
+							});
+						}
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						// Release button
+						KTUtil.btnRelease(formSubmitButton);
+						// alert(errorThrown);
+	
+						Swal.fire({
+							text: 'Internet Connection Problem',
+							icon: "error",
+							buttonsStyling: false,
+							confirmButtonText: "Ok, got it!",
+							customClass: {
+								confirmButton: "btn font-weight-bold btn-light-primary"
+							}
+						}).then(function () {
+							KTUtil.scrollTop();
+						});
+					}
+				});
+
+
+
+
+
+			}
+
 
 	$('#customerContact').keyup(function () {
 		var reg = /^(?:\+971|00971|0)?(?:50|51|52|55|56|2|3|4|6|7|9)\d{11}$/;
@@ -618,6 +717,11 @@ jQuery(document).ready(function () {
 
 		}
 	});
+
+
+
+
+
 
 	$('#promoCode').keyup(function () {
 
