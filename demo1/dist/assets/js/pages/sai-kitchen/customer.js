@@ -1999,7 +1999,7 @@ jQuery(document).ready(function() {
                                                                        <!--begin::Stats-->
                                                                        <div class="flex-grow-1">                                                                           
                                                                            <div class="text-white display-3 font-weight-bold" id="">`+response.data[counter].customers+`</div>
-                                                                           <div class="text-white font-weight-bold">Customers Account By: `+response.data[counter].user+`</div>
+                                                                           <div style="opacity: 90%;font-size: 0.9rem;" class="text-white font-weight-bold">Customers Account By: `+response.data[counter].user+`</div>
                                                                        </div>
                                                                        <!--end::Stats-->
                                                                    </div>
@@ -2093,7 +2093,7 @@ jQuery(document).ready(function() {
                                                                        <!--begin::Stats-->
                                                                        <div class="flex-grow-1">
                                                                            <div class="font-weight-bolder font-size-h3" id="">`+response.data[i].customers+`</div>
-                                                                           <div class="text-dark-50 font-weight-bold">Assigned To :   `+response.data[i].user+`</div> 
+                                                                           <div style="opacity: 90%;font-size: 0.9rem;" class=" font-weight-bold">Assigned To :   `+response.data[i].user+`</div> 
                                                                        </div>
                                                                        <!--end::Stats-->
                                                                    </div>
