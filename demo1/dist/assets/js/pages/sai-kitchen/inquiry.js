@@ -382,81 +382,86 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             ],
         });
         
-        $('#TotalInquiry').on('click', function() {
-            table.column(2).search('',true, false, true ).draw();
-            
-            // document.getElementById('r').innerHTML=  table.page.info().recordsTotal;
-            $('html, body').animate({
-                scrollTop: $("#kt_datatable").offset().top
-            }, 1000);
-         });
+   
          $('#MeasurementPending').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
              table.column(2).search(1,true, false, true ).draw();
              $('html, body').animate({
                  scrollTop: $("#kt_datatable").offset().top
              }, 1000);
           });
          $('#MeasurementDelayed').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(2,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          }); 
          $('#MeasurementWaitingForApproval').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(9,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });   
          $('#MeasurementRejected').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(8,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignPending').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(3,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignDelayed').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(4,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignWaitingForApproval').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(16,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignRejected').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(11,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationPending').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(5,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
              $('#QuotationDelayed').on('click', function() {
+                $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(6,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationWaitingForCustomerApproval').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(15,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);   
          });
          $('#QuotationRejected').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(14,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -466,6 +471,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
 
          $('#contractPending').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(58,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -473,6 +479,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#contractWaitingForCustomerApproval').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(59,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -480,6 +487,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#contractApproved').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(60,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -487,6 +495,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#contractInProgress').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(62,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -494,6 +503,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#contractRejected').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(63,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -502,18 +512,21 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
          //
          $('#DesignRevisionRequested').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(56,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationApproved').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(13,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderInProgress').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(47,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -522,6 +535,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
 
         $('#TechnicalChecklistInProgress').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(18,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -529,6 +543,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#TechnicalChecklistAccepted').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(19,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -536,6 +551,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#TechnicalChecklistRejected').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(20,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -543,6 +559,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#CommercialChecklistPending').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(43,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -550,6 +567,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#CommercialChecklistAccepted').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(44,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -557,6 +575,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#CommercialChecklistRejected').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(45,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -564,24 +583,28 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          })
 
          $('#JobOrderFactoryConfirmationPending').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(46,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderFactoryConfirmationRejected').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(48,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderDelayed').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(26,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderCompleted').on('click', function() {
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(27,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -1298,10 +1321,9 @@ jQuery(document).ready(function() {
              document.getElementById('com2').innerHTML=response.data[0].inquiries[43][0].inquiryCount;
 
              document.getElementById('com3').innerHTML=response.data[0].inquiries[44][0].inquiryCount;
-             
-             // 
 
              document.getElementById('r').innerHTML=  response.data[0].totalinquiries;
+    
 
 
 		},
@@ -1352,6 +1374,98 @@ jQuery(document).ready(function() {
 
        }
     });
+
+ // get inquiry by user
+
+ $.ajax({
+    type: "get",
+    url: baseURL + '/Inquiry/GetinquiriesByuser',
+
+    headers: {
+        'Content-Type': 'application/json',
+        'userId': user.data.userId,
+        'userToken': user.data.userToken,
+        'userRoleId': user.data.userRoles[0].userRoleId,
+        'branchId': user.data.userRoles[0].branchId,
+        'branchRoleId': user.data.userRoles[0].branchRoleId,
+        'Access-Control-Allow-Origin': '*',
+    },
+    success: function(response) {
+        console.log(response);
+        if (response.isError == false) {
+
+            for (var counter=0;counter<response.data.length;counter++)
+            {
+                            if(response.data[counter].inquiriesCount> 0)
+                        {
+                        
+                            document.getElementById('inquirybyUser').innerHTML +=`
+    
+                                    <div class="col-xl-2">
+                                                    <!--begin::Tiles Widget 4-->
+                                                <div class="card card-custom gutter-b" style="height: 150px;">
+                                                    <!--begin::Body-->
+                                                    <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column" onclick=searchInquiryManaged(`+response.data[counter].userId+`) >
+                                                        <!--begin::Stats-->
+                                                        <div class="flex-grow-1">
+                                                            <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].inquiriesCount+`</div>
+                                                            <div class="text-dark-50 font-weight-bold">Inquires Account By:  `+response.data[counter].user+`</div>                                                                               
+                                                        </div>
+                                                        <!--end::Stats-->
+                                                    </div>
+                                                    <!--end::Body-->
+                                                </div>
+                                                <!--end::Tiles Widget 4-->
+                                                </div>`;
+                            
+                                                        
+                        }
+                        
+                
+    
+            }
+
+
+
+        } else {
+            Swal.fire({
+                text: response.errorMessage,
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+        // alert(errorThrown);
+
+        Swal.fire({
+            text: 'Internet Connection Problem',
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    }
+});
+
+
+ // end inquiry by user
+
+
+
+    
     $.ajax({
         type: "post",
         url: baseURL + '/Inquiry/GetManagedByForInquiries?branchId=' + user.data.userRoles[0].branch.branchId,
@@ -1456,9 +1570,11 @@ jQuery(document).ready(function() {
             });
         }
     });
-
-
 });
+
+
+
+
 
 $('#kt_managedby_button').click(function () {
     var checklistdata = {

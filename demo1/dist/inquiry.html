@@ -96,13 +96,16 @@
                         <!--begin::Dashboard-->
                         <!--begin::Row-->
                         <div class="row">
+
+                           
                            <div class="col-xl-12">
-                              <div class="row">
+
+                              <div class="row" id="inquirybyUser" >
                                   
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 12-->
                                     <div class="card card-custom gutter-b" style="height: 150px">
-                                       <div class="card-body"  style="cursor: pointer;" id="TotalInquiry" >
+                                       <div class="card-body"  style="cursor: pointer;" id="TotalInquiry" onclick=getAllInquires() >
                                           <span class="svg-icon svg-icon-3x svg-icon-success">
                                              <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo2/dist/../src/media/svg/icons/Shopping/Box3.svg-->
                                              <!--end::Svg Icon-->
@@ -113,6 +116,11 @@
                                     </div>
                                     <!--end::Tiles Widget 12-->
                                  </div>
+
+                              </div>
+
+                              <div class="row">
+
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 11-->
                                     <div class="card card-custom gutter-b" style="height: 150px">
@@ -127,6 +135,7 @@
                                     </div>
                                     <!--end::Tiles Widget 11-->
                                  </div>
+
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 12-->
                                     <div class="card card-custom gutter-b" style="height: 150px">
@@ -141,6 +150,7 @@
                                     </div>
                                     <!--end::Tiles Widget 12-->
                                  </div>
+
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 11-->
                                     <div class="card card-custom  gutter-b" style="height: 150px">
@@ -155,6 +165,7 @@
                                     </div>
                                     <!--end::Tiles Widget 11-->
                                  </div>
+
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 12-->
                                     <div class="card card-custom gutter-b" style="height: 150px">
@@ -169,6 +180,7 @@
                                     </div>
                                     <!--end::Tiles Widget 12-->
                                  </div>
+
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 12-->
                                     <div class="card card-custom gutter-b" style="height: 150px">
@@ -183,9 +195,7 @@
                                     </div>
                                     <!--end::Tiles Widget 12-->
                                  </div>
-                              </div>
-                              <div class="row">
-                                  
+
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 12-->
                                     <div class="card card-custom gutter-b" style="height: 150px">
@@ -200,6 +210,13 @@
                                     </div>
                                     <!--end::Tiles Widget 12-->
                                  </div>
+
+                              </div>
+
+
+                              <div class="row">
+                                  
+                                 
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 12-->
                                     <div class="card card-custom gutter-b" style="height: 150px">
@@ -214,6 +231,7 @@
                                     </div>
                                     <!--end::Tiles Widget 12-->
                                  </div>
+
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 11-->
                                     <div class="card card-custom gutter-b" style="height: 150px">
@@ -270,9 +288,6 @@
                                     </div>
                                     <!--end::Tiles Widget 12-->
                                  </div>
-                              </div>
-                              <div class="row">
-                                  
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 11-->
                                     <div class="card card-custom  gutter-b" style="height: 150px">
@@ -287,6 +302,11 @@
                                     </div>
                                     <!--end::Tiles Widget 11-->
                                  </div>
+                              </div>
+
+                              <div class="row">
+                                  
+                                 
                                  <div class="col-xl-2">
                                     <!--begin::Tiles Widget 11-->
                                     <div class="card card-custom  gutter-b" style="height: 150px">
@@ -1703,6 +1723,31 @@
          function setInquiryWorkscopeId(inquiryWorskcopeId) {
              document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorskcopeId;
          }
+
+         function getAllInquires(){
+
+            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+            $('#kt_datatable').DataTable().column(2).search('',true, false, true ).draw();
+  
+                  // document.getElementById('r').innerHTML=  table.page.info().recordsTotal;
+                  $('html, body').animate({
+                     scrollTop: $("#kt_datatable").offset().top
+                  }, 1000);
+
+
+                  }
+
+
+         function searchInquiryManaged(userId){
+            $('#kt_datatable').DataTable().column(2).search('',true, false, true ).draw();
+         $('#kt_datatable').DataTable().column(25).search(userId,true, false, true).draw(); 
+            $('html, body').animate({
+                scrollTop: $("#kt_datatable").offset().top
+            }, 1000);
+      
+
+        }
+        
 
 
     // get all comments
