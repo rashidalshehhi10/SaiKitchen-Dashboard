@@ -1808,7 +1808,7 @@ jQuery(document).ready(function() {
      
     // begin offset 
 
-    $("html, body").animate({ scrollTop: $("#kt_datatable").offset().top }, 1000);
+    //$("html, body").animate({ scrollTop: $("#kt_datatable").offset().top }, 1000);
 
    // end offset
     
@@ -1991,7 +1991,7 @@ jQuery(document).ready(function() {
                            all += parseInt(response.data[counter].customers);
                                document.getElementById('customerbyUser').innerHTML +=`
        
-                                                   <div class="col-xl-4">
+                                                   <div class="col-xl-3">
                                                                    <!--begin::Tiles Widget 4-->
                                                                <div class="card card-custom gutter-b" style="height: 110px;background-color: #755043;">
                                                                    <!--begin::Body-->
