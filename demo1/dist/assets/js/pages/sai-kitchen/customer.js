@@ -1991,15 +1991,15 @@ jQuery(document).ready(function() {
                            all += parseInt(response.data[counter].customers);
                                document.getElementById('customerbyUser').innerHTML +=`
        
-                                                   <div class="col-xl-2">
+                                                   <div class="col-xl-4">
                                                                    <!--begin::Tiles Widget 4-->
-                                                               <div class="card card-custom gutter-b" style="height: 130px;">
+                                                               <div class="card card-custom gutter-b" style="height: 110px;background-color: #755043;">
                                                                    <!--begin::Body-->
                                                                    <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterUser(`+response.data[counter].userId+`)>
                                                                        <!--begin::Stats-->
-                                                                       <div class="flex-grow-1">
-                                                                           <div class="text-dark-50 font-weight-bold">Customers Account By: `+response.data[counter].user+`</div>
-                                                                           <div class="font-weight-bolder font-size-h3" id="">`+response.data[counter].customers+`</div>
+                                                                       <div class="flex-grow-1">                                                                           
+                                                                           <div class="text-white display-3 font-weight-bold" id="">`+response.data[counter].customers+`</div>
+                                                                           <div class="text-white font-weight-bold">Customers Account By: `+response.data[counter].user+`</div>
                                                                        </div>
                                                                        <!--end::Stats-->
                                                                    </div>
@@ -2092,8 +2092,8 @@ jQuery(document).ready(function() {
                                                                    <div id="divclkAssignment"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column " onclick=filterAssignedTo(`+response.data[i].userId+`)>
                                                                        <!--begin::Stats-->
                                                                        <div class="flex-grow-1">
-                                                                           <div class="text-dark-50 font-weight-bold">Assigned To :   `+response.data[i].user+`</div>
                                                                            <div class="font-weight-bolder font-size-h3" id="">`+response.data[i].customers+`</div>
+                                                                           <div class="text-dark-50 font-weight-bold">Assigned To :   `+response.data[i].user+`</div> 
                                                                        </div>
                                                                        <!--end::Stats-->
                                                                    </div>
