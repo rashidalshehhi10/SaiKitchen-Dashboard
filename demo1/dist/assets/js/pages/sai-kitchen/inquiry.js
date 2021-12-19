@@ -384,84 +384,84 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         
    
          $('#MeasurementPending').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+           // $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
              table.column(2).search(1,true, false, true ).draw();
              $('html, body').animate({
                  scrollTop: $("#kt_datatable").offset().top
              }, 1000);
           });
          $('#MeasurementDelayed').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(2,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          }); 
          $('#MeasurementWaitingForApproval').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(9,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });   
          $('#MeasurementRejected').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+           // $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(8,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignPending').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+           // $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(3,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignDelayed').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(4,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignWaitingForApproval').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(16,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#DesignRejected').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(11,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationPending').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+        //    $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(5,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
              $('#QuotationDelayed').on('click', function() {
-                $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+            //    $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(6,true, false, true).draw();  
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationWaitingForCustomerApproval').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(15,true, false, true).draw();
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);   
          });
          $('#QuotationRejected').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(14,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -471,7 +471,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
 
          $('#contractPending').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(58,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -479,7 +479,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#contractWaitingForCustomerApproval').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(59,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -487,7 +487,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#contractApproved').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(60,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -495,7 +495,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#contractInProgress').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(62,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -503,7 +503,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#contractRejected').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(63,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -512,21 +512,21 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
          //
          $('#DesignRevisionRequested').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(56,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#QuotationApproved').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(13,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderInProgress').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+        //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(47,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -535,7 +535,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
 
         $('#TechnicalChecklistInProgress').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(18,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -543,7 +543,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#TechnicalChecklistAccepted').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(19,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -551,7 +551,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#TechnicalChecklistRejected').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+        //    $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(20,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -559,7 +559,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#CommercialChecklistPending').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(43,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -567,7 +567,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#CommercialChecklistAccepted').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(44,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -575,7 +575,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          });
 
          $('#CommercialChecklistRejected').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(45,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -583,28 +583,28 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
          })
 
          $('#JobOrderFactoryConfirmationPending').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+         //   $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(46,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderFactoryConfirmationRejected').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+        //    $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(48,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderDelayed').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+          //  $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(26,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
          });
          $('#JobOrderCompleted').on('click', function() {
-            $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
+        //    $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
             table.column(2).search(27,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
@@ -1241,7 +1241,7 @@ jQuery(document).ready(function() {
     
     $.ajax({
 		type: "Post",
-		url: baseURL + '/Inquiry/GetinquiryStatusByBranch',
+		url: baseURL + '/Inquiry/GetinquiryStatusByBranch?ManagedBy=0',
 
 		headers: {
         'Content-Type': 'application/json',

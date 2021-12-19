@@ -1723,7 +1723,7 @@
          function setInquiryWorkscopeId(inquiryWorskcopeId) {
              document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorskcopeId;
          }
-
+         
          function getAllInquires(){
 
             $('#kt_datatable').DataTable().column(25).search('',true, false, true ).draw();
@@ -1734,17 +1734,203 @@
                      scrollTop: $("#kt_datatable").offset().top
                   }, 1000);
 
+                  $.ajax({
+                     type: "Post",
+                     url: baseURL + '/Inquiry/GetinquiryStatusByBranch?ManagedBy=0',
 
-                  }
+                     headers: {
+                     'Content-Type': 'application/json',
+                     'userId': user.data.userId,
+                     'userToken': user.data.userToken,
+                     'userRoleId': user.data.userRoles[0].userRoleId,
+                     'branchId': user.data.userRoles[0].branchId,
+                     'branchRoleId': user.data.userRoles[0].branchRoleId,
+                     'Access-Control-Allow-Origin': '*',
+                     },
+                     success: function (response) {
+                        console.log(response);
+
+                        //   const data1 = JSON.stringify(response.data);
+
+                           
+                           document.getElementById('a').innerHTML=response.data[0].inquiries[0][0].inquiryCount;
+                           
+                           document.getElementById('b').innerHTML=response.data[0].inquiries[1][0].inquiryCount;
+
+                           document.getElementById('c').innerHTML=response.data[0].inquiries[8][0].inquiryCount;
+
+                           document.getElementById('d').innerHTML=response.data[0].inquiries[7][0].inquiryCount;
+
+                           document.getElementById('e').innerHTML=response.data[0].inquiries[2][0].inquiryCount;
+
+                           document.getElementById('f').innerHTML=response.data[0].inquiries[3][0].inquiryCount;
+
+                           document.getElementById('g').innerHTML=response.data[0].inquiries[15][0].inquiryCount;
+                           
+                           document.getElementById('h').innerHTML=response.data[0].inquiries[10][0].inquiryCount;
+
+                           document.getElementById('i').innerHTML=response.data[0].inquiries[4][0].inquiryCount;
+
+                           document.getElementById('j').innerHTML=response.data[0].inquiries[5][0].inquiryCount;
+
+                           document.getElementById('k').innerHTML=response.data[0].inquiries[14][0].inquiryCount;
+
+                           document.getElementById('l').innerHTML=response.data[0].inquiries[13][0].inquiryCount;
+
+                           document.getElementById('m').innerHTML=response.data[0].inquiries[55][0].inquiryCount;
+                           
+                           document.getElementById('n').innerHTML=response.data[0].inquiries[12][0].inquiryCount;
+
+                           document.getElementById('o').innerHTML=response.data[0].inquiries[46][0].inquiryCount;
+                           
+                           document.getElementById('p').innerHTML=response.data[0].inquiries[25][0].inquiryCount;
+
+                           document.getElementById('q').innerHTML=response.data[0].inquiries[26][0].inquiryCount;
 
 
+                           document.getElementById('s').innerHTML=response.data[0].inquiries[45][0].inquiryCount;
+                           
+                           document.getElementById('t').innerHTML=response.data[0].inquiries[47][0].inquiryCount;
+
+
+                           document.getElementById('ff').innerHTML=response.data[0].inquiries[57][0].inquiryCount;
+
+                           document.getElementById('vv').innerHTML=response.data[0].inquiries[58][0].inquiryCount;
+
+                           document.getElementById('cc').innerHTML=response.data[0].inquiries[59][0].inquiryCount;
+
+                           document.getElementById('dd').innerHTML=response.data[0].inquiries[61][0].inquiryCount;
+
+                           document.getElementById('nn').innerHTML=response.data[0].inquiries[62][0].inquiryCount;
+
+                           // technical & commercial
+
+                           document.getElementById('tec1').innerHTML=response.data[0].inquiries[17][0].inquiryCount;
+
+                           document.getElementById('tec2').innerHTML=response.data[0].inquiries[18][0].inquiryCount;
+
+                           document.getElementById('tec3').innerHTML=response.data[0].inquiries[19][0].inquiryCount;
+
+                           document.getElementById('com1').innerHTML=response.data[0].inquiries[42][0].inquiryCount;
+
+                           document.getElementById('com2').innerHTML=response.data[0].inquiries[43][0].inquiryCount;
+
+                           document.getElementById('com3').innerHTML=response.data[0].inquiries[44][0].inquiryCount;
+
+                           document.getElementById('r').innerHTML=  response.data[0].totalinquiries;
+                  
+
+
+                     },
+                     error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                     }
+                  });
+         }
+
+         var user;
          function searchInquiryManaged(userId){
+            var login = localStorage.getItem("user");
+            if (login !== null) {
+               user = JSON.parse(login);
+            }
             $('#kt_datatable').DataTable().column(2).search('',true, false, true ).draw();
-         $('#kt_datatable').DataTable().column(25).search(userId,true, false, true).draw(); 
+             $('#kt_datatable').DataTable().column(25).search(userId,true, false, true).draw(); 
             $('html, body').animate({
                 scrollTop: $("#kt_datatable").offset().top
             }, 1000);
-      
+            $.ajax({
+            type: "Post",
+            url: baseURL + '/Inquiry/GetinquiryStatusByBranch?ManagedBy='+parseInt(userId),
+
+            headers: {
+            'Content-Type': 'application/json',
+            'userId': user.data.userId,
+            'userToken': user.data.userToken,
+            'userRoleId': user.data.userRoles[0].userRoleId,
+            'branchId': user.data.userRoles[0].branchId,
+            'branchRoleId': user.data.userRoles[0].branchRoleId,
+            'Access-Control-Allow-Origin': '*',
+            },
+            success: function (response) {
+               console.log(response);
+
+               //   const data1 = JSON.stringify(response.data);
+
+                  
+                  document.getElementById('a').innerHTML=response.data[0].inquiries[0][0].inquiryCount;
+                  
+                  document.getElementById('b').innerHTML=response.data[0].inquiries[1][0].inquiryCount;
+
+                  document.getElementById('c').innerHTML=response.data[0].inquiries[8][0].inquiryCount;
+
+                  document.getElementById('d').innerHTML=response.data[0].inquiries[7][0].inquiryCount;
+
+                  document.getElementById('e').innerHTML=response.data[0].inquiries[2][0].inquiryCount;
+
+                  document.getElementById('f').innerHTML=response.data[0].inquiries[3][0].inquiryCount;
+
+                  document.getElementById('g').innerHTML=response.data[0].inquiries[15][0].inquiryCount;
+                  
+                  document.getElementById('h').innerHTML=response.data[0].inquiries[10][0].inquiryCount;
+
+                  document.getElementById('i').innerHTML=response.data[0].inquiries[4][0].inquiryCount;
+
+                  document.getElementById('j').innerHTML=response.data[0].inquiries[5][0].inquiryCount;
+
+                  document.getElementById('k').innerHTML=response.data[0].inquiries[14][0].inquiryCount;
+
+                  document.getElementById('l').innerHTML=response.data[0].inquiries[13][0].inquiryCount;
+
+                  document.getElementById('m').innerHTML=response.data[0].inquiries[55][0].inquiryCount;
+                  
+                  document.getElementById('n').innerHTML=response.data[0].inquiries[12][0].inquiryCount;
+
+                  document.getElementById('o').innerHTML=response.data[0].inquiries[46][0].inquiryCount;
+                  
+                  document.getElementById('p').innerHTML=response.data[0].inquiries[25][0].inquiryCount;
+
+                  document.getElementById('q').innerHTML=response.data[0].inquiries[26][0].inquiryCount;
+
+
+                  document.getElementById('s').innerHTML=response.data[0].inquiries[45][0].inquiryCount;
+                  
+                  document.getElementById('t').innerHTML=response.data[0].inquiries[47][0].inquiryCount;
+
+
+                  document.getElementById('ff').innerHTML=response.data[0].inquiries[57][0].inquiryCount;
+
+                  document.getElementById('vv').innerHTML=response.data[0].inquiries[58][0].inquiryCount;
+
+                  document.getElementById('cc').innerHTML=response.data[0].inquiries[59][0].inquiryCount;
+
+                  document.getElementById('dd').innerHTML=response.data[0].inquiries[61][0].inquiryCount;
+
+                  document.getElementById('nn').innerHTML=response.data[0].inquiries[62][0].inquiryCount;
+
+                  // technical & commercial
+
+                  document.getElementById('tec1').innerHTML=response.data[0].inquiries[17][0].inquiryCount;
+
+                  document.getElementById('tec2').innerHTML=response.data[0].inquiries[18][0].inquiryCount;
+
+                  document.getElementById('tec3').innerHTML=response.data[0].inquiries[19][0].inquiryCount;
+
+                  document.getElementById('com1').innerHTML=response.data[0].inquiries[42][0].inquiryCount;
+
+                  document.getElementById('com2').innerHTML=response.data[0].inquiries[43][0].inquiryCount;
+
+                  document.getElementById('com3').innerHTML=response.data[0].inquiries[44][0].inquiryCount;
+
+                  document.getElementById('r').innerHTML=  response.data[0].totalinquiries;
+         
+
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+         });
 
         }
         
