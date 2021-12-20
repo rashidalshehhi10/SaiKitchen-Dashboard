@@ -247,8 +247,10 @@ jQuery(document).ready(function() {
             document.getElementById('noInquiryCustomer').innerHTML=response.data.contactedWithInquiry;
             document.getElementById('contactedCustomer').innerHTML=response.data.contactedWithoutinquiry;
             document.getElementById('needToContact').innerHTML=response.data.customerNeedtoContact;
-            document.getElementById('needtofollowup').innerHTML=response.data.needToFollowUp;
-            document.getElementById('notresponding').innerHTML=response.data.notResponding;
+            document.getElementById('needToFollowUpWithInquiry').innerHTML=response.data.needToFollowUpWithInquiry;
+            document.getElementById('needToFollowUpWithoutInquiry').innerHTML=response.data.needToFollowUpWithoutInquiry;
+            document.getElementById('notRespondingWithInquiry').innerHTML=response.data.notRespondingWithInquiry;
+            document.getElementById('notRespondingWithoutInquiry').innerHTML=response.data.notRespondingWithoutInquiry;
            
 			eventList =[];
             let mstart ='';
