@@ -75,7 +75,16 @@ var KTDatatablesExtensionsResponsive = function () {
 						return data.userRoles[0].branch.branchName;
 					}
 				},
-
+				{
+					data: null,
+					render: function (data, type, row) {
+						console.log(data);
+						if(data.isNotificationEnabled)
+						 return "Yes";
+						else 
+						 return "No";
+					}
+				},
 				{
 					data: null
 				}
@@ -88,7 +97,7 @@ var KTDatatablesExtensionsResponsive = function () {
 					targets: 0
 				},
 				{
-					targets: 7,
+					targets: 8,
 					title: 'Actions',
 					orderable: false,
 					render: function (data, type, full, meta) {
@@ -190,11 +199,13 @@ var KTDatatablesExtensionsResponsive = function () {
 				// Show loading state on button
 				KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
 				// Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+				
 				var newuser = {
 					userId:"string",
 					userName: "string",
 					userEmail: "string",
 					userMobile: "string",
+					isNotificationEnabled : false,
 					userRoles: new Array()
 				}
 				var userRole = {
@@ -213,6 +224,7 @@ var KTDatatablesExtensionsResponsive = function () {
 				// 	isActive: true,
 				// 	isDeleted: false
 				// };
+				newuser.isNotificationEnabled = document.getElementById('IsNotificationEnabled').checked;
 				newuser.userId = document.getElementById('userId').innerHTML;
 				newuser.userName = document.getElementById('userName').value;
 				newuser.userEmail = document.getElementById('Email').value;
@@ -230,7 +242,8 @@ var KTDatatablesExtensionsResponsive = function () {
 				// 	isActive: true,
 				// 	isDeleted: false
 				// });
-
+				
+			
 				// console.log(branchRole);
 				const data = JSON.stringify(newuser);
 				console.log(data);

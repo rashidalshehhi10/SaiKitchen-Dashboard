@@ -151,7 +151,8 @@ License: You must have a valid license purchased only from themeforest(the above
 												<th>Mobile</th>
 												<th>Last Seen</th>
 												<th>Position</th>
-												<th>Branch</th>
+												<th>Branch</th>	
+												<th>Notification</th>	
 												<th>Actions</th>
 											</tr>
 										</thead>
@@ -599,6 +600,18 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 									</div>
 
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Enable Notification</label>
+										<div class="input-group input-group-lg">
+											<div class="switch switch-sm switch-icon">
+											 <label>
+											  <input type="checkbox" id="IsNotificationEnabled" name="select"/>
+											  <span></span>
+											 </label>
+											</div>
+										   </div>
+									</div>
+
 								</div>
 
 								<div class="col-xl-1">
@@ -637,6 +650,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				document.getElementById('Email').value ='';
 				$('#kt_select_branch'+' option[value="1"').attr('selected',true).change();
 				$('#kt_select_branch_role'+' option[value="1"').attr('selected',true).change();
+				$('#IsNotificationEnabled').attr('checked',false).change();
             } catch (error) {
 
             }
@@ -664,6 +678,10 @@ License: You must have a valid license purchased only from themeforest(the above
 						document.getElementById('Email').value =response.data.userEmail;
 						$('#kt_select_branch option[value="'+response.data.userRoles['0']['branchId']+'"]').attr('selected',true).change();
 						$('#kt_select_branch_role option[value="'+response.data.userRoles['0']['branchRoleId']+'"]').attr('selected',true).change();					
+						if(response.data.isNotificationEnabled==true){
+							$('#IsNotificationEnabled').attr('checked',true).change();}
+						else { 
+							$('#IsNotificationEnabled').attr('checked',false).change();}
 					} else {
 						Swal.fire({
 							text: response.errorMessage,
@@ -680,7 +698,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					}
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
-					KTUtil.btnRelease(formSubmitButton);
+				//	KTUtil.btnRelease(formSubmitButton);
 					Swal.fire({
 						text: 'Internet Connection Problem',
 						icon: "error",
