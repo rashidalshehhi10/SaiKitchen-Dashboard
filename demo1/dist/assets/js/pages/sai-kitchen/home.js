@@ -345,4 +345,86 @@ jQuery(document).ready(function() {
 
 		}
 	});
+  $.ajax({
+    type: "get",
+    url: baseURL + '/Inquiry/GetinquiriesByuser',
+  
+    headers: {
+        'Content-Type': 'application/json',
+        'userId': user.data.userId,
+        'userToken': user.data.userToken,
+        'userRoleId': user.data.userRoles[0].userRoleId,
+        'branchId': user.data.userRoles[0].branchId,
+        'branchRoleId': user.data.userRoles[0].branchRoleId,
+        'Access-Control-Allow-Origin': '*',
+    },
+    success: function(response) {
+        console.log(response);
+        if (response.isError == false) {
+           document.getElementById("r").innerHTML = response.data.totalInquiries;
+            for (var counter=0;counter<response.data.inquiriess.length;counter++)
+            {
+                            if(response.data.inquiriess[counter].inquiriesCount> 0)
+                        {
+                        
+                            document.getElementById('inquirybyUser').innerHTML +=`
+    
+                                    <div class="col-xl-3">
+                                                    <!--begin::Tiles Widget 4-->
+                                                <div class="card card-custom gutter-b" style="height: 110px;background-color: #755043;"">
+                                                    <!--begin::Body-->
+                                                    <div id="divclkUser"  style="border-radius: .42rem;" class="card-body d-flex flex-column" >
+                                                        <!--begin::Stats-->
+                                                        <div class="flex-grow-1">
+                                                            <div class="text-white display-3 font-weight-bold" id="">`+response.data.inquiriess[counter].inquiriesCount+`</div>
+                                                            <div style="opacity: 90%;font-size: 0.9rem;" class="text-white font-weight-bold">Inquires Account By:  `+response.data.inquiriess[counter].user+`</div>                                                                               
+                                                        </div>
+                                                        <!--end::Stats-->
+                                                    </div>
+                                                    <!--end::Body-->
+                                                </div>
+                                                <!--end::Tiles Widget 4-->
+                                                </div>`;
+                            
+                                                        
+                        }
+                        
+                
+    
+            }
+  
+  
+  
+        } else {
+            Swal.fire({
+                text: response.errorMessage,
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+  
+  
+        // alert(errorThrown);
+  
+        Swal.fire({
+            text: 'Internet Connection Problem',
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    }
+  });
 });

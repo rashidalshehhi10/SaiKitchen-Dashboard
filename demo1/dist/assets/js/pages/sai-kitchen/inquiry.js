@@ -1394,9 +1394,9 @@ jQuery(document).ready(function() {
         console.log(response);
         if (response.isError == false) {
 
-            for (var counter=0;counter<response.data.length;counter++)
+            for (var counter=0;counter<response.data.inquiriess.length;counter++)
             {
-                            if(response.data[counter].inquiriesCount> 0)
+                            if(response.data.inquiriess[counter].inquiriesCount> 0)
                         {
                         
                             document.getElementById('inquirybyUser').innerHTML +=`
@@ -1405,11 +1405,11 @@ jQuery(document).ready(function() {
                                                     <!--begin::Tiles Widget 4-->
                                                 <div class="card card-custom gutter-b" style="height: 110px;background-color: #755043;"">
                                                     <!--begin::Body-->
-                                                    <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column" onclick=searchInquiryManaged(`+response.data[counter].userId+`) >
+                                                    <div id="divclkUser"  style="border-radius: .42rem;cursor: pointer;" class="card-body d-flex flex-column" onclick=searchInquiryManaged(`+response.data.inquiriess[counter].userId+`) >
                                                         <!--begin::Stats-->
                                                         <div class="flex-grow-1">
-                                                            <div class="text-white display-3 font-weight-bold" id="">`+response.data[counter].inquiriesCount+`</div>
-                                                            <div style="opacity: 90%;font-size: 0.9rem;" class="text-white font-weight-bold">Inquires Account By:  `+response.data[counter].user+`</div>                                                                               
+                                                            <div class="text-white display-3 font-weight-bold" id="">`+response.data.inquiriess[counter].inquiriesCount+`</div>
+                                                            <div style="opacity: 90%;font-size: 0.9rem;" class="text-white font-weight-bold">Inquires Account By:  `+response.data.inquiriess[counter].user+`</div>                                                                               
                                                         </div>
                                                         <!--end::Stats-->
                                                     </div>
