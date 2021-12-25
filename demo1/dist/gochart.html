@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+
+<head>
+	<base href="">
+	<meta charset="utf-8" />
+	<title>Sai Kitchen & Wardrobes</title>
+	<meta name="description" content="Sai Kitchen & Wardrobes" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="canonical" href="https://keenthemes.com/metronic" />
+	<!--begin::Fonts-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+	<!--end::Fonts-->
+	<!--begin::Page Vendors Styles(used by this page)-->
+	<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+	<!--end::Page Vendors Styles-->
+	<!--begin::Global Theme Styles(used by all pages)-->
+	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<!--end::Global Theme Styles-->
+	<!--begin::Layout Themes(used by all pages)-->
+	<link href="assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+	<!--end::Layout Themes-->
+	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+
+	<script src="https://unpkg.com/gojs/release/go-debug.js"></script>
+
+	<!--PWA-->
+	<link rel="manifest" href="manifest.json" />
+	<!-- ios support -->
+	<link rel="apple-touch-icon" href="assets/media/logos/icon-72x72.png" />
+	<link rel="apple-touch-icon" href="assets/media/logos/icon-96x96.png" />
+	<link rel="apple-touch-icon" href="assets/media/logos/icon-128x128.png" />
+	<link rel="apple-touch-icon" href="assets/media/logos/icon-144x144.png" />
+	<link rel="apple-touch-icon" href="assets/media/logos/icon-152x152.png" />
+	<link rel="apple-touch-icon" href="assets/media/logos/icon-192x192.png" />
+	<link rel="apple-touch-icon" href="assets/media/logos/icon-384x384.png" />
+	<link rel="apple-touch-icon" href="assets/media/logos/icon-512x512.png" />
+	<meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+	<meta name="theme-color" content="#db4938" />
+	<!--End:PWA-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9H-Gmi17sb3cbdR1lpTNnCjcan7vV9jc&v=3.exp&sensor=false&libraries=places"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/dist/typeahead.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead-addresspicker/0.1.4/typeahead-addresspicker.min.js"></script>
+<style>
+
+</style>
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body"
+	class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+	<!--begin::Main-->
+	<!--begin::Header Mobile-->
+	<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
+	</div>
+	<!--end::Header Mobile-->
+	<div class="d-flex flex-column flex-root">
+		<!--begin::Page-->
+		<div class="d-flex flex-row flex-column-fluid page">
+			<!--begin::Aside-->
+			<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
+			</div>
+			<!--end::Aside-->
+			<!--begin::Wrapper-->
+			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+				<!--begin::Header-->
+				<div id="kt_header" class="header header-fixed">
+				</div>
+				<!--end::Header-->
+				<!--begin::Content-->
+				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+					<!--begin::Subheader-->
+
+					<!--end::Subheader-->
+					<!--begin::Entry-->
+					<div class="d-flex flex-column-fluid">
+						<!--begin::Container-->
+						<div class="container">
+							<!--begin::CustomBody-->
+							<!--begin::Dashboard-->
+							<!--begin::Content-->
+							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+								<!--begin::Subheader-->
+								
+								<!--end::Subheader-->
+								
+								<!--begin::Entry-->
+								<div class="d-flex flex-column-fluid">
+									<!--begin::Container-->
+									<!-- <div class="container">
+										<div class="card card-custom gutter-b">
+											<div class="card-header">
+												<div class="card-title">
+													<h3 class="card-label">Simple Column Chart</h3>
+												</div>
+											</div>
+											<div class="card-body">
+												<div id="myDiagramDiv"  
+												style="height: 500px;"></div>
+											</div>
+										</div>
+				
+									</div> -->
+									<!--end::Container-->
+								</div>
+
+								<div class="container">
+									<div class="card card-custom gutter-b">
+										<div class="card-header">
+											<div class="card-title">
+												<h3 class="card-label">Simple Column Chart</h3>
+											</div>
+										</div>
+										<div class="card-body">
+										
+											
+											  <div class="md:flex flex-col md:flex-row md:min-h-screen w-full max-w-screen-xl mx-auto">
+												<div id="navSide" class="flex flex-col w-full md:w-48 text-gray-700 bg-white flex-shrink-0"></div>
+												<!-- * * * * * * * * * * * * * -->
+												<!-- Start of GoJS sample code -->
+												
+												<script src="../release/go.js"></script>
+												<div class="p-4 w-full">
+											<script id="code">
+											  function init() {
+												if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+												var $ = go.GraphObject.make;  // for conciseness in defining templates
+											
+												myDiagram =
+												  $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
+													{
+													  "LinkDrawn": showLinkLabel,  // this DiagramEvent listener is defined below
+													  "LinkRelinked": showLinkLabel,
+													  "undoManager.isEnabled": true,  // enable undo & redo
+													});
+
+
+
+													myDiagram.layout =
+															$(go.LayeredDigraphLayout,  // this will be discussed in a later section
+															{ direction :90,
+																columnSpacing: 10,
+																setsPortSpots: true });
+
+													// myDiagram.linkTemplate =
+													// 			$(go.Link,       // the whole link panel
+													// 				$(go.Shape)  // the link shape, default black stroke
+													// 			);
+
+
+
+
+												// when the document is modified, add a "*" to the title and enable the "Save" button
+												myDiagram.addDiagramListener("Modified", function(e) {
+												  var button = document.getElementById("SaveButton");
+												  if (button) button.disabled = !myDiagram.isModified;
+												  var idx = document.title.indexOf("*");
+												  if (myDiagram.isModified) {
+													if (idx < 0) document.title += "*";
+												  } else {
+													if (idx >= 0) document.title = document.title.substr(0, idx);
+												  }
+												});
+											
+												// helper definitions for node templates
+											
+												function nodeStyle() {
+												  return [
+													// The Node.location comes from the "loc" property of the node data,
+													// converted by the Point.parse static method.
+													// If the Node.location is changed, it updates the "loc" property of the node data,
+													// converting back using the Point.stringify static method.
+													new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+													{
+													  // the Node.location is at the center of each node
+													  locationSpot: go.Spot.Right
+													}
+												  ];
+												}
+											
+												// Define a function for creating a "port" that is normally transparent.
+												// The "name" is used as the GraphObject.portId,
+												// the "align" is used to determine where to position the port relative to the body of the node,
+												// the "spot" is used to control how links connect with the port and whether the port
+												// stretches along the side of the node,
+												// and the boolean "output" and "input" arguments control whether the user can draw links from or to the port.
+												function makePort(name, align, spot, output, input) {
+												  var horizontal = align.equals(go.Spot.Top) || align.equals(go.Spot.Bottom);
+												  // the port is basically just a transparent rectangle that stretches along the side of the node,
+												  // and becomes colored when the mouse passes over it
+												  return $(go.Shape,
+													{
+													  fill: "transparent",  // changed to a color in the mouseEnter event handler
+													  strokeWidth: 0,  // no stroke
+													  width: horizontal ? NaN : 8,  // if not stretching horizontally, just 8 wide
+													  height: !horizontal ? NaN : 8,  // if not stretching vertically, just 8 tall
+													  alignment: align,  // align the port on the main Shape
+													  stretch: (horizontal ? go.GraphObject.Horizontal : go.GraphObject.Vertical),
+													  portId: name,  // declare this object to be a "port"
+													  fromSpot: spot,  // declare where links may connect at this port
+													  fromLinkable: output,  // declare whether the user may draw links from here
+													  toSpot: spot,  // declare where links may connect at this port
+													//  setsPortSpots: true,
+													  toLinkable: input,  // declare whether the user may draw links to here
+													  cursor: "pointer",  // show a different cursor to indicate potential link point
+													  mouseEnter: function(e, port) {  // the PORT argument will be this Shape
+														if (!e.diagram.isReadOnly) port.fill = "rgba(255,0,255,0.5)";
+													  },
+													  mouseLeave: function(e, port) {
+														port.fill = "transparent";
+													  }
+													});
+												}
+											
+												function textStyle() {
+												  return {
+													font: "bold 11pt Lato, Helvetica, Arial, sans-serif",
+													stroke: "#000000"
+												  }
+												}
+											
+												// define the Node templates for regular nodes
+											
+												myDiagram.nodeTemplateMap.add("",  // the default category
+												  $(go.Node, "Table", nodeStyle(),
+													// the main object is a Panel that surrounds a TextBlock with a rectangular Shape
+													$(go.Panel, "Auto",
+													  $(go.Shape, "Rectangle",
+														{ fill: "#ffffff", stroke: "#00A9C9", strokeWidth: 3.5 },
+														new go.Binding("figure", "figure")),
+													  $(go.TextBlock, textStyle(),
+														{
+														  margin: 8,
+														  maxSize: new go.Size(160, NaN),
+														  wrap: go.TextBlock.WrapFit,
+														  editable: true
+														},
+														new go.Binding("text").makeTwoWay())
+													),
+													// four named ports, one on each side:
+													makePort("T", go.Spot.Top, go.Spot.TopSide, false, true),
+													makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
+													makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
+													makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, false)
+												  ));
+											
+												myDiagram.nodeTemplateMap.add("Conditional",
+												  $(go.Node, "Table", nodeStyle(),
+													// the main object is a Panel that surrounds a TextBlock with a rectangular Shape
+													$(go.Panel, "Auto",
+													  $(go.Shape, "Diamond",
+														{ fill: "#282c34", stroke: "#00A9C9", strokeWidth: 3.5 },
+														new go.Binding("figure", "figure")),
+													  $(go.TextBlock, textStyle(),
+														{
+														  margin: 8,
+														  maxSize: new go.Size(160, NaN),
+														  wrap: go.TextBlock.WrapFit,
+														  editable: true
+														},
+														new go.Binding("text").makeTwoWay())
+													),
+													// four named ports, one on each side:
+													makePort("T", go.Spot.Top, go.Spot.Top, false, true),
+													makePort("L", go.Spot.Left, go.Spot.Left, true, true),
+													makePort("R", go.Spot.Right, go.Spot.Right, true, true),
+													makePort("B", go.Spot.Bottom, go.Spot.Bottom, true, false)
+												  ));
+											
+												myDiagram.nodeTemplateMap.add("Start",
+												  $(go.Node, "Table", nodeStyle(),
+													$(go.Panel, "Spot",
+													  $(go.Shape, "Circle",
+														{ desiredSize: new go.Size(70, 70), fill: "#282c34", stroke: "#09d3ac", strokeWidth: 3.5 }),
+													  $(go.TextBlock, "Start", textStyle(),
+														new go.Binding("text"))
+													),
+													// three named ports, one on each side except the top, all output only:
+													makePort("L", go.Spot.Left, go.Spot.Left, true, false),
+													makePort("R", go.Spot.Right, go.Spot.Right, true, false),
+													makePort("B", go.Spot.Bottom, go.Spot.Bottom, true, false)
+												  ));
+											
+												myDiagram.nodeTemplateMap.add("End",
+												  $(go.Node, "Table", nodeStyle(),
+													$(go.Panel, "Spot",
+													  $(go.Shape, "Circle",
+														{ desiredSize: new go.Size(60, 60), fill: "#282c34", stroke: "#DC3C00", strokeWidth: 3.5 }),
+													  $(go.TextBlock, "End", textStyle(),
+														new go.Binding("text"))
+													),
+													// three named ports, one on each side except the bottom, all input only:
+													makePort("T", go.Spot.Top, go.Spot.Top, false, true),
+													makePort("L", go.Spot.Left, go.Spot.Left, false, true),
+													makePort("R", go.Spot.Right, go.Spot.Right, false, true)
+												  ));
+											
+												// taken from ../extensions/Figures.js:
+												go.Shape.defineFigureGenerator("File", function(shape, w, h) {
+												  var geo = new go.Geometry();
+												  var fig = new go.PathFigure(0, 0, true); // starting point
+												  geo.add(fig);
+												  fig.add(new go.PathSegment(go.PathSegment.Line, .75 * w, 0));
+												  fig.add(new go.PathSegment(go.PathSegment.Line, w, .25 * h));
+												  fig.add(new go.PathSegment(go.PathSegment.Line, w, h));
+												  fig.add(new go.PathSegment(go.PathSegment.Line, 0, h).close());
+												  var fig2 = new go.PathFigure(.75 * w, 0, false);
+												  geo.add(fig2);
+												  // The Fold
+												  fig2.add(new go.PathSegment(go.PathSegment.Line, .75 * w, .25 * h));
+												  fig2.add(new go.PathSegment(go.PathSegment.Line, w, .25 * h));
+												  geo.spot1 = new go.Spot(0, .25);
+												  geo.spot2 = go.Spot.BottomRight;
+												  return geo;
+												});
+											
+												myDiagram.nodeTemplateMap.add("Comment",
+												  $(go.Node, "Auto", nodeStyle(),
+													$(go.Shape, "File",
+													  { fill: "#282c34", stroke: "#DEE0A3", strokeWidth: 3 }),
+													$(go.TextBlock, textStyle(),
+													  {
+														margin: 8,
+														maxSize: new go.Size(200, NaN),
+														wrap: go.TextBlock.WrapFit,
+														textAlign: "center",
+														editable: true
+													  },
+													  new go.Binding("text").makeTwoWay())
+													// no ports, because no links are allowed to connect with a comment
+												  ));
+											
+											
+												// replace the default Link template in the linkTemplateMap
+												myDiagram.linkTemplate =
+												  $(go.Link,  // the whole link panel --   routing: go.Link.Orthogonal, -- curve: go.Link.JumpGap,
+													{
+													  routing: go.Link.AvoidsNodes,
+													  curve: go.Link.JumpOver,
+													  corner: 5, toShortLength: 4,
+													  relinkableFrom: true,
+													  relinkableTo: true,
+													  reshapable: true,
+													  resegmentable: true,
+													  // mouse-overs subtly highlight links:
+													  mouseEnter: function(e, link) { link.findObject("HIGHLIGHT").stroke = "rgba(30,144,255,0.2)"; },
+													  mouseLeave: function(e, link) { link.findObject("HIGHLIGHT").stroke = "transparent"; },
+													  selectionAdorned: false
+													},
+													new go.Binding("points").makeTwoWay(),
+													$(go.Shape,  // the highlight shape, normally transparent
+													  { isPanelMain: true, strokeWidth: 8, stroke: "transparent", name: "HIGHLIGHT" }),
+													$(go.Shape,  // the link path shape
+													  { isPanelMain: true,  strokeWidth: 1 },
+													  new go.Binding("stroke", "isSelected", function(sel) { return sel ? "dodgerblue" : "black"; }).ofObject()),
+													$(go.Shape,  // the arrowhead
+													  { toArrow: "standard", strokeWidth: 0, fill: "black" }),
+													$(go.Panel, "Auto",  // the link label, normally not visible
+													  { visible: false, name: "LABEL", segmentIndex: 2, segmentFraction: 0.5 },
+													  new go.Binding("visible", "visible").makeTwoWay(),
+													  $(go.Shape, "RoundedRectangle",  // the label shape
+														{ fill: "#F8F8F8", strokeWidth: 0 }),
+													  $(go.TextBlock, "Yes",  // the label
+														{
+														  textAlign: "center",
+														  font: "10pt helvetica, arial, sans-serif",
+														  stroke: "#333333",
+														  editable: true
+														},
+														new go.Binding("text").makeTwoWay())
+													)
+												  );
+											
+												// Make link labels visible if coming out of a "conditional" node.
+												// This listener is called by the "LinkDrawn" and "LinkRelinked" DiagramEvents.
+												function showLinkLabel(e) {
+												  var label = e.subject.findObject("LABEL");
+												  if (label !== null) label.visible = (e.subject.fromNode.data.category === "Conditional");
+												}
+											
+												// temporary links used by LinkingTool and RelinkingTool are also orthogonal:
+												myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
+												myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
+											
+												load();  // load an initial diagram from some JSON text
+											
+												// initialize the Palette that is on the left side of the page
+												// myPalette =
+												//   $(go.Palette, "myPaletteDiv",  // must name or refer to the DIV HTML element
+												// 	{
+												// 	  // Instead of the default animation, use a custom fade-down
+												// 	  "animationManager.initialAnimationStyle": go.AnimationManager.None,
+												// 	  "InitialAnimationStarting": animateFadeDown, // Instead, animate with this function
+											
+												// 	  nodeTemplateMap: myDiagram.nodeTemplateMap,  // share the templates used by myDiagram
+												// 	  model: new go.GraphLinksModel([  // specify the contents of the Palette
+												// 		{ category: "Start", text: "Start" },
+												// 		{ text: "Step" },
+												// 		{ category: "Conditional", text: "???" },
+												// 		{ category: "End", text: "End" },
+												// 		{ category: "Comment", text: "Comment" }
+												// 	  ])
+												// 	});
+											
+												// This is a re-implementation of the default animation, except it fades in from downwards, instead of upwards.
+												function animateFadeDown(e) {
+												  var diagram = e.diagram;
+												  var animation = new go.Animation();
+												  animation.isViewportUnconstrained = true; // So Diagram positioning rules let the animation start off-screen
+												  animation.easing = go.Animation.EaseOutExpo;
+												  animation.duration = 900;
+												  // Fade "down", in other words, fade in from above
+												  animation.add(diagram, 'position', diagram.position.copy().offset(0, 200), diagram.position);
+												  animation.add(diagram, 'opacity', 0, 1);
+												  animation.start();
+												}
+											
+											  } // end init
+											
+											
+											  // Show the diagram's model in JSON format that the user may edit
+											  function save() {
+												document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+												myDiagram.isModified = false;
+											  }
+											  function load() {
+												myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+											  }
+											
+											  // print the diagram by opening a new window holding SVG images of the diagram contents for each page
+											  function printDiagram() {
+												var svgWindow = window.open();
+												if (!svgWindow) return;  // failure to open a new Window
+												var printSize = new go.Size(700, 960);
+												var bnds = myDiagram.documentBounds;
+												var x = bnds.x;
+												var y = bnds.y;
+												while (y < bnds.bottom) {
+												  while (x < bnds.right) {
+													var svg = myDiagram.makeSvg({ scale: 1.0, position: new go.Point(x, y), size: printSize });
+													svgWindow.document.body.appendChild(svg);
+													x += printSize.width;
+												  }
+												  x = bnds.x;
+												  y += printSize.height;
+												}
+												setTimeout(function() { svgWindow.print(); }, 1);
+											  }
+											  window.addEventListener('DOMContentLoaded', init);
+											</script>
+											
+											<div id="sample">
+											<div style="width: 100%; display: flex; justify-content: space-between">
+											  <!-- <div id="myPaletteDiv" style="width: 100px; margin-right: 2px; background-color: #282c34;"></div> -->
+											  <div id="myDiagramDiv" style="flex-grow: 1; height: 750px; background-color: #ffffff;"></div>
+											</div>
+											
+											
+											<button hidden id="SaveButton" onclick="save()">Save</button>
+											<button hidden onclick="load()">Load</button>
+											
+											<textarea hidden id="mySavedModel" style="width:100%;height:300px">
+											{ "class": "go.GraphLinksModel",
+											"linkFromPortIdProperty": "fromPort",
+											"linkToPortIdProperty": "toPort",
+											"nodeDataArray": [    
+										
+											{"key":0, "loc":"-200 100", "text":"Total Customer"},
+											{"key":1, "loc":"0 100", "text":"Customer Account By Saher"},
+											{"key":2, "loc":"200 100", "text":"Customer Account By Omran"},
+											{"key":3, "loc":"0 100", "text":"Delay"},
+											{"key":4, "loc":"-120 300", "text":"Customer With Inquiry"},
+											{"key":5, "loc":"300 300", "text":"Customer Without Inquiry"},
+											{"key":6, "loc":"600 300", "text":"Customer Not Yet Contracted"},
+											{"key":7, "loc":"-250 500", "text":"Inquiry In Progress"},
+											{"key":8, "loc":"-50 500", "text":"Inquiry Need To Follow-Up"},
+
+											{"key":9, "loc":"150 500", "text":"Lost Customer"},
+											{"key":10, "loc":"270 500", "text":"potential Customer"},
+											{"key":11, "loc":"420 500", "text":"Unresponsive potential Customers"},
+											{"key":12, "loc":"-350 700", "text":"Delay"},
+											{"key":13, "loc":"-220 700", "text":"On-Going"},
+											{"key":14, "loc":"-130 700", "text":"Delay"},
+											{"key":15, "loc":"50 700", "text":"Overall Follow Up"},
+
+											{"key":16, "loc":"210 700", "text":"Follow Up"},
+											{"key":17, "loc":"300 700", "text":"Delay"}
+											
+											],
+											"linkDataArray": [
+											
+											{"from":0, "to":4, "fromPort":"B", "color": "white", "toPort":"T"},
+											{"from":1, "to":4, "fromPort":"B", "toPort":"T"},
+											{"from":2, "to":4, "fromPort":"B", "toPort":"T"},
+											{"from":0, "to":5, "fromPort":"B", "toPort":"T"},
+											{"from":1, "to":5, "fromPort":"B", "toPort":"T"},
+											{"from":2, "to":5, "fromPort":"B", "toPort":"T"},
+											{"from":0, "to":6, "fromPort":"B", "toPort":"T"},
+											{"from":1, "to":6, "fromPort":"B", "toPort":"T"},
+											{"from":2, "to":6, "fromPort":"B", "toPort":"T"},
+											{"from":4, "to":7, "fromPort":"B", "toPort":"T"},
+											{"from":4, "to":8, "fromPort":"B", "toPort":"T"},
+											{"from":5, "to":9, "fromPort":"B", "toPort":"T"},
+											{"from":5, "to":10, "fromPort":"B", "toPort":"T"},
+											{"from":5, "to":11, "fromPort":"B", "toPort":"T"},
+											{"from":10, "to":16, "fromPort":"B", "toPort":"T"},
+											{"from":10, "to":17, "fromPort":"B", "toPort":"T"},
+
+											{"from":7, "to":12, "fromPort":"B", "toPort":"T"},
+											{"from":7, "to":13, "fromPort":"B", "toPort":"T"},
+											{"from":8, "to":14, "fromPort":"B", "toPort":"T"},
+											{"from":8, "to":15, "fromPort":"B", "toPort":"T"},
+
+
+											{"from":3, "to":12, "fromPort":"B", "toPort":"T"},
+											{"from":3, "to":14, "fromPort":"B", "toPort":"T"},
+											{"from":3, "to":17, "fromPort":"B", "toPort":"T"}
+											
+											
+										
+											
+											]}
+											</textarea>
+											<!-- <button onclick="printDiagram()">Print Diagram Using SVG</button> -->
+											</div>
+											<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700&swap' rel='stylesheet' type='text/css'>
+												</div>
+												<!-- * * * * * * * * * * * * * -->
+												<!--  End of GoJS sample code  -->
+											  </div>
+										</div>
+									</div>
+			
+								</div>
+
+
+
+
+
+
+
+								<!--end::Entry-->
+							</div>
+							<!--end::Content-->
+ 
+							
+
+
+							<!--end::Dashboard-->
+							<!--end::CustomBody-->
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Entry-->
+				</div>
+				<!--end::Content-->
+				<!--begin::Footer-->
+				<div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+				</div>
+				<!--end::Footer-->
+			</div>
+			<!--end::Wrapper-->
+		</div>
+		<!--end::Page-->
+	</div>
+	<!--end::Main-->
+	<!-- begin::User Panel-->
+	<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
+	</div>
+	<!-- end::User Panel-->
+
+	<!--begin::Quick Panel-->
+	<div id="kt_quick_panel" class="offcanvas offcanvas-right pt-5 pb-10">
+	</div>
+	<!--end::Quick Panel-->
+	<!--begin::Chat Panel-->
+	<div class="modal modal-sticky modal-sticky-bottom-right" id="kt_chat_modal" role="dialog" data-backdrop="false">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<!--begin::Card-->
+				<div class="card card-custom">
+					<!--begin::Header-->
+					<div class="card-header align-items-center px-4 py-3">
+						<div class="text-left flex-grow-1">
+							<!--begin::Dropdown Menu-->
+							<div class="dropdown dropdown-inline">
+								<button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="svg-icon svg-icon-lg">
+										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+											viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<polygon points="0 0 24 0 24 24 0 24" />
+												<path
+													d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z"
+													fill="#000000" fill-rule="nonzero" opacity="0.3" />
+												<path
+													d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z"
+													fill="#000000" fill-rule="nonzero" />
+											</g>
+										</svg>
+										<!--end::Svg Icon-->
+									</span>
+								</button>
+								<div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-md">
+									<!--begin::Navigation-->
+									<ul class="navi navi-hover py-5">
+										<li class="navi-item">
+											<a href="#" class="navi-link">
+												<span class="navi-icon">
+													<i class="flaticon2-drop"></i>
+												</span>
+												<span class="navi-text">New Group</span>
+											</a>
+										</li>
+										<li class="navi-item">
+											<a href="#" class="navi-link">
+												<span class="navi-icon">
+													<i class="flaticon2-list-3"></i>
+												</span>
+												<span class="navi-text">Contacts</span>
+											</a>
+										</li>
+										<li class="navi-item">
+											<a href="#" class="navi-link">
+												<span class="navi-icon">
+													<i class="flaticon2-rocket-1"></i>
+												</span>
+												<span class="navi-text">Groups</span>
+												<span class="navi-link-badge">
+													<span
+														class="label label-light-primary label-inline font-weight-bold">new</span>
+												</span>
+											</a>
+										</li>
+										<li class="navi-item">
+											<a href="#" class="navi-link">
+												<span class="navi-icon">
+													<i class="flaticon2-bell-2"></i>
+												</span>
+												<span class="navi-text">Calls</span>
+											</a>
+										</li>
+										<li class="navi-item">
+											<a href="#" class="navi-link">
+												<span class="navi-icon">
+													<i class="flaticon2-gear"></i>
+												</span>
+												<span class="navi-text">Settings</span>
+											</a>
+										</li>
+										<li class="navi-separator my-3"></li>
+										<li class="navi-item">
+											<a href="#" class="navi-link">
+												<span class="navi-icon">
+													<i class="flaticon2-magnifier-tool"></i>
+												</span>
+												<span class="navi-text">Help</span>
+											</a>
+										</li>
+										<li class="navi-item">
+											<a href="#" class="navi-link">
+												<span class="navi-icon">
+													<i class="flaticon2-bell-2"></i>
+												</span>
+												<span class="navi-text">Privacy</span>
+												<span class="navi-link-badge">
+													<span
+														class="label label-light-danger label-rounded font-weight-bold">5</span>
+												</span>
+											</a>
+										</li>
+									</ul>
+									<!--end::Navigation-->
+								</div>
+							</div>
+							<!--end::Dropdown Menu-->
+						</div>
+						<div class="text-center flex-grow-1">
+							<div class="text-dark-75 font-weight-bold font-size-h5">Matt Pears</div>
+							<div>
+								<span class="label label-dot label-success"></span>
+								<span class="font-weight-bold text-muted font-size-sm">Active</span>
+							</div>
+						</div>
+						<div class="text-right flex-grow-1">
+							<button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md"
+								data-dismiss="modal">
+								<i class="ki ki-close icon-1x"></i>
+							</button>
+						</div>
+					</div>
+					<!--end::Header-->
+					<!--begin::Body-->
+					<div class="card-body">
+						<!--begin::Scroll-->
+						<div class="scroll scroll-pull" data-height="375" data-mobile-height="300">
+							<!--begin::Messages-->
+							<div class="messages">
+								<!--begin::Message In-->
+								<div class="d-flex flex-column mb-5 align-items-start">
+									<div class="d-flex align-items-center">
+										<div class="symbol symbol-circle symbol-40 mr-3">
+											<img alt="Pic" src="assets/media/users/300_12.jpg" />
+										</div>
+										<div>
+											<a href="#"
+												class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt
+												Pears</a>
+											<span class="text-muted font-size-sm">2 Hours</span>
+										</div>
+									</div>
+									<div
+										class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">
+										How likely are you to recommend our company to your friends and family?</div>
+								</div>
+								<!--end::Message In-->
+								<!--begin::Message Out-->
+								<div class="d-flex flex-column mb-5 align-items-end">
+									<div class="d-flex align-items-center">
+										<div>
+											<span class="text-muted font-size-sm">3 minutes</span>
+											<a href="#"
+												class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
+										</div>
+										<div class="symbol symbol-circle symbol-40 ml-3">
+											<img alt="Pic" src="assets/media/users/300_21.jpg" />
+										</div>
+									</div>
+									<div
+										class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">
+										Hey there, we’re just writing to let you know that you’ve been subscribed to a
+										repository on GitHub.</div>
+								</div>
+								<!--end::Message Out-->
+								<!--begin::Message In-->
+								<div class="d-flex flex-column mb-5 align-items-start">
+									<div class="d-flex align-items-center">
+										<div class="symbol symbol-circle symbol-40 mr-3">
+											<img alt="Pic" src="assets/media/users/300_21.jpg" />
+										</div>
+										<div>
+											<a href="#"
+												class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt
+												Pears</a>
+											<span class="text-muted font-size-sm">40 seconds</span>
+										</div>
+									</div>
+									<div
+										class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">
+										Ok, Understood!</div>
+								</div>
+								<!--end::Message In-->
+								<!--begin::Message Out-->
+								<div class="d-flex flex-column mb-5 align-items-end">
+									<div class="d-flex align-items-center">
+										<div>
+											<span class="text-muted font-size-sm">Just now</span>
+											<a href="#"
+												class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
+										</div>
+										<div class="symbol symbol-circle symbol-40 ml-3">
+											<img alt="Pic" src="assets/media/users/300_21.jpg" />
+										</div>
+									</div>
+									<div
+										class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">
+										You’ll receive notifications for all issues, pull requests!</div>
+								</div>
+								<!--end::Message Out-->
+								<!--begin::Message In-->
+								<div class="d-flex flex-column mb-5 align-items-start">
+									<div class="d-flex align-items-center">
+										<div class="symbol symbol-circle symbol-40 mr-3">
+											<img alt="Pic" src="assets/media/users/300_12.jpg" />
+										</div>
+										<div>
+											<a href="#"
+												class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt
+												Pears</a>
+											<span class="text-muted font-size-sm">40 seconds</span>
+										</div>
+									</div>
+									<div
+										class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">
+										You can unwatch this repository immediately by clicking here:
+										<a href="#">https://github.com</a></div>
+								</div>
+								<!--end::Message In-->
+								<!--begin::Message Out-->
+								<div class="d-flex flex-column mb-5 align-items-end">
+									<div class="d-flex align-items-center">
+										<div>
+											<span class="text-muted font-size-sm">Just now</span>
+											<a href="#"
+												class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
+										</div>
+										<div class="symbol symbol-circle symbol-40 ml-3">
+											<img alt="Pic" src="assets/media/users/300_21.jpg" />
+										</div>
+									</div>
+									<div
+										class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">
+										Discover what students who viewed Learn Figma - UI/UX Design. Essential Training
+										also viewed</div>
+								</div>
+								<!--end::Message Out-->
+								<!--begin::Message In-->
+								<div class="d-flex flex-column mb-5 align-items-start">
+									<div class="d-flex align-items-center">
+										<div class="symbol symbol-circle symbol-40 mr-3">
+											<img alt="Pic" src="assets/media/users/300_12.jpg" />
+										</div>
+										<div>
+											<a href="#"
+												class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt
+												Pears</a>
+											<span class="text-muted font-size-sm">40 seconds</span>
+										</div>
+									</div>
+									<div
+										class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">
+										Most purchased Business courses during this sale!</div>
+								</div>
+								<!--end::Message In-->
+								<!--begin::Message Out-->
+								<div class="d-flex flex-column mb-5 align-items-end">
+									<div class="d-flex align-items-center">
+										<div>
+											<span class="text-muted font-size-sm">Just now</span>
+											<a href="#"
+												class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
+										</div>
+										<div class="symbol symbol-circle symbol-40 ml-3">
+											<img alt="Pic" src="assets/media/users/300_21.jpg" />
+										</div>
+									</div>
+									<div
+										class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">
+										Company BBQ to celebrate the last quater achievements and goals. Food and drinks
+										provided</div>
+								</div>
+								<!--end::Message Out-->
+							</div>
+							<!--end::Messages-->
+						</div>
+						<!--end::Scroll-->
+					</div>
+					<!--end::Body-->
+					<!--begin::Footer-->
+					<div class="card-footer align-items-center">
+						<!--begin::Compose-->
+						<textarea class="form-control border-0 p-0" rows="2" placeholder="Type a message"></textarea>
+						<div class="d-flex align-items-center justify-content-between mt-5">
+							<div class="mr-3">
+								<a href="#" class="btn btn-clean btn-icon btn-md mr-1">
+									<i class="flaticon2-photograph icon-lg"></i>
+								</a>
+								<a href="#" class="btn btn-clean btn-icon btn-md">
+									<i class="flaticon2-photo-camera icon-lg"></i>
+								</a>
+							</div>
+							<div>
+								<button type="button"
+									class="btn btn-primary btn-md text-uppercase font-weight-bold chat-send py-2 px-6">Send</button>
+							</div>
+						</div>
+						<!--begin::Compose-->
+					</div>
+					<!--end::Footer-->
+				</div>
+				<!--end::Card-->
+			</div>
+		</div>
+	</div>
+	<!--end::Chat Panel-->
+
+
+	<div id="kt_scrolltop" class="scrolltop">
+	</div>
+	<!--end::Scrolltop-->
+	<!-- <script src="assets/js/pages/sai-kitchen/layout.js" type="module"></script> -->
+	<script>
+		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+		function divclick(id){
+			//document.getElementById("12345").style.removeProperty('background-color');
+			document.getElementById("12345").classList.remove("bg-danger");
+			document.getElementById("12345").style.removeProperty('background-color');
+			document.getElementById("12345").style.backgroundColor  = '#8950FC !important';
+			setTimeout(alert('Hello'), 5000);
+			document.getElementById("12345").classList.add("bg-danger");
+		   
+		}
+		function sleep(ms) {
+			return new Promise(
+				resolve => setTimeout(resolve, ms)
+			);
+		}
+	</script>
+	<!--begin::Global Config(global config for global JS scripts)-->
+	<script>
+		var KTAppSettings = {
+			"breakpoints": {
+				"sm": 576,
+				"md": 768,
+				"lg": 992,
+				"xl": 1200,
+				"xxl": 1400
+			},
+			"colors": {
+				"theme": {
+					"base": {
+						"white": "#ffffff",
+						"primary": "#3699FF",
+						"secondary": "#E5EAEE",
+						"success": "#1BC5BD",
+						"info": "#8950FC",
+						"warning": "#FFA800",
+						"danger": "#F64E60",
+						"light": "#E4E6EF",
+						"dark": "#181C32"
+					},
+					"light": {
+						"white": "#ffffff",
+						"primary": "#E1F0FF",
+						"secondary": "#EBEDF3",
+						"success": "#C9F7F5",
+						"info": "#EEE5FF",
+						"warning": "#FFF4DE",
+						"danger": "#FFE2E5",
+						"light": "#F3F6F9",
+						"dark": "#D6D6E0"
+					},
+					"inverse": {
+						"white": "#ffffff",
+						"primary": "#ffffff",
+						"secondary": "#3F4254",
+						"success": "#ffffff",
+						"info": "#ffffff",
+						"warning": "#ffffff",
+						"danger": "#ffffff",
+						"light": "#464E5F",
+						"dark": "#ffffff"
+					}
+				},
+				"gray": {
+					"gray-100": "#F3F6F9",
+					"gray-200": "#EBEDF3",
+					"gray-300": "#E4E6EF",
+					"gray-400": "#D1D3E0",
+					"gray-500": "#B5B5C3",
+					"gray-600": "#7E8299",
+					"gray-700": "#5E6278",
+					"gray-800": "#3F4254",
+					"gray-900": "#181C32"
+				}
+			},
+			"font-family": "Poppins"
+		};
+	</script>
+	<!--end::Global Config-->
+	<!--begin::Global Theme Bundle(used by all pages)-->
+	<script src="assets/plugins/global/plugins.bundle.js"></script>
+	<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+	<script src="assets/js/scripts.bundle.js"></script>
+	<!--end::Global Theme Bundle-->
+	<!--begin::Page Vendors(used by this page)-->
+	<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+	<!--end::Page Vendors-->
+	<!--begin::Page Scripts(used by this page)-->
+	<script src="assets/js/pages/widgets.js"></script>
+	<!--end::Page Scripts-->
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
+	<script src="assets/js/pages/sai-kitchen/firebase.js" type="module"></script>
+
+
+	<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
+    <!--end::Page Scripts-->
+
+	<script src="assets/js/pages/sai-kitchen/base.js" type="module"></script>
+
+	<!--begin::Page Scripts(used by this page)-->
+	<!-- <script src="assets/js/pages/sai-kitchen/gochart.js" type="module"></script> -->
+	<!--end::Page Scripts-->
+
+	<!--begin::Page Scripts(used by this page)-->
+	<script src="assets/js/pages/sai-kitchen/dropdown.js"></script>
+	<!--end::Page Scripts-->
+
+	<script>
+		// import {
+		// 	baseURL
+		// } from './assets/js/pages/sai-kitchen/constant.js';
+		// alert('hi ' + baseURL);
+		var baseURL = 'https://backendsaikitchen.azurewebsites.net/Api/';
+		var user=	JSON.parse(localStorage.getItem("user"));
+
+$( "#kt_contact_status" ).change(function () {    
+    var today  = new Date();
+    var hours = new Date();
+    $("#next_meeting_date").val(today.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
+	$("#next_meeting_date").prop('required',true);
+	/* if($('#kt_contact_status').val()=="1" || $('#kt_contact_status').val()=="2"){
+         $("#nextMeetingDate").hide();
+         document.getElementById('next_meeting_date').value = "";
+	$("#next_meeting_date").prop('required',false);
+	}else{
+		$("#nextMeetingDate").show();
+		$("#next_meeting_date").prop('required',true);
+	} */
+});
+$( "#kt_follow_status" ).change(function () {    
+    var today  = new Date();
+    var hours = new Date();
+    $("#next_follow_date").val(today.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
+	$("#next_follow_date").prop('required',true);
+});  
+
+	
+
+   
+    
+	
+
+		function selectAllCheckbox(element) {
+			//    element.checked = !element.checked;
+			var markedCheckbox = document.getElementsByName('permissionCheckbox');
+			for (var checkbox of markedCheckbox) {
+
+				checkbox.checked = element.checked;
+			}
+		}
+
+		function toggleCheckbox(element) {
+			//    element.checked = !element.checked;
+			// var markedCheckbox = document.getElementsByName('selectAll');
+			// for (var checkbox of markedCheckbox) {
+
+			// 	checkbox.checked = false;
+			// }
+		}
+
+
+		// 	document.getElementById('btn').onclick = function() {  
+		//   var markedCheckbox = document.getElementsByName('pl');  
+		//   for (var checkbox of markedCheckbox) {  
+		//     if (checkbox.checked)  
+		//       document.body.append(checkbox.value + ' ');  
+		//   }  
+		// }  
+	</script>
+
+
+	</script>
+
+
+	<script>
+		if (Notification.permission === "denied") {
+			Swal.fire({
+				title: 'Allow Notification?',
+				text: "You won't be able to revert this!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ok!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					notifyMe();
+				}
+			});
+		}
+
+
+		function notifyMe() {
+			// Let's check if the browser supports notifications
+			if (!("Notification" in window)) {
+				alert("This browser does not support desktop notification");
+			}
+
+			// Let's check whether notification permissions have already been granted
+			else if (Notification.permission === "granted") {
+				// If it's okay let's create a notification
+				var notification = new Notification("Hi there!");
+				registerServiceWorker();
+			}
+
+			// Otherwise, we need to ask the user for permission
+			else if (Notification.permission !== "denied") {
+				Notification.requestPermission().then(function (permission) {
+					// If the user accepts, let's create a notification
+					if (permission === "granted") {
+						var notification = new Notification("Hi there!");
+					}
+				});
+			}
+
+			// At last, if the user has denied notifications, and you
+			// want to be respectful there is no need to bother them any more.
+		}
+	
+
+
+	</script>
+	<!--end::Page Scripts-->
+	
+</body>
+<!--end::Body-->
+
+</html>
