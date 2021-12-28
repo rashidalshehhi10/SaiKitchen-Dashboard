@@ -1766,6 +1766,18 @@ jQuery(document).ready(function () {
    <span id="customerCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+<a href="gochart.html" class="menu-link menu-toggle">
+	<span class="svg-icon menu-icon">
+	
+   <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+   <img src="/assets//media/svg/saikitchen/customers.svg"/>
+   <!--end::Svg Icon-->
+	</span>
+	<span class="menu-text">Customer Graph</span>
+   <span id="customerCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
+</a>
+</li>
 `;
       }
       if (permission.includes(6)) {
