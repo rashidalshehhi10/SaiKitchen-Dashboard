@@ -133,6 +133,7 @@
 											<div hidden id="M"></div>
 											<div hidden id="N"></div>
 											<div hidden id="O"></div>
+											<div hidden id="P"></div>
 
 											<div class="card-title">
 												<h3 class="card-label">Customer Chart</h3>
@@ -166,6 +167,7 @@
 						     var  nodesArray = new Array();
 							 var linksArray = new Array();
 							 let AllCustomers;
+							 var SumDelay;
 							 let LevelTotal = ["B", "C", "D"];
 							 $(document).ready(function () {
 
@@ -207,7 +209,7 @@
 										nodesArray.push({
 															"key": i,
 															"loc": "-200 100",
-															"text":"Customer Account by: "+response.data.userCount[i].userName,
+															"text":response.data.userCount[i].userName,
 															"val": response.data.userCount[i].customerCount,
 															"id":response.data.userCount[i].userId
 														})	
@@ -215,8 +217,8 @@
 
 											}
 
-
-											nodesArray.push({"key":"A", "loc": "600 100","text":"Delay","val": response.data.needToContactDelay,"id":""},
+											SumDelay = response.data.inquiryInProgressDelay + response.data.needToFollowUpDelay + response.data.potentialCustomersDelay + response.data.needToContactDelay
+											nodesArray.push({"key":"A", "loc": "600 100","text":"Delay","val": SumDelay,"id":""},
 															{"key":"B", "loc":"-120 300", "text":"Customer With Inquiry","val": response.data.customerWithInquiry,"id":""},
 															{"key":"C", "loc":"300 300", "text":"Customer Without Inquiry","val": response.data.customerWithOutInquiry,"id":""},
 															{"key":"D", "loc":"600 300", "text":"Customer Not Yet Contacted","val": response.data.needToContact,"id":""},
@@ -230,7 +232,8 @@
 															{"key":"L", "loc":"-50 700", "text":"Delay","val": response.data.needToFollowUpDelay,"id":""},
 													        {"key":"M", "loc":"100 700", "text":"Overall Follow Up","val": response.data.needTofollow,"id":""},
 															{"key":"N", "loc":"300 700", "text":"Follow Up","val": response.data.potentialCustomerFollowUp,"id":""},
-															{"key":"O", "loc":"500 700", "text":"Delay","val": response.data.potentialCustomersDelay,"id":""})
+															{"key":"O", "loc":"500 700", "text":"Delay","val": response.data.potentialCustomersDelay,"id":""},
+															{"key":"P", "loc":"500 700", "text":"Delay","val": response.data.needToContactDelay,"id":""})
 
 
 															linksArray.push({"from":-1, "to":"B", "fromPort":"B", "toPort":"T"},
@@ -261,6 +264,7 @@
 																			{"from":"C", "to":"G", "fromPort":"B", "toPort":"T"},
 																			{"from":"C", "to":"H", "fromPort":"B", "toPort":"T"},
 																			{"from":"C", "to":"I", "fromPort":"B", "toPort":"T"},
+																			{"from":"D", "to":"P", "fromPort":"B", "toPort":"T"},
 																			{"from":"E", "to":"J", "fromPort":"B", "toPort":"T"},
 																			{"from":"E", "to":"K", "fromPort":"B", "toPort":"T"},
 																			{"from":"F", "to":"L", "fromPort":"B", "toPort":"T"},
@@ -270,7 +274,8 @@
 
 																			{"from":"A", "to":"J", "fromPort":"B", "toPort":"T","color": "C"},
 																			{"from":"A", "to":"L", "fromPort":"B", "toPort":"T","color": "C"},
-																			{"from":"A", "to":"O", "fromPort":"B", "toPort":"T","color": "C"}
+																			{"from":"A", "to":"O", "fromPort":"B", "toPort":"T","color": "C"},
+																			{"from":"A", "to":"P", "fromPort":"B", "toPort":"T","color": "C"}
 																		
 																			)					
 																						
@@ -364,6 +369,7 @@
 														m.set(myDiagram.findNodeForKey("M").data, "val", document.getElementById("M").value);
 														m.set(myDiagram.findNodeForKey("N").data, "val", document.getElementById("N").value);
 														m.set(myDiagram.findNodeForKey("O").data, "val", document.getElementById("O").value);
+														m.set(myDiagram.findNodeForKey("P").data, "val", document.getElementById("P").value);
 
 																		}
 																	//	m.set(node.data, "val", obj.data.val);
@@ -467,7 +473,7 @@
 							
 
 							 	function SetValues(bb){
-
+								var sumDelyValues;
 								var m;
 									$.ajax({
 								type: "Post",
@@ -486,7 +492,10 @@
 									console.log(response);
 									if (response.isError == false) {
 									console.log(JSON.stringify(response.data))
-									    document.getElementById("A").value = response.data.needToContactDelay;
+
+									     sumDelyValues = response.data.needToContactDelay + response.data.potentialCustomersDelay + response.data.needToFollowUpDelay + response.data.inquiryInProgressDelay
+
+									    document.getElementById("A").value = sumDelyValues;
 										document.getElementById("B").value = response.data.customerWithInquiry;
 										document.getElementById("C").value = response.data.customerWithOutInquiry;
 										document.getElementById("D").value = response.data.needToContact;
@@ -502,6 +511,7 @@
 										document.getElementById("M").value = response.data.needTofollow;
 										document.getElementById("N").value = response.data.potentialCustomerFollowUp;
 										document.getElementById("O").value = response.data.potentialCustomersDelay;
+										document.getElementById("P").value = response.data.needToContactDelay;
 
 
 
