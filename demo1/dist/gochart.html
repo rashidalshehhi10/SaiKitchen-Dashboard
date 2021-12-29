@@ -117,6 +117,23 @@
 								<div class="container">
 									<div class="card card-custom gutter-b">
 										<div class="card-header">
+
+											<div hidden id="A"></div>					
+											<div hidden id="B"></div>
+											<div hidden id="C"></div>
+											<div hidden id="D"></div>
+											<div hidden id="E"></div>
+											<div hidden id="F"></div>
+											<div hidden id="G"></div>
+											<div hidden id="H"></div>
+											<div hidden id="I"></div>
+											<div hidden id="J"></div>
+											<div hidden id="K"></div>
+											<div hidden id="L"></div>
+											<div hidden id="M"></div>
+											<div hidden id="N"></div>
+											<div hidden id="O"></div>
+
 											<div class="card-title">
 												<h3 class="card-label">Customer Chart</h3>
 											</div>
@@ -139,17 +156,6 @@
 											  <!-- <div id="myPaletteDiv" style="width: 100px; margin-right: 2px; background-color: #282c34;"></div> -->
 											  <div id="myDiagramDiv" style="flex-grow: 1; height: 750px; background-color: #ffffff;"></div>
 											</div>
-
-
-
-
-
-
-
-
-
-
-
 
 											<script>
 
@@ -201,7 +207,7 @@
 										nodesArray.push({
 															"key": i,
 															"loc": "-200 100",
-															"text":response.data.userCount[i].userName,
+															"text":"Customer Account by: "+response.data.userCount[i].userName,
 															"val": response.data.userCount[i].customerCount,
 															"id":response.data.userCount[i].userId
 														})	
@@ -210,21 +216,21 @@
 											}
 
 
-											nodesArray.push({"key":"A", "loc": "600 100","text":"Delay","val": "0","id":""},
+											nodesArray.push({"key":"A", "loc": "600 100","text":"Delay","val": response.data.needToContactDelay,"id":""},
 															{"key":"B", "loc":"-120 300", "text":"Customer With Inquiry","val": response.data.customerWithInquiry,"id":""},
 															{"key":"C", "loc":"300 300", "text":"Customer Without Inquiry","val": response.data.customerWithOutInquiry,"id":""},
-															{"key":"D", "loc":"600 300", "text":"Customer Not Yet Contracted","val": response.data.needToContact,"id":""},
-															{"key":"E", "loc":"-250 500", "text":"Inquiry In Progress","val": "","id":""},
+															{"key":"D", "loc":"600 300", "text":"Customer Not Yet Contacted","val": response.data.needToContact,"id":""},
+															{"key":"E", "loc":"-250 500", "text":"Inquiry In Progress","val": response.data.inquiryInProgress,"id":""},
 															{"key":"F", "loc":"-50 500", "text":"Inquiry Need To Follow-Up","val":response.data.needToFollowUpToday,"id":""},
 															{"key":"G", "loc":"150 500", "text":"Lost Customer","val": response.data.lostCustomer,"id":""},
 															{"key":"H", "loc":"400 500", "text":"potential Customer","val": response.data.potentialCustomers,"id":""},
-															{"key":"I", "loc":"600 500", "text":"Unresponsive potential Customers","val": "","id":""},
-															{"key":"J", "loc":"-350 700", "text":"Delay","val": "0","id":""},
-															{"key":"K", "loc":"-220 700", "text":"On-Going","val": "","id":""},
-															{"key":"L", "loc":"-50 700", "text":"Delay","val": "0","id":""},
-													        {"key":"M", "loc":"100 700", "text":"Overall Follow Up","val": "","id":""},
-															{"key":"N", "loc":"300 700", "text":"Follow Up","val": "","id":""},
-															{"key":"O", "loc":"500 700", "text":"Delay","val": "0","id":""})
+															{"key":"I", "loc":"600 500", "text":"Unresponsive potential Customers","val": response.data.unresponsivePotentialCustomers,"id":""},
+															{"key":"J", "loc":"-350 700", "text":"Delay","val": response.data.inquiryInProgressDelay,"id":""},
+															{"key":"K", "loc":"-220 700", "text":"On-Going","val": response.data.inquiryInProgressongoing,"id":""},
+															{"key":"L", "loc":"-50 700", "text":"Delay","val": response.data.needToFollowUpDelay,"id":""},
+													        {"key":"M", "loc":"100 700", "text":"Overall Follow Up","val": response.data.needTofollow,"id":""},
+															{"key":"N", "loc":"300 700", "text":"Follow Up","val": response.data.potentialCustomerFollowUp,"id":""},
+															{"key":"O", "loc":"500 700", "text":"Delay","val": response.data.potentialCustomersDelay,"id":""})
 
 
 															linksArray.push({"from":-1, "to":"B", "fromPort":"B", "toPort":"T"},
@@ -338,7 +344,28 @@
 																	//var node = myDiagram.findNodeForKey("17");
 																if(obj.part.data.id !="") 
 																		{ 
-																	    	window.location.replace("gochart.html?graphuserId="+obj.part.data.id);}
+																	       //	window.location.replace("testchart.html?graphuserId="+obj.part.data.id);
+																									
+                            
+																		   SetValues(obj.part.data.id)
+
+														m.set(myDiagram.findNodeForKey("A").data, "val", document.getElementById("A").value);
+														m.set(myDiagram.findNodeForKey("B").data, "val", document.getElementById("B").value);
+														m.set(myDiagram.findNodeForKey("C").data, "val", document.getElementById("C").value);
+														m.set(myDiagram.findNodeForKey("D").data, "val", document.getElementById("D").value);
+														m.set(myDiagram.findNodeForKey("E").data, "val", document.getElementById("E").value);
+														m.set(myDiagram.findNodeForKey("F").data, "val", document.getElementById("F").value);
+														m.set(myDiagram.findNodeForKey("G").data, "val", document.getElementById("G").value);
+														m.set(myDiagram.findNodeForKey("H").data, "val", document.getElementById("H").value);
+														m.set(myDiagram.findNodeForKey("I").data, "val", document.getElementById("I").value);
+														m.set(myDiagram.findNodeForKey("J").data, "val", document.getElementById("J").value);
+														m.set(myDiagram.findNodeForKey("K").data, "val", document.getElementById("K").value);
+														m.set(myDiagram.findNodeForKey("L").data, "val", document.getElementById("L").value);
+														m.set(myDiagram.findNodeForKey("M").data, "val", document.getElementById("M").value);
+														m.set(myDiagram.findNodeForKey("N").data, "val", document.getElementById("N").value);
+														m.set(myDiagram.findNodeForKey("O").data, "val", document.getElementById("O").value);
+
+																		}
 																	//	m.set(node.data, "val", obj.data.val);
 
 																		});
@@ -380,7 +407,9 @@
 															// if we wanted an arrowhead we would also add another Shape with toArrow defined:
 															// $(go.Shape, { toArrow: "Standard", stroke: null }
 														);
-														
+					
+												myDiagram.model = new go.GraphLinksModel(
+													nodesArray, linksArray);
 
 														// const templmap = new go.Map();
 														// const dashedTemplate = $(
@@ -391,43 +420,7 @@
 														// 						);
 														// 						templmap.add('dashed', dashedTemplate);
 														// 						myDiagram.linkTemplateMap = templmap
-
-
-														
-												myDiagram.model = new go.GraphLinksModel(
-													nodesArray, linksArray
-												// [
-												// 		    {"from":0, "to":4, "fromPort":"B", "toPort":"T"},
-												// 			{"from":1, "to":4, "fromPort":"B", "toPort":"T"},
-												// 			{"from":2, "to":4, "fromPort":"B", "toPort":"T"},
-												// 			{"from":0, "to":5, "fromPort":"B", "toPort":"T"},
-												// 			{"from":1, "to":5, "fromPort":"B", "toPort":"T"},
-												// 			{"from":2, "to":5, "fromPort":"B", "toPort":"T"},
-												// 			{"from":0, "to":6, "fromPort":"B", "toPort":"T"},
-												// 			{"from":1, "to":6, "fromPort":"B", "toPort":"T"},
-												// 			{"from":2, "to":6, "fromPort":"B", "toPort":"T"},
-												// 			{"from":4, "to":7, "fromPort":"B", "toPort":"T"},
-												// 			{"from":4, "to":8, "fromPort":"B", "toPort":"T"},
-												// 			{"from":5, "to":9, "fromPort":"B", "toPort":"T"},
-												// 			{"from":5, "to":10, "fromPort":"B", "toPort":"T"},
-												// 			{"from":5, "to":11, "fromPort":"B", "toPort":"T"},
-												// 			{"from":10, "to":16, "fromPort":"B", "toPort":"T"},
-												// 			{"from":10, "to":17, "fromPort":"B", "toPort":"T"},
-
-												// 			{"from":7, "to":12, "fromPort":"B", "toPort":"T"},
-												// 			{"from":7, "to":13, "fromPort":"B", "toPort":"T"},
-												// 			{"from":8, "to":14, "fromPort":"B", "toPort":"T"},
-												// 			{"from":8, "to":15, "fromPort":"B", "toPort":"T"},
-
-
-												// 			{"from":3, "to":12, "fromPort":"B", "toPort":"T","color": "C"},
-												// 			{"from":3, "to":14, "fromPort":"B", "toPort":"T","color": "C"},
-												// 			{"from":3, "to":17, "fromPort":"B", "toPort":"T","color": "C"}
-												// ]
-												
-												
-												);
-							
+															
 
 
         } else {
@@ -473,7 +466,87 @@
 											
 							
 
+							 	function SetValues(bb){
 
+								var m;
+									$.ajax({
+								type: "Post",
+								url: baseURL + '/Customer/GetCustomerGraph?userId=' + bb,
+							 	async: false, 
+								headers: {
+									'Content-Type': 'application/json',
+									'userId': user.data.userId,
+									'userToken': user.data.userToken,
+									'userRoleId': user.data.userRoles[0].userRoleId,
+									'branchId': user.data.userRoles[0].branchId,
+									'branchRoleId': user.data.userRoles[0].branchRoleId,
+									'Access-Control-Allow-Origin': '*',
+								},
+								success: function(response) {
+									console.log(response);
+									if (response.isError == false) {
+									console.log(JSON.stringify(response.data))
+									    document.getElementById("A").value = response.data.needToContactDelay;
+										document.getElementById("B").value = response.data.customerWithInquiry;
+										document.getElementById("C").value = response.data.customerWithOutInquiry;
+										document.getElementById("D").value = response.data.needToContact;
+										document.getElementById("E").value = response.data.inquiryInProgress;
+										document.getElementById("F").value = response.data.inquiryNeedToFollowUp;
+										document.getElementById("G").value = response.data.lostCustomer;
+										document.getElementById("H").value = response.data.potentialCustomers;
+										document.getElementById("I").value = response.data.unresponsivePotentialCustomers;
+
+										document.getElementById("J").value = response.data.inquiryInProgressDelay;
+										document.getElementById("K").value = response.data.inquiryInProgressongoing;
+										document.getElementById("L").value = response.data.needToFollowUpDelay;
+										document.getElementById("M").value = response.data.needTofollow;
+										document.getElementById("N").value = response.data.potentialCustomerFollowUp;
+										document.getElementById("O").value = response.data.potentialCustomersDelay;
+
+
+
+										
+
+
+																							
+																	
+							} else {
+								Swal.fire({
+									text: response.errorMessage,
+									icon: "error",
+									buttonsStyling: false,
+									confirmButtonText: "Ok, got it!",
+									customClass: {
+										confirmButton: "btn font-weight-bold btn-light-primary"
+									}
+								}).then(function () {
+									KTUtil.scrollTop();
+								});
+							}
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+							// alert(errorThrown);
+
+							Swal.fire({
+								text: 'Internet Connection Problem',
+								icon: "error",
+								buttonsStyling: false,
+								confirmButtonText: "Ok, got it!",
+								customClass: {
+									confirmButton: "btn font-weight-bold btn-light-primary"
+								}
+							}).then(function() {
+								KTUtil.scrollTop();
+							});
+						}
+					});
+
+	
+
+
+								 }
 													
 
 
