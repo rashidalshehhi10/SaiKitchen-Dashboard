@@ -1638,6 +1638,7 @@ jQuery(document).ready(function () {
        }
        if(document.getElementById("dapprovalCountId")){
           document.getElementById("dapprovalCountId").innerHTML = response.data[0].designApprovals;
+          document.getElementById("dapprovalCustomerCountId").innerHTML = response.data[0].designApprovals;
        }
        if(document.getElementById("qrequestCountId")){
           document.getElementById("qrequestCountId").innerHTML = response.data[0].quotationAssign;
@@ -1932,7 +1933,7 @@ if(branchTypeId!=3){
       <!--end::Svg Icon-->
 		</span>
 		<span class="menu-text">Waiting customer Approval</span>
-		<span id="dapprovalCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
+		<span id="dapprovalCustomerCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 	</a>
 	</li>
 	`;
