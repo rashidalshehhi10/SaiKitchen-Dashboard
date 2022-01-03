@@ -1652,6 +1652,9 @@ jQuery(document).ready(function () {
        if(document.getElementById("filesCountId")){
           document.getElementById("filesCountId").innerHTML = response.data[0].uploadcontract;
        }
+       if(document.getElementById("DetailedCountId")){
+         document.getElementById("DetailedCountId").innerHTML = response.data[0].detailedFiles;
+      }
        if(document.getElementById("technicalCountId")){
           document.getElementById("technicalCountId").innerHTML = response.data[0].technicalChecklist;
        }
@@ -2002,7 +2005,18 @@ if(branchTypeId!=3){
 	<span id="filesCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
 </a>
 </li>
-
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+<a href="detailedfiles.html" class="menu-link menu-toggle">
+	<span class="svg-icon menu-icon">
+		
+   <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+   <img src="/assets//media/svg/saikitchen/attach.png"/>
+   <!--end::Svg Icon-->
+	</span>
+	<span class="menu-text">Add Detailed Files</span>
+	<span id="DetailedCountId" class="badge badge-circle badge-white" style="align-self: center;"></span>
+</a>
+</li>
 `;
       }
       if (permission.includes(13) || permission.includes(17) || permission.includes(21)) {

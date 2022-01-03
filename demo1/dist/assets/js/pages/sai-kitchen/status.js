@@ -285,4 +285,8 @@ export let inqStatus= {
         'title': 'Job Order Design Team Delay',
         'class': ' label-light-danger'
     },
+    72: {
+        'title': 'Detailed Files Pending',
+        'class': ' label-light-primary'
+    },
 };
