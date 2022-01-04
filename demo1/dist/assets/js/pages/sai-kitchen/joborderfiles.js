@@ -667,13 +667,13 @@ $('#kt_approve_inquiry_button').click(function () {
            KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
             var file1='',file2='',file3='',file4='';
             if(four.length >0){
-                file1 = four[0];
+                file1 = four;
             }
             if(five.length >0){
-                file2 = five[0];
+                file2 = five;
             }
             if(six.length >0){
-                file3 = six[0];
+                file3 = six;
             }
             if(seven.length >0){
                 file4 = seven[0];
@@ -711,10 +711,10 @@ $('#kt_approve_inquiry_button').click(function () {
             var checklistdata = {
                 "inquiryId":parseInt(document.getElementById('inquiryId').value),
                // "isAppliancesProvidedByClient" : $('input[name="isAppliances"]:checked').val(),
-               // "materialSheetFileUrl":file1,
-               // "mepDrawingFileUrl": file2,
+                "signedquotation":file1,
+                "signedcontract": file2,
                 //"jobOrderChecklistFileUrl":fourfile[6]==undefined?"":fourfile[6],
-                //"dataSheetApplianceFileUrl":file3,
+                "signeddesign":file3,
                 //"detailedDesignFile":file4,
                 "advancePayment":advancePayment,
                 "beforeInstallation":beforeInstallation,
@@ -752,7 +752,187 @@ $('#kt_approve_inquiry_button').click(function () {
 });
 
 
+$('#kt_dropzone_4').dropzone({
+            
+    // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+    url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+    type: "Post",
+    headers : {
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json'
+    },
+    paramName: "file", // The name that will be used to transfer the file
+    maxFiles: 10,
+    maxFilesize: 30000, // MB
+    timeout: 600000,
+    addRemoveLinks: true,
+    removedfile:function(file) {
+        if(file.status =="error"){
+            file.previewElement.remove();
+            return false;
+        }
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        var fileurl ='';
+        var filearr = fileuploded.innerHTML.split(".");
+        if(filearr.length > 1){
+            fileurl = "/File/DeleteFileFromBlob?fileName=";
+        }else{
+            fileurl = "/File/DeleteVideo?VideoId=";
+        }
+        $.ajax({
+            type:"post",
+            url:baseURL+fileurl+fileuploded.innerHTML,
+            cache:false,
+            success: function(){
+                 removeA(four, fileuploded.innerHTML);
+                file.previewElement.remove();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("Error");
+        
+            }
+        });
 
+    },
+
+    acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+    
+init: function() {
+
+},
+success: function(file, response){
+    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+    fileuploded.innerHTML = response.data.item1;
+    four.push(response.data.item1);
+    document.getElementById("alert").innerHTML ='';
+}
+    
+});
+$('#kt_dropzone_5').dropzone({
+            
+    // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+    url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+    type: "Post",
+    headers : {
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json'
+    },
+    paramName: "file", // The name that will be used to transfer the file
+    maxFiles: 10,
+    maxFilesize: 30000, // MB
+    timeout: 600000,
+    addRemoveLinks: true,
+    removedfile:function(file) {
+        if(file.status =="error"){
+            file.previewElement.remove();
+            return false;
+        }
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        var fileurl ='';
+        var filearr = fileuploded.innerHTML.split(".");
+        if(filearr.length > 1){
+            fileurl = "/File/DeleteFileFromBlob?fileName=";
+        }else{
+            fileurl = "/File/DeleteVideo?VideoId=";
+        }
+        $.ajax({
+            type:"post",
+            url:baseURL+fileurl+fileuploded.innerHTML,
+            cache:false,
+            success: function(){
+                removeA(five, fileuploded.innerHTML);
+                file.previewElement.remove();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("Error");
+        
+            }
+        });
+
+    },
+
+    acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+    
+init: function() {
+    
+},
+success: function(file, response){
+    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+    fileuploded.innerHTML = response.data.item1;
+
+    five.push(response.data.item1);
+
+}
+
+});
+
+$('#kt_dropzone_6').dropzone({
+            
+    // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+    url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+    type: "Post",
+    headers : {
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json'
+    },
+    paramName: "file", // The name that will be used to transfer the file
+    maxFiles: 10,
+    maxFilesize: 30000, // MB
+    timeout: 600000,
+    addRemoveLinks: true,
+    removedfile:function(file) {
+        if(file.status =="error"){
+            file.previewElement.remove();
+            return false;
+        }
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        var fileurl ='';
+        var filearr = fileuploded.innerHTML.split(".");
+        if(filearr.length > 1){
+            fileurl = "/File/DeleteFileFromBlob?fileName=";
+        }else{
+            fileurl = "/File/DeleteVideo?VideoId=";
+        }
+        $.ajax({
+            type:"post",
+            url:baseURL+fileurl+fileuploded.innerHTML,
+            cache:false,
+            success: function(){
+                removeA(six, fileuploded.innerHTML);
+                file.previewElement.remove();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("Error");
+        
+            }
+        });
+
+    },
+
+    acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+    
+init: function() {
+
+},
+success: function(file, response){
+    var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+    fileuploded.innerHTML = response.data.item1;
+
+    six.push(response.data.item1);
+
+}
+
+});
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
 
 
 
