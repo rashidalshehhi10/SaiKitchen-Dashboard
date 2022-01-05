@@ -13,6 +13,7 @@ let user;
 var table;
 export let workscopelist;
 var filearry = new Array();
+var six=new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -299,17 +300,29 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                var file ='';
+                
+                var materialdate='';
+                if($("#MCheckChecked").prop('checked')){
+                    materialdate=document.getElementById('schedule_date5').value;
+                    if(six.length >0){
+                        file = six;
+                    }
+                }
+                
                 var checklistdata = {
                     "inquiryId":parseInt( document.getElementById('inquiryId').value),
                     "materialAvailablityDate": document.getElementById('schedule_date1').value,
                     "shopDrawingCompletionDate": document.getElementById('schedule_date2').value,
                     "productionCompletionDate": document.getElementById('schedule_date3').value,
                     "woodenWorkCompletionDate": document.getElementById('schedule_date4').value,
-                    "materialDeliveryFinalDate": document.getElementById('schedule_date5').value,
+                    "materialDeliveryFinalDate": materialdate,
                     "counterTopFixingDate": document.getElementById('schedule_date6').value,
                     "InstallationStartDate":document.getElementById('schedule_date7').value,
                     "InstallationCompletionDate":document.getElementById('schedule_date8').value,
                     "notes": document.getElementById('CheckComment').value,
+                    "IsMaterialRequired":$("#MCheckChecked").prop('checked'),
+                    "materialfile":file,
                   };
             
                 const data = JSON.stringify(checklistdata);
@@ -431,3 +444,80 @@ $('#kt_reject_inquiry_button').click(function () {
     }); 
 });
 
+$(function() {
+    $('input:checkbox').change(function() {
+        if($(this).prop('checked')){
+            document.getElementById("MaterialDiv").style.removeProperty('display');
+        }else{
+            document.getElementById("MaterialDiv").style.display='none';
+        }
+          
+    })
+    })
+    $('#kt_dropzone_6').dropzone({
+           
+        // url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+        url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+        type: "Post",
+        headers : {
+            'Access-Control-Allow-Origin': '*',
+            // 'Content-Type': 'application/json'
+        },
+        paramName: "file", // The name that will be used to transfer the file
+        maxFiles: 10,
+        maxFilesize: 30000, // MB
+        timeout: 600000,
+        addRemoveLinks: true,
+        removedfile:function(file) {
+            if(file.status =="error"){
+                file.previewElement.remove();
+                return false;
+            }
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            var fileurl ='';
+            var filearr = fileuploded.innerHTML.split(".");
+            if(filearr.length > 1){
+                fileurl = "/File/DeleteFileFromBlob?fileName=";
+            }else{
+                fileurl = "/File/DeleteVideo?VideoId=";
+            }
+            $.ajax({
+                type:"post",
+                url:baseURL+fileurl+fileuploded.innerHTML,
+                cache:false,
+                success: function(){
+                    removeA(six, fileuploded.innerHTML);
+                    file.previewElement.remove();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    console.log("Error");
+            
+                }
+            });
+     
+        },
+     
+        acceptedFiles: "image/*,application/pdf,.png,.mp4,.dwg",
+        
+     init: function() {
+     
+     },
+     success: function(file, response){
+        var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+        fileuploded.innerHTML = response.data.item1;
+     
+        six.push(response.data.item1);
+     
+     }
+     
+     });
+                            function removeA(arr) {
+                                var what, a = arguments, L = a.length, ax;
+                                while (L > 1 && arr.length) {
+                                    what = a[--L];
+                                    while ((ax= arr.indexOf(what)) !== -1) {
+                                        arr.splice(ax, 1);
+                                    }
+                                }
+                                return arr;
+                            }
