@@ -9,7 +9,7 @@ var KTBootstrapDatetimepicker = function () {
         $('#kt_datetimepicker_1,#kt_design_datetimepicker,#kt_datetimepicker_cus').datetimepicker({
             // useCurrent: true,
            minDate: new Date().getDate(),
-           daysOfWeekDisabled: [5],
+           //daysOfWeekDisabled: [5],
             disabledDates: [
                 moment('12/25/2020'),
             ]
