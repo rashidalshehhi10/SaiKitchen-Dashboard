@@ -155,12 +155,12 @@
 											<div id="sample">
 											<div style="width: 100%; display: flex; justify-content: space-between">
 											  <!-- <div id="myPaletteDiv" style="width: 100px; margin-right: 2px; background-color: #282c34;"></div> -->
-											  <div id="myDiagramDiv" style="flex-grow: 1; height: 750px; background-color: #ffffff;"></div>
+											  <div id="myDiagramDiv" style="flex-grow: 1; height: 350px; background-color: #ffffff;"></div>
 											</div>
 
 											<script>
 
-
+                            var userselected=0;	
 							var baseURL = 'https://backendsaikitchen.azurewebsites.net/Api/';
 						 	var user=	JSON.parse(localStorage.getItem("user"));
 							let graphuserId=0;
@@ -290,7 +290,7 @@
 
 
 											    var $ = go.GraphObject.make;
-
+                                               
 												var myDiagram =
 												$(go.Diagram, "myDiagramDiv",
 													{ // enable Ctrl-Z to undo and Ctrl-Y to redo
@@ -330,7 +330,7 @@
 													$(go.TextBlock,
 													"Default Text",  // the initial value for TextBlock.text
 													// some room around the text, a larger font, and a white stroke:
-													{ margin: 12, maxSize: new go.Size(100, NaN),wrap: go.TextBlock.WrapFit, stroke: "white",font: "bold 12px sans-serif" },
+													{ margin: 3, maxSize: new go.Size(85, NaN),wrap: go.TextBlock.WrapFit, stroke: "white",font: "bold 10px sans-serif" },
 													// TextBlock.text is data bound to the "name" property of the model data
 													new go.Binding("text", "text")),
 													$(go.TextBlock,
@@ -370,11 +370,59 @@
 														m.set(myDiagram.findNodeForKey("N").data, "val", document.getElementById("N").value);
 														m.set(myDiagram.findNodeForKey("O").data, "val", document.getElementById("O").value);
 														m.set(myDiagram.findNodeForKey("P").data, "val", document.getElementById("P").value);
-
-																		}
+                                                        refreshCustomerTable(obj.part.data.id,0);
+                                                        graphuserId = obj.part.data.id;
+														}
 																	//	m.set(node.data, "val", obj.data.val);
-
-																		});
+														if(obj.part.data.key=="B"){
+															refreshCustomerTable(graphuserId,1);
+														}else
+														if(obj.part.data.key=="C"){
+															refreshCustomerTable(graphuserId,2);
+														}else
+														if(obj.part.data.key=="D"){
+															refreshCustomerTable(graphuserId,3);
+														}else
+														if(obj.part.data.key=="E"){
+															refreshCustomerTable(graphuserId,4);
+														}else
+														if(obj.part.data.key=="F"){
+															refreshCustomerTable(graphuserId,5);
+														}else
+														if(obj.part.data.key=="G"){
+															refreshCustomerTable(graphuserId,6);
+														}else
+														if(obj.part.data.key=="I"){
+															refreshCustomerTable(graphuserId,7);
+														}else
+														if(obj.part.data.key=="A"){
+															refreshCustomerTable(graphuserId,8);
+														}else
+														if(obj.part.data.key=="H"){
+															refreshCustomerTable(graphuserId,9);
+														}else
+														if(obj.part.data.key=="K"){
+															refreshCustomerTable(graphuserId,10);
+														}else
+														if(obj.part.data.key=="M"){
+															refreshCustomerTable(graphuserId,11);
+														}else
+														if(obj.part.data.key=="J"){
+															refreshCustomerTable(graphuserId,12);
+														}else
+														if(obj.part.data.key=="L"){
+															refreshCustomerTable(graphuserId,13);
+														}else
+														if(obj.part.data.key=="O"){
+															refreshCustomerTable(graphuserId,14);
+														}else
+														if(obj.part.data.key=="N"){
+															refreshCustomerTable(graphuserId,15);
+														}else
+														if(obj.part.data.key=="P"){
+															refreshCustomerTable(graphuserId,16);
+														}
+														});
 
 														
 														},
@@ -572,7 +620,125 @@
 											  </div>
 										</div>
 									</div>
-			
+			                     <!--begin::Card-->
+										<div class="card card-custom">
+											<!--begin::Header-->
+											<div class="card-header flex-wrap border-0 pt-6 pb-0">
+												<div class="card-title">
+													<h3 class="card-label">Customer Management
+														<!-- <span class="d-block text-muted pt-2 font-size-sm">User
+															management made easy</span></h3> -->
+												</div>
+												<div class="card-toolbar" id="btnNewCustomer">
+													<!--begin::Dropdown-->
+													<div class="dropdown dropdown-inline mr-2">
+														<button type="button"
+															class="btn btn-light-primary font-weight-bolder dropdown-toggle"
+															data-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false">
+															<span class="svg-icon svg-icon-md">
+																<!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
+																<svg xmlns="http://www.w3.org/2000/svg"
+																	xmlns:xlink="http://www.w3.org/1999/xlink"
+																	width="24px" height="24px" viewBox="0 0 24 24"
+																	version="1.1">
+																	<g stroke="none" stroke-width="1" fill="none"
+																		fill-rule="evenodd">
+																		<rect x="0" y="0" width="24" height="24" />
+																		<path
+																			d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z"
+																			fill="#000000" opacity="0.3" />
+																		<path
+																			d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z"
+																			fill="#000000" />
+																	</g>
+																</svg>
+																<!--end::Svg Icon-->
+															</span>Export</button>
+														<!--begin::Dropdown Menu-->
+														<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+															<!--begin::Navigation-->
+															<ul class="navi flex-column navi-hover py-2">
+																<li
+																	class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
+																	Choose an option:</li>
+																<li class="navi-item">
+																	<a href="#" class="navi-link">
+																		<span class="navi-icon">
+																			<i class="la la-print"></i>
+																		</span>
+																		<span class="navi-text">Print</span>
+																	</a>
+																</li>
+																<li class="navi-item">
+																	<a href="#" class="navi-link">
+																		<span class="navi-icon">
+																			<i class="la la-copy"></i>
+																		</span>
+																		<span class="navi-text">Copy</span>
+																	</a>
+																</li>
+																<li class="navi-item">
+																	<a href="#" class="navi-link" name="btnExcelExport" id="btnExcelExport">
+																		<span class="navi-icon">
+																			<i class="la la-file-excel-o"></i>
+																		</span>
+																		<span class="navi-text">Excel</span>
+																	</a>
+																</li>
+																<li class="navi-item">
+																	<a href="#" class="navi-link">
+																		<span class="navi-icon">
+																			<i class="la la-file-text-o"></i>
+																		</span>
+																		<span class="navi-text">CSV</span>
+																	</a>
+																</li>
+																<li class="navi-item">
+																	<a href="#" class="navi-link " id="export_pdf">
+																		<span class="navi-icon">
+																			<i class="la la-file-pdf-o"></i>
+																		</span>
+																		<span class="navi-text">PDF</span>
+																	</a>
+																</li>
+															</ul>
+															<!--end::Navigation-->
+														</div>
+														<!--end::Dropdown Menu-->
+													</div>
+													<!--end::Dropdown-->
+													<!--begin::Button-->
+													<!-- <button type="button" onclick="customFormReset();" data-target="#addCustomer" data-toggle="modal"
+														class="btn btn-primary font-weight-bolder">
+														<span class="svg-icon svg-icon-md">
+															<svg xmlns="http://www.w3.org/2000/svg"
+																xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+																height="24px" viewBox="0 0 24 24" version="1.1">
+																<g stroke="none" stroke-width="1" fill="none"
+																	fill-rule="evenodd">
+																	<rect x="0" y="0" width="24" height="24" />
+																	<circle fill="#000000" cx="9" cy="15" r="6" />
+																	<path
+																		d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+																		fill="#000000" opacity="0.3" />
+																</g>
+															</svg>
+														</span>New Customer</button> -->
+													<!--end::Button-->
+												</div>
+											</div>
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body">
+												<!--begin: Datatable-->
+												<div class="datatable datatable-bordered datatable-head-custom"
+													id="kt_datatable"></div>
+												<!--end: Datatable-->
+											</div>
+											<!--end::Body-->
+										</div>
+										<!--end::Card-->
 								</div>
 
 
@@ -918,7 +1084,524 @@
 		</div>
 	</div>
 	<!--end::Chat Panel-->
+    <div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">New Customer</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+				</div>
+				<!--begin::Form-->
+				<form class="form" id="kt_add_customer" action="" name="addCustomerform">
+					<span id="customerId" style="display:none">0</span>
+					<span id="customerCity" style="display:none">0</span>
+					<div class="modal-body">
 
+						<!--begin::Signin-->
+						<div class="login-form">
+							<div class="row">
+								<div class="col-xl-5">
+									<!--begin::Form group-->
+
+									<div class="form-group">
+										<label class="font-size-h6 font-weight-bolder text-dark">Name*</label>
+										<div class="input-group input-group-lg input-group-solid">
+
+											<input type="text" name="customerName" id="customerName"
+												class="form-control form-control-lg form-control-solid" value=""
+												placeholder="John" required>
+										</div>
+									</div>
+									<!--end::Form group-->
+									<!--begin::Form group-->
+
+									<div class="form-group">
+										<label class="font-size-h6 font-weight-bolder text-dark">Contact*</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<div class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="la la-phone"></i>
+												</span>
+											</div>
+											<input type="text" name="customerContact" id="customerContact"
+												class="form-control form-control-lg form-control-solid" value=""
+												placeholder="971500000000" required>
+										</div>
+									</div>
+									<!--end::Form group-->
+									<!--end::Form group-->
+
+
+									<div class="form-group">
+										<label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<div class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="la la-at"></i>
+												</span>
+											</div>
+											<input type="text" name="customerEmail" id="customerEmail"
+												class="form-control form-control-lg form-control-solid" value=""
+												placeholder="abc@abc.com">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="font-size-h6 font-weight-bolder text-dark">Address</label>
+										<div class="input-group input-group-lg input-group-solid">
+
+											<input id="customerAddress"  type="text" name="customerAddress" id="customerAddress"
+												class="form-control form-control-lg form-control-solid" value=""
+												placeholder="abc, Dubai">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="font-size-h6 font-weight-bolder text-dark">Makani#/Map URL</label>
+										<div class="input-group input-group-lg input-group-solid">
+
+											<input type="text" name="name" id="customerNationalId"
+												class="form-control form-control-lg form-control-solid" value=""
+												placeholder="123 or https://www.google.com/maps">
+										</div>
+									</div>
+
+                                    <div class="form-group">
+										<label class="font-size-h6 font-weight-bolder text-dark">Whatsapp</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<div class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="la la-phone"></i>
+												</span>
+											</div>
+											<input type="text" name="whatsapp" id="whatsapp"
+												class="form-control form-control-lg form-control-solid" value=""
+												placeholder="971500000000" required>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xl-1">
+								</div>
+								<div class="col-xl-5">
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Contact Status*</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<select class="form-control" id="kt_contact_status" name="contactstatus"
+												class="form-control form-control-lg form-control-solid"
+												style="width:100%">
+											</select>
+										</div>
+									</div>
+									<div id="nextMeetingDate" >
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Next Follow-up Date</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
+												<input type="text" id="next_meeting_date" name="next_meeting_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_1">
+												<div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
+													<span class="input-group-text">
+														<i class="ki ki-calendar"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Way of Finding us*</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<select class="form-control" id="kt_wayofcontact" name="wayofcontact"
+												class="form-control form-control-lg form-control-solid"
+												style="width:100%">
+
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Country of
+											Residence*</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<select class="form-control" id="kt_country_of_Resdience"
+												name="countryofresidence"
+												class="form-control form-control-lg form-control-solid"
+												style="width:100%">
+
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">City of
+											Residence*</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<select class="form-control" id="kt_city_of_Resdience"
+												name="cityofresidence"
+												class="form-control form-control-lg form-control-solid"
+												style="width:100%">
+
+											</select>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Nationality*</label>
+										<div class="input-group input-group-lg input-group-solid">
+											<select class="form-control" id="kt_nationality" name="nationality"
+												class="form-control form-control-lg form-control-solid"
+												style="width:100%">
+
+											</select>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="font-size-h6 font-weight-bolder text-dark">Assigned To</label>
+										<div class="input-group input-group-lg input-group-solid">
+												<select class="form-control" id="CustomerAssignedTo" name="CustomerAssignedTo"
+												class="form-control form-control-lg form-control-solid"
+												style="width:100%">
+
+											</select>
+										</div>
+									</div>
+									
+
+									
+
+								</div>
+
+								<div class="col-xl-1">
+								</div>
+
+							</div>
+							
+									
+							<div class="form-group row col-11">
+								<label class="font-size-h6 font-weight-bolder text-dark">Notes</label>
+								<div class="input-group input-group-lg input-group-solid">
+
+									<!-- <input type="text" name="customerNotes" id="customerNotes"
+										class="form-control form-control-lg form-control-solid" value=""
+										placeholder="Need to contact tomorrow" > -->
+										<textarea   type="text" name="customerNotes" id="customerNotes" class="form-control form-control-lg form-control-solid" placeholder="Any feedback" rows="3"></textarea>
+                                         
+								</div>
+							</div>
+						</div>
+						<!--end::Signin-->
+					</div>
+					<div class="modal-footer">
+						<button type="button" onclick="
+						document.getElementById('customerId').innerHTML = '0';" class="btn btn-light-primary font-weight-bold"
+							data-dismiss="modal">Close</button>
+						<button type="submit" id="kt_add_customer_button"
+							class="btn btn-primary font-weight-bold">Add</button>
+					</div>
+
+				</form>
+				<!--end::Form-->
+			</div>
+		</div>
+	</div>
+	<!--Inquiry Model customer-->
+	<div class="modal fade" id="inquires" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Inquires List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+                </div>
+                <!--begin::Form-->
+                <form class="form" id="kt_approve_inquiry" action="" name="approveinquiryform">
+                    <div class="modal-body">
+                        <div class="form-group">
+							<table class="table table-bordered table-hover table-checkable" id="kt_datatableInquiry">
+								<thead>
+								   <tr>
+									  <th>ID</th>
+									  <th>Status</th>
+									  <th>Latest Comment</th>
+									  <th>Customer Name</th>
+									  <th>Managed By</th>
+									  <th>Workscope</th>
+									  <th>Code</th>
+									  <th>Description</th>
+									  <th>Start Date</th>
+									  <th>End Date</th>
+									  <th>Measurement Provided By Customer</th>
+									  <th>Measurement Schedule Date</th>
+									  <th>Measurement Assign To</th>
+									  <th>Measurement Added Date</th>
+									  <th>Design Provided By Customer</th>
+									  <th>Design Schedule Date</th>
+									  <th>Design Assign To</th>
+									  <th>Design Added Date</th>
+									  <th>Quotation Schedule Date</th>
+									  <th>Quotation Added Date</th>
+
+									  <th>Customer Code</th>
+									  <th>Customer Contact</th>
+									  <th>Customer Email</th>
+									  <th>Contact Status</th>
+									  <th>Next Follow-up Date</th>
+									  <th>Customer Notes</th>
+									  <th>Building Address</th>
+									  <th>Building Makani Map</th>
+									  <th>Building Type Of Unit</th>
+									  <th>Building Condition</th>
+									  <th>Building Floor</th>
+									  <th>Building Re-construction</th>
+									  <th>Building Occupied</th>
+									  <th>Comment Added Date</th>
+									  <th>Factory Name</th>
+									  
+									  <th>Escalation Requested By</th>
+									  <th>Escalation Requested On</th> 
+									  <th>Actions</th>
+								   </tr>
+								</thead>
+							 </table>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+	<!--begin::Scrolltop-->
+	<div class="modal fade" id="InquiryComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+		   <div class="modal-content">
+			  <div class="modal-header">
+				 <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+				 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				 <i aria-hidden="true" class="ki ki-close"></i>
+				 </button>
+			  </div>
+			  <!--begin::Form-->
+			  <form class="form" id="kt_inq_comment" action="" name="addcomment">
+				 <div class="modal-body">
+					<!-- <div class="form-group">
+					   <label id="oldComment" style="font-size: 14px;"  class=""></label>
+					   
+					</div> -->
+					<span id="inquiryWorkscopeId" style="display:none">0</span>
+
+					<div class="form-group">
+					   <label class="">Add Comment*</label>
+					   <div class="input-group input-group-lg input-group-solid">
+						  <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="inqtxtComment" name="inqtxtComment" class="form-control" placeholder="" rows="7"></textarea>
+					   </div>
+					</div>
+				   
+				  <div class="table-responsive">
+					<table  class="table table-striped table-bordered">
+					   <label class="font-size-h6 font-weight-bolder text-dark">Old Comments</label>
+					   <thead>
+						 <tr>
+						   <th scope="col">Comment</th>
+						   <th scope="col">Status</th>
+						   <th scope="col">Added By</th>
+						   <th scope="col">Created Date</th>
+						 </tr>
+					   </thead>
+					   <tbody id="bodyoftable">
+					   </tbody>
+					 </table>
+				  </div>
+
+				 </div>
+				 <div class="modal-footer">
+					<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal" data-toggle="modal" data-target="#customerpop">Follow-up</button>
+					<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+					<button type="submit"  id="kt_comment_button"  class="btn btn-primary font-weight-bold">Add</button>
+				 </div>
+			  </form>
+			  <!--end::Form-->
+		   </div>
+		</div>
+	 </div>
+
+	 <div class="modal fade" id="managedby" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal" role="document">
+		   <div class="modal-content">
+			  <div class="modal-header">
+				 <h5 class="modal-title" id="examplemanagedby">Change Inquiry Managed By</h5>
+				 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				 <i aria-hidden="true" class="ki ki-close"></i>
+				 </button>
+			  </div>
+			  <!--begin::Form-->
+			  <form class="form" id="kt_managedby" action="" name="kt_managedby">
+				 <div class="modal-body">
+					<div class="form-group row">
+					   <div class="col-lg-12 mb-lg-0 mb-12">
+						  <label class="">Managed By</label>
+						  <div class="input-group input-group-lg input-group-solid">
+							 <select class="form-control" id="kt_selectmanagedby" name="kt_selectmanagedby" class="form-control form-control-lg form-control-solid" style="width:50%">
+							 </select>
+						  </div>
+					   </div>
+					</div>
+				 </div>
+				 <div class="modal-footer">
+					<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+					<button type="button" id="kt_managedby_button" class="btn btn-primary font-weight-bold">Update</button>
+				 </div>
+			  </form>
+			  <!--end::Form-->
+		   </div>
+		</div>
+		</div>
+
+	 <div class="modal fade" id="customerpop" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal" role="document">
+		   <div class="modal-content">
+			  <div class="modal-header">
+				 <h5 class="modal-title" id="examplecustomer">Follow Up</h5>
+				 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				 <i aria-hidden="true" class="ki ki-close"></i>
+				 </button>
+			  </div>
+			  <!--begin::Form-->
+			  <form class="form" id="kt_customerform" action="" name="kt_customerform">
+				 <div class="modal-body">
+					<div class="form-group row">
+								<label class="font-size-h6 font-weight-bolder text-dark">Contact Status*</label>
+								<div class="input-group input-group-lg input-group-solid">
+								   <select class="form-control" id="kt_follow_status" name="contactfollowstatus"
+									  class="form-control form-control-lg form-control-solid"
+									  style="width:100%">
+								   </select>
+								</div>
+				 </div>
+				 <div class="form-group row">
+								<label class="font-size-h6 font-weight-bolder text-dark">Next Follow-up Date</label>
+								<div class="input-group input-group-lg input-group-solid">
+								   <div class="input-group date" id="kt_datetimepicker_cus" data-target-input="nearest">
+									  <input type="text" id="next_follow_date" name="next_follow_date" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_cus">
+									  <div class="input-group-append" data-target="#kt_datetimepicker_cus" data-toggle="datetimepicker">
+										 <span class="input-group-text">
+											<i class="ki ki-calendar"></i>
+										 </span>
+									  </div>
+								   </div>
+								</div>
+				  </div>
+				 <div class="form-group row">
+						  <label class="">Add Comment*</label>
+						  <div class="input-group input-group-lg input-group-solid">
+							 <textarea style="border:1px solid #E8E4E4 !important;font-size: 14px;"  type="text" id="custxtComment" name="custxtComment" class="form-control" placeholder="" rows="7"></textarea>
+						  </div>
+					   </div>
+				 
+				 </div>
+				 <div class="modal-footer">
+				   
+					<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+					<button type="submit" id="kt_customer_button" class="btn btn-primary font-weight-bold">Add</button>
+				 </div>
+			  </form>
+			  <!--end::Form-->
+		   </div>
+		</div>
+		</div>
+
+		<div class="modal fade" id="Requestforescalation" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Request For Escalation</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<i aria-hidden="true" class="ki ki-close"></i>
+						</button>
+					</div>
+					<!--begin::Form-->
+					<form class="form" id="kt_escalation" action="" name="escalationform">
+					   <span id="customerEscalationId" style="display:none">0</span>
+						<div class="modal-body">
+						   
+							<div class="form-group row" style="padding-left:25px ;">
+								<label class="">Are you sure to request for escalation?</label>
+								
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">No</button>
+							<button type="submit" id="kt_escalation_button" class="btn btn-primary font-weight-bold">Yes</button>
+						</div>
+					</form>
+					<!--end::Form-->
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="Approveescalation" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Approve Escalation</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<i aria-hidden="true" class="ki ki-close"></i>
+						</button>
+					</div>
+					<!--begin::Form-->
+					<form class="form" id="kt_approveescalation" action="" name="approveescalationform">
+					   <span id="customerApproveEscalationId" style="display:none">0</span>
+						<div class="modal-body">
+						   
+							<div class="form-group row" style="padding-left:25px ;">
+								<label class="">Are you sure to approve escalation?</label>
+								
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">No</button>
+							<button type="submit" id="kt_approveescalation_button" class="btn btn-primary font-weight-bold">Approve</button>
+						</div>
+					</form>
+					<!--end::Form-->
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="Rervertescalation" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Revert Escalation</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<i aria-hidden="true" class="ki ki-close"></i>
+						</button>
+					</div>
+					<!--begin::Form-->
+					<form class="form" id="kt_revertescalation" action="" name="revertescalationform">
+					   <span id="customerRevertEscalationId" style="display:none">0</span>
+						<div class="modal-body">
+						   
+							<div class="form-group row" style="padding-left:25px ;">
+								<label class="">Are you sure to revert escalation?</label>
+								
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button"  class="btn btn-light-primary font-weight-bold" data-dismiss="modal">No</button>
+							<button type="submit" id="kt_revertescalation_button" class="btn btn-primary font-weight-bold">Revert</button>
+						</div>
+					</form>
+					<!--end::Form-->
+				</div>
+			</div>
+		</div>
 
 	<div id="kt_scrolltop" class="scrolltop">
 	</div>
@@ -1033,7 +1716,7 @@
 	<script src="assets/js/pages/sai-kitchen/base.js" type="module"></script>
 
 	<!--begin::Page Scripts(used by this page)-->
-	<!-- <script src="assets/js/pages/sai-kitchen/gochart.js" type="module"></script> -->
+	 <script src="assets/js/pages/sai-kitchen/gochart.js" type="module"></script> 
 	<!--end::Page Scripts-->
 
 	<!--begin::Page Scripts(used by this page)-->
@@ -1151,14 +1834,1592 @@ $( "#kt_follow_status" ).change(function () {
 			// At last, if the user has denied notifications, and you
 			// want to be respectful there is no need to bother them any more.
 		}
-	
+		var customerPermission;
+	var login = localStorage.getItem("user");
+    if (login !== null) {
+        user = JSON.parse(login);
+        console.log(user);
+        permissions = user.data.userRoles[0].branchRole.permissionRoles;
+        console.log(permissions);
+        for (var i = 0; i < permissions.length; i++) {
+            if (permissions[i].permissionId == 5) {
+                customerPermission = permissions[i].permissionLevelId;
+                console.log(customerPermission);
+            }
+        }
+        if(customerPermission==null){
+            window.location.replace("index.html");
+            }
 
+          }
+    function refreshCustomerTable(fuserId,filter){
+		$('#kt_datatable').KTDatatable('destroy');
+		var KTAppsUsersListDatatable = function() {
+    // Private functions
+
+    // basic demo
+    var _demo = function() {
+        datatable = $('#kt_datatable').KTDatatable({
+            // datasource definition
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ],
+            data: {
+
+                type: 'remote',
+                source: {
+                    read: {
+                        url: baseURL + '/Customer/GetCustomerGraphOfBranch?userId=' + parseInt(fuserId) +"&filter="+filter,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'userId': user.data.userId,
+                            'userToken': user.data.userToken,
+                            'userRoleId': user.data.userRoles[0].userRoleId,
+                            'branchId': user.data.userRoles[0].branchId,
+                            'branchRoleId': user.data.userRoles[0].branchRoleId,
+                            'Access-Control-Allow-Origin': '*',
+                        },
+                    },
+                },
+                pageSize: 10, // display 20 records per page
+               // serverPaging: true,
+                serverFiltering: false,
+                serverSorting: false,
+            },
+
+            // layout definition
+            layout: {
+                scroll: true, // enable/disable datatable scroll both horizontal and vertical when needed.
+                footer: false, // display/hide footer
+            },
+
+            // column sorting
+            sortable: true,
+
+            pagination: true,
+            stateSave: true,
+            processing: true,
+            serverSide: false,
+            search: {
+                input: $('#kt_subheader_search_form'),
+                delay: 0,
+                key: 'generalSearch'
+            },
+
+            // columns definition
+            columns: [{
+                    field: 'CustomerId',
+                    title: '#',
+                    sortable: 'asc',
+                    width: 40,
+                    type: 'number',
+                    selector: false,
+                    textAlign: 'left',
+                    template: function(data) {
+                        customerData = data;
+                        console.log(customerData);
+                                return '<span class="font-weight-bolder">' + data.customerId + '</span>';
+
+                    }
+                },
+
+                {
+                    field: 'Code',
+                    title: 'Code',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        if (data.code !== null) {
+                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.code + '</div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        }
+                        return output;
+                    },
+                }, {
+                    field: 'CustomerName',
+                    title: 'name',
+                    width: 250,
+                    template: function(data) {
+                        // var number = KTUtil.getRandomInt(1, 14);
+                        // var user_img = '100_' + number + '.jpg';
+
+                        var output = '';
+                        // if (number > 8) {
+                        // 	output = '<div class="d-flex align-items-center">\
+                        // 		<div class="symbol symbol-40 symbol-sm flex-shrink-0">\
+                        // 			<img class="" src="assets/media/users/' + user_img + '" alt="photo">\
+                        // 		</div>\
+                        // 		<div class="ml-4">\
+                        // 			<div class="text-dark-75 font-weight-bolder font-size-lg mb-0">' + data.CompanyAgent + '</div>\
+                        // 			<a href="#" class="text-muted font-weight-bold text-hover-primary">' + data.CompanyEmail + '</a>\
+                        // 		</div>\
+                        // 	</div>';
+                        // }
+                        // else {
+                        var stateNo = KTUtil.getRandomInt(0, 7);
+                        var states = [
+                            'success',
+                            'primary',
+                            'danger',
+                            'success',
+                            'warning',
+                            'dark',
+                            'primary',
+                            'info'
+                        ];
+                        var state = states[stateNo];
+
+                        output = '<div class="d-flex align-items-center">\
+								<div class="symbol symbol-40 symbol-light-' + state + ' flex-shrink-0">\
+									<span class="symbol-label font-size-h4 font-weight-bold">' + data.customerName.substring(0, 1) + '</span>\
+								</div>\
+								<div class="ml-4">\
+									<div class="text-dark-75 font-weight-bolder font-size-lg mb-0">' + data.customerName + '</div>\
+									<a href="javascript:;" class="text-muted font-weight-bold text-hover-primary">' + data.customerEmail + '</a>\
+								</div>\
+							</div>';
+                        // }
+
+                        return output;
+                    }
+                }, {
+                    field: 'Phone',
+                    title: 'Contact',
+                    autoHide: false,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+
+                        output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerContact + '</div>';
+                        // output += '<div class="text-muted">' + status[index].title + '</div>';
+
+                        return output;
+                    },
+                },{
+                    field: 'TotalNoOfInquiries',
+                    title: 'Total Inquiries',
+                    autoHide: true,
+                    // overflow: 'visible',
+                    // callback function support for column rendering
+                    template: function(data) {
+                       // if(data.totalNoOfInquiries==0)
+                       //    data.totalNoOfInquiries ='No Inquiries';
+                        //if(data.totalNoOfInquiries!=0)
+                        //   return '<span class="label label-lg font-weight-bold  label-inline">' +data.totalNoOfInquiries + '</span>';
+                       // else
+                           return '<span class="label label-lg font-weight-bold  label-inline">'+data.totalNoOfInquiries+'</span>';
+
+                    },
+                },{
+                    field: 'AddedOn',
+                    title: 'Added On',
+                    autoHide: false,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.addedOn + '</div>';
+
+                        return output;
+                    }
+                }
+                ,  {
+                    field: 'Actions',
+                    title: 'Actions',
+                    sortable: false,
+                    //  width: 180 ,
+                    // overflow: 'visible',
+                    autoHide: false,
+                    template: function(data) {
+              
+                        if (customerPermission >= 3) {
+                            var action = '\
+<button type="button"  onclick="getCustomerById(\'' + baseURL + '\',\'' + data.customerId + '\');"  class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">\
+			<span class="svg-icon svg-icon-md">\
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
+					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
+						<rect x="0" y="0" width="24" height="24"/>\
+						<path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953) "/>\
+						<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>\
+					</g>\
+				</svg>\
+			</span>\
+		</button>\
+		';
+        //                     if (customerPermission >= 5) {
+        //                         action += '\
+		// 	<button type="button"  onclick="deleteCustomerById(\'' + baseURL + '\',\'' + data.customerId + '\');"  class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" title="Delete">\
+		// 	<span class="svg-icon svg-icon-md">\
+		// 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
+		// 			<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
+		// 				<rect x="0" y="0" width="24" height="24"/>\
+		// 				<path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"/>\
+		// 				<path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"/>\
+		// 			</g>\
+		// 		</svg>\
+		// 	</span>\
+		// </button>\
+		// ';
+        //                     }
+                            if(data.totalNoOfInquiries !="No Inquiries"){
+                                action += '\
+                                <button type="button" onclick="showInquiry(\'' + data.customerId + '\')" name="' + data.customerId + '"   class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" title="Show Inquires">\
+                                <span class="svg-icon svg-icon-md">\
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">\
+                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"></path>\
+                                <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"></path>\
+                            </svg>\
+                                </span>\
+                            </button>\
+                            ';
+                            }
+                                  if (customerPermission == 4) {
+                                                            if (data.isEscalationRequested!==true)
+                                                             {
+                                                        
+                                                                    action += `
+                                                                    <a type="button" onclick="setCustomerEscalationId(` + data.customerId + `)" data-toggle="modal" data-target="#Requestforescalation" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon"  style="margin:2px" title="Request For Escalation">
+                                                                    <span class="svg-icon svg-icon-md">\
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                                                                    </svg>
+                                                                    </span>\
+                                                                    </a>  
+                                                                `; 
+                                                                }
+                                                             }
+
+
+             if (customerPermission >= 5) {    
+
+                    if (data.isEscalationRequested==true){
+                      
+                            action += `
+                            <a type="button" onclick="setCustomerApproveEscalationId(` + data.customerId + `)" data-toggle="modal" data-target="#Approveescalation" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon"  style="margin:2px" title="Approve Escalation">
+                            <span class="svg-icon svg-icon-md">\
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+                            <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+                            </svg>
+                            </span>\
+                            </a>  
+                        `; 
+                       
+
+                       
+                           
+                                action += `
+                                <a type="button" onclick="setCustomerRevertEscalationId(` + data.customerId + `)" data-toggle="modal" data-target="#Rervertescalation" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon"  style="margin:2px" title="Revert Escalation">
+                                <span class="svg-icon svg-icon-md">\
+                                <i class="fa fa-undo" aria-hidden="true"></i>
+                                </a>  
+                            `; 
+                            }
+
+                        }
+
+                        action += `
+                        <a type="button"   href="`+window.location.origin+`/addinquiry.html?customerContact=` + data.customerContact + `"  class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon"  style="margin:2px" title="Add Inquiry">
+                        <span class="svg-icon svg-icon-md">\
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                        <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                        </svg>
+                        </a>  
+                    `;
+
+
+                            
+                            return action;
+                        } else {
+                            return `<span></span>`;
+                        }
+                    },
+                }, {
+                    field: 'Country',
+                    title: 'Country',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bolder font-size-lg mb-0">' + data.customerCountry + '</div>';
+                        output += '<div class="font-weight-bold text-muted">Nationality: ' + data.customerNationality + '</div>';
+
+                        return output;
+                    }
+                }, {
+                    field: 'WayofContact',
+                    title: 'Way of Contact',
+                    autoHide: true,
+                    // callback function support for column rendering
+                    template: function(data) {
+                        var status = {
+                            1: {
+                                'title': 'Direct',
+                                'class': ' label-light-primary'
+                            },
+                            2: {
+                                'title': 'Google',
+                                'class': ' label-light-danger'
+                            },
+                            3: {
+                                'title': 'Facebook',
+                                'class': ' label-light-primary'
+                            },
+                            4: {
+                                'title': 'Linkedin',
+                                'class': ' label-light-success'
+                            },
+                            5: {
+                                'title': 'Twitter',
+                                'class': ' label-light-info'
+                            },
+                            6: {
+                                'title': 'Friends recommended',
+                                'class': ' label-light-primary'
+                            },
+                            7: {
+                                'title': 'Website',
+                                'class': ' label-light-danger'
+                            },
+                            8: {
+                                'title': 'Mobile App',
+                                'class': ' label-light-primary'
+                            },
+                            9: {
+                                'title': 'Owner Reference',
+                                'class': ' label-light-info'
+                            },
+                            10: {
+                                'title': 'Instagram',
+                                'class': ' label-light-primary'
+                            },
+                            11: {
+                                'title': 'Other',
+                                'class': ' label-light-info'
+                            }
+                        };
+                        return '<span class="label label-lg font-weight-bold ' + status[data.wayofContactId].class + ' label-inline">' + status[data.wayofContactId].title + '</span>';
+
+                    },
+                },
+                {
+                    field: 'Address',
+                    title: 'Address',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        if (data.customerAddress !== null) {
+                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerAddress + '</div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        }
+                        return output;
+                    },
+                },
+                {
+                    field: 'City',
+                    title: 'City',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        if (data.customerCity !== null) {
+                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerCity + '</div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        }
+                        return output;
+                    },
+                }, {
+                    field: 'ContactStatus',
+                    title: 'Contact Status',
+                    autoHide: true,
+                    // overflow: 'visible',
+                    // callback function support for column rendering
+                    template: function(data) {
+                        var status = {
+                            1: {
+                                'title': 'Contacted',
+                                'class': ' label-light-primary'
+                            },
+                            2: {
+                                'title': 'Need to Contact',
+                                'class': ' label-light-danger'
+                            },
+                            3: {
+                                'title': 'Need to Follow-up',
+                                'class': ' label-light-danger'
+                            },
+                            4: {
+                                'title': 'Not Responding',
+                                'class': ' label-light-danger'
+                            }
+                        };
+                        return '<span class="label label-lg font-weight-bold ' + status[data.contactStatusId].class + ' label-inline">' +data.contactStatus + '</span>';
+
+                    },
+                }, {
+                    field: 'CustomerNextMeetingDate',
+                    title: 'Next Follow-up Date',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        if (data.customerNextMeetingDate !== null) {
+                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerNextMeetingDate + '</div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        }
+                        return output;
+                    },
+                }, {
+                    field: 'CustomerNotes',
+                    title: 'Customer Notes',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        if (data.customerNotes !== null) {
+                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerNotes + '</div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        }
+                        return output;
+                    },
+                },
+                {
+                    field: 'EmiratesId',
+                    title: 'Makani#/Map URL',
+                    autoHide: true,
+                    // type: 'date',
+                    // format: 'MM/DD/YYYY',
+                    template: function(data) {
+                        var output = '';
+
+                        // var status = {
+                        // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
+                        // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
+                        // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
+                        // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
+                        // };
+                        // var index = KTUtil.getRandomInt(1, 4);
+                        if (data.customerNationalId !== null) {
+                            output += '<div class="font-weight-bolder text-primary mb-0"><a href='+data.customerNationalId+' target="_blank">' + data.customerNationalId + '</a></div>';
+                            // output += '<div class="text-muted">' + status[index].title + '</div>';
+                        }
+                        return output;
+                    },
+                }, {
+                    field: 'AddedBy',
+                    title: 'Managed By',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.userName + '</div>';
+
+                        return output;
+                    },
+                },{
+                    field: 'customerAssignedToName',
+                    title: 'Assigned To',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.customerAssignedToName + '</div>';
+
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'customerAssignedByName',
+                    title: 'Assigned By',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.customerAssignedByName + '</div>';
+
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'customerAssignedDate',
+                    title: 'Assigned On',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+
+                        output += '<div class="font-weight-bold text-muted">' + data.customerAssignedDate + '</div>';
+
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'escalationRequestedByName',
+                    title: 'Escalation Requested By:',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                        if (data.escalationRequestedByName !== null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.escalationRequestedByName + '</div>';
+                        }
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'escalationRequestedOn',
+                    title: 'Escalation Requested On:',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                    if (data.escalationRequestedOn !== null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.escalationRequestedOn + '</div>';
+                        }   
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'escalatedByName',
+                    title: 'Escalation By:',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                        if (data.escalatedByName !== null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.escalatedByName + '</div>';
+                        }
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'escalatedOn',
+                    title: 'Escalation On:',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                    if (data.escalatedOn !== null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.escalatedOn + '</div>';
+                        }   
+                        return output;
+                    }
+                }
+                ,{
+                    field: 'isEscalationRequested',
+                    title: 'is Escalation Requested:',
+                    autoHide: true,
+                    template: function(data) {
+                        var output = '';
+                  
+                        output += '<div class="font-weight-bold text-muted">' + data.isEscalationRequested + '</div>';
+                      
+                        return output;
+                    }
+                }
+            ],
+        });
+        //console.log(datatable.rows().data());
+         $('#kt_subheader_search_form').on('blur', function() {
+            datatable.search($(this).val().toLowerCase());
+        }); 
+
+        $('#kt_datatable_contact_statuss').on('change', function() {
+            datatable.search($(this).val().toLowerCase(), 'Type');
+        });
+
+ 
+         
+ 
+        $('#kt_datatable_search_status, #kt_datatable_contact_statuss').selectpicker();
+        // $('#kt_datatable_search_status').selectpicker();
+ /*        $("#export_pdf").on("click",(function(e){
+            e.preventDefault(),
+            datatable.button(2).trigger()})); */
+        
+    }; 
+
+
+
+	
+    return {
+        // public functions
+        init: function() {
+            _demo();
+        },
+    };
+    }();
+	KTAppsUsersListDatatable.init();
+	}
 
 	</script>
 
 	
 
+<script>
+	// import {
+	// 	baseURL
+	// } from './assets/js/pages/sai-kitchen/constant.js';
+	// alert('hi ' + baseURL);
+	var baseURL = 'https://backendsaikitchen.azurewebsites.net/Api/';
+	var user=	JSON.parse(localStorage.getItem("user"));
+
+$( "#kt_contact_status" ).change(function () {    
+var today  = new Date();
+var hours = new Date();
+$("#next_meeting_date").val(today.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
+$("#next_meeting_date").prop('required',true);
+/* if($('#kt_contact_status').val()=="1" || $('#kt_contact_status').val()=="2"){
+	 $("#nextMeetingDate").hide();
+	 document.getElementById('next_meeting_date').value = "";
+$("#next_meeting_date").prop('required',false);
+}else{
+	$("#nextMeetingDate").show();
+	$("#next_meeting_date").prop('required',true);
+} */
+});
+$( "#kt_follow_status" ).change(function () {    
+var today  = new Date();
+var hours = new Date();
+$("#next_follow_date").val(today.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
+$("#next_follow_date").prop('required',true);
+});  
+
+	function customFormReset() {
+try {
+
+document.getElementById("exampleModalLabel").innerHTML = "New Customer";
+		document.getElementById("kt_add_customer_button").innerHTML = "Add";
+		document.getElementById("customerId").innerHTML = '0';
+		document.getElementById('customerName').value = "";
+		document.getElementById('customerNotes').value = "";
+		document.getElementById('next_meeting_date').value = "";
+		document.getElementById('customerEmail').value = "";
+		document.getElementById('customerContact').value = "";
+		document.getElementById('customerAddress').value = "";
+		document.getElementById('customerNationalId').value = "";
+		$('#CustomerAssignedTo option:first').prop('selected',true);
+		var today  = new Date();
+		var hours = new Date();
+		$("#next_meeting_date").val(today.toLocaleDateString()+" "+hours.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
+
+		// $('#kt_contact_status').val(response.data.contactStatusId).change();
+		// $('#kt_wayofcontact').val(response.data.wayofContactId).change();
+		// $('#kt_country_of_Resdience').val(response.data.customerCountry).change();
+		// $('#kt_city_of_Resdience').val(response.data.customerCity).change();
+		// document.getElementById("customerCity").innerHTML = response.data.customerCity;
+		// $('#kt_nationality').val(response.data.customerNationality).change();
+} catch (error) {
+
+}
+	}
+	let inqStatus= {
+1: {
+	'title': 'Measurement In-Progress',
+	'class': 'label-light-primary'
+},
+2: {
+	'title': 'Measurement Delayed',
+	'class': ' label-light-danger'
+},
+3: {
+	'title': 'Design In-Progress',
+	'class': ' label-light-primary'
+},
+4: {
+	'title': 'Design Delayed',
+	'class': ' label-light-danger'
+},
+5: {
+	'title': 'Quotation Pending',
+	'class': ' label-light-primary'
+},
+6: {
+	'title': 'Quotation Delayed',
+	'class': ' label-light-danger'
+},
+7: {
+	'title': 'Measurement Accepted',
+	'class': 'label-light-success'
+},
+8: {
+	'title': 'Measurement Rejected',
+	'class': ' label-light-danger'
+},
+9: {
+	'title': 'Measurement Waiting For Approval',
+	'class': ' label-light-info'
+},
+10: {
+	'title': 'Design Accepted',
+	'class': 'label-light-success'
+},
+11: {
+	'title': 'Design Rejected',
+	'class': ' label-light-danger'
+},
+12: {
+	'title': 'Design Waiting For Approval',
+	'class': ' label-light-info'
+},
+13: {
+	'title': 'Quotation Approved',
+	'class': 'label-light-success'
+},
+14: {
+	'title': 'Quotation Rejected',
+	'class': ' label-light-danger'
+},
+15: {
+	'title': 'Quotation Waiting For Customer Approval',
+	'class': ' label-light-info'
+},
+16: {
+	'title': 'Design Waiting For Customer Approval',
+	'class': ' label-light-info'
+},
+17: {
+	'title': 'Design Rejected By Client',
+	'class': ' label-light-danger'
+},
+18: {
+	'title': 'Technical Checklist In-Progress',
+	'class': ' label-light-primary'
+},
+19: {
+	'title': 'Technical Checklist Accepted',
+	'class': ' label-light-success'
+},
+20: {
+	'title': 'Technical Checklist Rejected',
+	'class': ' label-light-danger'
+},
+21: {
+	'title': 'Job Order Pending',
+	'class': ' label-light-primary'
+},
+22: {
+	'title': 'Job Order Created',
+	'class': ' label-light-success'
+},
+23: {
+	'title': 'Job Order Approved',
+	'class': ' label-light-success'
+},
+24: {
+	'title': 'Job Order Rejected',
+	'class': 'label-light-danger'
+},
+25: {
+	'title': 'Job Order Waiting For Approval',
+	'class': 'label-light-info'
+},
+26: {
+	'title': 'Job Order Delayed',
+	'class': ' label-light-danger'
+},
+27: {
+	'title': 'Job Order Completed',
+	'class': ' label-light-success'
+},
+28: {
+	'title': 'Delivery In-Progress',
+	'class': ' label-light-primary'
+},
+29: {
+	'title': 'Unable to Deliver',
+	'class': ' label-light-danger'
+},
+30: {
+	'title': 'Delivered',
+	'class': ' label-light-success'
+},
+31: {
+	'title': 'Waiting For Measurement Fee',
+	'class': ' label-light-primary'
+},
+32: {
+	'title': 'Waiting For Advance',
+	'class': ' label-light-primary'
+},
+33: {
+	'title': 'Waiting For BeforeDeliveryPayment',
+	'class': ' label-light-primary'
+},
+34: {
+	'title': 'Waiting For AfterDeliveryPayment',
+	'class': ' label-light-primary'
+},
+35: {
+	'title': 'Inquiry Completed',
+	'class': ' label-light-success'
+},
+36: {
+	'title': 'Measurement Assignee Pending',
+	'class': ' label-light-primary'
+},
+37: {
+	'title': 'Measurement Assignee Accepted',
+	'class': 'label-light-success'
+},
+38: {
+	'title': 'Measurement Assignee Rejected',
+	'class': ' label-light-danger'
+},
+39: {
+	'title': 'Design Assignee  Pending',
+	'class': ' label-light-primary'
+},
+40: {
+	'title': 'Design Assignee Accepted',
+	'class': 'label-light-success'
+},
+41: {
+	'title': 'Design Assignee Rejected',
+	'class': ' label-light-danger'
+},
+42: {
+	'title': 'Quotation Schedule  Pending',
+	'class': ' label-light-primary'
+},
+43: {
+	'title': 'Commerical Checklist Pending',
+	'class': ' label-light-primary'
+},
+44: {
+	'title': 'Commerical Checklist Accepted',
+	'class': ' label-light-success'
+},
+45: {
+	'title': 'Commerical Checklist Rejected',
+	'class': ' label-light-danger'
+},
+46: {
+	'title': 'Job Order Factory Approval Pending',
+	'class': ' label-light-primary'
+},
+47: {
+	'title': 'Job Order In-Progress',
+	'class': ' label-light-primary'
+},
+48: {
+	'title': 'Job Order Factory Rejected',
+	'class': ' label-light-danger'
+},
+49: {
+	'title': 'Job Order Reschedule Requested',
+	'class': ' label-light-primary'
+},
+50: {
+	'title': 'Job Order Reschedule Approved',
+	'class': ' label-light-success'
+},
+51: {
+	'title': 'Job Order Reschedule Rejected',
+	'class': ' label-light-danger'
+},
+52: {
+	'title': 'Job Order Delay Requested',
+	'class': ' label-light-primary'
+},
+53: {
+	'title': 'Job Order Ready For Installation',
+	'class': ' label-light-primary'
+},
+54: {
+	'title': 'Job Order Files In-Progress',
+	'class': ' label-light-primary'
+},
+55: {
+	'title': 'Job Order Files Delayed',
+	'class': ' label-light-primary'
+},
+56: {
+	'title': 'Design Revision Requested',
+	'class': ' label-light-primary'
+},
+57: {
+	'title': 'Quotation Waiting For Approval',
+	'class': ' label-light-info'
+},
+58: {
+	'title': 'contract Pending',
+	'class': ' label-light-primary'
+},
+59: {
+	'title': 'Contract Waiting For Customer Approval',
+	'class': ' label-light-info'
+},
+60: {
+	'title': 'Contract Approved',
+	'class': ' label-light-success'
+},
+61: {
+	'title': 'quotation Revision Requested',
+	'class': ' label-light-primary'
+},
+62: {
+	'title': 'Contract In-Progress',
+	'class': ' label-light-primary'
+},
+63: {
+	'title': 'Contract Rejected',
+	'class': ' label-light-danger'
+},
+64: {
+	'title': 'job Order Audit Pending ',
+	'class': ' label-light-primary'
+},
+65: {
+	'title': 'job Order Audit Rejected',
+	'class': ' label-light-danger'
+},
+66: {
+	'title': 'special approval pending',
+	'class': ' label-light-primary'
+},
+67: {
+	'title': 'Special approval rejected',
+	'class': ' label-light-danger'
+},
+
+68: {
+	'title': 'Job Order Factory Delayed',
+	'class': ' label-light-danger'
+},
+
+69: {
+	'title': 'Job Order Procurement Delayed',
+	'class': ' label-light-danger'
+},
+70: {
+	'title': 'Job Order Site Not Ready',
+	'class': ' label-light-primary'
+},
+71: {
+	'title': 'Job Order Design Team Delay',
+	'class': ' label-light-danger'
+},
+72: {
+	'title': 'Detailed Files Pending',
+	'class': ' label-light-primary'
+},
+};
+  function showInquiry(customerId){
+	$('#kt_datatableInquiry').dataTable().fnDestroy();
+	var table;
+	$('#kt_datatableInquiry').hide();
+	table = $('#kt_datatableInquiry').DataTable({
+				responsive: true,
+				// Pagination settings
+				dom: `<'row'<'col-sm-12'tr>>
+				<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
+				// read more: https://datatables.net/examples/basic_init/dom.html
+
+				lengthMenu: [5, 10, 25, 50, 100, 150, 200, 250],
+
+				pageLength: 10,
+				stateSave: true,
+				language: {
+					'lengthMenu': 'Display _MENU_',
+				},
+				serverSorting: true,
+				autoColumns: true,
+				order: [
+					[0, 'desc']
+				],
+				searchDelay: 0,
+				processing: true,
+				serverSide: false,
+				ajax: {
+					url:  'https://backendsaikitchen.azurewebsites.net/Api/Inquiry/GetInquiriesByCustomerId?customerId=' + customerId,
+					type: 'GET',
+					data: {
+						// parameters for custom backend script demo
+						columnsDef: [
+							'inquiryId', 'status','inquiryComment','customerName','inquiryAddedBy','workscopeNames','inquiryCode', 'inquiryDescription','inquiryStartDate', 'inquiryEndDate', 'isMeasurementProvidedByCustomer', 
+							'measurementScheduleDate', 'measurementAssignTo','measurementAddedOn','isDesignProvidedByCustomer','designScheduleDate', 'designAssignTo','designAddedOn','quotationScheduleDate','quotationAddedOn',
+							'customerCode', 'customerContact','customerEmail','contactStatus','nextMeetingDate','customerNotes', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
+							'isOccupied', 'inquiryAddedById','commentAddedOn','factorName','noOfRevision','escalationRequestedBy','escalationRequestedOn','actions'
+						],
+					},
+				},
+				columns: [{
+						data: 'inquiryId',
+						autoHide: false,
+					},
+					{
+						data: 'status',
+						autoHide: false,
+					},
+					{
+						data: 'inquiryComment',
+						autoHide: false,
+					},
+					{
+						data: 'customerName',
+						autoHide: false,
+					},
+					{
+						data: 'inquiryAddedBy',
+						autoHide: false,
+					},
+					{
+						data: 'workscopeNames',
+						autoHide: false,
+					},
+					{
+						data: 'inquiryCode',
+						autoHide: false,
+					},
+					{
+						data: 'inquiryDescription',
+						autoHide: false,
+					},
+					{
+						data: 'inquiryStartDate',
+						autoHide: false,
+					},
+					{
+						data: 'inquiryEndDate',
+						autoHide: false,
+					},
+					 {
+						data: 'isMeasurementProvidedByCustomer',
+						autoHide: true,
+					},
+					{
+						data: 'measurementScheduleDate',
+						autoHide: true,
+					},
+					{
+						data: 'measurementAssignTo',
+						autoHide: true,
+					},
+					{
+						data: 'measurementAddedOn',
+						autoHide: true,
+					},
+					{
+						data: 'isDesignProvidedByCustomer',
+						autoHide: true,
+					},
+					{
+						data: 'designScheduleDate',
+						autoHide: true,
+					},
+					{
+						data: 'designAssignTo',
+						autoHide: true,
+					},
+					{
+						data: 'designAddedOn',
+						autoHide: true,
+					},
+					{
+						data:'quotationScheduleDate',
+						autoHide: true,
+					},
+					{
+						data: 'quotationAddedOn',
+						autoHide: true,
+					},
+				
+					{
+						data: 'customerCode',
+						autoHide: true,
+					},
+					{
+						data: 'customerContact',
+						autoHide: true,
+					},
+					{
+						data: 'customerEmail',
+						autoHide: true,
+					},
+					{
+						data: 'contactStatus',
+						autoHide: true,
+					},
+					{
+						data: 'nextMeetingDate',
+						autoHide: true,
+					},
+					{
+						data: 'customerNotes',
+						autoHide: true,
+					},
+					{
+						data: 'buildingAddress',
+						autoHide: true,
+					},
+					{
+						data: 'buildingMakaniMap',
+						autoHide: true,
+					},
+					{
+						data: 'buildingTypeOfUnit',
+						autoHide: true,
+					},
+					{
+						data: 'buildingCondition',
+						autoHide: true,
+					},
+					{
+						data: 'buildingFloor',
+						autoHide: true,
+					},
+					{
+						data: 'buildingReconstruction',
+						autoHide: true,
+					},
+					{
+						data: 'isOccupied',
+						autoHide: true,
+					},
+				
+					{
+						data: 'commentAddedOn',
+						autoHide: true,
+					},
+					{
+						data: 'factorName',
+						autoHide: true,
+					},
+				
+					{
+						data:'escalationRequestedBy',
+						autoHide: true,
+					},
+					{
+						data:'escalationRequestedOn',
+						autoHide: true,
+					}, 
+					{
+						data: 'actions',
+						responsivePriority: -1
+					},
+				],
+
+		/* 		initComplete: function(data, type, full, meta) {
+					this.api().columns().every(function() {
+						var column = this;
+
+						switch (column.title()) {
+						
+							default:
+								//Statements executed when none of
+								//the values match the value of the expression
+								var v=column.title();
+							break;
+							
+
+						}
+					});
+				}, */
+
+				columnDefs: [{
+				targets: -1,
+				title: 'Actions',
+				orderable: false,
+				render: function(data, type, full, meta) {
+					var action = ``;
+					action += `\<a  style="background-color:#734f43;margin:2px" href="`+window.location.origin+`/viewinquirystatus.html?inquiryId=` + full.inquiryId + `"     class="btn btn-sm btn-clean btn-icon" title="Inquiry Status">
+					<i class="la la-ellipsis-h"></i>\
+					</a>\
+					`;
+
+					if(full.inquiryAddedById==user.data.userId ||user.data.userRoles[0].branchRole.roleTypeId==1){
+						var inquiryComment='';
+					var txtfollow = '';
+					if(full.inquiryComment != null){
+					   inquiryComment =full.inquiryComment.replace(/\n\r?/g, '|||'); 
+					   
+					}
+					if(full.customerNotes != null)
+					   txtfollow =full.customerNotes.replace(/\n\r?/g, '|||');  
+					action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `);setcomment('` + inquiryComment + `');getAllComments(` + full.inquiryId + `);followUp(` + full.contactStatusId + `,'` + full.nextMeetingDate + `','` + txtfollow + `')"   data-toggle="modal" data-target="#InquiryComment"  class="btn btn-sm btn-clean btn-icon" title="Add Comment">
+						<i class="la la-file-text-o"></i>\
+						</a>\
+					`;
+					action += `\<a href="javascript:;" style="background-color:#734f43;margin:2px" onclick="setInquiryWorkscopeId(` + full.inquiryId + `)"   data-toggle="modal" data-target="#managedby"  class="btn btn-sm btn-clean btn-icon" title="Change Inquiry Managed By">
+						<i class="la la-user-alt"></i>\
+						</a>\
+					`;  
+
+					} 
+
+					
+					return action;
+				},
+			},
+					{
+						targets: 1,
+						render: function(data, type, full, meta) {
+
+							var status = inqStatus;
+
+							console.log(data);
+							if (typeof status[data] === 'undefined') {
+								return data;
+							}
+							return '<span style="font-size:1.0rem !important; height:80px;" class="label label-lg font-weight-bold ' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
+
+						},
+					},
+					/* {
+						targets: 27,
+						render: function(data, type, full, meta) {
+						
+							if (typeof data === 'undefined' || data===null || data=="") {
+								return data;
+							}
+							return '<div class="font-weight-bolder text-primary mb-0"><a href='+data+' target="_blank">Click Here</a></div>';
+						},
+					}, */
+
+
+				],
+				"initComplete": function( settings, json ) {
+					$(this).show()
+				},
+			});
 	
+		
+	$('#inquires').modal('show');
+  }
+	// document.querySelector('#editbutton').addEventListener('click', hello);
+	function getCustomerById(baseURL, customerId) {
+
+		document.getElementById("exampleModalLabel").innerHTML = "Modify Customer";
+		document.getElementById("kt_add_customer_button").innerHTML = "Modify";
+		document.getElementById("customerId").innerHTML = customerId + '';
+
+
+		// alert('hi ' + baseURL);
+		$.ajax({
+			type: "Get",
+			url: baseURL + '/Customer/GetCustomerbyId?customerId=' + customerId,
+			headers: {
+						'Content-Type': 'application/json',
+						'userId': user.data.userId,
+						'userToken': user.data.userToken,
+						'userRoleId': user.data.userRoles[0].userRoleId,
+						'branchId': user.data.userRoles[0].branchId,
+						'branchRoleId': user.data.userRoles[0].branchRoleId,
+					'Access-Control-Allow-Origin': '*',
+					},
+			// data: data,
+			success: function (response) {
+				console.log(response);
+				// window.location.replace("home.html");
+				if (response.isError == false) {
+					// sessionStorage.setItem('user', JSON.stringify(response));
+					try {
+					$('#addCustomer').modal('show');
+					document.getElementById('customerName').value = response.data.customerName;
+					document.getElementById('customerEmail').value = response.data.customerEmail;
+					document.getElementById('customerContact').value = response.data.customerContact;
+					document.getElementById('customerAddress').value = response.data.customerAddress;
+					document.getElementById('customerNotes').value = response.data.customerNotes;	
+					
+					document.getElementById('customerNationalId').value = response.data.customerNationalId;
+					$('#kt_contact_status').val(response.data.contactStatusId).change();
+					document.getElementById('next_meeting_date').value = response.data.customerNextMeetingDate;
+					$('#kt_wayofcontact').val(response.data.wayofContactId).change();
+					$('#kt_country_of_Resdience').val(response.data.customerCountry).change();
+					$('#kt_city_of_Resdience').val(response.data.customerCity).change();
+					document.getElementById("customerCity").innerHTML = response.data.customerCity;
+					$('#kt_nationality').val(response.data.customerNationality).change();
+					document.getElementById('whatsapp').value =response.data.customerWhatsapp;
+					$('#CustomerAssignedTo'+' option[value="'+response.data.customerAssignedTo+'"]').attr('selected',true).change();	
+					} catch (error) {
+						
+					}
+
+					//  document.getElementById('customerEmail').value;
+					// 	customer.customerEmail = document.getElementById('customerEmail').value;
+					// 	customer.customerContact = document.getElementById('customerContact').value;
+					// 	customer.customerAddress = document.getElementById('customerAddress').value;
+					// 	customer.customerNationalId = document.getElementById('customerNationalId').value;
+					// 	customer.contactStatusId = $('#kt_contact_status').val();
+					// 	customer.wayofContactId = $('#kt_wayofcontact').val();
+					// 	customer.customerCountry = $('#kt_country_of_Resdience').val();
+					// 	customer.customerCity = $('#kt_city_of_Resdience').val();
+					// 	customer.customerNationality = $('#kt_nationality').val();
+
+					// window.location.replace("branchrole.html");
+
+				} else {
+					Swal.fire({
+						text: response.errorMessage,
+						icon: "error",
+						buttonsStyling: false,
+						confirmButtonText: "Ok, got it!",
+						customClass: {
+							confirmButton: "btn font-weight-bold btn-light-primary"
+						}
+					}).then(function () {
+						KTUtil.scrollTop();
+					});
+				}
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				// Release button
+				KTUtil.btnRelease(formSubmitButton);
+				// alert(errorThrown);
+
+				Swal.fire({
+					text: 'Internet Connection Problem',
+					icon: "error",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				}).then(function () {
+					KTUtil.scrollTop();
+				});
+			}
+		});
+	}
+
+	function setcomment(comment){
+		$("#inqtxtComment").html(comment);
+		var text = $("#inqtxtComment").html().replaceAll("|||","\n");
+		$("#inqtxtComment").html(text);
+	}
+	function setCustomerEscalationId(customerId) {
+		document.getElementById("customerEscalationId").innerHTML = customerId;
+	
+	}
+
+	function setCustomerApproveEscalationId(customerId) {
+		document.getElementById("customerApproveEscalationId").innerHTML = customerId;
+	
+	}
+
+	function setCustomerRevertEscalationId(customerId) {
+		document.getElementById("customerRevertEscalationId").innerHTML = customerId;
+	
+	}
+
+
+
+	function deleteCustomerById(baseURL, customerId) {
+		// alert('hi ' + branchRoleId);
+		var data = JSON.stringify({
+			customerId: customerId
+		});
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				
+		$.ajax({
+			type: "Post",
+			url: baseURL + '/Customer/DeleteCustomer?customerId=' + customerId,
+			headers: {
+						'Content-Type': 'application/json',
+						'userId': user.data.userId,
+						'userToken': user.data.userToken,
+						'userRoleId': user.data.userRoles[0].userRoleId,
+						'branchId': user.data.userRoles[0].branchId,
+						'branchRoleId': user.data.userRoles[0].branchRoleId,
+					'Access-Control-Allow-Origin': '*',
+					},
+			data: data,
+			success: function (response) {
+				console.log(response);
+				if (response.isError == false) {
+					// sessionStorage.setItem('user', JSON.stringify(response));
+					location.reload();
+
+				} else {
+					Swal.fire({
+						text: response.errorMessage,
+						icon: "error",
+						buttonsStyling: false,
+						confirmButtonText: "Ok, got it!",
+						customClass: {
+							confirmButton: "btn font-weight-bold btn-light-primary"
+						}
+					}).then(function () {
+						KTUtil.scrollTop();
+					});
+				}
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus);
+			},
+		});
+			}
+		});
+	}
+
+
+	function selectAllCheckbox(element) {
+		//    element.checked = !element.checked;
+		var markedCheckbox = document.getElementsByName('permissionCheckbox');
+		for (var checkbox of markedCheckbox) {
+
+			checkbox.checked = element.checked;
+		}
+	}
+
+	function toggleCheckbox(element) {
+		//    element.checked = !element.checked;
+		// var markedCheckbox = document.getElementsByName('selectAll');
+		// for (var checkbox of markedCheckbox) {
+
+		// 	checkbox.checked = false;
+		// }
+	}
+
+
+	function setInquiryWorkscopeId(inquiryWorskcopeId) {
+             document.getElementById("inquiryWorkscopeId").innerHTML = inquiryWorskcopeId;
+         }
+		 function getAllComments(inquiryId) {
+
+$.ajax({
+    type: "post",
+    url: baseURL + '/Inquiry/GetAllCommentByInquiryId?inquiryId=' + inquiryId,
+
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+    },
+
+    success: function(response) {
+        console.log(response);
+        if (response.isError == false) {
+
+         document.getElementById('bodyoftable').innerHTML = '';
+      
+
+         if(response.data.length==0)
+         {
+            document.getElementById('bodyoftable').innerHTML +=
+                           `<tr>
+                            <td>no comments</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>`;
+
+         }
+
+         else 
+         {
+                  for(var i=0 ; i<response.data.length;i++)
+                     {
+                        
+                              document.getElementById('bodyoftable').innerHTML +=
+                                             `<tr>
+                                             <td>`+response.data[i].commentDetail+`</td>
+                                             <td>`+response.data[i].inquiryStatus+`</td>
+                                             <td>`+response.data[i].commentAddedBy+`</td>
+                                             <td>`+response.data[i].commentAddedon+`</td>
+                                             </tr>`;
+                     
+                                    
+                     }
+
+
+         }
+
+        } else {
+            Swal.fire({
+                text: 'Status error',
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                KTUtil.scrollTop();
+            });
+        }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+   }
+});
+//
+}
+
+function followUp(contactStatusId,nextMeetingDate,customerNotes){
+            $('#kt_follow_status'+' option[value="'+contactStatusId+'"]').attr('selected',true).change();
+            document.getElementById('next_follow_date').value = nextMeetingDate;
+             //document.getElementById('custxtComment').value = customerNotes;
+			 $("#custxtComment").html(customerNotes);
+            var text = $("#custxtComment").html().replaceAll("|||","\n");
+            $("#custxtComment").html(text);
+         }
+</script>
 	<!--end::Page Scripts-->
 	
 </body>
