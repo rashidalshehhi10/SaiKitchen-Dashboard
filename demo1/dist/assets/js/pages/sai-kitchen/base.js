@@ -2210,7 +2210,7 @@ if (permission.includes(14)) {
 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li>
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-<a href="#" class="menu-link menu-toggle">
+<a href="purchase.html" class="menu-link menu-toggle">
 <span class="svg-icon menu-icon">
 		<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
