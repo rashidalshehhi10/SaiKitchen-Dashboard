@@ -277,14 +277,42 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                        /* measurement_schedule_date: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Cabinetry installation Date Date is required'
-                                }
+                        schedule_date2: {
+                           validators: {
+                               notEmpty: {
+                                   message: 'Production Drawing Completion Date is required'
+                               }
+                           }
+                       },
+                       schedule_date3: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Production Completion Date is required'
                             }
-                        }, */
+                        }
                     },
+                    schedule_date7: {
+                     validators: {
+                         notEmpty: {
+                             message: 'Planned Installation Date is required'
+                         }
+                     }
+                 },
+                  schedule_date4: {
+                     validators: {
+                        notEmpty: {
+                           message: 'Wooden Work Completion Date is required'
+                              }
+                           }
+                     },
+                     schedule_date8: {
+                  validators: {
+                     notEmpty: {
+                        message: 'Planned Completion Date is required'
+                        }
+                        }
+                     },
+                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
                         submitButton: new FormValidation.plugins.SubmitButton(),
@@ -320,6 +348,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                     "counterTopFixingDate": document.getElementById('schedule_date6').value,
                     "InstallationStartDate":document.getElementById('schedule_date7').value,
                     "InstallationCompletionDate":document.getElementById('schedule_date8').value,
+                    "jobordercompletiondate":document.getElementById('schedule_date9').value,
                     "notes": document.getElementById('CheckComment').value,
                     "IsMaterialRequired":$("#MCheckChecked").prop('checked'),
                     "materialfile":file,

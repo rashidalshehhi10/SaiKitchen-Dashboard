@@ -1889,6 +1889,7 @@ workscope.innerHTML=workscopeHtml;
                   "counterTopFixingDate": document.getElementById('schedule_date6').value,
                   "InstallationStartDate":document.getElementById('schedule_date7').value,
                   "InstallationCompletionDate":document.getElementById('schedule_date8').value,
+                  "jobordercompletiondate":document.getElementById('schedule_date9').value,
                   "notes": document.getElementById('CheckComment').value,
                   "IsMaterialRequired":$("#MCheckChecked").prop('checked'),
                   "materialfile":file,
