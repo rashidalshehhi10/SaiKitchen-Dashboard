@@ -55,6 +55,19 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="apple-touch-icon" href="assets/media/logos/icon-512x512.png" />
     <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
     <meta name="theme-color" content="#db4938" />
+    <style>
+        .divico{width: 100px;border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left}
+    </style>
+          <style>
+
+            .se-pre-con {
+               padding-left: 9rem;
+                width: 60px;
+                height: 60px;
+                z-index: 9999;
+                background: url(assets/media/gif/load.gif) center no-repeat #fff;
+            }
+                  </style>
     <!--End:PWA-->
 </head>
 <!--end::Head-->
@@ -595,6 +608,64 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
     </div>
+    <div
+      class="modal fade"
+      id="AuditApprove"
+      data-backdrop="static"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="staticBackdrop"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+          <form
+            class="form"
+            id="kt_approve_inquiry"
+            action=""
+            name="approveinquiryform"
+          >
+            <input id="inquiryId" type="hidden" value="0" />
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">View LPO</h5>
+              <button
+                id="xclose"
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <i aria-hidden="true" class="ki ki-close"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="WorkscopesDiv" style="padding-left: 20px;">
+                <div class="form-group row" id="workscope">
+                 
+                </div>
+             </div>
+              <div class="form-group row">
+
+              <div class="form-group row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <span id="alert" style="color: red"></span>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                id="kt_close_inquiry_button"
+                class="btn btn-light-primary font-weight-bold"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <!--end::Chat Panel-->
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop"> 
@@ -812,12 +883,155 @@ License: You must have a valid license purchased only from themeforest(the above
         }
     </script>
     <script>
-        
+         var baseURL = "https://backendsaikitchen.azurewebsites.net/Api"
+        var baseFileURL = "https://saikitchenstorage.blob.core.windows.net/files/"
         function addComponent(inquiryId) {
              document.getElementById("inquiryId").value=inquiryId;
+             document.getElementById("workscope").innerHTML ='';
+             addWooden(inquiryId);
             
-                 }
-        
+        }
+
+          function addWooden(inquiryId){
+            $.ajax({
+                type: "Post",
+                url: baseURL + '/Purchase/GetPurchaseOrderedByInquiryId?inquiryId='+inquiryId,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.isError == false) {
+                    if(response.data.length==0)
+                      document.getElementById("workscope").innerHTML ='No Job Order Requests';
+                    var woodenString = '';
+                    for(var i=0;i<response.data.length;i++){
+                        var file ='';
+                     for(var j=0;j<response.data[i].files.length;j++){
+                        switch(response.data[i].files[j].fileContentType) {
+                        case "pdf":
+                              file +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[i].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:100%;"></a>'+
+                              '</div>';
+                        break;
+                        case "jpg":
+                              file +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[i].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                              '</div>';
+                        break;
+                        case "jpeg":
+                             file +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[i].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                              '</div>';
+                        break;
+                        default:
+                            file +=
+                            '<div   class="divico">'+
+                             '<a href="'+baseFileURL+response.data[i].files[j].fileUrl+'" target="_blank"> <img  src="" style="width:100%;"></a>'+
+                            '</div>';
+
+                      }
+                     }
+                      woodenString = 
+                        `<div class="input-group divContainer"  id="Wooden`+i+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
+                        <div  class="row col-lg-12 col-md-12 col-sm-12 ">
+                            
+                            <div   class="col">
+                                <label style="padding-left:2px;">Expected Delivery Date</label>
+                                <div class="input-group input-group-lg input-group-solid" >
+                                                        <div class="input-group date" id="kt_datetimepicker_`+i+`" data-target-input="nearest">
+                                                            <input disabled type="text" id="date`+i+`" name="date`+i+`" value="`+response.data[i].purchaseOrderExpectedDeliveryDate+`" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_`+i+`">
+                                                            <div class="input-group-append" data-target="#kt_datetimepicker_`+i+`" data-toggle="datetimepicker">
+                                                                <span class="input-group-text">
+                                                                    <i class="ki ki-calendar"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                            </div>
+                            <div   class="col">
+                                <label style="padding-left:2px;">Amount</label>
+                                <input disabled type="text" id="Quantity`+i+`" value="`+response.data[i].purchaseOrderAmount+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
+                            </div>            
+                            
+                            <div   class="col2">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div id="icons" class="paddall" style="display: inline-block;width: 100%;">
+                                        
+                                   `+file+`
+                                </div>
+                                </div>
+                            </div>
+                            <div id="recivedId" style="padding-top:2rem"  class="col">
+                                
+                                <button type="button" onclick="itemDelevierd(`+response.data[i].purchaseOrderId+`,`+i+`)" id="kt_approve_inquiry_button" class="btn btn-primary font-weight-bold"> Item Received </button>
+                                <div class="se-pre-con" id="load`+i+`" style="display: none;" ></div>
+                        </div>
+                        </div>
+
+                        </div>  `;
+                       // $('#Wooden').last().before(woodenString);
+                       document.getElementById("workscope").innerHTML += woodenString;
+                    }
+                    } else {
+                        Swal.fire({
+                            text: response.errorMessage,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                },
+            });
+            
+              
+        }
+        function itemDelevierd(purchaseOrderId,i){
+            document.getElementById("load"+i).style.removeProperty('display'); 
+             $.ajax({
+                type: "Post",
+                url: baseURL + '/Purchase/RecievePurchaseOrder?purchaseOrderId='+purchaseOrderId,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.isError == false) {
+                        document.getElementById("load"+i).style.display ="none";
+                        document.getElementById('Wooden'+i).remove();
+					}
+                    else {
+                        Swal.fire({
+                            text: response.errorMessage,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                },
+            });
+        }
     </script>
     <!--end::Page Scripts-->
 </body>

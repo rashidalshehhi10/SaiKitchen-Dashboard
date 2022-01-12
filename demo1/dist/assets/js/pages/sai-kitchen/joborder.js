@@ -175,6 +175,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         <i class="la la-file-contract"></i>
                     </a>
                     `;
+                    action += `
+                    <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#AuditApprove" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="purchase received">
+                        <i class="la la-registered"></i>
+                    </a>
+                
+                `;
                         }
                             return action;
                        
