@@ -996,7 +996,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
     }
     if(counter == 0 & jobOrder.length > 0){
       if(jobOrder[0].purchaseRequests.length >0){
-        jobOrder[0].purchaseRequests[0].files.forEach(element => {
+        jobOrder[0].purchaseRequests[0].purchaseOrders.forEach(jelement => {
+         jelement.files.forEach(element => {
          document.getElementById("purchaseRequests").innerHTML += element.fileUrl+',';
          var fileExtension = element.fileUrl.substr((element.fileUrl.lastIndexOf('.') + 1));
             if(   dicPchs["dicPchs"+response.data.inquiry.inquiryId]==null){
@@ -1040,7 +1041,9 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                 </div>
                 <!--end::Col-->`;
         }
-     })
+       })
+        }
+     )
       }
   }
     //payments files
