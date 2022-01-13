@@ -990,7 +990,7 @@ $('#kt_approve_inquiry_button').click(function () {
     for(var j=0;j<=elecount;j++){
       if(document.getElementById("Quantity"+j) != null){
        Wooden.push({
-         "purchaseOrderActualDeliveryDate":document.getElementById("date"+j).value,
+         "PurchaseOrderExpectedDeliveryDate":document.getElementById("date"+j).value,
          "purchaseOrderAmount":document.getElementById("Quantity"+j).value,
          "files":filearry[j]
        });

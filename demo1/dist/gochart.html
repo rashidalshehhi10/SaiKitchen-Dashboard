@@ -168,7 +168,7 @@
 							 var linksArray = new Array();
 							 let AllCustomers;
 							 var SumDelay;
-							 let LevelTotal = ["B", "C", "D"];
+							 let LevelTotal = ["A","B", "C", "D"];
 							 $(document).ready(function () {
 
 								const queryString = window.location.search;
@@ -218,7 +218,7 @@
 											}
 
 											SumDelay = response.data.inquiryInProgressDelay + response.data.needToFollowUpDelay + response.data.potentialCustomersDelay + response.data.needToContactDelay
-											nodesArray.push({"key":"A", "loc": "600 100","text":"Delay","val": SumDelay,"id":""},
+											nodesArray.push({"key":"A", "loc": "0 0","text":"Delay","val": SumDelay,"id":""},
 															{"key":"B", "loc":"-120 300", "text":"Customer With Inquiry","val": response.data.customerWithInquiry,"id":""},
 															{"key":"C", "loc":"300 300", "text":"Customer Without Inquiry","val": response.data.customerWithOutInquiry,"id":""},
 															{"key":"D", "loc":"600 300", "text":"Customer Not Yet Contacted","val": response.data.needToContact,"id":""},
@@ -272,10 +272,10 @@
 																			{"from":"H", "to":"N", "fromPort":"B", "toPort":"T"},
 																			{"from":"H", "to":"O", "fromPort":"B", "toPort":"T"},
 
-																			{"from":"A", "to":"J", "fromPort":"B", "toPort":"T","color": "C"},
+																			/* {"from":"A", "to":"J", "fromPort":"B", "toPort":"T","color": "C"},
 																			{"from":"A", "to":"L", "fromPort":"B", "toPort":"T","color": "C"},
 																			{"from":"A", "to":"O", "fromPort":"B", "toPort":"T","color": "C"},
-																			{"from":"A", "to":"P", "fromPort":"B", "toPort":"T","color": "C"}
+																			{"from":"A", "to":"P", "fromPort":"B", "toPort":"T","color": "C"} */
 																		
 																			)					
 																						
