@@ -742,6 +742,7 @@ var KTAppsUsersListDatatable = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                document.getElementById("kt_add_customer_button").disabled = true;
                 var customer = {
                     customerId: 0,
                     customerName: "string",
@@ -816,10 +817,12 @@ var KTAppsUsersListDatatable = function() {
                         console.log(response);
                         // window.location.replace("home.html");
                         if (response.isError == false) {
+                            document.getElementById("kt_add_customer_button").disabled = false;
                             // sessionStorage.setItem('user', JSON.stringify(response));
                             location.reload();
 
                         } else {
+                            document.getElementById("kt_add_customer_button").disabled = false;
                             Swal.fire({
                                 text: response.errorMessage,
                                 icon: "error",

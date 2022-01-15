@@ -1039,7 +1039,7 @@ var KTAppsUsersListDatatable = function() {
         var form = KTUtil.getById('kt_add_customer');
         var formSubmitUrl = KTUtil.attr(form, 'action');
         var formSubmitButton = KTUtil.getById('kt_add_customer_button');
-
+       
         if (!form) {
             return;
         }
@@ -1093,6 +1093,7 @@ var KTAppsUsersListDatatable = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
+                document.getElementById("kt_add_customer_button").disabled = true;
                 var customer = {
                     customerId: 0,
                     customerName: "string",
@@ -1168,9 +1169,11 @@ var KTAppsUsersListDatatable = function() {
                         // window.location.replace("home.html");
                         if (response.isError == false) {
                             // sessionStorage.setItem('user', JSON.stringify(response));
+                            document.getElementById("kt_add_customer_button").disabled = false;
                             location.reload();
 
                         } else {
+                            document.getElementById("kt_add_customer_button").disabled = false;
                             Swal.fire({
                                 text: response.errorMessage,
                                 icon: "error",
