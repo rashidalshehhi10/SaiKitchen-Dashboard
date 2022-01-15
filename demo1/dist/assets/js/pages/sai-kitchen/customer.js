@@ -635,7 +635,7 @@ var KTAppsUsersListDatatable = function() {
                         return output;
                     },
                 },{
-                    field: 'updateDate',
+                    field: 'updatedDate',
                     title: 'Last FollowUp Date',
                     autoHide: true,
                     // type: 'date',
@@ -651,7 +651,7 @@ var KTAppsUsersListDatatable = function() {
                         // };
                         // var index = KTUtil.getRandomInt(1, 4);
                         if (data.customerNextMeetingDate !== null) {
-                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.customerNextMeetingDate + '</div>';
+                            output += '<div class="font-weight-bolder text-primary mb-0">' + data.updatedDate + '</div>';
                             // output += '<div class="text-muted">' + status[index].title + '</div>';
                         }
                         return output;
