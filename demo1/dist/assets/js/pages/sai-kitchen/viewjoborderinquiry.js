@@ -1045,6 +1045,55 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
         }
      )
       }
+      //for material job order files
+      if(jobOrder[0].purchaseRequests.length >0){
+         jobOrder[0].purchaseRequests[0].files.forEach(element => {
+          document.getElementById("purchaseRequests").innerHTML += element.fileUrl+',';
+          var fileExtension = element.fileUrl.substr((element.fileUrl.lastIndexOf('.') + 1));
+             if(   dicPchs["dicPchs"+response.data.inquiry.inquiryId]==null){
+               dicPchs["dicPchs"+response.data.inquiry.inquiryId]=``;
+             }
+             if(fileExtension=='pdf'){
+               dicPchs["dicPchs"+response.data.inquiry.inquiryId] +=`
+                     <!--begin::Col-->
+                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <!--begin::Card-->
+                        <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                           <div class="d-flex flex-column align-items-center">
+                              <!--begin: Icon-->
+                              <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                              <!--end: Icon-->
+                              <!--begin: Tite-->
+                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                              <!--end: Tite-->
+                           </div>
+                        </div>
+                        <!--end:: Card-->
+                     </div>
+                     <!--end::Col-->`;
+   
+             }else{
+               dicPchs["dicPchs"+response.data.inquiry.inquiryId] +=`
+                 <!--begin::Col-->
+                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                    <!--begin::Card-->
+                    <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                       <div class="d-flex flex-column align-items-center">
+                          <!--begin: Icon-->
+                          <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                          <!--end: Icon-->
+                          <!--begin: Tite-->
+                          <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                          <!--end: Tite-->
+                       </div>
+                    </div>
+                    <!--end:: Card-->
+                 </div>
+                 <!--end::Col-->`;
+         }
+        }
+      )
+       }
   }
     //payments files
     if(response.data.inquiry.quotations.length > 0){

@@ -144,16 +144,25 @@ jQuery(document).ready(function() {
     document.getElementById("inquiryId").value = inquiryId;
     console.log(inquiryId);
     if (inquiryId == null || inquiryId == "") {
-        window.location.replace("inquiry.html");
+        window.location.replace("commercialchecklist.html");
     }
     
 branchTypeId = user.data.userRoles[0].branch.branchTypeId;
+if(branchTypeId==2||branchTypeId==1){
+   document.getElementById("RequestforReschedulingBtn").style.display = "inline-block";
+      }
 
-   
+      if(branchTypeId==3){
+         document.getElementById("jocomp").style.display = "inline-block";
+         //document.getElementById("rtinstall").style.display = "inline-block";
+         document.getElementById("adelay").style.display = "inline-block";
+        // document.getElementById("aror").style.display = "inline-block";
+            }
+    
 
     $.ajax({
         type: "post",
-        url: baseURL + '/Inquiry/GetinquiryDetailsById?inquiryId=' + inquiryId,
+        url: baseURL + '/JobOrderDetail/GetinquiryJobOrderDetailsById?inquiryId=' + inquiryId,
 
         headers: {
             'Content-Type': 'application/json',
@@ -168,7 +177,9 @@ branchTypeId = user.data.userRoles[0].branch.branchTypeId;
         success: function(response) {
             console.log(response);
             if (response.isError == false) {
-                  response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
+
+                
+                response.data.inquiry.inquiryWorkscopes[0]['quotations'] =response.data.inquiry.quotations;
 var inquiryWorkscopelength=response.data.inquiry.inquiryWorkscopes[response.data.inquiry.inquiryWorkscopes.length-1];
 console.log(inquiryWorkscopelength);
 inquiry=response.data.inquiry;
@@ -178,8 +189,7 @@ document.getElementById('txtPromoCode').value=inquiry.promo?.promoName;
 promoDiscount=inquiry.promoDiscount;
 promoId=inquiry.promoId;
 isMeasurementPromo=inquiry.isMeasurementPromo;
-if(inquiry.payments.length > 0)
-  measurementFee=inquiry.payments[0]?.paymentAmount;
+measurementFee=inquiry.payments[0]?.paymentAmount;
 const customerDetail = document.getElementById('customerDetail');
 const tabs = document.getElementById('tabpaneworkscope');
 const workscope=document.getElementById('workscopedetail');
@@ -200,9 +210,6 @@ var dicCALC = new Object();
 var dicPchs = new Object();
 var workscopeHtml=``;
 var tabsHTML =``;
-
-var jobHtml =``;
-var jobdetail =``;
 dicMeasurement["measurementRow"+response.data.inquiry.inquiryId]='';
 dicDesign["DesignRow"+response.data.inquiry.inquiryId]='';
 dicQuot["QuotRow"+response.data.inquiry.inquiryId]='';
@@ -217,9 +224,19 @@ dicAfter["dicAfter"+response.data.inquiry.inquiryId]='';
 dicInstall["dicInstall"+response.data.inquiry.inquiryId]='';
 dicCALC["dicCALC"+response.data.inquiry.inquiryId]='';
 dicPchs["dicPchs"+response.data.inquiry.inquiryId]='';
+// response.data.inquiryWorkscopes.forEach(element => {
+// 	console.log(baseFileURL+element.fileUrl);
 
-if(response.data.inquiry.jobOrders.length > 0){
-   var bool1,bool2,bool2,bool3,bool4,bool5,bool6;
+//     workscopeHtml+=` <li class="nav-item">
+//     <a class="nav-link " data-toggle="tab" href="#workscope`+element.workscopeId+`">
+//     <span class="nav-icon">
+//     <i class="la la-box"></i>
+//     </span>
+//     <span class="nav-text">`+element.workscopeId+`</span>
+//     </a>
+//  </li>`;
+// });
+var bool1,bool2,bool2,bool3,bool4,bool5,bool6;
    if(response.data.inquiry.jobOrders[0].siteMeasurementMatchingWithDesign){
       bool1  ="Yes";
    }else
@@ -243,102 +260,7 @@ if(response.data.inquiry.jobOrders.length > 0){
    if(response.data.inquiry.jobOrders[0].appliancesDataSheet){
       bool6  ="Yes";
    }else
-      bool6 = "No";          
-   jobHtml =`<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Prefered date by client :</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderExpectedDeadline+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">Site Measurement Matching With Design :</span>
-      <span class="text-muted" style=" text-align: right;">`+bool1+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">Site Measurement Matching With Design Notes :</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].siteMeasurementMatchingWithDesignNotes+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">material Confirmation :</span>
-      <span class="text-muted" style=" text-align: right;">`+bool2+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">material Confirmation Notes:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].materialConfirmationNotes+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">mep drawing:</span>
-      <span class="text-muted" style=" text-align: right;">`+bool3+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">mep drawing Notes:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].mepdrawingNotes+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">quotation And Calculation Sheet Matching Proposal:</span>
-      <span class="text-muted" style=" text-align: right;">`+bool4+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">quotation And Calculation Sheet Matching Proposal Notes:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].quotationAndCalculationSheetMatchingProposalNotes+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">approved Drawings And Availability Of Client Signature:</span>
-      <span class="text-muted" style=" text-align: right;">`+bool5+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">approved Drawings And Availability Of Client Signature Notes:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].approvedDrawingsAndAvailabilityOfClientSignatureNotes+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">appliances DataSheet:</span>
-      <span class="text-muted" style=" text-align: right;">`+bool6+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-      <span class="font-weight-bold mr-2">appliances DataSheet Notes:</span>
-      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].appliancesDataSheetNotes+`</span>
-</div>
-`;
-if(response.data.inquiry.jobOrders[0].jobOrderDetails.length >0){
- jobdetail = `<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Material Requested Date:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialRequestDate+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Shop Drawing Completion Date:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].shopDrawingCompletionDate+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Production Completion Date:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].productionCompletionDate+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Wooden Work Completion Date:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].woodenWorkCompletionDate+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Material Delivery Final Date:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialDeliveryFinalDate+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Counter Top Fixing Date:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].countertopFixingDate+`</span>
-</div>
-<div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Installation Start Date:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate+`</span>
-</div>
- <div class="d-flex align-items-center justify-content-between mb-2">
-   <span class="font-weight-bold mr-2">Notes:</span>
-   <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].jobOrderDetailDescription+`</span>
-</div>
-
-`;
-}
-jobHtml +=jobdetail;
-}
+      bool6 = "No";  
 customerDetail.innerHTML=` <!--begin::User-->
 <div class="d-flex align-items-center">
    <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
@@ -389,15 +311,100 @@ customerDetail.innerHTML=` <!--begin::User-->
       <span class="font-weight-bold mr-2">Type Of Unit:</span>
       <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.building.buildingTypeOfUnit+`</span>
    </div>
-   `+jobHtml+`
-   
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Prefered date by client :</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderExpectedDeadline+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Is Appliances Provided By Client:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].isAppliancesProvidedByClient+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Material Requested Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialRequestDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Shop Drawing Completion Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].shopDrawingCompletionDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Production Completion Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].productionCompletionDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Wooden Work Completion Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].woodenWorkCompletionDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Material Delivery Final Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].materialDeliveryFinalDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Counter Top Fixing Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].countertopFixingDate+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Installation Start Date:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate+`</span>
+   </div>
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Notes:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].jobOrderDetails[0].jobOrderDetailDescription+`</span>
+   </div>
+   <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Site Measurement Matching With Design :</span>
+      <span class="text-muted" style=" text-align: right;">`+bool1+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">Site Measurement Matching With Design Notes :</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].siteMeasurementMatchingWithDesignNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">material Confirmation :</span>
+      <span class="text-muted" style=" text-align: right;">`+bool2+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">material Confirmation Notes:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].materialConfirmationNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">mep drawing:</span>
+      <span class="text-muted" style=" text-align: right;">`+bool3+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">mep drawing Notes:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].mepdrawingNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">quotation And Calculation Sheet Matching Proposal:</span>
+      <span class="text-muted" style=" text-align: right;">`+bool4+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">quotation And Calculation Sheet Matching Proposal Notes:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].quotationAndCalculationSheetMatchingProposalNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">approved Drawings And Availability Of Client Signature:</span>
+      <span class="text-muted" style=" text-align: right;">`+bool5+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">approved Drawings And Availability Of Client Signature Notes:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].approvedDrawingsAndAvailabilityOfClientSignatureNotes+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">appliances DataSheet:</span>
+      <span class="text-muted" style=" text-align: right;">`+bool6+`</span>
+</div>
+<div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="font-weight-bold mr-2">appliances DataSheet Notes:</span>
+      <span class="text-muted" style=" text-align: right;">`+response.data.inquiry.jobOrders[0].appliancesDataSheetNotes+`</span>
+</div>
 </div>
 <!--end::Contact-->
 `;
 inquiryCode.innerHTML=response.data.inquiry.inquiryCode;
 var isfirst=true;
 var counter = 0;
-
 response.data.inquiry.inquiryWorkscopes.forEach(element => {
    if(isfirst){
        workscopeHtml+=` <li class="nav-item">
@@ -981,56 +988,57 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
     }
     if(counter == 0 & jobOrder.length > 0){
       if(jobOrder[0].purchaseRequests.length >0){
-         jobOrder[0].purchaseRequests[0].purchaseOrders.forEach(jelement => {
-          jelement.files.forEach(element => {
-          document.getElementById("purchaseRequests").innerHTML += element.fileUrl+',';
-          var fileExtension = element.fileUrl.substr((element.fileUrl.lastIndexOf('.') + 1));
-             if(   dicPchs["dicPchs"+response.data.inquiry.inquiryId]==null){
-               dicPchs["dicPchs"+response.data.inquiry.inquiryId]=``;
-             }
-             if(fileExtension=='pdf'){
-               dicPchs["dicPchs"+response.data.inquiry.inquiryId] +=`
-                     <!--begin::Col-->
-                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                        <!--begin::Card-->
-                        <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                           <div class="d-flex flex-column align-items-center">
-                              <!--begin: Icon-->
-                              <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
-                              <!--end: Icon-->
-                              <!--begin: Tite-->
-                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
-                              <!--end: Tite-->
-                           </div>
-                        </div>
-                        <!--end:: Card-->
-                     </div>
-                     <!--end::Col-->`;
-   
-             }else{
-               dicPchs["dicPchs"+response.data.inquiry.inquiryId] +=`
-                 <!--begin::Col-->
-                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                    <!--begin::Card-->
-                    <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                       <div class="d-flex flex-column align-items-center">
-                          <!--begin: Icon-->
-                          <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
-                          <!--end: Icon-->
-                          <!--begin: Tite-->
-                          <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
-                          <!--end: Tite-->
+        jobOrder[0].purchaseRequests[0].purchaseOrders.forEach(jelement => {
+         jelement.files.forEach(element => {
+         document.getElementById("purchaseRequests").innerHTML += element.fileUrl+',';
+         var fileExtension = element.fileUrl.substr((element.fileUrl.lastIndexOf('.') + 1));
+            if(   dicPchs["dicPchs"+response.data.inquiry.inquiryId]==null){
+              dicPchs["dicPchs"+response.data.inquiry.inquiryId]=``;
+            }
+            if(fileExtension=='pdf'){
+              dicPchs["dicPchs"+response.data.inquiry.inquiryId] +=`
+                    <!--begin::Col-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                       <!--begin::Card-->
+                       <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                          <div class="d-flex flex-column align-items-center">
+                             <!--begin: Icon-->
+                             <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                             <!--end: Icon-->
+                             <!--begin: Tite-->
+                             <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                             <!--end: Tite-->
+                          </div>
                        </div>
+                       <!--end:: Card-->
                     </div>
-                    <!--end:: Card-->
-                 </div>
-                 <!--end::Col-->`;
-         }
-        })
-         }
-      )
-       }
-       if(jobOrder[0].purchaseRequests.length >0){
+                    <!--end::Col-->`;
+  
+            }else{
+              dicPchs["dicPchs"+response.data.inquiry.inquiryId] +=`
+                <!--begin::Col-->
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                   <!--begin::Card-->
+                   <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                      <div class="d-flex flex-column align-items-center">
+                         <!--begin: Icon-->
+                         <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                         <!--end: Icon-->
+                         <!--begin: Tite-->
+                         <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                         <!--end: Tite-->
+                      </div>
+                   </div>
+                   <!--end:: Card-->
+                </div>
+                <!--end::Col-->`;
+        }
+       })
+        }
+     )
+      }
+      //for material job order files
+      if(jobOrder[0].purchaseRequests.length >0){
          jobOrder[0].purchaseRequests[0].files.forEach(element => {
           document.getElementById("purchaseRequests").innerHTML += element.fileUrl+',';
           var fileExtension = element.fileUrl.substr((element.fileUrl.lastIndexOf('.') + 1));
@@ -1078,7 +1086,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
         }
       )
        }
-}
+  }
     //payments files
     if(response.data.inquiry.quotations.length > 0){
     if(counter == 0 & response.data.inquiry.quotations[0].payments.length > 0){
@@ -1898,6 +1906,8 @@ isfirst=false;
 
 tabs.innerHTML=`<div class="tab-content ">`+tabsHTML+`</div>`;
 workscope.innerHTML=workscopeHtml;
+
+
             }else {
 				Swal.fire({
 					text: response.errorMessage,
@@ -1942,108 +1952,9 @@ workscope.innerHTML=workscopeHtml;
    
 
     });
-
-    $('#kt_approve_inquiry_button').click(function () {
-      var checklistdata = {
-          "inquiryId":parseInt( document.getElementById('inquiryId').value),
-          "reason": document.getElementById('CheckComment').value,
-        };
-  
-      const data = JSON.stringify(checklistdata);
-      console.log(data);
-      
-      $.ajax({
-          type: "Post",
-          url: baseURL + '/JobOrder/ApproveAudit',
-          headers: {
-              'Content-Type': 'application/json',
-              'userId': user.data.userId,
-              'Access-Control-Allow-Origin': '*',
-          },
-          data: data,
-          success: function(response) {
-              console.log(response);
+ 
    
-              window.location.replace("joborderaudit.html");
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-              document.getElementById("alert").innerHTML ="An error occured";
-          }
-      });
-  });
-  $('#kt_reject_inquiry_button').click(function () {
     
-      var form = KTUtil.getById('kt_reject_inquiry');
-      var formSubmitUrl = KTUtil.attr(form, 'action');
-      var formSubmitButton = KTUtil.getById('RejectComment');
-      var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
-      if (!form) {
-          return;
-      }
-  
-      FormValidation
-          .formValidation(
-              form, {
-                  fields: {
-                      RejectComment: {
-                          validators: {
-                              notEmpty: {
-                                  message: 'Reason is required'
-                              }
-                          }
-                      },
-                      
-                  },
-                  plugins: {
-                      trigger: new FormValidation.plugins.Trigger(),
-                      submitButton: new FormValidation.plugins.SubmitButton(),
-                      bootstrap: new FormValidation.plugins.Bootstrap({
-                      })
-                  }
-              }
-          )
-          .on('core.form.valid', function() {
-              KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");     
-              var rejectlistdata = {
-                  "inquiryId":parseInt(document.getElementById('inquiryId').value),
-                  "reason":document.getElementById('RejectComment').value,
-                };
-  
-              const data = JSON.stringify(rejectlistdata);
-              console.log(data);
-               $.ajax({
-                  type: "Post",
-                  url: baseURL + '/JobOrder/RejectAudit',
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'userId': user.data.userId,
-                      'Access-Control-Allow-Origin': '*',
-                  },
-                  data: data,
-                  success: function(response) {
-                      console.log(response);
-                      window.location.replace("joborderaudit.html");
-                      
-                  },
-                  error: function(XMLHttpRequest, textStatus, errorThrown) {
-                      document.getElementById("ralert").innerHTML ="An error occured";
-                  }
-              }); 				
-          })
-          .on('core.form.invalid', function() {
-              Swal.fire({
-                  text: "Sorry, looks like there are some errors detected, please try again.",
-                  icon: "error",
-                  buttonsStyling: false,
-                  confirmButtonText: "Ok, got it!",
-                  customClass: {
-                      confirmButton: "btn font-weight-bold btn-light-primary"
-                  }
-              }).then(function() {
-                  KTUtil.scrollTop();
-              });
-          });
-  });
     
     
                             

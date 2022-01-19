@@ -169,7 +169,11 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         
                         if (quotationPermission >= 2) {
                             console.log(full.inquiryId);
-
+                            action += `
+                            <a href="viewpurchasedetails.html?inquiryId=` + full.inquiryId + `" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="View Inquiry">\
+                            <i class="la la-file-contract"></i>
+                        </a>
+                        `;
                         action += `
                             <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#AuditApprove" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
 								<i class="la la-registered"></i>
