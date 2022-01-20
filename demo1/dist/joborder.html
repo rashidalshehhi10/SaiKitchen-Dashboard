@@ -955,7 +955,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div   class="col">
                                 <label style="padding-left:2px;">Amount</label>
-                                <input disabled type="text" id="Quantity`+i+`" value="`+response.data[i].purchaseOrderAmount+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
+                                <input disabled type="text" id="Quantity`+i+`" value="`+response.data[i].purchaseOrderAmount+`" style="width:10rem !important;"  class="form-control"  value="" placeholder="" >
                             </div>            
                             
                             <div   class="col2">
@@ -966,9 +966,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 </div>
                             </div>
+                            <div   class="col">
+                                <label style="padding-left:2px;">Final Delivery Date</label>
+                                <input disabled type="text" id="final`+i+`" value="" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
+                            </div> 
                             <div id="recivedId" style="padding-top:2rem"  class="col">
                                 
-                                <button type="button" onclick="itemDelevierd(`+response.data[i].purchaseOrderId+`,`+i+`)" id="kt_approve_inquiry_button" class="btn btn-primary font-weight-bold"> Item Received </button>
+                                <button type="button" onclick="itemDelevierd(`+response.data[i].purchaseOrderId+`,`+i+`)" id="kt_approve_inquiry_button`+i+`" class="btn btn-primary font-weight-bold"> Item Received </button>
                                 <div class="se-pre-con" id="load`+i+`" style="display: none;" ></div>
                         </div>
                         </div>
@@ -999,6 +1003,17 @@ License: You must have a valid license purchased only from themeforest(the above
               
         }
         function itemDelevierd(purchaseOrderId,i){
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                        
             document.getElementById("load"+i).style.removeProperty('display'); 
              $.ajax({
                 type: "Post",
@@ -1011,7 +1026,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     console.log(response);
                     if (response.isError == false) {
                         document.getElementById("load"+i).style.display ="none";
-                        document.getElementById('Wooden'+i).remove();
+                        //document.getElementById('Wooden'+i).remove();
+                        document.getElementById("kt_approve_inquiry_button"+i).disabled = true;
+                        document.getElementById("final"+i).value = response.data.purchaseOrderActualDeliveryDate;
 					}
                     else {
                         Swal.fire({
@@ -1031,6 +1048,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     alert(textStatus);
                 },
             });
+           }
+            })
         }
     </script>
     <!--end::Page Scripts-->

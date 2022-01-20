@@ -215,6 +215,7 @@ var dicBefore = new Object();
 var dicAfter = new Object();
 var dicInstall = new Object();
 var dicCALC = new Object();
+var dicPurch = new Object();
 var dicPchs = new Object();
 var workscopeHtml=``;
 var tabsHTML =``;
@@ -231,6 +232,7 @@ dicBefore["dicBefore"+response.data.inquiry.inquiryId]='';
 dicAfter["dicAfter"+response.data.inquiry.inquiryId]='';
 dicInstall["dicInstall"+response.data.inquiry.inquiryId]='';
 dicCALC["dicCALC"+response.data.inquiry.inquiryId]='';
+dicPurch["dicPurch"+response.data.inquiry.inquiryId]='';
 dicPchs["dicPchs"+response.data.inquiry.inquiryId]='';
 // response.data.inquiryWorkscopes.forEach(element => {
 // 	console.log(baseFileURL+element.fileUrl);
@@ -1045,56 +1047,58 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
         }
      )
       }
-      //for material job order files
-      if(jobOrder[0].purchaseRequests.length >0){
-         jobOrder[0].purchaseRequests[0].files.forEach(element => {
-          document.getElementById("purchaseRequests").innerHTML += element.fileUrl+',';
-          var fileExtension = element.fileUrl.substr((element.fileUrl.lastIndexOf('.') + 1));
-             if(   dicPchs["dicPchs"+response.data.inquiry.inquiryId]==null){
-               dicPchs["dicPchs"+response.data.inquiry.inquiryId]=``;
-             }
-             if(fileExtension=='pdf'){
-               dicPchs["dicPchs"+response.data.inquiry.inquiryId] +=`
-                     <!--begin::Col-->
-                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                        <!--begin::Card-->
-                        <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                           <div class="d-flex flex-column align-items-center">
-                              <!--begin: Icon-->
-                              <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
-                              <!--end: Icon-->
-                              <!--begin: Tite-->
-                              <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
-                              <!--end: Tite-->
-                           </div>
-                        </div>
-                        <!--end:: Card-->
-                     </div>
-                     <!--end::Col-->`;
-   
-             }else{
-               dicPchs["dicPchs"+response.data.inquiry.inquiryId] +=`
-                 <!--begin::Col-->
-                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                    <!--begin::Card-->
-                    <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
-                       <div class="d-flex flex-column align-items-center">
-                          <!--begin: Icon-->
-                          <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
-                          <!--end: Icon-->
-                          <!--begin: Tite-->
-                          <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
-                          <!--end: Tite-->
-                       </div>
-                    </div>
-                    <!--end:: Card-->
-                 </div>
-                 <!--end::Col-->`;
-         }
-        }
-      )
-       }
   }
+  if(counter == 0 & jobOrder.length > 0){
+   //for material job order files
+   if(jobOrder[0].purchaseRequests.length >0){
+      jobOrder[0].purchaseRequests[0].files.forEach(element => {
+       document.getElementById("purchfile").innerHTML += element.fileUrl+',';
+       var fileExtension = element.fileUrl.substr((element.fileUrl.lastIndexOf('.') + 1));
+          if(   dicPurch["dicPurch"+response.data.inquiry.inquiryId]==null){
+            dicPurch["dicPurch"+response.data.inquiry.inquiryId]=``;
+          }
+          if(fileExtension=='pdf'){
+            dicPurch["dicPurch"+response.data.inquiry.inquiryId] +=`
+                  <!--begin::Col-->
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                     <!--begin::Card-->
+                     <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                        <div class="d-flex flex-column align-items-center">
+                           <!--begin: Icon-->
+                           <img alt="" class="max-h-65px" src="assets/media/svg/files/pdf.svg" />
+                           <!--end: Icon-->
+                           <!--begin: Tite-->
+                           <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                           <!--end: Tite-->
+                        </div>
+                     </div>
+                     <!--end:: Card-->
+                  </div>
+                  <!--end::Col-->`;
+
+          }else{
+            dicPurch["dicPurch"+response.data.inquiry.inquiryId] +=`
+              <!--begin::Col-->
+              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                 <!--begin::Card-->
+                 <div class="card-body" onclick="window.open('`+baseFileURL+element.fileUrl+`', '_blank');" target="_blank" style="cursor: pointer;">
+                    <div class="d-flex flex-column align-items-center">
+                       <!--begin: Icon-->
+                       <img alt="" class="max-h-65px" src="assets/media/svg/files/jpg.svg" />
+                       <!--end: Icon-->
+                       <!--begin: Tite-->
+                       <a href="#" class="text-dark-75 font-weight-bold mt-15 font-size-lg">`+element.fileUrl+`</a>
+                       <!--end: Tite-->
+                    </div>
+                 </div>
+                 <!--end:: Card-->
+              </div>
+              <!--end::Col-->`;
+      }
+     }
+   )
+    }
+}
     //payments files
     if(response.data.inquiry.quotations.length > 0){
     if(counter == 0 & response.data.inquiry.quotations[0].payments.length > 0){
@@ -1294,8 +1298,29 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
     counter = 1;
            if(isfirst){
               let Advance='';let Before='';let After='';let Install='';
-              let purchase = '';
+              let purchase = '';let purchfile='';
              //   if(element.designs.length > 0){
+               purchfile =
+               `<div class="card">
+               <div class="card-header" >
+                  <div class="card-title collapsed" data-toggle="collapse" data-target="#dicPurch`+element.inquiryWorkscopeId+`">
+                     <i class="la fab la-codepen"></i>Purchase Request File<span class="badge badge-default bi-download" id="k" onclick="downloadItems('purchfile');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                     <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                   </svg></span>
+
+              
+
+                  </div>
+               </div>
+               <div id="dicPurch`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+                <div class="card-body" >
+                <div class="row" id="dicPurch`+response.data.inquiry.inquiryId+`">
+                `+dicPurch["dicPurch"+response.data.inquiry.inquiryId]+`
+                    </div>
+                 </div>
+               </div>
+            </div>`;
                purchase =
                   `<div class="card">
                   <div class="card-header" >
@@ -1602,7 +1627,8 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                <!--begin::Accordion-->
                <div class="accordion accordion-solid accordion-toggle-plus" id="accordion`+element.inquiryWorkscopeId+`">
                   
-                  `+measur+design+quot+calculation+collect+purchase+Advance+Before+After+Install+`
+               
+               `+measur+design+quot+calculation+collect+purchfile+purchase+Advance+Before+After+Install+`
              
 
                </div>
@@ -1612,7 +1638,28 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
            
            }else{
               let Advance='';let Before='';let After='';let Install='';
-              let purchase = '';
+              let purchase = '';let purchfile ='';
+              purchfile =
+              `<div class="card">
+              <div class="card-header" >
+                 <div class="card-title collapsed" data-toggle="collapse" data-target="#dicPurch`+element.inquiryWorkscopeId+`">
+                    <i class="la fab la-codepen"></i>Purchase Request File<span class="badge badge-default bi-download" id="k" onclick="downloadItems('purchfile');"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                  </svg></span>
+
+             
+
+                 </div>
+              </div>
+              <div id="dicPurch`+element.inquiryWorkscopeId+`" class="collapse" data-parent="#accordion`+element.inquiryWorkscopeId+`">
+               <div class="card-body" >
+               <div class="row" id="dicPurch`+response.data.inquiry.inquiryId+`">
+               `+dicPurch["dicPurch"+response.data.inquiry.inquiryId]+`
+                   </div>
+                </div>
+              </div>
+           </div>`;
               //   if(element.designs.length > 0){
                 purchase =
                    `<div class="card">
@@ -1902,7 +1949,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
       
       `+measur+design+
       quot+calculation
-      +collect+purchase+Advance+Before+After+Install+
+      +collect+purchfile+purchase+Advance+Before+After+Install+
       `
    </div>
    <!--end::Accordion-->
