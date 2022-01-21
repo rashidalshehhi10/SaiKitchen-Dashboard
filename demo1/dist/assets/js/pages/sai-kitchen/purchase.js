@@ -175,7 +175,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         </a>
                         `;
                         action += `
-                            <a type="button"  onclick="addComponent(` + full.inquiryId + `);" data-toggle="modal" data-target="#AuditApprove" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
+                            <a type="button"  onclick="addComponent(` + full.inquiryId + `);beforeWooden(` + full.inquiryId + `);" data-toggle="modal" data-target="#AuditApprove" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Approved">
 								<i class="la la-registered"></i>
 							</a>
                         

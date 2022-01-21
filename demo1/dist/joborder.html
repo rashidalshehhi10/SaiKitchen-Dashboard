@@ -55,8 +55,11 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="apple-touch-icon" href="assets/media/logos/icon-512x512.png" />
     <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
     <meta name="theme-color" content="#db4938" />
-    <style>
+    <!-- <style>
         .divico{width: 100px;border-radius: 5px;background-color: #f0e8ff;padding: 15px;margin-right: 5px;margin-bottom: 5px;float: left}
+    </style> -->
+    <style>
+        .divico{width: 60px;border-radius: 5px;background-color: #f0e8ff;padding: 5px;margin-right: 5px;margin-bottom: 5px;}
     </style>
           <style>
 
@@ -936,6 +939,14 @@ License: You must have a valid license purchased only from themeforest(the above
 
                       }
                      }
+                     var disable=''
+                     if(response.data[i].purchaseStatusId==4){
+                      disable = 'disabled';
+                     }
+                     var dis ='';
+                     if(response.data[i].purchaseOrderDescription!=null){
+                      dis =response.data[i].purchaseOrderDescription;
+                     }
                       woodenString = 
                         `<div class="input-group divContainer"  id="Wooden`+i+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
                         <div  class="row col-lg-12 col-md-12 col-sm-12 ">
@@ -957,7 +968,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label style="padding-left:2px;">Amount</label>
                                 <input disabled type="text" id="Quantity`+i+`" value="`+response.data[i].purchaseOrderAmount+`" style="width:10rem !important;"  class="form-control"  value="" placeholder="" >
                             </div>            
-                            
+                            <div   class="col2">
+                              <label style="padding-left:2px;">Discription</label>
+                             <textarea id="bDescId`+i+`" class="form-control" rows="5" value=""  placeholder="">`+dis+`</textarea>
+                            </div> 
                             <div   class="col2">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div id="icons" class="paddall" style="display: inline-block;width: 100%;">
@@ -972,7 +986,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div> 
                             <div id="recivedId" style="padding-top:2rem"  class="col">
                                 
-                                <button type="button" onclick="itemDelevierd(`+response.data[i].purchaseOrderId+`,`+i+`)" id="kt_approve_inquiry_button`+i+`" class="btn btn-primary font-weight-bold"> Item Received </button>
+                                <button `+disable+` type="button" onclick="itemDelevierd(`+response.data[i].purchaseOrderId+`,`+i+`)" id="kt_approve_inquiry_button`+i+`" class="btn btn-primary font-weight-bold"> Item Received </button>
                                 <div class="se-pre-con" id="load`+i+`" style="display: none;" ></div>
                         </div>
                         </div>
