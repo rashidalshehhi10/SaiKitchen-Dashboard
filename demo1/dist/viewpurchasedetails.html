@@ -111,6 +111,19 @@
          } 
          
    </style>
+    <style>
+      .divico{width: 60px;border-radius: 5px;background-color: #f0e8ff;padding: 5px;margin-right: 5px;margin-bottom: 5px;}
+  </style>
+          <style>
+
+            .se-pre-con {
+               padding-left: 9rem;
+                width: 60px;
+                height: 60px;
+                z-index: 9999;
+                background: url(assets/media/gif/load.gif) center no-repeat #fff;
+            }
+                  </style>
    </head>
    <!--end::Head-->
    <!--begin::Body-->
@@ -142,7 +155,7 @@
                <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
                   <div class="card-toolbar" style="padding-right: 25px;text-align: right;width: 100%;">
      
-                     <a href="#" id="RequestforReschedulingBtn" onclick="addComponent()" data-toggle="modal" data-target="#AuditApprove"     class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff; display: none;">
+                     <a href="#" id="RequestforReschedulingBtn" onclick="addComponent();beforeWooden();" data-toggle="modal" data-target="#AuditApprove"     class="btn btn-sm font-weight-bold headapp" style="background-color: #F1583E; color:#ffffff; display: none;">
                         <i >
                            <span class="svg-icon svg-icon-2x svg-icon-white ml-n2">
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
@@ -645,6 +658,9 @@
             <div class="modal-body">
               <div id="WorkscopesDiv" style="padding-left: 20px;">
                 <div class="form-group row" id="workscope">
+                  <div class="row" id="beforeWooden">
+
+                  </div>
                   <input type="hidden" id="worckscopeId" value="" />
                   <input type="hidden" value="0" id="HideWoodenLength" />
                 <div class="input-group"   >
@@ -653,7 +669,7 @@
                   </div>
                   <div class="row" id="Wooden"></div>
                   
-  </div>
+                  </div>
              </div>
               <div class="form-group row">
 
@@ -996,161 +1012,399 @@
                   return arr;
               }
             
-            function addWooden(i){
-                  $(document).ready(function() {
-                    $('#kt_datetimepicker_'+i).datetimepicker({
-                  // useCurrent: true,
-                 minDate: new Date().getDate(),
-      
-                  });
-                  let measurementFile =new Array();
-              $('#kt_dropzone_'+i).dropzone({
-                  url: baseURL+"/File/UploadFile", // Set the url for your upload script location
-                 type: "Head",
-                 headers : {
-                     'Access-Control-Allow-Origin': '*',
-                 },
-                 paramName: "file"+i, // The name that will be used to transfer the file
-                 maxFiles: 150,
-                 maxFilesize: 30000, // MB
-                 timeout: 600000,
-                 addRemoveLinks: true,
-                 removedfile:function(file) {
-                  var fileuploded = file.previewElement.querySelector("[data-dz-name]");
-                  var fileurl ='';
-                  var filearr = fileuploded.innerHTML.split(".");
-                  if(filearr.length > 1){
-                      fileurl = "/File/DeleteFileFromBlob?fileName=";
-                  }else{
-                      fileurl = "/File/DeleteVideo?VideoId=";
-                  }
-                  $.ajax({
-                      type:"post",
-                      url:baseURL+fileurl+fileuploded.innerHTML,
-                      cache:false,
-                      success: function(){
-                          removeA(measurementFile, fileuploded.innerHTML);
-                          filearry[i] = measurementFile;
-                          file.previewElement.remove();
-                      },
-                      error: function(XMLHttpRequest, textStatus, errorThrown){
-                          console.log("Error");
-                  
-                      }
-                  });
-                 },
-           
-                 acceptedFiles: "image/*,application/pdf",
-                 
-                init: function() {
-             
-                 },
-                 success: function(file, response){
-                  var fileuploded = file.previewElement.querySelector("[data-dz-name]");
-                  fileuploded.innerHTML = response.data.item1;
-                     // alert(response.data.item1);
-                     measurementFile.push(response.data.item1);
-                     filearry[i] = measurementFile;
-                 
-                 }
-                 
-               });
-                  });
-                  var counter=0;
-                  var woodenString = '';
-                  
-                  woodenString = 
-                  `<div class="input-group divContainer"  id="Wooden`+i+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
-                    <div  class="row col-lg-12 col-md-12 col-sm-12 ">
-                      
-                      <div   class="col">
-                          <label style="padding-left:2px;">Expected Delivery Date</label>
-                          <div class="input-group input-group-lg input-group-solid" >
-                                       <div class="input-group date" id="kt_datetimepicker_`+i+`" data-target-input="nearest">
-                                          <input type="text" id="date`+i+`" name="date`+i+`" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_`+i+`">
-                                          <div class="input-group-append" data-target="#kt_datetimepicker_`+i+`" data-toggle="datetimepicker">
-                                             <span class="input-group-text">
-                                                <i class="ki ki-calendar"></i>
-                                             </span>
-                                          </div>
-                                       </div>
-                                    </div>
-                      </div>
-                      <div   class="col">
-                          <label style="padding-left:2px;">Amount</label>
-                          <input type="text" id="Quantity`+i+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
-                      </div>            
-                      
-                      <div   class="col2">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                  <div class="dropzone dropzone-default dropzone-success" id="kt_dropzone_`+i+`" name="measurementDrawing">
-                                      <div class="dropzone-msg dz-message needsclick">
-                                          <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
-                                          <span class="dropzone-msg-desc"> pdf files are allowed for upload</span>
-                                      </div>
-                                  </div>
-                          </div>
-                      </div>
-                      <div id="" style="padding-top:2rem"  class="col">
-                          
-                          <span onclick="removewooden(`+i+`);" style="background-color: #f0e8ff;">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                          </svg>
-                          </span>
-                    
-                  </div>
-                    </div>
-      
-                    </div>  `;
-                    $('#Wooden').last().before(woodenString);
-                    document.getElementById("HideWoodenLength").value = i;
-              }
-              function removewooden (i){
-           
-              document.getElementById('Wooden'+i).remove();
-      
-              }
-              
-      $('#kt_approve_inquiry_button').click(function () {
-          var Wooden =[];
-          for(var j=0;j<=elecount;j++){
-            if(document.getElementById("Quantity"+j) != null){
-             Wooden.push({
-               "PurchaseOrderExpectedDeliveryDate":document.getElementById("date"+j).value,
-               "purchaseOrderAmount":document.getElementById("Quantity"+j).value,
-               "files":filearry[j]
-             });
+              function addWooden(i){
+            $(document).ready(function() {
+              $('#kt_datetimepicker_'+i).datetimepicker({
+            // useCurrent: true,
+           minDate: new Date().getDate(),
+
+            });
+            let measurementFile =new Array();
+        $('#kt_dropzone_'+i).dropzone({
+            url: baseURL+"/File/UploadFile", // Set the url for your upload script location
+           type: "Head",
+           headers : {
+               'Access-Control-Allow-Origin': '*',
+           },
+           paramName: "file"+i, // The name that will be used to transfer the file
+           maxFiles: 150,
+           maxFilesize: 30000, // MB
+           timeout: 600000,
+           addRemoveLinks: true,
+           removedfile:function(file) {
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            var fileurl ='';
+            var filearr = fileuploded.innerHTML.split(".");
+            if(filearr.length > 1){
+                fileurl = "/File/DeleteFileFromBlob?fileName=";
+            }else{
+                fileurl = "/File/DeleteVideo?VideoId=";
             }
-          }
-          var checklistdata = {
-              "inquiryId":parseInt( document.getElementById('inquiryId').value),
-               "lpo":Wooden,
-            };
-      
-          const data = JSON.stringify(checklistdata);
-          console.log(data);
-          
-          $.ajax({
-              type: "Post",
-              url: baseURL + '/Purchase/AddPurchaseOrder',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Access-Control-Allow-Origin': '*',
-              },
-              data: data,
-              success: function(response) {
-                  console.log(response);
+            $.ajax({
+                type:"post",
+                url:baseURL+fileurl+fileuploded.innerHTML,
+                cache:false,
+                success: function(){
+                    removeA(measurementFile, fileuploded.innerHTML);
+                    filearry[i] = measurementFile;
+                    file.previewElement.remove();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    console.log("Error");
+            
+                }
+            });
+           },
+     
+           acceptedFiles: "image/*,application/pdf",
+           
+          init: function() {
        
-                  window.location.replace("purchase.html");
-              },
-              error: function(XMLHttpRequest, textStatus, errorThrown) {
-                  document.getElementById("alert").innerHTML ="An error occured";
-              }
-          });
-      });
-          </script>
+           },
+           success: function(file, response){
+            var fileuploded = file.previewElement.querySelector("[data-dz-name]");
+            fileuploded.innerHTML = response.data.item1;
+               // alert(response.data.item1);
+               measurementFile.push(response.data.item1);
+               filearry[i] = measurementFile;
+           
+           }
+           
+         });
+            });
+            var counter=0;
+            var woodenString = '';
+            
+            woodenString = 
+            `<div class="input-group divContainer"  id="Wooden`+i+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
+              <div  class="row col-lg-12 col-md-12 col-sm-12 ">
+                
+                <div   class="col">
+                    <label style="padding-left:2px;">Expected Delivery Date</label>
+                    <div class="input-group input-group-lg input-group-solid" >
+											<div class="input-group date" id="kt_datetimepicker_`+i+`" data-target-input="nearest">
+												<input type="text" id="date`+i+`" name="date`+i+`" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#kt_datetimepicker_`+i+`">
+												<div class="input-group-append" data-target="#kt_datetimepicker_`+i+`" data-toggle="datetimepicker">
+													<span class="input-group-text">
+														<i class="ki ki-calendar"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+                </div>
+                <div   class="col">
+                    <label style="padding-left:2px;">Amount</label>
+                    <input type="text" id="Quantity`+i+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
+                </div>            
+                <div   class="col">
+                    <label style="padding-left:2px;">Discription</label>
+                    <textarea id="DescId`+i+`" class="form-control" rows="5"  placeholder=""></textarea>
+                </div>  
+                <div   class="col2">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div style="display:inline-block;" class="dropzone dropzone-default dropzone-success" id="kt_dropzone_`+i+`" name="measurementDrawing">
+                                <div class="dropzone-msg dz-message needsclick">
+                                    <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                    <span class="dropzone-msg-desc"> pdf files are allowed for upload</span>
+                                </div>
+                            </div>
+                  <div id="" style="padding-top:2rem;padding-left:2rem;display:inline-block;" >
+                    
+                    <span onclick="removewooden(`+i+`);" style="background-color: #f0e8ff;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                    </span>
+              
+                 </div>
+                    </div>
+                    
+                </div>
+           
+              </div>
+
+              </div>  `;
+              $('#Wooden').last().before(woodenString);
+              document.getElementById("HideWoodenLength").value = i;
+        }
+        function removewooden (i){
+     
+        document.getElementById('Wooden'+i).remove();
+
+        }
+        
+$('#kt_approve_inquiry_button').click(function () {
+    var Wooden =[];
+    for(var j=0;j<=elecount;j++){
+      if(document.getElementById("Quantity"+j) != null){
+       Wooden.push({
+         "PurchaseOrderExpectedDeliveryDate":document.getElementById("date"+j).value,
+         "purchaseOrderAmount":document.getElementById("Quantity"+j).value,
+         "purchaseOrderDescription":document.getElementById("DescId"+j).value,
+         "files":filearry[j]
+       });
+      }
+    }
+    var checklistdata = {
+        "inquiryId":parseInt( document.getElementById('inquiryId').value),
+         "lpo":Wooden,
+      };
+
+    const data = JSON.stringify(checklistdata);
+    console.log(data);
+    
+    $.ajax({
+        type: "Post",
+        url: baseURL + '/Purchase/AddPurchaseOrder',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        },
+        data: data,
+        success: function(response) {
+            console.log(response);
+ 
+            location.reload();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            document.getElementById("alert").innerHTML ="An error occured please check if file attached";
+        }
+    });
+});
+var baseURL = "https://backendsaikitchen.azurewebsites.net/Api"
+        var baseFileURL = "https://saikitchenstorage.blob.core.windows.net/files/"
+function beforeWooden(){
+            $.ajax({
+                type: "Post",
+                url: baseURL + '/Purchase/GetPurchaseOrderedByInquiryId?inquiryId='+parseInt(document.getElementById("inquiryId").value),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.isError == false) {
+                    if(response.data.length==0)
+                     // document.getElementById("workscope").innerHTML ='No Job Order Requests';
+                    var woodenString = '';
+                    for(var i=0;i<response.data.length;i++){
+                     
+                        var file ='';
+                     for(var j=0;j<response.data[i].files.length;j++){
+                        switch(response.data[i].files[j].fileContentType) {
+                        case "pdf":
+                              file +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[i].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:100%;"></a>'+
+                              '</div>';
+                        break;
+                        case "jpg":
+                              file +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[i].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                              '</div>';
+                        break;
+                        case "jpeg":
+                             file +=
+                              '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[i].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                              '</div>';
+                        break;
+                        default:
+                            file +=
+                            '<div   class="divico">'+
+                             '<a href="'+baseFileURL+response.data[i].files[j].fileUrl+'" target="_blank"> <img  src="" style="width:100%;"></a>'+
+                            '</div>';
+
+                      }
+                     }
+                     var disable=''
+                     if(response.data[i].purchaseStatusId==4){
+                      disable = 'disabled';
+                     }
+                     var dis ='';
+                     if(response.data[i].purchaseOrderDescription!=null){
+                      dis =response.data[i].purchaseOrderDescription;
+                     }
+                      woodenString = 
+                        `<div class="input-group divContainer"  id="bWooden`+i+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
+                        <div  class="row col-lg-12 col-md-12 col-sm-12 ">
+                            
+                            <div   class="col">
+                                <label style="padding-left:2px;">Expected Delivery Date</label>
+                                <div class="input-group input-group-lg input-group-solid" >
+                                                        <div class="input-group date" id="bf_datetimepicker_`+i+`" data-target-input="nearest">
+                                                            <input  type="text" id="bdate`+i+`" name="bdate`+i+`" value="`+response.data[i].purchaseOrderExpectedDeliveryDate+`" class="form-control datetimepicker-input" placeholder="Select date &amp; time" data-target="#bf_datetimepicker_`+i+`">
+                                                            <div class="input-group-append" data-target="#bf_datetimepicker_`+i+`" data-toggle="datetimepicker">
+                                                                <span class="input-group-text">
+                                                                    <i class="ki ki-calendar"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                            </div>
+                            <div   class="col">
+                                <label style="padding-left:2px;">Amount</label>
+                                <input disabled type="text" id="bQuantity`+i+`" value="`+response.data[i].purchaseOrderAmount+`"   class="form-control"  value="" placeholder="" >
+                            </div>            
+                            <div   class="col">
+                              <label style="padding-left:2px;">Discription</label>
+                             <textarea id="bDescId`+i+`" class="form-control" rows="5" value=""  placeholder="">`+dis+`</textarea>
+                            </div> 
+                            <div   class="col2">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div id="icons" class="paddall" style="display: inline-block;width: 100%;">
+                                        
+                                   `+file+`
+                                </div>
+                                </div>
+                            </div>
+                            
+                            <div id="recivedId" style="padding-top:2rem"  class="col">
+                                
+                                <button `+disable+` type="button" onclick="updateitem(`+response.data[i].purchaseOrderId+`,`+i+`)" id="kt_update_button`+i+`" class="btn btn-primary font-weight-bold"> Update Date</button>
+                                <button `+disable+` type="button" onclick="removeItem(`+response.data[i].purchaseOrderId+`,`+i+`)" id="kt_del_button`+i+`" class="btn btn-primary font-weight-bold"> Remove</button>
+                                <div class="se-pre-con" id="bload`+i+`" style="display: none;" ></div>
+                        </div>
+                        </div>
+
+                        </div>  `;
+                       // $('#Wooden').last().before(woodenString);
+                       document.getElementById("beforeWooden").innerHTML += woodenString;
+
+                        
+                       
+                    }
+                    
+                        $(document).ready(function() {
+                          for(var i=0;i<response.data.length;i++){
+                          $('#bf_datetimepicker_'+i).datetimepicker({
+                            minDate: new Date().getDate(),
+                           });
+                          }
+                        });
+                       
+                    } else {
+                        Swal.fire({
+                            text: response.errorMessage,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                },
+            });
+            
+              
+        }
+        function updateitem(purchaseOrderId,i){
+                  
+            document.getElementById("bload"+i).style.removeProperty('display'); 
+            var inquiryApproved = {
+                    purchaseOrderId: purchaseOrderId,
+                    purchaseOrderExpectedDeliveryDate: document.getElementById('bdate'+i).value,
+                };
+            const data = JSON.stringify(inquiryApproved);
+             $.ajax({
+                type: "Post",
+                url: baseURL + '/Purchase/UpdatePurchaseOrder',
+                data:data,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.isError == false) {
+                        document.getElementById("bload"+i).style.display ="none";
+                        Swal.fire({
+                            text:  'Expected Delivery Date Updated Successfully',
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        });
+					}
+                    else {
+                        Swal.fire({
+                            text: response.errorMessage,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                },
+            });
+           
+            
+        }
+        function removeItem(purchaseOrderId,i){
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                        
+            document.getElementById("bload"+i).style.removeProperty('display'); 
+             $.ajax({
+                type: "Post",
+                url: baseURL + '/Purchase/DeletePurchaseOrder?PurchaseOrderId='+purchaseOrderId,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.isError == false) {
+                        document.getElementById("bload"+i).style.display ="none";
+                        document.getElementById('bWooden'+i).remove();
+					}
+                    else {
+                        Swal.fire({
+                            text: response.errorMessage,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                },
+            });
+           }
+            })
+        }
+  </script>
       <!--end::Page Scripts-->
 
      <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
