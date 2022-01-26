@@ -6,7 +6,7 @@ import {
     baseFileURL
 } from './constant.js'
 import {
-    measurementFile
+   customizeFile
 } from './constant.js'
 export let user;
 var filearry = new Array();
@@ -2143,6 +2143,7 @@ workscope.innerHTML=workscopeHtml;
            "inquiryId":parseInt( document.getElementById('inquiryId').value),
            "remark": document.getElementById('aemoji').value,
            "jobOrderDetailsDescription": document.getElementById('jobComment').value,
+           "handingover":customizeFile,
          };
       }
       if(choose == "5"){

@@ -461,7 +461,7 @@ License: You must have a valid license purchased only from themeforest(the above
                   <input type="hidden" value="0" id="HideWoodenLength" />
                 <div class="input-group"   >
                       <label class="font-size-h6 font-weight-bolder text-dark" style="padding-left:25px;width:140px;">Scope of Work</label>
-                      <a type="button" style="margin-top:3px;" onclick="addWooden(elecount++)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
+                      <a type="button" style="margin-top:3px;" onclick="addWooden()" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
                   </div>
                   <div class="row" id="Wooden"></div>
                   
@@ -644,6 +644,7 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
     <!--end::Chat Panel-->
     <!--begin::Scrolltop-->
+    <input type="hidden" id="counterId" value="0" />
     <div id="kt_scrolltop" class="scrolltop"></div>
     <!--end::Scrolltop-->
     <!-- <script src="assets/js/pages/sai-kitchen/layout.js" type="module"></script> -->
@@ -867,23 +868,23 @@ License: You must have a valid license purchased only from themeforest(the above
       }
       var elecount=0;
       function addWooden(i){
-            var counter=0;
             var woodenString = '';
-            
+            var i = document.getElementById("counterId").value;
             woodenString = 
-            `<div class="input-group divContainer"  id="Wooden`+i+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;">
-              <div  class="row col-lg-12 col-md-12 col-sm-12 ">
+            `<div class="input-group divContainer"  id="Wooden`+i+`"  style="padding-bottom:2px;padding-left:10px;padding-bottom:20px;padding-right:20px;">
+              <div  id="innerDiv`+i+`" class="row">
                 
                 <div   class="col">
                     <label style="padding-left:2px;">Name</label>
-                    <select id="NameSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
-     				        	<option></option>
+                    <select id="ScopeSelect`+i+`" style="width:10rem !important;"  class="form-control" >
+     				        	`+brand+`
 				            </select>
                 </div>
                 <div   class="col">
-                    <label style="padding-left:2px;">Discription</label>
+                    <label style="padding-left:2px;">Material</label>
+                    <a type="button" style="margin-top:3px;" onclick="addmaterial(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
                     <select id="MaterialSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
-     				        	<option></option>
+     				        	<option>Select Material</option>
 				            </select>
                 </div> 
                 <div   class="col">
@@ -891,9 +892,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     <input type="text" id="Quantity`+i+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
                 </div>            
                 <div   class="col">
-                    <label style="padding-left:2px;">Discription</label>
+                    <label style="padding-left:2px;">Size</label>
                     <select id="SizeSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
-     				        	<option></option>
+     				        	<option>Select Size</option>
 				            </select>
                 </div>
                 <div   class="col2">
@@ -918,12 +919,109 @@ License: You must have a valid license purchased only from themeforest(the above
               </div>  `;
               $('#Wooden').last().before(woodenString);
               document.getElementById("HideWoodenLength").value = i;
+             
+                $('#ScopeSelect'+i).select2({ width: '15rem' });
+                $('#MaterialSelect'+i).select2({ width: '15rem' });
+                $('#SizeSelect'+i).select2({ width: '15rem' });
+           
+            i++;
+            document.getElementById("counterId").value=i;
+        }
+        function addmaterial(j){
+          if(document.getElementById("ScopeSelect"+j).value==0){
+            Swal.fire({
+                                text: "should select work scope",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            });
+                            return false;
+          }
+          var i = document.getElementById("counterId").value;
+            var woodenString = '';
+            
+            woodenString = 
+            `
+              <div id="material`+i+`" class="row" style="padding-top:2px;">
+                
+                <div   class="col">
+                  <label style="padding-left:17rem;"></label>
+                  <input type="hidden" id="scopehiddenId" value="`+j+`" />
+                </div>
+                <div   class="col">
+                    <label style="padding-left:2px;">Material</label>
+                    
+                    <select id="MaterialSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
+     				        	<option>Select Material</option>
+				            </select>
+                </div> 
+                <div   class="col">
+                    <label style="padding-left:2px;">Quantity</label>
+                    <input type="text" id="Quantity`+i+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
+                </div>            
+                <div   class="col">
+                    <label style="padding-left:2px;">Size</label>
+                    <select id="SizeSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
+     				        	<option>Select Size</option>
+				            </select>
+                </div>
+                <div   class="col2">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                            
+                  <div id="" style="padding-top:2rem;display:inline-block;" >
+                    
+                    <span onclick="removematerial(`+i+`);" style="background-color: #f0e8ff;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                    </span>
+              
+                 </div>
+                    </div>
+                    
+                </div>
+           
+              </div>
+
+                `;
+              $('#innerDiv'+j).last().after(woodenString);
+              $('#MaterialSelect'+i).select2({ width: '15rem' });
+                $('#SizeSelect'+i).select2({ width: '15rem' });
+                i++;
+            document.getElementById("counterId").value=i;
         }
         function removewooden (i){
      
         document.getElementById('Wooden'+i).remove();
 
         }
+        function removematerial (i){
+     
+         document.getElementById('material'+i).remove();
+
+        }
+        var brand ='';
+        $.ajax({
+          type: "post",
+          url: baseURL + '/Inquiry/GetAllWorkscope' ,
+          success: function(response) {
+           
+              console.log(response);
+              brand ='';
+                brand =`<option  selected value="0">Select Scope</option>`;
+                  for(var i=0;i<response.length;i++){
+                     brand += `<option value="`+response[i].workScopeId+`">`+response[i].workScopeName+`</option>`;
+                  }
+
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+             
+          }
+      });
         function ExportToTable() {  
      var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;  
      /*Checks whether the file is a valid excel file*/  
