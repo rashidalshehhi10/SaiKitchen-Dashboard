@@ -88,6 +88,16 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
     <meta name="theme-color" content="#db4938" />
     <!--End:PWA-->
+    <style>
+
+      .se-pre-con {
+         padding-left: 9rem;
+          width: 60px;
+          height: 60px;
+          z-index: 9999;
+          background: url(assets/media/gif/load.gif) center no-repeat #fff;
+      }
+            </style>
   </head>
   <!--end::Head-->
   <!--begin::Body-->
@@ -425,26 +435,26 @@ License: You must have a valid license purchased only from themeforest(the above
               <div class="form-group row">
                 <div  class="row col-lg-12 col-md-12 col-sm-12 ">
                 
-                  <div   class="col">
+                  <div   class="col form-group">
                     <label class="font-size-h6 font-weight-bolder text-dark">JobNO</label>
                     <div class="input-group input-group-lg input-group-solid">
-                      <input type="text" name="name" id="JobNOId"
+                      <input type="text" name="JobNOId" id="JobNOId"
                       class="form-control form-control-lg form-control-solid" value=""
-                      placeholder="">
+                      placeholder="" >
                     </div>
                   </div>
-                  <div   class="col">
+                  <div   class="col form-group">
                     <label class="font-size-h6 font-weight-bolder text-dark">Project Name</label>
                     <div class="input-group input-group-lg input-group-solid">
-                      <input type="text" name="name" id="projectId"
+                      <input type="text" name="projectId" id="projectId"
                       class="form-control form-control-lg form-control-solid" value=""
                       placeholder="">
                     </div>
                   </div>
-                  <div   class="col">
+                  <div   class="col form-group">
                     <label class="font-size-h6 font-weight-bolder text-dark">Location</label>
                     <div class="input-group input-group-lg input-group-solid">
-                      <input type="text" name="name" id="locationId"
+                      <input type="text" name="locationId" id="locationId" 
                       class="form-control form-control-lg form-control-solid" value=""
                       placeholder="">
                     </div>
@@ -460,7 +470,7 @@ License: You must have a valid license purchased only from themeforest(the above
                   <input type="hidden" id="worckscopeId" value="" />
                   <input type="hidden" value="0" id="HideWoodenLength" />
                 <div class="input-group"   >
-                      <label class="font-size-h6 font-weight-bolder text-dark" style="padding-left:25px;width:140px;">Scope of Work</label>
+                      <label class="font-size-h6 font-weight-bolder text-dark" style="padding-left:17px;width:140px;">Scope of Work</label>
                       <a type="button" style="margin-top:3px;" onclick="addWooden()" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
                   </div>
                   <div class="row" id="Wooden"></div>
@@ -471,11 +481,14 @@ License: You must have a valid license purchased only from themeforest(the above
               
               <div class="form-group row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                  <div class="col">
-                    <input type="file" id="excelfile" />
-                    <input type="button" id="viewfile" value="Export To Table" onclick="ExportToTable()" />
-                    <table id="exceltable">  
-                    </table> 
+                  <div class="col mb-3 form-group">
+                    <!-- <input class="form-control form-control-sm" id="excelfile" type="file"> -->
+                    <!-- <input type="file" id="excelfile" class="form-control" /> -->
+                    <!-- <input type="button" id="viewfile" value="Export To Table" onclick="ExportToTable()" /> -->
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="excelfile" name="excelfile">
+                      <label class="custom-file-label" for="excelfile">Choose Excel file...</label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -498,8 +511,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 Close
               </button>
               <button
-                type="button"
-                id="kt_approve_inquiry_button"
+                type="submit"
+                id="kt_approve_project_button"
                 class="btn btn-primary font-weight-bold"
               >
                 Approve
@@ -509,87 +522,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="ScheduleDate"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalSizeSm"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Assign Expected Delivery Date
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <i aria-hidden="true" class="ki ki-close"></i>
-            </button>
-          </div>
-          <!--begin::Form-->
-          <form
-            class="form"
-            id="kt_approve_inquiry"
-            action=""
-            name="approveinquiryform"
-          >
-            <div class="modal-body">
-              <div class="form-group row">
-                <label class="">Expected Delivery Date*</label>
-                <div class="input-group input-group-lg input-group-solid">
-                  <div
-                    class="input-group date"
-                    id="kt_design_datetimepicker"
-                    data-target-input="nearest"
-                  >
-                    <input
-                      type="text"
-                      id="design_schedule_date"
-                      name="design_schedule_date"
-                      class="form-control datetimepicker-input"
-                      placeholder="Select date &amp; time"
-                      data-target="#kt_design_datetimepicker"
-                    />
-                    <div
-                      class="input-group-append"
-                      data-target="#kt_design_datetimepicker"
-                      data-toggle="datetimepicker"
-                    >
-                      <span class="input-group-text">
-                        <i class="ki ki-calendar"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-light-primary font-weight-bold"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="submit"
-                id="kt_approve_inquiry_button"
-                class="btn btn-primary font-weight-bold"
-              >
-                Approved
-              </button>
-            </div>
-          </form>
-          <!--end::Form-->
-        </div>
-      </div>
-    </div>
+
     <!--end::Quick Panel-->
     <!--begin::Chat Panel-->
     <div
@@ -876,28 +809,28 @@ License: You must have a valid license purchased only from themeforest(the above
                 
                 <div   class="col">
                     <label style="padding-left:2px;">Name</label>
-                    <select id="ScopeSelect`+i+`" style="width:10rem !important;"  class="form-control" >
+                    <select id="ScopeSelect`+i+`" style="width:10rem  !important;" onchange="getMaterials(`+i+`)"  class="form-control" required >
      				        	`+brand+`
 				            </select>
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Material</label>
                     <a type="button" style="margin-top:3px;" onclick="addmaterial(`+i+`)" class="btn-floating light-green"><i class="la la-plus-circle"></i></a>
-                    <select id="MaterialSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
-     				        	<option>Select Material</option>
+                    <select id="MaterialSelect`+i+`" style="width:10rem !important;" onchange="getElements(`+i+`)" class="form-control datatable-input" required >
+     				        	<option value="0">Select Material</option>
 				            </select>
                 </div> 
                 <div   class="col">
                     <label style="padding-left:2px;">Quantity</label>
-                    <input type="text" id="Quantity`+i+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
+                    <input type="text" id="Quantity`+i+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" required />
                 </div>            
                 <div   class="col">
                     <label style="padding-left:2px;">Size</label>
-                    <select id="SizeSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
-     				        	<option>Select Size</option>
+                    <select id="SizeSelect`+i+`" style="width:10rem !important;"  class="form-control datatable-input" required >
+     				        	<option value="0">Select Size</option>
 				            </select>
                 </div>
-                <div   class="col2">
+                <div   class="col">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                             
                   <div id="" style="padding-top:2rem;padding-left:2rem;display:inline-block;" >
@@ -909,11 +842,15 @@ License: You must have a valid license purchased only from themeforest(the above
                     </svg>
                     </span>
               
-                 </div>
-                    </div>
+                   </div>
+                  </div>
                     
                 </div>
-           
+                <div   class="col">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="se-pre-con" id="load`+i+`" style="display: none;" ></div>
+                  </div>
+                </div> 
               </div>
 
               </div>  `;
@@ -941,34 +878,36 @@ License: You must have a valid license purchased only from themeforest(the above
                             return false;
           }
           var i = document.getElementById("counterId").value;
+ 
+          
             var woodenString = '';
             
             woodenString = 
             `
-              <div id="material`+i+`" class="row" style="padding-top:2px;">
+              <div id="material`+i+`" class="row div`+j+`" style="padding-top:2px;">
                 
                 <div   class="col">
-                  <label style="padding-left:17rem;"></label>
-                  <input type="hidden" id="scopehiddenId" value="`+j+`" />
+                  <label style="padding-left:15rem;"></label>
+                  <input type="hidden" id="scopehiddenId`+i+`" value="`+document.getElementById("ScopeSelect"+j).value+`" required />
                 </div>
                 <div   class="col">
                     <label style="padding-left:2px;">Material</label>
                     
-                    <select id="MaterialSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
-     				        	<option>Select Material</option>
+                    <select id="MaterialSelect`+i+`" style="width:10rem !important;" onchange="getElements(`+i+`)" class="form-control datatable-input" required>
+     				        	<option value="0">Select Material</option>
 				            </select>
                 </div> 
                 <div   class="col">
                     <label style="padding-left:2px;">Quantity</label>
-                    <input type="text" id="Quantity`+i+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" >
+                    <input type="text" id="Quantity`+i+`" style="width:15rem !important;"  class="form-control"  value="" placeholder="" required />
                 </div>            
                 <div   class="col">
                     <label style="padding-left:2px;">Size</label>
-                    <select id="SizeSelect`+i+`" style="width:10rem !important;" onchange="getElements()" class="form-control datatable-input" >
-     				        	<option>Select Size</option>
+                    <select id="SizeSelect`+i+`" style="width:10rem !important;"  class="form-control datatable-input" required>
+     				        	<option value="0">Select Size</option>
 				            </select>
                 </div>
-                <div   class="col2">
+                <div   class="col">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                             
                   <div id="" style="padding-top:2rem;display:inline-block;" >
@@ -980,19 +919,118 @@ License: You must have a valid license purchased only from themeforest(the above
                     </svg>
                     </span>
               
-                 </div>
+                   </div>
                     </div>
                     
                 </div>
-           
+                <div   class="col">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="se-pre-con" id="load`+i+`" style="display: none;" ></div>
+                  </div>
+                </div>  
               </div>
 
                 `;
               $('#innerDiv'+j).last().after(woodenString);
               $('#MaterialSelect'+i).select2({ width: '15rem' });
                 $('#SizeSelect'+i).select2({ width: '15rem' });
+                $.ajax({
+                type: "Post",
+                async: false,
+                url: baseURL + '/Material/GetMaterialByWorkscopeId?WorkscopeId='+parseInt(document.getElementById("ScopeSelect"+j).value),
+               // url: baseURL + '/Inquiry/GetAllWorkscope' ,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                   // document.getElementById("load").style.display = 'none';
+                   var k = document.getElementById("counterId").value;
+                   const roleTypeList2 = document.getElementById('MaterialSelect'+k);
+                  // roleTypeList2.style.removeProperty('width');
+                    var roleTypeListHTML2 = new Array();
+                    roleTypeListHTML2.push('<option selected value="0">Select Material</option>');
+                    var selected='';
+                    for (var i = 0; i < response.length; i++) {
+                        selected='';
+                        roleTypeListHTML2.push(`<option value="`+response[i].workScopeId+`">`+response[i].workScopeName+`</option>`);
+                    }
+                    roleTypeList2.innerHTML = roleTypeListHTML2.join('');
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    //document.getElementById("load").style.display = 'none';  
+                },
+            });
                 i++;
             document.getElementById("counterId").value=i;
+        }
+        function getMaterials(j){
+          jQuery('.div'+j).remove();
+          $("#SizeSelect"+j).empty().trigger('change');
+          $("#SizeSelect"+j).append('<option value="0">Select Size</option>').trigger('change'); 
+          document.getElementById("load"+j).style.removeProperty('display');     
+          if(document.getElementById("ScopeSelect"+j).value==0){
+            $("#MaterialSelect"+j).empty().trigger('change');
+            $("#MaterialSelect"+j).append('<option value="0">Select Material</option>').trigger('change');  
+          }
+           $.ajax({
+                type: "Post",
+                 url: baseURL + '/Material/GetMaterialByWorkscopeId?WorkscopeId='+parseInt(document.getElementById("ScopeSelect"+j).value),
+                //url: baseURL + '/Inquiry/GetAllWorkscope' ,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    document.getElementById("load"+j).style.display = 'none';
+                   const roleTypeList2 = document.getElementById('MaterialSelect'+j);
+                  // roleTypeList2.style.removeProperty('width');
+                    var roleTypeListHTML2 = new Array();
+                    roleTypeListHTML2.push('<option selected value="0">Select Material</option>');
+                    var selected='';
+                    for (var i = 0; i < response.length; i++) {
+                        selected='';
+                        roleTypeListHTML2.push(`<option value="`+response[i].workScopeId+`">`+response[i].workScopeName+`</option>`);
+                    }
+                    roleTypeList2.innerHTML = roleTypeListHTML2.join('');
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    document.getElementById("load"+j).style.display = 'none';  
+                },
+            });
+       
+        }
+        function getElements(j){
+            document.getElementById("load"+j).style.removeProperty('display');     
+          $.ajax({
+                type: "Post",
+                url: baseURL + '/Size/GetSizeByMaterialId?MaterialId='+parseInt(document.getElementById("MaterialSelect"+j).value),
+                //url: baseURL + '/Inquiry/GetAllWorkscope' ,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    document.getElementById("load"+j).style.display = 'none';
+                   const roleTypeList2 = document.getElementById('SizeSelect'+j);
+                  // roleTypeList2.style.removeProperty('width');
+                    var roleTypeListHTML2 = new Array();
+                    roleTypeListHTML2.push('<option selected value="0">Select Size</option>');
+                    var selected='';
+                    for (var i = 0; i < response.length; i++) {
+                        selected='';
+                        roleTypeListHTML2.push(`<option value="`+response[i].workScopeId+`">`+response[i].workScopeName+`</option>`);
+                    }
+                    roleTypeList2.innerHTML = roleTypeListHTML2.join('');
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    document.getElementById("load"+j).style.display = 'none';  
+                },
+            });
+       
         }
         function removewooden (i){
      
@@ -1022,91 +1060,7 @@ License: You must have a valid license purchased only from themeforest(the above
              
           }
       });
-        function ExportToTable() {  
-     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;  
-     /*Checks whether the file is a valid excel file*/  
-     if (regex.test($("#excelfile").val().toLowerCase())) {  
-         var xlsxflag = false; /*Flag for checking whether excel is .xls format or .xlsx format*/  
-         if ($("#excelfile").val().toLowerCase().indexOf(".xlsx") > 0) {  
-             xlsxflag = true;  
-         }  
-         /*Checks whether the browser supports HTML5*/  
-         if (typeof (FileReader) != "undefined") {  
-             var reader = new FileReader();  
-             reader.onload = function (e) {  
-                 var data = e.target.result;  
-                 /*Converts the excel data in to object*/  
-                 if (xlsxflag) {  
-                     var workbook = XLSX.read(data, { type: 'binary' });  
-                 }  
-                 else {  
-                     var workbook = XLS.read(data, { type: 'binary' });  
-                 }  
-                 /*Gets all the sheetnames of excel in to a variable*/  
-                 var sheet_name_list = workbook.SheetNames;  
-  
-                 var cnt = 0; /*This is used for restricting the script to consider only first sheet of excel*/  
-                 sheet_name_list.forEach(function (y) { /*Iterate through all sheets*/  
-                     /*Convert the cell value to Json*/  
-                     if (xlsxflag) {  
-                         var exceljson = XLSX.utils.sheet_to_json(workbook.Sheets[y]);  
-                     }  
-                     else {  
-                         var exceljson = XLS.utils.sheet_to_row_object_array(workbook.Sheets[y]);  
-                     }  
-                     if (exceljson.length > 0 && cnt == 0) {  
-                         BindTable(exceljson, '#exceltable');  
-                         cnt++;  
-                     }  
-                 });  
-                 $('#exceltable').show();  
-             }  
-             if (xlsxflag) {/*If excel file is .xlsx extension than creates a Array Buffer from excel*/  
-                 reader.readAsArrayBuffer($("#excelfile")[0].files[0]);  
-             }  
-             else {  
-                 reader.readAsBinaryString($("#excelfile")[0].files[0]);  
-             }  
-         }  
-         else {  
-             alert("Sorry! Your browser does not support HTML5!");  
-         }  
-     }  
-     else {  
-         alert("Please upload a valid Excel file!");  
-     }  
- }  
- function BindTable(jsondata, tableid) {/*Function used to convert the JSON array to Html Table*/ 
-  console.log(jsondata); 
-     var columns = BindTableHeader(jsondata, tableid); /*Gets all the column headings of Excel*/  
-     for (var i = 0; i < jsondata.length; i++) {  
-         var row$ = $('<tr/>');  
-         for (var colIndex = 0; colIndex < columns.length; colIndex++) {  
-             var cellValue = jsondata[i][columns[colIndex]];  
-             if (cellValue == null)  
-                 cellValue = "";  
-             row$.append($('<td/>').html(cellValue));  
-         }  
-         $(tableid).append(row$);  
-     }  
- }  
- function BindTableHeader(jsondata, tableid) {/*Function used to get all column names from JSON and bind the html table header*/  
-     var columnSet = [];  
-     var headerTr$ = $('<tr/>');  
-     for (var i = 0; i < jsondata.length; i++) {  
-         var rowHash = jsondata[i];  
-         for (var key in rowHash) {  
-             if (rowHash.hasOwnProperty(key)) {  
-                 if ($.inArray(key, columnSet) == -1) {/*Adding each unique column names to a variable array*/  
-                     columnSet.push(key);  
-                     headerTr$.append($('<th/>').html(key));  
-                 }  
-             }  
-         }  
-     }  
-     $(tableid).append(headerTr$);  
-     return columnSet;  
- }  
+
     </script>
 
     <!--end::Page Scripts-->

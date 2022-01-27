@@ -11,6 +11,7 @@ import {
 } from './status.js'
 let user;
 var table;
+var exceljson;
 export let workscopelist;
 var filearry = new Array();
 var KTDatatablesSearchOptionsAdvancedSearch = function() {
@@ -297,9 +298,9 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
     }
     var _handleFormExpectedDeliveryDate = function() {
-        var form = KTUtil.getById('kt_approve_inquiry');
+        var form = KTUtil.getById('kt_approve_project');
         var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
+        var formSubmitButton = KTUtil.getById('kt_approve_project_button');
 
         if (!form) {
             return;
@@ -309,10 +310,31 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                        design_schedule_date: {
+                        JobNOId: {
                             validators: {
                                 notEmpty: {
-                                    message: 'Expected Delivery Date is required'
+                                    message: 'JobNo is required'
+                                }
+                            }
+                        },
+                        projectId: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Project Name is required'
+                                }
+                            }
+                        },
+                        locationId: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Location is required'
+                                }
+                            }
+                        },
+                        excelfile: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Excel File is required'
                                 }
                             }
                         },
@@ -332,68 +354,149 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 // Show loading state on button
                 KTUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
-                var inquiryApproved = {
-                    purchaseOrderId: document.getElementById("PurchaseOrderId").innerHTML,
-                    purchaseOrderExpectedDeliveryDate: document.getElementById('design_schedule_date').value,
-                };
-                const data = JSON.stringify(inquiryApproved);
-                console.log(data);
-                $.ajax({
-                    type: "Post",
-                    url: baseURL + '/Purchase/UpdatePurchaseOrder',
-
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'userId': user.data.userId,
-                        'userToken': user.data.userToken,
-                        'userRoleId': user.data.userRoles[0].userRoleId,
-                        'branchId': user.data.userRoles[0].branchId,
-                        'branchRoleId': user.data.userRoles[0].branchRoleId,
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                    data: data,
-                    success: function(response) {
-                        // Release button
-                        KTUtil.btnRelease(formSubmitButton);
-                        console.log(response);
-                        // window.location.replace("home.html");
-                        if (response.isError == false) {
-                            // sessionStorage.setItem('user', JSON.stringify(response));
-                            location.reload();
-
-                        } else {
-                            Swal.fire({
-                                text: response.errorMessage,
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;  
+                var exceljson='';
+                /*Checks whether the file is a valid excel file*/  
+                if (regex.test($("#excelfile").val().toLowerCase())) {  
+                    var xlsxflag = false; /*Flag for checking whether excel is .xls format or .xlsx format*/  
+                    if ($("#excelfile").val().toLowerCase().indexOf(".xlsx") > 0) {  
+                        xlsxflag = true;  
+                    }  
+                    /*Checks whether the browser supports HTML5*/  
+                    if (typeof (FileReader) != "undefined") {  
+                        var reader = new FileReader();  
+                        reader.onload = function (e) {  
+                            var data = e.target.result;  
+                            /*Converts the excel data in to object*/  
+                            if (xlsxflag) {  
+                                var workbook = XLSX.read(data, { type: 'binary' });  
+                            }  
+                            else {  
+                                var workbook = XLS.read(data, { type: 'binary' });  
+                            }  
+                            /*Gets all the sheetnames of excel in to a variable*/  
+                            var sheet_name_list = workbook.SheetNames;  
+             
+                            var cnt = 0; /*This is used for restricting the script to consider only first sheet of excel*/  
+                            sheet_name_list.forEach(function (y) { /*Iterate through all sheets*/  
+                                /*Convert the cell value to Json*/  
+                                if (xlsxflag) {  
+                                     exceljson = XLSX.utils.sheet_to_json(workbook.Sheets[y]);  
+                                }  
+                                else {  
+                                     exceljson = XLS.utils.sheet_to_row_object_array(workbook.Sheets[y]);  
+                                }  
+                                if (exceljson.length > 0 && cnt == 0) {  
+                                   // BindTable(exceljson, '#exceltable');  
+                                    cnt++;  
+                                }  
+                            });  
+                            var scope =[];
+							for(var i=0;i<parseInt(document.getElementById("counterId").value);i++){
+							   
+								if(document.getElementById("Quantity"+i) != null){
+									if(document.getElementById("ScopeSelect"+i) != null){  
+										scope.push(
+												{
+													"workScopeId":parseInt(document.getElementById("ScopeSelect"+i).value), 
+													"materialId":parseInt(document.getElementById("MaterialSelect"+i).value), 
+													"quantity":parseInt(document.getElementById("Quantity"+i).value),
+													"sizeId":parseInt(document.getElementById("SizeSelect"+i).value),
+												});  
+									}else{
+										scope.push(
+											{
+												"workScopeId":parseInt(document.getElementById("scopehiddenId"+i).value), 
+												"materialId":parseInt(document.getElementById("MaterialSelect"+i).value), 
+												"quantity":parseInt(document.getElementById("Quantity"+i).value),
+												"sizeId":parseInt(document.getElementById("SizeSelect"+i).value),
+											});  
+									}   
+								}              
+							}
+							
+							var obj={
+								"jobno": document.getElementById("JobNOId").value,
+								"projectname": document.getElementById("projectId").value,
+								"location": document.getElementById("locationId").value,
+								"scopeofWork":scope,
+								"excel": exceljson
+							}
+                            const data = JSON.stringify(obj);
+                            $.ajax({
+                                type: "Post",
+                                url: baseURL + '/CommercialProject/AddCommercialProject',
+            
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'userId': user.data.userId,
+                                    'userToken': user.data.userToken,
+                                    'userRoleId': user.data.userRoles[0].userRoleId,
+                                    'branchId': user.data.userRoles[0].branchId,
+                                    'branchRoleId': user.data.userRoles[0].branchRoleId,
+                                    'Access-Control-Allow-Origin': '*',
+                                },
+                                data: data,
+                                success: function(response) {
+                                    // Release button
+                                    KTUtil.btnRelease(formSubmitButton);
+                                    console.log(response);
+                                    // window.location.replace("home.html");
+                                    if (response.isError == false) {
+                                        // sessionStorage.setItem('user', JSON.stringify(response));
+                                        location.reload();
+            
+                                    } else {
+                                        Swal.fire({
+                                            text: response.errorMessage,
+                                            icon: "error",
+                                            buttonsStyling: false,
+                                            confirmButtonText: "Ok, got it!",
+                                            customClass: {
+                                                confirmButton: "btn font-weight-bold btn-light-primary"
+                                            }
+                                        }).then(function() {
+                                            KTUtil.scrollTop();
+                                        });
+                                    }
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                    // Release button
+                                    KTUtil.btnRelease(formSubmitButton);
+            
+                                    // alert(errorThrown);
+            
+                                    Swal.fire({
+                                        text: 'Internet Connection Problem',
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn font-weight-bold btn-light-primary"
+                                        }
+                                    }).then(function() {
+                                        KTUtil.scrollTop();
+                                    });
                                 }
-                            }).then(function() {
-                                KTUtil.scrollTop();
                             });
-                        }
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        // Release button
-                        KTUtil.btnRelease(formSubmitButton);
-
-                        // alert(errorThrown);
-
-                        Swal.fire({
-                            text: 'Internet Connection Problem',
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        }).then(function() {
-                            KTUtil.scrollTop();
-                        });
-                    }
-                });
+                        }  
+                        if (xlsxflag) {/*If excel file is .xlsx extension than creates a Array Buffer from excel*/  
+                            reader.readAsArrayBuffer($("#excelfile")[0].files[0]);  
+                        }  
+                        else {  
+                            reader.readAsBinaryString($("#excelfile")[0].files[0]);  
+                        }  
+                    }  
+                    else {  
+                        alert("Sorry! Your browser does not support HTML5!");  
+                        return false;
+                    }  
+                }  
+                else {  
+                    alert("Please upload a valid Excel file!");  
+                    return false;
+                }
+                
             })
             
     }
@@ -466,4 +569,4 @@ jQuery(document).ready(function() {
 
 });
 
-
+ 
