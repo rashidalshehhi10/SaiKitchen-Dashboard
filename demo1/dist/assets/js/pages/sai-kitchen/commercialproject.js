@@ -48,45 +48,34 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             processing: true,
             serverSide: false,
             ajax: {
-                url: baseURL + '/Purchase/GetPurchaseOrderedByBranchId?branchId=' + user.data.userRoles[0].branchId,
+               // url: baseURL + '/CommercialProject/GetAllCommercialProjects?branchId=' + user.data.userRoles[0].branchId,
+               url: baseURL + '/CommercialProject/GetAllCommercialProjects',
                 type: 'POST',
                 data: {
                     // parameters for custom backend script demo
                     columnsDef: [
-                        'inquiryId', 'inquiryCode',  'workscopeNames',/*'status','customerCode',*/ 'customerName',
-                        'customerContact','purchaseOrderExpectedDeliveryDate','purchaseOrderActualDeliveryDate','purchaseOrderAmount' , 'actions' 
+                        'commercialProjectId', 'commercialProjectName',  'commercialProjectNo', 'commercialProjectDesription',
+                        'commercialProjectStartDate','projectStatusName' , 'actions' 
                     ],
                 },
             },
             columns: [{
-                    data: 'inquiryId'
+                    data: 'commercialProjectId'
                 },
                 {
-                    data: 'inquiryCode'
+                    data: 'commercialProjectName'
                  },
-                // {
-                //     data: 'status'
-                // },
                  {
-                    data: 'workscopeNames'
+                    data: 'commercialProjectNo'
                  },
-                //{
-              //      data: 'customerCode'
-              //  },
                 {
-                    data: 'customerName'
+                    data: 'commercialProjectDesription'
                 },
                 {
-                    data: 'customerContact'
+                    data: 'commercialProjectStartDate'
                 },
                 {
-                    data: 'purchaseOrderExpectedDeliveryDate'
-                },
-                {
-                    data: 'purchaseOrderActualDeliveryDate'
-                },
-                {
-                    data: 'purchaseOrderAmount'
+                    data: 'projectStatusName'
                 },
                 {
                     data: 'actions',
@@ -126,37 +115,24 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         var action = ``;
                         
                         
-                         if (quotationPermission >= 2) {
-                            console.log(full.inquiryId);
-                            action += `
-                            <a type="button"  onclick="document.getElementById('PurchaseOrderId').innerHTML = ` + full.purchaseOrderId + `;" data-toggle="modal" data-target="#ScheduleDate" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Rest Expected Delivery Date">\
-                            <i class="la la-calendar"></i>
-                        </a>
-                        `;
-                        action += `
-                        <a type="button" onclick="document.getElementById('PurchaseOrderId').innerHTML = ` + full.purchaseOrderId + `;" data-toggle="modal" data-target="#Requestforescalation" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Request For Delete">
-                        <i class="la la-trash"></i>
-                        </a>
                         
-						`;
-                        } 
+                    
+                        //     action += `
+                        //     <a type="button"  onclick="document.getElementById('PurchaseOrderId').innerHTML = ` + full.purchaseOrderId + `;" data-toggle="modal" data-target="#ScheduleDate" style="background-color:#734f43;margin:2px" class="btn btn-sm btn-clean btn-icon" title="Rest Expected Delivery Date">\
+                        //     <i class="la la-calendar"></i>
+                        // </a>
+                        // `;
+                        // action += `
+                        // <a type="button" onclick="document.getElementById('PurchaseOrderId').innerHTML = ` + full.purchaseOrderId + `;" data-toggle="modal" data-target="#Requestforescalation" class="btn btn-sm btn-clean btn-icon"  style="background-color:#734f43;margin:2px" title="Request For Delete">
+                        // <i class="la la-trash"></i>
+                        // </a>
+                        
+						// `;
+                         
                             return action;
                        
                     },
                 },
-/*                 {
-                    targets: 3,
-                    render: function(data, type, full, meta) {
-                        var status = inqStatus;
-
-                        console.log(data);
-                        if (typeof status[data] === 'undefined') {
-                            return data;
-                        }
-                        return '<span style="font-size:1.0rem !important; height:80px;" class="label label-lg font-weight-bold ' + status[data].class + ' label-inline" style="background-color:white;">' + status[data].title + '</span>';
-
-                    },
-                }, */
 
             ],
         });
