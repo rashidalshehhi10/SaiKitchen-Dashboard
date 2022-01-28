@@ -952,9 +952,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     var roleTypeListHTML2 = new Array();
                     roleTypeListHTML2.push('<option selected value="0">Select Material</option>');
                     var selected='';
-                    for (var i = 0; i < response.length; i++) {
+                    for (var i = 0; i < response.data.length; i++) {
                         selected='';
-                        roleTypeListHTML2.push(`<option value="`+response[i].workScopeId+`">`+response[i].workScopeName+`</option>`);
+                        roleTypeListHTML2.push(`<option value="`+response.data[i].materialId+`">`+response.data[i].materialName+`</option>`);
                     }
                     roleTypeList2.innerHTML = roleTypeListHTML2.join('');
                 },
@@ -990,9 +990,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     var roleTypeListHTML2 = new Array();
                     roleTypeListHTML2.push('<option selected value="0">Select Material</option>');
                     var selected='';
-                    for (var i = 0; i < response.length; i++) {
+                    for (var i = 0; i < response.data.length; i++) {
                         selected='';
-                        roleTypeListHTML2.push(`<option value="`+response[i].workScopeId+`">`+response[i].workScopeName+`</option>`);
+                        roleTypeListHTML2.push(`<option value="`+response.data[i].materialId+`">`+response.data[i].materialName+`</option>`);
                     }
                     roleTypeList2.innerHTML = roleTypeListHTML2.join('');
                 },
@@ -1020,9 +1020,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     var roleTypeListHTML2 = new Array();
                     roleTypeListHTML2.push('<option selected value="0">Select Size</option>');
                     var selected='';
-                    for (var i = 0; i < response.length; i++) {
+                    for (var i = 0; i < response.data.length; i++) {
                         selected='';
-                        roleTypeListHTML2.push(`<option value="`+response[i].workScopeId+`">`+response[i].workScopeName+`</option>`);
+                        roleTypeListHTML2.push(`<option value="`+response.data[i].sizeId+`">`+response.data[i].sizeName+`</option>`);
                     }
                     roleTypeList2.innerHTML = roleTypeListHTML2.join('');
                 },

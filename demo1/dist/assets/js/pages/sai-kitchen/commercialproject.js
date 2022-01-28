@@ -395,12 +395,16 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 							for(var i=0;i<parseInt(document.getElementById("counterId").value);i++){
 							   
 								if(document.getElementById("Quantity"+i) != null){
+                                    var quant=0;
+                                    if(document.getElementById("Quantity"+i).value != "")
+                                      quant= parseInt(document.getElementById("Quantity"+i).value)
+                                       
 									if(document.getElementById("ScopeSelect"+i) != null){  
 										scope.push(
 												{
 													"workScopeId":parseInt(document.getElementById("ScopeSelect"+i).value), 
 													"materialId":parseInt(document.getElementById("MaterialSelect"+i).value), 
-													"quantity":parseInt(document.getElementById("Quantity"+i).value),
+													"quantity":quant,
 													"sizeId":parseInt(document.getElementById("SizeSelect"+i).value),
 												});  
 									}else{
@@ -408,7 +412,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 											{
 												"workScopeId":parseInt(document.getElementById("scopehiddenId"+i).value), 
 												"materialId":parseInt(document.getElementById("MaterialSelect"+i).value), 
-												"quantity":parseInt(document.getElementById("Quantity"+i).value),
+												"quantity":quant,
 												"sizeId":parseInt(document.getElementById("SizeSelect"+i).value),
 											});  
 									}   
@@ -422,7 +426,8 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 								"scopeofWork":scope,
 								"excel": exceljson
 							}
-                            const data = JSON.stringify(obj);
+                            const data1 = JSON.stringify(obj);
+                            console.log(data1);
                             $.ajax({
                                 type: "Post",
                                 url: baseURL + '/CommercialProject/AddCommercialProject',
@@ -436,7 +441,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     'branchRoleId': user.data.userRoles[0].branchRoleId,
                                     'Access-Control-Allow-Origin': '*',
                                 },
-                                data: data,
+                                data: data1,
                                 success: function(response) {
                                     // Release button
                                     KTUtil.btnRelease(formSubmitButton);
