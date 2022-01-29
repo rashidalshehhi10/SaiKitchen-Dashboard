@@ -1348,16 +1348,17 @@
                 )
                   .attr("selected", true)
                   .change();
-                //if (response.data.size.length > 0)
-                //   document.getElementById("counterId").value =
-                //     response.data.size.length;
-                var sizarr = response.data.sizes.split(",");
-                document.getElementById("counterId").value = sizarr.length;
-                for (var i = 0; i < sizarr.length; i++) {
+                //response.data.size = ["1", "2", "3"];
+                if (response.data.sizes.length > 0)
+                  document.getElementById("counterId").value =
+                    response.data.sizes.length;
+                //var sizarr = response.data.sizes.split(",");
+                // document.getElementById("counterId").value = sizarr.length;
+                for (var i = 0; i < response.data.sizes.length; i++) {
                   if (i == 0) {
-                    // document.getElementById("size0").value =
-                    //   response.data.size[0];
-                    document.getElementById("size0").value = sizarr[0];
+                    document.getElementById("size0").value =
+                      response.data.sizes[0];
+                    //document.getElementById("size0").value = sizarr[0];
                   } else {
                     var woodenString = "";
                     woodenString =
@@ -1374,7 +1375,7 @@
                                     <input type="text" id="size` +
                       i +
                       `" style="width:15rem !important;"  class="form-control form-control-lg form-control-solid"  value="` +
-                      sizarr[i] +
+                      response.data.sizes[i] +
                       `" placeholder="" required />
                                 </div>            
                             
