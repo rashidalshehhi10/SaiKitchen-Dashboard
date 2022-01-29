@@ -7,7 +7,9 @@ import {
 import {
     customizeFile
  } from './constant.js'
-
+ import {
+    baseFileURL
+} from './constant.js'
 
 let user;
 let datatable;
@@ -66,6 +68,44 @@ var KTAppsUsersListDatatable = function () {
                     return '<span class="font-weight-bolder">' + data.materialId + '</span>';
 
                 }
+            },{
+                field: 'materialImg',
+                title: 'Image',
+               // autoHide: true,
+                template: function(data) {
+                    var output = '';
+                   if (data.materialImg != null){
+
+                
+                var file = data.materialImg.substr((data.materialImg.lastIndexOf('.') + 1));
+                switch(file) {
+
+
+                        case "jpg":
+                            output +=
+                            '<div   class="divico">'+
+                            '<a href="'+baseFileURL+data.materialImg+'" target="_blank"> <img  src='+baseFileURL+data.materialImg+'  style="width:80px;height:80px;"></a>'+
+                            '</div>';
+                        break;
+                        case "jpeg":
+                            output +=
+                            '<div   class="divico">'+
+                            '<a href="'+baseFileURL+data.materialImg+'" target="_blank"> <img  src='+baseFileURL+data.materialImg+' style="width:80px;height:80px;"></a>'+
+                            '</div>';
+                        break;
+
+
+                        default:
+                            output +=
+                            '<div   class="divico">'+
+                            '<a href="'+baseFileURL+data.materialImg+'" target="_blank"> <img  src="" style="width:80px;height:80px;"></a>'+
+                            '</div>';
+
+                    }
+
+                    }
+                        return output;
+                    },
             },
             {
                 field: 'materialName',
@@ -76,16 +116,8 @@ var KTAppsUsersListDatatable = function () {
                 template: function (data) {
                     var output = '';
 
-                    // var status = {
-                    // 	1: {'title': 'Paid', 'class': ' label-light-primary'},
-                    // 	2: {'title': 'Approved', 'class': ' label-light-danger'},
-                    // 	3: {'title': 'Pending', 'class': ' label-light-primary'},
-                    // 	4: {'title': 'Rejected', 'class': ' label-light-success'}
-                    // };
-                    // var index = KTUtil.getRandomInt(1, 4);
                     if (data.materialName != null) {
                         output += '<div class="font-weight-bold text-muted">' + data.materialName + '</div>';
-                        // output += '<div class="text-muted">' + status[index].title + '</div>';
                     }
                     return output;
                 },
@@ -129,19 +161,7 @@ var KTAppsUsersListDatatable = function () {
                 },
 
             },
-            {
-                field: 'materialDescription',
-                title: 'Description',
-                // autoHide: true,
-                template: function (data) {
-                    var output = '';
-                    if (data.materialDescription != null) {
-                        output += '<div class="font-weight-bold text-muted">' + data.materialDescription + '</div>';
-                    }
-                    return output;
-                },
-
-            },
+            
             {
                 field: 'Actions',
                 title: 'Actions',
@@ -181,8 +201,33 @@ var KTAppsUsersListDatatable = function () {
                     return action;
 
                 },
-            }
+            },
+            {
+                field: 'materialDescription',
+                title: 'Description',
+                 autoHide: true,
+                template: function (data) {
+                    var output = '';
+                    if (data.materialDescription != null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.materialDescription + '</div>';
+                    }
+                    return output;
+                },
 
+            },
+            {
+                field: 'sizes',
+                title: 'Size',
+                 autoHide: true,
+                template: function (data) {
+                    var output = '';
+                    if (data.materialDescription != null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.sizes + '</div>';
+                    }
+                    return output;
+                },
+
+            },
             ],
         });
 
@@ -271,11 +316,12 @@ var KTAppsUsersListDatatable = function () {
 
 
                 var material = {
-                    materialId: document.getElementById("materialId").innerHTML,
+                    materialId:parseInt(document.getElementById("materialId").innerHTML),
                     materialName: document.getElementById('materialName').value,
-                    workscopeId: document.getElementById('ScopeCode').value,
+                    workscopeId:parseInt( document.getElementById('ScopeCode').value),
                     materialDescription: document.getElementById('materialDescription').value,
                     skucode: document.getElementById('skuCode').value,
+                    unitOfMeasurementId:parseInt( document.getElementById('unitOfMeasurementId').value),
                     sizeDetail:size,
                     materialImg:customizeFile[0],
                 };

@@ -1277,18 +1277,28 @@
       function customFormReset() {
         try {
           jQuery(".divContainer").remove();
+          $("#skuCode").prop("disabled", false);
+          document.getElementById("counterId").value = 1;
           document.getElementById("exampleModalLabel").innerHTML =
             "New Material";
           document.getElementById("kt_add_material_button").innerHTML = "Add";
           document.getElementById("materialId").innerHTML = "0";
           document.getElementById("materialName").value = "";
           document.getElementById("materialDescription").value = "";
+          document.getElementById("skuCode").value = "";
+          document.getElementById("size0").value = "";
+          $("#unitOfMeasurementId option:first")
+            .prop("selected", true)
+            .change();
+          $("#ScopeCode option:first").prop("selected", true).change();
         } catch (error) {}
       }
 
       // document.querySelector('#editbutton').addEventListener('click', hello);
       function getmaterialById(baseURL, materialId) {
         jQuery(".divContainer").remove();
+        $("#skuCode").prop("disabled", true);
+        document.getElementById("counterId").value = 1;
         document.getElementById("exampleModalLabel").innerHTML =
           "Modify Material";
         document.getElementById("kt_add_material_button").innerHTML = "Modify";
@@ -1321,7 +1331,7 @@
                 document.getElementById("materialDescription").value =
                   response.data.materialDescription;
                 document.getElementById("skuCode").value =
-                  response.data.skuCode;
+                  response.data.skucode;
                 $(
                   "#ScopeCode" +
                     ' option[value="' +
@@ -1338,13 +1348,16 @@
                 )
                   .attr("selected", true)
                   .change();
-                if (response.data.size.length > 0)
-                  document.getElementById("counterId").value =
-                    response.data.size.length;
-                for (var i = 0; i < response.data.size.length; i++) {
+                //if (response.data.size.length > 0)
+                //   document.getElementById("counterId").value =
+                //     response.data.size.length;
+                var sizarr = response.data.sizes.split(",");
+                document.getElementById("counterId").value = sizarr.length;
+                for (var i = 0; i < sizarr.length; i++) {
                   if (i == 0) {
-                    document.getElementById("size0").value =
-                      response.data.size[0];
+                    // document.getElementById("size0").value =
+                    //   response.data.size[0];
+                    document.getElementById("size0").value = sizarr[0];
                   } else {
                     var woodenString = "";
                     woodenString =
@@ -1360,7 +1373,9 @@
                                     
                                     <input type="text" id="size` +
                       i +
-                      `" style="width:15rem !important;"  class="form-control form-control-lg form-control-solid"  value="" placeholder="" required />
+                      `" style="width:15rem !important;"  class="form-control form-control-lg form-control-solid"  value="` +
+                      sizarr[i] +
+                      `" placeholder="" required />
                                 </div>            
                             
                                 <div   class="col">
@@ -1546,7 +1561,7 @@
                
                 <div   class="col" >
                     
-                    <input type="text" id="Size` +
+                    <input type="text" id="size` +
           i +
           `" style="width:15rem !important;"  class="form-control form-control-lg form-control-solid"  value="" placeholder="" required />
                 </div>            
