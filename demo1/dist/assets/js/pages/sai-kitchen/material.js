@@ -4,7 +4,9 @@
 import {
     baseURL
 } from './constant.js'
-
+import {
+    customizeFile
+ } from './constant.js'
 
 
 let user;
@@ -90,12 +92,38 @@ var KTAppsUsersListDatatable = function () {
             },
             {
                 field: 'workScopeName',
-                title: 'workScopeName',
+                title: 'workScope',
                 // autoHide: true,
                 template: function (data) {
                     var output = '';
                     if (data.workscopeId != null) {
                         output += '<div class="font-weight-bold text-muted">' + data.workScopeName + '</div>';
+                    }
+                    return output;
+                },
+
+            },
+            {
+                field: 'unitOfMeasurementName',
+                title: 'Measurement',
+                // autoHide: true,
+                template: function (data) {
+                    var output = '';
+                    if (data.workscopeId != null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.unitOfMeasurementName + '</div>';
+                    }
+                    return output;
+                },
+
+            },
+            {
+                field: 'skucode',
+                title: 'SKUCode',
+                // autoHide: true,
+                template: function (data) {
+                    var output = '';
+                    if (data.workscopeId != null) {
+                        output += '<div class="font-weight-bold text-muted">' + data.skucode + '</div>';
                     }
                     return output;
                 },
@@ -234,7 +262,12 @@ var KTAppsUsersListDatatable = function () {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 //  console.log($('input[name="measurementPromo"]:checked').val());
                 // var measurementPromo=$('input[name="measurementPromo"]:checked').val()=="on"?true:false;
-
+                var size=[];
+                for(var i=0;i<parseInt(document.getElementById("counterId").value);i++){
+                    if(document.getElementById("size"+i) != null){
+                         size.push(document.getElementById("size"+i).value);
+                    }
+                }
 
 
                 var material = {
@@ -242,7 +275,9 @@ var KTAppsUsersListDatatable = function () {
                     materialName: document.getElementById('materialName').value,
                     workscopeId: document.getElementById('ScopeCode').value,
                     materialDescription: document.getElementById('materialDescription').value,
-
+                    skucode: document.getElementById('skuCode').value,
+                    sizeDetail:size,
+                    materialImg:customizeFile[0],
                 };
                 const data = JSON.stringify(material);
                 console.log(data);
@@ -464,4 +499,50 @@ $.ajax({
     }
 });
 $('#ScopeCode').select2();
+$.ajax({
+    type: "post",
+    url: baseURL + '/UnitOfMeasurement/GetAllUnitOfMeasurement' ,
+    success: function(response) {
 
+        console.log(response);
+        if (response.isError == false) {
+            // for(var i=0;i<response.data.length;i++){
+            // brand += `<option value="`+response.data[i].brandId+`">`+response.data[i].brandName+`</option>`;
+            // }
+
+            const roleTypeList2 = document.getElementById('unitOfMeasurementId');
+            var roleTypeListHTML2 = new Array();
+            //roleTypeListHTML2.push('<option value="0"></option>');
+            var selected='';
+            for (var i = 0; i < response.data.length; i++) {
+                selected='';
+                // if( unitOfMeasurementNUM == response.data[i].unitOfMeasurementId){
+                //     selected='selected';
+                // }
+                roleTypeListHTML2.push(`
+                <option value="` + response.data[i].unitOfMeasurementId+ `" `+selected+`>` + response.data[i].unitOfMeasurementName + `</option>`);
+            }
+            roleTypeList2.innerHTML = roleTypeListHTML2.join('');
+
+
+        }else {
+        Swal.fire({
+            text: response.errorMessage,
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+    }
+
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+    
+    }
+});
+
+$('#unitOfMeasurementId').select2();
