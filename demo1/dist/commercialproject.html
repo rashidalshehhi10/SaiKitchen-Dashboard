@@ -948,7 +948,7 @@ License: You must have a valid license purchased only from themeforest(the above
           jQuery('.div'+j).remove();
           $("#SizeSelect"+j).empty().trigger('change');
           $("#SizeSelect"+j).append('<option value="0">Select Size</option>').trigger('change'); 
-          document.getElementById("load"+j).style.removeProperty('display');     
+          //document.getElementById("load"+j).style.removeProperty('display');     
           if(document.getElementById("ScopeSelect"+j).value==0){
             $("#MaterialSelect"+j).empty().trigger('change');
             $("#MaterialSelect"+j).append('<option value="0">Select Material</option>').trigger('change');  
@@ -963,7 +963,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 },
                 success: function(response) {
                     console.log(response);
-                    document.getElementById("load"+j).style.display = 'none';
+                    //document.getElementById("load"+j).style.display = 'none';
                    const roleTypeList2 = document.getElementById('MaterialSelect'+j);
                   // roleTypeList2.style.removeProperty('width');
                     var roleTypeListHTML2 = new Array();
@@ -982,7 +982,7 @@ License: You must have a valid license purchased only from themeforest(the above
        
         }
         function getElements(j){
-            document.getElementById("load"+j).style.removeProperty('display');     
+            //document.getElementById("load"+j).style.removeProperty('display');     
           $.ajax({
                 type: "Post",
                 url: baseURL + '/Size/GetSizeByMaterialId?MaterialId='+parseInt(document.getElementById("MaterialSelect"+j).value),
@@ -1001,7 +1001,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     var selected='';
                     for (var i = 0; i < response.data.length; i++) {
                         selected='';
-                        roleTypeListHTML2.push(`<option value="`+response.data[i].sizeId+`">`+response.data[i].sizeName+`</option>`);
+                        roleTypeListHTML2.push(`<option value="`+response.data[i].sizeId+`">`+response.data[i].sizeDetail+`</option>`);
                     }
                     roleTypeList2.innerHTML = roleTypeListHTML2.join('');
                 },

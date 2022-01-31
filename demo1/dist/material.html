@@ -983,7 +983,7 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="font-size-h6 font-weight-bolder text-dark"
-                        >skuCode</label
+                        >skuCode*</label
                       >
                       <div class="input-group input-group-lg input-group-solid">
                         <input
@@ -1004,7 +1004,7 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="font-size-h6 font-weight-bolder text-dark"
-                        >WorkScope</label
+                        >WorkScope*</label
                       >
                       <div class="input-group input-group-lg input-group-solid">
                         <select id="ScopeCode" class="form-control"></select>
@@ -1014,7 +1014,7 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="font-size-h6 font-weight-bolder text-dark"
-                        >Unit of Measurement</label
+                        >Unit of Measurement*</label
                       >
                       <div class="input-group input-group-lg input-group-solid">
                         <select
@@ -1053,7 +1053,7 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="font-size-h6 font-weight-bolder text-dark"
-                        >Size</label
+                        >Size*</label
                       >
                       <a
                         type="button"
@@ -1114,6 +1114,11 @@
                           >
                         </div>
                       </div>
+                      <label
+                        id="alert"
+                        style="color: red; font-size: 0.9rem"
+                        class=""
+                      ></label>
                     </div>
                   </div>
                 </div>
@@ -1276,6 +1281,8 @@
 
       function customFormReset() {
         try {
+          document.getElementById("alert").innerHTML = "";
+          KTUtil.btnRelease(KTUtil.getById("kt_add_material_button"));
           jQuery(".divContainer").remove();
           $("#skuCode").prop("disabled", false);
           document.getElementById("counterId").value = 1;
@@ -1296,6 +1303,8 @@
 
       // document.querySelector('#editbutton').addEventListener('click', hello);
       function getmaterialById(baseURL, materialId) {
+        document.getElementById("alert").innerHTML = "";
+        KTUtil.btnRelease(KTUtil.getById("kt_add_material_button"));
         jQuery(".divContainer").remove();
         $("#skuCode").prop("disabled", true);
         document.getElementById("counterId").value = 1;

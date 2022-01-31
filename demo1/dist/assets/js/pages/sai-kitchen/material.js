@@ -275,20 +275,27 @@ var KTAppsUsersListDatatable = function () {
                             }
                         }
                      },
-                    // kt_datepicker_3: {
-                    //     validators: {
-                    //         notEmpty: {
-                    //             message: 'Date is required'
-                    //         }
-                    //     }
-                    // },
-                    // kt_datepicker_2: {
-                    //     validators: {
-                    //         notEmpty: {
-                    //             message: 'Date is required'
-                    //         }
-                    //     }
-                    // },
+                     skuCode: {
+                        validators: {
+                            notEmpty: {
+                                message: 'skuCode is required'
+                            }
+                        }
+                     },
+                     size0: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Size is required'
+                            }
+                        }
+                     },
+                     unitOfMeasurementId: {
+                        validators: {
+                            notEmpty: {
+                                message: 'unitOfMeasurementId is required'
+                            }
+                        }
+                     },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -307,13 +314,15 @@ var KTAppsUsersListDatatable = function () {
                 // Form Validation & Ajax Submission: https://formvalidation.io/guide/examples/using-ajax-to-submit-the-form
                 //  console.log($('input[name="measurementPromo"]:checked').val());
                 // var measurementPromo=$('input[name="measurementPromo"]:checked').val()=="on"?true:false;
+                
+                   
                 var size=[];
                 for(var i=0;i<parseInt(document.getElementById("counterId").value);i++){
                     if(document.getElementById("size"+i) != null){
                          size.push(document.getElementById("size"+i).value);
                     }
                 }
-
+                
 
                 var material = {
                     materialId:parseInt(document.getElementById("materialId").innerHTML),
@@ -330,6 +339,10 @@ var KTAppsUsersListDatatable = function () {
 
 
                 if (material.materialId == 0) {
+                    if(customizeFile.length==0){
+                        document.getElementById("alert").innerHTML ="File is required";
+                        return false;
+                    }
                     $.ajax({
                         type: "Post",
                         url: baseURL + '/Material/AddMaterial',
