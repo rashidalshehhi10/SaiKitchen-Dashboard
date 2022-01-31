@@ -271,6 +271,16 @@ var bool1,bool2,bool2,bool3,bool4,bool5,bool6;
       bool6  ="Yes";
    }else
       bool6 = "No";  
+      var projectname ="";
+      response.data.inquiry.inquiryWorkscopes.forEach(element => {
+       projectname  += element.workscope.workScopeName+" ";
+      });
+      document.getElementById("Lprojectname").innerHTML += '<u>'+projectname+'</u>';
+      document.getElementById("Lprojectcode").innerHTML += '<u>'+response.data.inquiry.inquiryCode+'</u>';
+      document.getElementById("Lclientname").innerHTML += '<u>'+response.data.inquiry.customer.customerName+'</u>';
+      document.getElementById("Lclientcode").innerHTML += '<u>CS'+response.data.inquiry.branchId+``+response.data.inquiry.customerId+'</u>';
+      document.getElementById("Lquotation").innerHTML = `The project has been fabricated,delivered and installed as per signed agreement and
+      approved quotation No: <u style="font-weight: bolder;">`+response.data.inquiry.quotations[0].quotationCode+`</u> and the same is duly handed`;
 customerDetail.innerHTML=` <!--begin::User-->
 <div class="d-flex align-items-center">
    <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
@@ -2141,9 +2151,14 @@ workscope.innerHTML=workscopeHtml;
          addURL ='/JobOrderDetail/JobOrderCompleted';
         checklistdata ={
            "inquiryId":parseInt( document.getElementById('inquiryId').value),
-           "remark": document.getElementById('aemoji').value,
+           "remark": "",
            "jobOrderDetailsDescription": document.getElementById('jobComment').value,
            "handingover":customizeFile,
+           "qualityRemarks":parseInt(document.getElementById('aemoji').value),
+           "speedOfWorkRemarks":parseInt(document.getElementById('bemoji').value),
+           "serviceOverAllRemarks":parseInt(document.getElementById('cemoji').value),
+           "esignatureImg":document.getElementById("sig-canvas").toDataURL(),
+           "yesNo":$("#DefaultCheckbox").prop('checked'),
          };
       }
       if(choose == "5"){
@@ -2157,7 +2172,7 @@ workscope.innerHTML=workscopeHtml;
         const data = JSON.stringify(checklistdata);
         console.log(data);
         
-         $.ajax({
+          $.ajax({
             type: "Post",
             url: baseURL + addURL,
             headers: {
@@ -2174,7 +2189,7 @@ workscope.innerHTML=workscopeHtml;
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 //document.getElementById("alert").innerHTML ="An error occured";
             }
-        }); 
+        });  
     });
     $('#kt_reject_inquiry_button').click(function () {
         var rejectlistdata = {

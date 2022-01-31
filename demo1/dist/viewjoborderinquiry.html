@@ -111,6 +111,24 @@
          } 
          
    </style>
+   <style>
+      .form-check {
+    display: flex;
+    align-items: center;
+}
+
+.form-check .form-check-input[type=checkbox] {
+    border-radius: .25em;
+    height: 30px;
+    width: 30px;
+}
+
+#sig-canvas {
+  border: 2px dotted #CCCCCC;
+  border-radius: 15px;
+  cursor: crosshair;
+}
+   </style>
    </head>
    <!--end::Head-->
    <!--begin::Body-->
@@ -689,34 +707,121 @@
                          </button>
                  </div>
                  <div class="modal-body">
+                  
                   <div id="divjobcomp">
+                     <label class="font-size-h6 font-weight-bolder text-dark" style="background-color: #DCDCDC;width: 100%;text-align: center;">
+                        OFFICIAL HAND OVER AND CUSTOMER HAPPINESS
+                     </label>
+                      <label id="LabelDate" style="text-align: right;width: 100%;padding-top: 1rem;padding-bottom: 1rem;"> </label>
+                      <label class="text-dark"   id="" >We as a Sai kitchen & wardrobes have completed the work for the following: </label>
+                      <label class="text-dark" id="Lprojectname" style="padding-left: .5rem;width: 100%" > Project Name: </label>
+                      <label class="text-dark" id="Lprojectcode" style="padding-left: .5rem;width: 100%" > Project Code: </label>
+                      <label class="text-dark" class="text-dark" id="Lclientname" style="padding-left: .5rem;width: 100%" > Client Name: </label>
+                      <label class="text-dark" id="Lclientcode" style="padding-left: .5rem;width: 100%;padding-bottom: 1rem;" > Client Code: </label>
+                      <label class="text-dark" id="Lquotation" style="width: 100%;padding-bottom: 1rem;"  >  </label>
+                      <label class="text-dark" id="Lquality" style="width: 100%;padding-bottom: 1rem;"  > Help us to improve our company by receiving your feedback of the following : </label>
                      <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Review:</label>
+                                    <div class="col-5">
+                                     <label class=" font-weight-bolder text-dark" style="padding-top: 2rem;"><u>QUALITY</u></label>
+                                    </div>
+                                    <div class="col-7">
                                     <div id="imoji" style="vertical-align: bottom;">
                                        <input type="hidden" id="aemoji" value="0" /> 
-                                          <div   class="emoj" style="cursor: pointer; float: left;width: 14%;" onclick="appr(1)">
-                                            <span id="aemoj1" class="emo1">   😶  </span >
-                                           </div>
-                                           <div  class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(2)">
+                                          <div   class="emoj" style="cursor: pointer; float: left;" onclick="appr(1)">
+                                             <span id="aemoj1" class="emo1">   😕  </span >
+                                          </div>
+                                           <div  class="emoj" style="cursor: pointer; float: left;" onclick="appr(2)">
                                              <span  id="aemoj2" class="emo2">   😑  </span >
                                             </div>
-                                            <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(3)">
-                                             <span id="aemoj3" class="emo3">   😒  </span >
+                                            
+                                            <div   class="emoj" style="cursor: pointer; float: left;" onclick="appr(3)">
+                                             <span id="aemoj3" class="emo3">   🙂  </span >
                                             </div>
-                                            <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(4)">
-                                             <span id="aemoj4" class="emo4">   😕  </span >
-                                            </div>
-                                            <div   class="emoj" style="cursor: pointer; float: left;width: 14%" onclick="appr(5)">
-                                             <span id="aemoj5" class="emo5">   🙂  </span >
-                                            </div>
-                                            <div   class="emoj" style="cursor: pointer; float: left;width: 15%" onclick="appr(6)">
-                                             <span id="aemoj6" class="emo6">   😃  </span >
-                                            </div>
-                                            <div   class="emoj" style="cursor: pointer; float: left;width: 15%" onclick="appr(7)">
-                                             <span id="aemoj7" class="emo7">   😍  </span >
-                                            </div>
+                 
                                        </div>
+                                    </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-5">
+                         <label class=" font-weight-bolder text-dark" style="padding-top: 2rem;"><u>SPEED OF WORK</u></label>
+                        </div>
+                        <div class="col-7">
+                        <div id="bmoji" style="vertical-align: bottom;">
+                           <input type="hidden" id="bemoji" value="0" /> 
+                              <div   class="emoj" style="cursor: pointer; float: left;" onclick="appr1(4)">
+                                 <span id="aemoj4" class="emo4">   😕  </span >
+                              </div>
+                               <div  class="emoj" style="cursor: pointer; float: left;" onclick="appr1(5)">
+                                 <span  id="aemoj5" class="emo5">   😑  </span >
+                                </div>
+                                
+                                <div   class="emoj" style="cursor: pointer; float: left;" onclick="appr1(6)">
+                                 <span id="aemoj6" class="emo6">   🙂  </span >
+                                </div>
+     
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-5">
+                         <label class=" font-weight-bolder text-dark" style="padding-top: 2rem;"><u>THE SERVICE OVER ALL</u></label>
+                        </div>
+                        <div class="col-7">
+                        <div id="bmoji" style="vertical-align: bottom;">
+                           <input type="hidden" id="cemoji" value="0" /> 
+                              <div   class="emoj" style="cursor: pointer; float: left;" onclick="appr2(7)">
+                                 <span id="aemoj7" class="emo7">   😕  </span >
+                              </div>
+                               <div  class="emoj" style="cursor: pointer; float: left;" onclick="appr2(8)">
+                                 <span  id="aemoj8" class="emo8">   😑  </span >
+                                </div>
+                                
+                                <div   class="emoj" style="cursor: pointer; float: left;" onclick="appr2(9)">
+                                 <span id="aemoj9" class="emo9">   🙂  </span >
+                                </div>
+     
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Remarks:</label>
+                                    <div class="input-group">
+                                      <textarea class="form-control" rows="2" name="jobComment" id="jobComment" ></textarea>
+                                        
+                                    </div>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                           <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="DefaultCheckbox">
+                              <label class="form-check-label" style="padding-left: 2rem;" for="DefaultCheckbox">
+                                 INTERESTED IN KNOWING THE LATEST DESIGNS AND OFFERS
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <label class="font-size-h6 font-weight-bolder text-dark">E-Signature:</label>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-12">
+                                  <canvas id="sig-canvas" width="" height="">
+                                     Get a better browser, bro.
+                                  </canvas>
+                               </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <button class="btn btn-default" id="sig-clearBtn">Clear Signature</button>
+                                
+                              </div>
+                           </div>
                         </div>
                      </div>
                      <div class="form-group row">
@@ -729,15 +834,7 @@
                             </div>
                         </div>
                      </div>
-                     <div class="form-group row">
-                         <div class="col-lg-12 col-md-12 col-sm-12">
-                                     <label class="font-size-h6 font-weight-bolder text-dark">Comments:</label>
-                                     <div class="input-group">
-                                       <textarea class="form-control" rows="4" name="jobComment" id="jobComment" ></textarea>
-                                         
-                                     </div>
-                         </div>
-                      </div>
+    
                   </div>
                   <div id="divrtinstall">
                      <div class="form-group row">
@@ -1069,11 +1166,35 @@
                    */
          function appr(id){         
            //var heart = document.getElementById("hemoji").value;
-           for (let i = 1; i <= 7; i++) {
+           for (let i = 1; i <= 3; i++) {
               if(i == id){
                document.getElementById("aemoj"+id).style.backgroundColor  = '#F1583E';
                document.getElementById("aemoj"+id).style.borderRadius = '100%';
                document.getElementById("aemoji").value = id;
+              }else{
+               document.getElementById("aemoj"+i).style.removeProperty('background-color');
+              }
+           }
+         }
+         function appr1(id){         
+           //var heart = document.getElementById("hemoji").value;
+           for (let i = 4; i <= 6; i++) {
+              if(i == id){
+               document.getElementById("aemoj"+id).style.backgroundColor  = '#F1583E';
+               document.getElementById("aemoj"+id).style.borderRadius = '100%';
+               document.getElementById("bemoji").value = i-3;
+              }else{
+               document.getElementById("aemoj"+i).style.removeProperty('background-color');
+              }
+           }
+         }
+         function appr2(id){         
+           //var heart = document.getElementById("hemoji").value;
+           for (let i = 7; i <= 9; i++) {
+              if(i == id){
+               document.getElementById("aemoj"+id).style.backgroundColor  = '#F1583E';
+               document.getElementById("aemoj"+id).style.borderRadius = '100%';
+               document.getElementById("cemoji").value = i-6;
               }else{
                document.getElementById("aemoj"+i).style.removeProperty('background-color');
               }
@@ -1131,10 +1252,143 @@
                      }
                      return new Blob(bytearrays);
                   };
+
+
+                  document.getElementById("LabelDate").innerHTML = "Date: "+ new Date().toLocaleDateString();
       </script>
       <!--end::Page Scripts-->
 
      <script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
+     <script>
+        (function() {
+  window.requestAnimFrame = (function(callback) {
+    return window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.oRequestAnimationFrame ||
+      window.msRequestAnimaitonFrame ||
+      function(callback) {
+        window.setTimeout(callback, 1000 / 60);
+      };
+  })();
+
+  var canvas = document.getElementById("sig-canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.strokeStyle = "#222222";
+  ctx.lineWidth = 4;
+
+  var drawing = false;
+  var mousePos = {
+    x: 0,
+    y: 0
+  };
+  var lastPos = mousePos;
+
+  canvas.addEventListener("mousedown", function(e) {
+    drawing = true;
+    lastPos = getMousePos(canvas, e);
+  }, false);
+
+  canvas.addEventListener("mouseup", function(e) {
+    drawing = false;
+  }, false);
+
+  canvas.addEventListener("mousemove", function(e) {
+    mousePos = getMousePos(canvas, e);
+  }, false);
+
+  // Add touch event support for mobile
+  canvas.addEventListener("touchstart", function(e) {
+
+  }, false);
+
+  canvas.addEventListener("touchmove", function(e) {
+    var touch = e.touches[0];
+    var me = new MouseEvent("mousemove", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(me);
+  }, false);
+
+  canvas.addEventListener("touchstart", function(e) {
+    mousePos = getTouchPos(canvas, e);
+    var touch = e.touches[0];
+    var me = new MouseEvent("mousedown", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(me);
+  }, false);
+
+  canvas.addEventListener("touchend", function(e) {
+    var me = new MouseEvent("mouseup", {});
+    canvas.dispatchEvent(me);
+  }, false);
+
+  function getMousePos(canvasDom, mouseEvent) {
+    var rect = canvasDom.getBoundingClientRect();
+    return {
+      x: mouseEvent.clientX - rect.left,
+      y: mouseEvent.clientY - rect.top
+    }
+  }
+
+  function getTouchPos(canvasDom, touchEvent) {
+    var rect = canvasDom.getBoundingClientRect();
+    return {
+      x: touchEvent.touches[0].clientX - rect.left,
+      y: touchEvent.touches[0].clientY - rect.top
+    }
+  }
+
+  function renderCanvas() {
+    if (drawing) {
+      ctx.moveTo(lastPos.x, lastPos.y);
+      ctx.lineTo(mousePos.x, mousePos.y);
+      ctx.stroke();
+      lastPos = mousePos;
+    }
+  }
+
+  // Prevent scrolling when touching the canvas
+  document.body.addEventListener("touchstart", function(e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  }, false);
+  document.body.addEventListener("touchend", function(e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  }, false);
+  document.body.addEventListener("touchmove", function(e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  }, false);
+
+  (function drawLoop() {
+    requestAnimFrame(drawLoop);
+    renderCanvas();
+  })();
+
+  function clearCanvas() {
+    canvas.width = canvas.width;
+  }
+
+
+  // Set up the UI
+  var clearBtn = document.getElementById("sig-clearBtn");
+  clearBtn.addEventListener("click", function(e) {
+    clearCanvas();
+    e.preventDefault();
+  }, false);
+
+
+})();
+ 
+     </script>
    </body>
    <!--end::Body-->
 </html>
