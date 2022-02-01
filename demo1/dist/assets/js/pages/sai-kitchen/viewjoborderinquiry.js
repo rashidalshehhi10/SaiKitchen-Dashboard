@@ -2157,7 +2157,7 @@ workscope.innerHTML=workscopeHtml;
            "qualityRemarks":parseInt(document.getElementById('aemoji').value),
            "speedOfWorkRemarks":parseInt(document.getElementById('bemoji').value),
            "serviceOverAllRemarks":parseInt(document.getElementById('cemoji').value),
-           "esignatureImg":document.getElementById("sig-canvas").toDataURL(),
+           "esignatureImg":document.getElementById("sig-canvas").toDataURL().split(",")[1],
            "yesNo":$("#DefaultCheckbox").prop('checked'),
          };
       }
