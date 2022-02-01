@@ -1820,7 +1820,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                let purchase = '';
                let purchfile='';
                //   if(element.designs.length > 0){
-                 purchfile =
+               let  purchfile =
                  `<div class="card">
                  <div class="card-header" >
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#dicPurch`+element.inquiryWorkscopeId+`">
@@ -2302,7 +2302,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
             }else{
                let Advance='';let Before='';let After='';let Install='';
                let purchase = '';
-               purchfile =
+              let purchfile =
                `<div class="card">
                <div class="card-header" >
                   <div class="card-title collapsed" data-toggle="collapse" data-target="#dicPurch`+element.inquiryWorkscopeId+`">
