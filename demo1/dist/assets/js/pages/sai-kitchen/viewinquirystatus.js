@@ -1820,7 +1820,7 @@ response.data.inquiry.inquiryWorkscopes.forEach(element => {
                let purchase = '';
                let purchfile='';
                //   if(element.designs.length > 0){
-               let  purchfile =
+                 purchfile =
                  `<div class="card">
                  <div class="card-header" >
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#dicPurch`+element.inquiryWorkscopeId+`">
