@@ -2071,6 +2071,7 @@ workscope.innerHTML=workscopeHtml;
       document.getElementById("divjobcomp").style.display = 'none';
       document.getElementById("kt_reject_inquiry_button").style.display = 'none';
       document.getElementById("schedule_date1").disabled =false ;
+      document.getElementById("exampleModalLabel").innerHTML = 'Job order';
       
     })
     $('#aror').click(function (
@@ -2082,6 +2083,7 @@ workscope.innerHTML=workscopeHtml;
       document.getElementById("divrtinstall").style.display = 'none';
       document.getElementById("divjobcomp").style.display = 'none';
       document.getElementById("schedule_date1").disabled = true;
+      document.getElementById("exampleModalLabel").innerHTML = 'Job order';
     });
     $('#adelay').click(function (
       ) {
@@ -2091,6 +2093,7 @@ workscope.innerHTML=workscopeHtml;
         document.getElementById("divrtinstall").style.display = 'none';
         document.getElementById("divjobcomp").style.display = 'none';
         document.getElementById("kt_reject_inquiry_button").style.display = 'none';
+        document.getElementById("exampleModalLabel").innerHTML = 'Job order';
       });
       $('#rtinstall').click(function (
          ) {
@@ -2100,9 +2103,11 @@ workscope.innerHTML=workscopeHtml;
            document.getElementById("divrjctreschedule").style.display = 'none';
            document.getElementById("divjobcomp").style.display = 'none';
            document.getElementById("kt_reject_inquiry_button").style.display = 'none';
+           document.getElementById("exampleModalLabel").innerHTML = 'Job order';
          });
          $('#jocomp').click(function (
             ) {
+               document.getElementById("exampleModalLabel").innerHTML = 'OFFICIAL HAND OVER AND CUSTOMER HAPPINESS';
                document.getElementById("selectedDiv").value ="4";
               document.getElementById("divjobcomp").style.removeProperty('display');
               document.getElementById("divrtinstall").style.display = 'none';
