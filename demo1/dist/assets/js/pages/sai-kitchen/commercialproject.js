@@ -404,7 +404,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 							}
                             const data1 = JSON.stringify(obj);
                             console.log(data1);
-                 /*            $.ajax({
+                             $.ajax({
                                 type: "Post",
                                 url: baseURL + '/CommercialProject/AddCommercialProject',
             
@@ -459,7 +459,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                         KTUtil.scrollTop();
                                     });
                                 }
-                            }); */
+                            }); 
                         }  
                         if (xlsxflag) {/*If excel file is .xlsx extension than creates a Array Buffer from excel*/  
                             reader.readAsArrayBuffer($("#excelfile")[0].files[0]);  
