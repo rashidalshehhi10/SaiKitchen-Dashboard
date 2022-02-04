@@ -35,10 +35,10 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
    
     var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
-    var _handleaddquotation = function() {
-        var form = KTUtil.getById('kt_add_quotation');
+    var _handlecomplete = function() {
+        var form = KTUtil.getById('kt_approve_inquiry');
         var formSubmitUrl = KTUtil.attr(form, 'action');
-        var formSubmitButton = KTUtil.getById('kt_btn_add_quotation');
+        var formSubmitButton = KTUtil.getById('kt_approve_inquiry_button');
 
         if (!form) {
             return;
@@ -47,36 +47,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
         FormValidation
             .formValidation(
                 form, {
-                    fields: {
-                        txtTotalAmount: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Total Amount is required'
-                                }
-                            }
-                        },
-                        txtAmount: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Amount is required'
-                                }
-                            }
-                        },
-                        txtAdvancePayment: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Advance Payment is required'
-                                }
-                            }
-                        },
-                        kt_datepicker_2: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Valid Till is required'
-                                }
-                            }
-                        },
-                    },
+  
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger(),
                         submitButton: new FormValidation.plugins.SubmitButton(),
@@ -89,6 +60,68 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 }
             )
             .on('core.form.valid', function() {
+                
+                var a='',b='',c='';
+                a =document.getElementById('aemoji').value;
+                b = document.getElementById('bemoji').value;
+                c = document.getElementById('cemoji').value;
+                if(c=="0" ||b=="0"||c=="0"){
+                    document.getElementById("emoalert").innerHTML="Emoji is Required";
+                    KTUtil.scrollTop();
+                    return false;
+                }else
+                    document.getElementById("emoalert").innerHTML="";
+                if(document.getElementById('jobComment').value==""){
+                        document.getElementById("dalert").innerHTML="Remark is Required";
+                        KTUtil.scrollTop();
+                        return false;
+                    }else
+                        document.getElementById("dalert").innerHTML="";
+                var sign ="iVBORw0KGgoAAAANSUhEUgAAASIAAACWCAYAAAB6koVhAAAEUUlEQVR4Xu3UwQ0AMAwCsbD/0hnjPu4CRSZi5xEgQCAWWPy/7wkQIHCGyBEQIJALGKK8AgEIEDBEboAAgVzAEOUVCECAgCFyAwQI5AKGKK9AAAIEDJEbIEAgFzBEeQUCECBgiNwAAQK5gCHKKxCAAAFD5AYIEMgFDFFegQAECBgiN0CAQC5giPIKBCBAwBC5AQIEcgFDlFcgAAEChsgNECCQCxiivAIBCBAwRG6AAIFcwBDlFQhAgIAhcgMECOQChiivQAACBAyRGyBAIBcwRHkFAhAgYIjcAAECuYAhyisQgAABQ+QGCBDIBQxRXoEABAgYIjdAgEAuYIjyCgQgQMAQuQECBHIBQ5RXIAABAobIDRAgkAsYorwCAQgQMERugACBXMAQ5RUIQICAIXIDBAjkAoYor0AAAgQMkRsgQCAXMER5BQIQIGCI3AABArmAIcorEIAAAUPkBggQyAUMUV6BAAQIGCI3QIBALmCI8goEIEDAELkBAgRyAUOUVyAAAQKGyA0QIJALGKK8AgEIEDBEboAAgVzAEOUVCECAgCFyAwQI5AKGKK9AAAIEDJEbIEAgFzBEeQUCECBgiNwAAQK5gCHKKxCAAAFD5AYIEMgFDFFegQAECBgiN0CAQC5giPIKBCBAwBC5AQIEcgFDlFcgAAEChsgNECCQCxiivAIBCBAwRG6AAIFcwBDlFQhAgIAhcgMECOQChiivQAACBAyRGyBAIBcwRHkFAhAgYIjcAAECuYAhyisQgAABQ+QGCBDIBQxRXoEABAgYIjdAgEAuYIjyCgQgQMAQuQECBHIBQ5RXIAABAobIDRAgkAsYorwCAQgQMERugACBXMAQ5RUIQICAIXIDBAjkAoYor0AAAgQMkRsgQCAXMER5BQIQIGCI3AABArmAIcorEIAAAUPkBggQyAUMUV6BAAQIGCI3QIBALmCI8goEIEDAELkBAgRyAUOUVyAAAQKGyA0QIJALGKK8AgEIEDBEboAAgVzAEOUVCECAgCFyAwQI5AKGKK9AAAIEDJEbIEAgFzBEeQUCECBgiNwAAQK5gCHKKxCAAAFD5AYIEMgFDFFegQAECBgiN0CAQC5giPIKBCBAwBC5AQIEcgFDlFcgAAEChsgNECCQCxiivAIBCBAwRG6AAIFcwBDlFQhAgIAhcgMECOQChiivQAACBAyRGyBAIBcwRHkFAhAgYIjcAAECuYAhyisQgAABQ+QGCBDIBQxRXoEABAgYIjdAgEAuYIjyCgQgQMAQuQECBHIBQ5RXIAABAobIDRAgkAsYorwCAQgQMERugACBXMAQ5RUIQICAIXIDBAjkAoYor0AAAgQMkRsgQCAXMER5BQIQIGCI3AABArmAIcorEIAAAUPkBggQyAUMUV6BAAQIGCI3QIBALmCI8goEIEDAELkBAgRyAUOUVyAAAQKGyA0QIJALGKK8AgEIEDBEboAAgVzAEOUVCECAwANU0ACXVnc2sgAAAABJRU5ErkJggg==";
+                if( document.getElementById("sig-canvas").toDataURL().split(",")[1]==sign){
+                    document.getElementById("ealert").innerHTML="E-signture is Required";
+                    KTUtil.scrollTop();
+                    return false;;
+                }else
+                    document.getElementById("ealert").innerHTML="";
+                let choose = document.getElementById("selectedDiv").value;
+       let addURL ='';
+       var checklistdata;
+        addURL ='/JobOrderDetail/JobOrderCompleted';
+        checklistdata ={
+           "inquiryId":parseInt( document.getElementById('inquiryId').value),
+           "remark": "",
+           "jobOrderDetailsDescription": document.getElementById('jobComment').value,
+           "handingover":customizeFile,
+           "qualityRemarks":parseInt(document.getElementById('aemoji').value),
+           "speedOfWorkRemarks":parseInt(document.getElementById('bemoji').value),
+           "serviceOverAllRemarks":parseInt(document.getElementById('cemoji').value),
+           "esignatureImg":document.getElementById("sig-canvas").toDataURL().split(",")[1],
+           "yesNo":$("#DefaultCheckbox").prop('checked'),
+         };
+      
+    
+        const data = JSON.stringify(checklistdata);
+        console.log(data);
+        
+           $.ajax({
+            type: "Post",
+            url: baseURL + addURL,
+            headers: {
+                'Content-Type': 'application/json',
+                'userId': user.data.userId,
+                'Access-Control-Allow-Origin': '*',
+            },
+            data: data,
+            success: function(response) {
+                console.log(response);
+     
+                window.location.replace("joborder.html");
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                //document.getElementById("alert").innerHTML ="An error occured";
+            }
+        });  
                
             })
             .on('core.form.invalid', function() {
@@ -110,7 +143,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 
         //main function to initiate the module
         init: function() {
-            _handleaddquotation();
+            _handlecomplete();
         },
 
     };
@@ -230,86 +263,9 @@ if(branchTypeId==2||branchTypeId==1){
     });
   
     $('#kt_approve_inquiry_button').click(function () {
-       let choose = document.getElementById("selectedDiv").value;
-       let addURL ='';
-       var checklistdata;
-        addURL ='/JobOrderDetail/JobOrderCompleted';
-        checklistdata ={
-           "inquiryId":parseInt( document.getElementById('inquiryId').value),
-           "remark": "",
-           "jobOrderDetailsDescription": document.getElementById('jobComment').value,
-           "handingover":customizeFile,
-           "qualityRemarks":parseInt(document.getElementById('aemoji').value),
-           "speedOfWorkRemarks":parseInt(document.getElementById('bemoji').value),
-           "serviceOverAllRemarks":parseInt(document.getElementById('cemoji').value),
-           "esignatureImg":document.getElementById("sig-canvas").toDataURL().split(",")[1],
-           "yesNo":$("#DefaultCheckbox").prop('checked'),
-         };
-      
-    
-        const data = JSON.stringify(checklistdata);
-        console.log(data);
-        
-          $.ajax({
-            type: "Post",
-            url: baseURL + addURL,
-            headers: {
-                'Content-Type': 'application/json',
-                'userId': user.data.userId,
-                'Access-Control-Allow-Origin': '*',
-            },
-            data: data,
-            success: function(response) {
-                console.log(response);
-     
-                window.location.replace("joborder.html");
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                //document.getElementById("alert").innerHTML ="An error occured";
-            }
-        }); 
+       
     });
-    $('#kt_reject_inquiry_button').click(function () {
-        var rejectlistdata = {
-            "inquiryId":parseInt(document.getElementById('inquiryId').value),
-            "reason":document.getElementById('appComment').value,
-          };
-    
-        const data = JSON.stringify(rejectlistdata);
-        console.log(data);
-         $.ajax({
-            type: "Post",
-            url: baseURL + '/JobOrderDetail/JobOrderDetailRescheduleReject',
-            headers: {
-                'Content-Type': 'application/json',
-                'userId': user.data.userId,
-                'Access-Control-Allow-Origin': '*',
-            },
-            data: data,
-            success: function(response) {
-                console.log(response);
-                if(response.errorMessage=="inquiry Not Found"){
-                Swal.fire({
-                  text: 'Can Not Reject Approved Inquiry',
-                  icon: "error",
-                  buttonsStyling: false,
-                  confirmButtonText: "Ok, got it!",
-                  customClass: {
-                      confirmButton: "btn font-weight-bold btn-light-primary"
-                  }
-              }).then(function() {
-                  KTUtil.scrollTop();
-              });
-            }else{
-               window.location.replace("joborder.html");
-            }
-                
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                //document.getElementById("ralert").innerHTML ="An error occured";
-            }
-        }); 
-    });
+   
     
     
     
