@@ -1353,16 +1353,26 @@
   // Prevent scrolling when touching the canvas
   document.body.addEventListener("touchstart", function(e) {
     if (e.target == canvas) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.getElementById("approve").style.overflow = 'hidden';
+      
       e.preventDefault();
     }
   }, false);
   document.body.addEventListener("touchend", function(e) {
     if (e.target == canvas) {
+      document.body.style.overflow = 'auto';
+      document.getElementById("approve").style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
       e.preventDefault();
     }
   }, false);
   document.body.addEventListener("touchmove", function(e) {
     if (e.target == canvas) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.getElementById("approve").style.overflow = 'hidden';
       e.preventDefault();
     }
   }, false);
