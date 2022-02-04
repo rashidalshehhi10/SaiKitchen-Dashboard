@@ -122,6 +122,9 @@ var branchTypeId;
 
 // Class Initialization
 jQuery(document).ready(function() {
+
+   document.getElementById("jocomp").style.display ='none';
+   document.getElementById("adelay").style.display ='none';
 	var login = localStorage.getItem("user");
     if (login !== null) {
         user = JSON.parse(login);
@@ -152,12 +155,7 @@ if(branchTypeId==2||branchTypeId==1){
    document.getElementById("RequestforReschedulingBtn").style.display = "inline-block";
       }
 
-      if(branchTypeId==3){
-         document.getElementById("jocomp").style.display = "inline-block";
-         //document.getElementById("rtinstall").style.display = "inline-block";
-         document.getElementById("adelay").style.display = "inline-block";
-        // document.getElementById("aror").style.display = "inline-block";
-            }
+      
     
 
     $.ajax({
@@ -178,10 +176,14 @@ if(branchTypeId==2||branchTypeId==1){
             console.log(response);
             if (response.isError == false) {
 
-                  if(response.data.inquiry.inquiryStatusId == 27 )
+                  if(response.data.inquiry.inquiryStatusId != 27 )
                   {
-                     $('#jocomp').hide(); 
-                     $('#adelay').hide();
+                     if(branchTypeId==3){
+                        document.getElementById("jocomp").style.display = "inline-block";
+                        //document.getElementById("rtinstall").style.display = "inline-block";
+                        document.getElementById("adelay").style.display = "inline-block";
+                       // document.getElementById("aror").style.display = "inline-block";
+                           }
                   } 
 
                document.getElementById("schedule_date1").value = response.data.inquiry.jobOrders[0].jobOrderDetails[0].installationStartDate;
