@@ -176,7 +176,7 @@ if(branchTypeId==2||branchTypeId==1){
             console.log(response);
             if (response.isError == false) {
 
-                  if(response.data.inquiry.inquiryStatusId == 27 )
+                  if(response.data.inquiry.inquiryStatusId != 27 )
                   {
                      if(branchTypeId==3){
                         document.getElementById("jocomp").style.display = "inline-block";
