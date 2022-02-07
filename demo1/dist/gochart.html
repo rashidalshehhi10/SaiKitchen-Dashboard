@@ -176,6 +176,11 @@
 
 								if(urlParams.get('graphuserId')!=null)
 								graphuserId = urlParams.get('graphuserId');
+
+								let usrdata = sessionStorage.getItem('graphuserId');
+								if(usrdata != null){
+									graphuserId = usrdata;
+								}
 							 $.ajax({
 								type: "Post",
 								url: baseURL + '/Customer/GetCustomerGraph?userId=' + graphuserId,
@@ -353,7 +358,8 @@
 																									
                             
 																		   SetValues(obj.part.data.id)
-
+                                                                           sessionStorage.setItem('graphuserId', obj.part.data.id);
+																		   // destroy fiter session
 														m.set(myDiagram.findNodeForKey("A").data, "val", document.getElementById("A").value);
 														m.set(myDiagram.findNodeForKey("B").data, "val", document.getElementById("B").value);
 														m.set(myDiagram.findNodeForKey("C").data, "val", document.getElementById("C").value);
@@ -373,6 +379,7 @@
                                                         refreshCustomerTable(obj.part.data.id,0);
                                                         graphuserId = obj.part.data.id;
 														}
+														//set filter session
 																	//	m.set(node.data, "val", obj.data.val);
 														if(obj.part.data.key=="B"){
 															refreshCustomerTable(graphuserId,1);

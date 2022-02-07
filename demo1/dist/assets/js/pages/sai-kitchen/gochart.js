@@ -17,7 +17,11 @@ let customerData;
 let fuserId=0;
 let filter = 0;
 let usercard = 1;
-
+let usrdata = sessionStorage.getItem('graphuserId');
+								if(usrdata != null){
+									fuserId = usrdata;
+								}
+                                ///here get filter session
 var KTAppsUsersListDatatable = function() {
     // Private functions
 
