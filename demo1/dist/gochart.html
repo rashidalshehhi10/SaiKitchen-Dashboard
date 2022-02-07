@@ -305,6 +305,7 @@
 
 
 
+
 													function nodeStyle() {
 												  return [
 													// The Node.location comes from the "loc" property of the node data,
@@ -329,8 +330,8 @@
 													   { // the Node.location point will be at the center of each node
 														locationSpot: go.Spot.Left
 														},
-														   new go.Binding("location", "loc"),
-													{ background: "#755043" },
+														//   new go.Binding("location", "loc"),
+													{ background: "#755043" },											
 													
 													$(go.TextBlock,
 													"Default Text",  // the initial value for TextBlock.text
@@ -338,14 +339,19 @@
 													{ margin: 3, maxSize: new go.Size(85, NaN),wrap: go.TextBlock.WrapFit, stroke: "white",font: "bold 10px sans-serif" },
 													// TextBlock.text is data bound to the "name" property of the model data
 													new go.Binding("text", "text")),
+													
 													$(go.TextBlock,
 													// Pictures should normally have an explicit width and height.
 													// This picture has a red background, only visible when there is no source set
 													// or when the image is partially transparent.
 													{ margin: 10, width: 25,  height: 25,    verticalAlignment: go.Spot.Center, textAlign: "center", stroke: "white", background: "#755043" ,font: "bold 14px sans-serif" },
 													// Picture.source is data bound to the "source" attribute of the model data
+													new go.Binding("fill", "isSelected", function(sel, shape) {
+															return sel ? "#121212" : shape.part.data.color || "#858585";
+														}).ofObject(),
 													new go.Binding("text", "val")),
 													{
+														
 														click: function(e, obj) { // obj === node
 															
 															
@@ -354,12 +360,15 @@
 																	//var node = myDiagram.findNodeForKey("17");
 																if(obj.part.data.id !="") 
 																		{ 
-																	       //	window.location.replace("testchart.html?graphuserId="+obj.part.data.id);
-																									
-                            
+																	       //	window.location.replace("testchart.html?graphuserId="+obj.part.data.id);																									
 																		   SetValues(obj.part.data.id)
+																		 
                                                                            sessionStorage.setItem('graphuserId', obj.part.data.id);
-																		   sessionStorage.removeItem('filter');
+																		   sessionStorage.removeItem('filter'); 
+																		   sessionStorage.removeItem('nodeSelected');
+																		   sessionStorage.setItem('nodeSelected',obj.part.data.key);
+																		   
+																
 																		   // destroy fitler session
 														m.set(myDiagram.findNodeForKey("A").data, "val", document.getElementById("A").value);
 														m.set(myDiagram.findNodeForKey("B").data, "val", document.getElementById("B").value);
@@ -383,66 +392,122 @@
 														//set filter session
 																	//	m.set(node.data, "val", obj.data.val);
 														if(obj.part.data.key=="B"){
+															
+
+															
+													      	sessionStorage.setItem('nodeSelected', "B");
+
 															refreshCustomerTable(graphuserId,1);
 															sessionStorage.setItem('filter', 1);
+				
 														}else
 														if(obj.part.data.key=="C"){
+
+														
+													      	sessionStorage.setItem('nodeSelected', "C");
+
 															refreshCustomerTable(graphuserId,2);
 															sessionStorage.setItem('filter', 2);
 														}else
 														if(obj.part.data.key=="D"){
+
+														
+													      	sessionStorage.setItem('nodeSelected', "D");
+
 															refreshCustomerTable(graphuserId,3);
 															sessionStorage.setItem('filter', 3);
 														}else
 														if(obj.part.data.key=="E"){
+
+														
+													      	sessionStorage.setItem('nodeSelected', "E");
+
 															refreshCustomerTable(graphuserId,4);
 															sessionStorage.setItem('filter', 4);
 														}else
 														if(obj.part.data.key=="F"){
+														
+													      	sessionStorage.setItem('nodeSelected', "F");
+
 															refreshCustomerTable(graphuserId,5);
 															sessionStorage.setItem('filter', 5);
 														}else
 														if(obj.part.data.key=="G"){
+
+														
+													      	sessionStorage.setItem('nodeSelected', "G");
+
 															refreshCustomerTable(graphuserId,6);
 															sessionStorage.setItem('filter', 6);
 														}else
 														if(obj.part.data.key=="I"){
+														
+													      	sessionStorage.setItem('nodeSelected', "I");
+
 															refreshCustomerTable(graphuserId,7);
 															sessionStorage.setItem('filter', 7);
 														}else
 														if(obj.part.data.key=="A"){
+
+															
+													      	sessionStorage.setItem('nodeSelected', "A");
+
 															refreshCustomerTable(graphuserId,8);
 															sessionStorage.setItem('filter', 8);
 														}else
 														if(obj.part.data.key=="H"){
+
+															
+													      	sessionStorage.setItem('nodeSelected', "H");
 															refreshCustomerTable(graphuserId,9);
 															sessionStorage.setItem('filter', 9);
 														}else
 														if(obj.part.data.key=="K"){
+
+
+														
+													      	sessionStorage.setItem('nodeSelected', "K");
+
 															refreshCustomerTable(graphuserId,10);
 															sessionStorage.setItem('filter', 10);
 														}else
 														if(obj.part.data.key=="M"){
+
+															
+													      	sessionStorage.setItem('nodeSelected', "M");
 															refreshCustomerTable(graphuserId,11);
 															sessionStorage.setItem('filter', 11);
 														}else
 														if(obj.part.data.key=="J"){
+															
+													      	sessionStorage.setItem('nodeSelected', "J");
+
 															refreshCustomerTable(graphuserId,12);
 															sessionStorage.setItem('filter', 12);
 														}else
 														if(obj.part.data.key=="L"){
+															
+													      	sessionStorage.setItem('nodeSelected', "L");
 															refreshCustomerTable(graphuserId,13);
 															sessionStorage.setItem('filter', 13);
 														}else
 														if(obj.part.data.key=="O"){
+
+														
+													      	sessionStorage.setItem('nodeSelected', "O");
 															refreshCustomerTable(graphuserId,14);
 															sessionStorage.setItem('filter', 14);
 														}else
 														if(obj.part.data.key=="N"){
+															
+													      	sessionStorage.setItem('nodeSelected', "N");
 															refreshCustomerTable(graphuserId,15);
 															sessionStorage.setItem('filter', 15);
 														}else
 														if(obj.part.data.key=="P"){
+
+													
+													      	sessionStorage.setItem('nodeSelected', "P");
 															refreshCustomerTable(graphuserId,16);
 															sessionStorage.setItem('filter', 16);
 														}
@@ -488,6 +553,13 @@
 					
 												myDiagram.model = new go.GraphLinksModel(
 													nodesArray, linksArray);
+
+													var nodeselected = sessionStorage.getItem('nodeSelected');
+													myDiagram.select(myDiagram.findNodeForKey(nodeselected));
+												
+												    //	if (node !== null) node.isSelected = true;
+
+
 
 														// const templmap = new go.Map();
 														// const dashedTemplate = $(
