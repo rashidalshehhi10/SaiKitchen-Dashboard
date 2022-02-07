@@ -359,7 +359,8 @@
                             
 																		   SetValues(obj.part.data.id)
                                                                            sessionStorage.setItem('graphuserId', obj.part.data.id);
-																		   // destroy fiter session
+																		   sessionStorage.removeItem('filter');
+																		   // destroy fitler session
 														m.set(myDiagram.findNodeForKey("A").data, "val", document.getElementById("A").value);
 														m.set(myDiagram.findNodeForKey("B").data, "val", document.getElementById("B").value);
 														m.set(myDiagram.findNodeForKey("C").data, "val", document.getElementById("C").value);
@@ -383,51 +384,67 @@
 																	//	m.set(node.data, "val", obj.data.val);
 														if(obj.part.data.key=="B"){
 															refreshCustomerTable(graphuserId,1);
+															sessionStorage.setItem('filter', 1);
 														}else
 														if(obj.part.data.key=="C"){
 															refreshCustomerTable(graphuserId,2);
+															sessionStorage.setItem('filter', 2);
 														}else
 														if(obj.part.data.key=="D"){
 															refreshCustomerTable(graphuserId,3);
+															sessionStorage.setItem('filter', 3);
 														}else
 														if(obj.part.data.key=="E"){
 															refreshCustomerTable(graphuserId,4);
+															sessionStorage.setItem('filter', 4);
 														}else
 														if(obj.part.data.key=="F"){
 															refreshCustomerTable(graphuserId,5);
+															sessionStorage.setItem('filter', 5);
 														}else
 														if(obj.part.data.key=="G"){
 															refreshCustomerTable(graphuserId,6);
+															sessionStorage.setItem('filter', 6);
 														}else
 														if(obj.part.data.key=="I"){
 															refreshCustomerTable(graphuserId,7);
+															sessionStorage.setItem('filter', 7);
 														}else
 														if(obj.part.data.key=="A"){
 															refreshCustomerTable(graphuserId,8);
+															sessionStorage.setItem('filter', 8);
 														}else
 														if(obj.part.data.key=="H"){
 															refreshCustomerTable(graphuserId,9);
+															sessionStorage.setItem('filter', 9);
 														}else
 														if(obj.part.data.key=="K"){
 															refreshCustomerTable(graphuserId,10);
+															sessionStorage.setItem('filter', 10);
 														}else
 														if(obj.part.data.key=="M"){
 															refreshCustomerTable(graphuserId,11);
+															sessionStorage.setItem('filter', 11);
 														}else
 														if(obj.part.data.key=="J"){
 															refreshCustomerTable(graphuserId,12);
+															sessionStorage.setItem('filter', 12);
 														}else
 														if(obj.part.data.key=="L"){
 															refreshCustomerTable(graphuserId,13);
+															sessionStorage.setItem('filter', 13);
 														}else
 														if(obj.part.data.key=="O"){
 															refreshCustomerTable(graphuserId,14);
+															sessionStorage.setItem('filter', 14);
 														}else
 														if(obj.part.data.key=="N"){
 															refreshCustomerTable(graphuserId,15);
+															sessionStorage.setItem('filter', 15);
 														}else
 														if(obj.part.data.key=="P"){
 															refreshCustomerTable(graphuserId,16);
+															sessionStorage.setItem('filter', 16);
 														}
 														});
 

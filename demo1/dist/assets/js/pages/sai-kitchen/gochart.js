@@ -15,10 +15,13 @@ let user;
 let datatable;
 let customerData;
 let fuserId=0;
-let filter = 0;
+//let filter = 0;
+let filter = sessionStorage.getItem('filter');
+if(filter == null ) filter = 0;
 let usercard = 1;
 let usrdata = sessionStorage.getItem('graphuserId');
-								if(usrdata != null){
+								if(usrdata != null)
+                                {
 									fuserId = usrdata;
 								}
                                 ///here get filter session
