@@ -120,6 +120,7 @@ License: You must have a valid license purchased only from themeforest(the above
       id="kt_header_mobile"
       class="header-mobile align-items-center header-mobile-fixed"
     ></div>
+    
     <!--end::Header Mobile-->
     <div class="d-flex flex-column flex-root">
       <!--begin::Page-->
@@ -522,6 +523,10 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="modal-body">
               <div id="WorkscopesDiv" style="padding-left: 20px;">
                 <div class="form-group row" id="workscope">
+                  <label class="font-size-h4  text-dark" style="padding: bottom 10px;">Purchase Requests Files</label>
+                  <div class="row" id="beforeWoodenFiles">
+                   
+                  </div>
                   <div class="row" id="beforeWooden">
 
                   </div>
@@ -870,6 +875,7 @@ License: You must have a valid license purchased only from themeforest(the above
       function addComponent(inquiryId) {
         document.getElementById("inquiryId").value = inquiryId;
         $('.divContainer').remove();
+        $('.divContainerFiles').remove();
         elecount=0;
         filearry=[];
       }
@@ -1047,6 +1053,98 @@ $('#kt_approve_inquiry_button').click(function () {
 var baseURL = "https://backendsaikitchen.azurewebsites.net/Api"
         var baseFileURL = "https://saikitchenstorage.blob.core.windows.net/files/"
 function beforeWooden(inquiryId){
+
+
+             
+            // bb
+
+            $.ajax({
+                type: "Post",
+                url: baseURL + '/Purchase/GetPurchaseRequestByInquiryId?inquiryId='+inquiryId,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.isError == false) {
+                      var files = '';
+                      for(var j=0;j<response.data[0].files.length;j++){
+                        switch(response.data[0].files[j].fileContentType) {
+                        case "pdf":
+                              files +=
+                              '<div   class="col"><div id="icons" class="paddall" style="display: inline-block;width: 100%;">'+
+                                '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[0].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/pdf.svg" style="width:100%;"></a>'+
+                              '</div> </div> </div>';
+                        break;
+                        case "jpg":
+                              files +=
+                              '<div   class="col"><div id="icons" class="paddall" style="display: inline-block;width: 100%;">'+
+                                '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[0].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                               '</div> </div> </div>';
+                        break;
+                        case "jpeg":
+                              files +=
+                             '<div   class="col"><div id="icons" class="paddall" style="display: inline-block;width: 100%;">'+
+                                '<div   class="divico">'+
+                               '<a href="'+baseFileURL+response.data[0].files[j].fileUrl+'" target="_blank"> <img  src="/assets/media/svg/files/jpg.svg" style="width:100%;"></a>'+
+                               '</div> </div> </div>';
+                             
+                               
+                        break;
+                        default:
+                             files +=
+                            '<div   class="col"><div id="icons" class="paddall" style="display: inline-block;width: 100%;">'+
+                                '<div   class="divico">'+
+                             '<a href="'+baseFileURL+response.data[0].files[j].fileUrl+'" target="_blank"> <img  src="" style="width:100%;"></a>'+
+                             '</div> </div> </div>';
+
+                      }
+                     }
+              
+
+
+
+
+                      woodenFilesString = 
+                      `<div class="input-group divContainerFiles"  style="padding-bottom:30px;padding-left:12px;padding-bottom:30px;">
+                        <div  class="row">
+                          `+files+`
+                        </div>
+                        </div>`;
+
+                       $('#beforeWoodenFiles').last().before(woodenFilesString);
+                     // document.getElementById("beforeWoodenFiles").innerHTML += woodenFilesString;
+                  
+                  
+                       
+                    } else {
+                        Swal.fire({
+                            text: response.errorMessage,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        }).then(function() {
+                            KTUtil.scrollTop();
+                        });
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                },
+            });
+            
+            // bb
+
+
+
+
+
             $.ajax({
                 type: "Post",
                 url: baseURL + '/Purchase/GetPurchaseOrderedByInquiryId?inquiryId='+inquiryId,
