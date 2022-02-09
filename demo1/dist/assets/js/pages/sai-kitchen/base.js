@@ -2528,7 +2528,7 @@ if (permission.includes(14)) {
       if (permission.includes(23)) {
          sideMenuHTML += `
          <li class="menu-section">
-         <h4 class="menu-text">SITE PROJECT</h4>
+         <h4 class="menu-text">SITE AREA</h4>
          <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
          </li>`;
          sideMenuHTML += `
@@ -2544,7 +2544,7 @@ if (permission.includes(14)) {
                </g>
             </svg>
                </span>
-               <span class="menu-text">Project Excel</span>
+               <span class="menu-text">Site Projects</span>
                 </a>
          </li>
          `;

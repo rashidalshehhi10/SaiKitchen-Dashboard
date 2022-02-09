@@ -31,17 +31,24 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
             .formValidation(
                 form, {
                     fields: {
-                        JobNOId: {
+                        projectName: {
                             validators: {
                                 notEmpty: {
-                                    message: 'JobNo is required'
+                                    message: 'Name is required'
                                 }
                             }
                         },
-                        projectId: {
+                        projectDescription: {
                             validators: {
                                 notEmpty: {
-                                    message: 'Project Name is required'
+                                    message: 'Description is required'
+                                }
+                            }
+                        },
+                        projectDescription: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Description is required'
                                 }
                             }
                         },
@@ -112,33 +119,33 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                                     cnt++;  
                                 }  
                             });  
-                            var scope =[];
-							for(var i=0;i<parseInt(document.getElementById("counterId").value);i++){
+                            // var scope =[];
+							// for(var i=0;i<parseInt(document.getElementById("counterId").value);i++){
 							   
-								if(document.getElementById("Quantity"+i) != null){
-                                    var quant=0;
-                                    if(document.getElementById("Quantity"+i).value != "")
-                                      quant= parseInt(document.getElementById("Quantity"+i).value)
+							// 	if(document.getElementById("Quantity"+i) != null){
+                            //         var quant=0;
+                            //         if(document.getElementById("Quantity"+i).value != "")
+                            //           quant= parseInt(document.getElementById("Quantity"+i).value)
                                        
-									if(document.getElementById("ScopeSelect"+i) != null){  
-										scope.push(
-												{
-													"workScopeId":parseInt(document.getElementById("ScopeSelect"+i).value), 
-													"materialId":parseInt(document.getElementById("MaterialSelect"+i).value), 
-													"quantity":quant,
-													"sizeId":parseInt(document.getElementById("SizeSelect"+i).value),
-												});  
-									}else{
-										scope.push(
-											{
-												"workScopeId":parseInt(document.getElementById("scopehiddenId"+i).value), 
-												"materialId":parseInt(document.getElementById("MaterialSelect"+i).value), 
-												"quantity":quant,
-												"sizeId":parseInt(document.getElementById("SizeSelect"+i).value),
-											});  
-									}   
-								}              
-							}
+							// 		if(document.getElementById("ScopeSelect"+i) != null){  
+							// 			scope.push(
+							// 					{
+							// 						"workScopeId":parseInt(document.getElementById("ScopeSelect"+i).value), 
+							// 						"materialId":parseInt(document.getElementById("MaterialSelect"+i).value), 
+							// 						"quantity":quant,
+							// 						"sizeId":parseInt(document.getElementById("SizeSelect"+i).value),
+							// 					});  
+							// 		}else{
+							// 			scope.push(
+							// 				{
+							// 					"workScopeId":parseInt(document.getElementById("scopehiddenId"+i).value), 
+							// 					"materialId":parseInt(document.getElementById("MaterialSelect"+i).value), 
+							// 					"quantity":quant,
+							// 					"sizeId":parseInt(document.getElementById("SizeSelect"+i).value),
+							// 				});  
+							// 		}   
+							// 	}              
+							// }
 
                             // 
 						
@@ -149,12 +156,12 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                             var keys = Object.keys(exceljson[0]);
                            
 
-                            for(i==0;i<exceljson.length;i++){
+                            for(var n=0;n<exceljson.length;n++){
 
-                                col0.push(exceljson[i][keys[0]])
-                                col1.push(exceljson[i][keys[1]])
-                                col2.push(exceljson[i][keys[2]])
-                                col3.push(exceljson[i][keys[3]])
+                                col0.push(exceljson[n][keys[0]])
+                                col1.push(exceljson[n][keys[1]])
+                                col2.push(exceljson[n][keys[2]])
+                                col3.push(exceljson[n][keys[3]])
                             }
 
                             var reason = new Array();
@@ -166,28 +173,29 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
 							
 
 							var obj={
-								"jobno": document.getElementById("JobNOId").value,
-								"projectname": document.getElementById("projectId").value,
-								"location": document.getElementById("locationId").value,
-								"scopeofWork":scope,
-								"excel": reason
+								"siteProjectName": document.getElementById("projectName").value,
+                                "siteProjectDescription":  document.getElementById("projectDescription").value,
+								"siteProjectLocation": document.getElementById("locationId").value,	
+                                "branchId": user.data.userRoles[0].branchId,							
+								"excel": reason,
 							}
 			
-                            
+                      //   
+
                             const data1 = JSON.stringify(obj);
                             console.log(data1);
 
                              $.ajax({
                                 type: "Post",
-                                url: baseURL + '/CommercialProject/AddCommercialProject',
+                                url: baseURL + '/SiteProject/AddSiteProject',
             
                                 headers: {
                                     'Content-Type': 'application/json',
                                     'userId': user.data.userId,
                                     'userToken': user.data.userToken,
-                                    'userRoleId': user.data.userRoles[0].userRoleId,
-                                    'branchId': user.data.userRoles[0].branchId,
-                                    'branchRoleId': user.data.userRoles[0].branchRoleId,
+                                    // 'userRoleId': user.data.userRoles[0].userRoleId,
+                                    // 'branchId': user.data.userRoles[0].branchId,
+                                    // 'branchRoleId': user.data.userRoles[0].branchRoleId,
                                     'Access-Control-Allow-Origin': '*',
                                 },
                                 data: data1,
