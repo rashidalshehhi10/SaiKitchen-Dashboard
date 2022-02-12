@@ -300,8 +300,8 @@ jQuery(document).ready(function() {
 	KTDatatablesSearchOptionsAdvancedSearch.init();
 	
 	$.ajax({
-		type: "get",
-		url: baseURL + '/User/GetAllUser',
+		type: "post",
+		url: baseURL + '/SiteProject/GetSiteProjectByBranchId?BranchId=' + user.data.userRoles[0].branchId,
 	
 		headers: {
 			'Content-Type': 'application/json',
@@ -315,7 +315,7 @@ jQuery(document).ready(function() {
 		success: function(response) {
 			console.log(response);
 			if (response.isError == false) {
-	
+            	
 				
 				// var arr = [];
 				// arr[0] = "Jani";
@@ -406,8 +406,8 @@ jQuery(document).ready(function() {
 												   <!--end::Pic-->
 												   <!--begin::Title-->
 												   <div class="d-flex flex-column">
-													   <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">`+response.data[i].userName+`</a>
-													   <span class="text-muted font-weight-bold">Head of Development</span>
+													   <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">`+response.data[i].siteProjectName+`</a>
+													   <span class="text-muted font-weight-bold">`+response.data[i].siteProjectDescription+`</span>
 												   </div>
 												   <!--end::Title-->
 											   </div>
@@ -420,20 +420,21 @@ jQuery(document).ready(function() {
 										   <!--begin::Info-->
 										   <div class="mb-7">
 											   <div class="d-flex justify-content-between align-items-center">
-												   <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
+												   <span class="text-dark-75 font-weight-bolder mr-2">Status:</span>
 												   <a href="#" class="text-muted text-hover-primary">`+response.data[i].userEmail+`</a>
 											   </div>
 											   <div class="d-flex justify-content-between align-items-cente my-1">
-												   <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
-												   <a href="#" class="text-muted text-hover-primary">`+response.data[i].userMobile+`</a>
+												   <span class="text-dark-75 font-weight-bolder mr-2">Is OnHold:</span>
+												   <a href="#" class="text-muted text-hover-primary">`+response.data[i].siteProjectIsOnHold+`</a>
 											   </div>
 											   <div class="d-flex justify-content-between align-items-center">
 												   <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-												   <span class="text-muted font-weight-bold">`+response.data[i].userRoles[0].branch.branchName+`</span>
+												   <span class="text-muted font-weight-bold">`+response.data[i].siteProjectLocation+`</span>
 											   </div>
 										   </div>
 										   <!--end::Info-->
-										   <a href="#" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">write message</a>
+										   <a href="siteprojectviewdetail.html?siteProjectId=`+response.data[i].siteProjectId+`" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">VIEW DETAIL</a>
+                                           
 									   </div>
 									   <!--end::Body-->
 								   </div>
@@ -441,9 +442,7 @@ jQuery(document).ready(function() {
 							   </div>`;
 								   
 													
-							   
-							
-					
+                            //    <a href="siteprojectviewdetail.html?`+siteProjectId+`" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">VIEW DETAIL</a>
 		   
 				   }
 	
