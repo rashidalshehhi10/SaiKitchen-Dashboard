@@ -833,7 +833,7 @@
                 document.getElementById("ListRowsId").innerHTML +=
                   `
           
-                                  <li class="nav-item mb-2">
+                                  <li class="nav-item mb-2" style="cursor: pointer;">
                                   <a class="nav-link" id="home-tab-5" data-toggle="tab" onclick="getBlocks(` +
                   n +
                   `)" >
@@ -890,15 +890,28 @@
           var villas = "";
 
           for (z = 0; z < listRows.data.rows[b].blocks[k].villas.length; z++) {
+            villasworkscopes = "";
+
             for (
               j = 0;
               j <
               listRows.data.rows[b].blocks[k].villas[z].villaWorkScopes.length;
               j++
             ) {
-              villasworkscopes +=
-                listRows.data.rows[b].blocks[k].villas[z].villaWorkScopes[j]
-                  .workScope.workScopeName + ", ";
+              if (
+                j ==
+                listRows.data.rows[b].blocks[k].villas[z].villaWorkScopes
+                  .length -
+                  1
+              ) {
+                villasworkscopes +=
+                  listRows.data.rows[b].blocks[k].villas[z].villaWorkScopes[j]
+                    .workScope.workScopeName;
+              } else {
+                villasworkscopes +=
+                  listRows.data.rows[b].blocks[k].villas[z].villaWorkScopes[j]
+                    .workScope.workScopeName + ", ";
+              }
             }
 
             villas +=
