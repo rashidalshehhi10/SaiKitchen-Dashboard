@@ -182,7 +182,7 @@ jQuery(document).ready(function() {
     
 branchTypeId = user.data.userRoles[0].branch.branchTypeId;
 if(branchTypeId==2||branchTypeId==1){
-   document.getElementById("RequestforReschedulingBtn").style.display = "inline-block";
+  // document.getElementById("RequestforReschedulingBtn").style.display = "inline-block";
       }
 
      
