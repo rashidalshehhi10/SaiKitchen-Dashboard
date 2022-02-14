@@ -1638,8 +1638,10 @@ jQuery(document).ready(function () {
        }
        if(document.getElementById("dapprovalCountId")){
           document.getElementById("dapprovalCountId").innerHTML = response.data[0].designApprovals;
-          document.getElementById("dapprovalCustomerCountId").innerHTML = response.data[0].designApprovals;
        }
+       if(document.getElementById("dapprovalCustomerCountId")){
+         document.getElementById("dapprovalCustomerCountId").innerHTML = response.data[0].designCustomerApprovals;
+      }
        if(document.getElementById("qrequestCountId")){
           document.getElementById("qrequestCountId").innerHTML = response.data[0].quotationAssign;
        }
