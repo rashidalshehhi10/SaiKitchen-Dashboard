@@ -47,7 +47,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         'inquiryId', 'status','inquiryComment','customerName','inquiryAddedBy','workscopeNames','inquiryCode', 'inquiryDescription','inquiryStartDate', 'inquiryEndDate', 'isMeasurementProvidedByCustomer', 
                         'measurementScheduleDate', 'measurementAssignTo','measurementAddedOn','isDesignProvidedByCustomer','designScheduleDate', 'designAssignTo','designAddedOn','quotationScheduleDate','quotationAddedOn',
                          'customerCode', 'customerContact','customerEmail','contactStatus','nextMeetingDate','customerNotes', 'buildingAddress','buildingMakaniMap', 'buildingTypeOfUnit', 'buildingCondition', 'buildingFloor', 'buildingReconstruction',
-                         'isOccupied', 'inquiryAddedById','commentAddedOn','factorName','noOfRevision','escalationRequestedBy','escalationRequestedOn', 'actions'
+                         'isOccupied', 'inquiryAddedById','commentAddedOn','factorName','noOfRevision','escalationRequestedBy','escalationRequestedOn','technicalChecklistDate','technicalChecklistByName','commercialChecklistDate','commercialChecklistByName','joborderConfirmationDate','joborderConfirmationByName', 'actions'
                     ],
                 },
             },
@@ -165,6 +165,24 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                 },
                 {
                     data:'escalationRequestedOn'
+                },
+                {
+                    data:'technicalChecklistDate'
+                },
+                {
+                    data:'technicalChecklistByName'
+                },
+                {
+                    data:'commercialChecklistDate'
+                },
+                {
+                    data:'commercialChecklistByName'
+                },
+                {
+                    data:'joborderConfirmationDate'
+                },
+                {
+                    data:'joborderConfirmationByName'
                 },
                 {
                     data: 'actions',
