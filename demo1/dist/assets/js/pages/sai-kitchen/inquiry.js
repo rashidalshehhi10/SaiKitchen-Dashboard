@@ -256,7 +256,7 @@ var KTDatatablesSearchOptionsAdvancedSearch = function() {
                         <i class="la la-ellipsis-h"></i>\
                         </a>\
                         `;
-                        if(full.status == 46){
+                        if(full.status == 46 || full.status==43){
                             action += `\<a  href="javascript:;" style="background-color:#734f43;margin:2px" onclick="changeFactor('` + full.factorName + `',`+full.inquiryId+`)"  data-toggle="modal" data-target="#changefactor"  class="btn btn-sm btn-clean btn-icon" title="Change Factory">
                             <i class="la la-foursquare"></i>\
                             </a>\
